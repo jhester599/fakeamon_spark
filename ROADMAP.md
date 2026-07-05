@@ -48,7 +48,7 @@ A good fight lasts about **3–5 hits per side**, misses are **rare**, and
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** ✅ | Show both fighters with stats + moves (placeholder colored boxes) | Growler & Whaley side by side — *done!* |
-| **2** | Add a **move button** for each of Growler's moves, and a **text battle log** under the arena | Four buttons; clicking one writes "Growler used Flare!" in the log (no damage yet) |
+| **2** ✅ | Add a **move button** for each of Growler's moves, and a **text battle log** under the arena | Four buttons; clicking one writes "Growler used Flare!" in the log — *done!* |
 | **3** | The **damage formula**: `raw = power + attack − defense` (min 1). Clicking a move lowers Whaley's HP number | Whaley's HP number drops when you attack |
 | **4** | **HP bars** — a colored bar that shrinks as HP falls | Green/red bars that visibly shrink |
 | **5** | Add **type multiplier** + the small **random wiggle** (×0.85–1.15) so damage varies and Fire-vs-Water feels different | "It's not very effective…" vs bigger hits; damage jitters a little each time |

@@ -1,0 +1,434 @@
+<title>Fakeamon — Quest Map (Development Roadmap)</title>
+<style>
+  /* ============================================================
+     TOKENS — colors picked for Fakeamon. Each milestone borrows
+     its creature TYPE color, so the map means something.
+     ============================================================ */
+  :root {
+    /* type / identity colors (same in both themes — they're the brand) */
+    --fire:   #ff7a3d;
+    --water:  #3d9bff;
+    --grass:  #4bbd6b;
+    --metal:  #8a94a6;
+    --cosmic: #a06bff;
+
+    /* neutrals — biased toward the game's blue (#2a4d8f) */
+    --bg:        #eef2fb;
+    --bg-2:      #ffffff;
+    --ink:       #1c2540;
+    --ink-soft:  #5a6485;
+    --line:      #d6ddef;
+    --card:      #ffffff;
+    --card-2:    #f5f8ff;
+    --shadow:    0 8px 22px rgba(30, 50, 110, 0.10);
+    --star:      transparent;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:       #0d1224;
+      --bg-2:     #131a33;
+      --ink:      #eef2ff;
+      --ink-soft: #9aa6cc;
+      --line:     #2a3358;
+      --card:     #161d38;
+      --card-2:   #1d2647;
+      --shadow:   0 10px 26px rgba(0, 0, 0, 0.45);
+      --star:     #cdd7ff;
+    }
+  }
+  /* explicit toggle wins over OS in both directions */
+  :root[data-theme="light"] {
+    --bg: #eef2fb; --bg-2: #ffffff; --ink: #1c2540; --ink-soft: #5a6485;
+    --line: #d6ddef; --card: #ffffff; --card-2: #f5f8ff;
+    --shadow: 0 8px 22px rgba(30,50,110,0.10); --star: transparent;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1224; --bg-2: #131a33; --ink: #eef2ff; --ink-soft: #9aa6cc;
+    --line: #2a3358; --card: #161d38; --card-2: #1d2647;
+    --shadow: 0 10px 26px rgba(0,0,0,0.45); --star: #cdd7ff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, color-mix(in srgb, var(--cosmic) 14%, transparent), transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* faint starfield — the meteor is coming, after all */
+  .sky {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, var(--star), transparent),
+      radial-gradient(1.4px 1.4px at 68% 12%, var(--star), transparent),
+      radial-gradient(1.6px 1.6px at 34% 58%, var(--star), transparent),
+      radial-gradient(1.2px 1.2px at 88% 44%, var(--star), transparent),
+      radial-gradient(1.3px 1.3px at 52% 82%, var(--star), transparent),
+      radial-gradient(1.5px 1.5px at 22% 90%, var(--star), transparent),
+      radial-gradient(1.2px 1.2px at 78% 74%, var(--star), transparent);
+    opacity: 0.7;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  .disp { font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
+
+  /* ---- header ---- */
+  header { text-align: center; margin-bottom: 8px; }
+  .eyebrow {
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 700;
+  }
+  h1.title {
+    font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+    font-size: clamp(34px, 7vw, 58px); line-height: 1.02; margin: 6px 0 4px;
+    text-wrap: balance; letter-spacing: -.01em;
+    background: linear-gradient(100deg, var(--fire), var(--water) 55%, var(--cosmic));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .subtitle { color: var(--ink-soft); max-width: 46ch; margin: 0 auto; font-size: 16px; }
+
+  /* ---- overall progress ---- */
+  .overall {
+    margin: 26px auto 8px; max-width: 560px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .overall .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .overall .row b { font-family: ui-rounded, system-ui, sans-serif; font-size: 15px; }
+  .overall .row .count { color: var(--ink-soft); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .meter { height: 12px; border-radius: 999px; background: var(--card-2); overflow: hidden; border: 1px solid var(--line); }
+  .meter > span {
+    display: block; height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--fire), var(--water));
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; justify-content: center; margin: 18px auto 30px; font-size: 13px; color: var(--ink-soft); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+
+  /* ---- milestone zone cards ---- */
+  .zones { display: flex; flex-direction: column; gap: 22px; }
+
+  .zone {
+    --c: var(--metal);
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);
+    border-left: 6px solid var(--c);
+  }
+  .zone.m1 { --c: var(--fire); }
+  .zone.m2 { --c: var(--water); }
+  .zone.m3 { --c: var(--grass); }
+  .zone.m4 { --c: var(--metal); }
+  .zone.m5 { --c: var(--cosmic); }
+
+  .zone-head {
+    padding: 18px 20px 16px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 12%, var(--card)), var(--card));
+    border-bottom: 1px solid var(--line);
+  }
+  .zone-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .badge-m {
+    font-family: ui-rounded, system-ui, sans-serif; font-weight: 800;
+    font-size: 13px; letter-spacing: .04em;
+    color: #fff; background: var(--c);
+    padding: 4px 11px; border-radius: 999px; white-space: nowrap;
+  }
+  .zone-title { font-family: ui-rounded, system-ui, sans-serif; font-size: 22px; font-weight: 800; margin: 0; flex: 1; min-width: 200px; }
+  .status {
+    font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+    border: 1px solid var(--line);
+  }
+  .status.done    { color: var(--grass);  background: color-mix(in srgb, var(--grass) 15%, transparent); border-color: color-mix(in srgb, var(--grass) 40%, transparent); }
+  .status.now     { color: var(--fire);   background: color-mix(in srgb, var(--fire) 16%, transparent);  border-color: color-mix(in srgb, var(--fire) 45%, transparent); }
+  .status.locked  { color: var(--ink-soft); }
+  .zone-goal { margin: 12px 0 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* per-zone mini progress */
+  .zone-meter { margin-top: 14px; height: 9px; border-radius: 999px; background: var(--card-2); border: 1px solid var(--line); overflow: hidden; }
+  .zone-meter > span { display: block; height: 100%; background: var(--c); border-radius: 999px; }
+  .zone-count { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; font-variant-numeric: tabular-nums; }
+
+  /* ---- steps ---- */
+  ol.steps { list-style: none; margin: 0; padding: 8px 20px 20px; display: flex; flex-direction: column; gap: 2px; }
+  ol.steps li { display: flex; gap: 14px; padding: 12px 4px; border-bottom: 1px dashed var(--line); }
+  ol.steps li:last-child { border-bottom: 0; }
+
+  .num {
+    flex: none; width: 30px; height: 30px; border-radius: 9px;
+    display: grid; place-items: center; font-weight: 800; font-size: 14px;
+    font-family: ui-rounded, system-ui, sans-serif; font-variant-numeric: tabular-nums;
+    background: var(--card-2); color: var(--c); border: 1px solid var(--line);
+  }
+  li.done .num { background: var(--grass); color: #fff; border-color: transparent; }
+  .step-body { flex: 1; }
+  .step-what { margin: 0; font-size: 15.5px; }
+  .step-what b { font-weight: 700; }
+  .see {
+    margin: 5px 0 0; font-size: 13.5px; color: var(--ink-soft);
+    display: flex; gap: 6px; align-items: baseline;
+  }
+  .see .tag { color: var(--c); font-weight: 800; white-space: nowrap; }
+  li.done .step-what { color: var(--ink-soft); }
+  li.done .step-what::after { content: " ✓"; color: var(--grass); font-weight: 800; }
+
+  .done-when {
+    margin: 14px 20px 20px; padding: 12px 14px;
+    background: color-mix(in srgb, var(--c) 10%, var(--card-2));
+    border: 1px solid color-mix(in srgb, var(--c) 30%, var(--line));
+    border-radius: 12px; font-size: 14px;
+  }
+  .done-when b { font-family: ui-rounded, system-ui, sans-serif; }
+
+  /* ---- rules + footer ---- */
+  .rules {
+    margin-top: 30px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 22px 24px; box-shadow: var(--shadow);
+  }
+  .rules h2 { font-family: ui-rounded, system-ui, sans-serif; margin: 0 0 12px; font-size: 20px; }
+  .rules ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 7px; font-size: 15px; }
+  .run { margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
+  .run code { background: var(--card-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-size: 13px; }
+
+  footer { text-align: center; color: var(--ink-soft); font-size: 13px; margin-top: 34px; }
+
+  /* theme toggle */
+  .toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 3;
+    font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    background: var(--card); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 999px; padding: 7px 13px; box-shadow: var(--shadow);
+  }
+  .toggle:focus-visible { outline: 3px solid var(--water); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .meter > span, .zone-meter > span { transition: width .6s ease; }
+  }
+</style>
+
+<div class="sky" aria-hidden="true"></div>
+<button class="toggle" id="themeBtn" type="button" aria-label="Switch light or dark theme">🌗 Theme</button>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Fakeamon · Build Plan</div>
+    <h1 class="title disp">The Quest Map</h1>
+    <p class="subtitle">Our step-by-step plan to build the game. Finish a step, play it, then build the next little bit. 🎮</p>
+
+    <div class="overall">
+      <div class="row">
+        <b>Whole game progress</b>
+        <span class="count">1 / 29 steps · Milestone 1 of 5</span>
+      </div>
+      <div class="meter"><span style="width:3.4%"></span></div>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot" style="background:var(--fire)"></i>M1 Battle</span>
+      <span><i class="dot" style="background:var(--water)"></i>M2 Catching</span>
+      <span><i class="dot" style="background:var(--grass)"></i>M3 Overworld</span>
+      <span><i class="dot" style="background:var(--metal)"></i>M4 World Systems</span>
+      <span><i class="dot" style="background:var(--cosmic)"></i>M5 Finale</span>
+    </div>
+  </header>
+
+  <div class="zones">
+
+    <!-- ============ M1 ============ -->
+    <section class="zone m1">
+      <div class="zone-head">
+        <div class="zone-top">
+          <span class="badge-m">M1 · FIRE</span>
+          <h2 class="zone-title">Battle Slice</h2>
+          <span class="status now">Playing now</span>
+        </div>
+        <p class="zone-goal">One full turn-based fight: <b>Growler vs Whaley</b>. Pick a move, deal damage, HP drops, someone faints, win or lose. A good fight lasts 3–5 hits each side, misses are rare, and type advantage clearly matters.</p>
+        <div class="zone-meter"><span style="width:12.5%"></span></div>
+        <div class="zone-count">1 of 8 steps done</div>
+      </div>
+      <ol class="steps">
+        <li class="done">
+          <span class="num">1</span>
+          <div class="step-body">
+            <p class="step-what"><b>Show both fighters</b> with stats + moves (placeholder colored boxes)</p>
+            <p class="see"><span class="tag">▶ You'll see</span> Growler &amp; Whaley side by side — done!</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div class="step-body">
+            <p class="step-what"><b>Move buttons</b> for Growler + a <b>text battle log</b></p>
+            <p class="see"><span class="tag">▶ You'll see</span> Clicking a button writes "Growler used Flare!" (no damage yet)</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div class="step-body">
+            <p class="step-what">The <b>damage formula</b> — attacks lower Whaley's HP number</p>
+            <p class="see"><span class="tag">▶ You'll see</span> Whaley's HP drops when you attack</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <div class="step-body">
+            <p class="step-what"><b>HP bars</b> that shrink as HP falls</p>
+            <p class="see"><span class="tag">▶ You'll see</span> Colored bars that visibly shrink</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <div class="step-body">
+            <p class="step-what"><b>Type multiplier</b> + the small <b>random wiggle</b> so Fire-vs-Water feels different</p>
+            <p class="see"><span class="tag">▶ You'll see</span> "Not very effective…" vs big hits; damage jitters a little</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">6</span>
+          <div class="step-body">
+            <p class="step-what"><b>Whaley fights back</b> (random move) + <b>turn order by Speed</b></p>
+            <p class="see"><span class="tag">▶ You'll see</span> A real back-and-forth: you hit, then Whaley hits</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">7</span>
+          <div class="step-body">
+            <p class="step-what"><b>Accuracy / misses</b> — a miss does nothing that turn (rare)</p>
+            <p class="see"><span class="tag">▶ You'll see</span> Occasionally "Flare missed!"</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">8</span>
+          <div class="step-body">
+            <p class="step-what"><b>Fainting + win/lose screen</b> + a <b>Play Again</b> button</p>
+            <p class="see"><span class="tag">▶ You'll see</span> At 0 HP a Fakeamon faints and "You win!/You lose!" shows</p>
+          </div>
+        </li>
+      </ol>
+      <p class="done-when"><b>🎉 Done when:</b> you can play a whole Growler-vs-Whaley battle, moves sometimes miss, type advantage is obvious, and fights last a few hits each.</p>
+    </section>
+
+    <!-- ============ M2 ============ -->
+    <section class="zone m2">
+      <div class="zone-head">
+        <div class="zone-top">
+          <span class="badge-m">M2 · WATER</span>
+          <h2 class="zone-title">Catching &amp; Team</h2>
+          <span class="status locked">🔒 Up next</span>
+        </div>
+        <p class="zone-goal">Turn a one-off fight into "catch creatures and build a team."</p>
+        <div class="zone-meter"><span style="width:0%"></span></div>
+        <div class="zone-count">0 of 6 steps done</div>
+      </div>
+      <ol class="steps">
+        <li><span class="num">1</span><div class="step-body"><p class="step-what"><b>Tidy the code</b> into small files (moves, fakeamon, typechart, battle)</p><p class="see"><span class="tag">▶ You'll see</span> Same game, easier to read and grow</p></div></li>
+        <li><span class="num">2</span><div class="step-body"><p class="step-what">Add <b>Leafick</b> (Grass) + a <b>"Choose your starter"</b> screen</p><p class="see"><span class="tag">▶ You'll see</span> Pick Growler, Whaley, or Leafick before the fight</p></div></li>
+        <li><span class="num">3</span><div class="step-body"><p class="step-what">A <b>random wild Fakeamon</b> appears instead of always Whaley</p><p class="see"><span class="tag">▶ You'll see</span> Different opponents each battle</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what">The <b>Catch action</b> + a <b>Fakeaball</b> (better chance at low HP)</p><p class="see"><span class="tag">▶ You'll see</span> "Gotcha! …was caught!"</p></div></li>
+        <li><span class="num">5</span><div class="step-body"><p class="step-what">A <b>team list</b> — caught Fakeamon join your party</p><p class="see"><span class="tag">▶ You'll see</span> A row of your creatures below the battle</p></div></li>
+        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Switch</b> which Fakeamon is fighting</p><p class="see"><span class="tag">▶ You'll see</span> A Switch button swaps in a teammate</p></div></li>
+      </ol>
+      <p class="done-when"><b>🎉 Done when:</b> you can fight a wild Fakeamon, weaken it, catch it, and swap between a team.</p>
+    </section>
+
+    <!-- ============ M3 ============ -->
+    <section class="zone m3">
+      <div class="zone-head">
+        <div class="zone-top">
+          <span class="badge-m">M3 · GRASS</span>
+          <h2 class="zone-title">Overworld (the map)</h2>
+          <span class="status locked">🔒 Locked</span>
+        </div>
+        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement.</p>
+        <div class="zone-meter"><span style="width:0%"></span></div>
+        <div class="zone-count">0 of 5 steps done</div>
+      </div>
+      <ol class="steps">
+        <li><span class="num">1</span><div class="step-body"><p class="step-what">Add <b>Phaser</b> + show a tiny <b>tile map</b></p><p class="see"><span class="tag">▶ You'll see</span> A little world on screen</p></div></li>
+        <li><span class="num">2</span><div class="step-body"><p class="step-what">A <b>player character</b> you move with the arrow keys</p><p class="see"><span class="tag">▶ You'll see</span> Walk around the map</p></div></li>
+        <li><span class="num">3</span><div class="step-body"><p class="step-what"><b>Real sprites</b> — drop in Tuxemon art + start <code>CREDITS.md</code></p><p class="see"><span class="tag">▶ You'll see</span> Real creature art instead of colored boxes</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Visible encounters</b> — walk into a creature to start a battle</p><p class="see"><span class="tag">▶ You'll see</span> Touch the creature → the battle opens</p></div></li>
+        <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Return to the map</b> after a battle</p><p class="see"><span class="tag">▶ You'll see</span> Win/catch/flee → back to walking</p></div></li>
+      </ol>
+      <p class="done-when"><b>🎉 Done when:</b> you explore a map, meet a wild Fakeamon, battle it, and return to exploring.</p>
+    </section>
+
+    <!-- ============ M4 ============ -->
+    <section class="zone m4">
+      <div class="zone-head">
+        <div class="zone-top">
+          <span class="badge-m">M4 · METAL</span>
+          <h2 class="zone-title">World Systems</h2>
+          <span class="status locked">🔒 Locked</span>
+        </div>
+        <p class="zone-goal">Reasons to explore — heal, shop, and the first trainer challenge.</p>
+        <div class="zone-meter"><span style="width:0%"></span></div>
+        <div class="zone-count">0 of 4 steps done</div>
+      </div>
+      <ol class="steps">
+        <li><span class="num">1</span><div class="step-body"><p class="step-what"><b>Tokens</b> — earn them from winning battles</p><p class="see"><span class="tag">▶ You'll see</span> A number that goes up when you win</p></div></li>
+        <li><span class="num">2</span><div class="step-body"><p class="step-what"><b>Fakeatent</b> — heal your whole team to full</p><p class="see"><span class="tag">▶ You'll see</span> A tent; HP refills</p></div></li>
+        <li><span class="num">3</span><div class="step-body"><p class="step-what"><b>Tall Tower</b> — spend tokens to buy Fakeaballs</p><p class="see"><span class="tag">▶ You'll see</span> A shop; your ball count goes up</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Gym 1</b> — a trainer with a 2-Fakeamon team (standard + ace)</p><p class="see"><span class="tag">▶ You'll see</span> A two-creature trainer battle</p></div></li>
+      </ol>
+      <p class="done-when"><b>🎉 Done when:</b> you can win tokens, heal at a Fakeatent, buy balls, and beat your first gym.</p>
+    </section>
+
+    <!-- ============ M5 ============ -->
+    <section class="zone m5">
+      <div class="zone-head">
+        <div class="zone-top">
+          <span class="badge-m">M5 · COSMIC</span>
+          <h2 class="zone-title">Depth &amp; Story · The Finale</h2>
+          <span class="status locked">🔒 Locked</span>
+        </div>
+        <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠</p>
+        <div class="zone-meter"><span style="width:0%"></span></div>
+        <div class="zone-count">0 of 6 steps done</div>
+      </div>
+      <ol class="steps">
+        <li><span class="num">1</span><div class="step-body"><p class="step-what"><b>Evolutions</b> — reach a level → new sprite + higher stats</p><p class="see"><span class="tag">▶ You'll see</span> "Growler is evolving!" with new art</p></div></li>
+        <li><span class="num">2</span><div class="step-body"><p class="step-what">The <b>5 mini-bosses</b> placed in the world</p><p class="see"><span class="tag">▶ You'll see</span> Tough special battles worth big XP</p></div></li>
+        <li><span class="num">3</span><div class="step-body"><p class="step-what">The <b>"beat all 5 → unlock Artemis"</b> gate</p><p class="see"><span class="tag">▶ You'll see</span> A locked area that opens once all five are down</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Cooking Cabin</b> — combine berries into healing dishes</p><p class="see"><span class="tag">▶ You'll see</span> Recipes that heal different amounts</p></div></li>
+        <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Artemis finale</b> — boss with self-hitting <b>Meteor Shower</b> (Lewis's idea!)</p><p class="see"><span class="tag">▶ You'll see</span> A huge-HP battle that's hard but winnable</p></div></li>
+        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Win screen</b> — beat Artemis, stop the meteor</p><p class="see"><span class="tag">▶ You'll see</span> "You saved the Fakeamon world!"</p></div></li>
+      </ol>
+      <p class="done-when"><b>🎉 Done when:</b> you can evolve creatures, clear all 5 mini-bosses, cook dishes, and defeat Artemis to win.</p>
+    </section>
+
+  </div>
+
+  <!-- rules -->
+  <div class="rules">
+    <h2>🧭 The golden rules (how we build)</h2>
+    <ol>
+      <li><b>One small step at a time.</b> Finish a step, play it, then move on.</li>
+      <li><b>Keep it runnable.</b> The game should open and work after every step.</li>
+      <li><b>Numbers live in obvious spots.</b> HP, power, catch rate — easy to find and tweak.</li>
+      <li><b>Commit after each working step</b>, with a plain message.</li>
+      <li><b>Stay in scope.</b> If a step drags in a later milestone, stop and flag it.</li>
+    </ol>
+    <p class="run"><b>Run it (M1):</b> <code>python3 -m http.server</code> then open <code>localhost:8000</code> — or just double-click <code>index.html</code>.</p>
+  </div>
+
+  <footer>Slice-first: each milestone is playable before the next one begins. · Full spec lives in <b>DESIGN.md</b>.</footer>
+</div>
+
+<script>
+  // Theme toggle: stamp data-theme so it beats the OS setting both ways.
+  (function () {
+    var btn = document.getElementById("themeBtn");
+    btn.addEventListener("click", function () {
+      var root = document.documentElement;
+      var isDark = getComputedStyle(root).getPropertyValue("--bg").trim().indexOf("#0d") === 0
+        || root.getAttribute("data-theme") === "dark";
+      root.setAttribute("data-theme", isDark ? "light" : "dark");
+    });
+  })();
+</script>

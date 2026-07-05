@@ -152,12 +152,17 @@ const WHALEY = {
 };
 
 // ===========================================================================
+//  BATTLE STATE
+//  Step 3: Whaley's current HP can now go down. (Growler doesn't take damage
+//  yet — that arrives in Step 6, when Whaley fights back.)
+// ===========================================================================
+let whaleyHP = WHALEY.maxHP;
+
+// ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
-//  (Step 1: just display them so we can see our data is right.
-//   Battle buttons and damage come in the next step.)
 // ===========================================================================
 
-function showFighter(fakeamon) {
+function showFighter(fakeamon, currentHP) {
   // Build the list of this Fakeamon's moves as text.
   const moveItems = fakeamon.moves.map(function (moveKey) {
     const move = MOVES[moveKey];
@@ -173,7 +178,7 @@ function showFighter(fakeamon) {
       '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
       '<div class="sprite type-' + fakeamon.type + '"></div>' +
       '<div class="stats">' +
-        "HP " + fakeamon.maxHP +
+        "HP " + currentHP + "/" + fakeamon.maxHP +
         " &nbsp;•&nbsp; Attack " + fakeamon.attack +
         " &nbsp;•&nbsp; Defense " + fakeamon.defense +
         " &nbsp;•&nbsp; Speed " + fakeamon.speed +
@@ -184,9 +189,25 @@ function showFighter(fakeamon) {
   );
 }
 
-// Put both fighters into the arena.
-document.getElementById("arena").innerHTML =
-  showFighter(GROWLER) + showFighter(WHALEY);
+// Redraw both fighters with their current HP.
+function renderArena() {
+  document.getElementById("arena").innerHTML =
+    showFighter(GROWLER, GROWLER.maxHP) + showFighter(WHALEY, whaleyHP);
+}
+
+renderArena();
+
+// ===========================================================================
+//  DAMAGE FORMULA
+//  Step 3: the basic formula only — no type advantage or randomness yet
+//  (those arrive in Step 5). Numbers straight from DESIGN.md §6:
+//    raw damage = move power + attacker's Attack − defender's Defense
+//  It never goes below 1, so every hit does at least a little something.
+// ===========================================================================
+function calculateDamage(move, attacker, defender) {
+  const raw = move.power + attacker.attack - defender.defense;
+  return Math.max(1, raw);
+}
 
 // ===========================================================================
 //  BATTLE LOG — a running list of what's happened so far.
@@ -204,8 +225,7 @@ function addLogLine(text) {
 
 // ===========================================================================
 //  MOVE BUTTONS
-//  Step 2: clicking a button just announces the move in the log.
-//  Real damage arrives in Step 3.
+//  Step 3: clicking a button now deals real damage to Whaley.
 // ===========================================================================
 function showMoveButtons(fakeamon) {
   const controls = document.getElementById("controls");
@@ -217,7 +237,11 @@ function showMoveButtons(fakeamon) {
     button.className = "move-btn";
     button.textContent = move.name;
     button.addEventListener("click", function () {
-      addLogLine(fakeamon.name + " used " + move.name + "!");
+      const damage = calculateDamage(move, fakeamon, WHALEY);
+      whaleyHP = Math.max(0, whaleyHP - damage);
+
+      addLogLine(fakeamon.name + " used " + move.name + "! It dealt " + damage + " damage.");
+      renderArena();
     });
     controls.appendChild(button);
   });

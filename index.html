@@ -66,10 +66,58 @@
     margin-bottom: 6px;
     font-size: 14px;
   }
+
+  /* ---- Step 2: move buttons + battle log ---- */
+  .section-label {
+    text-align: center;
+    color: #556;
+    margin: 20px 0 8px;
+  }
+  #controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .move-btn {
+    background: #2a4d8f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .move-btn:hover {
+    background: #1d3868;
+  }
+  #log {
+    max-width: 760px;
+    margin: 20px auto 0;
+    background: white;
+    border: 3px solid #d0d8e8;
+    border-radius: 16px;
+    padding: 12px 16px;
+    height: 140px;
+    overflow-y: auto;
+    font-size: 14px;
+    color: #334;
+  }
+  #log div {
+    padding: 3px 0;
+  }
 </style>
 
 <h1>Fakeamon Battle — Growler vs Whaley</h1>
 <div id="arena"></div>
+
+<p class="section-label">Choose Growler's move:</p>
+<div id="controls"></div>
+
+<p class="section-label">Battle Log</p>
+<div id="log"></div>
 
 <script>
 // ===========================================================================
@@ -139,4 +187,42 @@ function showFighter(fakeamon) {
 // Put both fighters into the arena.
 document.getElementById("arena").innerHTML =
   showFighter(GROWLER) + showFighter(WHALEY);
+
+// ===========================================================================
+//  BATTLE LOG — a running list of what's happened so far.
+// ===========================================================================
+const logLines = [];
+
+function addLogLine(text) {
+  logLines.push(text);
+  const logBox = document.getElementById("log");
+  logBox.innerHTML = logLines.map(function (line) {
+    return "<div>" + line + "</div>";
+  }).join("");
+  logBox.scrollTop = logBox.scrollHeight; // keep the newest line in view
+}
+
+// ===========================================================================
+//  MOVE BUTTONS
+//  Step 2: clicking a button just announces the move in the log.
+//  Real damage arrives in Step 3.
+// ===========================================================================
+function showMoveButtons(fakeamon) {
+  const controls = document.getElementById("controls");
+  controls.innerHTML = ""; // clear any old buttons first
+
+  fakeamon.moves.forEach(function (moveKey) {
+    const move = MOVES[moveKey];
+    const button = document.createElement("button");
+    button.className = "move-btn";
+    button.textContent = move.name;
+    button.addEventListener("click", function () {
+      addLogLine(fakeamon.name + " used " + move.name + "!");
+    });
+    controls.appendChild(button);
+  });
+}
+
+showMoveButtons(GROWLER);
+addLogLine("A wild " + WHALEY.name + " appears! Choose a move for " + GROWLER.name + ".");
 </script>

@@ -43,9 +43,9 @@ Fields: Name, Type, Stats (HP/Attack/Defense/Speed), Moves (up to 4), Level & XP
 | **Whaley** | Water | Bigfin | Dollfin art → Whaley (Bigfin) |
 | **Leafick** | Grass | Frondly | Budaye art → Leafick (Frondly) |
 
-**Whaley/Dollfin note:** In Tuxemon, both Bigfin (Whaley) and the mini-boss Sharpfin evolve from **Dollfin**. To avoid the same base sprite appearing twice, either give Whaley no pre-evolution (start it as Bigfin) or pick a different base. **[TO DECIDE]**
+**Whaley/Dollfin note:** In Tuxemon, both Bigfin (Whaley) and the mini-boss Sharpfin evolve from **Dollfin**. To avoid the same base sprite appearing twice, either give Whaley no pre-evolution (start it as Bigfin) or pick a different base. **DECIDED (2026-07-05):** Whaley has **no pre-evolution** — it starts as Bigfin. Simplest, and it avoids the shared Dollfin sprite. *(Lewis's call.)*
 
-**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **[TO DECIDE: evolution level per starter; auto-evolve vs. player-confirm.]**
+**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)* **[TO DECIDE: evolution level per starter — number tuning, Jeff.]**
 
 ---
 
@@ -78,7 +78,7 @@ Attacker → how much damage vs each defender:
 | **Metal** | 0.5× | 1× | 2× | 1× |
 | **Normal** | 1× | 1× | 1× | 1× |
 
-Reads cleanly: Fire melts Metal and burns Grass; Water douses Fire; Grass drinks Water; Metal chops Grass. **Cosmic** (Artemis) matchups are **[TO DECIDE]** — likely neutral or 2× against everything, tuned so the finale is hard but winnable.
+Reads cleanly: Fire melts Metal and burns Grass; Water douses Fire; Grass drinks Water; Metal chops Grass. **Cosmic** (Artemis) matchups — **DECIDED (2026-07-05):** Cosmic hits **2× against every type**. *(Lewis's call — "if it wasn't hard, the training and journey would feel like they were for nothing.")* The finale still stays winnable because Artemis's Meteor Shower also damages itself.
 
 ---
 
@@ -154,9 +154,20 @@ Meteor Shower is Lewis's idea and it's a good one: because Artemis hurts itself,
 ```
 chance = baseCatchRate × (1 − currentHP / maxHP) × ballBonus   (with a small floor and a cap)
 ```
-Caught Fakeamon join your team. **[TO DECIDE: better Fakeaballs? can you catch a mini-boss?]**
+Caught Fakeamon join your team.
 
-**Losing:** **[TO DECIDE: whole team faints → return to last Fakeatent? keep it gentle.]**
+**DECIDED (2026-07-05) — Fakeaball tiers (Lewis's design):**
+
+| Ball | Effect |
+|---|---|
+| **Fakeaball** | the basic ball |
+| **Great Fakeaball** | slightly higher catch chance than a normal Fakeaball |
+| **Ultra Fakeaball** | **100% catch** if the target is below **50% HP** |
+| **Cosmic Fakeaball** | the best ball — and the **only** one that can catch a **mini-boss** |
+
+**DECIDED (2026-07-05):** you **can catch a mini-boss**, but **only with a Cosmic Fakeaball**. *(Lewis's call.)* Artemis stays uncatchable (see §10).
+
+**Losing:** **DECIDED (2026-07-05):** when your whole team faints, you wake up at the last **Fakeatent**, fully healed, and **drop a few tokens** — a small sting, not harsh. *(Lewis's call.)*
 
 ---
 
@@ -194,14 +205,35 @@ Top-down, tile-based. Grid movement, four directions. **[TO DECIDE: one big map 
 | **2** | Goth | **Agnite** — Fire "false dragon" iguana | **Windeye** — Metal/Lightning "tower" bot | Fire + Metal (mixed) |
 | **3** | Child Actor | **Spectera** — Grass/Sky leaf-winged fruit bat | **Eaglace** — Water/Frost ice eagle | Grass + Water (mixed) |
 
-**Gym typing note:** Gym 1 is cleanly Metal; Gyms 2 and 3 mix two types. Mixed gyms are fine (and simpler — just use the picks), but the "type advantage" strategy is muddier there. **[TO DECIDE: re-theme to single-type gyms, or keep mixed?]**
+**Gym typing note:** Gym 1 is cleanly Metal; Gyms 2 and 3 currently mix two types. **DECIDED (2026-07-05):** **each gym is a single type** — cleaner type-advantage strategy. *(Lewis's call.)* Gyms 2 and 3 will be re-themed to one type each when we build M4 (keep the leader's ace type, swap the off-type creature).
 
 ---
 
 ## 9. Economy & Items
 
 **Tokens** — earned in gym battles and found in the world; spent on healing (Fakeatents) and Fakeaballs (Tall Towers). **[TO DECIDE: prices.]**
-**Berries & Recipes** — found while exploring; cooked into healing dishes. **[TO DECIDE: berry list + recipes.]**
+**Berries & Recipes** — found while exploring; cooked into healing dishes.
+
+**DECIDED (2026-07-05) — Lewis's berries & recipes:**
+
+Berries: **Fakeaberry, Greenberry, Raspberry, Cosmicberry, Greatberry, Bossberry** *(Bossberry only drops from mini-bosses).*
+
+| Recipe | Dish | Heals |
+|---|---|---|
+| Fakeaberry + Fakeaberry | Fakea Snack | +10 HP |
+| Greenberry + Greenberry | Green Snack | +20 HP |
+| Raspberry + Raspberry | Rasp Snack | +20 HP |
+| Cosmicberry + Cosmicberry | Cosmic Snack | +40 HP |
+| Greatberry + Greatberry | Great Snack | +30 HP |
+| Bossberry + Bossberry | Boss Snack | +30 HP |
+| Fakeaberry + Greenberry | Healthy Snack | +30 HP |
+| Fakeaberry + Raspberry | Healthier Snack | +40 HP |
+| Fakeaberry + Cosmicberry | Cosmic Dish | +50 HP |
+| Fakeaberry + Greatberry | Healthiest Snack | +50 HP |
+| Greenberry + Raspberry | Rasp Dish | +30 HP |
+| Greenberry + Cosmicberry | Green Meal | +40 HP |
+| Greenberry + Greatberry | Great Meal | +40 HP |
+| *any other combination* | Basic Dish | +30 HP |
 
 ---
 
@@ -216,7 +248,7 @@ Top-down, tile-based. Grid movement, four directions. **[TO DECIDE: one big map 
 4. That unlocks the **final battle with Artemis** (see stats/moveset in §5–6).
 5. Beat Artemis → stop the meteor → win.
 
-**[TO DECIDE: can you catch Artemis after beating it? what do gym badges do?]**
+**DECIDED (2026-07-05):** you **cannot catch Artemis** after beating it — it's so powerful it would one-shot every other Fakeamon; defeating it is the ending. And **gym badges open a new area** to explore. *(Both Lewis's calls.)*
 
 ---
 
@@ -289,12 +321,11 @@ Top-down, tile-based. Grid movement, four directions. **[TO DECIDE: one big map 
 
 **Resolved in v0.3:** Leafick's moves; Artemis stats (2× rule) + moveset (incl. self-hitting Meteor Shower); all 5 mini-bosses; all 3 gyms (leader/standard/ace); Tuxemon type mapping proposed; Metal type proposed; expanded type chart drafted.
 
-**New decisions from this version:**
-1. Confirm adding **Metal** and **Cosmic** types; finalize the type chart + Cosmic matchups.
-2. Single-type gyms vs. keep the mixed teams as-is.
-3. Whaley's base form (Dollfin appears twice) — resolve.
-4. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
+**Resolved by Lewis (2026-07-05):** Cosmic = 2× vs all types (§4); single-type gyms (§8); Whaley has no pre-evolution (§3); auto-evolve, no confirm (§3); Fakeaball tiers — Great / Ultra / Cosmic — and mini-bosses catchable only with a Cosmic Fakeaball (§6); whole-team-faint = wake at Fakeatent, lose a few tokens (§6); gym badges open a new area (§10); can't catch Artemis (§10); full berry + recipe list (§9).
 
-**Still needed (M2–M3):** capture details + Fakeaball tiers; mini-boss individual levels/stats; party size + storage; encounter style; map structure; whole-team-faint behavior.
-
-**Bigger picture:** XP curve + per-Fakeamon XP; token prices + gym rewards; berries + recipes; badge effects; can you catch Artemis.
+**Still open — grown-up / number-tuning (Jeff):**
+1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
+2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
+3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
+4. Capture-formula numbers (base rate, per-ball bonuses, floor/cap); token prices + gym rewards.
+5. Party size + storage; encounter style; map structure.

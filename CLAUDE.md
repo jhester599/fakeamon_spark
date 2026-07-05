@@ -135,6 +135,18 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - Commit **often**, after each small working step, with plain messages ("add damage formula", "growler can now use Flare").
 - Keep `main` runnable. Nothing fancy needed — small frequent commits beat big ones.
 
+## Design decision loop (Lewis is creative director)
+
+Open creative questions live as homework for **Lewis** in `HOMEWORK.md` (writable) and `homework.html` (interactive worksheet). When Jeff relays Lewis's picks, **run the loop** — full details and the question→section index are in **`DECISIONS.md`**:
+
+1. **Log** each pick in the *Decisions Made* table in `DECISIONS.md` (number, decision, Lewis's reason, date), and flip that row's Status to ✅.
+2. **Update `DESIGN.md`** — use the Question Index in `DECISIONS.md` to find the matching **[TO DECIDE]** and replace it with the decision, tagged **`DECIDED (date):`** so the open question is gone.
+3. **Tick** the question in `HOMEWORK.md` (mark it done).
+4. **Update the milestone status** in this file if the decision affects the current build.
+5. **Commit** with a plain message, e.g. `"decide: gym badges open a new area"`.
+
+If a pick is unclear or clashes with an existing decision, **ask before writing it in** — don't guess on Lewis's behalf.
+
 ## When in doubt
 
-If a design detail isn't decided (e.g., capture tuning, encounter style, whether gyms are single-type), it's marked **[TO DECIDE]** in `DESIGN.md` — **ask Jeff and Lewis rather than guessing.** Small, reversible defaults are fine for prototyping; call them out when you use one.
+If a design detail isn't decided (e.g., capture tuning, encounter style, whether gyms are single-type), it's marked **[TO DECIDE]** in `DESIGN.md` — **ask Jeff and Lewis rather than guessing.** Small, reversible defaults are fine for prototyping; call them out when you use one. Once decided, it stops being a guess — run the **Design decision loop** above to make it official.

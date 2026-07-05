@@ -13,6 +13,19 @@ your own idea!), and tell us **why** — the "why" helps us build it right.
 
 ---
 
+> ## ✅ All 10 decided! (2026-07-05)
+> Great work, Creative Director! Every question below is answered and now
+> **official** in `DESIGN.md`. The full record (with your reasons) lives in
+> `DECISIONS.md`. Quick recap of your picks:
+>
+> **1** Cosmic = super strong (2× vs all) · **2** Whaley has no baby form ·
+> **3** four ball tiers (Great / Ultra / Cosmic) · **4** catch a mini-boss only
+> with a Cosmic Fakeaball · **5** can't catch Artemis · **6** badges open a new
+> area · **7** single-type gyms · **8** faint → heal at Fakeatent, lose a few
+> tokens · **9** evolving is a surprise · **10** your berries & recipes 🍓
+
+---
+
 ## 🔥 Types & Battles
 
 ### 1. How strong is Artemis's "Cosmic" power?  *(needed at M5 — the finale)*

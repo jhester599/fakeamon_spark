@@ -1,0 +1,381 @@
+<title>Fakeamon — Creative Director Homework</title>
+<style>
+  :root {
+    --fire:#ff7a3d; --water:#3d9bff; --grass:#4bbd6b; --metal:#8a94a6; --cosmic:#a06bff;
+    --bg:#eef2fb; --bg-2:#ffffff; --ink:#1c2540; --ink-soft:#5a6485;
+    --line:#d6ddef; --card:#ffffff; --card-2:#f5f8ff;
+    --shadow:0 8px 22px rgba(30,50,110,.10); --star:transparent;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#0d1224; --bg-2:#131a33; --ink:#eef2ff; --ink-soft:#9aa6cc;
+      --line:#2a3358; --card:#161d38; --card-2:#1d2647;
+      --shadow:0 10px 26px rgba(0,0,0,.45); --star:#cdd7ff;
+    }
+  }
+  :root[data-theme="light"] { --bg:#eef2fb; --bg-2:#fff; --ink:#1c2540; --ink-soft:#5a6485; --line:#d6ddef; --card:#fff; --card-2:#f5f8ff; --shadow:0 8px 22px rgba(30,50,110,.10); --star:transparent; }
+  :root[data-theme="dark"]  { --bg:#0d1224; --bg-2:#131a33; --ink:#eef2ff; --ink-soft:#9aa6cc; --line:#2a3358; --card:#161d38; --card-2:#1d2647; --shadow:0 10px 26px rgba(0,0,0,.45); --star:#cdd7ff; }
+
+  * { box-sizing: border-box; }
+  body {
+    margin:0;
+    background: radial-gradient(1100px 460px at 82% -10%, color-mix(in srgb, var(--cosmic) 14%, transparent), transparent 60%), var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  .sky { position: fixed; inset:0; z-index:0; pointer-events:none; opacity:.7;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, var(--star), transparent),
+      radial-gradient(1.4px 1.4px at 68% 12%, var(--star), transparent),
+      radial-gradient(1.6px 1.6px at 34% 58%, var(--star), transparent),
+      radial-gradient(1.2px 1.2px at 88% 44%, var(--star), transparent),
+      radial-gradient(1.3px 1.3px at 52% 82%, var(--star), transparent),
+      radial-gradient(1.5px 1.5px at 22% 90%, var(--star), transparent),
+      radial-gradient(1.2px 1.2px at 78% 74%, var(--star), transparent);
+  }
+  .wrap { position: relative; z-index:1; max-width: 780px; margin:0 auto; padding: 40px 20px 72px; }
+  .disp { font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
+
+  header { text-align:center; margin-bottom: 6px; }
+  .eyebrow { font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; }
+  h1.title {
+    font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+    font-size: clamp(32px, 6.5vw, 52px); line-height:1.03; margin:6px 0 6px; text-wrap:balance; letter-spacing:-.01em;
+    background: linear-gradient(100deg, var(--fire), var(--water) 55%, var(--cosmic));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .subtitle { color:var(--ink-soft); max-width: 52ch; margin:0 auto; font-size:16px; }
+
+  .bar {
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    margin: 22px auto 6px; max-width:620px;
+    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 16px; box-shadow:var(--shadow);
+  }
+  .bar .count { font-family: ui-rounded, system-ui, sans-serif; font-weight:800; font-size:15px; }
+  .bar .count b { color: var(--grass); font-variant-numeric: tabular-nums; }
+  .bar .actions { display:flex; gap:8px; }
+  button.btn {
+    font: inherit; font-size:13.5px; font-weight:700; cursor:pointer;
+    background:var(--card-2); color:var(--ink); border:1px solid var(--line);
+    border-radius:999px; padding:7px 14px;
+  }
+  button.btn:hover { border-color: var(--water); }
+  button.btn:focus-visible { outline:3px solid var(--water); outline-offset:2px; }
+
+  .note { text-align:center; color:var(--ink-soft); font-size:14px; margin: 14px auto 26px; max-width: 56ch; }
+  .note code { background:var(--card-2); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
+
+  /* section */
+  section.sec { --c: var(--fire); margin-bottom: 30px; }
+  section.sec.s-water  { --c: var(--water); }
+  section.sec.s-grass  { --c: var(--grass); }
+  section.sec.s-cosmic { --c: var(--cosmic); }
+  section.sec.s-metal  { --c: var(--metal); }
+  .sec-title {
+    font-family: ui-rounded, system-ui, sans-serif; font-size: 21px; font-weight:800;
+    display:flex; align-items:center; gap:10px; margin: 0 0 14px;
+    padding-bottom: 8px; border-bottom: 3px solid color-mix(in srgb, var(--c) 45%, var(--line));
+  }
+
+  .q {
+    background:var(--card); border:1px solid var(--line); border-left:6px solid var(--c);
+    border-radius:16px; box-shadow:var(--shadow); padding:18px 20px; margin-bottom:16px;
+  }
+  .q-head { display:flex; gap:12px; align-items:flex-start; }
+  .q-num {
+    flex:none; width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+    font-family: ui-rounded, system-ui, sans-serif; font-weight:800; font-size:15px;
+    background: var(--c); color:#fff;
+  }
+  .q-title { margin:0; font-family: ui-rounded, system-ui, sans-serif; font-size:17px; font-weight:800; flex:1; }
+  .when {
+    display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.03em;
+    color:var(--ink-soft); background:var(--card-2); border:1px solid var(--line);
+    border-radius:999px; padding:2px 9px; margin-left:8px; white-space:nowrap;
+  }
+  .q-desc { margin:10px 0 12px; color:var(--ink-soft); font-size:14.5px; }
+
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  label.opt {
+    display:flex; gap:10px; align-items:flex-start; cursor:pointer;
+    background:var(--card-2); border:1.5px solid var(--line); border-radius:11px; padding:10px 12px;
+    font-size:14.5px; transition: border-color .12s, background .12s;
+  }
+  label.opt:hover { border-color: color-mix(in srgb, var(--c) 55%, var(--line)); }
+  label.opt.picked { border-color: var(--c); background: color-mix(in srgb, var(--c) 12%, var(--card-2)); }
+  label.opt input { margin-top: 3px; accent-color: var(--c); width:16px; height:16px; flex:none; }
+  label.opt .ok { flex:1; }
+  label.opt .ok b { font-weight:800; }
+
+  .fill { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+  .fill label { font-size:13px; font-weight:700; color:var(--ink-soft); }
+  input.txt, textarea.txt {
+    font: inherit; font-size:14.5px; color:var(--ink);
+    background:var(--bg-2); border:1.5px solid var(--line); border-radius:10px; padding:9px 11px; width:100%;
+  }
+  textarea.txt { resize: vertical; min-height: 56px; }
+  input.txt:focus, textarea.txt:focus { outline:none; border-color: var(--c); }
+
+  /* grown-up list */
+  .grown { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--metal);
+    border-radius:16px; box-shadow:var(--shadow); padding:18px 22px; }
+  .grown h2 { font-family: ui-rounded, system-ui, sans-serif; margin:0 0 8px; font-size:19px; }
+  .grown p.sub { margin:0 0 12px; color:var(--ink-soft); font-size:14px; }
+  .grown ul { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:6px; font-size:14.5px; }
+
+  footer { text-align:center; color:var(--ink-soft); font-size:13px; margin-top:30px; }
+
+  .toggle { position: fixed; top:14px; right:14px; z-index:3; font:inherit; font-size:13px; font-weight:700; cursor:pointer;
+    background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:7px 13px; box-shadow:var(--shadow); }
+  .toggle:focus-visible { outline:3px solid var(--water); outline-offset:2px; }
+
+  /* PRINT — clean homework sheet */
+  @media print {
+    .sky, .toggle, .bar .actions, .note { display:none !important; }
+    body { background:#fff; color:#000; }
+    .q, .grown, .bar { box-shadow:none; break-inside: avoid; }
+    label.opt { background:#fff; }
+    h1.title { color:#111 !important; -webkit-text-fill-color:#111; }
+  }
+</style>
+
+<div class="sky" aria-hidden="true"></div>
+<button class="toggle" id="themeBtn" type="button" aria-label="Switch light or dark theme">🌗 Theme</button>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Fakeamon · Creative Director</div>
+    <h1 class="title disp">Lewis's Design Homework</h1>
+    <p class="subtitle">Big fun decisions that are <b>yours</b> to make. Pick the one you like and say why — that's what helps us build it right. 🎨</p>
+  </header>
+
+  <div class="bar">
+    <span class="count"><b id="doneN">0</b> of 10 decisions made</span>
+    <div class="actions">
+      <button class="btn" id="printBtn" type="button">🖨️ Print</button>
+      <button class="btn" id="resetBtn" type="button">↺ Reset</button>
+    </div>
+  </div>
+  <p class="note">Your picks save right in this browser, so you can come back later. The little tag on each question (like <code>needed at M5</code>) tells you when we actually build it — <b>nothing here is urgent!</b></p>
+
+  <!-- ===== Types & Battles ===== -->
+  <section class="sec s-fire">
+    <h2 class="sec-title">🔥 Types &amp; Battles</h2>
+
+    <div class="q" data-q="1">
+      <div class="q-head"><span class="q-num">1</span>
+        <h3 class="q-title">How strong is Artemis's "Cosmic" power? <span class="when">needed at M5 · finale</span></h3></div>
+      <p class="q-desc">Artemis is the final boss. Its attacks are a special type called <b>Cosmic</b>. How hard should Cosmic hit everyone else?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="Normal (1x)"><span class="ok"><b>A) Normal</b> — 1×, same as anything. A fair fight.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Super strong (2x)"><span class="ok"><b>B) Super scary</b> — 2× against everyone. Really hard finale.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Mixed"><span class="ok"><b>C) Mixed</b> — strong vs some types, weak vs others (you say which!).</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="2">
+      <div class="q-head"><span class="q-num">2</span>
+        <h3 class="q-title">Whaley's look-alike twin <span class="when">needed at M2–M3</span></h3></div>
+      <p class="q-desc">In the art we're borrowing, <b>Whaley</b> and the shark mini-boss <b>Sharpfin</b> grow from the <i>same</i> baby — so they'd share a face. Let's fix it.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="No baby form"><span class="ok"><b>A)</b> Whaley has <b>no baby form</b> (starts grown-up). Simplest.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="Different baby"><span class="ok"><b>B)</b> Give Whaley a <b>different baby</b> so they look unique.</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" placeholder="Tell us why you picked that"></div>
+    </div>
+  </section>
+
+  <!-- ===== Catching ===== -->
+  <section class="sec s-water">
+    <h2 class="sec-title">🌊 Catching</h2>
+
+    <div class="q" data-q="3">
+      <div class="q-head"><span class="q-num">3</span>
+        <h3 class="q-title">Fancier Fakeaballs? <span class="when">needed at M2</span></h3></div>
+      <p class="q-desc">Right now there's one <b>Fakeaball</b>. Should there be better balls that catch more easily?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="One ball"><span class="ok"><b>A)</b> Just one ball, keep it simple.</span></label>
+        <label class="opt"><input type="radio" name="q3" value="Several kinds"><span class="ok"><b>B)</b> A few kinds! Name them below.</span></label>
+      </div>
+      <div class="fill"><label>If a few kinds — name them &amp; how strong:</label><input class="txt" name="q3_names" placeholder="e.g. Super Ball, Mega Ball…"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q3_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="4">
+      <div class="q-head"><span class="q-num">4</span>
+        <h3 class="q-title">Can you catch a mini-boss? <span class="when">needed at M5</span></h3></div>
+      <p class="q-desc">The 5 mini-bosses are big and tough. Can you add one to <i>your</i> team?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="Yes"><span class="ok"><b>A) Yes</b> — catch them if you weaken them enough. A real prize.</span></label>
+        <label class="opt"><input type="radio" name="q4" value="No"><span class="ok"><b>B) No</b> — battles only; you beat them, not keep them.</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q4_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="5">
+      <div class="q-head"><span class="q-num">5</span>
+        <h3 class="q-title">Catch Artemis after you beat it? <span class="when">needed at M5</span></h3></div>
+      <p class="q-desc">Once you defeat the legendary Artemis and stop the meteor…</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="Yes"><span class="ok"><b>A) Yes!</b> — a secret reward: the legend joins your team.</span></label>
+        <label class="opt"><input type="radio" name="q5" value="No"><span class="ok"><b>B) No</b> — beating it is the ending; you don't keep it.</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q5_why" placeholder="Tell us why you picked that"></div>
+    </div>
+  </section>
+
+  <!-- ===== World & Gyms ===== -->
+  <section class="sec s-grass">
+    <h2 class="sec-title">🌿 The World &amp; Gyms</h2>
+
+    <div class="q" data-q="6">
+      <div class="q-head"><span class="q-num">6</span>
+        <h3 class="q-title">What does a Gym Badge actually do? <span class="when">needed at M4</span></h3></div>
+      <p class="q-desc">You earn a <b>badge</b> for beating a gym. Should it give a power-up, or just look cool?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="Bragging"><span class="ok"><b>A) Just bragging</b> — a shiny badge to collect.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Heal boost"><span class="ok"><b>B) Heal boost</b> — team heals a little after each battle.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Catch boost"><span class="ok"><b>C) Catch boost</b> — Fakeaballs work a bit better.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Opens area"><span class="ok"><b>D) Opens a new area</b> to explore.</span></label>
+      </div>
+      <div class="fill"><label>…or your own idea + why:</label><input class="txt" name="q6_why" placeholder="Your idea and why"></div>
+    </div>
+
+    <div class="q" data-q="7">
+      <div class="q-head"><span class="q-num">7</span>
+        <h3 class="q-title">Gym teams — matching type, or mixed? <span class="when">needed at M4</span></h3></div>
+      <p class="q-desc">Some gyms right now have two <i>different</i> types on one team. Should each gym…</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="Match one type"><span class="ok"><b>A) Match one type</b> (like an all-Metal gym) — cleaner strategy.</span></label>
+        <label class="opt"><input type="radio" name="q7" value="Stay mixed"><span class="ok"><b>B) Stay mixed</b> — trickier and more surprising.</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q7_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="8">
+      <div class="q-head"><span class="q-num">8</span>
+        <h3 class="q-title">What happens when your whole team faints? <span class="when">needed at M2–M4</span></h3></div>
+      <p class="q-desc">We want losing to feel <b>gentle</b>, not mean. When everyone faints…</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="Heal at tent, no penalty"><span class="ok"><b>A)</b> Wake up at the last <b>Fakeatent</b>, fully healed. No penalty.</span></label>
+        <label class="opt"><input type="radio" name="q8" value="Lose a few tokens"><span class="ok"><b>B)</b> Same, but drop a few <b>tokens</b> (a small sting).</span></label>
+      </div>
+      <div class="fill"><label>…or your own idea + why:</label><input class="txt" name="q8_why" placeholder="Your idea and why"></div>
+    </div>
+  </section>
+
+  <!-- ===== Growing Up & Cooking ===== -->
+  <section class="sec s-cosmic">
+    <h2 class="sec-title">🌟 Growing Up &amp; Cooking</h2>
+
+    <div class="q" data-q="9">
+      <div class="q-head"><span class="q-num">9</span>
+        <h3 class="q-title">Evolving — surprise, or ask first? <span class="when">needed at M5</span></h3></div>
+      <p class="q-desc">When a Fakeamon is strong enough to <b>evolve</b> into its bigger form…</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="Surprise"><span class="ok"><b>A) Surprise!</b> — it just evolves right away.</span></label>
+        <label class="opt"><input type="radio" name="q9" value="Ask first"><span class="ok"><b>B) Ask me first</b> — "Do you want Growler to evolve?" Yes/No.</span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q9_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="10">
+      <div class="q-head"><span class="q-num">10</span>
+        <h3 class="q-title">Invent the berries and recipes! 🍓 <span class="when">needed at M5</span></h3></div>
+      <p class="q-desc">The <b>Cooking Cabin</b> turns berries into healing snacks. This one's all you — make some up! (This counts as your 10th decision once you write something.)</p>
+      <div class="fill"><label>Berry names:</label><input class="txt" name="q10_berries" placeholder="e.g. Zingberry, Frostplum, Sunmelon…"></div>
+      <div class="fill"><label>Recipes (berries → dish → heals how much):</label><textarea class="txt" name="q10_recipes" placeholder="Zingberry + Sunmelon → Sunny Smoothie → heals 20 HP&#10;…"></textarea></div>
+    </div>
+  </section>
+
+  <!-- ===== Grown-up list ===== -->
+  <section class="sec s-metal">
+    <h2 class="sec-title">🧑‍💻 Grown-up decisions</h2>
+    <div class="grown">
+      <p class="sub">Technical / number-tuning calls — really Jeff's to lock in (Lewis can still have opinions!).</p>
+      <ul>
+        <li><b>Game stack:</b> confirm plain HTML/JS now → adopt <b>Phaser</b> at M3.</li>
+        <li><b>Type system:</b> officially lock in <b>Metal</b> + <b>Cosmic</b> types and the type chart.</li>
+        <li><b>The math:</b> XP curve, XP per creature, mini-boss levels &amp; stats.</li>
+        <li><b>Capture numbers:</b> base catch rate, ball bonus, catch-chance floor/cap.</li>
+        <li><b>Team storage:</b> party size, where extras go, and <b>saving</b> the game.</li>
+        <li><b>Map structure:</b> one big map vs. connected areas.</li>
+        <li><b>Token prices:</b> cost of healing, balls, etc. (Lewis can suggest; Jeff balances.)</li>
+        <li><b>Art task:</b> grab real Tuxemon gym-leader sprites → record in <code>CREDITS.md</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Full design lives in <b>DESIGN.md</b>. When Lewis decides, we write it into DESIGN.md to make it official. 🌠</footer>
+</div>
+
+<script>
+  // ---- theme toggle ----
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    var root = document.documentElement;
+    var isDark = getComputedStyle(root).getPropertyValue("--bg").trim().indexOf("#0d") === 0
+      || root.getAttribute("data-theme") === "dark";
+    root.setAttribute("data-theme", isDark ? "light" : "dark");
+  });
+
+  // ---- save & restore Lewis's answers in this browser ----
+  var KEY = "fakeamon-homework-v1";
+  var fields = document.querySelectorAll("input[name], textarea[name]");
+
+  function load() {
+    var saved;
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+    fields.forEach(function (f) {
+      var v = saved[f.name];
+      if (v === undefined) return;
+      if (f.type === "radio") { if (f.value === v) f.checked = true; }
+      else { f.value = v; }
+    });
+    refresh();
+  }
+
+  function save() {
+    var data = {};
+    fields.forEach(function (f) {
+      if (f.type === "radio") { if (f.checked) data[f.name] = f.value; }
+      else if (f.value.trim() !== "") { data[f.name] = f.value; }
+    });
+    localStorage.setItem(KEY, JSON.stringify(data));
+  }
+
+  // Count how many of the 10 questions have an answer.
+  function refresh() {
+    // highlight picked options
+    document.querySelectorAll("label.opt").forEach(function (l) {
+      var r = l.querySelector("input");
+      l.classList.toggle("picked", r.checked);
+    });
+    var done = 0;
+    for (var i = 1; i <= 9; i++) {
+      if (document.querySelector('input[name="q' + i + '"]:checked')) done++;
+    }
+    // Q10 is creative: counts if any of its boxes has text
+    var b = document.querySelector('[name="q10_berries"]').value.trim();
+    var r = document.querySelector('[name="q10_recipes"]').value.trim();
+    if (b || r) done++;
+    document.getElementById("doneN").textContent = done;
+  }
+
+  fields.forEach(function (f) {
+    f.addEventListener("change", function () { save(); refresh(); });
+    f.addEventListener("input", function () { save(); refresh(); });
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (confirm("Clear all of Lewis's answers on this browser?")) {
+      localStorage.removeItem(KEY);
+      fields.forEach(function (f) { if (f.type === "radio") f.checked = false; else f.value = ""; });
+      refresh();
+    }
+  });
+
+  load();
+</script>

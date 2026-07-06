@@ -18,6 +18,7 @@ the original again.
 |---|---|---|---|---|---|
 | Growler (sprite) | `assets/sprites/growler.png` | `mods/tuxemon/gfx/sprites/battle/hissiorite-sheet.png` | Hissiorite | princess-phoenix (per `wiki.tuxemon.org/Hissiorite`, confirmed via `CONTENT_REFERENCE.md` §13) | CC BY-SA 3.0 |
 | Whaley (sprite) | `assets/sprites/whaley.png` | `mods/tuxemon/gfx/sprites/battle/bigfin-sheet.png` | Bigfin | Cavalcadeur, rsg167 | CC BY-SA 4.0 |
+| Leafick (sprite) | `assets/sprites/leafick.png` | `mods/tuxemon/gfx/sprites/battle/frondly-sheet.png` | Frondly | Leo (original design), ReallyDarkandWindie (art), Levaine (sprites), Sanglorian (back sprite) (per `wiki.tuxemon.org/Frondly`, confirmed via `CONTENT_REFERENCE.md` §13) | CC BY-SA 3.0 |
 
 **How these were made:** each source is a 128×88 sprite sheet containing two
 large action poses plus a small 2-frame standing/idle pose. We cropped just
@@ -31,10 +32,6 @@ it 4× with nearest-neighbor (no blur) to get a crisp pixel-art portrait.
 Everything below was checked against the actual repo (not just the wiki) and
 exists at `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` unless noted.
 Full detail is in `DESIGN.md` §12.
-
-**Starters:** Leafick ← Frondly — Leo (original design), ReallyDarkandWindie
-(art), Levaine (sprites), Sanglorian (back sprite), CC BY-SA 3.0 (per
-`wiki.tuxemon.org/Frondly`, confirmed via `CONTENT_REFERENCE.md` §13)
 
 **Legendary:** Artemis ← Djinnbo (Cavalcadeur, rsg167)
 

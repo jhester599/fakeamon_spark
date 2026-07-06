@@ -182,11 +182,12 @@ const TYPE_CHART = {
 };
 
 // ===========================================================================
-//  BATTLE STATE
-//  Step 3: Whaley's current HP can now go down. (Growler doesn't take damage
-//  yet — that arrives in Step 6, when Whaley fights back.)
+//  BATTLE STATE — current HP for each fighter, keyed by name.
 // ===========================================================================
-let whaleyHP = WHALEY.maxHP;
+const hp = {
+  Growler: GROWLER.maxHP,
+  Whaley: WHALEY.maxHP,
+};
 
 // ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
@@ -235,7 +236,7 @@ function showFighter(fakeamon, currentHP) {
 // Redraw both fighters with their current HP.
 function renderArena() {
   document.getElementById("arena").innerHTML =
-    showFighter(GROWLER, GROWLER.maxHP) + showFighter(WHALEY, whaleyHP);
+    showFighter(GROWLER, hp.Growler) + showFighter(WHALEY, hp.Whaley);
 }
 
 renderArena();
@@ -271,8 +272,48 @@ function addLogLine(text) {
 }
 
 // ===========================================================================
-//  MOVE BUTTONS
-//  Step 3: clicking a button now deals real damage to Whaley.
+//  ONE ATTACK — attacker hits defender with a move, HP and log both update.
+// ===========================================================================
+function performAttack(attacker, defender, move) {
+  const result = calculateDamage(move, attacker, defender);
+  hp[defender.name] = Math.max(0, hp[defender.name] - result.damage);
+
+  let line = attacker.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
+  if (result.typeMultiplier >= 2) {
+    line += " It's super effective!";
+  } else if (result.typeMultiplier <= 0.5) {
+    line += " It's not very effective...";
+  }
+  addLogLine(line);
+}
+
+// Whaley doesn't think ahead yet — she just picks one of her moves at random.
+function pickRandomMove(fakeamon) {
+  const index = Math.floor(Math.random() * fakeamon.moves.length);
+  return MOVES[fakeamon.moves[index]];
+}
+
+// ===========================================================================
+//  ONE TURN — Step 6: Growler attacks AND Whaley attacks back.
+//  Whoever has higher Speed swings first; a tie goes to the player.
+// ===========================================================================
+function resolveTurn(playerMove) {
+  const enemyMove = pickRandomMove(WHALEY);
+  const playerGoesFirst = GROWLER.speed >= WHALEY.speed;
+
+  if (playerGoesFirst) {
+    performAttack(GROWLER, WHALEY, playerMove);
+    performAttack(WHALEY, GROWLER, enemyMove);
+  } else {
+    performAttack(WHALEY, GROWLER, enemyMove);
+    performAttack(GROWLER, WHALEY, playerMove);
+  }
+
+  renderArena();
+}
+
+// ===========================================================================
+//  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn above).
 // ===========================================================================
 function showMoveButtons(fakeamon) {
   const controls = document.getElementById("controls");
@@ -284,17 +325,7 @@ function showMoveButtons(fakeamon) {
     button.className = "move-btn";
     button.textContent = move.name;
     button.addEventListener("click", function () {
-      const result = calculateDamage(move, fakeamon, WHALEY);
-      whaleyHP = Math.max(0, whaleyHP - result.damage);
-
-      let line = fakeamon.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
-      if (result.typeMultiplier >= 2) {
-        line += " It's super effective!";
-      } else if (result.typeMultiplier <= 0.5) {
-        line += " It's not very effective...";
-      }
-      addLogLine(line);
-      renderArena();
+      resolveTurn(move);
     });
     controls.appendChild(button);
   });

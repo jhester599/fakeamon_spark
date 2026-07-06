@@ -1,155 +1,78 @@
-# Lewis's Creative Director Homework 🎨
+# Homework Before We Continue 🌙
 
-Hi Lewis! You're the **creative director** of Fakeamon. That means a bunch of
-big fun decisions are *yours to make*. Below are the open questions from our
-design doc, written as choices. **Circle or check the one you like** (or write
-your own idea!), and tell us **why** — the "why" helps us build it right.
-
-> **No rush.** Each question has a tag like *(needed at M5)* telling you when we
-> actually build it. Nothing here is needed for our next coding session — pick
-> away whenever you feel inspired. ✏️
-
-*(Grown-up/technical decisions for Jeff are in a short list at the bottom.)*
+Good stopping point for tonight! This is a short one — just the couple of
+things we need answered before picking **M2** back up. (Round 1's 10
+creative decisions are all done — see `DECISIONS.md` for the full history,
+they're already written into `DESIGN.md`.)
 
 ---
 
-> ## ✅ All 10 decided! (2026-07-05)
-> Great work, Creative Director! Every question below is answered and now
-> **official** in `DESIGN.md`. The full record (with your reasons) lives in
-> `DECISIONS.md`. Quick recap of your picks:
->
-> **1** Cosmic = super strong (2× vs all) · **2** Whaley has no baby form ·
-> **3** four ball tiers (Great / Ultra / Cosmic) · **4** catch a mini-boss only
-> with a Cosmic Fakeaball · **5** can't catch Artemis · **6** badges open a new
-> area · **7** single-type gyms · **8** faint → heal at Fakeatent, lose a few
-> tokens · **9** evolving is a surprise · **10** your berries & recipes 🍓
+## ✅ What we built tonight
+
+- **M1 — Battle Slice: complete.** Move buttons, damage formula, type
+  advantage, HP bars, misses, fainting, and a win/lose screen with Play
+  Again. Turn pacing tuned so it reads as a real back-and-forth.
+- **Bonus, ahead of schedule:** Growler and Whaley now show real
+  Tuxemon-based art instead of colored boxes.
+- **Docs:** verified exactly where Tuxemon's art lives in their repo, fixed
+  a wrong license note (it's CC BY-SA 4.0, not 3.0), and found two sprites
+  with missing attribution (see Jeff's list below).
 
 ---
 
-## 🔥 Types & Battles
+## 🌊 Lewis's 2 questions
 
-### 1. How strong is Artemis's "Cosmic" power?  *(needed at M5 — the finale)*
-Artemis is the final boss. Its attacks are a special type called **Cosmic**.
-How strong should Cosmic hits be against everyone else?
+Both are fun, feel-based questions — Jeff will turn your picks into exact
+numbers.
 
-- [ ] **A) Normal** — 1×, same as anything. A fair fight.
-- [ ] **B) Super scary** — 2× against *everyone*. Makes the finale really hard.
-- [ ] **C) Mixed** — strong vs some types, weak vs others (you tell us which!).
+### 1. How many Fakeamon can be on your team at once?  *(needed for M2 Step 5)*
+Once you start catching creatures, how big is your active team before extras
+have to wait in storage?
 
-**Lewis picks:** ____________  **Because:** ________________________________
+- [ ] **A) 3** — small and tight, every pick matters a lot.
+- [ ] **B) 4** — a little room to experiment.
+- [ ] **C) 6** — classic "full team" size, like the games that inspired us.
 
-### 2. Whaley's look-alike twin  *(needed at M2–M3)*
-In the art we're borrowing, **Whaley** and the shark mini-boss **Sharpfin** both
-grow from the *same* baby creature — so they'd share a face. We should fix that.
-
-- [ ] **A)** Whaley just has **no baby form** (starts grown-up). Simplest.
-- [ ] **B)** Give Whaley a **different baby** creature so they look unique.
+**What happens when your team is full and you catch a new one?**
+____________________________________________________________
 
 **Lewis picks:** ____________  **Because:** ________________________________
 
----
+### 2. How easy should catching be?  *(needed for M2 Step 4)*
+Picture a wild Fakeamon at **half health**. You throw a regular Fakeaball
+(not a fancy one). How often should it work?
 
-## 🌊 Catching
-
-### 3. Fancier Fakeaballs?  *(needed at M2)*
-Right now there's one **Fakeaball**. Should there be better balls that catch
-more easily?
-
-- [ ] **A)** Just one ball, keep it simple.
-- [ ] **B)** A few kinds! Name them and say how strong each is:
-      ____________________________________________________________
-
-**Lewis picks:** ____________  **Because:** ________________________________
-
-### 4. Can you catch a mini-boss?  *(needed at M5)*
-The 5 mini-bosses are big and tough. Can you add one to *your* team?
-
-- [ ] **A) Yes** — catch them if you weaken them enough (a real prize).
-- [ ] **B) No** — they're battles only; you beat them, not keep them.
-
-**Lewis picks:** ____________  **Because:** ________________________________
-
-### 5. Can you catch Artemis after you beat it?  *(needed at M5)*
-Once you defeat the legendary Artemis and stop the meteor…
-
-- [ ] **A) Yes!** — a secret reward: the legend joins your team.
-- [ ] **B) No** — beating it is the ending; you don't keep it.
+- [ ] **A) About 1 in 4** — catching feels hard-won and exciting.
+- [ ] **B) About 1 in 2** — a coin flip, fair and simple.
+- [ ] **C) About 3 in 4** — catching is easy, the fun is battling.
 
 **Lewis picks:** ____________  **Because:** ________________________________
 
 ---
 
-## 🌿 The World & Gyms
+## 🧑‍💻 Jeff's list
 
-### 6. What does a Gym Badge actually *do*?  *(needed at M4)*
-You earn a **badge** for beating a gym. Besides bragging rights, should it give
-a power-up?
+Not blocking M2, but shouldn't be forgotten:
 
-- [ ] **A) Just bragging** — a shiny badge to collect.
-- [ ] **B) Heal boost** — your team heals a little after each battle.
-- [ ] **C) Catch boost** — Fakeaballs work a bit better.
-- [ ] **D) Opens a new area** to explore.
-- [ ] **E) Your idea:** ______________________________________________
+1. **Check manually:** visit `wiki.tuxemon.org/Hissiorite` and `/Frondly` in
+   a real browser for artist credit — both are missing from Tuxemon's own
+   `ATTRIBUTIONS.md`, and automated tools are blocked from reaching that
+   wiki from here. Needed before any public release, not before tomorrow's
+   dev work.
+2. Officially confirm the tech stack (still marked `[TO CONFIRM]` in
+   `DESIGN.md` — plain HTML/JS through M2, Phaser starting M3). We've been
+   building on this assumption all along; just needs a formal sign-off.
+3. Decide whether to open one PR now bundling everything since the last
+   merge (M1 steps 3–8, the turn-pacing fix, and the art bonus), or keep
+   stacking commits before opening it.
 
-**Lewis picks:** ____________  **Because:** ________________________________
-
-### 7. Gym teams — matching type, or mixed?  *(needed at M4)*
-Some gyms right now have two *different* types on one team. Should each gym…
-
-- [ ] **A) Match one type** (like an all-Metal gym) — cleaner, easier strategy.
-- [ ] **B) Stay mixed** — trickier and more surprising.
-
-**Lewis picks:** ____________  **Because:** ________________________________
-
-### 8. What happens when your whole team faints?  *(needed at M2–M4)*
-We want losing to feel **gentle**, not mean. When everyone faints…
-
-- [ ] **A)** You wake up at the last **Fakeatent**, fully healed. No penalty.
-- [ ] **B)** Same, but you drop a few **tokens** (a small sting).
-- [ ] **C) Your idea:** ______________________________________________
-
-**Lewis picks:** ____________  **Because:** ________________________________
+**No rush — later milestones:** evolution level per starter & XP curve (M5),
+capture-formula exact numbers beyond the basic rate above (M2, fine-tuning
+can wait), token prices (M4), map structure & encounter style (M3),
+officially locking the Metal/Cosmic type chart (low urgency — already built
+and working).
 
 ---
 
-## 🌟 Growing Up & Cooking
-
-### 9. Evolving — surprise, or ask first?  *(needed at M5)*
-When a Fakeamon is strong enough to **evolve** into its bigger form…
-
-- [ ] **A) Surprise!** — it just evolves right away.
-- [ ] **B) Ask me first** — "Do you want Growler to evolve?" Yes/No.
-
-**Lewis picks:** ____________  **Because:** ________________________________
-
-### 10. Invent the berries and recipes! 🍓  *(needed at M5)*
-The **Cooking Cabin** turns berries into healing snacks. This one's all you —
-make some up!
-
-**Berries** (name a few): ________________________________________________
-
-**Recipes** (berries → dish → how much it heals):
-- ______________ + ______________ → ______________ heals ______ HP
-- ______________ + ______________ → ______________ heals ______ HP
-- ______________ + ______________ → ______________ heals ______ HP
-
----
-
-## 🧑‍💻 Grown-up decisions (Jeff's list — not homework for Lewis)
-
-These are technical/number-tuning calls. Lewis can still have opinions, but
-they're really Jeff's to lock in:
-
-- **Game stack:** confirm plain HTML/JS now → adopt **Phaser** at M3 (the map).
-- **Type system:** officially lock in adding **Metal** + **Cosmic** and the type chart.
-- **The math:** XP curve, how much XP each creature gives, mini-boss levels & stats.
-- **Capture numbers:** base catch rate, ball bonus, and the floor/cap on catch chance.
-- **Team storage:** how many Fakeamon in your party, where extras go, and **saving** the game.
-- **Map structure:** one big map vs. connected areas (build detail).
-- **Token prices:** cost of healing, balls, etc. (Lewis can suggest; Jeff balances.)
-- **Art task:** grab the real Tuxemon gym-leader sprites and record them in `CREDITS.md`.
-
----
-
-*Full design lives in `DESIGN.md`. When Lewis decides something, we'll write it
-into DESIGN.md so it becomes official. Have fun, Creative Director!* 🌠
+*Sleep well! Pick this back up any time — `DESIGN.md` and `DECISIONS.md`
+have the full history.* 🌠

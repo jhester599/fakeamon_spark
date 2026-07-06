@@ -1,4 +1,4 @@
-<title>Fakeamon — Creative Director Homework</title>
+<title>Fakeamon — Homework Before We Continue</title>
 <style>
   :root {
     --fire:#ff7a3d; --water:#3d9bff; --grass:#4bbd6b; --metal:#8a94a6; --cosmic:#a06bff;
@@ -41,15 +41,28 @@
   .eyebrow { font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; }
   h1.title {
     font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
-    font-size: clamp(32px, 6.5vw, 52px); line-height:1.03; margin:6px 0 6px; text-wrap:balance; letter-spacing:-.01em;
+    font-size: clamp(30px, 6vw, 46px); line-height:1.05; margin:6px 0 6px; text-wrap:balance; letter-spacing:-.01em;
     background: linear-gradient(100deg, var(--fire), var(--water) 55%, var(--cosmic));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   .subtitle { color:var(--ink-soft); max-width: 52ch; margin:0 auto; font-size:16px; }
 
+  /* recap card */
+  .recap {
+    margin: 24px auto 30px; max-width: 640px;
+    background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--grass);
+    border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow);
+  }
+  .recap h2 { font-family: ui-rounded, system-ui, sans-serif; font-size: 17px; margin: 0 0 10px; }
+  .recap ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; }
+  .recap .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .03em;
+    color: #fff; background: var(--grass); border-radius: 999px; padding: 1px 8px; margin-right: 6px;
+  }
+
   .bar {
     display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    margin: 22px auto 6px; max-width:620px;
+    margin: 0 auto 6px; max-width:640px;
     background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 16px; box-shadow:var(--shadow);
   }
   .bar .count { font-family: ui-rounded, system-ui, sans-serif; font-weight:800; font-size:15px; }
@@ -66,17 +79,15 @@
   .note { text-align:center; color:var(--ink-soft); font-size:14px; margin: 14px auto 26px; max-width: 56ch; }
   .note code { background:var(--card-2); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
 
-  /* section */
   section.sec { --c: var(--fire); margin-bottom: 30px; }
   section.sec.s-water  { --c: var(--water); }
-  section.sec.s-grass  { --c: var(--grass); }
-  section.sec.s-cosmic { --c: var(--cosmic); }
   section.sec.s-metal  { --c: var(--metal); }
   .sec-title {
-    font-family: ui-rounded, system-ui, sans-serif; font-size: 21px; font-weight:800;
-    display:flex; align-items:center; gap:10px; margin: 0 0 14px;
+    font-family: ui-rounded, system-ui, sans-serif; font-size: 19px; font-weight:800;
+    display:flex; align-items:center; gap:10px; margin: 0 0 6px;
     padding-bottom: 8px; border-bottom: 3px solid color-mix(in srgb, var(--c) 45%, var(--line));
   }
+  .sec-sub { color: var(--ink-soft); font-size: 13.5px; margin: 0 0 14px; }
 
   .q {
     background:var(--card); border:1px solid var(--line); border-left:6px solid var(--c);
@@ -89,7 +100,7 @@
     background: var(--c); color:#fff;
   }
   .q-title { margin:0; font-family: ui-rounded, system-ui, sans-serif; font-size:17px; font-weight:800; flex:1; }
-  .when {
+  .why-tag {
     display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.03em;
     color:var(--ink-soft); background:var(--card-2); border:1px solid var(--line);
     border-radius:999px; padding:2px 9px; margin-left:8px; white-space:nowrap;
@@ -114,15 +125,22 @@
     font: inherit; font-size:14.5px; color:var(--ink);
     background:var(--bg-2); border:1.5px solid var(--line); border-radius:10px; padding:9px 11px; width:100%;
   }
-  textarea.txt { resize: vertical; min-height: 56px; }
   input.txt:focus, textarea.txt:focus { outline:none; border-color: var(--c); }
 
-  /* grown-up list */
-  .grown { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--metal);
-    border-radius:16px; box-shadow:var(--shadow); padding:18px 22px; }
-  .grown h2 { font-family: ui-rounded, system-ui, sans-serif; margin:0 0 8px; font-size:19px; }
-  .grown p.sub { margin:0 0 12px; color:var(--ink-soft); font-size:14px; }
-  .grown ul { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:6px; font-size:14.5px; }
+  .jefflist {
+    background:var(--card); border:1px solid var(--line); border-left:6px solid var(--metal);
+    border-radius:16px; box-shadow:var(--shadow); padding:18px 22px;
+  }
+  .jefflist h2 { font-family: ui-rounded, system-ui, sans-serif; margin:0 0 4px; font-size:17px; }
+  .jefflist p.sub { margin:0 0 12px; color:var(--ink-soft); font-size:13.5px; }
+  .jefflist ol { margin:0; padding-left: 20px; display:flex; flex-direction:column; gap:10px; font-size:14.5px; }
+  .jefflist .priority { font-weight: 800; color: var(--fire); }
+
+  .laterlist {
+    margin-top: 18px; background: var(--card-2); border: 1px dashed var(--line);
+    border-radius: 14px; padding: 14px 18px; font-size: 13.5px; color: var(--ink-soft);
+  }
+  .laterlist b { color: var(--ink); }
 
   footer { text-align:center; color:var(--ink-soft); font-size:13px; margin-top:30px; }
 
@@ -130,11 +148,10 @@
     background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:7px 13px; box-shadow:var(--shadow); }
   .toggle:focus-visible { outline:3px solid var(--water); outline-offset:2px; }
 
-  /* PRINT — clean homework sheet */
   @media print {
     .sky, .toggle, .bar .actions, .note { display:none !important; }
     body { background:#fff; color:#000; }
-    .q, .grown, .bar { box-shadow:none; break-inside: avoid; }
+    .q, .jefflist, .bar, .recap { box-shadow:none; break-inside: avoid; }
     label.opt { background:#fff; }
     h1.title { color:#111 !important; -webkit-text-fill-color:#111; }
   }
@@ -145,174 +162,79 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Fakeamon · Creative Director</div>
-    <h1 class="title disp">Lewis's Design Homework</h1>
-    <p class="subtitle">Big fun decisions that are <b>yours</b> to make. Pick the one you like and say why — that's what helps us build it right. 🎨</p>
+    <div class="eyebrow">Fakeamon · Stopping Point</div>
+    <h1 class="title disp">Homework Before We Continue</h1>
+    <p class="subtitle">Good stopping point for tonight! Here's what we finished, and the couple of things we need answered before picking M2 back up. 🌙</p>
   </header>
 
+  <div class="recap">
+    <h2>✅ What we built tonight</h2>
+    <ul>
+      <li><span class="tag">M1</span>Finished the whole Battle Slice — moves, damage, types, HP bars, misses, fainting, and a win/lose screen with Play Again.</li>
+      <li><span class="tag">Bonus</span>Growler and Whaley now have real Tuxemon-based art instead of colored boxes.</li>
+      <li><span class="tag">Docs</span>Verified exactly where Tuxemon's art lives, fixed a wrong license note, and found two sprites (Growler's, and Leafick's for later) with missing attribution — see the Jeff list below.</li>
+    </ul>
+  </div>
+
   <div class="bar">
-    <span class="count"><b id="doneN">0</b> of 10 decisions made</span>
+    <span class="count"><b id="doneN">0</b> of 2 questions answered</span>
     <div class="actions">
       <button class="btn" id="printBtn" type="button">🖨️ Print</button>
       <button class="btn" id="resetBtn" type="button">↺ Reset</button>
     </div>
   </div>
-  <p class="note">Your picks save right in this browser, so you can come back later. The little tag on each question (like <code>needed at M5</code>) tells you when we actually build it — <b>nothing here is urgent!</b></p>
+  <p class="note">Your picks save right in this browser. These two are the only things actually <b>blocking</b> tomorrow's M2 work (catching &amp; team) — everything else can wait.</p>
 
-  <!-- ===== Types & Battles ===== -->
-  <section class="sec s-fire">
-    <h2 class="sec-title">🔥 Types &amp; Battles</h2>
+  <section class="sec s-water">
+    <h2 class="sec-title">🌊 Lewis's 2 questions</h2>
+    <p class="sec-sub">Both are fun ones — how the game <i>feels</i>. Jeff will turn your picks into exact numbers.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
-        <h3 class="q-title">How strong is Artemis's "Cosmic" power? <span class="when">needed at M5 · finale</span></h3></div>
-      <p class="q-desc">Artemis is the final boss. Its attacks are a special type called <b>Cosmic</b>. How hard should Cosmic hit everyone else?</p>
+        <h3 class="q-title">How many Fakeamon can be on your team at once? <span class="why-tag">needed for M2 Step 5</span></h3></div>
+      <p class="q-desc">Once you start catching creatures, how big is your active team before extra ones have to wait in storage?</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q1" value="Normal (1x)"><span class="ok"><b>A) Normal</b> — 1×, same as anything. A fair fight.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="Super strong (2x)"><span class="ok"><b>B) Super scary</b> — 2× against everyone. Really hard finale.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="Mixed"><span class="ok"><b>C) Mixed</b> — strong vs some types, weak vs others (you say which!).</span></label>
+        <label class="opt"><input type="radio" name="q1" value="3"><span class="ok"><b>A) 3</b> — small and tight, every pick matters a lot.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="4"><span class="ok"><b>B) 4</b> — a little room to experiment.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="6"><span class="ok"><b>C) 6</b> — classic "full team" size, like the games that inspired us.</span></label>
       </div>
+      <div class="fill"><label>What happens when your team is full and you catch a new one?</label><input class="txt" name="q1_overflow" placeholder="e.g. auto-send to storage / make me pick one to swap out"></div>
       <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
     </div>
 
     <div class="q" data-q="2">
       <div class="q-head"><span class="q-num">2</span>
-        <h3 class="q-title">Whaley's look-alike twin <span class="when">needed at M2–M3</span></h3></div>
-      <p class="q-desc">In the art we're borrowing, <b>Whaley</b> and the shark mini-boss <b>Sharpfin</b> grow from the <i>same</i> baby — so they'd share a face. Let's fix it.</p>
+        <h3 class="q-title">How easy should catching be? <span class="why-tag">needed for M2 Step 4</span></h3></div>
+      <p class="q-desc">Picture a wild Fakeamon at <b>half health</b>. You throw a regular Fakeaball (not a fancy one). How often should it work?</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q2" value="No baby form"><span class="ok"><b>A)</b> Whaley has <b>no baby form</b> (starts grown-up). Simplest.</span></label>
-        <label class="opt"><input type="radio" name="q2" value="Different baby"><span class="ok"><b>B)</b> Give Whaley a <b>different baby</b> so they look unique.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="25% - hard"><span class="ok"><b>A) About 1 in 4</b> — catching feels hard-won and exciting.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="50% - medium"><span class="ok"><b>B) About 1 in 2</b> — a coin flip, fair and simple.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="75% - easy"><span class="ok"><b>C) About 3 in 4</b> — catching is easy, the fun is battling.</span></label>
       </div>
       <div class="fill"><label>Because…</label><input class="txt" name="q2_why" placeholder="Tell us why you picked that"></div>
     </div>
   </section>
 
-  <!-- ===== Catching ===== -->
-  <section class="sec s-water">
-    <h2 class="sec-title">🌊 Catching</h2>
-
-    <div class="q" data-q="3">
-      <div class="q-head"><span class="q-num">3</span>
-        <h3 class="q-title">Fancier Fakeaballs? <span class="when">needed at M2</span></h3></div>
-      <p class="q-desc">Right now there's one <b>Fakeaball</b>. Should there be better balls that catch more easily?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q3" value="One ball"><span class="ok"><b>A)</b> Just one ball, keep it simple.</span></label>
-        <label class="opt"><input type="radio" name="q3" value="Several kinds"><span class="ok"><b>B)</b> A few kinds! Name them below.</span></label>
-      </div>
-      <div class="fill"><label>If a few kinds — name them &amp; how strong:</label><input class="txt" name="q3_names" placeholder="e.g. Super Ball, Mega Ball…"></div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q3_why" placeholder="Tell us why you picked that"></div>
-    </div>
-
-    <div class="q" data-q="4">
-      <div class="q-head"><span class="q-num">4</span>
-        <h3 class="q-title">Can you catch a mini-boss? <span class="when">needed at M5</span></h3></div>
-      <p class="q-desc">The 5 mini-bosses are big and tough. Can you add one to <i>your</i> team?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q4" value="Yes"><span class="ok"><b>A) Yes</b> — catch them if you weaken them enough. A real prize.</span></label>
-        <label class="opt"><input type="radio" name="q4" value="No"><span class="ok"><b>B) No</b> — battles only; you beat them, not keep them.</span></label>
-      </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q4_why" placeholder="Tell us why you picked that"></div>
-    </div>
-
-    <div class="q" data-q="5">
-      <div class="q-head"><span class="q-num">5</span>
-        <h3 class="q-title">Catch Artemis after you beat it? <span class="when">needed at M5</span></h3></div>
-      <p class="q-desc">Once you defeat the legendary Artemis and stop the meteor…</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q5" value="Yes"><span class="ok"><b>A) Yes!</b> — a secret reward: the legend joins your team.</span></label>
-        <label class="opt"><input type="radio" name="q5" value="No"><span class="ok"><b>B) No</b> — beating it is the ending; you don't keep it.</span></label>
-      </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q5_why" placeholder="Tell us why you picked that"></div>
-    </div>
-  </section>
-
-  <!-- ===== World & Gyms ===== -->
-  <section class="sec s-grass">
-    <h2 class="sec-title">🌿 The World &amp; Gyms</h2>
-
-    <div class="q" data-q="6">
-      <div class="q-head"><span class="q-num">6</span>
-        <h3 class="q-title">What does a Gym Badge actually do? <span class="when">needed at M4</span></h3></div>
-      <p class="q-desc">You earn a <b>badge</b> for beating a gym. Should it give a power-up, or just look cool?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q6" value="Bragging"><span class="ok"><b>A) Just bragging</b> — a shiny badge to collect.</span></label>
-        <label class="opt"><input type="radio" name="q6" value="Heal boost"><span class="ok"><b>B) Heal boost</b> — team heals a little after each battle.</span></label>
-        <label class="opt"><input type="radio" name="q6" value="Catch boost"><span class="ok"><b>C) Catch boost</b> — Fakeaballs work a bit better.</span></label>
-        <label class="opt"><input type="radio" name="q6" value="Opens area"><span class="ok"><b>D) Opens a new area</b> to explore.</span></label>
-      </div>
-      <div class="fill"><label>…or your own idea + why:</label><input class="txt" name="q6_why" placeholder="Your idea and why"></div>
-    </div>
-
-    <div class="q" data-q="7">
-      <div class="q-head"><span class="q-num">7</span>
-        <h3 class="q-title">Gym teams — matching type, or mixed? <span class="when">needed at M4</span></h3></div>
-      <p class="q-desc">Some gyms right now have two <i>different</i> types on one team. Should each gym…</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q7" value="Match one type"><span class="ok"><b>A) Match one type</b> (like an all-Metal gym) — cleaner strategy.</span></label>
-        <label class="opt"><input type="radio" name="q7" value="Stay mixed"><span class="ok"><b>B) Stay mixed</b> — trickier and more surprising.</span></label>
-      </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q7_why" placeholder="Tell us why you picked that"></div>
-    </div>
-
-    <div class="q" data-q="8">
-      <div class="q-head"><span class="q-num">8</span>
-        <h3 class="q-title">What happens when your whole team faints? <span class="when">needed at M2–M4</span></h3></div>
-      <p class="q-desc">We want losing to feel <b>gentle</b>, not mean. When everyone faints…</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q8" value="Heal at tent, no penalty"><span class="ok"><b>A)</b> Wake up at the last <b>Fakeatent</b>, fully healed. No penalty.</span></label>
-        <label class="opt"><input type="radio" name="q8" value="Lose a few tokens"><span class="ok"><b>B)</b> Same, but drop a few <b>tokens</b> (a small sting).</span></label>
-      </div>
-      <div class="fill"><label>…or your own idea + why:</label><input class="txt" name="q8_why" placeholder="Your idea and why"></div>
-    </div>
-  </section>
-
-  <!-- ===== Growing Up & Cooking ===== -->
-  <section class="sec s-cosmic">
-    <h2 class="sec-title">🌟 Growing Up &amp; Cooking</h2>
-
-    <div class="q" data-q="9">
-      <div class="q-head"><span class="q-num">9</span>
-        <h3 class="q-title">Evolving — surprise, or ask first? <span class="when">needed at M5</span></h3></div>
-      <p class="q-desc">When a Fakeamon is strong enough to <b>evolve</b> into its bigger form…</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="q9" value="Surprise"><span class="ok"><b>A) Surprise!</b> — it just evolves right away.</span></label>
-        <label class="opt"><input type="radio" name="q9" value="Ask first"><span class="ok"><b>B) Ask me first</b> — "Do you want Growler to evolve?" Yes/No.</span></label>
-      </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q9_why" placeholder="Tell us why you picked that"></div>
-    </div>
-
-    <div class="q" data-q="10">
-      <div class="q-head"><span class="q-num">10</span>
-        <h3 class="q-title">Invent the berries and recipes! 🍓 <span class="when">needed at M5</span></h3></div>
-      <p class="q-desc">The <b>Cooking Cabin</b> turns berries into healing snacks. This one's all you — make some up! (This counts as your 10th decision once you write something.)</p>
-      <div class="fill"><label>Berry names:</label><input class="txt" name="q10_berries" placeholder="e.g. Zingberry, Frostplum, Sunmelon…"></div>
-      <div class="fill"><label>Recipes (berries → dish → heals how much):</label><textarea class="txt" name="q10_recipes" placeholder="Zingberry + Sunmelon → Sunny Smoothie → heals 20 HP&#10;…"></textarea></div>
-    </div>
-  </section>
-
-  <!-- ===== Grown-up list ===== -->
   <section class="sec s-metal">
-    <h2 class="sec-title">🧑‍💻 Grown-up decisions</h2>
-    <div class="grown">
-      <p class="sub">Technical / number-tuning calls — really Jeff's to lock in (Lewis can still have opinions!).</p>
-      <ul>
-        <li><b>Game stack:</b> confirm plain HTML/JS now → adopt <b>Phaser</b> at M3.</li>
-        <li><b>Type system:</b> officially lock in <b>Metal</b> + <b>Cosmic</b> types and the type chart.</li>
-        <li><b>The math:</b> XP curve, XP per creature, mini-boss levels &amp; stats.</li>
-        <li><b>Capture numbers:</b> base catch rate, ball bonus, catch-chance floor/cap.</li>
-        <li><b>Team storage:</b> party size, where extras go, and <b>saving</b> the game.</li>
-        <li><b>Map structure:</b> one big map vs. connected areas.</li>
-        <li><b>Token prices:</b> cost of healing, balls, etc. (Lewis can suggest; Jeff balances.)</li>
-        <li><b>Art task:</b> grab real Tuxemon gym-leader sprites → record in <code>CREDITS.md</code>.</li>
-      </ul>
+    <h2 class="sec-title">🧑‍💻 Jeff's list</h2>
+    <p class="sec-sub">Not blocking M2, but shouldn't be forgotten.</p>
+    <div class="jefflist">
+      <ol>
+        <li><span class="priority">Check manually:</span> visit <code>wiki.tuxemon.org/Hissiorite</code> and <code>/Frondly</code> in a real browser for artist credit — both are missing from Tuxemon's own <code>ATTRIBUTIONS.md</code>, and our automated tools are blocked from reaching that wiki. Needed before any public release, not before tomorrow's dev work.</li>
+        <li>Officially confirm the tech stack (still marked <code>[TO CONFIRM]</code> in <code>DESIGN.md</code> — plain HTML/JS through M2, Phaser starting M3). We've been building on this assumption all along; just needs a formal sign-off.</li>
+        <li>Decide whether to open one PR now bundling everything since the last merge (M1 steps 3–8, the turn-pacing fix, and the art bonus), or keep stacking commits before opening it.</li>
+      </ol>
+    </div>
+
+    <div class="laterlist">
+      <b>No rush — later milestones:</b> evolution level per starter &amp; XP curve (M5), capture-formula exact numbers beyond the basic rate above (M2, but fine-tuning can wait), token prices (M4), map structure &amp; encounter style (M3), officially locking the Metal/Cosmic type chart (low urgency — already built and working).
     </div>
   </section>
 
-  <footer>Full design lives in <b>DESIGN.md</b>. When Lewis decides, we write it into DESIGN.md to make it official. 🌠</footer>
+  <footer>Sleep well! Pick this back up any time — <b>DESIGN.md</b> and <b>DECISIONS.md</b> have the full history. 🌠</footer>
 </div>
 
 <script>
-  // ---- theme toggle ----
   document.getElementById("themeBtn").addEventListener("click", function () {
     var root = document.documentElement;
     var isDark = getComputedStyle(root).getPropertyValue("--bg").trim().indexOf("#0d") === 0
@@ -320,8 +242,7 @@
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 
-  // ---- save & restore Lewis's answers in this browser ----
-  var KEY = "fakeamon-homework-v1";
+  var KEY = "fakeamon-homework-v2";
   var fields = document.querySelectorAll("input[name], textarea[name]");
 
   function load() {
@@ -345,21 +266,14 @@
     localStorage.setItem(KEY, JSON.stringify(data));
   }
 
-  // Count how many of the 10 questions have an answer.
   function refresh() {
-    // highlight picked options
     document.querySelectorAll("label.opt").forEach(function (l) {
       var r = l.querySelector("input");
       l.classList.toggle("picked", r.checked);
     });
     var done = 0;
-    for (var i = 1; i <= 9; i++) {
-      if (document.querySelector('input[name="q' + i + '"]:checked')) done++;
-    }
-    // Q10 is creative: counts if any of its boxes has text
-    var b = document.querySelector('[name="q10_berries"]').value.trim();
-    var r = document.querySelector('[name="q10_recipes"]').value.trim();
-    if (b || r) done++;
+    if (document.querySelector('input[name="q1"]:checked')) done++;
+    if (document.querySelector('input[name="q2"]:checked')) done++;
     document.getElementById("doneN").textContent = done;
   }
 
@@ -370,7 +284,7 @@
 
   document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
   document.getElementById("resetBtn").addEventListener("click", function () {
-    if (confirm("Clear all of Lewis's answers on this browser?")) {
+    if (confirm("Clear these answers on this browser?")) {
       localStorage.removeItem(KEY);
       fields.forEach(function (f) { if (f.type === "radio") f.checked = false; else f.value = ""; });
       refresh();

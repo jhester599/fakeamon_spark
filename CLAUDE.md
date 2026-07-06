@@ -36,14 +36,14 @@ project. After the step works, briefly reflect: was the model pick right?
 
 ## Current status
 
-> **Milestone: M1 — Battle Slice. Complete! 🎉** *(Update this line as we progress.)*
-> Growler vs Whaley is a full playable battle: move buttons, damage, type advantage, misses, HP bars, fainting, and a win/lose screen with Play Again. M2 (Catching & Team) is next — see `ROADMAP.md`. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
+> **Milestone: M2 — Catching & Team. In progress: Steps 1–2 done ✅** *(Update this line as we progress.)*
+> M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), and Leafick + a Choose Your Starter screen (Step 2). **Next up: Step 3 — a random wild opponent**, built as the `startBattle(config)` contract from `PLANS/M3_OVERWORLD_PLAN.md` §5 (see `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.2 for the how). Lewis's Round 3 homework (B1, B2, B4, B5) feeds Steps 3–4 — see `HOMEWORK.md`. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
 
 ## Scope guardrails
 
-**Build now (M1 only):** a single turn-based battle between two Fakeamon — choose a move, resolve damage, update HP, someone faints, win/lose screen.
+**Build now (M2 only):** wild opponents, catching with Fakeaballs, a team of 4 with Boxes overflow, switching fighters — **plus** the state/save foundation steps the M5 plan schedules *into* M2 (individuals & the state bag, the `startBattle` contract, save v1 — see `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6, steps S1–S4).
 
-**Do NOT build yet:** overworld/map, catching, inventory, gyms, mini-bosses, shops, cooking, evolutions, saving. Those are later milestones (M2–M5 in `DESIGN.md`). If a change starts pulling in out-of-scope systems, pause and flag it.
+**Do NOT build yet:** overworld/map and anything Phaser (M3 — but M2's battle module must end up matching the M3 plan's §5 contract), gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). If a change starts pulling in out-of-scope systems, pause and flag it.
 
 ## Tech stack
 
@@ -102,38 +102,30 @@ or use a simple local server like `python3 -m http.server`.
 
 ---
 
-## Milestone 1 — build this
+## Milestone 2 — build this
 
-Two Fakeamon fight. Player controls Growler; a simple opponent controls Whaley (random move is fine for now).
+Turn the one-off battle into "catch creatures and build a team." Steps 1–2
+are done. What's left, in order (full tables: `ROADMAP.md` M2 +
+`PLANS/M5_STATE_AND_SAVE_PLAN.md` §6):
 
-**Combatants (level 5):**
+| Step | What we build | Where it's specced |
+|---|---|---|
+| **3** *(+ M5-plan S2)* | A **random wild opponent** — built as the global `startBattle(config) → Promise<outcome>` contract; starter-select moves out of `battle.js` into `src/main.js` | contract shape: M3 plan §5 · globals version: M5 plan §A.2 · needs Lewis's **B1** (flee) + **B4** (wild levels) |
+| **4** | **Catch action + Fakeaball** — capture formula, 50% base rate (Lewis's call) | formula: `DESIGN.md` §6 · needs Lewis's **B2** (caught HP) + **B5** (catch words) |
+| *M5-plan **S1** — before Step 5* | **Individuals & the state bag** — `src/state.js`, `newIndividual()`, `statsFor()`; retires the `hp[name]` map so two Growlers don't share HP | M5 plan §1 + §A.3 |
+| **5** | **Team list** — up to 4 active, overflow to Boxes | decision #11 · nicknames = Lewis's **B3** (on deck) |
+| **6** | **Switch** which Fakeamon fights, including from Boxes | — |
+| *M5-plan **S3–S4** — end of M2* | **Save v1** (autosave to localStorage, Continue/New Game), then **export/import** | M5 plan §4 |
 
-| | HP | Attack | Defense | Speed | Moves |
-|---|---|---|---|---|---|
-| **Growler** (Fire) | 40 | 13 | 10 | 12 | Tackle, Bite, Burn, Flare |
-| **Whaley** (Water) | 44 | 12 | 12 | 9 | Tackle, Splash, Spout, Breech |
+Battle rules (damage, accuracy, type chart, stats) are unchanged from M1 —
+they live in `src/battle.js` and `src/data/*.js` now; those files are the
+truth, tweak numbers there. The M1 spec remains in `DESIGN.md` §6 and
+`ROADMAP.md`.
 
-**Moves** `{ name, type, power, accuracy }`:
-- Growler: Tackle (Normal, 8, 100%), Bite (Normal, 10, 95%), Burn (Fire, 12, 95%), Flare (Fire, 18, 85%)
-- Whaley: Tackle (Normal, 8, 100%), Splash (Water, 8, 100%), Spout (Water, 12, 95%), Breech (Water, 16, 90%)
-
-**Rules:**
-- **Turn order** by Speed (ties → player).
-- **Accuracy:** roll per move; a miss does nothing that turn (misses should be rare).
-- **Damage:** `raw = power + attackerAttack − defenderDefense` (min 1); `damage = round(raw × typeMultiplier × random(0.85–1.15))`.
-- **Type chart** (attacker vs defender):
-
-| ↓ vs → | Fire | Water | Grass | Metal |
-|---|---|---|---|---|
-| Fire | 1 | 0.5 | 2 | 2 |
-| Water | 2 | 1 | 0.5 | 1 |
-| Grass | 0.5 | 2 | 1 | 0.5 |
-| Metal | 0.5 | 1 | 2 | 1 |
-| Normal | 1 | 1 | 1 | 1 |
-
-- Reduce HP; at 0 the Fakeamon faints and the battle ends with a win/lose message.
-
-**Definition of done for M1:** you can play a full Growler-vs-Whaley battle in the browser, moves sometimes miss, type advantage visibly matters, and a typical fight lasts about **3–5 hits** per side.
+**Definition of done for M2:** you can fight a wild Fakeamon, weaken it,
+catch it, see it join a team of up to 4 (overflow to Boxes), and swap
+fighters — and the battle module is the clean `startBattle` contract that
+M3 will call without changes.
 
 ---
 

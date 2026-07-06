@@ -82,7 +82,7 @@ PLANS/       → architecture plans from high-end planning sessions:
                state, XP, evolution, and saving — read its §A first, it
                reconciles the plans against the code as it actually exists
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
-HOMEWORK_BACKLOG.md → the big question bank (B1–B34) for the whole game;
+HOMEWORK_BACKLOG.md → the big question bank (B1–B36) for the whole game;
                HOMEWORK.md gets served 2–4 questions at a time from here
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
@@ -172,7 +172,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.
 - Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
 - When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
-- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, Growler and Whaley now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
+- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, all 3 starters (Growler, Whaley, Leafick) now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
 - **✅ Resolved:** Growler's (Hissiorite) and Leafick's (Frondly) sprites have no entry in Tuxemon's own `ATTRIBUTIONS.md`, but both artists are now confirmed via the wiki — see `CONTENT_REFERENCE.md` §13 and `CREDITS.md`. No longer a blocker for public distribution.
 
 ## Git

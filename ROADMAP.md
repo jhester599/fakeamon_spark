@@ -51,9 +51,10 @@ this section gets updated.)
 **Goal:** one full turn-based fight — **Growler vs Whaley**. Pick a move,
 deal damage, HP drops, someone faints, win/lose screen. Nothing else.
 
-**Bonus, ahead of schedule:** Growler and Whaley now show real Tuxemon-based
-art (`assets/sprites/growler.png` / `whaley.png`) instead of colored boxes —
-see `CREDITS.md`. The rest of the roster's art is still planned for **M3
+**Bonus, ahead of schedule:** all 3 starters — Growler, Whaley, and Leafick —
+now show real Tuxemon-based art (`assets/sprites/growler.png` / `whaley.png`
+/ `leafick.png`) instead of colored boxes — see `CREDITS.md`. The rest of
+the roster's art (mini-bosses, gyms, evolutions) is still planned for **M3
 Step 3** below, once Phaser is in and we need proper sprite-sheet slicing
 for the overworld anyway.
 
@@ -120,7 +121,7 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 |---|---|---|
 | **1** | Add **Phaser** and show a tiny **tile map** — pull a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15) rather than placeholder colors; wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable/testable until the real map↔battle handoff lands at Step 4 | A little world on screen, built from real tile art, with a button to jump into a battle |
 | **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid — pull a real Tuxemon player walk-sheet (+ a `CREDITS.md` row) for the hero's sprite | Walk around the map with real character art |
-| **3** | **Real sprites** art pass for the rest of the roster (Leafick + everyone in M4/M5) — Growler/Whaley already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
+| **3** | **Real sprites** art pass for the rest of the roster (mini-bosses, gyms, evolutions — everyone in M4/M5) — all 3 starters already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
 
@@ -184,9 +185,9 @@ healing dishes, and defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B34). Lewis cleared
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B36). Lewis cleared
 **B1–B32** in one big homework round (2026-07-06) — see `DECISIONS.md` rows
-14–45 and `DESIGN.md` for where each landed. Two are still open, neither
+14–45 and `DESIGN.md` for where each landed. Four are still open, none
 urgent:
 
 - **M5:** where you swap boxed Fakeamon onto your team (B33) — needed by
@@ -194,6 +195,10 @@ urgent:
 - **M2 (flavor):** how a mirror match (same species on both sides) should
   read in the battle log (B34) — found during Step 3 testing; the battle
   itself plays correctly either way.
+- **M5 (flavor):** Lewis invented two new design bits outside a homework
+  round — berries on the ground (B35: themed by area or anywhere?) and
+  Cooking Cabins being more common in Snow Mountain (B36: only there, or
+  a starter cabin too?) — see `DECISIONS.md` rows 46–47.
 
 Plus Jeff's ongoing number-tuning list (not creative calls, just math):
 evolution levels per starter, the XP curve, exact Great/Ultra/Cosmic ball

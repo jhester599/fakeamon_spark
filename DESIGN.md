@@ -269,6 +269,8 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 **DECIDED (2026-07-06) — the Cooking Cabin:** self-serve — nobody runs it, walk in and cook. *(Lewis's call, B26.)*
 
+**DECIDED (2026-07-06) — where Cooking Cabins are:** they're **more common in the Snow Mountain area**. *(Lewis's invention, volunteered outside a homework round.)* Whether Snow Mountain is the *only* place with one, or there's also a smaller cabin somewhere earlier so cooking isn't gated entirely behind that area's gym badge, is still open — see **B36** in `HOMEWORK_BACKLOG.md`.
+
 ---
 
 ## 9. Economy & Items
@@ -280,6 +282,8 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 **DECIDED (2026-07-06) — Tall Tower stock:** just Fakeaballs — cooking covers healing, keep shops simple. *(Lewis's call, B18.)*
 
 **Berries & Recipes** — found while exploring; cooked into healing dishes.
+
+**DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)* Whether specific berries are themed to specific areas (matching each area's vibe, §7) or any of the 6 can turn up anywhere is still open — see **B35** in `HOMEWORK_BACKLOG.md`.
 
 **DECIDED (2026-07-05) — Lewis's berries & recipes:**
 

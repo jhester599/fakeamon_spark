@@ -159,11 +159,23 @@ function setControlsEnabled(enabled) {
 // A random pause between the two attacks, so the turn reads as "first this
 // happens, THEN that happens" instead of both landing at once. Tweak these
 // two numbers (in milliseconds) to make battles feel snappier or slower.
-const TURN_PAUSE_MIN_MS = 1000;
-const TURN_PAUSE_MAX_MS = 1500;
+// Lengthened 2026-07-06 after Jeff & Lewis's testing feedback — the
+// back-and-forth was reading too fast to follow.
+const TURN_PAUSE_MIN_MS = 2000;
+const TURN_PAUSE_MAX_MS = 2800;
 
 function randomTurnPause() {
   return TURN_PAUSE_MIN_MS + Math.random() * (TURN_PAUSE_MAX_MS - TURN_PAUSE_MIN_MS);
+}
+
+// The catch "wobble" suspense beats keep their own, snappier pacing (see
+// Step 4's throwFakeaball below) so a longer attack pause doesn't also
+// drag out throwing a ball.
+const CATCH_PAUSE_MIN_MS = 1000;
+const CATCH_PAUSE_MAX_MS = 1500;
+
+function randomCatchPause() {
+  return CATCH_PAUSE_MIN_MS + Math.random() * (CATCH_PAUSE_MAX_MS - CATCH_PAUSE_MIN_MS);
 }
 
 // Step 8: has this role's Fakeamon fainted? If so, announce it in the log.
@@ -213,7 +225,7 @@ function throwFakeaball(onDone) {
     setTimeout(function () {
       addLogLine("The Fakeaball wobbles...");
       wobble(remaining - 1);
-    }, randomTurnPause());
+    }, randomCatchPause());
   }
 
   function reveal() {
@@ -224,7 +236,7 @@ function throwFakeaball(onDone) {
         addLogLine("Oh no! " + opponent.name + " broke free!");
       }
       onDone(caught);
-    }, randomTurnPause());
+    }, randomCatchPause());
   }
 
   wobble(CATCH_WOBBLE_COUNT);

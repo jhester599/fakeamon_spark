@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "One entry per vendored battle sheet in assets/sprites/battle/.",
+    "slice-sheets.mjs REFUSES to slice a sheet with no entry here — that is",
+    "on purpose: no asset ships without attribution (CONTENT_REFERENCE.md §14).",
+    "Before adding an entry, verify the artist/license in Tuxemon's",
+    "ATTRIBUTIONS.md, or the creature's wiki.tuxemon.org page when it is",
+    "missing there. sourceCommit is the Tuxemon commit the sheet was pulled from."
+  ],
+  "hissiorite": {
+    "ourName": "Growler",
+    "artists": "princess-phoenix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hissiorite)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bigfin": {
+    "ourName": "Whaley",
+    "artists": "Cavalcadeur, rsg167",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "frondly": {
+    "ourName": "Leafick",
+    "artists": "Leo (design), ReallyDarkandWindie (art), Levaine (sprites), Sanglorian (back sprite)",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Frondly)",
+    "sourceCommit": "c34a9c72"
+  }
+}

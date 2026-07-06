@@ -1,0 +1,2 @@
+# Developer tools only — the game itself has no dependencies and no build step.
+tools/node_modules/

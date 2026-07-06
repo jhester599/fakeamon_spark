@@ -11,10 +11,8 @@ const WHALEY = {
   moves: ["tackle", "splash", "spout", "breech"],
 };
 
-// Leafick has no real art yet (planned for M3 Step 3) — showFighter()
-// falls back to a plain colored box when sprite is left out.
 const LEAFICK = {
-  name: "Leafick", type: "grass",
+  name: "Leafick", type: "grass", sprite: "assets/sprites/leafick.png",
   maxHP: 42, attack: 11, defense: 13, speed: 10,
   moves: ["tackle", "leafage", "pounce", "confusion"],
 };

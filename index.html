@@ -97,6 +97,13 @@
     background: #a7b4cf;
     cursor: not-allowed;
   }
+  .result-message {
+    width: 100%;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 0 0 12px;
+  }
   #log {
     max-width: 760px;
     margin: 20px auto 0;
@@ -243,8 +250,6 @@ function renderArena() {
     showFighter(GROWLER, hp.Growler) + showFighter(WHALEY, hp.Whaley);
 }
 
-renderArena();
-
 // ===========================================================================
 //  DAMAGE FORMULA — full version from DESIGN.md §6:
 //    raw    = move power + attacker's Attack − defender's Defense (min 1)
@@ -277,8 +282,15 @@ function addLogLine(text) {
 
 // ===========================================================================
 //  ONE ATTACK — attacker hits defender with a move, HP and log both update.
+//  Step 7: first roll for accuracy. A miss does nothing but announce itself.
 // ===========================================================================
 function performAttack(attacker, defender, move) {
+  const accuracyRoll = Math.random() * 100;
+  if (accuracyRoll >= move.accuracy) {
+    addLogLine(attacker.name + " used " + move.name + ", but it missed!");
+    return;
+  }
+
   const result = calculateDamage(move, attacker, defender);
   hp[defender.name] = Math.max(0, hp[defender.name] - result.damage);
 
@@ -308,17 +320,25 @@ function setControlsEnabled(enabled) {
 // A random pause between the two attacks, so the turn reads as "first this
 // happens, THEN that happens" instead of both landing at once. Tweak these
 // two numbers (in milliseconds) to make battles feel snappier or slower.
-const TURN_PAUSE_MIN_MS = 700;
-const TURN_PAUSE_MAX_MS = 1100;
+const TURN_PAUSE_MIN_MS = 1000;
+const TURN_PAUSE_MAX_MS = 1500;
 
 function randomTurnPause() {
   return TURN_PAUSE_MIN_MS + Math.random() * (TURN_PAUSE_MAX_MS - TURN_PAUSE_MIN_MS);
 }
 
+// Step 8: has this Fakeamon fainted? If so, announce it in the log.
+function checkForFaint(fakeamon) {
+  if (hp[fakeamon.name] > 0) return false;
+  addLogLine(fakeamon.name + " fainted!");
+  return true;
+}
+
 // ===========================================================================
 //  ONE TURN — Growler attacks AND Whaley attacks back, with a pause between
 //  so it feels like a real back-and-forth. Whoever has higher Speed swings
-//  first; a tie goes to the player.
+//  first; a tie goes to the player. If either fighter faints, the battle
+//  ends right there instead of playing out the rest of the turn.
 // ===========================================================================
 function resolveTurn(playerMove) {
   setControlsEnabled(false);
@@ -334,11 +354,52 @@ function resolveTurn(playerMove) {
   performAttack(first.attacker, first.defender, first.move);
   renderArena();
 
+  if (checkForFaint(first.defender)) {
+    endBattle(first.attacker);
+    return;
+  }
+
   setTimeout(function () {
     performAttack(second.attacker, second.defender, second.move);
     renderArena();
+
+    if (checkForFaint(second.defender)) {
+      endBattle(second.attacker);
+      return;
+    }
+
     setControlsEnabled(true);
   }, randomTurnPause());
+}
+
+// ===========================================================================
+//  WIN / LOSE — Step 8: swap the move buttons for a result + Play Again.
+// ===========================================================================
+function endBattle(winner) {
+  const playerWon = winner === GROWLER;
+  const message = playerWon
+    ? "🎉 " + GROWLER.name + " wins!"
+    : "💀 " + GROWLER.name + " fainted — " + WHALEY.name + " wins.";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML =
+    '<p class="result-message">' + message + "</p>" +
+    '<button id="playAgainBtn" class="move-btn">Play Again</button>';
+
+  document.getElementById("playAgainBtn").addEventListener("click", startNewBattle);
+}
+
+// Reset both fighters to full HP and start a fresh battle.
+function startNewBattle() {
+  hp.Growler = GROWLER.maxHP;
+  hp.Whaley = WHALEY.maxHP;
+
+  logLines.length = 0;
+  document.getElementById("log").innerHTML = "";
+
+  renderArena();
+  showMoveButtons(GROWLER);
+  addLogLine("A wild " + WHALEY.name + " appears! Choose a move for " + GROWLER.name + ".");
 }
 
 // ===========================================================================
@@ -360,6 +421,5 @@ function showMoveButtons(fakeamon) {
   });
 }
 
-showMoveButtons(GROWLER);
-addLogLine("A wild " + WHALEY.name + " appears! Choose a move for " + GROWLER.name + ".");
+startNewBattle();
 </script>

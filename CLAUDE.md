@@ -21,8 +21,8 @@ Context for Claude Code. Read this first every session. The full design lives in
 
 ## Current status
 
-> **Milestone: M1 — Battle Slice.** *(Update this line as we progress.)*
-> Building the first playable battle: Growler vs Whaley. Nothing else yet.
+> **Milestone: M1 — Battle Slice. Complete! 🎉** *(Update this line as we progress.)*
+> Growler vs Whaley is a full playable battle: move buttons, damage, type advantage, misses, HP bars, fainting, and a win/lose screen with Play Again. M2 (Catching & Team) is next — see `ROADMAP.md`.
 
 ## Scope guardrails
 

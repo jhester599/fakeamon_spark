@@ -58,11 +58,10 @@ Picture a wild Fakeamon at **half health**. You throw a regular Fakeaball
 
 Not blocking M2, but shouldn't be forgotten:
 
-1. **Check manually:** visit `wiki.tuxemon.org/Hissiorite` and `/Frondly` in
-   a real browser for artist credit — both are missing from Tuxemon's own
-   `ATTRIBUTIONS.md`, and automated tools are blocked from reaching that
-   wiki from here. Needed before any public release, not before tomorrow's
-   dev work.
+1. ✅ ~~Check Hissiorite/Frondly attribution on the wiki~~ — done, resolved
+   via `CONTENT_REFERENCE.md` §13. Hissiorite: princess-phoenix. Frondly:
+   Leo, ReallyDarkandWindie, Levaine, Sanglorian. Both CC BY-SA 3.0.
+   `CREDITS.md` updated — no longer blocking public distribution.
 2. Officially confirm the tech stack (still marked `[TO CONFIRM]` in
    `DESIGN.md` — plain HTML/JS through M2, Phaser starting M3). We've been
    building on this assumption all along; just needs a formal sign-off.

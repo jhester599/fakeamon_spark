@@ -54,14 +54,21 @@ inspired by Pokémon in spirit only — no Nintendo names, sprites, or music.
 
 ## Publishing this site (one-time setup)
 
-This repo is currently **private**, and GitHub Pages needs a repo to be
-**public** to serve a truly public link (private-repo Pages requires a paid
-GitHub plan, and even then stays access-restricted to collaborators). A
-GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) is already
-set up to deploy `index.html`, `roadmap.html`, `homework.html`, and
-`assets/` to GitHub Pages automatically on every push to `main` — it just
-needs the repo to be public to actually go live:
+A GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) deploys
+`index.html`, `roadmap.html`, `homework.html`, and `assets/` to GitHub Pages
+automatically on every push to `main`. Two one-time steps get it live
+(both done by hand — GitHub deliberately doesn't let a workflow enable
+Pages for the first time on its own, even with the right permissions):
 
-1. Go to **Settings → General → Danger Zone → Change repository visibility → Public**.
-2. That's it — the next push to `main` will deploy automatically. Check
-   progress under the repo's **Actions** tab.
+1. ✅ **Make the repo public** — done. (Private-repo Pages needs a paid
+   GitHub plan, and even then stays access-restricted to collaborators.)
+2. **Turn on Pages, once:** go to **Settings → Pages**, and under
+   "Build and deployment" set **Source: GitHub Actions**. That's the actual
+   switch that was missing — our workflow tried to flip it automatically
+   and GitHub blocked it with *"Resource not accessible by integration"*,
+   which is expected/by-design, not a bug in our setup.
+
+After that one click, this workflow runs itself forever — no more manual
+steps for future pushes. Check progress under the repo's **Actions** tab;
+the site will be at
+**[jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)**.

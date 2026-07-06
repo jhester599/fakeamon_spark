@@ -21,6 +21,12 @@ whole idea: build a little, play it, then build the next little bit.
    `"growler can now use Flare"`.
 5. **Stay in scope.** If a step starts dragging in a *later* milestone, stop
    and flag it.
+6. **Tick both trackers, same commit.** This file and `roadmap.html` (the
+   live quest map) show the same steps two ways — every time a step's
+   status changes here (✅, step count, progress bar), update `roadmap.html`
+   too, in the same commit. They drifted apart once (2026-07-06, Steps 3–4
+   shipped here but not there) and Jeff & Lewis caught it during testing —
+   don't let it happen again.
 
 ## How to run the game
 
@@ -154,12 +160,16 @@ healing dishes, and defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B33). Lewis cleared
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B34). Lewis cleared
 **B1–B32** in one big homework round (2026-07-06) — see `DECISIONS.md` rows
-14–45 and `DESIGN.md` for where each landed. Only one is still open:
+14–45 and `DESIGN.md` for where each landed. Two are still open, neither
+urgent:
 
 - **M5:** where you swap boxed Fakeamon onto your team (B33) — needed by
   the Boxes UI, no rush.
+- **M2 (flavor):** how a mirror match (same species on both sides) should
+  read in the battle log (B34) — found during Step 3 testing; the battle
+  itself plays correctly either way.
 
 Plus Jeff's ongoing number-tuning list (not creative calls, just math):
 evolution levels per starter, the XP curve, exact Great/Ultra/Cosmic ball

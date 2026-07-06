@@ -28,7 +28,7 @@ whenever he has time — and Jeff serves them up a few at a time.
 
 ---
 
-## ✅ M2 — Catching & Team *(all 5 answered 2026-07-06!)*
+## 🟡 M2 — Catching & Team *(5 of 6 answered — B34 is new, found during Step 3 testing)*
 
 ### ✅ B1. Can you run away from a wild battle?  *(needed by M2 Step 3)*
 
@@ -52,6 +52,22 @@ uses the player's team-average level as a stand-in until M3's areas exist
 
 Caught: `"Gotcha! <name> was caught!"`
 Broke free: `"Oh no! <name> broke free!"` *(Lewis kept the example wording.)*
+
+### 🔲 B34. INVENT: telling apart a mirror match  *(anytime — no rush, found during M2 Step 3 testing)*
+Since B3 decided no nicknames, a battle where your Fakeamon and the wild
+one are the **same species** (like Whaley vs. a wild Whaley) can read
+confusingly in the log and the win/lose message — e.g. "Whaley used
+Splash!" or "Whaley fainted — Whaley wins." The game plays correctly
+either way (each side's HP is tracked separately); this is purely about
+how it reads. How should we label the wild one?
+
+- [ ] **A) Add "wild"** — e.g. "the wild Whaley used Splash!" everywhere
+  the opponent is mentioned in the log and result message.
+- [ ] **B) Leave it as-is** — the HP bars on screen already make it clear
+  enough, don't bother.
+- [ ] **C) Invent something else** — a label, a title, your own idea.
+
+**Lewis picks:** ____________  **Because:** ________________________________
 
 ---
 
@@ -217,12 +233,12 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 
 | Milestone | Questions | Answered |
 |---|---|---|
-| M2 | B1–B5 | 5 / 5 |
+| M2 | B1–B5, B34 | 5 / 6 |
 | M3 | B6–B12 | 7 / 7 |
 | M4 | B13–B18 | 6 / 6 |
 | M5 | B19–B26, B33 | 8 / 9 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **32 / 33** |
+| **Total** | | **32 / 34** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

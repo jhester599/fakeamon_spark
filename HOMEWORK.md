@@ -3,8 +3,9 @@
 > **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
 > batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
 > ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Only **B33** (where you swap boxed Fakeamon) is still open, and it's not
-> needed until M5's Boxes screen — no rush.
+> Two questions are still open, neither urgent: **B33** (where you swap
+> boxed Fakeamon, needed by M5's Boxes screen) and **B34** (new — found
+> while testing Step 3, see below).
 >
 > Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
 > see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
@@ -31,11 +32,19 @@
 M2 Steps 3–4 (wild opponents + catching) have everything they need:
 flee always works (B1), caught Fakeamon join fully healed (B2), wild level
 uses team-average as a stand-in until M3's map exists (B4), and the catch
-messages are locked in (B5). Time for the Model Huddle and Step 3.
+messages are locked in (B5). Steps 3 and 4 are both built and live.
 
-**Only open question, no rush:** **B33** — where do you swap a boxed
-Fakeamon onto your active team? (At a Fakeatent / anywhere / a new
-building — needed by M5's Boxes screen, not before.)
+**Two open questions, no rush:**
+
+- **B33** — where do you swap a boxed Fakeamon onto your active team? (At
+  a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
+  not before.)
+- **B34** — new, found while testing Step 3: when you fight a wild
+  Fakeamon that's the *same species* as yours (like Whaley vs. a wild
+  Whaley), the log can't tell them apart ("Whaley used Splash!", "Whaley
+  fainted — Whaley wins"). The battle plays correctly either way — this
+  is purely about how it reads. Should we label the wild one somehow
+  (e.g. "the wild Whaley"), leave it as-is, or invent something else?
 
 ---
 
@@ -60,4 +69,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*Serve B33/B34 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

@@ -62,7 +62,7 @@ src/data/fakeamon.js    → GROWLER, WHALEY data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
 src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
 src/main.js         → the conductor: starter-select screen, picks each random wild opponent
-roadmap.html        → visual quest map (mirrors ROADMAP.md), also served live
+roadmap.html        → visual quest map — mirrors ROADMAP.md; update BOTH in the same commit whenever a step's done-status changes (they drifted once, 2026-07-06 — see ROADMAP.md golden rule #6), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
 /assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
 /assets/sprites/battle → vendored original source sheets, for future slicing (M3)
@@ -80,7 +80,7 @@ PLANS/       → architecture plans from high-end planning sessions:
                state, XP, evolution, and saving — read its §A first, it
                reconciles the plans against the code as it actually exists
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
-HOMEWORK_BACKLOG.md → the big question bank (B1–B33) for the whole game;
+HOMEWORK_BACKLOG.md → the big question bank (B1–B34) for the whole game;
                HOMEWORK.md gets served 2–4 questions at a time from here
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
@@ -177,6 +177,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 
 - Commit **often**, after each small working step, with plain messages ("add damage formula", "growler can now use Flare").
 - Keep `main` runnable. Nothing fancy needed — small frequent commits beat big ones.
+- **Ticking a step done? Update `ROADMAP.md` and `roadmap.html` together, same commit.** See ROADMAP.md golden rule #6 — they drifted once and it shipped as a real bug.
 
 ## Design decision loop (Lewis is creative director)
 

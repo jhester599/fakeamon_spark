@@ -42,6 +42,7 @@ Or just double-click `index.html`.
 | `CLAUDE.md` | Working brief and current milestone status |
 | `ROADMAP.md` | Stepwise build plan (M1–M5), what's done and what's next |
 | `DECISIONS.md` | Log of decisions made, and how new ones get folded in |
+| `MODELS.md` | Which Claude model/effort to use per roadmap step, and the pre-step Model Huddle |
 | `HOMEWORK.md` | Open questions waiting on Lewis (creative director) and Jeff |
 | `CREDITS.md` | Art attribution — what's borrowed, from where, under what license |
 | `CONTENT_REFERENCE.md` | Where our Tuxemon-sourced art, data, and roster ideas come from, and the licensing rules for using them |

@@ -45,6 +45,8 @@ project. After the step works, briefly reflect: was the model pick right?
 
 **Do NOT build yet:** overworld/map and anything Phaser (M3 — but M2's battle module must end up matching the M3 plan's §5 contract), gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). If a change starts pulling in out-of-scope systems, pause and flag it.
 
+**Not yet scheduled anywhere — flag before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has 200 Tuxemon pre-selected and typed for this, but no roadmap step wires them in — it's an **M3-late-through-M5, area-by-area task** tied to when each of the six Venta areas (`DESIGN.md` §7, `DECISIONS.md` B8) actually gets built. See the note in `ROADMAP.md`'s M3 section before starting any of this work.
+
 ## Tech stack
 
 **CONFIRMED (2026-07-06) by Jeff:**

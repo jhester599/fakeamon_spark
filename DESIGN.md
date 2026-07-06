@@ -154,7 +154,12 @@ Meteor Shower is Lewis's idea and it's a good one: because Artemis hurts itself,
 ```
 chance = baseCatchRate × (1 − currentHP / maxHP) × ballBonus   (with a small floor and a cap)
 ```
+
+**DECIDED (2026-07-06) — base catch rate = 50%** *(Lewis's call: "about 1 in 4, because catching is pretty hard").* Worked backwards from his answer: a regular Fakeaball has `ballBonus = 1`, and at half HP `(1 − 0.5) = 0.5`, so `chance = baseCatchRate × 0.5`. For that to land at ~25% (his "1 in 4"), `baseCatchRate = 0.5`. **Great/Ultra/Cosmic Fakeaball exact `ballBonus` numbers are still [TO DECIDE] — Jeff, number-tuning** (Ultra's 100%-under-50%-HP rule already overrides the formula per the ball tiers below).
+
 Caught Fakeamon join your team.
+
+**DECIDED (2026-07-06) — team size = 4** *(Lewis's call: "a little room to experiment").* A caught Fakeamon beyond your 4 active slots goes to **Boxes** — storage you can open to **switch** a boxed Fakeamon in for one on your active team. Nothing is ever lost; it just waits in the Boxes until you want it.
 
 **DECIDED (2026-07-05) — Fakeaball tiers (Lewis's design):**
 
@@ -330,7 +335,7 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 
 ## 13. Technical Notes
 
-- **Stack: [TO CONFIRM]** — recommended: browser (HTML5 Canvas → Phaser), built from scratch with Claude Code, Tuxemon as art source/reference (not a forked codebase).
+- **Stack: CONFIRMED (2026-07-06) by Jeff** — plain HTML/CSS/JS through M2, Phaser starting M3, built from scratch with Claude Code, Tuxemon as art source/reference (not a forked codebase).
 - **Repo:** add `CLAUDE.md` (design + current milestone) and `CREDITS.md` (attribution).
 - **Type system decision (new):** confirm adding Metal + Cosmic and lock the mapping in §4.
 - **IP:** inspired by Pokémon only — no Nintendo names/sprites/music. Borrowed base art is Tuxemon's, credited. *(Not legal advice; none of this bites until public distribution.)*
@@ -343,9 +348,13 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 
 **Resolved by Lewis (2026-07-05):** Cosmic = 2× vs all types (§4); single-type gyms (§8); Whaley has no pre-evolution (§3); auto-evolve, no confirm (§3); Fakeaball tiers — Great / Ultra / Cosmic — and mini-bosses catchable only with a Cosmic Fakeaball (§6); whole-team-faint = wake at Fakeatent, lose a few tokens (§6); gym badges open a new area (§10); can't catch Artemis (§10); full berry + recipe list (§9).
 
+**Resolved by Lewis (2026-07-06):** team size = 4, overflow goes to Boxes with switching (§6); base catch rate = 50% (§6).
+
+**Confirmed by Jeff (2026-07-06):** tech stack — plain HTML/JS through M2, Phaser starting M3 (§13).
+
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
 3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
-4. Capture-formula numbers (base rate, per-ball bonuses, floor/cap); token prices + gym rewards.
-5. Party size + storage; encounter style; map structure.
+4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards.
+5. Encounter style; map structure.

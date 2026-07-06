@@ -32,13 +32,11 @@ Context for Claude Code. Read this first every session. The full design lives in
 
 ## Tech stack
 
-**[TO CONFIRM with Jeff]** — recommended default, chosen for simplicity and instant feedback:
+**CONFIRMED (2026-07-06) by Jeff:**
 
-- **M1 (battle): plain HTML + CSS + JavaScript, no build step.** A single page: buttons for moves, `<div>` HP bars, a text log. Open the file in a browser and it just works. This keeps the first milestone maximally understandable for Lewis — no game-engine concepts needed yet.
+- **M1–M2 (battle, catching, team): plain HTML + CSS + JavaScript, no build step.** A single page: buttons for moves, `<div>` HP bars, a text log. Open the file in a browser and it just works. This keeps things maximally understandable for Lewis — no game-engine concepts needed yet.
 - **M3 (overworld) onward:** adopt **Phaser** when we need tile maps and sprite movement.
-- **Art:** for M1, use **placeholder colored boxes + names** — no sprites required to build battle logic. We'll drop in Tuxemon sprites later (see Assets below).
-
-Confirm or override before writing code.
+- **Art:** M1 used placeholder colored boxes + names to start; real Tuxemon sprites are already dropping in for the starters (see Assets below), full roster art lands at M3.
 
 ## Current project structure
 
@@ -69,8 +67,7 @@ single HTML file — not needed yet.)*
 — auto-deployed from `main` on every push, always current.
 
 **Or run it locally:** no tooling needed — open `index.html` in a browser,
-or use a simple local server like `python3 -m http.server`. *(Update this
-section once the tech stack is formally confirmed — see Tech stack above.)*
+or use a simple local server like `python3 -m http.server`.
 
 ---
 

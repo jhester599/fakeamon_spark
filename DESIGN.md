@@ -178,7 +178,7 @@ Caught Fakeamon join your team.
 
 ## 7. The Overworld
 
-Top-down, tile-based. Grid movement, four directions. **[TO DECIDE: one big map vs. connected areas; random (tall-grass) vs. visible encounters — visible is simpler and less frustrating for v1.]**
+Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** **visible encounters** — wild Fakeamon stand on the map and you bump into them, no random tall-grass surprises (simpler and less frustrating; details in `PLANS/M3_OVERWORLD_PLAN.md` §6.3). **[TO DECIDE: one big map vs. connected areas — Lewis's B6 in `HOMEWORK_BACKLOG.md`.]**
 
 ---
 
@@ -357,4 +357,4 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
 3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
 4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards.
-5. Encounter style; map structure.
+5. Map structure (one big map vs. connected areas — Lewis's B6; encounter style is decided: visible, §7).

@@ -108,25 +108,47 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 
 > **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
 > Its nine finer-grained steps (**S1–S9**, in its §9) supersede the five
-> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8. The table
-> below stays as the short version; build from the plan.
+> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
+> (cleanup: remove the temporary "Battle test" button below, flip status/
+> ticks, clear stale `M3 PLACEHOLDER` comments, verify the live Pages build
+> plays start-to-finish) — S9 doesn't get its own row since it's wrap-up,
+> not new player-visible behavior, but it still has to happen before M3 is
+> actually done. The table below stays as the short version; build from
+> the plan.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | Add **Phaser** and show a tiny **tile map** (grass + paths) | A little world on screen |
-| **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid | Walk around the map |
+| **1** | Add **Phaser** and show a tiny **tile map** — pull a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15) rather than placeholder colors; wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable/testable until the real map↔battle handoff lands at Step 4 | A little world on screen, built from real tile art, with a button to jump into a battle |
+| **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid — pull a real Tuxemon player walk-sheet (+ a `CREDITS.md` row) for the hero's sprite | Walk around the map with real character art |
 | **3** | **Real sprites** art pass for the rest of the roster (Leafick + everyone in M4/M5) — Growler/Whaley already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
-| **4** | **Visible encounters** — a wild Fakeamon stands on the map; walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
+| **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
 
 **🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon, battle it,
 and return to exploring.
+
+> **🎒 Not yet scheduled — expanding the wild roster:** `CONTENT_REFERENCE.md`
+> §16 already has **200 Tuxemon selected, typed, and sourced** as the approved
+> wild-encounter pool — way beyond the 3 starters Step 4 needs to prove the
+> mechanic works. No step above wires any of the 200 in yet; that's not an
+> oversight, it's sequencing — widening the roster only means something once
+> a map exists to place encounters on. It's naturally an **M3-late-through-M5,
+> area-by-area task**: each of the six Venta areas (B8 — The Meadows, The
+> Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) gets its own
+> slice of the 200 as that area gets built, with Lewis doing the
+> Tuxemon-slug → Fakeamon rename pass per area (`CONTENT_REFERENCE.md` §16's
+> own suggested workflow). Since Snow Mountain/The Factory/The Lagoon only
+> unlock via gym badges (B14), full-roster work can't land as one step
+> anyway — revisit this note once the *first* area beyond the starting map
+> is actually in progress, and turn it into real numbered steps then.
 
 ---
 
 ## 🔴 M4 — World Systems (places to visit)
 
 **Goal:** reasons to explore — heal, shop, and the first trainer challenge.
+*(Each area a gym badge opens is also a chance to widen the wild roster —
+see the M3 note above and `CONTENT_REFERENCE.md` §16.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -143,6 +165,8 @@ Tall Tower, and beat your first gym.
 ## 🔴 M5 — Depth & Story (the finale)
 
 **Goal:** the big finish — evolutions, the mini-bosses, and stopping Artemis.
+*(Same ongoing roster-widening applies to any late-game areas —
+`CONTENT_REFERENCE.md` §16.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|

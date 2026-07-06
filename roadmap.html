@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Fakeamon — Quest Map (Development Roadmap)</title>
 <style>
   /* ============================================================
@@ -353,18 +354,19 @@
           <h2 class="zone-title">Overworld (the map)</h2>
           <span class="status locked">🔒 Locked</span>
         </div>
-        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>(M3 now has a full blueprint — <code>PLANS/M3_OVERWORLD_PLAN.md</code>, nine finer steps S1–S9; the five below are the short version.)</i></p>
+        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>(M3 now has a full blueprint — <code>PLANS/M3_OVERWORLD_PLAN.md</code>, nine finer steps S1–S9 (1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, plus S9 cleanup with no row of its own); the five below are the short version.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
         <div class="zone-count">0 of 5 steps done</div>
       </div>
       <ol class="steps">
-        <li><span class="num">1</span><div class="step-body"><p class="step-what">Add <b>Phaser</b> + show a tiny <b>tile map</b></p><p class="see"><span class="tag">▶ You'll see</span> A little world on screen</p></div></li>
-        <li><span class="num">2</span><div class="step-body"><p class="step-what">A <b>player character</b> you move with the arrow keys</p><p class="see"><span class="tag">▶ You'll see</span> Walk around the map</p></div></li>
+        <li><span class="num">1</span><div class="step-body"><p class="step-what">Add <b>Phaser</b> + show a tiny <b>tile map</b> — pull a real Tuxemon tileset (+ a <code>CREDITS.md</code> row); wire a temporary <b>"Battle test" button</b> so the battle stays reachable until Step 4</p><p class="see"><span class="tag">▶ You'll see</span> A little world on screen, built from real tile art, with a button to jump into a battle</p></div></li>
+        <li><span class="num">2</span><div class="step-body"><p class="step-what">A <b>player character</b> you move with the arrow keys — pull a real Tuxemon walk-sheet (+ a <code>CREDITS.md</code> row) for the hero</p><p class="see"><span class="tag">▶ You'll see</span> Walk around the map with real character art</p></div></li>
         <li><span class="num">3</span><div class="step-body"><p class="step-what"><b>Real sprites</b> — drop in Tuxemon art + start <code>CREDITS.md</code></p><p class="see"><span class="tag">▶ You'll see</span> Real creature art instead of colored boxes</p></div></li>
-        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Visible encounters</b> — walk into a creature to start a battle</p><p class="see"><span class="tag">▶ You'll see</span> Touch the creature → the battle opens</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Visible encounters</b> — walk into a creature to start a battle <i>(starts with just a small pool, e.g. the 3 starters)</i></p><p class="see"><span class="tag">▶ You'll see</span> Touch the creature → the battle opens</p></div></li>
         <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Return to the map</b> after a battle</p><p class="see"><span class="tag">▶ You'll see</span> Win/catch/flee → back to walking</p></div></li>
       </ol>
       <p class="done-when"><b>🎉 Done when:</b> you explore a map, meet a wild Fakeamon, battle it, and return to exploring.</p>
+      <p class="done-when"><b>🎒 Not yet scheduled — expanding the wild roster:</b> <code>CONTENT_REFERENCE.md</code> §16 already has <b>200 Tuxemon</b> selected, typed, and sourced as the approved wild-encounter pool — way beyond the 3 starters Step 4 needs. Widening it is an <b>M3-late-through-M5, area-by-area task</b>: each of the six Venta areas (The Meadows, The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) gets its own slice of the 200 as that area gets built. Since Snow Mountain/The Factory/The Lagoon only unlock via gym badges, this can't be one step — revisit once the first new area is actually in progress.</p>
     </section>
 
     <!-- ============ M4 ============ -->
@@ -375,7 +377,7 @@
           <h2 class="zone-title">World Systems</h2>
           <span class="status locked">🔒 Locked</span>
         </div>
-        <p class="zone-goal">Reasons to explore — heal, shop, and the first trainer challenge.</p>
+        <p class="zone-goal">Reasons to explore — heal, shop, and the first trainer challenge. <i>(Each area a gym badge opens is also a chance to widen the wild roster — see the M3 note above.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
         <div class="zone-count">0 of 4 steps done</div>
       </div>
@@ -396,7 +398,7 @@
           <h2 class="zone-title">Depth &amp; Story · The Finale</h2>
           <span class="status locked">🔒 Locked</span>
         </div>
-        <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠</p>
+        <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠 <i>(Same ongoing roster-widening applies to any late-game areas.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
         <div class="zone-count">0 of 6 steps done</div>
       </div>

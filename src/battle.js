@@ -192,36 +192,50 @@ function catchChance() {
   return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
 }
 
+// How many suspenseful "wobble" beats play between the throw and the
+// reveal, and how long each one pauses — tweak these to make catching
+// feel snappier or more dramatic.
+const CATCH_WOBBLE_COUNT = 2;
+
+// Lewis's B5 pick — the "Gotcha!" moment. Announces the throw, plays a
+// couple of suspenseful wobbles, then reveals whether it worked. Calls
+// onDone(caught) once the whole sequence has finished, since the log now
+// takes a few beats to play out instead of resolving instantly.
+function throwFakeaball(onDone) {
+  addLogLine(player.name + " threw a Fakeaball at " + opponent.name + "!");
+  const caught = Math.random() < catchChance();
+
+  function wobble(remaining) {
+    if (remaining <= 0) {
+      reveal();
+      return;
+    }
+    setTimeout(function () {
+      addLogLine("The Fakeaball wobbles...");
+      wobble(remaining - 1);
+    }, randomTurnPause());
+  }
+
+  function reveal() {
+    setTimeout(function () {
+      if (caught) {
+        addLogLine("Gotcha! " + opponent.name + " was caught!");
+      } else {
+        addLogLine("Oh no! " + opponent.name + " broke free!");
+      }
+      onDone(caught);
+    }, randomTurnPause());
+  }
+
+  wobble(CATCH_WOBBLE_COUNT);
+}
+
 // Throwing a ball takes your turn, just like an attack — same speed-order
 // rule as DESIGN.md §6 ("Actions: Attack, Catch, Item, Flee"). If the wild
 // Fakeamon is faster, it may get its attack in before you even throw.
 function attemptCatch() {
   setControlsEnabled(false);
   const playerGoesFirst = player.speed >= opponent.speed;
-
-  // Lewis's B5 pick — the "Gotcha!" moment. Rolls the catch, logs the
-  // result, and resolves the battle promise if it succeeds. Caught
-  // Fakeamon join fully healed, per Lewis's B2 pick (joining your team is
-  // a fresh start — the actual team join lands with the state bag at
-  // Step 5; for now the encounter just ends).
-  function throwFakeaball() {
-    const caught = Math.random() < catchChance();
-
-    if (caught) {
-      addLogLine("Gotcha! " + opponent.name + " was caught!");
-      setTimeout(function () {
-        resolveBattle({
-          result: "caught",
-          caught: { species: opponent, currentHP: opponent.maxHP },
-          xpGained: 0,
-        });
-      }, randomTurnPause());
-    } else {
-      addLogLine("Oh no! " + opponent.name + " broke free!");
-    }
-
-    return caught;
-  }
 
   function enemyCounterAttack(afterAttack) {
     const enemyMove = pickRandomMove(opponent);
@@ -236,15 +250,34 @@ function attemptCatch() {
     afterAttack();
   }
 
+  // Caught Fakeamon join fully healed, per Lewis's B2 pick (joining your
+  // team is a fresh start — the actual team join lands with the state bag
+  // at Step 5; for now the encounter just ends).
+  function afterThrow(caught) {
+    if (caught) {
+      resolveBattle({
+        result: "caught",
+        caught: { species: opponent, currentHP: opponent.maxHP },
+        xpGained: 0,
+      });
+      return;
+    }
+
+    if (playerGoesFirst) {
+      setTimeout(function () {
+        enemyCounterAttack(function () { setControlsEnabled(true); });
+      }, randomTurnPause());
+    } else {
+      setControlsEnabled(true);
+    }
+  }
+
   if (playerGoesFirst) {
-    if (throwFakeaball()) return;
-    setTimeout(function () {
-      enemyCounterAttack(function () { setControlsEnabled(true); });
-    }, randomTurnPause());
+    throwFakeaball(afterThrow);
   } else {
     enemyCounterAttack(function () {
       setTimeout(function () {
-        if (!throwFakeaball()) setControlsEnabled(true);
+        throwFakeaball(afterThrow);
       }, randomTurnPause());
     });
   }

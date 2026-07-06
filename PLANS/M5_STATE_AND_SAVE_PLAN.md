@@ -52,6 +52,33 @@ The M2 refactor (Steps 1–2, merged as PRs #10–#11) diverged from
    Growler fights your Growler, both read the same HP slot. The fix is
    structural, not a patch, and it's §1's individual-vs-species split.
 
+### Added 2026-07-06 — docs-integration session, checked against `main` @ `e237770`
+
+4. **The code is exactly where §A assumed.** When these plans were committed,
+   `main`'s newest commit was still the M2 Step 2 merge (PR #11) — no M2
+   Steps 3+ landed in parallel. §A.1–.3 were verified true against the real
+   files: plain script tags in `index.html`, no `startBattle` contract,
+   starter-select living inside `battle.js`, and the `hp[name]` map at the
+   top of `src/battle.js`. Nothing extra to reconcile in the code itself.
+5. **Lewis answered HOMEWORK Round 2 (decisions #11–12), so §1 and §5 are
+   less blocked than written.** Team size is **4** and a catch beyond that
+   goes to **Boxes** (with switching) — so §1's "max size per Lewis HOMEWORK
+   Q1" is now just *4*, and §5's "dump to box + log line" placeholder is the
+   *decided* overflow behavior, not a guess. Also decided: **base catch rate
+   50%** (#12), which M2 Step 4 builds with. Still genuinely open from §5:
+   *where* you swap boxed ⇄ active — filed as **B33** in
+   `HOMEWORK_BACKLOG.md`.
+6. **The tech-stack confirmation already happened.** `DESIGN.md` §13 was
+   flipped to "CONFIRMED (2026-07-06) by Jeff" *before* these plans were
+   committed, so the M3 plan §11 item "flip it when committing this file"
+   was already done. This session refined the §13 wording (global scripts
+   through M2; Phaser 4 pinned via CDN global at M3, per the M3 plan §2 and
+   §A.1 above) and logged it in `DECISIONS.md` as a Jeff call.
+7. **Where the two plans' `gameState` sketches disagree** (the M3 plan §4
+   has a flatter `inventory`, no `box`), **this plan's §1 wins** — it's the
+   later, fuller drawing of the same object. M3 sessions should take state
+   shapes from here.
+
 ---
 
 ## §1. The state model — species vs. individuals

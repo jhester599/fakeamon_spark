@@ -22,8 +22,9 @@ whenever he has time — and Jeff serves them up a few at a time.
 - Already-decided things (Cosmic 2×, ball tiers, single-type gyms,
   auto-evolve, berries, etc.) are **not** in here — see `DECISIONS.md`.
 
-> **Note:** the two questions currently live in `HOMEWORK.md` (team size +
-> catch difficulty) stay there — they're up next and aren't repeated below.
+> **Note:** the two questions that lived in `HOMEWORK.md` (team size + catch
+> difficulty) were ✅ **answered 2026-07-06** — team of 4 with Boxes, 50% base
+> catch rate. See `DECISIONS.md` #11–12. They aren't repeated below.
 
 ---
 

@@ -56,6 +56,7 @@ ROADMAP.md   → stepwise M1–M5 build plan, what's done/next
 DECISIONS.md → decision log + the loop for folding Lewis's picks into DESIGN.md
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
+CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
 README.md    → repo front page, links to the live site
 ```
 
@@ -140,6 +141,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 
 ## Assets & attribution
 
+- **Read `CONTENT_REFERENCE.md` before pulling any new Tuxemon art, sound, or creature data** — it's the full guide: why Tuxemon (not Pokémon Void), the complete repo map, per-milestone pull lists, licensing rules, and a 200-monster wild-encounter roster for M3+. This section is the short version.
 - Starting art is **Tuxemon** sprites. License is **mixed per asset** (mostly CC BY-SA 4.0, some CC BY 3.0/4.0, a couple Public Domain) — **check each file's actual license before using it**, don't assume one blanket license. Usable with credit; keep art edits under the same (share-alike) license where that applies.
 - **Verified source path:** `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` on the `development` branch of `github.com/Tuxemon/Tuxemon` — not the wiki, not a guess. Full details, per-creature file list, and the two open attribution gaps (Hissiorite, Frondly) are in `DESIGN.md` §12.
 - These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.

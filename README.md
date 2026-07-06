@@ -44,6 +44,7 @@ Or just double-click `index.html`.
 | `DECISIONS.md` | Log of decisions made, and how new ones get folded in |
 | `HOMEWORK.md` | Open questions waiting on Lewis (creative director) and Jeff |
 | `CREDITS.md` | Art attribution — what's borrowed, from where, under what license |
+| `CONTENT_REFERENCE.md` | Where our Tuxemon-sourced art, data, and roster ideas come from, and the licensing rules for using them |
 
 ## Credits
 

@@ -17,6 +17,10 @@ they're already written into `DESIGN.md`.)
 - **Docs:** verified exactly where Tuxemon's art lives in their repo, fixed
   a wrong license note (it's CC BY-SA 4.0, not 3.0), and found two sprites
   with missing attribution (see Jeff's list below).
+- **The game is live!** [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)
+  — added a `README.md`, made the repo public, and set up GitHub Pages so
+  it auto-deploys on every push to `main`. No more Claude-session-linked
+  preview links; this is a real, permanent, repo-owned URL.
 
 ---
 
@@ -62,16 +66,10 @@ Not blocking M2, but shouldn't be forgotten:
 2. Officially confirm the tech stack (still marked `[TO CONFIRM]` in
    `DESIGN.md` — plain HTML/JS through M2, Phaser starting M3). We've been
    building on this assumption all along; just needs a formal sign-off.
-3. Decide whether to open one PR now bundling everything since the last
-   merge (M1 steps 3–8, the turn-pacing fix, and the art bonus), or keep
-   stacking commits before opening it.
+3. ✅ ~~Decide on PR timing~~ — done. Opened and merged as we went (PRs #2–#4).
 4. ✅ ~~Make the repo public~~ — done.
-5. **Turn on Pages, once:** `Settings → Pages` → under "Build and
-   deployment," set **Source: GitHub Actions**. Our workflow tried to do
-   this automatically and GitHub blocked it ("Resource not accessible by
-   integration") — that's expected; GitHub deliberately requires a human to
-   flip this switch the first time. See "Publishing this site" in
-   `README.md`. One click, and every push after that deploys itself.
+5. ✅ ~~Turn on Pages~~ — done. Site is live and confirmed working:
+   [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/).
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 capture-formula exact numbers beyond the basic rate above (M2, fine-tuning

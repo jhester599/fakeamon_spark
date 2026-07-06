@@ -55,6 +55,8 @@
   }
   .recap h2 { font-family: ui-rounded, system-ui, sans-serif; font-size: 17px; margin: 0 0 10px; }
   .recap ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; }
+  .recap a { color: var(--water); font-weight: 700; text-decoration: none; }
+  .recap a:hover, .recap a:focus-visible { text-decoration: underline; }
   .recap .tag {
     display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .03em;
     color: #fff; background: var(--grass); border-radius: 999px; padding: 1px 8px; margin-right: 6px;
@@ -173,6 +175,7 @@
       <li><span class="tag">M1</span>Finished the whole Battle Slice — moves, damage, types, HP bars, misses, fainting, and a win/lose screen with Play Again.</li>
       <li><span class="tag">Bonus</span>Growler and Whaley now have real Tuxemon-based art instead of colored boxes.</li>
       <li><span class="tag">Docs</span>Verified exactly where Tuxemon's art lives, fixed a wrong license note, and found two sprites (Growler's, and Leafick's for later) with missing attribution — see the Jeff list below.</li>
+      <li><span class="tag">Live!</span>The game is now hosted at <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a> — a real, permanent URL that auto-deploys on every push, not a Claude-session link.</li>
     </ul>
   </div>
 
@@ -222,9 +225,9 @@
       <ol>
         <li><span class="priority">Check manually:</span> visit <code>wiki.tuxemon.org/Hissiorite</code> and <code>/Frondly</code> in a real browser for artist credit — both are missing from Tuxemon's own <code>ATTRIBUTIONS.md</code>, and our automated tools are blocked from reaching that wiki. Needed before any public release, not before tomorrow's dev work.</li>
         <li>Officially confirm the tech stack (still marked <code>[TO CONFIRM]</code> in <code>DESIGN.md</code> — plain HTML/JS through M2, Phaser starting M3). We've been building on this assumption all along; just needs a formal sign-off.</li>
-        <li>Decide whether to open one PR now bundling everything since the last merge (M1 steps 3–8, the turn-pacing fix, and the art bonus), or keep stacking commits before opening it.</li>
+        <li>✅ <s>Decide on PR timing</s> — done. Opened and merged as we went (PRs #2–#4).</li>
         <li>✅ <s>Make the repo public</s> — done.</li>
-        <li><span class="priority">Turn on Pages, once:</span> <code>Settings → Pages</code> → under "Build and deployment," set <b>Source: GitHub Actions</b>. Our workflow tried to flip this automatically and GitHub blocked it ("Resource not accessible by integration") — that's expected, GitHub deliberately requires a human for this first click. See "Publishing this site" in <code>README.md</code>. After that, every push deploys itself.</li>
+        <li>✅ <s>Turn on Pages</s> — done. Site is live and confirmed working: <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a>.</li>
       </ol>
     </div>
 

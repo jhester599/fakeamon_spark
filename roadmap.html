@@ -200,6 +200,8 @@
   .rules h2 { font-family: ui-rounded, system-ui, sans-serif; margin: 0 0 12px; font-size: 20px; }
   .rules ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 7px; font-size: 15px; }
   .run { margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
+  .run a { color: var(--water); font-weight: 700; text-decoration: none; }
+  .run a:hover, .run a:focus-visible { text-decoration: underline; }
   .run code { background: var(--card-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-size: 13px; }
 
   footer { text-align: center; color: var(--ink-soft); font-size: 13px; margin-top: 34px; }
@@ -421,7 +423,7 @@
       <li><b>Commit after each working step</b>, with a plain message.</li>
       <li><b>Stay in scope.</b> If a step drags in a later milestone, stop and flag it.</li>
     </ol>
-    <p class="run"><b>Run it (M1):</b> <code>python3 -m http.server</code> then open <code>localhost:8000</code> — or just double-click <code>index.html</code>.</p>
+    <p class="run"><b>Play it live:</b> <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a> (auto-deployed on every push) — or run locally: <code>python3 -m http.server</code> then open <code>localhost:8000</code>, or just double-click <code>index.html</code>.</p>
   </div>
 
   <footer>Slice-first: each milestone is playable before the next one begins. · Full spec lives in <b>DESIGN.md</b>.</footer>

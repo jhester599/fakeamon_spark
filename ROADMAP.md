@@ -85,7 +85,7 @@ few hits each.
 |---|---|---|
 | **1** ✅ | Split game code into small files: `src/data/moves.js`, `src/data/fakeamon.js`, `src/data/typechart.js`, plus `src/battle.js`. Same game, tidier code | Game plays exactly the same — just easier to read and grow — *done!* |
 | **2** ✅ | Add the third starter **Leafick** (Grass) to the data, and a simple **"Choose your starter"** screen | Pick Growler, Whaley, or Leafick before the fight — *done!* |
-| **3** | A **wild Fakeamon** appears (pick a random one to fight) instead of always Whaley | Different opponents each battle |
+| **3** ✅ | A **wild Fakeamon** appears (pick a random one to fight) instead of always Whaley | Different opponents each battle — *done!* |
 | **4** | Add the **Catch** action + a **Fakeaball**, using the capture formula (50% base chance, better at low HP — Lewis's call) | A "Throw Fakeaball" button; sometimes "Gotcha! …was caught!" |
 | **5** | A **team list** — caught Fakeamon join your party, up to **4 active** (Lewis's call). A 5th catch goes to your **Boxes** | A row of up to 4 creatures below the battle, plus a Boxes screen for overflow |
 | **6** | **Switch** which Fakeamon is fighting, including swapping one in from your Boxes | A "Switch" button swaps in a teammate |
@@ -154,25 +154,21 @@ healing dishes, and defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B33); Jeff serves a
-few at a time into `HOMEWORK.md`. Don't guess — ask Jeff & Lewis. Still open,
-by milestone:
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B33). Lewis cleared
+**B1–B32** in one big homework round (2026-07-06) — see `DECISIONS.md` rows
+14–45 and `DESIGN.md` for where each landed. Only one is still open:
 
-- **M2:** flee rule (B1), caught-Fakeamon HP (B2), nicknames (B3), wild
-  levels (B4), the "Gotcha!" words (B5). *B1/B2/B4/B5 are on Lewis's plate
-  right now in `HOMEWORK.md`.*
-- **M3:** one big map vs connected areas (B6), world + area names (B7–B8),
-  mini-boss homes (B9), the hero (B10), day/night (B11), NPCs (B12).
-- **M4:** gym re-theming (B13), badge names (B14), inside a gym (B15), how
-  pricey things feel (B16 — Jeff turns it into numbers), rematches (B17),
-  shop stock (B18).
-- **M5:** story & finale inventions (B19–B26), where you swap boxed
-  Fakeamon (B33) — plus Jeff's number tuning: evolution levels, XP curve,
-  ball multipliers, token prices.
+- **M5:** where you swap boxed Fakeamon onto your team (B33) — needed by
+  the Boxes UI, no rush.
 
-*(Everything from the old version of this list is decided — ball tiers,
-mini-boss catching, party size, badges, auto-evolve, Cosmic chart, berries,
-Artemis. See `DECISIONS.md`.)*
+Plus Jeff's ongoing number-tuning list (not creative calls, just math):
+evolution levels per starter, the XP curve, exact Great/Ultra/Cosmic ball
+multipliers, token prices (feel is decided — B16), and the Gym 2/3 ace
+re-theme/swap (Windeye, Spectera).
+
+*(Everything else — ball tiers, mini-boss catching, party size, badges,
+auto-evolve, Cosmic chart, berries, Artemis, plus this whole B1–B32 batch —
+is decided. See `DECISIONS.md`.)*
 
 ---
 

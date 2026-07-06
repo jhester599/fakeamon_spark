@@ -36,8 +36,8 @@ project. After the step works, briefly reflect: was the model pick right?
 
 ## Current status
 
-> **Milestone: M2 — Catching & Team. In progress: Steps 1–2 done ✅** *(Update this line as we progress.)*
-> M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), and Leafick + a Choose Your Starter screen (Step 2). **Next up: Step 3 — a random wild opponent**, built as the `startBattle(config)` contract from `PLANS/M3_OVERWORLD_PLAN.md` §5 (see `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.2 for the how). Lewis's Round 3 homework (B1, B2, B4, B5) feeds Steps 3–4 — see `HOMEWORK.md`. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
+> **Milestone: M2 — Catching & Team. In progress: Steps 1–3 done ✅** *(Update this line as we progress.)*
+> M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), and a random wild opponent every battle via the `startBattle(config)` contract, with a Run button that always works and starter-select moved to `src/main.js` (Step 3). **Next up: Step 4 — the Catch action + Fakeaball** (`DESIGN.md` §6; caught Fakeamon join fully healed, messages already decided — B2/B5). Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
 
 ## Scope guardrails
 
@@ -60,7 +60,8 @@ index.html         → loads the game scripts (plain <script> tags, no build ste
 src/data/moves.js       → MOVES data (tweak power/accuracy here)
 src/data/fakeamon.js    → GROWLER, WHALEY data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
-src/battle.js       → all battle logic (turns, damage, HP, win/lose)
+src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
+src/main.js         → the conductor: starter-select screen, picks each random wild opponent
 roadmap.html        → visual quest map (mirrors ROADMAP.md), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
 /assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
@@ -104,16 +105,16 @@ or use a simple local server like `python3 -m http.server`.
 
 ## Milestone 2 — build this
 
-Turn the one-off battle into "catch creatures and build a team." Steps 1–2
+Turn the one-off battle into "catch creatures and build a team." Steps 1–3
 are done. What's left, in order (full tables: `ROADMAP.md` M2 +
 `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6):
 
 | Step | What we build | Where it's specced |
 |---|---|---|
-| **3** *(+ M5-plan S2)* | A **random wild opponent** — built as the global `startBattle(config) → Promise<outcome>` contract; starter-select moves out of `battle.js` into `src/main.js` | contract shape: M3 plan §5 · globals version: M5 plan §A.2 · needs Lewis's **B1** (flee) + **B4** (wild levels) |
-| **4** | **Catch action + Fakeaball** — capture formula, 50% base rate (Lewis's call) | formula: `DESIGN.md` §6 · needs Lewis's **B2** (caught HP) + **B5** (catch words) |
+| **3** ✅ | A **random wild opponent** — the global `startBattle(config) → Promise<outcome>` contract lives in `src/battle.js`; starter-select moved to `src/main.js`. Flee (Run button) always works (B1); wild level uses the team-average as an M2 stand-in until M3's areas exist (B4, `DESIGN.md` §5). *(Note: this M2-sized contract uses plain `player`/`enemy` species objects, not yet `playerParty`/species-key+level — those arrive with individuals at M5-plan S1 and leveling at M5-plan S5.)* | contract shape: M3 plan §5 · globals version: M5 plan §A.2 |
+| **4** | **Catch action + Fakeaball** — capture formula, 50% base rate (Lewis's call). Caught Fakeamon join fully healed (B2); catch messages are `"Gotcha! <name> was caught!"` / `"Oh no! <name> broke free!"` (B5) | formula: `DESIGN.md` §6 |
 | *M5-plan **S1** — before Step 5* | **Individuals & the state bag** — `src/state.js`, `newIndividual()`, `statsFor()`; retires the `hp[name]` map so two Growlers don't share HP | M5 plan §1 + §A.3 |
-| **5** | **Team list** — up to 4 active, overflow to Boxes | decision #11 · nicknames = Lewis's **B3** (on deck) |
+| **5** | **Team list** — up to 4 active, overflow to Boxes. No nicknames — species names only (B3, decided) | decision #11 |
 | **6** | **Switch** which Fakeamon fights, including from Boxes | — |
 | *M5-plan **S3–S4** — end of M2* | **Save v1** (autosave to localStorage, Continue/New Game), then **export/import** | M5 plan §4 |
 

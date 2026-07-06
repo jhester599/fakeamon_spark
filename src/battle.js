@@ -3,15 +3,31 @@
 //  Step 3: this file's only public entry point is startBattle(config) below
 //  — see PLANS/M3_OVERWORLD_PLAN.md §5 for the full contract it's built
 //  from. player/opponent/hp stay simple module-level vars for now (only one
-//  battle ever runs at a time); the individuals/state-bag upgrade that
-//  retires this hp-by-name map lands before M2 Step 5.
+//  battle ever runs at a time); the individuals/state-bag upgrade lands
+//  before M2 Step 5.
+//
+//  Bug fix (found testing Step 3): in a mirror match (e.g. Whaley vs a wild
+//  Whaley) player and opponent can be the exact same species object — the
+//  STARTERS array holds one shared object per species, not a fresh copy
+//  per battler. That broke two things at once: hp used to be keyed by
+//  fakeamon.name (same name → same slot, so attacking hit both fighters'
+//  HP), and win/lose was decided with `winner === player` (also always
+//  true when player and opponent are literally the same object). Fixed by
+//  tracking everything through the battle *role* ("player" / "opponent")
+//  instead of the fighter object — a role is always distinct even when the
+//  species behind it isn't.
 // ===========================================================================
 let player;
 let opponent;
-const hp = {};
+const hp = { player: 0, opponent: 0 };
 let canFlee = true;
 let canCatch = true;
 let resolveBattle; // set by startBattle(); called once the fight is over
+
+// The Fakeamon currently playing this role.
+function fighterFor(role) {
+  return role === "player" ? player : opponent;
+}
 
 // ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
@@ -66,7 +82,7 @@ function showFighter(fakeamon, currentHP) {
 // Redraw both fighters with their current HP.
 function renderArena() {
   document.getElementById("arena").innerHTML =
-    showFighter(player, hp[player.name]) + showFighter(opponent, hp[opponent.name]);
+    showFighter(player, hp.player) + showFighter(opponent, hp.opponent);
 }
 
 // ===========================================================================
@@ -101,9 +117,13 @@ function addLogLine(text) {
 
 // ===========================================================================
 //  ONE ATTACK — attacker hits defender with a move, HP and log both update.
+//  Takes battle *roles*, not fighter objects — see the bug-fix note above.
 //  Step 7: first roll for accuracy. A miss does nothing but announce itself.
 // ===========================================================================
-function performAttack(attacker, defender, move) {
+function performAttack(attackerRole, defenderRole, move) {
+  const attacker = fighterFor(attackerRole);
+  const defender = fighterFor(defenderRole);
+
   const accuracyRoll = Math.random() * 100;
   if (accuracyRoll >= move.accuracy) {
     addLogLine(attacker.name + " used " + move.name + ", but it missed!");
@@ -111,7 +131,7 @@ function performAttack(attacker, defender, move) {
   }
 
   const result = calculateDamage(move, attacker, defender);
-  hp[defender.name] = Math.max(0, hp[defender.name] - result.damage);
+  hp[defenderRole] = Math.max(0, hp[defenderRole] - result.damage);
 
   let line = attacker.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
   if (result.typeMultiplier >= 2) {
@@ -146,10 +166,10 @@ function randomTurnPause() {
   return TURN_PAUSE_MIN_MS + Math.random() * (TURN_PAUSE_MAX_MS - TURN_PAUSE_MIN_MS);
 }
 
-// Step 8: has this Fakeamon fainted? If so, announce it in the log.
-function checkForFaint(fakeamon) {
-  if (hp[fakeamon.name] > 0) return false;
-  addLogLine(fakeamon.name + " fainted!");
+// Step 8: has this role's Fakeamon fainted? If so, announce it in the log.
+function checkForFaint(role) {
+  if (hp[role] > 0) return false;
+  addLogLine(fighterFor(role).name + " fainted!");
   return true;
 }
 
@@ -164,8 +184,10 @@ const BASE_CATCH_RATE = 0.5;      // Lewis: "about 1 in 4" at half HP
 const CATCH_CHANCE_FLOOR = 0.05;  // never truly impossible, even at full HP
 const CATCH_CHANCE_CAP = 0.95;    // room for stronger balls later
 
-function catchChance(target) {
-  const missingHPFraction = 1 - hp[target.name] / target.maxHP;
+// You only ever throw a ball at the wild Fakeamon, so this always reads
+// the opponent's HP.
+function catchChance() {
+  const missingHPFraction = 1 - hp.opponent / opponent.maxHP;
   const raw = BASE_CATCH_RATE * missingHPFraction; // ballBonus = 1 for now
   return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
 }
@@ -183,7 +205,7 @@ function attemptCatch() {
   // a fresh start — the actual team join lands with the state bag at
   // Step 5; for now the encounter just ends).
   function throwFakeaball() {
-    const caught = Math.random() < catchChance(opponent);
+    const caught = Math.random() < catchChance();
 
     if (caught) {
       addLogLine("Gotcha! " + opponent.name + " was caught!");
@@ -203,11 +225,11 @@ function attemptCatch() {
 
   function enemyCounterAttack(afterAttack) {
     const enemyMove = pickRandomMove(opponent);
-    performAttack(opponent, player, enemyMove);
+    performAttack("opponent", "player", enemyMove);
     renderArena();
 
-    if (checkForFaint(player)) {
-      endBattle(opponent);
+    if (checkForFaint("player")) {
+      endBattle("opponent");
       return;
     }
 
@@ -240,25 +262,25 @@ function resolveTurn(playerMove) {
   const enemyMove = pickRandomMove(opponent);
   const playerGoesFirst = player.speed >= opponent.speed;
 
-  const first  = playerGoesFirst ? { attacker: player, defender: opponent, move: playerMove }
-                                  : { attacker: opponent, defender: player, move: enemyMove };
-  const second = playerGoesFirst ? { attacker: opponent, defender: player, move: enemyMove }
-                                  : { attacker: player, defender: opponent, move: playerMove };
+  const first  = playerGoesFirst ? { attackerRole: "player", defenderRole: "opponent", move: playerMove }
+                                  : { attackerRole: "opponent", defenderRole: "player", move: enemyMove };
+  const second = playerGoesFirst ? { attackerRole: "opponent", defenderRole: "player", move: enemyMove }
+                                  : { attackerRole: "player", defenderRole: "opponent", move: playerMove };
 
-  performAttack(first.attacker, first.defender, first.move);
+  performAttack(first.attackerRole, first.defenderRole, first.move);
   renderArena();
 
-  if (checkForFaint(first.defender)) {
-    endBattle(first.attacker);
+  if (checkForFaint(first.defenderRole)) {
+    endBattle(first.attackerRole);
     return;
   }
 
   setTimeout(function () {
-    performAttack(second.attacker, second.defender, second.move);
+    performAttack(second.attackerRole, second.defenderRole, second.move);
     renderArena();
 
-    if (checkForFaint(second.defender)) {
-      endBattle(second.attacker);
+    if (checkForFaint(second.defenderRole)) {
+      endBattle(second.attackerRole);
       return;
     }
 
@@ -271,8 +293,8 @@ function resolveTurn(playerMove) {
 //  result + Continue button. Clicking Continue resolves startBattle()'s
 //  promise so main.js can decide what happens next.
 // ===========================================================================
-function endBattle(winner) {
-  const playerWon = winner === player;
+function endBattle(winnerRole) {
+  const playerWon = winnerRole === "player";
   const message = playerWon
     ? "🎉 " + player.name + " wins!"
     : "💀 " + player.name + " fainted — " + opponent.name + " wins.";
@@ -356,8 +378,8 @@ function startBattle(config) {
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
 
-    hp[player.name] = player.maxHP;
-    hp[opponent.name] = opponent.maxHP;
+    hp.player = player.maxHP;
+    hp.opponent = opponent.maxHP;
 
     document.getElementById("title").textContent =
       "Fakeamon Battle — " + player.name + " vs " + opponent.name;

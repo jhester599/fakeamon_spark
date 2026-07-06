@@ -150,7 +150,7 @@ appear at night**.
 
 ---
 
-## 🟡 M5 — Story, Bosses & the Finale *(8 of 9 answered 2026-07-06 — only B33 left!)*
+## 🟡 M5 — Story, Bosses & the Finale *(8 of 11 answered — B33, B35, B36 still open)*
 
 ### ✅ B19. INVENT: how the adventure starts 🎬  *(needed by M5 — but fun to answer early!)*
 
@@ -199,6 +199,29 @@ to swap a boxed Fakeamon onto your active team?
 
 **Lewis picks:** ____________  **Because:** ________________________________
 
+### 🔲 B35. Berries on the ground — themed by area, or anywhere?  *(anytime — you already invented this one, just needs one more detail)*
+You said: "you can find berries on the ground" while exploring. Do certain
+areas of Venta tend to grow certain berries (matching that area's vibe —
+B8), or can any of the 6 berries turn up in any area?
+
+- [ ] **A) Themed by area** — each area mostly drops berries that fit its vibe.
+- [ ] **B) Anywhere** — any of the 6 berries can appear in any area, pure luck.
+- [ ] **C) Something else** — invent it!
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 B36. Cooking Cabins — Snow Mountain only, or elsewhere too?  *(anytime — you already invented this one, just needs one more detail)*
+You said: "cooking cabins are more common in the snow mountain area." Does
+that mean:
+
+- [ ] **A) Snow Mountain is the only one** — "more common" is just flavor for
+  its cozy cabin-hub vibe.
+- [ ] **B) There's a smaller cabin near the start too** — so cooking isn't
+  gated entirely behind Snow Mountain's gym badge — plus more once you're there.
+- [ ] **C) Something else** — invent it (e.g. one per area)!
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
 ---
 
 ## ✅ Anytime — pure flavor, no deadline *(all 6 answered 2026-07-06!)*
@@ -236,9 +259,9 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 | M2 | B1–B5, B34 | 5 / 6 |
 | M3 | B6–B12 | 7 / 7 |
 | M4 | B13–B18 | 6 / 6 |
-| M5 | B19–B26, B33 | 8 / 9 |
+| M5 | B19–B26, B33, B35, B36 | 8 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **32 / 34** |
+| **Total** | | **32 / 36** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

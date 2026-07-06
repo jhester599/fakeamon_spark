@@ -91,6 +91,11 @@ Use this to jump straight to the right spot when recording a decision.
 | 44 | (B31) Shiny variants | §3 Fakeamon | ✅ Decided |
 | 45 | (B32) Sound & music vibe | §13 Technical Notes | ✅ Decided |
 | — | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | 🔲 Still open |
+| 46 | Berries found on the ground | §9 Economy & Items | ✅ Decided |
+| — | (B34) Telling apart a mirror match | §6 Battle System | 🔲 Still open |
+| — | (B35) Berries — area-themed or anywhere | §9 Economy & Items | 🔲 Still open |
+| 47 | Cooking Cabins more common in Snow Mountain | §7/§8 World Locations | ✅ Decided |
+| — | (B36) Cooking Cabins — Snow-Mountain-only or elsewhere too | §8 World Locations & Roster | 🔲 Still open |
 
 *(Evolution **level** per starter is still open — that's Jeff's number-tuning, not a creative call. So are the exact Great/Ultra/Cosmic ball bonus multipliers from Q12.)*
 
@@ -147,6 +152,8 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-06 | 43 | **Lewis's own credit line:** declined — no personal credit line added to `CREDITS.md` | "don't have any credits, the game keeps going" |
 | 2026-07-06 | 44 | **Shiny variants:** just **one** secret shiny Fakeamon exists in the whole game — a rare legend to hunt | "its cool" (option C) |
 | 2026-07-06 | 45 | **Sound & music:** full chiptune — retro music for map, battle, and bosses | (option C) |
+| 2026-07-06 | 46 | **Berries can be found on the ground** while exploring the overworld | invented — volunteered outside a formal homework round; follow-up detail (area-themed vs. anywhere) filed as **B35** |
+| 2026-07-06 | 47 | **Cooking Cabins are more common in the Snow Mountain area** | invented — volunteered outside a formal homework round; follow-up detail (Snow-Mountain-only vs. a starter cabin too) filed as **B36** |
 
 <!--
 Template for a new row:

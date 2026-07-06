@@ -3,9 +3,10 @@
 > **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
 > batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
 > ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Two questions are still open, neither urgent: **B33** (where you swap
-> boxed Fakeamon, needed by M5's Boxes screen) and **B34** (new — found
-> while testing Step 3, see below).
+> Four questions are still open, none urgent: **B33** (where you swap
+> boxed Fakeamon), **B34** (new — found while testing Step 3), and **B35**/
+> **B36** (new — follow-ups on two design bits Lewis invented outside a
+> homework round, see below).
 >
 > Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
 > see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
@@ -22,8 +23,13 @@
 - **One item needed a check with Jeff:** B10's hero look ("looks like Ash")
   bumped into the no-Nintendo-IP rule — resolved as an **original design**
   inspired by the classic-trainer vibe, not a copy. See `DESIGN.md` §1.
-- Everything is now folded into `DESIGN.md`, `HOMEWORK_BACKLOG.md` (all
-  ticked ✅ except B33), and this file.
+- Everything is now folded into `DESIGN.md`, `HOMEWORK_BACKLOG.md`, and this
+  file.
+- **Lewis added two design bits on his own, outside a homework round:**
+  berries can be found on the ground, and Cooking Cabins are more common
+  in the Snow Mountain area. Both are logged as decisions (`DECISIONS.md`
+  #46–47) and folded into `DESIGN.md` §8–9. Each has one follow-up detail
+  filed as new homework — B35 and B36 below.
 
 ---
 
@@ -34,7 +40,7 @@ flee always works (B1), caught Fakeamon join fully healed (B2), wild level
 uses team-average as a stand-in until M3's map exists (B4), and the catch
 messages are locked in (B5). Steps 3 and 4 are both built and live.
 
-**Two open questions, no rush:**
+**Four open questions, no rush:**
 
 - **B33** — where do you swap a boxed Fakeamon onto your active team? (At
   a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
@@ -45,6 +51,12 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
   fainted — Whaley wins"). The battle plays correctly either way — this
   is purely about how it reads. Should we label the wild one somehow
   (e.g. "the wild Whaley"), leave it as-is, or invent something else?
+- **B35** — you said berries can be found on the ground. Do specific
+  areas of Venta tend to grow specific berries (matching that area's
+  vibe), or can any of the 6 turn up anywhere?
+- **B36** — you said Cooking Cabins are more common in Snow Mountain. Is
+  Snow Mountain the *only* place with one, or is there a smaller cabin
+  near the start too (so cooking isn't gated behind that area's badge)?
 
 ---
 
@@ -75,4 +87,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33/B34 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*Serve B33–B36 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

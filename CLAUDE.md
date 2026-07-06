@@ -90,7 +90,7 @@ PLANS/       → architecture plans from high-end planning sessions:
                state, XP, evolution, and saving — read its §A first, it
                reconciles the plans against the code as it actually exists
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
-HOMEWORK_BACKLOG.md → the big question bank (B1–B34) for the whole game;
+HOMEWORK_BACKLOG.md → the big question bank (B1–B36) for the whole game;
                HOMEWORK.md gets served 2–4 questions at a time from here
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
@@ -177,10 +177,10 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - **Read `CONTENT_REFERENCE.md` before pulling any new Tuxemon art, sound, or creature data** — it's the full guide: why Tuxemon (not Pokémon Void), the complete repo map, per-milestone pull lists, licensing rules, and a 200-monster wild-encounter roster for M3+. This section is the short version.
 - Starting art is **Tuxemon** sprites. License is **mixed per asset** (mostly CC BY-SA 4.0, some CC BY 3.0/4.0, a couple Public Domain) — **check each file's actual license before using it**, don't assume one blanket license. Usable with credit; keep art edits under the same (share-alike) license where that applies.
 - **Verified source path:** `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` on the `development` branch of `github.com/Tuxemon/Tuxemon` — not the wiki, not a guess. Full details and per-creature file list are in `DESIGN.md` §12.
-- These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.
+- These are **composite sprite sheets (128×88px)**, not flat single sprites — a 64×64 front pose at (0,0), a 64×64 back pose at (64,0), and a small 2-frame idle animation (two 24×24 frames) at (0,64)/(24,64). *(Corrected 2026-07-06 by measurement — an older "2×2 grid of ~64×44 cells" description was wrong.)* `tools/slice-sheets.mjs` cuts them; scale with nearest-neighbor only.
 - Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
 - When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
-- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, Growler and Whaley now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
+- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, all 3 starters (Growler, Whaley, Leafick) now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
 - **✅ Resolved:** Growler's (Hissiorite) and Leafick's (Frondly) sprites have no entry in Tuxemon's own `ATTRIBUTIONS.md`, but both artists are now confirmed via the wiki — see `CONTENT_REFERENCE.md` §13 and `CREDITS.md`. No longer a blocker for public distribution.
 
 ## Git

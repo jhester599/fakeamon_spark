@@ -360,20 +360,21 @@ unblocked once that lands.
 
 ---
 
-## 16. Wild encounter roster — 200 Tuxemon selected (~50% of the dex)
+## 16. Wild encounter roster — 198 Tuxemon selected (~50% of the dex)
 
-> **Staging status (2026-07-06, M3S0):** the roster's *sourcing work* is now
-> largely done ahead of time —
-> **`tools/roster-200.json`** holds all 200 monsters' reference data (types,
-> evolution lines, catch rates, description blurbs, attribution status), and
-> the **43 monsters whose license could be verified from Tuxemon's
-> `ATTRIBUTIONS.md`** have their sheets vendored in `assets/sprites/battle/`
-> with a generated ledger, **`CREDITS_ROSTER.md`**. The other **157** are
-> credited only on `wiki.tuxemon.org` (unreachable from the staging
-> session's network) — resolving them is one command from any normal
-> machine: `cd tools && npm run wiki-credits -- --write`, review, then
-> `npm run vendor-sheets && npm run roster-credits`. What remains creative
-> (unstaged on purpose): Lewis's rename pass and per-area encounter tables.
+> **Staging status (updated 2026-07-06, after the Cowork wiki run):** the
+> roster's *sourcing work* is **done**. All sheets are vendored in
+> `assets/sprites/battle/` with verified attribution — **198 staged, 0
+> pending** (ledger: the generated **`CREDITS_ROSTER.md`**; reference data:
+> **`tools/roster-200.json`** — types, evolution lines, catch rates,
+> blurbs, attribution). Two selections were **dropped** for having no
+> credit in `ATTRIBUTIONS.md` *or* on the wiki: `foxko` (Fire) and
+> `bearloch` (Metal) — both standalone lines, so no evolution family was
+> broken; the pool is now **198**, and the tables below mark them dropped.
+> Three staged monsters (`coaldiak`, `ninjasmine`, `toxiris`) are ⚠️
+> **OPMon-derived** — confirm that project's terms before they enter the
+> game. What remains creative (unstaged on purpose): Lewis's rename pass
+> and per-area encounter tables.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every
@@ -424,7 +425,7 @@ which type in the wild.]**
 
 ### The 200 — grouped by our (proposed) type
 
-### Fire — 34 monsters, 18 evolution lines
+### Fire — 33 monsters, 17 evolution lines *(foxko dropped 2026-07-06)*
 
 | Evolution line (Tuxemon slugs, basic → final) | Tuxemon type(s) | Blurbs |
 |---|---|---|
@@ -442,7 +443,7 @@ which type in the wild.]**
 | `thumpurn` → `volconey` | fire, normal | ✅ |
 | `agnsher` | fire, water | ✅ |
 | `drokoro` | fire | ✅ |
-| `foxko` | fire, wood | ✅ |
+| ~~`foxko`~~ *(dropped 2026-07-06 — no credit in ATTRIBUTIONS.md or on the wiki)* | fire, wood | — |
 | `mingdyn` | fire, sky | ✅ |
 | `primordia` | fire, frost | ✅ |
 | `solight` | cosmic, fire | ✅ |
@@ -491,7 +492,7 @@ which type in the wild.]**
 | `shybulb` → `narcileaf` | wood | ✅ |
 | `tumbleworm` → `tumblebee` | venom | ✅ |
 
-### Metal — 34 monsters, 18 evolution lines
+### Metal — 33 monsters, 17 evolution lines *(bearloch dropped 2026-07-06)*
 
 | Evolution line (Tuxemon slugs, basic → final) | Tuxemon type(s) | Blurbs |
 |---|---|---|
@@ -507,7 +508,7 @@ which type in the wild.]**
 | `tetrchimp` → `apeoro` | cosmic, lightning | ✅ |
 | `virware` → `trojerror` | cosmic, metal | ✅ |
 | `woodoor` → `blasdoor` | metal, wood | ✅ |
-| `bearloch` | metal, wood | ✅ |
+| ~~`bearloch`~~ *(dropped 2026-07-06 — no credit in ATTRIBUTIONS.md or on the wiki)* | metal, wood | — |
 | `chrome_robo` | metal | ✅ |
 | `dark_robo` | metal | ✅ |
 | `hydrone` | metal, water | ✅ |

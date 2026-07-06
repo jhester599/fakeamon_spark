@@ -186,11 +186,11 @@
       <button class="btn" id="resetBtn" type="button">↺ Reset</button>
     </div>
   </div>
-  <p class="note">Your picks save right in this browser. These two are the only things actually <b>blocking</b> tomorrow's M2 work (catching &amp; team) — everything else can wait.</p>
+  <p class="note">Both answered — nothing left blocking M2. This page stays here for whenever the next round of questions comes up.</p>
 
   <section class="sec s-water">
-    <h2 class="sec-title">🌊 Lewis's 2 questions</h2>
-    <p class="sec-sub">Both are fun ones — how the game <i>feels</i>. Jeff will turn your picks into exact numbers.</p>
+    <h2 class="sec-title">🌊 Lewis's 2 questions — ✅ answered!</h2>
+    <p class="sec-sub">Both picked 2026-07-06 — now written into <code>DESIGN.md</code> §6.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
@@ -198,11 +198,11 @@
       <p class="q-desc">Once you start catching creatures, how big is your active team before extra ones have to wait in storage?</p>
       <div class="opts">
         <label class="opt"><input type="radio" name="q1" value="3"><span class="ok"><b>A) 3</b> — small and tight, every pick matters a lot.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="4"><span class="ok"><b>B) 4</b> — a little room to experiment.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="4" checked><span class="ok"><b>B) 4</b> — a little room to experiment.</span></label>
         <label class="opt"><input type="radio" name="q1" value="6"><span class="ok"><b>C) 6</b> — classic "full team" size, like the games that inspired us.</span></label>
       </div>
-      <div class="fill"><label>What happens when your team is full and you catch a new one?</label><input class="txt" name="q1_overflow" placeholder="e.g. auto-send to storage / make me pick one to swap out"></div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
+      <div class="fill"><label>What happens when your team is full and you catch a new one?</label><input class="txt" name="q1_overflow" value="It goes to your Boxes, a space that lets you switch out with the other members of your team" placeholder="e.g. auto-send to storage / make me pick one to swap out"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" value="a little room to experiment" placeholder="Tell us why you picked that"></div>
     </div>
 
     <div class="q" data-q="2">
@@ -210,11 +210,11 @@
         <h3 class="q-title">How easy should catching be? <span class="why-tag">needed for M2 Step 4</span></h3></div>
       <p class="q-desc">Picture a wild Fakeamon at <b>half health</b>. You throw a regular Fakeaball (not a fancy one). How often should it work?</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q2" value="25% - hard"><span class="ok"><b>A) About 1 in 4</b> — catching feels hard-won and exciting.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="25% - hard" checked><span class="ok"><b>A) About 1 in 4</b> — catching feels hard-won and exciting.</span></label>
         <label class="opt"><input type="radio" name="q2" value="50% - medium"><span class="ok"><b>B) About 1 in 2</b> — a coin flip, fair and simple.</span></label>
         <label class="opt"><input type="radio" name="q2" value="75% - easy"><span class="ok"><b>C) About 3 in 4</b> — catching is easy, the fun is battling.</span></label>
       </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" placeholder="Tell us why you picked that"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" value="catching is pretty hard" placeholder="Tell us why you picked that"></div>
     </div>
   </section>
 
@@ -224,7 +224,7 @@
     <div class="jefflist">
       <ol>
         <li>✅ <s>Check Hissiorite/Frondly attribution on the wiki</s> — done, resolved via <code>CONTENT_REFERENCE.md</code> §13. Hissiorite: princess-phoenix. Frondly: Leo, ReallyDarkandWindie, Levaine, Sanglorian. Both CC BY-SA 3.0. <code>CREDITS.md</code> updated — no longer blocking public distribution.</li>
-        <li>Officially confirm the tech stack (still marked <code>[TO CONFIRM]</code> in <code>DESIGN.md</code> — plain HTML/JS through M2, Phaser starting M3). We've been building on this assumption all along; just needs a formal sign-off.</li>
+        <li>✅ <s>Officially confirm the tech stack</s> — done. Confirmed: plain HTML/JS through M2, Phaser starting M3.</li>
         <li>✅ <s>Decide on PR timing</s> — done. Opened and merged as we went (PRs #2–#4).</li>
         <li>✅ <s>Make the repo public</s> — done.</li>
         <li>✅ <s>Turn on Pages</s> — done. Site is live and confirmed working: <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a>.</li>

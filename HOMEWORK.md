@@ -1,9 +1,13 @@
 # Homework Before We Continue 🌙
 
-Good stopping point for tonight! This is a short one — just the couple of
-things we need answered before picking **M2** back up. (Round 1's 10
-creative decisions are all done — see `DECISIONS.md` for the full history,
-they're already written into `DESIGN.md`.)
+> **✅ Round 2 answered (2026-07-06)!** Team size (4, with Boxes) and catch
+> rate (50% base) are both decided and written into `DESIGN.md` — see
+> `DECISIONS.md` for the full log. Jeff's tech-stack confirmation landed too.
+> Nothing left blocking M2. This file stays here for whenever the next
+> round of questions comes up.
+
+(Round 1's 10 creative decisions are all done too — see `DECISIONS.md` for
+the full history, they're already written into `DESIGN.md`.)
 
 ---
 
@@ -24,33 +28,24 @@ they're already written into `DESIGN.md`.)
 
 ---
 
-## 🌊 Lewis's 2 questions
-
-Both are fun, feel-based questions — Jeff will turn your picks into exact
-numbers.
+## 🌊 Lewis's 2 questions — ✅ answered! (2026-07-06)
 
 ### 1. How many Fakeamon can be on your team at once?  *(needed for M2 Step 5)*
-Once you start catching creatures, how big is your active team before extras
-have to wait in storage?
 
-- [ ] **A) 3** — small and tight, every pick matters a lot.
-- [ ] **B) 4** — a little room to experiment.
-- [ ] **C) 6** — classic "full team" size, like the games that inspired us.
+- [x] **B) 4** — a little room to experiment.
 
-**What happens when your team is full and you catch a new one?**
-____________________________________________________________
+**What happens when your team is full and you catch a new one?** It goes to
+your **Boxes** — storage you can open to switch a boxed Fakeamon in for one
+on your active team.
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picked:** B, 4 **Because:** "a little room to experiment"
 
 ### 2. How easy should catching be?  *(needed for M2 Step 4)*
-Picture a wild Fakeamon at **half health**. You throw a regular Fakeaball
-(not a fancy one). How often should it work?
 
-- [ ] **A) About 1 in 4** — catching feels hard-won and exciting.
-- [ ] **B) About 1 in 2** — a coin flip, fair and simple.
-- [ ] **C) About 3 in 4** — catching is easy, the fun is battling.
+- [x] **A) About 1 in 4** — catching feels hard-won and exciting.
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picked:** A, about 1 in 4 **Because:** "catching is pretty hard"
+— worked out to a **50% base catch rate** (see `DESIGN.md` §6 for the math).
 
 ---
 
@@ -62,9 +57,9 @@ Not blocking M2, but shouldn't be forgotten:
    via `CONTENT_REFERENCE.md` §13. Hissiorite: princess-phoenix. Frondly:
    Leo, ReallyDarkandWindie, Levaine, Sanglorian. Both CC BY-SA 3.0.
    `CREDITS.md` updated — no longer blocking public distribution.
-2. Officially confirm the tech stack (still marked `[TO CONFIRM]` in
-   `DESIGN.md` — plain HTML/JS through M2, Phaser starting M3). We've been
-   building on this assumption all along; just needs a formal sign-off.
+2. ✅ ~~Officially confirm the tech stack~~ — done. Confirmed: plain
+   HTML/JS through M2, Phaser starting M3 (the recommended default we'd
+   already been building on).
 3. ✅ ~~Decide on PR timing~~ — done. Opened and merged as we went (PRs #2–#4).
 4. ✅ ~~Make the repo public~~ — done.
 5. ✅ ~~Turn on Pages~~ — done. Site is live and confirmed working:

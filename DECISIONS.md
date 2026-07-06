@@ -57,6 +57,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 10 | Berries & recipes | §9 Economy & Items | ✅ Decided |
 | 11 | Team size / storage | §6 Battle System (Capturing) | ✅ Decided |
 | 12 | Catch-rate feel (base rate) | §6 Battle System (Capturing) | ✅ Decided |
+| 13 | Encounter style (visible vs random) | §7 The Overworld | ✅ Decided |
 
 *(Evolution **level** per starter is still open — that's Jeff's number-tuning, not a creative call. So are the exact Great/Ultra/Cosmic ball bonus multipliers from Q12.)*
 
@@ -80,8 +81,20 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-05 | 10 | **Berries & recipes** (6 berries, 14 recipe rules) — see §9 of DESIGN.md | invented the full cooking list; Bossberry only drops from mini-bosses |
 | 2026-07-06 | 11 | **Team size = 4**, overflow goes to **Boxes** (switch a boxed Fakeamon in for an active one) | "a little room to experiment" |
 | 2026-07-06 | 12 | **Base catch rate = 50%** (works out to ~1-in-4 at half HP with a regular Fakeaball, per the capture formula) | "catching is pretty hard" |
+| 2026-07-05 | 13 | **Visible encounters** — wild Fakeamon stand on the map and you bump into them (no random tall-grass battles) | simpler and less frustrating — you can see who you're walking into *(logged 2026-07-06; decided during planning)* |
 
 <!--
 Template for a new row:
 | 2026-07-05 | 6 | Gym badges open a new area to explore | "so beating a gym feels like it unlocks something" |
 -->
+
+---
+
+## 🔧 Jeff's technical calls
+
+Engineering decisions, not creative-director picks — logged here so they
+don't get lost. (Lewis's creative decisions stay in the table above.)
+
+| Date | Decision | Why |
+|---|---|---|
+| 2026-07-06 | **Tech stack confirmed:** plain HTML/CSS/JS with global scripts (no build step, no ES modules) through M2; **Phaser 4** at M3, pinned to an exact version and loaded from a CDN as a script global | Keeps double-click-to-play alive and the code Lewis-readable; Phaser-as-CDN-global is the same style, so nothing has to be rewritten. Details: `PLANS/M3_OVERWORLD_PLAN.md` §2 + `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.1, recorded in `DESIGN.md` §13 |

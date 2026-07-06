@@ -75,6 +75,12 @@ few hits each.
 
 **Goal:** turn a one-off fight into "catch creatures and build a team."
 
+> **🧩 New since planning:** `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6 schedules
+> state-foundation work *into* M2: the `startBattle` contract lands with
+> Steps 3–4, "individuals & the state bag" lands **before Step 5**, and
+> save v1 + export/import land at the **end of M2**. Read that plan's §A
+> before starting Step 3 — it maps the plans onto our global-script style.
+
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** ✅ | Split game code into small files: `src/data/moves.js`, `src/data/fakeamon.js`, `src/data/typechart.js`, plus `src/battle.js`. Same game, tidier code | Game plays exactly the same — just easier to read and grow — *done!* |
@@ -93,6 +99,11 @@ see it join a team you can swap between.
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
+
+> **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
+> Its nine finer-grained steps (**S1–S9**, in its §9) supersede the five
+> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8. The table
+> below stays as the short version; build from the plan.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -143,13 +154,25 @@ healing dishes, and defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-These are marked **[TO DECIDE]** in `DESIGN.md` — don't guess, ask Jeff & Lewis:
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B33); Jeff serves a
+few at a time into `HOMEWORK.md`. Don't guess — ask Jeff & Lewis. Still open,
+by milestone:
 
-- **M2:** better Fakeaballs? can you catch a mini-boss? party size + storage.
-- **M3:** one big map or connected areas? (visible encounters already chosen.)
-- **M4:** token prices; what gym badges *do*.
-- **M5:** evolution level per starter; auto-evolve vs. confirm; Cosmic type
-  matchups; berry list + recipes; can you catch Artemis after beating it.
+- **M2:** flee rule (B1), caught-Fakeamon HP (B2), nicknames (B3), wild
+  levels (B4), the "Gotcha!" words (B5). *B1/B2/B4/B5 are on Lewis's plate
+  right now in `HOMEWORK.md`.*
+- **M3:** one big map vs connected areas (B6), world + area names (B7–B8),
+  mini-boss homes (B9), the hero (B10), day/night (B11), NPCs (B12).
+- **M4:** gym re-theming (B13), badge names (B14), inside a gym (B15), how
+  pricey things feel (B16 — Jeff turns it into numbers), rematches (B17),
+  shop stock (B18).
+- **M5:** story & finale inventions (B19–B26), where you swap boxed
+  Fakeamon (B33) — plus Jeff's number tuning: evolution levels, XP curve,
+  ball multipliers, token prices.
+
+*(Everything from the old version of this list is decided — ball tiers,
+mini-boss catching, party size, badges, auto-evolve, Cosmic chart, berries,
+Artemis. See `DECISIONS.md`.)*
 
 ---
 

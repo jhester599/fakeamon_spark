@@ -55,14 +55,25 @@ Huddle can override them (that's the point of huddling!).
 | 6 | Switch fighter | **Sonnet 5** | medium | Last M2 piece; small |
 | — | Decision-loop runs (folding Lewis's picks into the docs) | **Sonnet 5** | low | Multi-file but purely clerical — DECISIONS.md is the recipe |
 
+> **New since planning:** `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6 adds
+> state-foundation steps *into M2*: **S1** (individuals & the state bag,
+> before Step 5 — Sonnet 5 / **high**), **S2** (the `startBattle` contract,
+> alongside Steps 3–4), **S3–S4** (save v1 + export/import, end of M2).
+> Huddle on those rows too — they're in that plan's table, not this one.
+
 ### M3 — Overworld ⚠️ *the big architecture moment*
+
+Step numbers here are the **S1–S9** from `PLANS/M3_OVERWORLD_PLAN.md` §9,
+which supersede ROADMAP's five M3 rows (that plan's table carries the same
+per-step picks — if the two ever disagree, the plan wins).
 
 | Step | What we build | Model | Effort | Why |
 |---|---|---|---|---|
-| **Pre-M3 planning session** | How Phaser (map) and our HTML battle hand off to each other | **Opus 4.8** (or `/model opusplan`) | high | The riskiest design decision in the whole project — it shapes M4 & M5. Worth the expensive brain. |
-| 1–2 | Phaser + tile map + walking | **Sonnet 5** | high | Executing the Architect's plan, but new territory |
-| 3 | Sprite art pass (~200 monsters) | **Sonnet 5** writes the slicing script, **Haiku** can run the repetitive parts | medium | Batch work + CREDITS.md bookkeeping |
-| 4–5 | Visible encounters + return-to-map | **Sonnet 5** | high | This is where the map↔battle handoff actually gets built |
+| **Planning session** ✅ | *Done!* How Phaser (map) and our HTML battle hand off — produced `PLANS/M3_OVERWORLD_PLAN.md` (+ the M5 state & save plan), via **Fable 5** in chat | — | — | The riskiest design decision in the whole project, now on paper |
+| S1–S3 | Phaser hello-world, tile map, player walking the grid | **Sonnet 5** | high | Executing the Architect's plan, but new territory (S3 is the movement-*feel* step — budget tuning time with Lewis) |
+| S4–S6 | Walk animation, the sprite-slicer tool, encounters standing on the map | **Sonnet 5** (slicer re-runs: **Haiku**) | medium | Batch work + CREDITS.md bookkeeping |
+| S7 | **The handoff** 🌉 — bump a creature → real battle → back to the map | **Sonnet 5** | high | The whole plan converges here; if it fights back twice, escalate to **Opus 4.8** |
+| S8–S9 | Catch/XP outcomes on the map + cleanup & docs | **Sonnet 5** | medium → low | Features against a settled seam |
 
 ### M4 — World Systems
 
@@ -74,8 +85,8 @@ Huddle can override them (that's the point of huddling!).
 
 | Step | What we build | Model | Effort | Why |
 |---|---|---|---|---|
-| **Pre-M5 planning session** | Save-game + evolution state design | **Opus 4.8** | high | Saving isn't on the roadmap yet and hurts if bolted on late |
-| 1–6 | Evolutions, mini-bosses, cooking, Artemis finale | **Sonnet 5** | medium | The specs live in DESIGN.md; this is building, not architecting |
+| **Pre-M5 planning session** ✅ | *Done early!* Save-game + evolution state design — produced `PLANS/M5_STATE_AND_SAVE_PLAN.md` (bundled with the M3 planning session) | — | — | Saving hurts if bolted on late — which is why its steps S1–S4 land back in **M2** (see the note in the M2 section above) |
+| 1–6 | Evolutions, mini-bosses, cooking, Artemis finale | **Sonnet 5** | medium | The specs live in DESIGN.md; XP/evolution/box steps follow the M5 plan §6 (its S5–S8, with per-step picks) |
 
 ### Anytime
 

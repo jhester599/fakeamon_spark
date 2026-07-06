@@ -1,77 +1,88 @@
 # Homework Before We Continue 🌙
 
-> **✅ Round 2 answered (2026-07-06)!** Team size (4, with Boxes) and catch
-> rate (50% base) are both decided and written into `DESIGN.md` — see
-> `DECISIONS.md` for the full log. Jeff's tech-stack confirmation landed too.
-> Nothing left blocking M2. This file stays here for whenever the next
-> round of questions comes up.
-
-(Round 1's 10 creative decisions are all done too — see `DECISIONS.md` for
-the full history, they're already written into `DESIGN.md`.)
+> **Round 3 is up! (2026-07-06)** Four questions for Lewis, all feeding the
+> very next build steps — **M2 Steps 3–4: wild battles + catching.** They
+> come from the big question bank in `HOMEWORK_BACKLOG.md` (B1, B2, B4, B5).
+>
+> Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
+> see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
 
 ---
 
-## ✅ What we built tonight
+## 🗺️ What happened this session
 
-- **M1 — Battle Slice: complete.** Move buttons, damage formula, type
-  advantage, HP bars, misses, fainting, and a win/lose screen with Play
-  Again. Turn pacing tuned so it reads as a real back-and-forth.
-- **Bonus, ahead of schedule:** Growler and Whaley now show real
-  Tuxemon-based art instead of colored boxes.
-- **Docs:** verified exactly where Tuxemon's art lives in their repo, fixed
-  a wrong license note (it's CC BY-SA 4.0, not 3.0), and found two sprites
-  with missing attribution (see Jeff's list below).
-- **The game is live!** [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)
-  — added a `README.md`, made the repo public, and set up GitHub Pages so
-  it auto-deploys on every push to `main`. No more Claude-session-linked
-  preview links; this is a real, permanent, repo-owned URL.
+- **The planning docs landed.** A high-end planning session produced two
+  architecture plans, now in `PLANS/`: the **M3 overworld plan** (how the
+  Phaser map and our battle screen hand off to each other) and the
+  **state & save plan** (XP, evolution, Boxes, saving — some of it lands
+  during M2!). Plus `HOMEWORK_BACKLOG.md` — a bank of **33 questions** for
+  Lewis covering the whole rest of the game. 🎒
+- **Tech stack pinned:** plain scripts (double-click still works!) through
+  M2; **Phaser 4** from a CDN at M3. Logged in `DECISIONS.md`.
+- All the docs got a freshen-up so they agree with each other again.
 
 ---
 
-## 🌊 Lewis's 2 questions — ✅ answered! (2026-07-06)
+## 🌊 Lewis's 4 questions — Round 3
 
-### 1. How many Fakeamon can be on your team at once?  *(needed for M2 Step 5)*
+### 🔲 1. (B1) Can you run away from a wild battle?  *(needed by M2 Step 3)*
+You bump into a wild Fakeamon you don't want to fight. What happens?
 
-- [x] **B) 4** — a little room to experiment.
+- [ ] **A) No escape** — every battle is a commitment. Tense!
+- [ ] **B) Always works** — a "Run" button that never fails.
+- [ ] **C) Usually works** — Run succeeds most of the time, but sometimes
+  the wild Fakeamon blocks you and gets a free hit. Risky!
 
-**What happens when your team is full and you catch a new one?** It goes to
-your **Boxes** — storage you can open to switch a boxed Fakeamon in for one
-on your active team.
+**Lewis picks:** ____________  **Because:** ________________________________
 
-**Lewis picked:** B, 4 **Because:** "a little room to experiment"
+### 🔲 2. (B2) When you catch a Fakeamon, how healthy is it?  *(needed by M2 Step 4)*
+You weakened it to catch it. When it joins your team, is it…
 
-### 2. How easy should catching be?  *(needed for M2 Step 4)*
+- [ ] **A) Still hurt** — it keeps the low HP; heal it at a Fakeatent.
+- [ ] **B) Fully healed** — joining your team is a fresh start.
+- [ ] **C) Half healed** — it patches up a bit out of gratitude.
 
-- [x] **A) About 1 in 4** — catching feels hard-won and exciting.
+**Lewis picks:** ____________  **Because:** ________________________________
 
-**Lewis picked:** A, about 1 in 4 **Because:** "catching is pretty hard"
-— worked out to a **50% base catch rate** (see `DESIGN.md` §6 for the math).
+### 🔲 3. (B4) What level are wild Fakeamon?  *(needed by M2 Step 3 — feel question, Jeff turns it into numbers)*
+
+- [ ] **A) Same as your team** — always a fair fight.
+- [ ] **B) A little random** — most are close to you, some weaker, some stronger.
+- [ ] **C) Depends on where you are** — early areas easy, far areas dangerous.
+  *(This one really kicks in at M3 when we have a map.)*
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 4. (B5) INVENT: the "Gotcha!" moment ✨  *(anytime before M2 Step 4)*
+Write the exact words the battle log says when a catch **succeeds** and when
+the Fakeamon **breaks free**. Make them yours!
+
+Caught: ____________________________________________________________
+Broke free: ________________________________________________________
+
+**On deck for next round:** B3 — do caught Fakeamon get nicknames?
+*(needed by M2 Step 5)*
 
 ---
 
 ## 🧑‍💻 Jeff's list
 
-Not blocking M2, but shouldn't be forgotten:
+Nothing blocking the next session; these come due at M3 Step S1:
 
-1. ✅ ~~Check Hissiorite/Frondly attribution on the wiki~~ — done, resolved
-   via `CONTENT_REFERENCE.md` §13. Hissiorite: princess-phoenix. Frondly:
-   Leo, ReallyDarkandWindie, Levaine, Sanglorian. Both CC BY-SA 3.0.
-   `CREDITS.md` updated — no longer blocking public distribution.
-2. ✅ ~~Officially confirm the tech stack~~ — done. Confirmed: plain
-   HTML/JS through M2, Phaser starting M3 (the recommended default we'd
-   already been building on).
-3. ✅ ~~Decide on PR timing~~ — done. Opened and merged as we went (PRs #2–#4).
-4. ✅ ~~Make the repo public~~ — done.
-5. ✅ ~~Turn on Pages~~ — done. Site is live and confirmed working:
-   [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/).
+1. **Zoom level (2× vs 3×)** — eyeball it on the family screen when the
+   first Phaser canvas is up (M3 plan §11).
+2. **Pin Phaser 4** — check [phaser.io/download/stable](https://phaser.io/download/stable)
+   and pin the newest 4.x in the CDN URL; record it in `DECISIONS.md`
+   (M3 plan §2).
+3. **Vendor the Phaser skills** — copy the relevant `skills/` files from the
+   Phaser 4 repo into `PLANS/phaser-skills/` before any Phaser code gets
+   written (M3 plan §2 — it's the defense against Claude's v3 habits).
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
-capture-formula exact numbers beyond the basic rate above (M2, fine-tuning
-can wait), token prices (M4), map structure & encounter style (M3),
-officially locking the Metal/Cosmic type chart (low urgency — already built
-and working).
+exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token
+prices (M4), officially locking the Metal/Cosmic type chart (low urgency —
+already built and working).
 
 ---
 
-*Sleep well! Pick this back up any time — `DESIGN.md` and `DECISIONS.md`
-have the full history.* 🌠
+*Serve the picks whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

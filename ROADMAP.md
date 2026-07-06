@@ -51,7 +51,7 @@ A good fight lasts about **3–5 hits per side**, misses are **rare**, and
 | **2** ✅ | Add a **move button** for each of Growler's moves, and a **text battle log** under the arena | Four buttons; clicking one writes "Growler used Flare!" in the log — *done!* |
 | **3** ✅ | The **damage formula**: `raw = power + attack − defense` (min 1). Clicking a move lowers Whaley's HP number | Whaley's HP number drops when you attack — *done!* |
 | **4** ✅ | **HP bars** — a colored bar that shrinks as HP falls | Green/yellow/red bars that visibly shrink — *done!* |
-| **5** | Add **type multiplier** + the small **random wiggle** (×0.85–1.15) so damage varies and Fire-vs-Water feels different | "It's not very effective…" vs bigger hits; damage jitters a little each time |
+| **5** ✅ | Add **type multiplier** + the small **random wiggle** (×0.85–1.15) so damage varies and Fire-vs-Water feels different | "It's not very effective…" vs bigger hits; damage jitters a little each time — *done!* |
 | **6** | **Whaley fights back** with a random move, and **turn order by Speed** (ties go to the player) | A real back-and-forth: you hit, then Whaley hits |
 | **7** | **Accuracy / misses** — roll each move; a miss does nothing that turn (rare) | Occasionally "Flare missed!" appears |
 | **8** | **Fainting + win/lose screen** + a **Play Again** button | At 0 HP a Fakeamon faints and a "You win! / You lose!" message shows |

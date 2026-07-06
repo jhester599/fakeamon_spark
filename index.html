@@ -170,6 +170,17 @@ const WHALEY = {
   moves: ["tackle", "splash", "spout", "breech"],
 };
 
+// ---- TYPE CHART ----  move type (rows) vs defender's type (columns).
+// From DESIGN.md §4: Fire melts Metal and burns Grass; Water douses Fire;
+// Grass drinks Water; Metal chops Grass. Normal moves are always neutral.
+const TYPE_CHART = {
+  fire:   { fire: 1,   water: 0.5, grass: 2,   metal: 2,   normal: 1 },
+  water:  { fire: 2,   water: 1,   grass: 0.5, metal: 1,   normal: 1 },
+  grass:  { fire: 0.5, water: 2,   grass: 1,   metal: 0.5, normal: 1 },
+  metal:  { fire: 0.5, water: 1,   grass: 2,   metal: 1,   normal: 1 },
+  normal: { fire: 1,   water: 1,   grass: 1,   metal: 1,   normal: 1 },
+};
+
 // ===========================================================================
 //  BATTLE STATE
 //  Step 3: Whaley's current HP can now go down. (Growler doesn't take damage
@@ -230,15 +241,19 @@ function renderArena() {
 renderArena();
 
 // ===========================================================================
-//  DAMAGE FORMULA
-//  Step 3: the basic formula only — no type advantage or randomness yet
-//  (those arrive in Step 5). Numbers straight from DESIGN.md §6:
-//    raw damage = move power + attacker's Attack − defender's Defense
-//  It never goes below 1, so every hit does at least a little something.
+//  DAMAGE FORMULA — full version from DESIGN.md §6:
+//    raw    = move power + attacker's Attack − defender's Defense (min 1)
+//    damage = round(raw × typeMultiplier × random(0.85–1.15))
+//  Returns both the damage and the type multiplier, so the battle log can
+//  say "super effective" or "not very effective" when it matters.
 // ===========================================================================
 function calculateDamage(move, attacker, defender) {
-  const raw = move.power + attacker.attack - defender.defense;
-  return Math.max(1, raw);
+  const raw = Math.max(1, move.power + attacker.attack - defender.defense);
+  const typeMultiplier = TYPE_CHART[move.type][defender.type];
+  const wiggle = 0.85 + Math.random() * 0.30; // a random number from 0.85 to 1.15
+  const damage = Math.round(raw * typeMultiplier * wiggle);
+
+  return { damage: damage, typeMultiplier: typeMultiplier };
 }
 
 // ===========================================================================
@@ -269,10 +284,16 @@ function showMoveButtons(fakeamon) {
     button.className = "move-btn";
     button.textContent = move.name;
     button.addEventListener("click", function () {
-      const damage = calculateDamage(move, fakeamon, WHALEY);
-      whaleyHP = Math.max(0, whaleyHP - damage);
+      const result = calculateDamage(move, fakeamon, WHALEY);
+      whaleyHP = Math.max(0, whaleyHP - result.damage);
 
-      addLogLine(fakeamon.name + " used " + move.name + "! It dealt " + damage + " damage.");
+      let line = fakeamon.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
+      if (result.typeMultiplier >= 2) {
+        line += " It's super effective!";
+      } else if (result.typeMultiplier <= 0.5) {
+        line += " It's not very effective...";
+      }
+      addLogLine(line);
       renderArena();
     });
     controls.appendChild(button);

@@ -10,6 +10,7 @@ let player;
 let opponent;
 const hp = {};
 let canFlee = true;
+let canCatch = true;
 let resolveBattle; // set by startBattle(); called once the fight is over
 
 // ===========================================================================
@@ -153,6 +154,81 @@ function checkForFaint(fakeamon) {
 }
 
 // ===========================================================================
+//  CATCHING — Step 4: throw a Fakeaball at the wild Fakeamon. Formula and
+//  base rate are from DESIGN.md §6 (Lewis's call: 50% base, better at low
+//  HP). Only the basic Fakeaball exists so far — ballBonus is always 1
+//  until Great/Ultra/Cosmic balls land (Jeff's number-tuning list).
+//  Tweak these three numbers to change how catching feels.
+// ===========================================================================
+const BASE_CATCH_RATE = 0.5;      // Lewis: "about 1 in 4" at half HP
+const CATCH_CHANCE_FLOOR = 0.05;  // never truly impossible, even at full HP
+const CATCH_CHANCE_CAP = 0.95;    // room for stronger balls later
+
+function catchChance(target) {
+  const missingHPFraction = 1 - hp[target.name] / target.maxHP;
+  const raw = BASE_CATCH_RATE * missingHPFraction; // ballBonus = 1 for now
+  return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
+}
+
+// Throwing a ball takes your turn, just like an attack — same speed-order
+// rule as DESIGN.md §6 ("Actions: Attack, Catch, Item, Flee"). If the wild
+// Fakeamon is faster, it may get its attack in before you even throw.
+function attemptCatch() {
+  setControlsEnabled(false);
+  const playerGoesFirst = player.speed >= opponent.speed;
+
+  // Lewis's B5 pick — the "Gotcha!" moment. Rolls the catch, logs the
+  // result, and resolves the battle promise if it succeeds. Caught
+  // Fakeamon join fully healed, per Lewis's B2 pick (joining your team is
+  // a fresh start — the actual team join lands with the state bag at
+  // Step 5; for now the encounter just ends).
+  function throwFakeaball() {
+    const caught = Math.random() < catchChance(opponent);
+
+    if (caught) {
+      addLogLine("Gotcha! " + opponent.name + " was caught!");
+      setTimeout(function () {
+        resolveBattle({
+          result: "caught",
+          caught: { species: opponent, currentHP: opponent.maxHP },
+          xpGained: 0,
+        });
+      }, randomTurnPause());
+    } else {
+      addLogLine("Oh no! " + opponent.name + " broke free!");
+    }
+
+    return caught;
+  }
+
+  function enemyCounterAttack(afterAttack) {
+    const enemyMove = pickRandomMove(opponent);
+    performAttack(opponent, player, enemyMove);
+    renderArena();
+
+    if (checkForFaint(player)) {
+      endBattle(opponent);
+      return;
+    }
+
+    afterAttack();
+  }
+
+  if (playerGoesFirst) {
+    if (throwFakeaball()) return;
+    setTimeout(function () {
+      enemyCounterAttack(function () { setControlsEnabled(true); });
+    }, randomTurnPause());
+  } else {
+    enemyCounterAttack(function () {
+      setTimeout(function () {
+        if (!throwFakeaball()) setControlsEnabled(true);
+      }, randomTurnPause());
+    });
+  }
+}
+
+// ===========================================================================
 //  ONE TURN — you attack AND your opponent attacks back, with a pause
 //  between so it feels like a real back-and-forth. Whoever has higher
 //  Speed swings first; a tie goes to the player. If either fighter faints,
@@ -224,7 +300,7 @@ function runAway() {
 
 // ===========================================================================
 //  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn
-//  above). A Run button sits alongside them when the battle allows fleeing.
+//  above). Catch and Run sit alongside them when the battle allows it.
 // ===========================================================================
 function showMoveButtons(fakeamon) {
   const controls = document.getElementById("controls");
@@ -241,6 +317,14 @@ function showMoveButtons(fakeamon) {
     controls.appendChild(button);
   });
 
+  if (canCatch) {
+    const catchButton = document.createElement("button");
+    catchButton.className = "move-btn catch-btn";
+    catchButton.textContent = "Throw Fakeaball";
+    catchButton.addEventListener("click", attemptCatch);
+    controls.appendChild(catchButton);
+  }
+
   if (canFlee) {
     const runButton = document.createElement("button");
     runButton.className = "move-btn run-btn";
@@ -254,13 +338,14 @@ function showMoveButtons(fakeamon) {
 //  START A BATTLE — the one function the rest of the game calls. Runs a
 //  fight in #arena/#controls/#log and resolves once it's over.
 //
-//    config  = { player: <species>, enemy: <species>, canFlee }
-//    outcome = { result: "win" | "lose" | "fled", xpGained }
+//    config  = { player: <species>, enemy: <species>, canFlee, canCatch }
+//    outcome = { result: "win" | "lose" | "fled" | "caught",
+//                caught: { species, currentHP } | null, xpGained }
 //
 //  This is the M2-sized version of the full contract in
-//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty/enemy.level and
-//  outcome.caught arrive with catching in Step 4 and individuals/levels
-//  before Step 5 — see PLANS/M5_STATE_AND_SAVE_PLAN.md §6).
+//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty/enemy.level and a
+//  persistent team to actually add outcome.caught to arrive with
+//  individuals/levels before Step 5 — see PLANS/M5_STATE_AND_SAVE_PLAN.md §6).
 // ===========================================================================
 function startBattle(config) {
   return new Promise(function (resolve) {
@@ -269,6 +354,7 @@ function startBattle(config) {
     player = config.player;
     opponent = config.enemy;
     canFlee = config.canFlee !== false;
+    canCatch = config.canCatch !== false;
 
     hp[player.name] = player.maxHP;
     hp[opponent.name] = opponent.maxHP;

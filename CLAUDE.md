@@ -36,8 +36,8 @@ project. After the step works, briefly reflect: was the model pick right?
 
 ## Current status
 
-> **Milestone: M2 — Catching & Team. In progress: Steps 1–3 done ✅** *(Update this line as we progress.)*
-> M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), and a random wild opponent every battle via the `startBattle(config)` contract, with a Run button that always works and starter-select moved to `src/main.js` (Step 3). **Next up: Step 4 — the Catch action + Fakeaball** (`DESIGN.md` §6; caught Fakeamon join fully healed, messages already decided — B2/B5). Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
+> **Milestone: M2 — Catching & Team. In progress: Steps 1–4 done ✅** *(Update this line as we progress.)*
+> M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), a random wild opponent every battle via the `startBattle(config)` contract with a Run button that always works (Step 3), and a **Throw Fakeaball** catch action using the 50%-base capture formula, with a Gotcha!/broke-free log and a counter-attack if the catch fails (Step 4). **Next up:** the M5-plan **S1** state-bag work (`src/state.js`, individuals) before Step 5's team list. Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
 
 ## Scope guardrails
 
@@ -105,14 +105,14 @@ or use a simple local server like `python3 -m http.server`.
 
 ## Milestone 2 — build this
 
-Turn the one-off battle into "catch creatures and build a team." Steps 1–3
+Turn the one-off battle into "catch creatures and build a team." Steps 1–4
 are done. What's left, in order (full tables: `ROADMAP.md` M2 +
 `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6):
 
 | Step | What we build | Where it's specced |
 |---|---|---|
 | **3** ✅ | A **random wild opponent** — the global `startBattle(config) → Promise<outcome>` contract lives in `src/battle.js`; starter-select moved to `src/main.js`. Flee (Run button) always works (B1); wild level uses the team-average as an M2 stand-in until M3's areas exist (B4, `DESIGN.md` §5). *(Note: this M2-sized contract uses plain `player`/`enemy` species objects, not yet `playerParty`/species-key+level — those arrive with individuals at M5-plan S1 and leveling at M5-plan S5.)* | contract shape: M3 plan §5 · globals version: M5 plan §A.2 |
-| **4** | **Catch action + Fakeaball** — capture formula, 50% base rate (Lewis's call). Caught Fakeamon join fully healed (B2); catch messages are `"Gotcha! <name> was caught!"` / `"Oh no! <name> broke free!"` (B5) | formula: `DESIGN.md` §6 |
+| **4** ✅ | **Catch action + Fakeaball** — "Throw Fakeaball" button, capture formula (50% base rate × missing-HP fraction, floor/cap; Lewis's call), only the basic ball for now (Great/Ultra/Cosmic bonuses are Jeff's number-tuning). Throwing a ball takes your turn, same speed-order rule as attacking — a failed throw lets the wild Fakeamon counter-attack. Caught Fakeamon are logged as fully healed (B2) with `"Gotcha! <name> was caught!"` / `"Oh no! <name> broke free!"` (B5); the encounter just ends for now — actually joining a team lands with the state bag at Step 5 | formula: `DESIGN.md` §6 |
 | *M5-plan **S1** — before Step 5* | **Individuals & the state bag** — `src/state.js`, `newIndividual()`, `statsFor()`; retires the `hp[name]` map so two Growlers don't share HP | M5 plan §1 + §A.3 |
 | **5** | **Team list** — up to 4 active, overflow to Boxes. No nicknames — species names only (B3, decided) | decision #11 |
 | **6** | **Switch** which Fakeamon fights, including from Boxes | — |

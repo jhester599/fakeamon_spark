@@ -108,6 +108,25 @@
   #log div {
     padding: 3px 0;
   }
+
+  /* ---- Step 4: HP bar ---- */
+  .hp-bar-track {
+    background: #e2e8f5;
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+    margin: 8px 0 6px;
+  }
+  .hp-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s ease, background 0.3s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hp-bar-fill {
+      transition: none;
+    }
+  }
 </style>
 
 <h1>Fakeamon Battle — Growler vs Whaley</h1>
@@ -162,6 +181,14 @@ let whaleyHP = WHALEY.maxHP;
 //  SHOW THE FIGHTERS ON SCREEN
 // ===========================================================================
 
+// Step 4: pick the HP bar color — green when healthy, yellow when hurt,
+// red when in real danger. Easy to retune these thresholds/colors later.
+function hpBarColor(percent) {
+  if (percent > 50) return "#4bbd6b"; // green
+  if (percent > 20) return "#f5c445"; // yellow
+  return "#e05252";                   // red
+}
+
 function showFighter(fakeamon, currentHP) {
   // Build the list of this Fakeamon's moves as text.
   const moveItems = fakeamon.moves.map(function (moveKey) {
@@ -172,11 +199,16 @@ function showFighter(fakeamon, currentHP) {
            ", " + move.accuracy + "% hit</li>";
   }).join("");
 
+  const percent = Math.max(0, Math.min(100, Math.round((currentHP / fakeamon.maxHP) * 100)));
+
   return (
     '<div class="fighter">' +
       "<h2>" + fakeamon.name + "</h2>" +
       '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
       '<div class="sprite type-' + fakeamon.type + '"></div>' +
+      '<div class="hp-bar-track">' +
+        '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
+      "</div>" +
       '<div class="stats">' +
         "HP " + currentHP + "/" + fakeamon.maxHP +
         " &nbsp;•&nbsp; Attack " + fakeamon.attack +

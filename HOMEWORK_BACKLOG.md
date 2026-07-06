@@ -260,6 +260,16 @@ ____________________________________________________________________
 
 **Lewis picks:** ____________  **Because:** ________________________________
 
+### 🔲 B33. Where do you swap team members with boxed ones? 📦  *(needed by M5's Boxes screen — your team-of-4 pick made this real!)*
+You decided a full team sends new catches to your **Boxes**. Where do you go
+to swap a boxed Fakeamon onto your active team?
+
+- [ ] **A) At a Fakeatent** — home base does one more job: heal AND swap.
+- [ ] **B) Anywhere** — open the team screen and swap on the spot.
+- [ ] **C) A brand-new building** — invent it! Name: ____________
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
 ---
 
 ## 🎨 Anytime — pure flavor, no deadline
@@ -316,9 +326,9 @@ Lewis's credit line: ________________________________________________
 | M2 | B1–B5 | 0 / 5 |
 | M3 | B6–B12 | 0 / 7 |
 | M4 | B13–B18 | 0 / 6 |
-| M5 | B19–B26 | 0 / 8 |
+| M5 | B19–B26, B33 | 0 / 9 |
 | Anytime | B27–B32 | 0 / 6 |
-| **Total** | | **0 / 32** |
+| **Total** | | **0 / 33** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

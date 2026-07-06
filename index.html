@@ -93,6 +93,10 @@
   .move-btn:hover {
     background: #1d3868;
   }
+  .move-btn:disabled {
+    background: #a7b4cf;
+    cursor: not-allowed;
+  }
   #log {
     max-width: 760px;
     margin: 20px auto 0;
@@ -293,23 +297,48 @@ function pickRandomMove(fakeamon) {
   return MOVES[fakeamon.moves[index]];
 }
 
+// Turn-out the buttons while a turn is playing, so a fast second click can't
+// start a new turn before the first one has finished showing itself.
+function setControlsEnabled(enabled) {
+  document.querySelectorAll(".move-btn").forEach(function (button) {
+    button.disabled = !enabled;
+  });
+}
+
+// A random pause between the two attacks, so the turn reads as "first this
+// happens, THEN that happens" instead of both landing at once. Tweak these
+// two numbers (in milliseconds) to make battles feel snappier or slower.
+const TURN_PAUSE_MIN_MS = 700;
+const TURN_PAUSE_MAX_MS = 1100;
+
+function randomTurnPause() {
+  return TURN_PAUSE_MIN_MS + Math.random() * (TURN_PAUSE_MAX_MS - TURN_PAUSE_MIN_MS);
+}
+
 // ===========================================================================
-//  ONE TURN — Step 6: Growler attacks AND Whaley attacks back.
-//  Whoever has higher Speed swings first; a tie goes to the player.
+//  ONE TURN — Growler attacks AND Whaley attacks back, with a pause between
+//  so it feels like a real back-and-forth. Whoever has higher Speed swings
+//  first; a tie goes to the player.
 // ===========================================================================
 function resolveTurn(playerMove) {
+  setControlsEnabled(false);
+
   const enemyMove = pickRandomMove(WHALEY);
   const playerGoesFirst = GROWLER.speed >= WHALEY.speed;
 
-  if (playerGoesFirst) {
-    performAttack(GROWLER, WHALEY, playerMove);
-    performAttack(WHALEY, GROWLER, enemyMove);
-  } else {
-    performAttack(WHALEY, GROWLER, enemyMove);
-    performAttack(GROWLER, WHALEY, playerMove);
-  }
+  const first  = playerGoesFirst ? { attacker: GROWLER, defender: WHALEY, move: playerMove }
+                                  : { attacker: WHALEY,  defender: GROWLER, move: enemyMove };
+  const second = playerGoesFirst ? { attacker: WHALEY,  defender: GROWLER, move: enemyMove }
+                                  : { attacker: GROWLER, defender: WHALEY, move: playerMove };
 
+  performAttack(first.attacker, first.defender, first.move);
   renderArena();
+
+  setTimeout(function () {
+    performAttack(second.attacker, second.defender, second.move);
+    renderArena();
+    setControlsEnabled(true);
+  }, randomTurnPause());
 }
 
 // ===========================================================================

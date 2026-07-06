@@ -37,10 +37,16 @@ this section gets updated.)
 
 ---
 
-## ✅ M1 — Battle Slice  *(we are here)*
+## ✅ M1 — Battle Slice  *(complete! 🎉 M2 is next)*
 
 **Goal:** one full turn-based fight — **Growler vs Whaley**. Pick a move,
 deal damage, HP drops, someone faints, win/lose screen. Nothing else.
+
+**Bonus, ahead of schedule:** Growler and Whaley now show real Tuxemon-based
+art (`assets/sprites/growler.png` / `whaley.png`) instead of colored boxes —
+see `CREDITS.md`. The rest of the roster's art is still planned for **M3
+Step 3** below, once Phaser is in and we need proper sprite-sheet slicing
+for the overworld anyway.
 
 A good fight lasts about **3–5 hits per side**, misses are **rare**, and
 **type advantage clearly matters**.
@@ -49,12 +55,12 @@ A good fight lasts about **3–5 hits per side**, misses are **rare**, and
 |---|---|---|
 | **1** ✅ | Show both fighters with stats + moves (placeholder colored boxes) | Growler & Whaley side by side — *done!* |
 | **2** ✅ | Add a **move button** for each of Growler's moves, and a **text battle log** under the arena | Four buttons; clicking one writes "Growler used Flare!" in the log — *done!* |
-| **3** | The **damage formula**: `raw = power + attack − defense` (min 1). Clicking a move lowers Whaley's HP number | Whaley's HP number drops when you attack |
-| **4** | **HP bars** — a colored bar that shrinks as HP falls | Green/red bars that visibly shrink |
-| **5** | Add **type multiplier** + the small **random wiggle** (×0.85–1.15) so damage varies and Fire-vs-Water feels different | "It's not very effective…" vs bigger hits; damage jitters a little each time |
-| **6** | **Whaley fights back** with a random move, and **turn order by Speed** (ties go to the player) | A real back-and-forth: you hit, then Whaley hits |
-| **7** | **Accuracy / misses** — roll each move; a miss does nothing that turn (rare) | Occasionally "Flare missed!" appears |
-| **8** | **Fainting + win/lose screen** + a **Play Again** button | At 0 HP a Fakeamon faints and a "You win! / You lose!" message shows |
+| **3** ✅ | The **damage formula**: `raw = power + attack − defense` (min 1). Clicking a move lowers Whaley's HP number | Whaley's HP number drops when you attack — *done!* |
+| **4** ✅ | **HP bars** — a colored bar that shrinks as HP falls | Green/yellow/red bars that visibly shrink — *done!* |
+| **5** ✅ | Add **type multiplier** + the small **random wiggle** (×0.85–1.15) so damage varies and Fire-vs-Water feels different | "It's not very effective…" vs bigger hits; damage jitters a little each time — *done!* |
+| **6** ✅ | **Whaley fights back** with a random move, and **turn order by Speed** (ties go to the player) | A real back-and-forth: you hit, then Whaley hits — *done!* |
+| **7** ✅ | **Accuracy / misses** — roll each move; a miss does nothing that turn (rare) | Occasionally "…but it missed!" appears — *done!* |
+| **8** ✅ | **Fainting + win/lose screen** + a **Play Again** button | At 0 HP a Fakeamon faints and a win/lose message shows — *done!* |
 
 **🎉 M1 done when:** you can play a whole Growler-vs-Whaley battle in the
 browser, moves sometimes miss, type advantage is obvious, and fights last a
@@ -89,7 +95,7 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 |---|---|---|
 | **1** | Add **Phaser** and show a tiny **tile map** (grass + paths) | A little world on screen |
 | **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid | Walk around the map |
-| **3** | **Real sprites** art pass — drop in Tuxemon PNGs for the starters (scaled up, nearest-neighbor), and start `CREDITS.md` | Actual creature art instead of colored boxes |
+| **3** | **Real sprites** art pass for the rest of the roster (Leafick + everyone in M4/M5) — Growler/Whaley already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map; walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
 

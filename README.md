@@ -18,10 +18,13 @@ Other pages from the same site:
 
 ## Status
 
-**Milestone M1 — Battle Slice: complete! 🎉** A full turn-based battle
-between Growler and Whaley — moves, damage, type advantage, misses, HP
-bars, fainting, and a win/lose screen. **M2 — Catching & Team** is next.
-See `ROADMAP.md` for the full plan.
+**Milestone M2 — Catching & Team: in progress.** M1 (a full turn-based
+battle — moves, damage, type advantage, misses, HP bars, fainting, win/lose
+screen) is complete 🎉. M2 so far: the code is split into tidy `src/` files,
+and there's a **Choose Your Starter** screen with all three starters
+(Growler, Whaley, Leafick). Next up: random wild opponents and catching.
+See `ROADMAP.md` for the full plan — and `PLANS/` for the architecture
+plans covering the M3 overworld and the save system.
 
 ## Run it locally
 
@@ -43,7 +46,9 @@ Or just double-click `index.html`.
 | `ROADMAP.md` | Stepwise build plan (M1–M5), what's done and what's next |
 | `DECISIONS.md` | Log of decisions made, and how new ones get folded in |
 | `MODELS.md` | Which Claude model/effort to use per roadmap step, and the pre-step Model Huddle |
+| `PLANS/` | Architecture plans from high-end planning sessions — the M3 overworld (Phaser ↔ battle) and the state/save system |
 | `HOMEWORK.md` | Open questions waiting on Lewis (creative director) and Jeff |
+| `HOMEWORK_BACKLOG.md` | The full question bank (B1–B33) that `HOMEWORK.md` gets served from |
 | `CREDITS.md` | Art attribution — what's borrowed, from where, under what license |
 | `CONTENT_REFERENCE.md` | Where our Tuxemon-sourced art, data, and roster ideas come from, and the licensing rules for using them |
 

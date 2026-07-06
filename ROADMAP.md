@@ -94,6 +94,11 @@ see it join a team you can swap between.
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
 
+> **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
+> Its nine finer-grained steps (**S1–S9**, in its §9) supersede the five
+> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8. The table
+> below stays as the short version; build from the plan.
+
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** | Add **Phaser** and show a tiny **tile map** (grass + paths) | A little world on screen |

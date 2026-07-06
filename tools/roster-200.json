@@ -1,3729 +1,3695 @@
 {
- "_about": [
-  "Wild-encounter roster reference data - generated 2026-07-06 from the pinned",
-  "Tuxemon clone (commit c34a9c72) + CONTENT_REFERENCE.md section 16. NOT loaded by the",
-  "game. ourTypeProposed uses section 16's remap table, which is still [TO CONFIRM]",
-  "with Lewis. descriptions are Tuxemon project text (CC, credit Tuxemon).",
-  "attribution.status=pending-wiki means: run fetch-wiki-credits.mjs (see tools/).",
-  "Player-facing names come from Lewis's rename pass, area by area - slugs are",
-  "working IDs only."
- ],
- "monsters": {
-  "aardart": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "aardorn",
-    "aardart"
-   ],
-   "stage": 2,
-   "shape": "varmint",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Magic-Purple-Hermit",
-    "license": "CC BY-SA 3.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "aardorn": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "aardorn",
-    "aardart"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "When born it is placed in an anthill and left to eat its way out.",
-   "attribution": {
-    "artists": "Magic-Purple-Hermit",
-    "license": "CC BY-SA 3.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "agnsher": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "water"
-   ],
-   "evolutionLine": [
-    "agnsher"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "A fusion of two tuxemon.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "ampystoma": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "lightning",
-    "water"
-   ],
-   "evolutionLine": [
-    "axolightl",
-    "ampystoma"
-   ],
-   "stage": 2,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "anoleaf": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "anoleaf",
-    "gectile",
-    "velocitile"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "apeoro": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "tetrchimp",
-    "apeoro"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "arthrobolt": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "metal"
-   ],
-   "evolutionLine": [
-    "nut",
-    "bolt",
-    "arthrobolt"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "artists": "josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "axolightl": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "axolightl",
-    "ampystoma"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Cavalcadeur, josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "babysnitch": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "shadow",
-    "normal"
-   ],
-   "evolutionLine": [
-    "babysnitch",
-    "baddrscratch"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "baddrscratch": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "babysnitch",
-    "baddrscratch"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "baobaraffe": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "baoby",
-    "baobaraffe"
-   ],
-   "stage": 2,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "baoby": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "baoby",
-    "baobaraffe"
-   ],
-   "stage": 1,
-   "shape": "landrace",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bearloch": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "wood"
-   ],
-   "evolutionLine": [
-    "bearloch"
-   ],
-   "stage": 1,
-   "shape": "brute",
-   "catchRate": 100.0,
-   "description": "A fusion of two tuxemon.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bedoo": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "jelillow",
-    "bedoo"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bewhich": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "shadow",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "cackleen",
-    "brumi",
-    "bewhich"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "birdee": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal",
-    "sky"
-   ],
-   "evolutionLine": [
-    "chickadee",
-    "birdee"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "birdling": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "hatchling",
-    "birdling"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "blasdoor": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "woodoor",
-    "blasdoor"
-   ],
-   "stage": 2,
-   "shape": "sprite",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bolt": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "nut",
-    "bolt",
-    "arthrobolt"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "TacoBot",
-    "license": "Public Domain",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "boltnu": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "boltnu",
-    "exclawvate"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "brachifor": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "fordin",
-    "stegofor",
-    "brachifor"
-   ],
-   "stage": 3,
-   "shape": "landrace",
-   "catchRate": 35.0,
-   "description": "BRACHIFOR can go without eating if it stays perfectly still.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "breem": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "venom"
-   ],
-   "evolutionLine": [
-    "duggot",
-    "breem"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bricgard": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "imbrickcile",
-    "bricgard",
-    "brickhemoth"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "brickhemoth": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "imbrickcile",
-    "bricgard",
-    "brickhemoth"
-   ],
-   "stage": 3,
-   "shape": "brute",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "brumi": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "shadow",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "cackleen",
-    "brumi",
-    "bewhich"
-   ],
-   "stage": 2,
-   "shape": "sprite",
-   "catchRate": 70.0,
-   "description": "Neglected brooms may be stolen by BRUMI. ",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bumbulus": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "bumbulus",
-    "nimbulex"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "burrlock": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "burrlock",
-    "cacaburr"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "bursa": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "bursa",
-    "flambear"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "It rejects fire as basic, and produces only the fire of the mind.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "cacaburr": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "burrlock",
-    "cacaburr"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "cackleen": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "shadow",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "cackleen",
-    "brumi",
-    "bewhich"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "cairfrey": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "cairfrey",
-    "possessun"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "caper": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "frost",
-    "normal"
-   ],
-   "evolutionLine": [
-    "caper",
-    "crankus"
-   ],
-   "stage": 1,
-   "shape": "landrace",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "capinyah": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "heroic"
-   ],
-   "evolutionLine": [
-    "capiti",
-    "capinyah"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "capiti": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "capiti",
-    "capinyah"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "cardiling": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "sky"
-   ],
-   "evolutionLine": [
-    "cardiling",
-    "cardiwing",
-    "cardinale"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "One wouldn't expect it to breathe fire, until it does.",
-   "attribution": {
-    "artists": "Spalding004, Kyu",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "cardinale": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "sky"
-   ],
-   "evolutionLine": [
-    "cardiling",
-    "cardiwing",
-    "cardinale"
-   ],
-   "stage": 3,
-   "shape": "flier",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "cardiwing": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "sky"
-   ],
-   "evolutionLine": [
-    "cardiling",
-    "cardiwing",
-    "cardinale"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "Its song is remarkable, but few dare keep an explosive songbird.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "cataspike": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "venom"
-   ],
-   "evolutionLine": [
-    "cataspike",
-    "puparmor",
-    "weavifly"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "chenipode": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "chenipode",
-    "exapode"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "It bites onto shoelaces and trouser legs when it wants to travel.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "chickadee": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal",
-    "sky"
-   ],
-   "evolutionLine": [
-    "chickadee",
-    "birdee"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "chillimp": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "frost",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "chillimp",
-    "snowrilla"
-   ],
-   "stage": 1,
-   "shape": "brute",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Chickenshowman",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "chloragon": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "chloragon",
-    "sapragon",
-    "dragarbor"
-   ],
-   "stage": 1,
-   "shape": "dragon",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "chrome_robo": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "chrome_robo"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "A hostile robot.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "claymorior": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "claymorior",
-    "regalance"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "coaldiak": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "normal"
-   ],
-   "evolutionLine": [
-    "furnursus",
-    "statursus",
-    "coaldiak"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "This bear can set fire to anywhere and draw blood from anything.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "cohldrabi": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "frost"
-   ],
-   "evolutionLine": [
-    "cohldrabi",
-    "lettice",
-    "frostuce"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "coppi": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "sky"
-   ],
-   "evolutionLine": [
-    "helipi",
-    "coppi",
-    "parappi"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "corvix": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "flacono",
-    "corvix",
-    "gryfix"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "It arms its wings with bone shards from its victims.",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "crankus": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "frost",
-    "normal"
-   ],
-   "evolutionLine": [
-    "caper",
-    "crankus"
-   ],
-   "stage": 2,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "criniotherme": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "normal"
-   ],
-   "evolutionLine": [
-    "pantherafira",
-    "criniotherme"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "crustagu": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "lesmagu",
-    "shelagu",
-    "crustagu"
-   ],
-   "stage": 3,
-   "shape": "polliwog",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "dandicub": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "dandicub",
-    "dandylion"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "dandylion": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "dandicub",
-    "dandylion"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Leo, ProfessorGreen, josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "dark_robo": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "dark_robo"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "A hostile robot.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "devidin": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "devidin",
-    "devidra",
-    "deviraptor"
-   ],
-   "stage": 1,
-   "shape": "landrace",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "devidra": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "devidin",
-    "devidra",
-    "deviraptor"
-   ],
-   "stage": 2,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "deviraptor": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "devidin",
-    "devidra",
-    "deviraptor"
-   ],
-   "stage": 3,
-   "shape": "dragon",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "dracune": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "venom",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "vamporm",
-    "dracune",
-    "fluttaflap"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "It is immobile during the day, but can wriggle and bite at night.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "dragarbor": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "chloragon",
-    "sapragon",
-    "dragarbor"
-   ],
-   "stage": 3,
-   "shape": "dragon",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "drokoro": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "drokoro"
-   ],
-   "stage": 1,
-   "shape": "dragon",
-   "catchRate": 5.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "duggot": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "venom"
-   ],
-   "evolutionLine": [
-    "duggot",
-    "breem"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "elofly": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal",
-    "sky"
-   ],
-   "evolutionLine": [
-    "elofly",
-    "elowind",
-    "elostorm"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "elostorm": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal",
-    "sky"
-   ],
-   "evolutionLine": [
-    "elofly",
-    "elowind",
-    "elostorm"
-   ],
-   "stage": 3,
-   "shape": "flier",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "elowind": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "normal"
-   ],
-   "evolutionLine": [
-    "elofly",
-    "elowind",
-    "elostorm"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "embazook": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "metal",
-    "fire"
-   ],
-   "evolutionLine": [
-    "ignibus",
-    "embazook",
-    "eruptibus"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "It is trained for use in war and it knows no other life.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "embra": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "embra",
-    "ruption"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "It eats everything it can to grow big enough to become a RUPTION.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "equill": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "shadow",
-    "normal"
-   ],
-   "evolutionLine": [
-    "hoarse",
-    "equill",
-    "hoarseshoo"
-   ],
-   "stage": 2,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "eruptibus": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "ignibus",
-    "embazook",
-    "eruptibus"
-   ],
-   "stage": 3,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "Smiths work with it, heating up metals in its caldera.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "eskipup": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "frost"
-   ],
-   "evolutionLine": [
-    "eskipup",
-    "houndice"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "Even as a puppy, it can pull 1 ton loads.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "exapode": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "chenipode",
-    "exapode"
-   ],
-   "stage": 2,
-   "shape": "grub",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "exclawvate": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "boltnu",
-    "exclawvate"
-   ],
-   "stage": 2,
-   "shape": "dragon",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "eyenemy": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "eyenemy",
-    "eyesore"
-   ],
-   "stage": 1,
-   "shape": "serpent",
-   "catchRate": 100.0,
-   "description": "It feeds on beautiful views and other spectacular sights.",
-   "attribution": {
-    "artists": "Cavalcadeur",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "eyesore": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "eyenemy",
-    "eyesore"
-   ],
-   "stage": 2,
-   "shape": "serpent",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Cavalcadeur, josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "firomenis": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "merlicun",
-    "firomenis"
-   ],
-   "stage": 2,
-   "shape": "dragon",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Princess-pheonix",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "flacono": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "flacono",
-    "corvix",
-    "gryfix"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "flambear": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "bursa",
-    "flambear"
-   ],
-   "stage": 2,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "flounce": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "flounce",
-    "knindling"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "flummack": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "flummby",
-    "flummack"
-   ],
-   "stage": 2,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "flummby": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "flummby",
-    "flummack"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "fluoresfin": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "lightning",
-    "water"
-   ],
-   "evolutionLine": [
-    "fluoresfin",
-    "incandesfin",
-    "lightmare"
-   ],
-   "stage": 1,
-   "shape": "piscine",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "fluttaflap": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "vamporm",
-    "dracune",
-    "fluttaflap"
-   ],
-   "stage": 3,
-   "shape": "grub",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "fordin": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "fordin",
-    "stegofor",
-    "brachifor"
-   ],
-   "stage": 1,
-   "shape": "leviathan",
-   "catchRate": 100.0,
-   "description": "When threatened, it curls into a ball and bounces away.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "forturtle": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "forturtle",
-    "prophetoise"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "It heats its shell to read the future from the cracks that emerge.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "foxfire": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "foxfire",
-    "vulpyre"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "foxko": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "wood"
-   ],
-   "evolutionLine": [
-    "foxko"
-   ],
-   "stage": 1,
-   "shape": "serpent",
-   "catchRate": 100.0,
-   "description": "A fusion of two tuxemon.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "frostuce": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "frost"
-   ],
-   "evolutionLine": [
-    "cohldrabi",
-    "lettice",
-    "frostuce"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "One rarely expects to see green waltzing around in a snowstorm.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "furnursus": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "furnursus",
-    "statursus",
-    "coaldiak"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "fuzzina": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic",
-    "normal"
-   ],
-   "evolutionLine": [
-    "fuzzlet",
-    "fuzzina"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "fuzzlet": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "cosmic",
-    "normal"
-   ],
-   "evolutionLine": [
-    "fuzzlet",
-    "fuzzina"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "galasces": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "nebufin",
-    "galasces",
-    "novaquarius"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "GALASCES can distort its shape to engulf prey its own size.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "gectile": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "anoleaf",
-    "gectile",
-    "velocitile"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "It is so quick and light that it can walk on leaves.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "golnagi": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "fire"
-   ],
-   "evolutionLine": [
-    "gupphish",
-    "gupphire",
-    "golnagi"
-   ],
-   "stage": 3,
-   "shape": "piscine",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "grimachin": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "grimachin",
-    "tigrock"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "It was made by a toy company to be a pet, but was too dangerous.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "grinflare": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "grintot",
-    "grinflare",
-    "grintrock"
-   ],
-   "stage": 2,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "It is said that each is the walking heart of a volcano.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "grintot": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "earth"
-   ],
-   "evolutionLine": [
-    "grintot",
-    "grinflare",
-    "grintrock"
-   ],
-   "stage": 1,
-   "shape": "brute",
-   "catchRate": 100.0,
-   "description": "It is a GRINTROCK or GRINFLARE that has experienced erosion.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "grintrock": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "earth"
-   ],
-   "evolutionLine": [
-    "grintot",
-    "grinflare",
-    "grintrock"
-   ],
-   "stage": 3,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "gryfix": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "flacono",
-    "corvix",
-    "gryfix"
-   ],
-   "stage": 3,
-   "shape": "flier",
-   "catchRate": 35.0,
-   "description": "Bone armor protects GRYFIX from all but the most powerful of attacks.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "gupphire": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "fire"
-   ],
-   "evolutionLine": [
-    "gupphish",
-    "gupphire",
-    "golnagi"
-   ],
-   "stage": 2,
-   "shape": "piscine",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "gupphish": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "fire"
-   ],
-   "evolutionLine": [
-    "gupphish",
-    "gupphire",
-    "golnagi"
-   ],
-   "stage": 1,
-   "shape": "piscine",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "hatchling": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "hatchling",
-    "birdling"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "helipi": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "sky"
-   ],
-   "evolutionLine": [
-    "helipi",
-    "coppi",
-    "parappi"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "hoarse": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "shadow",
-    "normal"
-   ],
-   "evolutionLine": [
-    "hoarse",
-    "equill",
-    "hoarseshoo"
-   ],
-   "stage": 1,
-   "shape": "landrace",
-   "catchRate": 100.0,
-   "description": "It appears to be a farm animal, but it was mistreated by its owner.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "hoarseshoo": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "venom",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "hoarse",
-    "equill",
-    "hoarseshoo"
-   ],
-   "stage": 3,
-   "shape": "blob",
-   "catchRate": 35.0,
-   "description": "It is what is left when an EQUILL's shadow eats its body.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "hoodoll": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "venom"
-   ],
-   "evolutionLine": [
-    "hoodoll",
-    "wolololl"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "houndice": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "frost"
-   ],
-   "evolutionLine": [
-    "eskipup",
-    "houndice"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "hydrone": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "water"
-   ],
-   "evolutionLine": [
-    "hydrone"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "It utilizes an experimental technology that creates power from water.",
-   "attribution": {
-    "artists": "josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "ignibus": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "ignibus",
-    "embazook",
-    "eruptibus"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "imbrickcile": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "imbrickcile",
-    "bricgard",
-    "brickhemoth"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "incandesfin": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "lightning",
-    "water"
-   ],
-   "evolutionLine": [
-    "fluoresfin",
-    "incandesfin",
-    "lightmare"
-   ],
-   "stage": 2,
-   "shape": "piscine",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "jelillow": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "jelillow",
-    "bedoo"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "jemuar": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "rockitten",
-    "rockat",
-    "jemuar"
-   ],
-   "stage": 3,
-   "shape": "hunter",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "knindling": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "flounce",
-    "knindling"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "Any spark from a stone KNINDLING happily tenders into a fire.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "komodraw": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "komodraw",
-    "komoduel"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "komoduel": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "komodraw",
-    "komoduel"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "kroki": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "kroki",
-    "krokivip",
-    "leviadile"
-   ],
-   "stage": 1,
-   "shape": "leviathan",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "krokivip": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "kroki",
-    "krokivip",
-    "leviadile"
-   ],
-   "stage": 2,
-   "shape": "leviathan",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "lambert": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "lambert",
-    "legko",
-    "moloch"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "legko": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "lambert",
-    "legko",
-    "moloch"
-   ],
-   "stage": 2,
-   "shape": "serpent",
-   "catchRate": 70.0,
-   "description": "Long thought to be legless, its leaves are actually vestigial limbs.",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "lesmagu": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "earth",
-    "venom"
-   ],
-   "evolutionLine": [
-    "lesmagu",
-    "shelagu",
-    "crustagu"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "lettice": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "frost"
-   ],
-   "evolutionLine": [
-    "cohldrabi",
-    "lettice",
-    "frostuce"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "Cold weather concentrates the power and vitality of LETTICE.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "leviadile": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "kroki",
-    "krokivip",
-    "leviadile"
-   ],
-   "stage": 3,
-   "shape": "leviathan",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "lightmare": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "lightning",
-    "water"
-   ],
-   "evolutionLine": [
-    "fluoresfin",
-    "incandesfin",
-    "lightmare"
-   ],
-   "stage": 3,
-   "shape": "leviathan",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "marvantis": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "normal"
-   ],
-   "evolutionLine": [
-    "marvillar",
-    "marvantis"
-   ],
-   "stage": 2,
-   "shape": "grub",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "marvillar": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "marvillar",
-    "marvantis"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "merlicun": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "cosmic",
-    "normal"
-   ],
-   "evolutionLine": [
-    "merlicun",
-    "firomenis"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Princess-pheonix",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "metesaur": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "metesaur",
-    "qetzlrokilus"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "mingdyn": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "sky"
-   ],
-   "evolutionLine": [
-    "mingdyn"
-   ],
-   "stage": 1,
-   "shape": "dragon",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "moloch": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "lambert",
-    "legko",
-    "moloch"
-   ],
-   "stage": 3,
-   "shape": "brute",
-   "catchRate": 35.0,
-   "description": "It can stiffen or soften its skin to respond to friends and foes.",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "myrmison": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "scarlant",
-    "shull",
-    "myrmison"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "narcileaf": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "shybulb",
-    "narcileaf"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "nebufin": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "nebufin",
-    "galasces",
-    "novaquarius"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "nimbulex": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "sky"
-   ],
-   "evolutionLine": [
-    "bumbulus",
-    "nimbulex"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "ninjasmine": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "venom"
-   ],
-   "evolutionLine": [
-    "rosarin",
-    "toxiris",
-    "ninjasmine"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "NINJASMINE poisons his opponents quickly using his two poison swords.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "noctalo": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "noctula",
-    "noctalo"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "noctula": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "noctula",
-    "noctalo"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "nostray": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "nostray",
-    "shnark"
-   ],
-   "stage": 1,
-   "shape": "piscine",
-   "catchRate": 100.0,
-   "description": "It can smell anything in the ocean, no matter how far away.",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "novaquarius": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "nebufin",
-    "galasces",
-    "novaquarius"
-   ],
-   "stage": 3,
-   "shape": "polliwog",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "nudiflot_female": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "nudiflot_female",
-    "nudimind"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "nudiflot_male": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "nudiflot_male",
-    "nudikill"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Sanglorian",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "nudikill": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "venom"
-   ],
-   "evolutionLine": [
-    "nudiflot_male",
-    "nudikill"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "nudimind": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "nudiflot_female",
-    "nudimind"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "It dreams of oceans under other skies.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "nut": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "nut",
-    "bolt",
-    "arthrobolt"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "TacoBot",
-    "license": "Public Domain",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "octabode": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "earth",
-    "normal"
-   ],
-   "evolutionLine": [
-    "skwib",
-    "octabode"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "ouroboutlet": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "metal"
-   ],
-   "evolutionLine": [
-    "pythwire",
-    "ouroboutlet",
-    "sockeserp"
-   ],
-   "stage": 2,
-   "shape": "serpent",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pairagrim": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "pairagrin",
-    "pairagrim"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pairagrin": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky"
-   ],
-   "evolutionLine": [
-    "pairagrin",
-    "pairagrim"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pantherafira": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "normal"
-   ],
-   "evolutionLine": [
-    "pantherafira",
-    "criniotherme"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "parappi": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "sky"
-   ],
-   "evolutionLine": [
-    "helipi",
-    "coppi",
-    "parappi"
-   ],
-   "stage": 3,
-   "shape": "blob",
-   "catchRate": 35.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pickoon": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "pickoon",
-    "raccscal"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pigabyte": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "normal"
-   ],
-   "evolutionLine": [
-    "pigabyte"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "Scientists found that the best computers have organic implants.",
-   "attribution": {
-    "artists": "josepharaoh99",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "pipis": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "normal"
-   ],
-   "evolutionLine": [
-    "pipis",
-    "strella"
-   ],
-   "stage": 1,
-   "shape": "flier",
-   "catchRate": 100.0,
-   "description": "Its cries are considered a bad omen, but it is a gentle creature.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "possessun": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "shadow"
-   ],
-   "evolutionLine": [
-    "cairfrey",
-    "possessun"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "It is a ghost that inhabits a dead CAIRFREY.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "potturmeist": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "potturmeist",
-    "potturney"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "potturney": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "potturmeist",
-    "potturney"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "primordia": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "frost"
-   ],
-   "evolutionLine": [
-    "primordia"
-   ],
-   "stage": 1,
-   "shape": "blob",
-   "catchRate": 100.0,
-   "description": "It is rumored to be the ancestor of all tuxemon.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "prophetoise": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "forturtle",
-    "prophetoise"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "Its heavenly fire is something foes rarely see coming.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "puparmor": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "venom"
-   ],
-   "evolutionLine": [
-    "cataspike",
-    "puparmor",
-    "weavifly"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "pythwire": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "metal"
-   ],
-   "evolutionLine": [
-    "pythwire",
-    "ouroboutlet",
-    "sockeserp"
-   ],
-   "stage": 1,
-   "shape": "serpent",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "qetzlrokilus": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "earth",
-    "fire"
-   ],
-   "evolutionLine": [
-    "metesaur",
-    "qetzlrokilus"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "raccscal": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "pickoon",
-    "raccscal"
-   ],
-   "stage": 2,
-   "shape": "varmint",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "regalance": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth"
-   ],
-   "evolutionLine": [
-    "claymorior",
-    "regalance"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "It can summon a halberd whenever it needs.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "rockat": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth"
-   ],
-   "evolutionLine": [
-    "rockitten",
-    "rockat",
-    "jemuar"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "Despite its considerable weight, its footfalls are silent.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "rockitten": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth"
-   ],
-   "evolutionLine": [
-    "rockitten",
-    "rockat",
-    "jemuar"
-   ],
-   "stage": 1,
-   "shape": "hunter",
-   "catchRate": 100.0,
-   "description": "It uses its tiny rock ears for snuggling.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "rosarin": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "rosarin",
-    "toxiris",
-    "ninjasmine"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "ROSARIN's love is incredible, he's only asking some affection.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "ruption": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "embra",
-    "ruption"
-   ],
-   "stage": 2,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "sapragon": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "chloragon",
-    "sapragon",
-    "dragarbor"
-   ],
-   "stage": 2,
-   "shape": "dragon",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "scarlant": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "scarlant",
-    "shull",
-    "myrmison"
-   ],
-   "stage": 1,
-   "shape": "varmint",
-   "catchRate": 100.0,
-   "description": "Its worst enemy is MARVILLAR, which pretends to be its kin.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "selket": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "venom"
-   ],
-   "evolutionLine": [
-    "selket",
-    "selmatek"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "selmatek": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "venom"
-   ],
-   "evolutionLine": [
-    "selket",
-    "selmatek"
-   ],
-   "stage": 2,
-   "shape": "grub",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "artists": "Catch Challenger",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "shelagu": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "earth",
-    "venom"
-   ],
-   "evolutionLine": [
-    "lesmagu",
-    "shelagu",
-    "crustagu"
-   ],
-   "stage": 2,
-   "shape": "polliwog",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "shnark": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "water"
-   ],
-   "evolutionLine": [
-    "nostray",
-    "shnark"
-   ],
-   "stage": 2,
-   "shape": "piscine",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "shull": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "earth",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "scarlant",
-    "shull",
-    "myrmison"
-   ],
-   "stage": 2,
-   "shape": "blob",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "shybulb": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "shybulb",
-    "narcileaf"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "skwib": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "skwib",
-    "octabode"
-   ],
-   "stage": 1,
-   "shape": "polliwog",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "snaki": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "snaki",
-    "snokari"
-   ],
-   "stage": 1,
-   "shape": "serpent",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "snokari": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "normal"
-   ],
-   "evolutionLine": [
-    "snaki",
-    "snokari"
-   ],
-   "stage": 2,
-   "shape": "serpent",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "snowrilla": {
-   "ourTypeProposed": "water",
-   "tuxemonTypes": [
-    "frost",
-    "heroic"
-   ],
-   "evolutionLine": [
-    "chillimp",
-    "snowrilla"
-   ],
-   "stage": 2,
-   "shape": "brute",
-   "catchRate": 70.0,
-   "description": "It delights in playing tag with skiers on desolate slopes.",
-   "attribution": {
-    "artists": "Chickenshowman",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "sockeserp": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "metal"
-   ],
-   "evolutionLine": [
-    "pythwire",
-    "ouroboutlet",
-    "sockeserp"
-   ],
-   "stage": 3,
-   "shape": "serpent",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "solight": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "solight"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "sphake": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "sprorm",
-    "sphake"
-   ],
-   "stage": 2,
-   "shape": "sprite",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "sprorm": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "sprorm",
-    "sphake"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "SPRORM is fed on by CARDINALE, which can melt it down.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "statursus": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "furnursus",
-    "statursus",
-    "coaldiak"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "stegofor": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "fordin",
-    "stegofor",
-    "brachifor"
-   ],
-   "stage": 2,
-   "shape": "landrace",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "strella": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "sky",
-    "normal"
-   ],
-   "evolutionLine": [
-    "pipis",
-    "strella"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "Its tails are lures to convince bugs to bite them and be trapped.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "tetrchimp": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "lightning",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "tetrchimp",
-    "apeoro"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "thumpurn": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "normal"
-   ],
-   "evolutionLine": [
-    "thumpurn",
-    "volconey"
-   ],
-   "stage": 1,
-   "shape": "brute",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "tigrock": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "grimachin",
-    "tigrock"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "toxiris": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "venom"
-   ],
-   "evolutionLine": [
-    "rosarin",
-    "toxiris",
-    "ninjasmine"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "trojerror": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "virware",
-    "trojerror"
-   ],
-   "stage": 2,
-   "shape": "sprite",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "tumblebee": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "venom"
-   ],
-   "evolutionLine": [
-    "tumbleworm",
-    "tumblebee"
-   ],
-   "stage": 2,
-   "shape": "flier",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "tumbleworm": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "venom"
-   ],
-   "evolutionLine": [
-    "tumbleworm",
-    "tumblebee"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "artists": "tamashihoshi",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "vamporm": {
-   "ourTypeProposed": "normal",
-   "tuxemonTypes": [
-    "venom",
-    "shadow"
-   ],
-   "evolutionLine": [
-    "vamporm",
-    "dracune",
-    "fluttaflap"
-   ],
-   "stage": 1,
-   "shape": "grub",
-   "catchRate": 100.0,
-   "description": "It thirsts for blood, but must make do with tree sap.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "velocitile": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "anoleaf",
-    "gectile",
-    "velocitile"
-   ],
-   "stage": 3,
-   "shape": "humanoid",
-   "catchRate": 35.0,
-   "description": "It can outrun a bullet, but only when it has warmed up.",
-   "attribution": {
-    "artists": "Spalding004",
-    "license": "CC BY-SA 4.0",
-    "source": "Tuxemon ATTRIBUTIONS.md",
-    "status": "verified"
-   }
-  },
-  "virware": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "cosmic"
-   ],
-   "evolutionLine": [
-    "virware",
-    "trojerror"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "volconey": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire",
-    "normal"
-   ],
-   "evolutionLine": [
-    "thumpurn",
-    "volconey"
-   ],
-   "stage": 2,
-   "shape": "varmint",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "vulpyre": {
-   "ourTypeProposed": "fire",
-   "tuxemonTypes": [
-    "fire"
-   ],
-   "evolutionLine": [
-    "foxfire",
-    "vulpyre"
-   ],
-   "stage": 2,
-   "shape": "hunter",
-   "catchRate": 70.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "weavifly": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal",
-    "sky"
-   ],
-   "evolutionLine": [
-    "cataspike",
-    "puparmor",
-    "weavifly"
-   ],
-   "stage": 3,
-   "shape": "grub",
-   "catchRate": 35.0,
-   "description": "When it is heavy with egg, it becomes unable to fly.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "wolololl": {
-   "ourTypeProposed": "grass",
-   "tuxemonTypes": [
-    "wood",
-    "venom"
-   ],
-   "evolutionLine": [
-    "hoodoll",
-    "wolololl"
-   ],
-   "stage": 2,
-   "shape": "humanoid",
-   "catchRate": 70.0,
-   "description": "WOLOLOLL's sharp spines are tipped with a deadly venom.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "woodoor": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "wood"
-   ],
-   "evolutionLine": [
-    "woodoor",
-    "blasdoor"
-   ],
-   "stage": 1,
-   "shape": "sprite",
-   "catchRate": 100.0,
-   "description": "",
-   "attribution": {
-    "status": "pending-wiki"
-   }
-  },
-  "xeon": {
-   "ourTypeProposed": "metal",
-   "tuxemonTypes": [
-    "metal"
-   ],
-   "evolutionLine": [
-    "xeon"
-   ],
-   "stage": 1,
-   "shape": "humanoid",
-   "catchRate": 100.0,
-   "description": "A hostile robot.",
-   "attribution": {
-    "status": "pending-wiki"
-   }
+  "_about": [
+    "Wild-encounter roster reference data - generated 2026-07-06 from the pinned",
+    "Tuxemon clone (commit c34a9c72) + CONTENT_REFERENCE.md section 16. NOT loaded by the",
+    "game. ourTypeProposed uses section 16's remap table, which is still [TO CONFIRM]",
+    "with Lewis. descriptions are Tuxemon project text (CC, credit Tuxemon).",
+    "attribution.status=pending-wiki means: run fetch-wiki-credits.mjs (see tools/).",
+    "Player-facing names come from Lewis's rename pass, area by area - slugs are",
+    "working IDs only."
+  ],
+  "monsters": {
+    "aardart": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "aardorn",
+        "aardart"
+      ],
+      "stage": 2,
+      "shape": "varmint",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Magic-Purple-Hermit",
+        "license": "CC BY-SA 3.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "aardorn": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "aardorn",
+        "aardart"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "When born it is placed in an anthill and left to eat its way out.",
+      "attribution": {
+        "artists": "Magic-Purple-Hermit",
+        "license": "CC BY-SA 3.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "agnsher": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "water"
+      ],
+      "evolutionLine": [
+        "agnsher"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "A fusion of two tuxemon.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "ampystoma": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "lightning",
+        "water"
+      ],
+      "evolutionLine": [
+        "axolightl",
+        "ampystoma"
+      ],
+      "stage": 2,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "anoleaf": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "anoleaf",
+        "gectile",
+        "velocitile"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "apeoro": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "tetrchimp",
+        "apeoro"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "arthrobolt": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "metal"
+      ],
+      "evolutionLine": [
+        "nut",
+        "bolt",
+        "arthrobolt"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "artists": "josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "axolightl": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "axolightl",
+        "ampystoma"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Cavalcadeur, josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "babysnitch": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "shadow",
+        "normal"
+      ],
+      "evolutionLine": [
+        "babysnitch",
+        "baddrscratch"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "baddrscratch": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "babysnitch",
+        "baddrscratch"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "baobaraffe": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "baoby",
+        "baobaraffe"
+      ],
+      "stage": 2,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "baoby": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "baoby",
+        "baobaraffe"
+      ],
+      "stage": 1,
+      "shape": "landrace",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bedoo": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "jelillow",
+        "bedoo"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bewhich": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "shadow",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "cackleen",
+        "brumi",
+        "bewhich"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "birdee": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal",
+        "sky"
+      ],
+      "evolutionLine": [
+        "chickadee",
+        "birdee"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "birdling": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "hatchling",
+        "birdling"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "blasdoor": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "woodoor",
+        "blasdoor"
+      ],
+      "stage": 2,
+      "shape": "sprite",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bolt": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "nut",
+        "bolt",
+        "arthrobolt"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "TacoBot",
+        "license": "Public Domain",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "boltnu": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "boltnu",
+        "exclawvate"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "brachifor": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "fordin",
+        "stegofor",
+        "brachifor"
+      ],
+      "stage": 3,
+      "shape": "landrace",
+      "catchRate": 35,
+      "description": "BRACHIFOR can go without eating if it stays perfectly still.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "breem": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "venom"
+      ],
+      "evolutionLine": [
+        "duggot",
+        "breem"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bricgard": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "imbrickcile",
+        "bricgard",
+        "brickhemoth"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "brickhemoth": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "imbrickcile",
+        "bricgard",
+        "brickhemoth"
+      ],
+      "stage": 3,
+      "shape": "brute",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "brumi": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "shadow",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "cackleen",
+        "brumi",
+        "bewhich"
+      ],
+      "stage": 2,
+      "shape": "sprite",
+      "catchRate": 70,
+      "description": "Neglected brooms may be stolen by BRUMI. ",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bumbulus": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "bumbulus",
+        "nimbulex"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "burrlock": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "burrlock",
+        "cacaburr"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "bursa": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "bursa",
+        "flambear"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "It rejects fire as basic, and produces only the fire of the mind.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "cacaburr": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "burrlock",
+        "cacaburr"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "cackleen": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "shadow",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "cackleen",
+        "brumi",
+        "bewhich"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "cairfrey": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "cairfrey",
+        "possessun"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "caper": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "frost",
+        "normal"
+      ],
+      "evolutionLine": [
+        "caper",
+        "crankus"
+      ],
+      "stage": 1,
+      "shape": "landrace",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "capinyah": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "heroic"
+      ],
+      "evolutionLine": [
+        "capiti",
+        "capinyah"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "capiti": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "capiti",
+        "capinyah"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "cardiling": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "sky"
+      ],
+      "evolutionLine": [
+        "cardiling",
+        "cardiwing",
+        "cardinale"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "One wouldn't expect it to breathe fire, until it does.",
+      "attribution": {
+        "artists": "Spalding004, Kyu",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "cardinale": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "sky"
+      ],
+      "evolutionLine": [
+        "cardiling",
+        "cardiwing",
+        "cardinale"
+      ],
+      "stage": 3,
+      "shape": "flier",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "cardiwing": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "sky"
+      ],
+      "evolutionLine": [
+        "cardiling",
+        "cardiwing",
+        "cardinale"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "Its song is remarkable, but few dare keep an explosive songbird.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "cataspike": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "venom"
+      ],
+      "evolutionLine": [
+        "cataspike",
+        "puparmor",
+        "weavifly"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "chenipode": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "chenipode",
+        "exapode"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "It bites onto shoelaces and trouser legs when it wants to travel.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "chickadee": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal",
+        "sky"
+      ],
+      "evolutionLine": [
+        "chickadee",
+        "birdee"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "chillimp": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "frost",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "chillimp",
+        "snowrilla"
+      ],
+      "stage": 1,
+      "shape": "brute",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Chickenshowman",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "chloragon": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "chloragon",
+        "sapragon",
+        "dragarbor"
+      ],
+      "stage": 1,
+      "shape": "dragon",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "chrome_robo": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "chrome_robo"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "A hostile robot.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "claymorior": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "claymorior",
+        "regalance"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "coaldiak": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "normal"
+      ],
+      "evolutionLine": [
+        "furnursus",
+        "statursus",
+        "coaldiak"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "This bear can set fire to anywhere and draw blood from anything.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "cohldrabi": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "frost"
+      ],
+      "evolutionLine": [
+        "cohldrabi",
+        "lettice",
+        "frostuce"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "coppi": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "sky"
+      ],
+      "evolutionLine": [
+        "helipi",
+        "coppi",
+        "parappi"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "corvix": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "flacono",
+        "corvix",
+        "gryfix"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "It arms its wings with bone shards from its victims.",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "crankus": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "frost",
+        "normal"
+      ],
+      "evolutionLine": [
+        "caper",
+        "crankus"
+      ],
+      "stage": 2,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "criniotherme": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "normal"
+      ],
+      "evolutionLine": [
+        "pantherafira",
+        "criniotherme"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "crustagu": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "lesmagu",
+        "shelagu",
+        "crustagu"
+      ],
+      "stage": 3,
+      "shape": "polliwog",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "dandicub": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "dandicub",
+        "dandylion"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "dandylion": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "dandicub",
+        "dandylion"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Leo, ProfessorGreen, josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "dark_robo": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "dark_robo"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "A hostile robot.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "devidin": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "devidin",
+        "devidra",
+        "deviraptor"
+      ],
+      "stage": 1,
+      "shape": "landrace",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "devidra": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "devidin",
+        "devidra",
+        "deviraptor"
+      ],
+      "stage": 2,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "deviraptor": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "devidin",
+        "devidra",
+        "deviraptor"
+      ],
+      "stage": 3,
+      "shape": "dragon",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "dracune": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "venom",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "vamporm",
+        "dracune",
+        "fluttaflap"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "It is immobile during the day, but can wriggle and bite at night.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "dragarbor": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "chloragon",
+        "sapragon",
+        "dragarbor"
+      ],
+      "stage": 3,
+      "shape": "dragon",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "drokoro": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "drokoro"
+      ],
+      "stage": 1,
+      "shape": "dragon",
+      "catchRate": 5,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "duggot": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "venom"
+      ],
+      "evolutionLine": [
+        "duggot",
+        "breem"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "elofly": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal",
+        "sky"
+      ],
+      "evolutionLine": [
+        "elofly",
+        "elowind",
+        "elostorm"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "elostorm": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal",
+        "sky"
+      ],
+      "evolutionLine": [
+        "elofly",
+        "elowind",
+        "elostorm"
+      ],
+      "stage": 3,
+      "shape": "flier",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "elowind": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "normal"
+      ],
+      "evolutionLine": [
+        "elofly",
+        "elowind",
+        "elostorm"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "embazook": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "metal",
+        "fire"
+      ],
+      "evolutionLine": [
+        "ignibus",
+        "embazook",
+        "eruptibus"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "It is trained for use in war and it knows no other life.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "embra": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "embra",
+        "ruption"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "It eats everything it can to grow big enough to become a RUPTION.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "equill": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "shadow",
+        "normal"
+      ],
+      "evolutionLine": [
+        "hoarse",
+        "equill",
+        "hoarseshoo"
+      ],
+      "stage": 2,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "eruptibus": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "ignibus",
+        "embazook",
+        "eruptibus"
+      ],
+      "stage": 3,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "Smiths work with it, heating up metals in its caldera.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "eskipup": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "frost"
+      ],
+      "evolutionLine": [
+        "eskipup",
+        "houndice"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "Even as a puppy, it can pull 1 ton loads.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "exapode": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "chenipode",
+        "exapode"
+      ],
+      "stage": 2,
+      "shape": "grub",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "exclawvate": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "boltnu",
+        "exclawvate"
+      ],
+      "stage": 2,
+      "shape": "dragon",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "eyenemy": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "eyenemy",
+        "eyesore"
+      ],
+      "stage": 1,
+      "shape": "serpent",
+      "catchRate": 100,
+      "description": "It feeds on beautiful views and other spectacular sights.",
+      "attribution": {
+        "artists": "Cavalcadeur",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "eyesore": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "eyenemy",
+        "eyesore"
+      ],
+      "stage": 2,
+      "shape": "serpent",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Cavalcadeur, josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "firomenis": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "merlicun",
+        "firomenis"
+      ],
+      "stage": 2,
+      "shape": "dragon",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Princess-pheonix",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "flacono": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "flacono",
+        "corvix",
+        "gryfix"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "flambear": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "bursa",
+        "flambear"
+      ],
+      "stage": 2,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "flounce": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "flounce",
+        "knindling"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "flummack": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "flummby",
+        "flummack"
+      ],
+      "stage": 2,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "flummby": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "flummby",
+        "flummack"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "fluoresfin": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "lightning",
+        "water"
+      ],
+      "evolutionLine": [
+        "fluoresfin",
+        "incandesfin",
+        "lightmare"
+      ],
+      "stage": 1,
+      "shape": "piscine",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "fluttaflap": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "vamporm",
+        "dracune",
+        "fluttaflap"
+      ],
+      "stage": 3,
+      "shape": "grub",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "fordin": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "fordin",
+        "stegofor",
+        "brachifor"
+      ],
+      "stage": 1,
+      "shape": "leviathan",
+      "catchRate": 100,
+      "description": "When threatened, it curls into a ball and bounces away.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "forturtle": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "forturtle",
+        "prophetoise"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "It heats its shell to read the future from the cracks that emerge.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "foxfire": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "foxfire",
+        "vulpyre"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "frostuce": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "frost"
+      ],
+      "evolutionLine": [
+        "cohldrabi",
+        "lettice",
+        "frostuce"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "One rarely expects to see green waltzing around in a snowstorm.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "furnursus": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "furnursus",
+        "statursus",
+        "coaldiak"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "fuzzina": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic",
+        "normal"
+      ],
+      "evolutionLine": [
+        "fuzzlet",
+        "fuzzina"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "fuzzlet": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "cosmic",
+        "normal"
+      ],
+      "evolutionLine": [
+        "fuzzlet",
+        "fuzzina"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "galasces": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "nebufin",
+        "galasces",
+        "novaquarius"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "GALASCES can distort its shape to engulf prey its own size.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "gectile": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "anoleaf",
+        "gectile",
+        "velocitile"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "It is so quick and light that it can walk on leaves.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "golnagi": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "fire"
+      ],
+      "evolutionLine": [
+        "gupphish",
+        "gupphire",
+        "golnagi"
+      ],
+      "stage": 3,
+      "shape": "piscine",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "grimachin": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "grimachin",
+        "tigrock"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "It was made by a toy company to be a pet, but was too dangerous.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "grinflare": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "grintot",
+        "grinflare",
+        "grintrock"
+      ],
+      "stage": 2,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "It is said that each is the walking heart of a volcano.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "grintot": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "earth"
+      ],
+      "evolutionLine": [
+        "grintot",
+        "grinflare",
+        "grintrock"
+      ],
+      "stage": 1,
+      "shape": "brute",
+      "catchRate": 100,
+      "description": "It is a GRINTROCK or GRINFLARE that has experienced erosion.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "grintrock": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "earth"
+      ],
+      "evolutionLine": [
+        "grintot",
+        "grinflare",
+        "grintrock"
+      ],
+      "stage": 3,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "gryfix": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "flacono",
+        "corvix",
+        "gryfix"
+      ],
+      "stage": 3,
+      "shape": "flier",
+      "catchRate": 35,
+      "description": "Bone armor protects GRYFIX from all but the most powerful of attacks.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "gupphire": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "fire"
+      ],
+      "evolutionLine": [
+        "gupphish",
+        "gupphire",
+        "golnagi"
+      ],
+      "stage": 2,
+      "shape": "piscine",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "gupphish": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "fire"
+      ],
+      "evolutionLine": [
+        "gupphish",
+        "gupphire",
+        "golnagi"
+      ],
+      "stage": 1,
+      "shape": "piscine",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "hatchling": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "hatchling",
+        "birdling"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "helipi": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "sky"
+      ],
+      "evolutionLine": [
+        "helipi",
+        "coppi",
+        "parappi"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "hoarse": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "shadow",
+        "normal"
+      ],
+      "evolutionLine": [
+        "hoarse",
+        "equill",
+        "hoarseshoo"
+      ],
+      "stage": 1,
+      "shape": "landrace",
+      "catchRate": 100,
+      "description": "It appears to be a farm animal, but it was mistreated by its owner.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "hoarseshoo": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "venom",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "hoarse",
+        "equill",
+        "hoarseshoo"
+      ],
+      "stage": 3,
+      "shape": "blob",
+      "catchRate": 35,
+      "description": "It is what is left when an EQUILL's shadow eats its body.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "hoodoll": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "venom"
+      ],
+      "evolutionLine": [
+        "hoodoll",
+        "wolololl"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "houndice": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "frost"
+      ],
+      "evolutionLine": [
+        "eskipup",
+        "houndice"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "hydrone": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "water"
+      ],
+      "evolutionLine": [
+        "hydrone"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "It utilizes an experimental technology that creates power from water.",
+      "attribution": {
+        "artists": "josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "ignibus": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "ignibus",
+        "embazook",
+        "eruptibus"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "imbrickcile": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "imbrickcile",
+        "bricgard",
+        "brickhemoth"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "incandesfin": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "lightning",
+        "water"
+      ],
+      "evolutionLine": [
+        "fluoresfin",
+        "incandesfin",
+        "lightmare"
+      ],
+      "stage": 2,
+      "shape": "piscine",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "jelillow": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "jelillow",
+        "bedoo"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "jemuar": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "rockitten",
+        "rockat",
+        "jemuar"
+      ],
+      "stage": 3,
+      "shape": "hunter",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "knindling": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "flounce",
+        "knindling"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "Any spark from a stone KNINDLING happily tenders into a fire.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "komodraw": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "komodraw",
+        "komoduel"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "komoduel": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "komodraw",
+        "komoduel"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "kroki": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "kroki",
+        "krokivip",
+        "leviadile"
+      ],
+      "stage": 1,
+      "shape": "leviathan",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "krokivip": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "kroki",
+        "krokivip",
+        "leviadile"
+      ],
+      "stage": 2,
+      "shape": "leviathan",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "lambert": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "lambert",
+        "legko",
+        "moloch"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "legko": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "lambert",
+        "legko",
+        "moloch"
+      ],
+      "stage": 2,
+      "shape": "serpent",
+      "catchRate": 70,
+      "description": "Long thought to be legless, its leaves are actually vestigial limbs.",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "lesmagu": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "earth",
+        "venom"
+      ],
+      "evolutionLine": [
+        "lesmagu",
+        "shelagu",
+        "crustagu"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "lettice": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "frost"
+      ],
+      "evolutionLine": [
+        "cohldrabi",
+        "lettice",
+        "frostuce"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "Cold weather concentrates the power and vitality of LETTICE.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "leviadile": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "kroki",
+        "krokivip",
+        "leviadile"
+      ],
+      "stage": 3,
+      "shape": "leviathan",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "lightmare": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "lightning",
+        "water"
+      ],
+      "evolutionLine": [
+        "fluoresfin",
+        "incandesfin",
+        "lightmare"
+      ],
+      "stage": 3,
+      "shape": "leviathan",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "marvantis": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "normal"
+      ],
+      "evolutionLine": [
+        "marvillar",
+        "marvantis"
+      ],
+      "stage": 2,
+      "shape": "grub",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "marvillar": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "marvillar",
+        "marvantis"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "merlicun": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "cosmic",
+        "normal"
+      ],
+      "evolutionLine": [
+        "merlicun",
+        "firomenis"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Princess-pheonix",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "metesaur": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "metesaur",
+        "qetzlrokilus"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "mingdyn": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "sky"
+      ],
+      "evolutionLine": [
+        "mingdyn"
+      ],
+      "stage": 1,
+      "shape": "dragon",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "moloch": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "lambert",
+        "legko",
+        "moloch"
+      ],
+      "stage": 3,
+      "shape": "brute",
+      "catchRate": 35,
+      "description": "It can stiffen or soften its skin to respond to friends and foes.",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "myrmison": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "scarlant",
+        "shull",
+        "myrmison"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "narcileaf": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "shybulb",
+        "narcileaf"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "nebufin": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "nebufin",
+        "galasces",
+        "novaquarius"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "nimbulex": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "sky"
+      ],
+      "evolutionLine": [
+        "bumbulus",
+        "nimbulex"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "ninjasmine": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "venom"
+      ],
+      "evolutionLine": [
+        "rosarin",
+        "toxiris",
+        "ninjasmine"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "NINJASMINE poisons his opponents quickly using his two poison swords.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "noctalo": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "noctula",
+        "noctalo"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "noctula": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "noctula",
+        "noctalo"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "nostray": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "nostray",
+        "shnark"
+      ],
+      "stage": 1,
+      "shape": "piscine",
+      "catchRate": 100,
+      "description": "It can smell anything in the ocean, no matter how far away.",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "novaquarius": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "nebufin",
+        "galasces",
+        "novaquarius"
+      ],
+      "stage": 3,
+      "shape": "polliwog",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "nudiflot_female": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "nudiflot_female",
+        "nudimind"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "nudiflot_male": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "nudiflot_male",
+        "nudikill"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Sanglorian",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "nudikill": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "venom"
+      ],
+      "evolutionLine": [
+        "nudiflot_male",
+        "nudikill"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "nudimind": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "nudiflot_female",
+        "nudimind"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "It dreams of oceans under other skies.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "nut": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "nut",
+        "bolt",
+        "arthrobolt"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "TacoBot",
+        "license": "Public Domain",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "octabode": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "earth",
+        "normal"
+      ],
+      "evolutionLine": [
+        "skwib",
+        "octabode"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "ouroboutlet": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "metal"
+      ],
+      "evolutionLine": [
+        "pythwire",
+        "ouroboutlet",
+        "sockeserp"
+      ],
+      "stage": 2,
+      "shape": "serpent",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pairagrim": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "pairagrin",
+        "pairagrim"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pairagrin": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky"
+      ],
+      "evolutionLine": [
+        "pairagrin",
+        "pairagrim"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pantherafira": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "normal"
+      ],
+      "evolutionLine": [
+        "pantherafira",
+        "criniotherme"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "parappi": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "sky"
+      ],
+      "evolutionLine": [
+        "helipi",
+        "coppi",
+        "parappi"
+      ],
+      "stage": 3,
+      "shape": "blob",
+      "catchRate": 35,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pickoon": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "pickoon",
+        "raccscal"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pigabyte": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "normal"
+      ],
+      "evolutionLine": [
+        "pigabyte"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "Scientists found that the best computers have organic implants.",
+      "attribution": {
+        "artists": "josepharaoh99",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "pipis": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "normal"
+      ],
+      "evolutionLine": [
+        "pipis",
+        "strella"
+      ],
+      "stage": 1,
+      "shape": "flier",
+      "catchRate": 100,
+      "description": "Its cries are considered a bad omen, but it is a gentle creature.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "possessun": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "shadow"
+      ],
+      "evolutionLine": [
+        "cairfrey",
+        "possessun"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "It is a ghost that inhabits a dead CAIRFREY.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "potturmeist": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "potturmeist",
+        "potturney"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "potturney": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "potturmeist",
+        "potturney"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "primordia": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "frost"
+      ],
+      "evolutionLine": [
+        "primordia"
+      ],
+      "stage": 1,
+      "shape": "blob",
+      "catchRate": 100,
+      "description": "It is rumored to be the ancestor of all tuxemon.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "prophetoise": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "forturtle",
+        "prophetoise"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "Its heavenly fire is something foes rarely see coming.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "puparmor": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "venom"
+      ],
+      "evolutionLine": [
+        "cataspike",
+        "puparmor",
+        "weavifly"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "pythwire": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "metal"
+      ],
+      "evolutionLine": [
+        "pythwire",
+        "ouroboutlet",
+        "sockeserp"
+      ],
+      "stage": 1,
+      "shape": "serpent",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "qetzlrokilus": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "earth",
+        "fire"
+      ],
+      "evolutionLine": [
+        "metesaur",
+        "qetzlrokilus"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "raccscal": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "pickoon",
+        "raccscal"
+      ],
+      "stage": 2,
+      "shape": "varmint",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "regalance": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth"
+      ],
+      "evolutionLine": [
+        "claymorior",
+        "regalance"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "It can summon a halberd whenever it needs.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "rockat": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth"
+      ],
+      "evolutionLine": [
+        "rockitten",
+        "rockat",
+        "jemuar"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "Despite its considerable weight, its footfalls are silent.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "rockitten": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth"
+      ],
+      "evolutionLine": [
+        "rockitten",
+        "rockat",
+        "jemuar"
+      ],
+      "stage": 1,
+      "shape": "hunter",
+      "catchRate": 100,
+      "description": "It uses its tiny rock ears for snuggling.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "rosarin": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "rosarin",
+        "toxiris",
+        "ninjasmine"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "ROSARIN's love is incredible, he's only asking some affection.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "ruption": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "embra",
+        "ruption"
+      ],
+      "stage": 2,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "sapragon": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "chloragon",
+        "sapragon",
+        "dragarbor"
+      ],
+      "stage": 2,
+      "shape": "dragon",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "scarlant": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "scarlant",
+        "shull",
+        "myrmison"
+      ],
+      "stage": 1,
+      "shape": "varmint",
+      "catchRate": 100,
+      "description": "Its worst enemy is MARVILLAR, which pretends to be its kin.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "selket": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "venom"
+      ],
+      "evolutionLine": [
+        "selket",
+        "selmatek"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "selmatek": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "venom"
+      ],
+      "evolutionLine": [
+        "selket",
+        "selmatek"
+      ],
+      "stage": 2,
+      "shape": "grub",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "artists": "Catch Challenger",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "shelagu": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "earth",
+        "venom"
+      ],
+      "evolutionLine": [
+        "lesmagu",
+        "shelagu",
+        "crustagu"
+      ],
+      "stage": 2,
+      "shape": "polliwog",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "shnark": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "water"
+      ],
+      "evolutionLine": [
+        "nostray",
+        "shnark"
+      ],
+      "stage": 2,
+      "shape": "piscine",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "shull": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "earth",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "scarlant",
+        "shull",
+        "myrmison"
+      ],
+      "stage": 2,
+      "shape": "blob",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "shybulb": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "shybulb",
+        "narcileaf"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "skwib": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "skwib",
+        "octabode"
+      ],
+      "stage": 1,
+      "shape": "polliwog",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "snaki": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "snaki",
+        "snokari"
+      ],
+      "stage": 1,
+      "shape": "serpent",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "snokari": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "normal"
+      ],
+      "evolutionLine": [
+        "snaki",
+        "snokari"
+      ],
+      "stage": 2,
+      "shape": "serpent",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "snowrilla": {
+      "ourTypeProposed": "water",
+      "tuxemonTypes": [
+        "frost",
+        "heroic"
+      ],
+      "evolutionLine": [
+        "chillimp",
+        "snowrilla"
+      ],
+      "stage": 2,
+      "shape": "brute",
+      "catchRate": 70,
+      "description": "It delights in playing tag with skiers on desolate slopes.",
+      "attribution": {
+        "artists": "Chickenshowman",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "sockeserp": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "metal"
+      ],
+      "evolutionLine": [
+        "pythwire",
+        "ouroboutlet",
+        "sockeserp"
+      ],
+      "stage": 3,
+      "shape": "serpent",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "solight": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "solight"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "sphake": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "sprorm",
+        "sphake"
+      ],
+      "stage": 2,
+      "shape": "sprite",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "sprorm": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "sprorm",
+        "sphake"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "SPRORM is fed on by CARDINALE, which can melt it down.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "statursus": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "furnursus",
+        "statursus",
+        "coaldiak"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "stegofor": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "fordin",
+        "stegofor",
+        "brachifor"
+      ],
+      "stage": 2,
+      "shape": "landrace",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "strella": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "sky",
+        "normal"
+      ],
+      "evolutionLine": [
+        "pipis",
+        "strella"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "Its tails are lures to convince bugs to bite them and be trapped.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "tetrchimp": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "lightning",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "tetrchimp",
+        "apeoro"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "thumpurn": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "normal"
+      ],
+      "evolutionLine": [
+        "thumpurn",
+        "volconey"
+      ],
+      "stage": 1,
+      "shape": "brute",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "tigrock": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "grimachin",
+        "tigrock"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "toxiris": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "venom"
+      ],
+      "evolutionLine": [
+        "rosarin",
+        "toxiris",
+        "ninjasmine"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "trojerror": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "virware",
+        "trojerror"
+      ],
+      "stage": 2,
+      "shape": "sprite",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "tumblebee": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "venom"
+      ],
+      "evolutionLine": [
+        "tumbleworm",
+        "tumblebee"
+      ],
+      "stage": 2,
+      "shape": "flier",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "tumbleworm": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "venom"
+      ],
+      "evolutionLine": [
+        "tumbleworm",
+        "tumblebee"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "artists": "tamashihoshi",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "vamporm": {
+      "ourTypeProposed": "normal",
+      "tuxemonTypes": [
+        "venom",
+        "shadow"
+      ],
+      "evolutionLine": [
+        "vamporm",
+        "dracune",
+        "fluttaflap"
+      ],
+      "stage": 1,
+      "shape": "grub",
+      "catchRate": 100,
+      "description": "It thirsts for blood, but must make do with tree sap.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "velocitile": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "anoleaf",
+        "gectile",
+        "velocitile"
+      ],
+      "stage": 3,
+      "shape": "humanoid",
+      "catchRate": 35,
+      "description": "It can outrun a bullet, but only when it has warmed up.",
+      "attribution": {
+        "artists": "Spalding004",
+        "license": "CC BY-SA 4.0",
+        "source": "Tuxemon ATTRIBUTIONS.md",
+        "status": "verified"
+      }
+    },
+    "virware": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "cosmic"
+      ],
+      "evolutionLine": [
+        "virware",
+        "trojerror"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "volconey": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire",
+        "normal"
+      ],
+      "evolutionLine": [
+        "thumpurn",
+        "volconey"
+      ],
+      "stage": 2,
+      "shape": "varmint",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "vulpyre": {
+      "ourTypeProposed": "fire",
+      "tuxemonTypes": [
+        "fire"
+      ],
+      "evolutionLine": [
+        "foxfire",
+        "vulpyre"
+      ],
+      "stage": 2,
+      "shape": "hunter",
+      "catchRate": 70,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "weavifly": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal",
+        "sky"
+      ],
+      "evolutionLine": [
+        "cataspike",
+        "puparmor",
+        "weavifly"
+      ],
+      "stage": 3,
+      "shape": "grub",
+      "catchRate": 35,
+      "description": "When it is heavy with egg, it becomes unable to fly.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "wolololl": {
+      "ourTypeProposed": "grass",
+      "tuxemonTypes": [
+        "wood",
+        "venom"
+      ],
+      "evolutionLine": [
+        "hoodoll",
+        "wolololl"
+      ],
+      "stage": 2,
+      "shape": "humanoid",
+      "catchRate": 70,
+      "description": "WOLOLOLL's sharp spines are tipped with a deadly venom.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "woodoor": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "wood"
+      ],
+      "evolutionLine": [
+        "woodoor",
+        "blasdoor"
+      ],
+      "stage": 1,
+      "shape": "sprite",
+      "catchRate": 100,
+      "description": "",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    },
+    "xeon": {
+      "ourTypeProposed": "metal",
+      "tuxemonTypes": [
+        "metal"
+      ],
+      "evolutionLine": [
+        "xeon"
+      ],
+      "stage": 1,
+      "shape": "humanoid",
+      "catchRate": 100,
+      "description": "A hostile robot.",
+      "attribution": {
+        "status": "pending-wiki"
+      }
+    }
   }
- }
 }

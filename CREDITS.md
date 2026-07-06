@@ -16,7 +16,7 @@ the original again.
 
 | Our name | File in our repo | Source in Tuxemon repo | Tuxemon name | Artist(s) | License |
 |---|---|---|---|---|---|
-| Growler (sprite) | `assets/sprites/growler.png` | `mods/tuxemon/gfx/sprites/battle/hissiorite-sheet.png` | Hissiorite | **⚠️ not listed in Tuxemon's own `ATTRIBUTIONS.md` — needs manual check of `wiki.tuxemon.org/Hissiorite` before any public release** | **⚠️ unconfirmed — do not distribute publicly until verified** |
+| Growler (sprite) | `assets/sprites/growler.png` | `mods/tuxemon/gfx/sprites/battle/hissiorite-sheet.png` | Hissiorite | princess-phoenix (per `wiki.tuxemon.org/Hissiorite`, confirmed via `CONTENT_REFERENCE.md` §13) | CC BY-SA 3.0 |
 | Whaley (sprite) | `assets/sprites/whaley.png` | `mods/tuxemon/gfx/sprites/battle/bigfin-sheet.png` | Bigfin | Cavalcadeur, rsg167 | CC BY-SA 4.0 |
 
 **How these were made:** each source is a 128×88 sprite sheet containing two
@@ -32,7 +32,9 @@ Everything below was checked against the actual repo (not just the wiki) and
 exists at `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` unless noted.
 Full detail is in `DESIGN.md` §12.
 
-**Starters:** Leafick ← Frondly *(⚠️ also not in Tuxemon's `ATTRIBUTIONS.md` — verify on wiki)*
+**Starters:** Leafick ← Frondly — Leo (original design), ReallyDarkandWindie
+(art), Levaine (sprites), Sanglorian (back sprite), CC BY-SA 3.0 (per
+`wiki.tuxemon.org/Frondly`, confirmed via `CONTENT_REFERENCE.md` §13)
 
 **Legendary:** Artemis ← Djinnbo (Cavalcadeur, rsg167)
 

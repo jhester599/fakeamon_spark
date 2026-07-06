@@ -268,15 +268,15 @@ Berries: **Fakeaberry, Greenberry, Raspberry, Cosmicberry, Greatberry, Bossberry
 
 **License:** the repo's own `ATTRIBUTIONS.md` lists most relevant assets as **CC BY-SA 4.0** (not 3.0 as previously written here), with a genuine mix per asset — some entries are CC BY 3.0, CC BY 4.0, or even Public Domain in the same file. **Allagon is CC BY-SA 4.0** (share-alike) per that file — the earlier note calling it a non-share-alike "CC BY 4.0" exception appears to have been wrong. **Bottom line: check the license per asset before using it; don't assume a blanket license for the whole project.** Our own *code* can be any license; the CC obligation rides with the images.
 
-**⚠️ Attribution gap:** the repo's `ATTRIBUTIONS.md` has **no entry at all** for **Hissiorite** or **Frondly** — two of our three starters' base sprites. The wiki pages linked below might still have artist credit, but automated tools couldn't load them (blocked). **Someone needs to check `wiki.tuxemon.org/Hissiorite` and `wiki.tuxemon.org/Frondly` by hand** before we credit/use those two sprites publicly.
+**✅ Attribution gap resolved (2026-07-06):** the repo's `ATTRIBUTIONS.md` has no entry for **Hissiorite** or **Frondly**, but both wiki pages have been checked by hand — see `CONTENT_REFERENCE.md` §13 for the full record. Hissiorite is credited to princess-phoenix; Frondly to Leo (design), ReallyDarkandWindie (art), Levaine (sprites), and Sanglorian (back sprite) — both CC BY-SA 3.0. `CREDITS.md` reflects this.
 
 ### Starters
 
 | Ours | Tuxemon | Battle sprite file | Wiki | Artists to credit |
 |---|---|---|---|---|
-| Growler | Hissiorite | `battle/hissiorite-sheet.png` | https://wiki.tuxemon.org/Hissiorite | princess-phoenix — **⚠️ not in repo's ATTRIBUTIONS.md, verify on wiki** |
+| Growler | Hissiorite | `battle/hissiorite-sheet.png` | https://wiki.tuxemon.org/Hissiorite | princess-phoenix — CC BY-SA 3.0 (per wiki) |
 | Whaley | Bigfin | `battle/bigfin-sheet.png` | https://wiki.tuxemon.org/Bigfin | Cavalcadeur, rsg167 (per repo `ATTRIBUTIONS.md`) |
-| Leafick | Frondly | `battle/frondly-sheet.png` | https://wiki.tuxemon.org/Frondly | Leo, ReallyDarkandWindie, Levaine, Sanglorian — **⚠️ not in repo's ATTRIBUTIONS.md, verify on wiki** |
+| Leafick | Frondly | `battle/frondly-sheet.png` | https://wiki.tuxemon.org/Frondly | Leo, ReallyDarkandWindie, Levaine, Sanglorian — CC BY-SA 3.0 (per wiki) |
 
 ### Legendary
 

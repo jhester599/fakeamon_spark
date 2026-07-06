@@ -362,9 +362,18 @@ unblocked once that lands.
 
 ## 16. Wild encounter roster — 200 Tuxemon selected (~50% of the dex)
 
-For the overworld (M3+), **200 of Tuxemon's 411 monsters** are approved as
-the wild-encounter candidate pool. They were selected programmatically from
-the pinned clone using these criteria:
+> **Staging status (2026-07-06, M3S0):** the roster's *sourcing work* is now
+> largely done ahead of time —
+> **`tools/roster-200.json`** holds all 200 monsters' reference data (types,
+> evolution lines, catch rates, description blurbs, attribution status), and
+> the **43 monsters whose license could be verified from Tuxemon's
+> `ATTRIBUTIONS.md`** have their sheets vendored in `assets/sprites/battle/`
+> with a generated ledger, **`CREDITS_ROSTER.md`**. The other **157** are
+> credited only on `wiki.tuxemon.org` (unreachable from the staging
+> session's network) — resolving them is one command from any normal
+> machine: `cd tools && npm run wiki-credits -- --write`, review, then
+> `npm run vendor-sheets && npm run roster-credits`. What remains creative
+> (unstaged on purpose): Lewis's rename pass and per-area encounter tables.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every

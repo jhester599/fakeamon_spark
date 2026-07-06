@@ -78,6 +78,15 @@ knocked out most of the old list:
    `wiki.tuxemon.org` wasn't reachable from the staging session. Check the
    wiki's Adventurer/NPC-sprites pages and fill in the ⚠️ row in
    `CREDITS.md` — same 2-minute drill that cleared Hissiorite/Frondly.
+5. **NEW — wild-roster wiki credits (157 monsters, one command):** 43 of
+   the §16 roster are staged with verified credits; the other 157 are
+   credited only on the wiki. From any machine with normal internet:
+   `cd tools && npm install && npm run wiki-credits -- --write`, review the
+   diff, then `npm run vendor-sheets && npm run roster-credits`, commit.
+   *(Alternative: add `wiki.tuxemon.org` to the Claude environment's
+   allowed network domains and a session can run it — that would also
+   cover item 4.)* No deadline — the roster wires in area by area,
+   M3-late at the earliest.
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token

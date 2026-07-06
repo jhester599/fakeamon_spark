@@ -90,6 +90,7 @@ Consequences (both make M3 *easier*):
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
 | Phaser version check | — | newest stable 4.x on npm as of 2026-07-06 is **4.2.0** — §2's "4.2.1" guess doesn't exist. Re-check and pin at S1; record in `DECISIONS.md` |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | 43 of the 200-monster pool (`CONTENT_REFERENCE.md` §16) vendored with verified credits; the other 157 wait on a one-command wiki license check (see §16's staging-status note). Reference data for all 200 (types/lines/catch rates/blurbs) is in the JSON. Not used by any M3 step — staged for the area-by-area roster work later |
 
 What S1 still owns: the pinned CDN script tag, `src/world/config.js`,
 BootScene + empty WorldScene, the "Battle test" button, Jeff's zoom pick.

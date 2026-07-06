@@ -85,3 +85,14 @@ Use this to jump straight to the right spot when recording a decision.
 Template for a new row:
 | 2026-07-05 | 6 | Gym badges open a new area to explore | "so beating a gym feels like it unlocks something" |
 -->
+
+---
+
+## 🔧 Jeff's technical calls
+
+Engineering decisions, not creative-director picks — logged here so they
+don't get lost. (Lewis's creative decisions stay in the table above.)
+
+| Date | Decision | Why |
+|---|---|---|
+| 2026-07-06 | **Tech stack confirmed:** plain HTML/CSS/JS with global scripts (no build step, no ES modules) through M2; **Phaser 4** at M3, pinned to an exact version and loaded from a CDN as a script global | Keeps double-click-to-play alive and the code Lewis-readable; Phaser-as-CDN-global is the same style, so nothing has to be rewritten. Details: `PLANS/M3_OVERWORLD_PLAN.md` §2 + `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.1, recorded in `DESIGN.md` §13 |

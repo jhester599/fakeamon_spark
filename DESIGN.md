@@ -335,7 +335,7 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 
 ## 13. Technical Notes
 
-- **Stack: CONFIRMED (2026-07-06) by Jeff** — plain HTML/CSS/JS through M2, Phaser starting M3, built from scratch with Claude Code, Tuxemon as art source/reference (not a forked codebase).
+- **Stack: CONFIRMED (2026-07-06) by Jeff** — plain HTML/CSS/JS with global `<script>` tags (no build step, no ES modules) through M2, so double-clicking `index.html` keeps working; **Phaser 4** at M3, pinned to an exact version and loaded from a CDN as a classic script global (same no-build style — see `PLANS/M3_OVERWORLD_PLAN.md` §2 and `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.1). Built from scratch with Claude Code, Tuxemon as art source/reference (not a forked codebase).
 - **Repo:** add `CLAUDE.md` (design + current milestone) and `CREDITS.md` (attribution).
 - **Type system decision (new):** confirm adding Metal + Cosmic and lock the mapping in §4.
 - **IP:** inspired by Pokémon only — no Nintendo names/sprites/music. Borrowed base art is Tuxemon's, credited. *(Not legal advice; none of this bites until public distribution.)*
@@ -350,7 +350,7 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 
 **Resolved by Lewis (2026-07-06):** team size = 4, overflow goes to Boxes with switching (§6); base catch rate = 50% (§6).
 
-**Confirmed by Jeff (2026-07-06):** tech stack — plain HTML/JS through M2, Phaser starting M3 (§13).
+**Confirmed by Jeff (2026-07-06):** tech stack — plain HTML/JS with global scripts through M2, Phaser 4 via pinned CDN global starting M3 (§13).
 
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.

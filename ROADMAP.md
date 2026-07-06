@@ -21,6 +21,12 @@ whole idea: build a little, play it, then build the next little bit.
    `"growler can now use Flare"`.
 5. **Stay in scope.** If a step starts dragging in a *later* milestone, stop
    and flag it.
+6. **Tick both trackers, same commit.** This file and `roadmap.html` (the
+   live quest map) show the same steps two ways — every time a step's
+   status changes here (✅, step count, progress bar), update `roadmap.html`
+   too, in the same commit. They drifted apart once (2026-07-06, Steps 3–4
+   shipped here but not there) and Jeff & Lewis caught it during testing —
+   don't let it happen again.
 
 ## How to run the game
 
@@ -86,7 +92,7 @@ few hits each.
 | **1** ✅ | Split game code into small files: `src/data/moves.js`, `src/data/fakeamon.js`, `src/data/typechart.js`, plus `src/battle.js`. Same game, tidier code | Game plays exactly the same — just easier to read and grow — *done!* |
 | **2** ✅ | Add the third starter **Leafick** (Grass) to the data, and a simple **"Choose your starter"** screen | Pick Growler, Whaley, or Leafick before the fight — *done!* |
 | **3** ✅ | A **wild Fakeamon** appears (pick a random one to fight) instead of always Whaley | Different opponents each battle — *done!* |
-| **4** | Add the **Catch** action + a **Fakeaball**, using the capture formula (50% base chance, better at low HP — Lewis's call) | A "Throw Fakeaball" button; sometimes "Gotcha! …was caught!" |
+| **4** ✅ | Add the **Catch** action + a **Fakeaball**, using the capture formula (50% base chance, better at low HP — Lewis's call) | A "Throw Fakeaball" button; sometimes "Gotcha! …was caught!" — *done!* |
 | **5** | A **team list** — caught Fakeamon join your party, up to **4 active** (Lewis's call). A 5th catch goes to your **Boxes** | A row of up to 4 creatures below the battle, plus a Boxes screen for overflow |
 | **6** | **Switch** which Fakeamon is fighting, including swapping one in from your Boxes | A "Switch" button swaps in a teammate |
 
@@ -154,12 +160,16 @@ healing dishes, and defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B33). Lewis cleared
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B34). Lewis cleared
 **B1–B32** in one big homework round (2026-07-06) — see `DECISIONS.md` rows
-14–45 and `DESIGN.md` for where each landed. Only one is still open:
+14–45 and `DESIGN.md` for where each landed. Two are still open, neither
+urgent:
 
 - **M5:** where you swap boxed Fakeamon onto your team (B33) — needed by
   the Boxes UI, no rush.
+- **M2 (flavor):** how a mirror match (same species on both sides) should
+  read in the battle log (B34) — found during Step 3 testing; the battle
+  itself plays correctly either way.
 
 Plus Jeff's ongoing number-tuning list (not creative calls, just math):
 evolution levels per starter, the XP curve, exact Great/Ultra/Cosmic ball

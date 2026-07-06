@@ -36,12 +36,12 @@ function pickRandomWildOpponent() {
   return STARTERS[index];
 }
 
-// Runs one wild battle, then — whatever happens (win, lose, or flee) —
-// starts another with a fresh random opponent. Team management (so you can
-// stop and swap fighters) arrives at M2 Step 5.
+// Runs one wild battle, then — whatever happens (win, lose, flee, or catch)
+// — starts another with a fresh random opponent. A caught Fakeamon doesn't
+// join a persistent team yet; that lands at M2 Step 5 with the state bag.
 function fightRandomWildFakeamon(starter) {
   const wildOpponent = pickRandomWildOpponent();
-  startBattle({ player: starter, enemy: wildOpponent, canFlee: true }).then(function () {
+  startBattle({ player: starter, enemy: wildOpponent, canFlee: true, canCatch: true }).then(function () {
     fightRandomWildFakeamon(starter);
   });
 }

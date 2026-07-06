@@ -48,7 +48,7 @@ Or just double-click `index.html`.
 | `MODELS.md` | Which Claude model/effort to use per roadmap step, and the pre-step Model Huddle |
 | `PLANS/` | Architecture plans from high-end planning sessions — the M3 overworld (Phaser ↔ battle) and the state/save system |
 | `HOMEWORK.md` | Open questions waiting on Lewis (creative director) and Jeff |
-| `HOMEWORK_BACKLOG.md` | The full question bank (B1–B33) that `HOMEWORK.md` gets served from |
+| `HOMEWORK_BACKLOG.md` | The full question bank (B1–B34) that `HOMEWORK.md` gets served from |
 | `CREDITS.md` | Art attribution — what's borrowed, from where, under what license |
 | `CONTENT_REFERENCE.md` | Where our Tuxemon-sourced art, data, and roster ideas come from, and the licensing rules for using them |
 

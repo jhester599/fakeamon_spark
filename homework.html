@@ -166,31 +166,31 @@
   <header>
     <div class="eyebrow">Fakeamon · Stopping Point</div>
     <h1 class="title disp">Homework Before We Continue</h1>
-    <p class="subtitle">Lewis cleared the whole backlog in one sitting — B1 through B32! Only one question left. 🌙</p>
+    <p class="subtitle">Lewis cleared the whole backlog in one sitting — B1 through B32! Two questions left. 🌙</p>
   </header>
 
   <div class="recap">
     <h2>✅ What happened this session</h2>
     <ul>
-      <li><span class="tag">Huge round</span>Lewis answered <b>32 of 33</b> backlog questions in one go: flee/catch/nickname rules, the world's name (<b>Venta</b>) and its six areas, gym re-themes and badges, the story spine, the evolution ceremony, sound &amp; music, and more. All logged in <code>DECISIONS.md</code> (rows 14–45) and folded into <code>DESIGN.md</code>.</li>
+      <li><span class="tag">Huge round</span>Lewis answered <b>32 of 34</b> backlog questions in one go: flee/catch/nickname rules, the world's name (<b>Venta</b>) and its six areas, gym re-themes and badges, the story spine, the evolution ceremony, sound &amp; music, and more. All logged in <code>DECISIONS.md</code> (rows 14–45) and folded into <code>DESIGN.md</code>.</li>
       <li><span class="tag">IP check</span>B10's hero look referenced an existing character, so it was redirected to an <b>original design</b> in the same spirit — no Nintendo IP in the repo. See <code>DESIGN.md</code> §1.</li>
+      <li><span class="tag">Bug found</span>Testing Step 3 turned up a real bug (mirror matches shared HP) — fixed — plus a cosmetic question, <b>B34</b> below, about how a mirror match should read in the log.</li>
       <li><span class="tag">Round 2</span>✅ Done — team of <b>4</b> with <b>Boxes</b>, <b>50%</b> base catch rate. See <code>DECISIONS.md</code> #11–12.</li>
-      <li><span class="tag">Plans</span>Two big architecture plans live in <code>PLANS/</code> — the <b>M3 overworld plan</b> and the <b>state &amp; save plan</b> — governing how M2's remaining steps get built.</li>
     </ul>
   </div>
 
   <div class="bar">
-    <span class="count"><b id="doneN">0</b> of 1 question answered</span>
+    <span class="count"><b id="doneN">0</b> of 2 questions answered</span>
     <div class="actions">
       <button class="btn" id="printBtn" type="button">🖨️ Print</button>
       <button class="btn" id="resetBtn" type="button">↺ Reset</button>
     </div>
   </div>
-  <p class="note">Answers auto-save in this browser. When you're done, tell Jeff (or Claude) your pick and we run the decision loop in <code>DECISIONS.md</code>.</p>
+  <p class="note">Answers auto-save in this browser. When you're done, tell Jeff (or Claude) your picks and we run the decision loop in <code>DECISIONS.md</code>.</p>
 
   <section class="sec s-water">
-    <h2 class="sec-title">🌊 Lewis's last question — B33</h2>
-    <p class="sec-sub">Not urgent — needed only for M5's Boxes screen. Everything blocking M2 is already answered.</p>
+    <h2 class="sec-title">🌊 Lewis's last two questions</h2>
+    <p class="sec-sub">Neither is urgent — everything blocking M2 is already answered.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
@@ -203,6 +203,19 @@
       </div>
       <div class="fill"><label>If C, what's it called?</label><input class="txt" name="q1_name" placeholder="Name your new building"></div>
       <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="2">
+      <div class="q-head"><span class="q-num">2</span>
+        <h3 class="q-title">Telling apart a mirror match <span class="why-tag">B34 · anytime, no rush</span></h3></div>
+      <p class="q-desc">Since you already decided no nicknames (B3), a battle where your Fakeamon and the wild one are the <b>same species</b> — like Whaley vs. a wild Whaley — can read confusingly in the log: "Whaley used Splash!", "Whaley fainted — Whaley wins." The battle plays correctly either way (we fixed a real bug there too) — this is purely about how it reads. How should we label the wild one?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="A - add wild"><span class="ok"><b>A) Add "wild"</b> — e.g. "the wild Whaley used Splash!" everywhere the opponent is mentioned.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="B - leave as-is"><span class="ok"><b>B) Leave it as-is</b> — the HP bars already make it clear enough.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="C - invent"><span class="ok"><b>C) Invent something else</b> — a label, a title, your own idea.</span></label>
+      </div>
+      <div class="fill"><label>If C, what's your idea?</label><input class="txt" name="q2_idea" placeholder="Describe it"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" placeholder="Tell us why you picked that"></div>
     </div>
   </section>
 
@@ -233,7 +246,7 @@
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 
-  var KEY = "fakeamon-homework-v4";
+  var KEY = "fakeamon-homework-v5";
   var fields = document.querySelectorAll("input[name], textarea[name]");
 
   function load() {
@@ -264,6 +277,7 @@
     });
     var done = 0;
     if (document.querySelector('input[name="q1"]:checked')) done++;
+    if (document.querySelector('input[name="q2"]:checked')) done++;
     document.getElementById("doneN").textContent = done;
   }
 

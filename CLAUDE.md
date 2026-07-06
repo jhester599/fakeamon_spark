@@ -19,6 +19,21 @@ Context for Claude Code. Read this first every session. The full design lives in
   - Make **numbers easy to tweak** (move power, HP, catch rate). Lewis will want to experiment — keep game values in obvious, well-labeled spots.
   - Keep it **fun and encouraging.** This should feel like play.
 
+## 🤝 Start every session with the Model Huddle
+
+**Before writing any code**, run the Model Huddle from **`MODELS.md`**:
+
+1. Ask **which roadmap step** we're doing.
+2. State the **recommended model + effort** from the table in `MODELS.md` and
+   ask Jeff & Lewis to **discuss and confirm or override**. If the session's
+   current model/effort doesn't match their pick, remind them to run
+   `/model` and `/effort` first, then wait.
+3. Ask **Lewis for his prediction**: which files will change, and what's the
+   riskiest part? (Compare against the actual diff at the end of the step.)
+
+Don't skip this even if the step seems obvious — the huddle *is* part of the
+project. After the step works, briefly reflect: was the model pick right?
+
 ## Current status
 
 > **Milestone: M1 — Battle Slice. Complete! 🎉** *(Update this line as we progress.)*
@@ -52,6 +67,7 @@ DESIGN.md    → full design spec (source of truth)
 CLAUDE.md    → this file — working brief + current milestone
 ROADMAP.md   → stepwise M1–M5 build plan, what's done/next
 DECISIONS.md → decision log + the loop for folding Lewis's picks into DESIGN.md
+MODELS.md    → which Claude model to use per step + the pre-step Model Huddle
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules

@@ -3,10 +3,11 @@
 > **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
 > batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
 > ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Four questions are still open, none urgent: **B33** (where you swap
-> boxed Fakeamon), **B34** (new — found while testing Step 3), and **B35**/
+> Five questions are still open, none urgent: **B33** (where you swap
+> boxed Fakeamon), **B34** (new — found while testing Step 3), **B35**/
 > **B36** (new — follow-ups on two design bits Lewis invented outside a
-> homework round, see below).
+> homework round), and **B37** (new, the fun one — review the draft of
+> which wild Fakeamon live in which area of Venta, see below).
 >
 > Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
 > see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
@@ -40,7 +41,7 @@ flee always works (B1), caught Fakeamon join fully healed (B2), wild level
 uses team-average as a stand-in until M3's map exists (B4), and the catch
 messages are locked in (B5). Steps 3 and 4 are both built and live.
 
-**Four open questions, no rush:**
+**Five open questions, no rush:**
 
 - **B33** — where do you swap a boxed Fakeamon onto your active team? (At
   a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
@@ -57,21 +58,44 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
 - **B36** — you said Cooking Cabins are more common in Snow Mountain. Is
   Snow Mountain the *only* place with one, or is there a smaller cabin
   near the start too (so cooking isn't gated behind that area's badge)?
+- **B37** — NEW, and it's a big fun one: all **198 wild Fakeamon** now have
+  a **draft home area** matched to your six area vibes — crocodiles in The
+  Lagoon, war robots in The Factory, yetis on Snow Mountain… Open
+  **`VENTA_ROSTER_DRAFT.md`** (it shows everyone's art) and tell us who's
+  in the wrong place. Evolution lines move together; no wrong answers.
 
 ---
 
 ## 🧑‍💻 Jeff's list
 
-Nothing blocking the next session; these come due at M3 Step S1:
+Nothing blocking the next session. The M3S0 prep session (2026-07-06)
+knocked out most of the old list:
 
-1. **Zoom level (2× vs 3×)** — eyeball it on the family screen when the
-   first Phaser canvas is up (M3 plan §11).
-2. **Pin Phaser 4** — check [phaser.io/download/stable](https://phaser.io/download/stable)
-   and pin the newest 4.x in the CDN URL; record it in `DECISIONS.md`
-   (M3 plan §2).
-3. **Vendor the Phaser skills** — copy the relevant `skills/` files from the
-   Phaser 4 repo into `PLANS/phaser-skills/` before any Phaser code gets
-   written (M3 plan §2 — it's the defense against Claude's v3 habits).
+1. **Zoom level (2× vs 3×)** — still open; eyeball it on the family screen
+   when the first Phaser canvas is up (M3 plan §11).
+2. ✅ ~~Pin Phaser 4~~ — *prepped 2026-07-06:* newest stable 4.x on npm is
+   **4.2.0** (the plan's "4.2.1" guess doesn't exist). Re-verify and pin in
+   the CDN URL at S1, and record it in `DECISIONS.md` then.
+3. ✅ ~~Vendor the Phaser skills~~ — *done 2026-07-06:* 10 skills + README
+   in `PLANS/phaser-skills/`, from `phaserjs/phaser` @ `539e718`.
+4. ✅ ~~**NEW — hero walk-sheet license check**~~ — *done 2026-07-06 (Cowork):*
+   `wiki.tuxemon.org/Adventurer` credits the overland walk sheet to
+   **Catch Challenger, adapted by Sanglorian** (full sheet also: front sprite
+   & art by Leo, small back sprite by tamashihoshi). `CREDITS.md` hero row
+   filled, license **CC BY-SA 3.0** — with a ⚠️ flag that the overland frames
+   trace to the Catch Challenger project, so confirm its share-alike terms
+   before a public deploy that features hero art.
+
+5. ✅ ~~**NEW — wild-roster wiki credits (157 monsters)**~~ — *done 2026-07-06
+   (Cowork, which could reach the wiki):* ran `fetch-wiki-credits.mjs --write`
+   → **147 credited cleanly**, then hand-resolved 8 more from the wiki's
+   `Sources` field (bedoo, primordia, xeon, dark_robo → CC BY-SA 3.0;
+   **thumpurn → CC BY 4.0**; OPMon trio coaldiak/ninjasmine/toxiris → flagged
+   ⚠️ *OPMon-derived, confirm OPMon terms*). Vendored all 155 sheets and
+   regenerated `CREDITS_ROSTER.md` — **198 staged, 0 pending**. The only two
+   without any wiki credit (`bearloch`, `foxko`) were **dropped from the
+   roster** (the "200" was always approximate), so nothing is left hanging.
+   Raw results in `tools/wiki-credits.json`.
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token
@@ -81,4 +105,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33–B36 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*Serve B33–B37 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

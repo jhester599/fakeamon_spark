@@ -1,0 +1,4360 @@
+{
+ "_about": [
+  "Wild-encounter roster reference data - generated 2026-07-06 from the pinned",
+  "Tuxemon clone (commit c34a9c72) + CONTENT_REFERENCE.md section 16. NOT loaded by the",
+  "game. ourTypeProposed uses section 16's remap table, which is still [TO CONFIRM]",
+  "with Lewis. descriptions are Tuxemon project text (CC, credit Tuxemon).",
+  "attribution.status=pending-wiki means: run fetch-wiki-credits.mjs (see tools/).",
+  "Player-facing names come from Lewis's rename pass, area by area - slugs are",
+  "working IDs only.",
+  "attribution blocks synced from sheet-manifest.json after the 2026-07-06 wiki-credit run; status 'flagged' = vendored but license terms still need confirming (the OPMon-derived trio).",
+  "areaProposed (added 2026-07-06) is a PROPOSED home area per monster - a draft for Lewis to react to (homework B37, worksheet: VENTA_ROSTER_DRAFT.md). Lines stay together: every stage of an evolution line shares one area."
+ ],
+ "monsters": {
+  "aardart": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "aardorn",
+    "aardart"
+   ],
+   "stage": 2,
+   "shape": "varmint",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "aardorn": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "aardorn",
+    "aardart"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "When born it is placed in an anthill and left to eat its way out.",
+   "attribution": {
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "agnsher": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "water"
+   ],
+   "evolutionLine": [
+    "agnsher"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "A fusion of two tuxemon.",
+   "attribution": {
+    "artists": "Manual fusion of Agnite and Tweesher, by Sanglorian from sprites by aviculor and Levaine",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Agnsher",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "ampystoma": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "lightning",
+    "water"
+   ],
+   "evolutionLine": [
+    "axolightl",
+    "ampystoma"
+   ],
+   "stage": 2,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and art by DevilDman; Sprites by JaskRendix and HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Ampystoma",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "anoleaf": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "anoleaf",
+    "gectile",
+    "velocitile"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "apeoro": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "tetrchimp",
+    "apeoro"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original art by CrisFarias; Front, back and face sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Apeoro",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "arthrobolt": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "metal"
+   ],
+   "evolutionLine": [
+    "nut",
+    "bolt",
+    "arthrobolt"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "axolightl": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "axolightl",
+    "ampystoma"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "babysnitch": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "shadow",
+    "normal"
+   ],
+   "evolutionLine": [
+    "babysnitch",
+    "baddrscratch"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Art by DarkMilkyWay1701",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Babysnitch",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "baddrscratch": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "babysnitch",
+    "baddrscratch"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Art by DarkMilkyWay1701",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Baddrscratch",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "baobaraffe": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "baoby",
+    "baobaraffe"
+   ],
+   "stage": 2,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Name, art, sprites and blurb by princess-phoenix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Baobaraffe",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "baoby": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "baoby",
+    "baobaraffe"
+   ],
+   "stage": 1,
+   "shape": "landrace",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Name, art, sprites and blurb by princess-phoenix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Baoby",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "bedoo": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "jelillow",
+    "bedoo"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "TheBritanniaRegion",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Bedoo",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "bewhich": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "shadow",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "cackleen",
+    "brumi",
+    "bewhich"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by Piacarrot",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Bewhich",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "birdee": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal",
+    "sky"
+   ],
+   "evolutionLine": [
+    "chickadee",
+    "birdee"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Isaiah658; Face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Birdee",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "birdling": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "hatchling",
+    "birdling"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by tamashihoshi; Back and face sprites by Chickenshowman; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Birdling",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "blasdoor": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "woodoor",
+    "blasdoor"
+   ],
+   "stage": 2,
+   "shape": "sprite",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, adapted from the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Blasdoor",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "bolt": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "nut",
+    "bolt",
+    "arthrobolt"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "TacoBot",
+    "license": "Public Domain",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "boltnu": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "boltnu",
+    "exclawvate"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and art by TheBritanniaRegion; Sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Boltnu",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "brachifor": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "fordin",
+    "stegofor",
+    "brachifor"
+   ],
+   "stage": 3,
+   "shape": "landrace",
+   "catchRate": 35,
+   "description": "BRACHIFOR can go without eating if it stays perfectly still.",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Brachifor",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "breem": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "venom"
+   ],
+   "evolutionLine": [
+    "duggot",
+    "breem"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Design Origin=Inspired by parasitic worms, to explain why the original creator had a worm evolving into a bee",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Breem",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "bricgard": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "imbrickcile",
+    "bricgard",
+    "brickhemoth"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Bricgard",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "brickhemoth": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "imbrickcile",
+    "bricgard",
+    "brickhemoth"
+   ],
+   "stage": 3,
+   "shape": "brute",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Brickhemoth",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "brumi": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "shadow",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "cackleen",
+    "brumi",
+    "bewhich"
+   ],
+   "stage": 2,
+   "shape": "sprite",
+   "catchRate": 70,
+   "description": "Neglected brooms may be stolen by BRUMI. ",
+   "attribution": {
+    "artists": "Design and original sprite by Piacarrot; Design Origin=The spirit of a girl possessed by an evil spirit",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Brumi",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "bumbulus": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "bumbulus",
+    "nimbulex"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Bumbulus",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "burrlock": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "burrlock",
+    "cacaburr"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Burrlock",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "bursa": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "bursa",
+    "flambear"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "It rejects fire as basic, and produces only the fire of the mind.",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites by josepharaoh99",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Bursa",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "cacaburr": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "burrlock",
+    "cacaburr"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Cacaburr",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "cackleen": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "shadow",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "cackleen",
+    "brumi",
+    "bewhich"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by Piacarrot; Design Origin=The spirit of a girl possessed by an evil spirit",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Cackleen",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "cairfrey": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "cairfrey",
+    "possessun"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "caper": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "frost",
+    "normal"
+   ],
+   "evolutionLine": [
+    "caper",
+    "crankus"
+   ],
+   "stage": 1,
+   "shape": "landrace",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front and back sprites by WaterTrainer; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Caper",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "capinyah": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "heroic"
+   ],
+   "evolutionLine": [
+    "capiti",
+    "capinyah"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Capinyah",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "capiti": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "capiti",
+    "capinyah"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "cardiling": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "sky"
+   ],
+   "evolutionLine": [
+    "cardiling",
+    "cardiwing",
+    "cardinale"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "One wouldn't expect it to breathe fire, until it does.",
+   "attribution": {
+    "artists": "Spalding004, Kyu",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "cardinale": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "sky"
+   ],
+   "evolutionLine": [
+    "cardiling",
+    "cardiwing",
+    "cardinale"
+   ],
+   "stage": 3,
+   "shape": "flier",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "cardiwing": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "sky"
+   ],
+   "evolutionLine": [
+    "cardiling",
+    "cardiwing",
+    "cardinale"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "Its song is remarkable, but few dare keep an explosive songbird.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "cataspike": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "venom"
+   ],
+   "evolutionLine": [
+    "cataspike",
+    "puparmor",
+    "weavifly"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Cataspike",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "chenipode": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "chenipode",
+    "exapode"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "It bites onto shoelaces and trouser legs when it wants to travel.",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Chenipode",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "chickadee": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal",
+    "sky"
+   ],
+   "evolutionLine": [
+    "chickadee",
+    "birdee"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Chickadee",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "chillimp": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "frost",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "chillimp",
+    "snowrilla"
+   ],
+   "stage": 1,
+   "shape": "brute",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "chloragon": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "chloragon",
+    "sapragon",
+    "dragarbor"
+   ],
+   "stage": 1,
+   "shape": "dragon",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "chrome_robo": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "chrome_robo"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "A hostile robot.",
+   "attribution": {
+    "artists": "Front sprite by Redshrike; Overland sprites by Catch Challenger",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Chrome_Robo",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "claymorior": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "claymorior",
+    "regalance"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Claymorior",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "coaldiak": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "normal"
+   ],
+   "evolutionLine": [
+    "furnursus",
+    "statursus",
+    "coaldiak"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "This bear can set fire to anywhere and draw blood from anything.",
+   "attribution": {
+    "artists": "From the open-source game OPMon; Jaskrendix; name by Sanglorian",
+    "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
+    "source": "wiki.tuxemon.org/Coaldiak",
+    "status": "flagged"
+   },
+   "areaProposed": "theFactory"
+  },
+  "cohldrabi": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "frost"
+   ],
+   "evolutionLine": [
+    "cohldrabi",
+    "lettice",
+    "frostuce"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Sanglorian; Back sprite adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Cohldrabi",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "coppi": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "sky"
+   ],
+   "evolutionLine": [
+    "helipi",
+    "coppi",
+    "parappi"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by FrozenFeathers and Piacarrot",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Coppi",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "corvix": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "flacono",
+    "corvix",
+    "gryfix"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "It arms its wings with bone shards from its victims.",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "crankus": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "frost",
+    "normal"
+   ],
+   "evolutionLine": [
+    "caper",
+    "crankus"
+   ],
+   "stage": 2,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Front and back sprites by WaterTrainer; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Crankus",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "criniotherme": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "normal"
+   ],
+   "evolutionLine": [
+    "pantherafira",
+    "criniotherme"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Criniotherme",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "crustagu": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "lesmagu",
+    "shelagu",
+    "crustagu"
+   ],
+   "stage": 3,
+   "shape": "polliwog",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and art by BrasioPkmn; Front and back sprites by Jaskrendix and HippasusTwo; Face sprites by JaskRendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Crustagu",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "dandicub": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "dandicub",
+    "dandylion"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Sanglorian; Art by slickedbackArtisan; Design Origin=Inspired by lions and dandelions",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Dandicub",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "dandylion": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "dandicub",
+    "dandylion"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Leo, ProfessorGreen, josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "dark_robo": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "dark_robo"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "A hostile robot.",
+   "attribution": {
+    "artists": "Redshrike",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Dark_Robo",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "devidin": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "devidin",
+    "devidra",
+    "deviraptor"
+   ],
+   "stage": 1,
+   "shape": "landrace",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Devidin",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "devidra": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "devidin",
+    "devidra",
+    "deviraptor"
+   ],
+   "stage": 2,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Devidra",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "deviraptor": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "devidin",
+    "devidra",
+    "deviraptor"
+   ],
+   "stage": 3,
+   "shape": "dragon",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Deviraptor",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "dracune": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "venom",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "vamporm",
+    "dracune",
+    "fluttaflap"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "It is immobile during the day, but can wriggle and bite at night.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "dragarbor": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "chloragon",
+    "sapragon",
+    "dragarbor"
+   ],
+   "stage": 3,
+   "shape": "dragon",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "drokoro": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "drokoro"
+   ],
+   "stage": 1,
+   "shape": "dragon",
+   "catchRate": 5,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by moritz_gunz; Face sprites tweaked by Sanglorian; Overland sprite adapted by Sanglorian from a sprite by CharlesGabriel; Other art by moritz_gunz",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Drokoro",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "duggot": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "venom"
+   ],
+   "evolutionLine": [
+    "duggot",
+    "breem"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Duggot",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "elofly": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal",
+    "sky"
+   ],
+   "evolutionLine": [
+    "elofly",
+    "elowind",
+    "elostorm"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian; Alternative sprite adapted by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Elofly",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "elostorm": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal",
+    "sky"
+   ],
+   "evolutionLine": [
+    "elofly",
+    "elowind",
+    "elostorm"
+   ],
+   "stage": 3,
+   "shape": "flier",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian; Alternative sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Elostorm",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "elowind": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "normal"
+   ],
+   "evolutionLine": [
+    "elofly",
+    "elowind",
+    "elostorm"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian; Alternative sprites adapted by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Elowind",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "embazook": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "metal",
+    "fire"
+   ],
+   "evolutionLine": [
+    "ignibus",
+    "embazook",
+    "eruptibus"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "It is trained for use in war and it knows no other life.",
+   "attribution": {
+    "artists": "Original design by Leo; Front sprite by josepharaoh99; Other sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Embazook",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "embra": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "embra",
+    "ruption"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "It eats everything it can to grow big enough to become a RUPTION.",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Embra",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "equill": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "shadow",
+    "normal"
+   ],
+   "evolutionLine": [
+    "hoarse",
+    "equill",
+    "hoarseshoo"
+   ],
+   "stage": 2,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Equill",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "eruptibus": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "ignibus",
+    "embazook",
+    "eruptibus"
+   ],
+   "stage": 3,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "Smiths work with it, heating up metals in its caldera.",
+   "attribution": {
+    "artists": "Original design by Leo; Sprites by josepharaoh99 and Leo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Eruptibus",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "eskipup": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "frost"
+   ],
+   "evolutionLine": [
+    "eskipup",
+    "houndice"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "Even as a puppy, it can pull 1 ton loads.",
+   "attribution": {
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Eskipup",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "exapode": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "chenipode",
+    "exapode"
+   ],
+   "stage": 2,
+   "shape": "grub",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Exapode",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "exclawvate": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "boltnu",
+    "exclawvate"
+   ],
+   "stage": 2,
+   "shape": "dragon",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and art by TheBritanniaRegion; Sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Exclawvate",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "eyenemy": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "eyenemy",
+    "eyesore"
+   ],
+   "stage": 1,
+   "shape": "serpent",
+   "catchRate": 100,
+   "description": "It feeds on beautiful views and other spectacular sights.",
+   "attribution": {
+    "artists": "Cavalcadeur",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "eyesore": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "eyenemy",
+    "eyesore"
+   ],
+   "stage": 2,
+   "shape": "serpent",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "firomenis": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "merlicun",
+    "firomenis"
+   ],
+   "stage": 2,
+   "shape": "dragon",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "flacono": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "flacono",
+    "corvix",
+    "gryfix"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Flacono",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "flambear": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "bursa",
+    "flambear"
+   ],
+   "stage": 2,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites by tamashihoshi",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Flambear",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "flounce": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "flounce",
+    "knindling"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Back sprite by HippasusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Flounce",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "flummack": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "flummby",
+    "flummack"
+   ],
+   "stage": 2,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front sprite by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Flummack",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "flummby": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "flummby",
+    "flummack"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front sprite by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Flummby",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "fluoresfin": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "lightning",
+    "water"
+   ],
+   "evolutionLine": [
+    "fluoresfin",
+    "incandesfin",
+    "lightmare"
+   ],
+   "stage": 1,
+   "shape": "piscine",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Fluoresfin",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "fluttaflap": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "vamporm",
+    "dracune",
+    "fluttaflap"
+   ],
+   "stage": 3,
+   "shape": "grub",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "fordin": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "fordin",
+    "stegofor",
+    "brachifor"
+   ],
+   "stage": 1,
+   "shape": "leviathan",
+   "catchRate": 100,
+   "description": "When threatened, it curls into a ball and bounces away.",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites resized by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Fordin",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "forturtle": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "forturtle",
+    "prophetoise"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "It heats its shell to read the future from the cracks that emerge.",
+   "attribution": {
+    "artists": "Original design and sprites by Chickenshowman",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Forturtle",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "foxfire": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "foxfire",
+    "vulpyre"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "frostuce": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "frost"
+   ],
+   "evolutionLine": [
+    "cohldrabi",
+    "lettice",
+    "frostuce"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "One rarely expects to see green waltzing around in a snowstorm.",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Frostuce",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "furnursus": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "furnursus",
+    "statursus",
+    "coaldiak"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Face sprites adapted from the front sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Furnursus",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "fuzzina": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic",
+    "normal"
+   ],
+   "evolutionLine": [
+    "fuzzlet",
+    "fuzzina"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Fuzzina",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "fuzzlet": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "cosmic",
+    "normal"
+   ],
+   "evolutionLine": [
+    "fuzzlet",
+    "fuzzina"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Fuzzlet",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "galasces": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "nebufin",
+    "galasces",
+    "novaquarius"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "GALASCES can distort its shape to engulf prey its own size.",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Galasces",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "gectile": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "anoleaf",
+    "gectile",
+    "velocitile"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "It is so quick and light that it can walk on leaves.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "golnagi": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "fire"
+   ],
+   "evolutionLine": [
+    "gupphish",
+    "gupphire",
+    "golnagi"
+   ],
+   "stage": 3,
+   "shape": "piscine",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Golnagi",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "grimachin": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "grimachin",
+    "tigrock"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "It was made by a toy company to be a pet, but was too dangerous.",
+   "attribution": {
+    "artists": "Design and artwork by Leo; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Grimachin",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "grinflare": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "grintot",
+    "grinflare",
+    "grintrock"
+   ],
+   "stage": 2,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "It is said that each is the walking heart of a volcano.",
+   "attribution": {
+    "artists": "Original design by Royaba and Spalding004; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Grinflare",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "grintot": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "earth"
+   ],
+   "evolutionLine": [
+    "grintot",
+    "grinflare",
+    "grintrock"
+   ],
+   "stage": 1,
+   "shape": "brute",
+   "catchRate": 100,
+   "description": "It is a GRINTROCK or GRINFLARE that has experienced erosion.",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Grintot",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "grintrock": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "earth"
+   ],
+   "evolutionLine": [
+    "grintot",
+    "grinflare",
+    "grintrock"
+   ],
+   "stage": 3,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design by Spalding004 and Royaba; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Grintrock",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "gryfix": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "flacono",
+    "corvix",
+    "gryfix"
+   ],
+   "stage": 3,
+   "shape": "flier",
+   "catchRate": 35,
+   "description": "Bone armor protects GRYFIX from all but the most powerful of attacks.",
+   "attribution": {
+    "artists": "Front sprite by Catch Challenger; Back and face sprites by Lejun",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Gryfix",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "gupphire": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "fire"
+   ],
+   "evolutionLine": [
+    "gupphish",
+    "gupphire",
+    "golnagi"
+   ],
+   "stage": 2,
+   "shape": "piscine",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Gupphire",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "gupphish": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "fire"
+   ],
+   "evolutionLine": [
+    "gupphish",
+    "gupphire",
+    "golnagi"
+   ],
+   "stage": 1,
+   "shape": "piscine",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Gupphish",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "hatchling": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "hatchling",
+    "birdling"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by tamashihoshi",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Hatchling",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "helipi": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "sky"
+   ],
+   "evolutionLine": [
+    "helipi",
+    "coppi",
+    "parappi"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot; It flies farther with one wing by rotating than with two, but sacrifices the ability to easily aim",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Helipi",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "hoarse": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "shadow",
+    "normal"
+   ],
+   "evolutionLine": [
+    "hoarse",
+    "equill",
+    "hoarseshoo"
+   ],
+   "stage": 1,
+   "shape": "landrace",
+   "catchRate": 100,
+   "description": "It appears to be a farm animal, but it was mistreated by its owner.",
+   "attribution": {
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Hoarse",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "hoarseshoo": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "venom",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "hoarse",
+    "equill",
+    "hoarseshoo"
+   ],
+   "stage": 3,
+   "shape": "blob",
+   "catchRate": 35,
+   "description": "It is what is left when an EQUILL's shadow eats its body.",
+   "attribution": {
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Hoarseshoo",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "hoodoll": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "venom"
+   ],
+   "evolutionLine": [
+    "hoodoll",
+    "wolololl"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Hoodoll",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "houndice": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "frost"
+   ],
+   "evolutionLine": [
+    "eskipup",
+    "houndice"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Houndice",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "hydrone": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "water"
+   ],
+   "evolutionLine": [
+    "hydrone"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "It utilizes an experimental technology that creates power from water.",
+   "attribution": {
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "ignibus": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "ignibus",
+    "embazook",
+    "eruptibus"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Originally design by Cavalcadeur; Other art by Leo; Front sprite by Leo; Back and face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Ignibus",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "imbrickcile": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "imbrickcile",
+    "bricgard",
+    "brickhemoth"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Imbrickcile",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "incandesfin": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "lightning",
+    "water"
+   ],
+   "evolutionLine": [
+    "fluoresfin",
+    "incandesfin",
+    "lightmare"
+   ],
+   "stage": 2,
+   "shape": "piscine",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Incandesfin",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "jelillow": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "jelillow",
+    "bedoo"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Art and design by TheBritanniaRegion; Sprites by Lejun",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Jelillow",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "jemuar": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "rockitten",
+    "rockat",
+    "jemuar"
+   ],
+   "stage": 3,
+   "shape": "hunter",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Original design by Leo; Sprites by tamashihoshi; Back sprite by Sanglorian; Other art by extyrannomon",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Jemuar",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "knindling": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "flounce",
+    "knindling"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "Any spark from a stone KNINDLING happily tenders into a fire.",
+   "attribution": {
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Knindling",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "komodraw": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "komodraw",
+    "komoduel"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Komodraw",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "komoduel": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "komodraw",
+    "komoduel"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Komoduel",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "kroki": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "kroki",
+    "krokivip",
+    "leviadile"
+   ],
+   "stage": 1,
+   "shape": "leviathan",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix; Backsprite by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Kroki",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "krokivip": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "kroki",
+    "krokivip",
+    "leviadile"
+   ],
+   "stage": 2,
+   "shape": "leviathan",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Krokivip",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "lambert": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "lambert",
+    "legko",
+    "moloch"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "legko": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "lambert",
+    "legko",
+    "moloch"
+   ],
+   "stage": 2,
+   "shape": "serpent",
+   "catchRate": 70,
+   "description": "Long thought to be legless, its leaves are actually vestigial limbs.",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "lesmagu": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "earth",
+    "venom"
+   ],
+   "evolutionLine": [
+    "lesmagu",
+    "shelagu",
+    "crustagu"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Art by BrasioPkmn; Sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Lesmagu",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "lettice": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "frost"
+   ],
+   "evolutionLine": [
+    "cohldrabi",
+    "lettice",
+    "frostuce"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "Cold weather concentrates the power and vitality of LETTICE.",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Lettice",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "leviadile": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "kroki",
+    "krokivip",
+    "leviadile"
+   ],
+   "stage": 3,
+   "shape": "leviathan",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Leviadile",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "lightmare": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "lightning",
+    "water"
+   ],
+   "evolutionLine": [
+    "fluoresfin",
+    "incandesfin",
+    "lightmare"
+   ],
+   "stage": 3,
+   "shape": "leviathan",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie; Back sprite tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Lightmare",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "marvantis": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "normal"
+   ],
+   "evolutionLine": [
+    "marvillar",
+    "marvantis"
+   ],
+   "stage": 2,
+   "shape": "grub",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Front and back sprites by HippasusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Marvantis",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "marvillar": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "marvillar",
+    "marvantis"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprite by Georg Eckert; Front, back and face sprites by HippasusTwo, based on art by WDFA-Final",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Marvillar",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "merlicun": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "cosmic",
+    "normal"
+   ],
+   "evolutionLine": [
+    "merlicun",
+    "firomenis"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "metesaur": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "metesaur",
+    "qetzlrokilus"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Sprites by Involuntary Twitch from art and design by TheBritanniaRegion",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Metesaur",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "mingdyn": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "sky"
+   ],
+   "evolutionLine": [
+    "mingdyn"
+   ],
+   "stage": 1,
+   "shape": "dragon",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Mingdyn",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "moloch": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "lambert",
+    "legko",
+    "moloch"
+   ],
+   "stage": 3,
+   "shape": "brute",
+   "catchRate": 35,
+   "description": "It can stiffen or soften its skin to respond to friends and foes.",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "myrmison": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "scarlant",
+    "shull",
+    "myrmison"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Myrmison",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "narcileaf": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "shybulb",
+    "narcileaf"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Narcileaf",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "nebufin": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "nebufin",
+    "galasces",
+    "novaquarius"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Nebufin",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nimbulex": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "sky"
+   ],
+   "evolutionLine": [
+    "bumbulus",
+    "nimbulex"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Nimbulex",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "ninjasmine": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "venom"
+   ],
+   "evolutionLine": [
+    "rosarin",
+    "toxiris",
+    "ninjasmine"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "NINJASMINE poisons his opponents quickly using his two poison swords.",
+   "attribution": {
+    "artists": "From the open-source game OPMon; Jaskrendix",
+    "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
+    "source": "wiki.tuxemon.org/Ninjasmine",
+    "status": "flagged"
+   },
+   "areaProposed": "theFactory"
+  },
+  "noctalo": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "noctula",
+    "noctalo"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "noctula": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "noctula",
+    "noctalo"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "nostray": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "nostray",
+    "shnark"
+   ],
+   "stage": 1,
+   "shape": "piscine",
+   "catchRate": 100,
+   "description": "It can smell anything in the ocean, no matter how far away.",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "novaquarius": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "nebufin",
+    "galasces",
+    "novaquarius"
+   ],
+   "stage": 3,
+   "shape": "polliwog",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Novaquarius",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nudiflot_female": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "nudiflot_female",
+    "nudimind"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nudiflot_male": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "nudiflot_male",
+    "nudikill"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nudikill": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "venom"
+   ],
+   "evolutionLine": [
+    "nudiflot_male",
+    "nudikill"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design by Sanglorian and DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Nudikill",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nudimind": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "nudiflot_female",
+    "nudimind"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "It dreams of oceans under other skies.",
+   "attribution": {
+    "artists": "Original design by DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Nudimind",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "nut": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "nut",
+    "bolt",
+    "arthrobolt"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "TacoBot",
+    "license": "Public Domain",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "octabode": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "earth",
+    "normal"
+   ],
+   "evolutionLine": [
+    "skwib",
+    "octabode"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and illustrated by fauxlens; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Octabode",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "ouroboutlet": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "metal"
+   ],
+   "evolutionLine": [
+    "pythwire",
+    "ouroboutlet",
+    "sockeserp"
+   ],
+   "stage": 2,
+   "shape": "serpent",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Ouroboutlet",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "pairagrim": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "pairagrin",
+    "pairagrim"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed by xirsoi; Art by thadeusart",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pairagrim",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "pairagrin": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky"
+   ],
+   "evolutionLine": [
+    "pairagrin",
+    "pairagrim"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Art by tamashihoshi",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pairagrin",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "pantherafira": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "normal"
+   ],
+   "evolutionLine": [
+    "pantherafira",
+    "criniotherme"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian; Alternative sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pantherafira",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "parappi": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "sky"
+   ],
+   "evolutionLine": [
+    "helipi",
+    "coppi",
+    "parappi"
+   ],
+   "stage": 3,
+   "shape": "blob",
+   "catchRate": 35,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Parappi",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "pickoon": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "pickoon",
+    "raccscal"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix; Back sprite by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pickoon",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "pigabyte": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "normal"
+   ],
+   "evolutionLine": [
+    "pigabyte"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "Scientists found that the best computers have organic implants.",
+   "attribution": {
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "pipis": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "normal"
+   ],
+   "evolutionLine": [
+    "pipis",
+    "strella"
+   ],
+   "stage": 1,
+   "shape": "flier",
+   "catchRate": 100,
+   "description": "Its cries are considered a bad omen, but it is a gentle creature.",
+   "attribution": {
+    "artists": "Original design and front sprite by Spalding004; Back and face sprites by Sanglorian; Overland sprite by Lanea Zimmerman",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pipis",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "possessun": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "shadow"
+   ],
+   "evolutionLine": [
+    "cairfrey",
+    "possessun"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "It is a ghost that inhabits a dead CAIRFREY.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "potturmeist": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "potturmeist",
+    "potturney"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and illustrated by fauxlens; Face sprites by Jaskrendix, based on front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Potturmeist",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "potturney": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "potturmeist",
+    "potturney"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and illustrated by fauxlens; Front and back sprites by Kohari nk; Face sprites by Jaskrendix, based on front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Potturney",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "primordia": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "frost"
+   ],
+   "evolutionLine": [
+    "primordia"
+   ],
+   "stage": 1,
+   "shape": "blob",
+   "catchRate": 100,
+   "description": "It is rumored to be the ancestor of all tuxemon.",
+   "attribution": {
+    "artists": "HippasusTwo; Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Primordia",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "prophetoise": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "forturtle",
+    "prophetoise"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "Its heavenly fire is something foes rarely see coming.",
+   "attribution": {
+    "artists": "Original design and sprites by Chickenshowman",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Prophetoise",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "puparmor": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "venom"
+   ],
+   "evolutionLine": [
+    "cataspike",
+    "puparmor",
+    "weavifly"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Puparmor",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "pythwire": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "metal"
+   ],
+   "evolutionLine": [
+    "pythwire",
+    "ouroboutlet",
+    "sockeserp"
+   ],
+   "stage": 1,
+   "shape": "serpent",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Pythwire",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "qetzlrokilus": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "earth",
+    "fire"
+   ],
+   "evolutionLine": [
+    "metesaur",
+    "qetzlrokilus"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Sprites by Involuntary Twitch from art and design by TheBritanniaRegion",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Qetzlrokilus",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "raccscal": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "pickoon",
+    "raccscal"
+   ],
+   "stage": 2,
+   "shape": "varmint",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Raccscal",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "regalance": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth"
+   ],
+   "evolutionLine": [
+    "claymorior",
+    "regalance"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "It can summon a halberd whenever it needs.",
+   "attribution": {
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Back sprite and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Regalance",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "rockat": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth"
+   ],
+   "evolutionLine": [
+    "rockitten",
+    "rockat",
+    "jemuar"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "Despite its considerable weight, its footfalls are silent.",
+   "attribution": {
+    "artists": "Original design and sprites by Leo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Rockat",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "rockitten": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth"
+   ],
+   "evolutionLine": [
+    "rockitten",
+    "rockat",
+    "jemuar"
+   ],
+   "stage": 1,
+   "shape": "hunter",
+   "catchRate": 100,
+   "description": "It uses its tiny rock ears for snuggling.",
+   "attribution": {
+    "artists": "Original design by ShadowApex; Sprites by ShadowApex; Face sprites by Leo; Art by Leo and ShadowApex",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Rockitten",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "rosarin": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "rosarin",
+    "toxiris",
+    "ninjasmine"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "ROSARIN's love is incredible, he's only asking some affection.",
+   "attribution": {
+    "artists": "Face sprites resized by Sanglorian from the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Rosarin",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "ruption": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "embra",
+    "ruption"
+   ],
+   "stage": 2,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Ruption",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "sapragon": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "chloragon",
+    "sapragon",
+    "dragarbor"
+   ],
+   "stage": 2,
+   "shape": "dragon",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "scarlant": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "scarlant",
+    "shull",
+    "myrmison"
+   ],
+   "stage": 1,
+   "shape": "varmint",
+   "catchRate": 100,
+   "description": "Its worst enemy is MARVILLAR, which pretends to be its kin.",
+   "attribution": {
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Scarlant",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "selket": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "venom"
+   ],
+   "evolutionLine": [
+    "selket",
+    "selmatek"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "selmatek": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "venom"
+   ],
+   "evolutionLine": [
+    "selket",
+    "selmatek"
+   ],
+   "stage": 2,
+   "shape": "grub",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "shelagu": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "earth",
+    "venom"
+   ],
+   "evolutionLine": [
+    "lesmagu",
+    "shelagu",
+    "crustagu"
+   ],
+   "stage": 2,
+   "shape": "polliwog",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and art by BrasioPkmn; Sprites by Lejun",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Shelagu",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "shnark": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "water"
+   ],
+   "evolutionLine": [
+    "nostray",
+    "shnark"
+   ],
+   "stage": 2,
+   "shape": "piscine",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front and face sprites by Sanglorian; Back sprite by Impossible Realms",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Shnark",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "shull": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "earth",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "scarlant",
+    "shull",
+    "myrmison"
+   ],
+   "stage": 2,
+   "shape": "blob",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Shull",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "shybulb": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "shybulb",
+    "narcileaf"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Shybulb",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "skwib": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "skwib",
+    "octabode"
+   ],
+   "stage": 1,
+   "shape": "polliwog",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and illustrated by fauxlens; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Skwib",
+    "status": "verified"
+   },
+   "areaProposed": "theLagoon"
+  },
+  "snaki": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "snaki",
+    "snokari"
+   ],
+   "stage": 1,
+   "shape": "serpent",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Snaki",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "snokari": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "normal"
+   ],
+   "evolutionLine": [
+    "snaki",
+    "snokari"
+   ],
+   "stage": 2,
+   "shape": "serpent",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Snokari",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "snowrilla": {
+   "ourTypeProposed": "water",
+   "tuxemonTypes": [
+    "frost",
+    "heroic"
+   ],
+   "evolutionLine": [
+    "chillimp",
+    "snowrilla"
+   ],
+   "stage": 2,
+   "shape": "brute",
+   "catchRate": 70,
+   "description": "It delights in playing tag with skiers on desolate slopes.",
+   "attribution": {
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "sockeserp": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "metal"
+   ],
+   "evolutionLine": [
+    "pythwire",
+    "ouroboutlet",
+    "sockeserp"
+   ],
+   "stage": 3,
+   "shape": "serpent",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Sockeserp",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "solight": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "solight"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot; 64px and face sprites by Lejun",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Solight",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "sphake": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "sprorm",
+    "sphake"
+   ],
+   "stage": 2,
+   "shape": "sprite",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Sphake",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "sprorm": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "sprorm",
+    "sphake"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "SPRORM is fed on by CARDINALE, which can melt it down.",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Sprorm",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "statursus": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "furnursus",
+    "statursus",
+    "coaldiak"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Face sprites adapted from the front sprites by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Statursus",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "stegofor": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "fordin",
+    "stegofor",
+    "brachifor"
+   ],
+   "stage": 2,
+   "shape": "landrace",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Stegofor",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "strella": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "sky",
+    "normal"
+   ],
+   "evolutionLine": [
+    "pipis",
+    "strella"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "Its tails are lures to convince bugs to bite them and be trapped.",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian; Overland sprites by Lanea Zimmerman",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Strella",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "tetrchimp": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "lightning",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "tetrchimp",
+    "apeoro"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Original art by CrisFarias; Front and back sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Tetrchimp",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "thumpurn": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "normal"
+   ],
+   "evolutionLine": [
+    "thumpurn",
+    "volconey"
+   ],
+   "stage": 1,
+   "shape": "brute",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Spalding004 (Sitran Fakedex); Jaskrendix",
+    "license": "CC BY 4.0",
+    "source": "wiki.tuxemon.org/Thumpurn",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "tigrock": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "grimachin",
+    "tigrock"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Original design and sprites by Leo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Tigrock",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "toxiris": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "venom"
+   ],
+   "evolutionLine": [
+    "rosarin",
+    "toxiris",
+    "ninjasmine"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "From the open-source game OPMon; Jaskrendix",
+    "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
+    "source": "wiki.tuxemon.org/Toxiris",
+    "status": "flagged"
+   },
+   "areaProposed": "theFactory"
+  },
+  "trojerror": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "virware",
+    "trojerror"
+   ],
+   "stage": 2,
+   "shape": "sprite",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Trojerror",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "tumblebee": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "venom"
+   ],
+   "evolutionLine": [
+    "tumbleworm",
+    "tumblebee"
+   ],
+   "stage": 2,
+   "shape": "flier",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design by josepharaoh99; Sprites by Cavalcadeur; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Tumblebee",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "tumbleworm": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "venom"
+   ],
+   "evolutionLine": [
+    "tumbleworm",
+    "tumblebee"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "tamashihoshi",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theMeadows"
+  },
+  "vamporm": {
+   "ourTypeProposed": "normal",
+   "tuxemonTypes": [
+    "venom",
+    "shadow"
+   ],
+   "evolutionLine": [
+    "vamporm",
+    "dracune",
+    "fluttaflap"
+   ],
+   "stage": 1,
+   "shape": "grub",
+   "catchRate": 100,
+   "description": "It thirsts for blood, but must make do with tree sap.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "velocitile": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "anoleaf",
+    "gectile",
+    "velocitile"
+   ],
+   "stage": 3,
+   "shape": "humanoid",
+   "catchRate": 35,
+   "description": "It can outrun a bullet, but only when it has warmed up.",
+   "attribution": {
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0",
+    "source": "Tuxemon ATTRIBUTIONS.md",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "virware": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "cosmic"
+   ],
+   "evolutionLine": [
+    "virware",
+    "trojerror"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Virware",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "volconey": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire",
+    "normal"
+   ],
+   "evolutionLine": [
+    "thumpurn",
+    "volconey"
+   ],
+   "stage": 2,
+   "shape": "varmint",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Volconey",
+    "status": "verified"
+   },
+   "areaProposed": "snowMountain"
+  },
+  "vulpyre": {
+   "ourTypeProposed": "fire",
+   "tuxemonTypes": [
+    "fire"
+   ],
+   "evolutionLine": [
+    "foxfire",
+    "vulpyre"
+   ],
+   "stage": 2,
+   "shape": "hunter",
+   "catchRate": 70,
+   "description": "",
+   "attribution": {
+    "artists": "Design by Leo; Sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Vulpyre",
+    "status": "verified"
+   },
+   "areaProposed": "theForest"
+  },
+  "weavifly": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal",
+    "sky"
+   ],
+   "evolutionLine": [
+    "cataspike",
+    "puparmor",
+    "weavifly"
+   ],
+   "stage": 3,
+   "shape": "grub",
+   "catchRate": 35,
+   "description": "When it is heavy with egg, it becomes unable to fly.",
+   "attribution": {
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian; Alternative sprites tweaked by HippasusTwo",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Weavifly",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  },
+  "wolololl": {
+   "ourTypeProposed": "grass",
+   "tuxemonTypes": [
+    "wood",
+    "venom"
+   ],
+   "evolutionLine": [
+    "hoodoll",
+    "wolololl"
+   ],
+   "stage": 2,
+   "shape": "humanoid",
+   "catchRate": 70,
+   "description": "WOLOLOLL's sharp spines are tipped with a deadly venom.",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Wolololl",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "woodoor": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "wood"
+   ],
+   "evolutionLine": [
+    "woodoor",
+    "blasdoor"
+   ],
+   "stage": 1,
+   "shape": "sprite",
+   "catchRate": 100,
+   "description": "",
+   "attribution": {
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, adapted from the front sprite",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Woodoor",
+    "status": "verified"
+   },
+   "areaProposed": "foggyCity"
+  },
+  "xeon": {
+   "ourTypeProposed": "metal",
+   "tuxemonTypes": [
+    "metal"
+   ],
+   "evolutionLine": [
+    "xeon"
+   ],
+   "stage": 1,
+   "shape": "humanoid",
+   "catchRate": 100,
+   "description": "A hostile robot.",
+   "attribution": {
+    "artists": "Redshrike",
+    "license": "CC BY-SA 3.0",
+    "source": "wiki.tuxemon.org/Xeon",
+    "status": "verified"
+   },
+   "areaProposed": "theFactory"
+  }
+ }
+}

@@ -38,6 +38,8 @@ project. After the step works, briefly reflect: was the model pick right?
 
 > **Milestone: M2 — Catching & Team. In progress: Steps 1–4 done ✅** *(Update this line as we progress.)*
 > M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), a random wild opponent every battle via the `startBattle(config)` contract with a Run button that always works (Step 3), and a **Throw Fakeaball** catch action using the 50%-base capture formula, with a Gotcha!/broke-free log and a counter-attack if the catch fails (Step 4). **Next up:** the M5-plan **S1** state-bag work (`src/state.js`, individuals) before Step 5's team list. Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
+>
+> **M3 prep is staged ("M3S0", 2026-07-06):** meadow tilesets + hero walk sheet + Frondly vendored (Leafick has real art now — all three starters do), the sprite-slicer tool built and run, `src/data/maps.js` drafted with The Meadows, and Phaser 4 skills vendored. Full inventory: `PLANS/M3_OVERWORLD_PLAN.md` **§A.4** — read §A before any M3 session. M3 *code* steps (S1–S9) have NOT started; M2 still finishes first. **Wild-roster art is FULLY staged (2026-07-06, Jeff's Cowork wiki run):** the entire §16 pool — now **198** after `bearloch`/`foxko` were dropped for having no credit anywhere — is vendored with verified attribution (**198 staged, 0 pending** in `CREDITS_ROSTER.md`), reference data in `tools/roster-200.json`. Two ⚠️ remain before those specific sprites reach the live game: the OPMon-derived trio (coaldiak/ninjasmine/toxiris — confirm OPMon's terms) and the hero sheet's Catch Challenger share-alike confirmation (`CREDITS.md`). **Every wild Fakeamon also has a PROPOSED home area** (`VENTA_ROSTER_DRAFT.md` + `areaProposed` in `tools/roster-200.json`) — that's Lewis's homework **B37**, a draft to react to, not a decision.
 
 ## Scope guardrails
 
@@ -45,7 +47,7 @@ project. After the step works, briefly reflect: was the model pick right?
 
 **Do NOT build yet:** overworld/map and anything Phaser (M3 — but M2's battle module must end up matching the M3 plan's §5 contract), gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). If a change starts pulling in out-of-scope systems, pause and flag it.
 
-**Not yet scheduled anywhere — flag before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has 200 Tuxemon pre-selected and typed for this, but no roadmap step wires them in — it's an **M3-late-through-M5, area-by-area task** tied to when each of the six Venta areas (`DESIGN.md` §7, `DECISIONS.md` B8) actually gets built. See the note in `ROADMAP.md`'s M3 section before starting any of this work.
+**Not yet scheduled anywhere — flag before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has 200 Tuxemon pre-selected and typed for this, but no roadmap step wires them in — it's an **M3-late-through-M5, area-by-area task** tied to when each of the six Venta areas (`DESIGN.md` §7, `DECISIONS.md` B8) actually gets built. See the note in `ROADMAP.md`'s M3 section before starting any of this work. *(The art/licensing legwork for this pool IS pre-staged — §16's staging note — but the creative wiring: Lewis's renames, encounter tables, stats — stays unscheduled.)*
 
 ## Tech stack
 
@@ -60,14 +62,20 @@ project. After the step works, briefly reflect: was the model pick right?
 ```
 index.html         → loads the game scripts (plain <script> tags, no build step, no modules)
 src/data/moves.js       → MOVES data (tweak power/accuracy here)
-src/data/fakeamon.js    → GROWLER, WHALEY data (stats, sprite paths)
+src/data/fakeamon.js    → GROWLER, WHALEY, LEAFICK data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
+src/data/maps.js        → The Meadows map draft (tile arrays + encounters) — staged for M3, NOT loaded by index.html yet
 src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
 src/main.js         → the conductor: starter-select screen, picks each random wild opponent
 roadmap.html        → visual quest map — mirrors ROADMAP.md; update BOTH in the same commit whenever a step's done-status changes (they drifted once, 2026-07-06 — see ROADMAP.md golden rule #6), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
-/assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
-/assets/sprites/battle → vendored original source sheets, for future slicing (M3)
+/assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png, leafick.png)
+/assets/sprites/battle → vendored original source sheets (slicer input)
+/assets/sprites/front|back|idle → sliced battle + overworld sprites, made by tools/slice-sheets.mjs (for M3)
+/assets/sprites/player → hero.png walk sheet for M3 (⚠️ license check pending — see CREDITS.md)
+/assets/tilesets     → meadow.png (the composed tileset The Meadows draws with) + the George originals it came from
+tools/               → dev-only Node scripts (slice-sheets.mjs + its manifest) — never loaded by the game
+PLANS/phaser-skills/ → vendored Phaser 4 skill docs — read the matching one BEFORE writing any Phaser code (M3 plan §2)
 .github/workflows    → deploy-pages.yml (auto-publishes to GitHub Pages on push to main)
 
 DESIGN.md    → full design spec (source of truth)
@@ -169,7 +177,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - **Read `CONTENT_REFERENCE.md` before pulling any new Tuxemon art, sound, or creature data** — it's the full guide: why Tuxemon (not Pokémon Void), the complete repo map, per-milestone pull lists, licensing rules, and a 200-monster wild-encounter roster for M3+. This section is the short version.
 - Starting art is **Tuxemon** sprites. License is **mixed per asset** (mostly CC BY-SA 4.0, some CC BY 3.0/4.0, a couple Public Domain) — **check each file's actual license before using it**, don't assume one blanket license. Usable with credit; keep art edits under the same (share-alike) license where that applies.
 - **Verified source path:** `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` on the `development` branch of `github.com/Tuxemon/Tuxemon` — not the wiki, not a guess. Full details and per-creature file list are in `DESIGN.md` §12.
-- These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.
+- These are **composite sprite sheets (128×88px)**, not flat single sprites — a 64×64 front pose at (0,0), a 64×64 back pose at (64,0), and a small 2-frame idle animation (two 24×24 frames) at (0,64)/(24,64). *(Corrected 2026-07-06 by measurement — an older "2×2 grid of ~64×44 cells" description was wrong.)* `tools/slice-sheets.mjs` cuts them; scale with nearest-neighbor only.
 - Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
 - When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
 - **M1's gameplay never needed art** — but as a bonus, ahead of schedule, all 3 starters (Growler, Whaley, Leafick) now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.

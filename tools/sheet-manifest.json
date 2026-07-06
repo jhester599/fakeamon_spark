@@ -1,0 +1,1216 @@
+{
+  "_comment": [
+    "One entry per vendored battle sheet in assets/sprites/battle/.",
+    "slice-sheets.mjs REFUSES to slice a sheet with no entry here — that is",
+    "on purpose: no asset ships without attribution (CONTENT_REFERENCE.md §14).",
+    "Before adding an entry, verify the artist/license in Tuxemon's",
+    "ATTRIBUTIONS.md, or the creature's wiki.tuxemon.org page when it is",
+    "missing there. sourceCommit is the Tuxemon commit the sheet was pulled from."
+  ],
+  "hissiorite": {
+    "ourName": "Growler",
+    "artists": "princess-phoenix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hissiorite)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bigfin": {
+    "ourName": "Whaley",
+    "artists": "Cavalcadeur, rsg167",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "frondly": {
+    "ourName": "Leafick",
+    "artists": "Leo (design), ReallyDarkandWindie (art), Levaine (sprites), Sanglorian (back sprite)",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Frondly)",
+    "sourceCommit": "c34a9c72"
+  },
+  "aardart": {
+    "ourName": null,
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "aardorn": {
+    "ourName": null,
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "anoleaf": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "arthrobolt": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "axolightl": {
+    "ourName": null,
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bolt": {
+    "ourName": null,
+    "artists": "TacoBot",
+    "license": "Public Domain (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cairfrey": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "capiti": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardiling": {
+    "ourName": null,
+    "artists": "Spalding004, Kyu",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardinale": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardiwing": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chillimp": {
+    "ourName": null,
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chloragon": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "corvix": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dandylion": {
+    "ourName": null,
+    "artists": "Leo, ProfessorGreen, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dracune": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dragarbor": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eyenemy": {
+    "ourName": null,
+    "artists": "Cavalcadeur",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eyesore": {
+    "ourName": null,
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "firomenis": {
+    "ourName": null,
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fluttaflap": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "foxfire": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "gectile": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hydrone": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "lambert": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "legko": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "merlicun": {
+    "ourName": null,
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "moloch": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "noctalo": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "noctula": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nostray": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudiflot_female": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudiflot_male": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nut": {
+    "ourName": null,
+    "artists": "TacoBot",
+    "license": "Public Domain (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pigabyte": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "possessun": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "sapragon": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "selket": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "selmatek": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "snowrilla": {
+    "ourName": null,
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "tumbleworm": {
+    "ourName": null,
+    "artists": "tamashihoshi",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "vamporm": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "velocitile": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "apeoro": {
+    "ourName": null,
+    "artists": "Original art by CrisFarias; Front, back and face sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Apeoro)",
+    "sourceCommit": "c34a9c72"
+  },
+  "agnsher": {
+    "ourName": null,
+    "artists": "Manual fusion of Agnite and Tweesher, by Sanglorian from sprites by aviculor and Levaine",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Agnsher)",
+    "sourceCommit": "c34a9c72"
+  },
+  "baobaraffe": {
+    "ourName": null,
+    "artists": "Name, art, sprites and blurb by princess-phoenix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Baobaraffe)",
+    "sourceCommit": "c34a9c72"
+  },
+  "ampystoma": {
+    "ourName": null,
+    "artists": "Design and art by DevilDman; Sprites by JaskRendix and HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Ampystoma)",
+    "sourceCommit": "c34a9c72"
+  },
+  "babysnitch": {
+    "ourName": null,
+    "artists": "Art by DarkMilkyWay1701",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Babysnitch)",
+    "sourceCommit": "c34a9c72"
+  },
+  "baoby": {
+    "ourName": null,
+    "artists": "Name, art, sprites and blurb by princess-phoenix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Baoby)",
+    "sourceCommit": "c34a9c72"
+  },
+  "baddrscratch": {
+    "ourName": null,
+    "artists": "Art by DarkMilkyWay1701",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Baddrscratch)",
+    "sourceCommit": "c34a9c72"
+  },
+  "boltnu": {
+    "ourName": null,
+    "artists": "Design and art by TheBritanniaRegion; Sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Boltnu)",
+    "sourceCommit": "c34a9c72"
+  },
+  "breem": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Design Origin=Inspired by parasitic worms, to explain why the original creator had a worm evolving into a bee",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Breem)",
+    "sourceCommit": "c34a9c72"
+  },
+  "birdee": {
+    "ourName": null,
+    "artists": "Front sprite by Isaiah658; Face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Birdee)",
+    "sourceCommit": "c34a9c72"
+  },
+  "birdling": {
+    "ourName": null,
+    "artists": "Design and front sprite by tamashihoshi; Back and face sprites by Chickenshowman; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Birdling)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bewhich": {
+    "ourName": null,
+    "artists": "Design and original sprite by Piacarrot",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Bewhich)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bumbulus": {
+    "ourName": null,
+    "artists": "Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Bumbulus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "blasdoor": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, adapted from the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Blasdoor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "brickhemoth": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Brickhemoth)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cackleen": {
+    "ourName": null,
+    "artists": "Design and original sprite by Piacarrot; Design Origin=The spirit of a girl possessed by an evil spirit",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Cackleen)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bursa": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites by josepharaoh99",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Bursa)",
+    "sourceCommit": "c34a9c72"
+  },
+  "capinyah": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Capinyah)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cataspike": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Cataspike)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bricgard": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Bricgard)",
+    "sourceCommit": "c34a9c72"
+  },
+  "brachifor": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Brachifor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "claymorior": {
+    "ourName": null,
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Claymorior)",
+    "sourceCommit": "c34a9c72"
+  },
+  "burrlock": {
+    "ourName": null,
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Burrlock)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cohldrabi": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Sanglorian; Back sprite adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Cohldrabi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cacaburr": {
+    "ourName": null,
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Cacaburr)",
+    "sourceCommit": "c34a9c72"
+  },
+  "brumi": {
+    "ourName": null,
+    "artists": "Design and original sprite by Piacarrot; Design Origin=The spirit of a girl possessed by an evil spirit",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Brumi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "crankus": {
+    "ourName": null,
+    "artists": "Front and back sprites by WaterTrainer; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Crankus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "caper": {
+    "ourName": null,
+    "artists": "Front and back sprites by WaterTrainer; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Caper)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dandicub": {
+    "ourName": null,
+    "artists": "Original design and sprites by Sanglorian; Art by slickedbackArtisan; Design Origin=Inspired by lions and dandelions",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Dandicub)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chenipode": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Chenipode)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chrome_robo": {
+    "ourName": null,
+    "artists": "Front sprite by Redshrike; Overland sprites by Catch Challenger",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Chrome_Robo)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chickadee": {
+    "ourName": null,
+    "artists": "Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Chickadee)",
+    "sourceCommit": "c34a9c72"
+  },
+  "deviraptor": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Deviraptor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "coppi": {
+    "ourName": null,
+    "artists": "Design and original sprite by FrozenFeathers and Piacarrot",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Coppi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "criniotherme": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Criniotherme)",
+    "sourceCommit": "c34a9c72"
+  },
+  "drokoro": {
+    "ourName": null,
+    "artists": "Original design and sprites by moritz_gunz; Face sprites tweaked by Sanglorian; Overland sprite adapted by Sanglorian from a sprite by CharlesGabriel; Other art by moritz_gunz",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Drokoro)",
+    "sourceCommit": "c34a9c72"
+  },
+  "elofly": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian; Alternative sprite adapted by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Elofly)",
+    "sourceCommit": "c34a9c72"
+  },
+  "elostorm": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Sprites tweaked by Sanglorian; Alternative sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Elostorm)",
+    "sourceCommit": "c34a9c72"
+  },
+  "elowind": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian; Alternative sprites adapted by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Elowind)",
+    "sourceCommit": "c34a9c72"
+  },
+  "crustagu": {
+    "ourName": null,
+    "artists": "Design and art by BrasioPkmn; Front and back sprites by Jaskrendix and HippasusTwo; Face sprites by JaskRendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Crustagu)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eruptibus": {
+    "ourName": null,
+    "artists": "Original design by Leo; Sprites by josepharaoh99 and Leo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Eruptibus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "equill": {
+    "ourName": null,
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Equill)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eskipup": {
+    "ourName": null,
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Eskipup)",
+    "sourceCommit": "c34a9c72"
+  },
+  "exclawvate": {
+    "ourName": null,
+    "artists": "Design and art by TheBritanniaRegion; Sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Exclawvate)",
+    "sourceCommit": "c34a9c72"
+  },
+  "devidin": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Devidin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "devidra": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front and back by HippasusTwo, face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Devidra)",
+    "sourceCommit": "c34a9c72"
+  },
+  "flounce": {
+    "ourName": null,
+    "artists": "Back sprite by HippasusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Flounce)",
+    "sourceCommit": "c34a9c72"
+  },
+  "flummby": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front sprite by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Flummby)",
+    "sourceCommit": "c34a9c72"
+  },
+  "duggot": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Duggot)",
+    "sourceCommit": "c34a9c72"
+  },
+  "embra": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Embra)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fordin": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites resized by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Fordin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "embazook": {
+    "ourName": null,
+    "artists": "Original design by Leo; Front sprite by josepharaoh99; Other sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Embazook)",
+    "sourceCommit": "c34a9c72"
+  },
+  "forturtle": {
+    "ourName": null,
+    "artists": "Original design and sprites by Chickenshowman",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Forturtle)",
+    "sourceCommit": "c34a9c72"
+  },
+  "flacono": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Flacono)",
+    "sourceCommit": "c34a9c72"
+  },
+  "exapode": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Exapode)",
+    "sourceCommit": "c34a9c72"
+  },
+  "frostuce": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Frostuce)",
+    "sourceCommit": "c34a9c72"
+  },
+  "furnursus": {
+    "ourName": null,
+    "artists": "Face sprites adapted from the front sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Furnursus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fuzzlet": {
+    "ourName": null,
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Fuzzlet)",
+    "sourceCommit": "c34a9c72"
+  },
+  "flummack": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front sprite by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Flummack)",
+    "sourceCommit": "c34a9c72"
+  },
+  "flambear": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites by tamashihoshi",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Flambear)",
+    "sourceCommit": "c34a9c72"
+  },
+  "grimachin": {
+    "ourName": null,
+    "artists": "Design and artwork by Leo; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Grimachin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "grinflare": {
+    "ourName": null,
+    "artists": "Original design by Royaba and Spalding004; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Grinflare)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fluoresfin": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Fluoresfin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "gupphish": {
+    "ourName": null,
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphish)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fuzzina": {
+    "ourName": null,
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Fuzzina)",
+    "sourceCommit": "c34a9c72"
+  },
+  "golnagi": {
+    "ourName": null,
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Golnagi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "galasces": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Galasces)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hoarse": {
+    "ourName": null,
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hoarse)",
+    "sourceCommit": "c34a9c72"
+  },
+  "grintot": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Grintot)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hoodoll": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hoodoll)",
+    "sourceCommit": "c34a9c72"
+  },
+  "ignibus": {
+    "ourName": null,
+    "artists": "Originally design by Cavalcadeur; Other art by Leo; Front sprite by Leo; Back and face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Ignibus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "grintrock": {
+    "ourName": null,
+    "artists": "Original design by Spalding004 and Royaba; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Grintrock)",
+    "sourceCommit": "c34a9c72"
+  },
+  "gryfix": {
+    "ourName": null,
+    "artists": "Front sprite by Catch Challenger; Back and face sprites by Lejun",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Gryfix)",
+    "sourceCommit": "c34a9c72"
+  },
+  "gupphire": {
+    "ourName": null,
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphire)",
+    "sourceCommit": "c34a9c72"
+  },
+  "incandesfin": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Incandesfin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "jemuar": {
+    "ourName": null,
+    "artists": "Original design by Leo; Sprites by tamashihoshi; Back sprite by Sanglorian; Other art by extyrannomon",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Jemuar)",
+    "sourceCommit": "c34a9c72"
+  },
+  "helipi": {
+    "ourName": null,
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot; It flies farther with one wing by rotating than with two, but sacrifices the ability to easily aim",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Helipi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hatchling": {
+    "ourName": null,
+    "artists": "Original design and sprites by tamashihoshi",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hatchling)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hoarseshoo": {
+    "ourName": null,
+    "artists": "Designed and sprited by Rsg167; Front and back sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Hoarseshoo)",
+    "sourceCommit": "c34a9c72"
+  },
+  "komodraw": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Komodraw)",
+    "sourceCommit": "c34a9c72"
+  },
+  "kroki": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix; Backsprite by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Kroki)",
+    "sourceCommit": "c34a9c72"
+  },
+  "houndice": {
+    "ourName": null,
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Houndice)",
+    "sourceCommit": "c34a9c72"
+  },
+  "komoduel": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Komoduel)",
+    "sourceCommit": "c34a9c72"
+  },
+  "lesmagu": {
+    "ourName": null,
+    "artists": "Art by BrasioPkmn; Sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Lesmagu)",
+    "sourceCommit": "c34a9c72"
+  },
+  "krokivip": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Krokivip)",
+    "sourceCommit": "c34a9c72"
+  },
+  "imbrickcile": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Imbrickcile)",
+    "sourceCommit": "c34a9c72"
+  },
+  "marvillar": {
+    "ourName": null,
+    "artists": "Original design and sprite by Georg Eckert; Front, back and face sprites by HippasusTwo, based on art by WDFA-Final",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Marvillar)",
+    "sourceCommit": "c34a9c72"
+  },
+  "knindling": {
+    "ourName": null,
+    "artists": "Back sprite by HappisusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Knindling)",
+    "sourceCommit": "c34a9c72"
+  },
+  "jelillow": {
+    "ourName": null,
+    "artists": "Art and design by TheBritanniaRegion; Sprites by Lejun",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Jelillow)",
+    "sourceCommit": "c34a9c72"
+  },
+  "narcileaf": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Narcileaf)",
+    "sourceCommit": "c34a9c72"
+  },
+  "marvantis": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Front and back sprites by HippasusTwo; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Marvantis)",
+    "sourceCommit": "c34a9c72"
+  },
+  "lettice": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Lettice)",
+    "sourceCommit": "c34a9c72"
+  },
+  "lightmare": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie; Back sprite tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Lightmare)",
+    "sourceCommit": "c34a9c72"
+  },
+  "leviadile": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Leviadile)",
+    "sourceCommit": "c34a9c72"
+  },
+  "myrmison": {
+    "ourName": null,
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Myrmison)",
+    "sourceCommit": "c34a9c72"
+  },
+  "novaquarius": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Novaquarius)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudikill": {
+    "ourName": null,
+    "artists": "Original design by Sanglorian and DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Nudikill)",
+    "sourceCommit": "c34a9c72"
+  },
+  "octabode": {
+    "ourName": null,
+    "artists": "Designed and illustrated by fauxlens; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Octabode)",
+    "sourceCommit": "c34a9c72"
+  },
+  "metesaur": {
+    "ourName": null,
+    "artists": "Sprites by Involuntary Twitch from art and design by TheBritanniaRegion",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Metesaur)",
+    "sourceCommit": "c34a9c72"
+  },
+  "mingdyn": {
+    "ourName": null,
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Mingdyn)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pantherafira": {
+    "ourName": null,
+    "artists": "Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian; Alternative sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pantherafira)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pairagrin": {
+    "ourName": null,
+    "artists": "Art by tamashihoshi",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pairagrin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nebufin": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Nebufin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "parappi": {
+    "ourName": null,
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Parappi)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nimbulex": {
+    "ourName": null,
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Nimbulex)",
+    "sourceCommit": "c34a9c72"
+  },
+  "potturney": {
+    "ourName": null,
+    "artists": "Designed and illustrated by fauxlens; Front and back sprites by Kohari nk; Face sprites by Jaskrendix, based on front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Potturney)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudimind": {
+    "ourName": null,
+    "artists": "Original design by DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Nudimind)",
+    "sourceCommit": "c34a9c72"
+  },
+  "ouroboutlet": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Ouroboutlet)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pythwire": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pythwire)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pairagrim": {
+    "ourName": null,
+    "artists": "Designed by xirsoi; Art by thadeusart",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pairagrim)",
+    "sourceCommit": "c34a9c72"
+  },
+  "potturmeist": {
+    "ourName": null,
+    "artists": "Designed and illustrated by fauxlens; Face sprites by Jaskrendix, based on front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Potturmeist)",
+    "sourceCommit": "c34a9c72"
+  },
+  "raccscal": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Raccscal)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pipis": {
+    "ourName": null,
+    "artists": "Original design and front sprite by Spalding004; Back and face sprites by Sanglorian; Overland sprite by Lanea Zimmerman",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pipis)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pickoon": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix; Back sprite by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Pickoon)",
+    "sourceCommit": "c34a9c72"
+  },
+  "regalance": {
+    "ourName": null,
+    "artists": "Design and original sprite by JustinNuggets and Piacarrot; Back sprite and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Regalance)",
+    "sourceCommit": "c34a9c72"
+  },
+  "rockat": {
+    "ourName": null,
+    "artists": "Original design and sprites by Leo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Rockat)",
+    "sourceCommit": "c34a9c72"
+  },
+  "rockitten": {
+    "ourName": null,
+    "artists": "Original design by ShadowApex; Sprites by ShadowApex; Face sprites by Leo; Art by Leo and ShadowApex",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Rockitten)",
+    "sourceCommit": "c34a9c72"
+  },
+  "ruption": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Ruption)",
+    "sourceCommit": "c34a9c72"
+  },
+  "prophetoise": {
+    "ourName": null,
+    "artists": "Original design and sprites by Chickenshowman",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Prophetoise)",
+    "sourceCommit": "c34a9c72"
+  },
+  "shnark": {
+    "ourName": null,
+    "artists": "Design and front and face sprites by Sanglorian; Back sprite by Impossible Realms",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Shnark)",
+    "sourceCommit": "c34a9c72"
+  },
+  "puparmor": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Puparmor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "shelagu": {
+    "ourName": null,
+    "artists": "Design and art by BrasioPkmn; Sprites by Lejun",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Shelagu)",
+    "sourceCommit": "c34a9c72"
+  },
+  "shybulb": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Shybulb)",
+    "sourceCommit": "c34a9c72"
+  },
+  "snaki": {
+    "ourName": null,
+    "artists": "Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki)",
+    "sourceCommit": "c34a9c72"
+  },
+  "skwib": {
+    "ourName": null,
+    "artists": "Designed and illustrated by fauxlens; Sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Skwib)",
+    "sourceCommit": "c34a9c72"
+  },
+  "snokari": {
+    "ourName": null,
+    "artists": "Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Snokari)",
+    "sourceCommit": "c34a9c72"
+  },
+  "solight": {
+    "ourName": null,
+    "artists": "Design and original sprite by FrozenFeather and Piacarrot; 64px and face sprites by Lejun",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Solight)",
+    "sourceCommit": "c34a9c72"
+  },
+  "qetzlrokilus": {
+    "ourName": null,
+    "artists": "Sprites by Involuntary Twitch from art and design by TheBritanniaRegion",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Qetzlrokilus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "sockeserp": {
+    "ourName": null,
+    "artists": "Original design and sprites by Serpexnessie",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Sockeserp)",
+    "sourceCommit": "c34a9c72"
+  },
+  "sphake": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Sphake)",
+    "sourceCommit": "c34a9c72"
+  },
+  "tetrchimp": {
+    "ourName": null,
+    "artists": "Original art by CrisFarias; Front and back sprites by Involuntary Twitch",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Tetrchimp)",
+    "sourceCommit": "c34a9c72"
+  },
+  "strella": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian; Overland sprites by Lanea Zimmerman",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Strella)",
+    "sourceCommit": "c34a9c72"
+  },
+  "rosarin": {
+    "ourName": null,
+    "artists": "Face sprites resized by Sanglorian from the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Rosarin)",
+    "sourceCommit": "c34a9c72"
+  },
+  "scarlant": {
+    "ourName": null,
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Scarlant)",
+    "sourceCommit": "c34a9c72"
+  },
+  "trojerror": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Trojerror)",
+    "sourceCommit": "c34a9c72"
+  },
+  "shull": {
+    "ourName": null,
+    "artists": "Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Shull)",
+    "sourceCommit": "c34a9c72"
+  },
+  "sprorm": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Sprorm)",
+    "sourceCommit": "c34a9c72"
+  },
+  "statursus": {
+    "ourName": null,
+    "artists": "Face sprites adapted from the front sprites by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Statursus)",
+    "sourceCommit": "c34a9c72"
+  },
+  "stegofor": {
+    "ourName": null,
+    "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Stegofor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "weavifly": {
+    "ourName": null,
+    "artists": "Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian; Alternative sprites tweaked by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Weavifly)",
+    "sourceCommit": "c34a9c72"
+  },
+  "tigrock": {
+    "ourName": null,
+    "artists": "Original design and sprites by Leo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Tigrock)",
+    "sourceCommit": "c34a9c72"
+  },
+  "wolololl": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Wolololl)",
+    "sourceCommit": "c34a9c72"
+  },
+  "tumblebee": {
+    "ourName": null,
+    "artists": "Design by josepharaoh99; Sprites by Cavalcadeur; Back sprite by Sanglorian",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Tumblebee)",
+    "sourceCommit": "c34a9c72"
+  },
+  "virware": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Virware)",
+    "sourceCommit": "c34a9c72"
+  },
+  "vulpyre": {
+    "ourName": null,
+    "artists": "Design by Leo; Sprites by HippasusTwo",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Vulpyre)",
+    "sourceCommit": "c34a9c72"
+  },
+  "volconey": {
+    "ourName": null,
+    "artists": "Front sprite by Spalding004; Back and face sprites by Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Volconey)",
+    "sourceCommit": "c34a9c72"
+  },
+  "woodoor": {
+    "ourName": null,
+    "artists": "Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, adapted from the front sprite",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Woodoor)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bedoo": {
+    "ourName": null,
+    "artists": "TheBritanniaRegion",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Bedoo)",
+    "sourceCommit": "c34a9c72"
+  },
+  "primordia": {
+    "ourName": null,
+    "artists": "HippasusTwo; Jaskrendix",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Primordia)",
+    "sourceCommit": "c34a9c72"
+  },
+  "xeon": {
+    "ourName": null,
+    "artists": "Redshrike",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Xeon)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dark_robo": {
+    "ourName": null,
+    "artists": "Redshrike",
+    "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Dark_Robo)",
+    "sourceCommit": "c34a9c72"
+  },
+  "thumpurn": {
+    "ourName": null,
+    "artists": "Spalding004 (Sitran Fakedex); Jaskrendix",
+    "license": "CC BY 4.0 (per wiki.tuxemon.org/Thumpurn)",
+    "sourceCommit": "c34a9c72"
+  },
+  "coaldiak": {
+    "ourName": null,
+    "artists": "From the open-source game OPMon; Jaskrendix; name by Sanglorian",
+    "license": "⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Coaldiak)",
+    "sourceCommit": "c34a9c72"
+  },
+  "ninjasmine": {
+    "ourName": null,
+    "artists": "From the open-source game OPMon; Jaskrendix",
+    "license": "⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Ninjasmine)",
+    "sourceCommit": "c34a9c72"
+  },
+  "toxiris": {
+    "ourName": null,
+    "artists": "From the open-source game OPMon; Jaskrendix",
+    "license": "⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Toxiris)",
+    "sourceCommit": "c34a9c72"
+  }
+}

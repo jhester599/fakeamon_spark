@@ -137,14 +137,14 @@ mods/tuxemon/
 │   ├── dialogue/            dialogue.yaml
 │   ├── animation/, music/, sounds/, status/, environment/, weather/, …
 ├── gfx/
-│   ├── sprites/battle/      412 monster battle sheets: <slug>-sheet.png (128×88, 2×2 grid)
-│   ├── sprites/player/      playable-character walk sheets (many palette variants)
+│   ├── sprites/battle/      412 monster battle sheets: <slug>-sheet.png (128×88; layout in §9)
+│   ├── sprites/player/      357 trainer battle PORTRAITS (128×64) — walk sheets are NOT here, see sprites/ below
 │   ├── sprites/flairs/      cosmetic monster variants
 │   ├── items/               177 item icons (balls, potions, berries, apps…)
 │   ├── tilesets/            96 overworld tileset PNGs (16×16, artist named in filename)
 │   ├── ui/                  menus, borders, HP-bar chrome, element type icons
 │   └── borders/, bubbles/   dialog boxes, emote bubbles
-├── sprites/                 208 overworld NPC walk-cycle sheets (goth.png, childactor.png, boss.png…)
+├── sprites/                 208 overworld walk-cycle sheets, player AND NPC (adventurer.png, goth.png, boss.png…) — the M3 hero source
 ├── animations/
 │   ├── technique/           193 frame-by-frame attack-effect PNG sequences
 │   ├── item/                capture-ball animations
@@ -246,10 +246,10 @@ Lewis's "2× vs everything" rule stays our own house rule for Artemis.)
 
 | Asset class | Path | Count | Notes |
 |---|---|---|---|
-| Monster battle sheets | `gfx/sprites/battle/<slug>-sheet.png` | 412 | 128×88 px, 2×2 grid: front + back pose, 2-frame idle each (~64×44/cell). Slice, then scale 3–4× nearest-neighbor. Already documented in DESIGN.md §12. |
+| Monster battle sheets | `gfx/sprites/battle/<slug>-sheet.png` | 412 | 128×88 px: front pose 64×64 at (0,0), back pose 64×64 at (64,0), 2-frame idle pair 24×24 at (0,64)/(24,64) *(corrected 2026-07-06 by measurement — this row previously claimed a "2×2 grid of ~64×44 cells", which is wrong)*. Slice with `tools/slice-sheets.mjs`, scale nearest-neighbor. See DESIGN.md §12. |
 | Monster cosmetic variants | `gfx/sprites/flairs/` | — | optional shiny-style variants |
-| Player walk sheets | `gfx/sprites/player/` | many | multiple outfits + palette swaps — **M3 player character source** |
-| Overworld NPC sheets | `sprites/` (top level, NOT gfx/) | 208 | walk cycles; our gym leaders map here: `goth.png`, `childactor.png`, `boss.png` archetype for Enforcer Boss |
+| Trainer battle portraits | `gfx/sprites/player/` | 357 | ⚠️ *(corrected 2026-07-06)* these are 128×64 **battle-screen portraits** (front + back poses), NOT walk sheets — this row previously mislabeled them as the M3 player source |
+| Overworld walk sheets — player AND NPCs | `sprites/` (top level, NOT gfx/) | 208 | 48×128 walk-cycle sheets: 3 frames × 4 directions of 16×32 cells. **This is the M3 player-character source** (e.g. `adventurer.png`, cap + backpack — vendored as our hero) plus our gym leaders: `goth.png`, `childactor.png`, `boss.png` archetype for Enforcer Boss |
 | Item icons | `gfx/items/` | 177 | balls, potions, berries, phone apps |
 | Tilesets | `gfx/tilesets/` | 96 | 16×16 overworld/interior tiles; artist in filename (e.g. `Cave_Tiles_by_ArMM1998…`, `Interiors by Redshrike.png`) — **M3 map source** |
 | UI chrome | `gfx/ui/`, `gfx/borders/`, `gfx/menu-*.png` | — | menu frames, HP bars, element type icons, emote bubbles |
@@ -354,17 +354,30 @@ unblocked once that lands.
 | Milestone | Pull from Tuxemon |
 |---|---|
 | **M2 — Catching & Team** | `gfx/items/tuxeball*.png` (recolor into our 4 ball tiers); `catch_rate` values from our creatures' YAMLs to seed the capture formula; `animations/item/` capture animation (optional) |
-| **M3 — Overworld** | `gfx/tilesets/` (start with Buch/George/ArMM1998 exterior+interior sets); `gfx/sprites/player/` hero walk sheet; slice the vendored battle sheets per DESIGN.md §12; `maps/*.tmx` as Tiled structure reference |
+| **M3 — Overworld** | `gfx/tilesets/` (start with Buch/George/ArMM1998 exterior+interior sets); hero walk sheet from `sprites/` — top level, *not* `gfx/sprites/player/` (see §9's corrected rows); slice the vendored battle sheets per DESIGN.md §12; `maps/*.tmx` as Tiled structure reference. *Mostly staged 2026-07-06 (M3S0) — see the M3 plan §A.4 for what's already vendored.* |
 | **M4 — World Systems** | `sprites/goth.png`, `childactor.png`, `boss.png` (gym leaders); shop item icons from `gfx/items/`; `sounds/interface/` UI sounds; a town + battle track from `music/` |
 | **M5 — Depth & Story** | evolution-stage sheets (cobarett, pythonova, budaye); berry/food icons from `gfx/items/`; `animations/technique/` battle effects; monster cries from `sounds/monster/`; description blurbs from `l18n/en_US/LC_MESSAGES/base.po` |
 
 ---
 
-## 16. Wild encounter roster — 200 Tuxemon selected (~50% of the dex)
+## 16. Wild encounter roster — 198 Tuxemon selected (~50% of the dex)
 
-For the overworld (M3+), **200 of Tuxemon's 411 monsters** are approved as
-the wild-encounter candidate pool. They were selected programmatically from
-the pinned clone using these criteria:
+> **Staging status (updated 2026-07-06, after the Cowork wiki run):** the
+> roster's *sourcing work* is **done**. All sheets are vendored in
+> `assets/sprites/battle/` with verified attribution — **198 staged, 0
+> pending** (ledger: the generated **`CREDITS_ROSTER.md`**; reference data:
+> **`tools/roster-200.json`** — types, evolution lines, catch rates,
+> blurbs, attribution). Two selections were **dropped** for having no
+> credit in `ATTRIBUTIONS.md` *or* on the wiki: `foxko` (Fire) and
+> `bearloch` (Metal) — both standalone lines, so no evolution family was
+> broken; the pool is now **198**, and the tables below mark them dropped.
+> Three staged monsters (`coaldiak`, `ninjasmine`, `toxiris`) are ⚠️
+> **OPMon-derived** — confirm that project's terms before they enter the
+> game. What remains creative: Lewis's rename pass and per-area encounter
+> tables — and to give those a running start, every monster now carries a
+> **proposed** home area (`areaProposed` in the JSON, worksheet in
+> **`VENTA_ROSTER_DRAFT.md`**, Lewis's homework **B37**). Proposed ≠
+> decided — Lewis reshuffles freely.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every
@@ -415,7 +428,7 @@ which type in the wild.]**
 
 ### The 200 — grouped by our (proposed) type
 
-### Fire — 34 monsters, 18 evolution lines
+### Fire — 33 monsters, 17 evolution lines *(foxko dropped 2026-07-06)*
 
 | Evolution line (Tuxemon slugs, basic → final) | Tuxemon type(s) | Blurbs |
 |---|---|---|
@@ -433,7 +446,7 @@ which type in the wild.]**
 | `thumpurn` → `volconey` | fire, normal | ✅ |
 | `agnsher` | fire, water | ✅ |
 | `drokoro` | fire | ✅ |
-| `foxko` | fire, wood | ✅ |
+| ~~`foxko`~~ *(dropped 2026-07-06 — no credit in ATTRIBUTIONS.md or on the wiki)* | fire, wood | — |
 | `mingdyn` | fire, sky | ✅ |
 | `primordia` | fire, frost | ✅ |
 | `solight` | cosmic, fire | ✅ |
@@ -482,7 +495,7 @@ which type in the wild.]**
 | `shybulb` → `narcileaf` | wood | ✅ |
 | `tumbleworm` → `tumblebee` | venom | ✅ |
 
-### Metal — 34 monsters, 18 evolution lines
+### Metal — 33 monsters, 17 evolution lines *(bearloch dropped 2026-07-06)*
 
 | Evolution line (Tuxemon slugs, basic → final) | Tuxemon type(s) | Blurbs |
 |---|---|---|
@@ -498,7 +511,7 @@ which type in the wild.]**
 | `tetrchimp` → `apeoro` | cosmic, lightning | ✅ |
 | `virware` → `trojerror` | cosmic, metal | ✅ |
 | `woodoor` → `blasdoor` | metal, wood | ✅ |
-| `bearloch` | metal, wood | ✅ |
+| ~~`bearloch`~~ *(dropped 2026-07-06 — no credit in ATTRIBUTIONS.md or on the wiki)* | metal, wood | — |
 | `chrome_robo` | metal | ✅ |
 | `dark_robo` | metal | ✅ |
 | `hydrone` | metal, water | ✅ |

@@ -11,7 +11,91 @@
 >
 > **Status:** plan complete; execution not started. Prerequisite: M2 finished
 > (especially the Step 1 refactor — see §8, which constrains *how* that
-> refactor must be done).
+> refactor must be done). **Read §A below first** — it reconciles this plan
+> against the code and decisions as they actually stand, and lists the prep
+> work already staged in the repo.
+
+---
+
+## §A. Amendments — M3S0 prep session (2026-07-06)
+
+Written while staging M3 prep work (Jeff-directed, Lewis away), following the
+reconciliation pattern from `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A: when code
+or facts and this plan disagree, the plan gets updated rather than rotting.
+
+### §A.1 Where the code actually is
+
+M2 Steps 1–4 are done. Checking §8's four constraints against `main`:
+
+1. **§8.1 (the `startBattle` contract) — ✅ done**, in its M2-sized form:
+   a global promise-returning function in `src/battle.js`, with plain
+   `player`/`enemy` species objects. `playerParty` + species-key/level enemies
+   arrive with individuals (M5 plan §6, S1) — the shape upgrade, not a rewrite.
+2. **§8.2 (`src/state.js`) — not yet.** Scheduled as the very next M2 session
+   (M5 plan S1, before M2 Step 5). M3 must not start before it lands.
+3. **§8.3 (ES-module/`file://` breakage) — void.** The project confirmed
+   plain global scripts, not ES modules (M5 plan §A.1; `DECISIONS.md`, Jeff's
+   technical calls). Double-click-to-play survives through M3; script load
+   order in `index.html` is the dependency graph. Read every `export`/`import`
+   in this plan as "define a global."
+4. **§8.4 (relative paths only) — stands, unchanged.**
+
+### §A.2 Homework answers that landed after this plan was written
+
+§11's "open threads for humans" is now almost all answered (Lewis cleared
+B1–B32 on 2026-07-06 — `DECISIONS.md` rows 14–45):
+
+- **B1** flee → Run always works (already built, M2 Step 3). `canFlee` wiring ✅.
+- **B2** caught HP → fully healed (already built, M2 Step 4).
+- **B6/B7/B8** → connected areas; the world is **Venta**; the starting area is
+  **The Meadows**. So this plan's placeholder id `starterMeadow` is renamed:
+  the staged map data uses **`theMeadows`**. Read `starterMeadow` anywhere in
+  these plans (including the M5 plan's `gameState.world` sketch) as `theMeadows`.
+- **B10** hero → original cap-and-backpack design, placeholder name "Hero";
+  don't copy an existing character. Placeholder art is vendored (§A.4) and a
+  recolor/original pass can come later without blocking anything.
+- Still genuinely open: **Jeff's zoom pick** (2× vs 3×, eyeballed at S1).
+
+### §A.3 ⚠️ Corrected battle-sheet geometry (supersedes §6.3 + §7.3 wording)
+
+The "2×2 grid of 64×44 cells, front/back × 2-frame idle" description in §7.3
+(and `DESIGN.md` §12) was **wrong**. Measured against 10 real sheets
+(2026-07-06, alpha-bounding-box check, uniform across all 10):
+
+```
+128×88 sheet:  front pose  64×64 at (0,0)
+               back pose   64×64 at (64,0)
+               idle pair   two 24×24 frames at (0,64) and (24,64)
+```
+
+Consequences (both make M3 *easier*):
+
+- **§6.3 encounters:** the map sprite is the dedicated little **idle pair**
+  (24×24 ×2 frames) — already tile-scale, no downscaling of the big front
+  pose needed. The "free idle animation" claim stays true, at the right size.
+- **§7.3 slicer:** outputs are `front/<slug>.png` (64×64),
+  `back/<slug>.png` (64×64), and `idle/<slug>.png` (48×24 two-frame strip;
+  Phaser loads it with `frameWidth: 24, frameHeight: 24`).
+
+### §A.4 Already staged in the repo (don't redo these in S1–S9)
+
+| Staged | Where | Notes |
+|---|---|---|
+| Meadow tileset, composed | `assets/tilesets/meadow.png` | 24-tile 16×16 set (6×4); index legend lives in `src/data/maps.js`. Built from the two George originals below (CC BY 3.0) |
+| Tileset source originals | `assets/tilesets/terrain_george.png`, `vegetation_george.png` | unmodified Tuxemon pulls, kept for re-composition |
+| Hero walk sheet | `assets/sprites/player/hero.png` | Tuxemon "adventurer" (cap + backpack — matches B10); 48×128, 3 frames × 4 rows (observed down/left/right/up), 16×32 cells — verify frame order at S3. ⚠️ license check pending, see `CREDITS.md` |
+| Frondly battle sheet + Leafick portrait | `assets/sprites/battle/frondly-sheet.png`, `assets/sprites/leafick.png` | Leafick's portrait is wired into `src/data/fakeamon.js` — all three starters now have art |
+| Sliced starter sprites | `assets/sprites/front|back|idle/<slug>.png` | hissiorite, bigfin, frondly |
+| The slicer tool (S5, built early) | `tools/slice-sheets.mjs` + `sheet-manifest.json` | corrected geometry per §A.3; refuses to slice unattributed sheets; regenerates `tools/credits-fragment.md`. S5 shrinks to "add manifest entries + re-run" |
+| Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
+| Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
+| Phaser version check | — | newest stable 4.x on npm as of 2026-07-06 is **4.2.0** — §2's "4.2.1" guess doesn't exist. Re-check and pin at S1; record in `DECISIONS.md` |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by any M3 step — staged for the area-by-area roster work later |
+
+What S1 still owns: the pinned CDN script tag, `src/world/config.js`,
+BootScene + empty WorldScene, the "Battle test" button, Jeff's zoom pick.
+The map *renders* at S2, the hero *walks* at S3 — the staged files just mean
+those sessions start from data and art that already exist.
 
 ---
 
@@ -235,10 +319,10 @@ First map: **one screen, ~30×20 tiles**, grass + a dirt path + tree border.
 No scrolling camera until the map is bigger than the screen (M3 step 6 —
 camera-follow is one line in Phaser, but keep it out of the first playable).
 
-> **Homework dependency:** Lewis's **B6** (one big map vs. connected areas)
-> decides M4's world shape, **not** M3's. Either answer starts from exactly
-> this one-map slice, so M3 is unblocked. Same for **B7/B8** (world/area
-> names) — use the placeholder id `starterMeadow` and rename when he decides.
+> **Homework dependency — resolved, see §A.2:** B6/B7/B8 are decided
+> (connected areas; the world is **Venta**; the first area is **The
+> Meadows**), so the placeholder id `starterMeadow` is now **`theMeadows`** —
+> which is what the staged `src/data/maps.js` already uses.
 
 ### 6.2 Grid movement — the classic lock-step
 
@@ -264,9 +348,10 @@ Pokémon-style movement is **discrete**: the player is always *on* a tile or
 ### 6.3 Encounters — visible creatures (decided 2026-07-05)
 
 - Each map encounter is a Phaser sprite standing on its tile, using the
-  creature's **front battle pose** (frame 0 of its sheet) scaled to fit the
-  tile — an idle 2-frame animation makes the world feel alive for free,
-  since the sheets already contain it.
+  creature's little **2-frame idle pair** from its sheet *(corrected — see
+  §A.3; the sheets carry a dedicated 24×24 idle sprite, already tile-scale,
+  sliced to `assets/sprites/idle/<slug>.png`)* — an idle 2-frame animation
+  makes the world feel alive for free, since the sheets already contain it.
 - Encounter tiles count as blocked for pathing; the *bump* is what triggers
   the battle: when the player's target tile contains an encounter, don't
   move — fire `handleEncounter(id)` instead.
@@ -299,12 +384,17 @@ asset, not later.
    (Lewis's **B10** invents the hero's *identity*; a custom look can be a
    later recolor — don't block on it.)
 3. **Battle-sheet slicing (the ~200-monster pass):** a Node script,
-   `tools/slice-sheets.mjs`, run manually (never in the browser):
-   - Input: vendored 128×88 sheets (`assets/sprites/battle/`), which are
-     2×2 grids — front/back pose × 2-frame idle, each cell 64×44.
-   - Output: `assets/sprites/front/<slug>.png` and `back/<slug>.png` as
-     2-frame horizontal strips (128×44), which Phaser loads directly as
-     2-frame spritesheets for the idle animation.
+   `tools/slice-sheets.mjs`, run manually (never in the browser).
+   ✅ *Built and run for the three starters during M3S0 — and the sheet
+   geometry described below was corrected in the process; see §A.3 for the
+   measured layout.*
+   - Input: vendored 128×88 sheets (`assets/sprites/battle/`) — front pose
+     64×64 at (0,0), back pose 64×64 at (64,0), and a two-frame 24×24 idle
+     pair at (0,64)/(24,64) *(not the "2×2 grid of 64×44 cells" this plan
+     originally guessed)*.
+   - Output: `front/<slug>.png` and `back/<slug>.png` (64×64 poses) plus
+     `idle/<slug>.png` (48×24 strip; Phaser loads it as a 2-frame
+     spritesheet with `frameWidth: 24, frameHeight: 24`).
    - Use `sharp` (`npm i sharp` — a `package.json` for *tools only* doesn't
      violate the no-build-step rule; the game itself still ships raw).
    - The script also **emits a CREDITS.md table fragment** from a manifest
@@ -389,9 +479,12 @@ controls, save/load, sound. Flag and stop, per the golden rules.
 
 ## 11. Open threads this plan leaves for humans
 
+*(Mostly resolved since — see §A.2. Kept for the record.)*
+
 - **Lewis (homework):** B1 flee rule (needed by S7's `canFlee`), B2
   caught-HP policy (S8), B6–B8 world naming/shape (rename `starterMeadow`
-  whenever answered; nothing blocks), B10 hero identity (cosmetic).
+  whenever answered; nothing blocks), B10 hero identity (cosmetic) —
+  **all answered 2026-07-06**, `DECISIONS.md` rows 14–45.
 - **Jeff:** confirm tech stack `[TO CONFIRM]` in `DESIGN.md` — this plan
   assumes the recommended default and effectively *is* the confirmation,
   so flip it when committing this file; decide zoom level (2× vs 3×) at S1

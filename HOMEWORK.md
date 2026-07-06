@@ -80,13 +80,24 @@ knocked out most of the old list:
    `CREDITS.md` — same 2-minute drill that cleared Hissiorite/Frondly.
 5. **NEW — wild-roster wiki credits (157 monsters, one command):** 43 of
    the §16 roster are staged with verified credits; the other 157 are
-   credited only on the wiki. From any machine with normal internet:
-   `cd tools && npm install && npm run wiki-credits -- --write`, review the
-   diff, then `npm run vendor-sheets && npm run roster-credits`, commit.
-   *(Alternative: add `wiki.tuxemon.org` to the Claude environment's
-   allowed network domains and a session can run it — that would also
-   cover item 4.)* No deadline — the roster wires in area by area,
-   M3-late at the earliest.
+   credited only on the wiki, which the remote Claude environment's proxy
+   refuses to reach (confirmed: CONNECT 403 at the proxy, not the wiki).
+   Run from any machine with Node 18+ and git — **no `npm install`
+   needed**, these scripts have zero dependencies. PowerShell-friendly:
+   ```
+   cd fakeamon_spark\tools
+   node .\fetch-wiki-credits.mjs --write     # ~157 wiki lookups, ~1 min
+   git diff                                  # review — you're the judge
+   node .\vendor-sheets.mjs                  # pull the newly-credited sheets
+   node .\make-roster-credits.mjs            # regenerate CREDITS_ROSTER.md
+   ```
+   then commit and push. Monsters printed with ✗ stayed pending on
+   purpose — hand their list (or `tools/wiki-credits.json`) to any Claude
+   session to chase down. Easiest of all: run it *via* Claude Code /
+   Cowork on your machine with the prompt "Do HOMEWORK item 5, review
+   ambiguous credits with me, then commit" — it can also do item 4 (the
+   hero sheet) in the same sitting. No deadline — the roster wires in
+   area by area, M3-late at the earliest.
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token

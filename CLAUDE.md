@@ -38,6 +38,8 @@ project. After the step works, briefly reflect: was the model pick right?
 
 > **Milestone: M2 — Catching & Team. In progress: Steps 1–4 done ✅** *(Update this line as we progress.)*
 > M1 (the battle slice) is complete and live. M2 so far: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), a random wild opponent every battle via the `startBattle(config)` contract with a Run button that always works (Step 3), and a **Throw Fakeaball** catch action using the 50%-base capture formula, with a Gotcha!/broke-free log and a counter-attack if the catch fails (Step 4). **Next up:** the M5-plan **S1** state-bag work (`src/state.js`, individuals) before Step 5's team list. Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
+>
+> **M3 prep is staged ("M3S0", 2026-07-06):** meadow tilesets + hero walk sheet + Frondly vendored (Leafick has real art now — all three starters do), the sprite-slicer tool built and run, `src/data/maps.js` drafted with The Meadows, and Phaser 4 skills vendored. Full inventory: `PLANS/M3_OVERWORLD_PLAN.md` **§A.4** — read §A before any M3 session. M3 *code* steps (S1–S9) have NOT started; M2 still finishes first. One ⚠️ open: the hero sheet's license check (`CREDITS.md`).
 
 ## Scope guardrails
 
@@ -60,14 +62,20 @@ project. After the step works, briefly reflect: was the model pick right?
 ```
 index.html         → loads the game scripts (plain <script> tags, no build step, no modules)
 src/data/moves.js       → MOVES data (tweak power/accuracy here)
-src/data/fakeamon.js    → GROWLER, WHALEY data (stats, sprite paths)
+src/data/fakeamon.js    → GROWLER, WHALEY, LEAFICK data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
+src/data/maps.js        → The Meadows map draft (tile arrays + encounters) — staged for M3, NOT loaded by index.html yet
 src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
 src/main.js         → the conductor: starter-select screen, picks each random wild opponent
 roadmap.html        → visual quest map — mirrors ROADMAP.md; update BOTH in the same commit whenever a step's done-status changes (they drifted once, 2026-07-06 — see ROADMAP.md golden rule #6), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
-/assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
-/assets/sprites/battle → vendored original source sheets, for future slicing (M3)
+/assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png, leafick.png)
+/assets/sprites/battle → vendored original source sheets (slicer input)
+/assets/sprites/front|back|idle → sliced battle + overworld sprites, made by tools/slice-sheets.mjs (for M3)
+/assets/sprites/player → hero.png walk sheet for M3 (⚠️ license check pending — see CREDITS.md)
+/assets/tilesets     → meadow.png (the composed tileset The Meadows draws with) + the George originals it came from
+tools/               → dev-only Node scripts (slice-sheets.mjs + its manifest) — never loaded by the game
+PLANS/phaser-skills/ → vendored Phaser 4 skill docs — read the matching one BEFORE writing any Phaser code (M3 plan §2)
 .github/workflows    → deploy-pages.yml (auto-publishes to GitHub Pages on push to main)
 
 DESIGN.md    → full design spec (source of truth)

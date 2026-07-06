@@ -50,16 +50,22 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
 
 ## 🧑‍💻 Jeff's list
 
-Nothing blocking the next session; these come due at M3 Step S1:
+Nothing blocking the next session. The M3S0 prep session (2026-07-06)
+knocked out most of the old list:
 
-1. **Zoom level (2× vs 3×)** — eyeball it on the family screen when the
-   first Phaser canvas is up (M3 plan §11).
-2. **Pin Phaser 4** — check [phaser.io/download/stable](https://phaser.io/download/stable)
-   and pin the newest 4.x in the CDN URL; record it in `DECISIONS.md`
-   (M3 plan §2).
-3. **Vendor the Phaser skills** — copy the relevant `skills/` files from the
-   Phaser 4 repo into `PLANS/phaser-skills/` before any Phaser code gets
-   written (M3 plan §2 — it's the defense against Claude's v3 habits).
+1. **Zoom level (2× vs 3×)** — still open; eyeball it on the family screen
+   when the first Phaser canvas is up (M3 plan §11).
+2. ✅ ~~Pin Phaser 4~~ — *prepped 2026-07-06:* newest stable 4.x on npm is
+   **4.2.0** (the plan's "4.2.1" guess doesn't exist). Re-verify and pin in
+   the CDN URL at S1, and record it in `DECISIONS.md` then.
+3. ✅ ~~Vendor the Phaser skills~~ — *done 2026-07-06:* 10 skills + README
+   in `PLANS/phaser-skills/`, from `phaserjs/phaser` @ `539e718`.
+4. **NEW — hero walk-sheet license check (before the next public deploy of
+   hero art):** `assets/sprites/player/hero.png` (Tuxemon's "adventurer"
+   overworld sheet) has no entry in Tuxemon's `ATTRIBUTIONS.md`, and
+   `wiki.tuxemon.org` wasn't reachable from the staging session. Check the
+   wiki's Adventurer/NPC-sprites pages and fill in the ⚠️ row in
+   `CREDITS.md` — same 2-minute drill that cleared Hissiorite/Frondly.
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token

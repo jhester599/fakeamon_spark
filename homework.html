@@ -166,77 +166,94 @@
   <header>
     <div class="eyebrow">Fakeamon · Stopping Point</div>
     <h1 class="title disp">Homework Before We Continue</h1>
-    <p class="subtitle">Good stopping point for tonight! Here's what we finished, and the couple of things we need answered before picking M2 back up. 🌙</p>
+    <p class="subtitle">Round 3! Four questions for Lewis — they feed the very next build steps: wild battles and catching. 🌙</p>
   </header>
 
   <div class="recap">
-    <h2>✅ What we built tonight</h2>
+    <h2>✅ What happened this session</h2>
     <ul>
-      <li><span class="tag">M1</span>Finished the whole Battle Slice — moves, damage, types, HP bars, misses, fainting, and a win/lose screen with Play Again.</li>
-      <li><span class="tag">Bonus</span>Growler and Whaley now have real Tuxemon-based art instead of colored boxes.</li>
-      <li><span class="tag">Docs</span>Verified exactly where Tuxemon's art lives, fixed a wrong license note, and found two sprites (Growler's, and Leafick's for later) with missing attribution — see the Jeff list below.</li>
-      <li><span class="tag">Live!</span>The game is now hosted at <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a> — a real, permanent URL that auto-deploys on every push, not a Claude-session link.</li>
+      <li><span class="tag">Plans</span>Two big architecture plans landed in <code>PLANS/</code> — the <b>M3 overworld plan</b> (how the Phaser map and our battle screen hand off) and the <b>state &amp; save plan</b> (XP, evolution, Boxes, saving).</li>
+      <li><span class="tag">Bank</span><code>HOMEWORK_BACKLOG.md</code> — a bank of <b>33 questions</b> for Lewis covering the whole rest of the game. This page serves a few at a time. 🎒</li>
+      <li><span class="tag">Stack</span>Tech stack pinned: plain scripts (double-click still works!) through M2; <b>Phaser 4</b> from a CDN at M3.</li>
+      <li><span class="tag">Round 2</span>✅ Done — team of <b>4</b> with <b>Boxes</b>, <b>50%</b> base catch rate. See <code>DECISIONS.md</code> #11–12.</li>
     </ul>
   </div>
 
   <div class="bar">
-    <span class="count"><b id="doneN">0</b> of 2 questions answered</span>
+    <span class="count"><b id="doneN">0</b> of 4 questions answered</span>
     <div class="actions">
       <button class="btn" id="printBtn" type="button">🖨️ Print</button>
       <button class="btn" id="resetBtn" type="button">↺ Reset</button>
     </div>
   </div>
-  <p class="note">Both answered — nothing left blocking M2. This page stays here for whenever the next round of questions comes up.</p>
+  <p class="note">Answers auto-save in this browser. When you're done, tell Jeff (or Claude) your picks and we run the decision loop in <code>DECISIONS.md</code>.</p>
 
   <section class="sec s-water">
-    <h2 class="sec-title">🌊 Lewis's 2 questions — ✅ answered!</h2>
-    <p class="sec-sub">Both picked 2026-07-06 — now written into <code>DESIGN.md</code> §6.</p>
+    <h2 class="sec-title">🌊 Lewis's 4 questions — Round 3</h2>
+    <p class="sec-sub">B1, B2, B4, B5 from the backlog — all needed for M2 Steps 3–4 (wild battles + catching). B3 (nicknames) is on deck for Step 5.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
-        <h3 class="q-title">How many Fakeamon can be on your team at once? <span class="why-tag">needed for M2 Step 5</span></h3></div>
-      <p class="q-desc">Once you start catching creatures, how big is your active team before extra ones have to wait in storage?</p>
+        <h3 class="q-title">Can you run away from a wild battle? <span class="why-tag">B1 · needed for M2 Step 3</span></h3></div>
+      <p class="q-desc">You bump into a wild Fakeamon you don't want to fight. What happens?</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q1" value="3"><span class="ok"><b>A) 3</b> — small and tight, every pick matters a lot.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="4" checked><span class="ok"><b>B) 4</b> — a little room to experiment.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="6"><span class="ok"><b>C) 6</b> — classic "full team" size, like the games that inspired us.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="A - no escape"><span class="ok"><b>A) No escape</b> — every battle is a commitment. Tense!</span></label>
+        <label class="opt"><input type="radio" name="q1" value="B - always works"><span class="ok"><b>B) Always works</b> — a "Run" button that never fails.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="C - usually works"><span class="ok"><b>C) Usually works</b> — Run succeeds most of the time, but sometimes the wild Fakeamon blocks you and gets a free hit. Risky!</span></label>
       </div>
-      <div class="fill"><label>What happens when your team is full and you catch a new one?</label><input class="txt" name="q1_overflow" value="It goes to your Boxes, a space that lets you switch out with the other members of your team" placeholder="e.g. auto-send to storage / make me pick one to swap out"></div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" value="a little room to experiment" placeholder="Tell us why you picked that"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
     </div>
 
     <div class="q" data-q="2">
       <div class="q-head"><span class="q-num">2</span>
-        <h3 class="q-title">How easy should catching be? <span class="why-tag">needed for M2 Step 4</span></h3></div>
-      <p class="q-desc">Picture a wild Fakeamon at <b>half health</b>. You throw a regular Fakeaball (not a fancy one). How often should it work?</p>
+        <h3 class="q-title">When you catch a Fakeamon, how healthy is it? <span class="why-tag">B2 · needed for M2 Step 4</span></h3></div>
+      <p class="q-desc">You weakened it to catch it. When it joins your team, is it…</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q2" value="25% - hard" checked><span class="ok"><b>A) About 1 in 4</b> — catching feels hard-won and exciting.</span></label>
-        <label class="opt"><input type="radio" name="q2" value="50% - medium"><span class="ok"><b>B) About 1 in 2</b> — a coin flip, fair and simple.</span></label>
-        <label class="opt"><input type="radio" name="q2" value="75% - easy"><span class="ok"><b>C) About 3 in 4</b> — catching is easy, the fun is battling.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="A - still hurt"><span class="ok"><b>A) Still hurt</b> — it keeps the low HP; heal it at a Fakeatent.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="B - fully healed"><span class="ok"><b>B) Fully healed</b> — joining your team is a fresh start.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="C - half healed"><span class="ok"><b>C) Half healed</b> — it patches up a bit out of gratitude.</span></label>
       </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" value="catching is pretty hard" placeholder="Tell us why you picked that"></div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q2_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="3">
+      <div class="q-head"><span class="q-num">3</span>
+        <h3 class="q-title">What level are wild Fakeamon? <span class="why-tag">B4 · needed for M2 Step 3</span></h3></div>
+      <p class="q-desc">A feel question — Jeff turns your pick into the actual numbers.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="A - same as team"><span class="ok"><b>A) Same as your team</b> — always a fair fight.</span></label>
+        <label class="opt"><input type="radio" name="q3" value="B - a little random"><span class="ok"><b>B) A little random</b> — most are close to you, some weaker, some stronger.</span></label>
+        <label class="opt"><input type="radio" name="q3" value="C - depends where you are"><span class="ok"><b>C) Depends on where you are</b> — early areas easy, far areas dangerous. <i>(Really kicks in at M3 when we have a map.)</i></span></label>
+      </div>
+      <div class="fill"><label>Because…</label><input class="txt" name="q3_why" placeholder="Tell us why you picked that"></div>
+    </div>
+
+    <div class="q" data-q="4">
+      <div class="q-head"><span class="q-num">4</span>
+        <h3 class="q-title">INVENT: the "Gotcha!" moment ✨ <span class="why-tag">B5 · anytime before M2 Step 4</span></h3></div>
+      <p class="q-desc">Write the exact words the battle log says when a catch <b>succeeds</b> and when the Fakeamon <b>breaks free</b>. Make them yours!</p>
+      <div class="fill"><label>When it's caught, the log says…</label><input class="txt" name="q4_caught" placeholder='e.g. "Gotcha! Leafick was caught!"'></div>
+      <div class="fill"><label>When it breaks free, the log says…</label><input class="txt" name="q4_broke" placeholder='e.g. "Oh no! It broke free!"'></div>
     </div>
   </section>
 
   <section class="sec s-metal">
     <h2 class="sec-title">🧑‍💻 Jeff's list</h2>
-    <p class="sec-sub">Not blocking M2, but shouldn't be forgotten.</p>
+    <p class="sec-sub">Nothing blocking the next session — these come due at M3's first Phaser step.</p>
     <div class="jefflist">
       <ol>
-        <li>✅ <s>Check Hissiorite/Frondly attribution on the wiki</s> — done, resolved via <code>CONTENT_REFERENCE.md</code> §13. Hissiorite: princess-phoenix. Frondly: Leo, ReallyDarkandWindie, Levaine, Sanglorian. Both CC BY-SA 3.0. <code>CREDITS.md</code> updated — no longer blocking public distribution.</li>
-        <li>✅ <s>Officially confirm the tech stack</s> — done. Confirmed: plain HTML/JS through M2, Phaser starting M3.</li>
-        <li>✅ <s>Decide on PR timing</s> — done. Opened and merged as we went (PRs #2–#4).</li>
-        <li>✅ <s>Make the repo public</s> — done.</li>
-        <li>✅ <s>Turn on Pages</s> — done. Site is live and confirmed working: <a href="https://jhester599.github.io/fakeamon_spark/">jhester599.github.io/fakeamon_spark</a>.</li>
+        <li><span class="priority">Zoom level (2× vs 3×)</span> — eyeball it on the family screen when the first Phaser canvas is up (M3 plan §11).</li>
+        <li><b>Pin Phaser 4</b> — check <a href="https://phaser.io/download/stable">phaser.io/download/stable</a>, pin the newest 4.x in the CDN URL, record it in <code>DECISIONS.md</code> (M3 plan §2).</li>
+        <li><b>Vendor the Phaser skills</b> — copy the relevant <code>skills/</code> files from the Phaser 4 repo into <code>PLANS/phaser-skills/</code> before any Phaser code gets written (M3 plan §2).</li>
       </ol>
     </div>
 
     <div class="laterlist">
-      <b>No rush — later milestones:</b> evolution level per starter &amp; XP curve (M5), capture-formula exact numbers beyond the basic rate above (M2, but fine-tuning can wait), token prices (M4), map structure &amp; encounter style (M3), officially locking the Metal/Cosmic type chart (low urgency — already built and working).
+      <b>No rush — later milestones:</b> evolution level per starter &amp; XP curve (M5), exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token prices (M4), officially locking the Metal/Cosmic type chart (low urgency — already built and working).
     </div>
   </section>
 
-  <footer>Sleep well! Pick this back up any time — <b>DESIGN.md</b> and <b>DECISIONS.md</b> have the full history. 🌠</footer>
+  <footer>Serve the picks whenever Lewis is ready — <b>DECISIONS.md</b> has the loop. 🌠</footer>
 </div>
 
 <script>
@@ -247,7 +264,7 @@
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 
-  var KEY = "fakeamon-homework-v2";
+  var KEY = "fakeamon-homework-v3";
   var fields = document.querySelectorAll("input[name], textarea[name]");
 
   function load() {
@@ -279,6 +296,10 @@
     var done = 0;
     if (document.querySelector('input[name="q1"]:checked')) done++;
     if (document.querySelector('input[name="q2"]:checked')) done++;
+    if (document.querySelector('input[name="q3"]:checked')) done++;
+    var caught = document.querySelector('input[name="q4_caught"]');
+    var broke = document.querySelector('input[name="q4_broke"]');
+    if (caught.value.trim() !== "" && broke.value.trim() !== "") done++;
     document.getElementById("doneN").textContent = done;
   }
 

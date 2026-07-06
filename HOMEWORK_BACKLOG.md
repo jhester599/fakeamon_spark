@@ -30,6 +30,9 @@ whenever he has time — and Jeff serves them up a few at a time.
 
 ## 🔴 M2 — Catching & Team *(needed soon!)*
 
+> 📤 **Now serving (2026-07-06):** B1, B2, B4, B5 are on Lewis's plate in
+> `HOMEWORK.md` (Round 3). B3 is on deck for M2 Step 5.
+
 ### 🔲 B1. Can you run away from a wild battle?  *(needed by M2 Step 3)*
 You bump into a wild Fakeamon you don't want to fight. What happens?
 

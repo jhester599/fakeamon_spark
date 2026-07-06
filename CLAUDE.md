@@ -72,7 +72,15 @@ CLAUDE.md    → this file — working brief + current milestone
 ROADMAP.md   → stepwise M1–M5 build plan, what's done/next
 DECISIONS.md → decision log + the loop for folding Lewis's picks into DESIGN.md
 MODELS.md    → which Claude model to use per step + the pre-step Model Huddle
+PLANS/       → architecture plans from high-end planning sessions:
+               M3_OVERWORLD_PLAN.md governs all M3 work AND constrains the
+               remaining M2 steps (its §5 battle contract — see the M5
+               plan's §A for how); M5_STATE_AND_SAVE_PLAN.md owns game
+               state, XP, evolution, and saving — read its §A first, it
+               reconciles the plans against the code as it actually exists
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
+HOMEWORK_BACKLOG.md → the big question bank (B1–B33) for the whole game;
+               HOMEWORK.md gets served 2–4 questions at a time from here
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
 README.md    → repo front page, links to the live site

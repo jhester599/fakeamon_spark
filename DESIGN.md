@@ -14,6 +14,12 @@ Fakeamon is a top-down, turn-based RPG in the spirit of classic monster-catching
 2. **Collecting is the heart.**
 3. **Small and finishable.**
 
+**DECIDED (2026-07-06) — the world's name:** the Fakeamon world is called **Venta**. *(Lewis's invention, B7 — details in §7.)*
+
+**DECIDED (2026-07-06) — title screen:** shows the game name **"Fakeamon"** with the word **"Spark"** and a meteor icon beside it. *(Lewis's invention, B27.)*
+
+**DECIDED (2026-07-06) — the hero:** placeholder name **"Hero"**; the look is original art in the spirit of a classic monster-trainer protagonist (cap, backpack, sturdy shoes) — Lewis's reference point was Ash from the Pokémon anime, but per the no-Nintendo-IP rule (§13) the actual design must be our own, not a copy. *(B10 — name/fun-detail still open for Lewis to add later if he wants.)*
+
 ---
 
 ## 2. Core Gameplay Loop
@@ -46,6 +52,10 @@ Fields: Name, Type, Stats (HP/Attack/Defense/Speed), Moves (up to 4), Level & XP
 **Whaley/Dollfin note:** In Tuxemon, both Bigfin (Whaley) and the mini-boss Sharpfin evolve from **Dollfin**. To avoid the same base sprite appearing twice, either give Whaley no pre-evolution (start it as Bigfin) or pick a different base. **DECIDED (2026-07-05):** Whaley has **no pre-evolution** — it starts as Bigfin. Simplest, and it avoids the shared Dollfin sprite. *(Lewis's call.)*
 
 **Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)* **[TO DECIDE: evolution level per starter — number tuning, Jeff.]**
+
+**DECIDED (2026-07-06) — the evolution show:** a full ceremony — the screen flashes, *"What?! `<name>` is evolving!"*, then a big sprite reveal. *(Lewis's call, B23.)*
+
+**DECIDED (2026-07-06) — shiny variants:** just **one** secret shiny Fakeamon exists in the whole game — a rare legend for players to hunt down. *(Lewis's call, B31 — "it's cool.")* Which species and what it looks like are still open; treat as a fun M3+ art-pass extra, not a blocker.
 
 ---
 
@@ -110,12 +120,16 @@ Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
 **Leveling:** winning awards XP → level up → stats rise. Mini-bosses award more XP than wild Fakeamon. **[TO DECIDE: XP curve; per-Fakeamon XP; mini-boss levels.]**
 
+**DECIDED (2026-07-06) — wild Fakeamon level:** depends on where you are — early areas are easy, far areas are dangerous. *(Lewis's call, B4.)* This is a full location-based feature once M3's map (§7) exists. For M2, before the map exists, use the player's average team level as a stand-in (`wildLevel ≈ playerAverageLevel`, with a small random wiggle) — Jeff turns the *real* per-area scaling into numbers once the areas in §7 are built.
+
 ---
 
 ## 6. Battle System
 
 **Turn order:** by Speed (ties → player). **Actions:** Attack, Catch, Item, Flee.
 **Accuracy:** moves can miss, but rarely (most 90–100%; only the biggest hitters dip lower). **No PP** — unlimited uses.
+
+**DECIDED (2026-07-06) — fleeing:** Run **always works** — a "Run" button that never fails. *(Lewis's call, B1.)*
 
 **Damage formula (tuned for 3–5 hits per battle):**
 ```
@@ -140,6 +154,8 @@ damage = round( raw × typeMultiplier × random(0.85 … 1.15) )
 | | Pounce | Normal | 10 | 95% | leaping hit |
 | | Confusion | Normal* | 10 | 95% | *could later add a "confuse" status effect |
 
+**DECIDED (2026-07-06) — move names & battle-log flavor:** Lewis reviewed the current move names and log lines (e.g. "It's not very effective…") and kept them exactly as-is — no renaming. *(B28, B29.)*
+
 ### Artemis's moveset (final boss)
 
 | Move | Type | Power | Acc | Notes |
@@ -158,6 +174,12 @@ chance = baseCatchRate × (1 − currentHP / maxHP) × ballBonus   (with a small
 **DECIDED (2026-07-06) — base catch rate = 50%** *(Lewis's call: "about 1 in 4, because catching is pretty hard").* Worked backwards from his answer: a regular Fakeaball has `ballBonus = 1`, and at half HP `(1 − 0.5) = 0.5`, so `chance = baseCatchRate × 0.5`. For that to land at ~25% (his "1 in 4"), `baseCatchRate = 0.5`. **Great/Ultra/Cosmic Fakeaball exact `ballBonus` numbers are still [TO DECIDE] — Jeff, number-tuning** (Ultra's 100%-under-50%-HP rule already overrides the formula per the ball tiers below).
 
 Caught Fakeamon join your team.
+
+**DECIDED (2026-07-06) — caught HP:** a caught Fakeamon joins your team **fully healed** — a fresh start. *(Lewis's call, B2.)*
+
+**DECIDED (2026-07-06) — nicknames:** **no nicknames** — species names only, keeps the roster clear. *(Lewis's call, B3.)*
+
+**DECIDED (2026-07-06) — the "Gotcha!" moment:** caught → `"Gotcha! <name> was caught!"`; breaks free → `"Oh no! <name> broke free!"` *(Lewis's call, B5 — he kept the example wording as-is: "the same … are fine.")*
 
 **DECIDED (2026-07-06) — team size = 4** *(Lewis's call: "a little room to experiment").* A caught Fakeamon beyond your 4 active slots goes to **Boxes** — storage you can open to **switch** a boxed Fakeamon in for one on your active team. Nothing is ever lost; it just waits in the Boxes until you want it.
 
@@ -178,7 +200,24 @@ Caught Fakeamon join your team.
 
 ## 7. The Overworld
 
-Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** **visible encounters** — wild Fakeamon stand on the map and you bump into them, no random tall-grass surprises (simpler and less frustrating; details in `PLANS/M3_OVERWORLD_PLAN.md` §6.3). **[TO DECIDE: one big map vs. connected areas — Lewis's B6 in `HOMEWORK_BACKLOG.md`.]**
+Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** **visible encounters** — wild Fakeamon stand on the map and you bump into them, no random tall-grass surprises (simpler and less frustrating; details in `PLANS/M3_OVERWORLD_PLAN.md` §6.3).
+
+**DECIDED (2026-07-06) — map structure:** **connected areas** — separate zones with paths between them, not one big open map. *(Lewis's call, B6 — fits nicely with "gym badges open a new area.")*
+
+**DECIDED (2026-07-06) — the six areas of Venta** *(Lewis's invention, B8):*
+
+| Area | Vibe |
+|---|---|
+| The Meadows | grassland |
+| The Forest | trees |
+| Foggy City | packed urban city |
+| Snow Mountain | icy, Everest-like peaks |
+| The Factory | poisonous war zone |
+| The Lagoon | swamp |
+
+**DECIDED (2026-07-06) — day/night:** it matters — **mini-bosses only appear at night**. *(Lewis's call, B11.)*
+
+**DECIDED (2026-07-06) — NPCs:** a few villagers scattered around, each with one line of advice. *(Lewis's call, B12.)*
 
 ---
 
@@ -194,29 +233,52 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 ### The 5 mini-bosses (defeat all → unlock Artemis)
 
-| Mini-boss | Our type | Tuxemon basis (stage) | Flavor |
-|---|---|---|---|
-| **Banvengeance** | Grass (Shadow) | Wood/Shadow, Stage 2 (Banling→Bansaken→Banvengeance) | strangler-fig "Sepulchre" brute |
-| **Saurchin** | Water | Water, evolves from Poinchin | dinosaur + sea-urchin megafauna |
-| **Sharpfin** | Water | Water/Wood, Stage 1 (from Dollfin) | shark, "the Rip" |
-| **Gastronium** | Metal | Metal, Stage 1 (from Stomic) | radioactive metal gastropod — fits the cosmic/meteor theme |
-| **Tobishimi** | Water | Water/Wood, Stage 2 (Drashimi→Tsushimi→Tobishimi) | dragon-roll dragon; "Celestial" tag, learns Starfall |
+| Mini-boss | Our type | Tuxemon basis (stage) | Flavor | Home (Venta) | Entrance line |
+|---|---|---|---|---|---|
+| **Banvengeance** | Grass (Shadow) | Wood/Shadow, Stage 2 (Banling→Bansaken→Banvengeance) | strangler-fig "Sepulchre" brute | The Forest | "Prepare to die, puny monkey thing!" |
+| **Saurchin** | Water | Water, evolves from Poinchin | dinosaur + sea-urchin megafauna | The Lagoon | "Get ready to be crushed." |
+| **Sharpfin** | Water | Water/Wood, Stage 1 (from Dollfin) | shark, "the Rip" | The Lagoon | "You look easy." |
+| **Gastronium** | Metal | Metal, Stage 1 (from Stomic) | radioactive metal gastropod — fits the cosmic/meteor theme | The Factory | "It's time to blow things up." |
+| **Tobishimi** | Water | Water/Wood, Stage 2 (Drashimi→Tsushimi→Tobishimi) | dragon-roll dragon; "Celestial" tag, learns Starfall | The Lagoon | "Prepare to meet your doom." |
+
+**DECIDED (2026-07-06) — mini-boss homes & entrance lines:** *(Lewis's invention, B9 + B21)* — the three Water-type mini-bosses (Saurchin, Sharpfin, Tobishimi) all live in the swampy Lagoon; Banvengeance takes The Forest and Gastronium takes The Factory.
+
+**DECIDED (2026-07-06) — mini-boss difficulty order:** any order, same difficulty — explore freely and fight them in whatever order you find them. *(Lewis's call, B20.)*
 
 ### The 3 gyms (leader + standard + ace)
 
 | Gym | Leader (trainer NPC) | Standard | Ace (stronger) | Gym typing |
 |---|---|---|---|---|
-| **1** | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | Metal (coherent) |
-| **2** | Goth | **Agnite** — Fire "false dragon" iguana | **Windeye** — Metal/Lightning "tower" bot | Fire + Metal (mixed) |
-| **3** | Child Actor | **Spectera** — Grass/Sky leaf-winged fruit bat | **Eaglace** — Water/Frost ice eagle | Grass + Water (mixed) |
+| **1** | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | **Metal** |
+| **2** | Goth | **Agnite** — Fire "false dragon" iguana | **Windeye** — Metal/Lightning "tower" bot *(needs a Fire re-theme or swap at M4 build time)* | **Fire** |
+| **3** | Child Actor | **Spectera** — Grass/Sky leaf-winged fruit bat | **Eaglace** — Water/Frost ice eagle *(Spectera needs a Water re-theme or swap at M4 build time)* | **Water** |
 
-**Gym typing note:** Gym 1 is cleanly Metal; Gyms 2 and 3 currently mix two types. **DECIDED (2026-07-05):** **each gym is a single type** — cleaner type-advantage strategy. *(Lewis's call.)* Gyms 2 and 3 will be re-themed to one type each when we build M4 (keep the leader's ace type, swap the off-type creature).
+**Gym typing note:** Gym 1 is cleanly Metal; Gyms 2 and 3 currently mix two types. **DECIDED (2026-07-05):** **each gym is a single type** — cleaner type-advantage strategy. *(Lewis's call.)* **DECIDED (2026-07-06) — which type:** Gym 2 → all **Fire** (Agnite already fits); Gym 3 → all **Water** (Eaglace already fits). *(Lewis's call, B13.)* Build note for M4: Windeye and Spectera are off-type for their gym and need re-theming or swapping for an on-type ace.
+
+**DECIDED (2026-07-06) — badge names & what they unlock** *(Lewis's invention, B14):*
+
+| Gym | Badge | Opens |
+|---|---|---|
+| 1 | Gear Badge | The Lagoon |
+| 2 | Flame Badge | The Factory |
+| 3 | Wet Badge | Snow Mountain |
+
+**DECIDED (2026-07-06) — inside a gym:** straight to the leader — walk in, battle, done. No warm-up trainer or puzzle. *(Lewis's call, B15.)*
+
+**DECIDED (2026-07-06) — gym rematches:** yes, same team, for a smaller token reward. *(Lewis's call, B17.)*
+
+**DECIDED (2026-07-06) — the Cooking Cabin:** self-serve — nobody runs it, walk in and cook. *(Lewis's call, B26.)*
 
 ---
 
 ## 9. Economy & Items
 
 **Tokens** — earned in gym battles and found in the world; spent on healing (Fakeatents) and Fakeaballs (Tall Towers). **[TO DECIDE: prices.]**
+
+**DECIDED (2026-07-06) — pricing feel:** after winning about **3** wild battles, you should be able to afford **a Fakeaball and a heal** — comfortable, keeps the adventure moving. *(Lewis's call, B16 — Jeff still sets the exact token numbers to hit this feel.)*
+
+**DECIDED (2026-07-06) — Tall Tower stock:** just Fakeaballs — cooking covers healing, keep shops simple. *(Lewis's call, B18.)*
+
 **Berries & Recipes** — found while exploring; cooked into healing dishes.
 
 **DECIDED (2026-07-05) — Lewis's berries & recipes:**
@@ -253,7 +315,15 @@ Berries: **Fakeaberry, Greenberry, Raspberry, Cosmicberry, Greatberry, Bossberry
 4. That unlocks the **final battle with Artemis** (see stats/moveset in §5–6).
 5. Beat Artemis → stop the meteor → win.
 
+**DECIDED (2026-07-06) — how the adventure starts:** Artemis reveals his meteor plan to the whole world — that's the opening scene. *(Lewis's invention, B19.)*
+
 **DECIDED (2026-07-05):** you **cannot catch Artemis** after beating it — it's so powerful it would one-shot every other Fakeamon; defeating it is the ending. And **gym badges open a new area** to explore. *(Both Lewis's calls.)*
+
+**DECIDED (2026-07-06) — Artemis's lair:** you see purple fire and Artemis's throne of stars, then the battle begins. *(Lewis's invention, B22.)*
+
+**DECIDED (2026-07-06) — the win screen:** *"Venta is saved! But adventures still await you…"* *(Lewis's invention, B24.)*
+
+**DECIDED (2026-07-06) — after you win:** the world stays open — keep exploring and catching. *(Lewis's call, B25.)*
 
 ---
 
@@ -331,6 +401,8 @@ on the `development` branch of `github.com/Tuxemon/Tuxemon` (e.g. `.../battle/hi
 
 Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 3, per `ROADMAP.md`): file, our name, source path, artist(s), license, and the commit/date it was pulled from (the `development` branch moves — note the commit SHA at pull time so we can find the exact source again later).
 
+**DECIDED (2026-07-06) — Lewis's own credit line:** declined — "don't have any credits, the game keeps going." *(B30.)* `CREDITS.md` stays focused on art attribution only.
+
 ---
 
 ## 13. Technical Notes
@@ -339,6 +411,8 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 - **Repo:** add `CLAUDE.md` (design + current milestone) and `CREDITS.md` (attribution).
 - **Type system decision (new):** confirm adding Metal + Cosmic and lock the mapping in §4.
 - **IP:** inspired by Pokémon only — no Nintendo names/sprites/music. Borrowed base art is Tuxemon's, credited. *(Not legal advice; none of this bites until public distribution.)*
+
+**DECIDED (2026-07-06) — sound & music:** full chiptune — retro music for the map, battle, and bosses. *(Lewis's call, B32.)* Lands whenever audio is added (likely M3+).
 
 ---
 
@@ -352,9 +426,14 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 
 **Confirmed by Jeff (2026-07-06):** tech stack — plain HTML/JS with global scripts through M2, Phaser 4 via pinned CDN global starting M3 (§13).
 
+**Resolved by Lewis (2026-07-06 — homework backlog batch, B1–B32 except B33):** fleeing always works (§6); caught Fakeamon join fully healed, no nicknames, the "Gotcha!"/broke-free lines (§6); battle-log flavor + move names kept as-is (§6); wild Fakeamon level depends on location, with a team-average stand-in for M2 (§5); connected areas (not one map), the world is named **Venta**, its six areas + vibes, day/night matters (mini-bosses only appear at night), a few villager NPCs (§7); mini-boss home turfs + entrance lines + any-order difficulty, Gym 2/3 re-themed to Fire/Water, badge names + what they unlock, straight-to-the-leader gyms, rematches allowed, self-serve Cooking Cabin (§8); pricing feel + Tall Tower sells just balls (§9); the opening scene, Artemis's lair, the win screen text, staying open after winning (§10); the hero's identity — original art, not a copy of any existing character (§1); the title screen (§1); Lewis declined a personal credit line (§12); one secret shiny variant exists (§3); the evolution ceremony is a full one (§3); full chiptune sound/music (§13).
+
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
 3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
-4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards.
-5. Map structure (one big map vs. connected areas — Lewis's B6; encounter style is decided: visible, §7).
+4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards (feel is decided, §9).
+5. Windeye's and Spectera's off-type re-theme/swap for Gyms 2/3, at M4 build time (§8).
+6. Wild-level location scaling — the real per-area numbers, once M3's areas (§7) exist.
+
+**Still open — Lewis, whenever:** B33 — where you swap boxed Fakeamon onto your active team (needed by M5's Boxes UI).

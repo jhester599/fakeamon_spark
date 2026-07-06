@@ -58,6 +58,39 @@ Use this to jump straight to the right spot when recording a decision.
 | 11 | Team size / storage | §6 Battle System (Capturing) | ✅ Decided |
 | 12 | Catch-rate feel (base rate) | §6 Battle System (Capturing) | ✅ Decided |
 | 13 | Encounter style (visible vs random) | §7 The Overworld | ✅ Decided |
+| 14 | (B1) Fleeing wild battles | §6 Battle System (Flee) | ✅ Decided |
+| 15 | (B2) Caught Fakeamon HP | §6 Battle System (Capturing) | ✅ Decided |
+| 16 | (B3) Nicknames | §6 Battle System (Capturing) | ✅ Decided |
+| 17 | (B4) Wild Fakeamon level | §5 Stats & Progression | ✅ Decided |
+| 18 | (B5) The "Gotcha!" catch/broke-free lines | §6 Battle System (Capturing) | ✅ Decided |
+| 19 | (B6) Map structure — one map vs. connected areas | §7 The Overworld | ✅ Decided |
+| 20 | (B7) The world's name | §7 The Overworld | ✅ Decided |
+| 21 | (B8) The six areas of Venta + vibes | §7 The Overworld | ✅ Decided |
+| 22 | (B9) Mini-boss home turfs | §8 World Locations & Roster | ✅ Decided |
+| 23 | (B10) The hero's identity | §1 Vision | ✅ Decided |
+| 24 | (B11) Day/night | §7 The Overworld | ✅ Decided |
+| 25 | (B12) NPCs | §7 The Overworld | ✅ Decided |
+| 26 | (B13) Gym 2/3 re-theme to single types | §8 World Locations & Roster | ✅ Decided |
+| 27 | (B14) Badge names + what they unlock | §8 World Locations & Roster | ✅ Decided |
+| 28 | (B15) Inside a gym | §8 World Locations & Roster | ✅ Decided |
+| 29 | (B16) Pricing feel | §9 Economy & Items | ✅ Decided |
+| 30 | (B17) Gym rematches | §8 World Locations & Roster | ✅ Decided |
+| 31 | (B18) Tall Tower stock | §9 Economy & Items | ✅ Decided |
+| 32 | (B19) How the adventure starts | §10 Story & Win Condition | ✅ Decided |
+| 33 | (B20) Mini-boss difficulty order | §8 World Locations & Roster | ✅ Decided |
+| 34 | (B21) Mini-boss entrance lines | §8 World Locations & Roster | ✅ Decided |
+| 35 | (B22) Artemis's lair | §10 Story & Win Condition | ✅ Decided |
+| 36 | (B23) The evolution ceremony | §3 Fakeamon (Evolutions) | ✅ Decided |
+| 37 | (B24) The win screen text | §10 Story & Win Condition | ✅ Decided |
+| 38 | (B25) After you win | §10 Story & Win Condition | ✅ Decided |
+| 39 | (B26) Who runs the Cooking Cabin | §8 World Locations & Roster | ✅ Decided |
+| 40 | (B27) Title screen | §1 Vision | ✅ Decided |
+| 41 | (B28) Battle-log flavor lines | §6 Battle System | ✅ Decided (kept as-is) |
+| 42 | (B29) Move-name glow-up | §6 Battle System | ✅ Decided (kept as-is) |
+| 43 | (B30) Lewis's own credit line | §12 Assets & Attribution | ✅ Decided (declined) |
+| 44 | (B31) Shiny variants | §3 Fakeamon | ✅ Decided |
+| 45 | (B32) Sound & music vibe | §13 Technical Notes | ✅ Decided |
+| — | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | 🔲 Still open |
 
 *(Evolution **level** per starter is still open — that's Jeff's number-tuning, not a creative call. So are the exact Great/Ultra/Cosmic ball bonus multipliers from Q12.)*
 
@@ -82,6 +115,38 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-06 | 11 | **Team size = 4**, overflow goes to **Boxes** (switch a boxed Fakeamon in for an active one) | "a little room to experiment" |
 | 2026-07-06 | 12 | **Base catch rate = 50%** (works out to ~1-in-4 at half HP with a regular Fakeaball, per the capture formula) | "catching is pretty hard" |
 | 2026-07-05 | 13 | **Visible encounters** — wild Fakeamon stand on the map and you bump into them (no random tall-grass battles) | simpler and less frustrating — you can see who you're walking into *(logged 2026-07-06; decided during planning)* |
+| 2026-07-06 | 14 | **Fleeing always works** — a "Run" button that never fails | (option B) |
+| 2026-07-06 | 15 | Caught Fakeamon join your team **fully healed** | "joining your team is a fresh start" (option B) |
+| 2026-07-06 | 16 | **No nicknames** — species names only | "keeps the roster clear" (option C) |
+| 2026-07-06 | 17 | Wild Fakeamon level **depends on where you are** (early areas easy, far areas dangerous) | (option C — really kicks in once M3's map exists; M2 uses team-average level as a stand-in) |
+| 2026-07-06 | 18 | The "Gotcha!" lines: caught → `"Gotcha! <name> was caught!"`, breaks free → `"Oh no! <name> broke free!"` | kept the example wording as-is — "the same … are fine" |
+| 2026-07-06 | 19 | **Connected areas**, not one big map | (option B — pairs with "badges open a new area") |
+| 2026-07-06 | 20 | The Fakeamon world is named **Venta** | invented |
+| 2026-07-06 | 21 | **Six areas of Venta:** The Meadows (grassland), The Forest (trees), Foggy City (packed urban), Snow Mountain (icy peaks), The Factory (poisonous war zone), The Lagoon (swamp) | invented |
+| 2026-07-06 | 22 | **Mini-boss homes:** Banvengeance → The Forest; Saurchin, Sharpfin, Tobishimi → The Lagoon; Gastronium → The Factory | invented (the three Water mini-bosses share the swampy Lagoon) |
+| 2026-07-06 | 23 | **The hero:** placeholder name "Hero"; look is original art in the spirit of a classic monster-trainer protagonist (cap, backpack) — **not** a copy of any existing character, per the no-Nintendo-IP rule | Lewis's reference point was Ash from the Pokémon anime; redirected to an original design per `DESIGN.md` §13's IP rule (Jeff's call, confirmed with Lewis) |
+| 2026-07-06 | 24 | **Day/night matters** — mini-bosses only appear at night | (option C, specialized) |
+| 2026-07-06 | 25 | **NPCs:** a few villagers, each with one line of advice | (option B) |
+| 2026-07-06 | 26 | **Gym re-theme:** Gym 2 → all **Fire**; Gym 3 → all **Water** | Lewis's pick (Agnite/Eaglace already fit; Windeye/Spectera need a re-theme or swap at M4) |
+| 2026-07-06 | 27 | **Badge names:** Gym 1 → Gear Badge (opens The Lagoon); Gym 2 → Flame Badge (opens The Factory); Gym 3 → Wet Badge (opens Snow Mountain) | invented |
+| 2026-07-06 | 28 | **Inside a gym:** straight to the leader, no warm-up trainer or puzzle | (option A) |
+| 2026-07-06 | 29 | **Pricing feel:** after ~3 wild-battle wins, afford a Fakeaball **and** a heal | (option B — comfortable, keeps the adventure moving) |
+| 2026-07-06 | 30 | **Gym rematches:** yes, same team, smaller token reward | (option B) |
+| 2026-07-06 | 31 | **Tall Tower stock:** just Fakeaballs | (option A — cooking covers healing) |
+| 2026-07-06 | 32 | **Opening scene:** Artemis reveals his meteor plan to the whole world | invented |
+| 2026-07-06 | 33 | **Mini-boss order:** any order, same difficulty — explore freely | (option A) |
+| 2026-07-06 | 34 | **Mini-boss entrance lines:** Banvengeance "Prepare to die, puny monkey thing!" · Saurchin "Get ready to be crushed." · Sharpfin "You look easy." · Gastronium "It's time to blow things up." · Tobishimi "Prepare to meet your doom." | invented |
+| 2026-07-06 | 35 | **Artemis's lair:** purple fire and a throne of stars, then the battle begins | invented |
+| 2026-07-06 | 36 | **Evolution ceremony:** full ceremony — screen flash, "What?! `<name>` is evolving!", big sprite reveal | (option A) |
+| 2026-07-06 | 37 | **Win screen:** *"Venta is saved! But adventures still await you…"* | invented |
+| 2026-07-06 | 38 | **After you win:** the world stays open — keep exploring and catching | (option B) |
+| 2026-07-06 | 39 | **Cooking Cabin:** self-serve, no NPC chef | (option A) |
+| 2026-07-06 | 40 | **Title screen:** "Fakeamon" with the word **"Spark"** and a meteor icon beside it | invented |
+| 2026-07-06 | 41 | **Battle-log flavor lines:** keep the current wording, no changes | "use the same … as suggested" |
+| 2026-07-06 | 42 | **Move names:** keep the current names, no renaming | "none, keep the same" |
+| 2026-07-06 | 43 | **Lewis's own credit line:** declined — no personal credit line added to `CREDITS.md` | "don't have any credits, the game keeps going" |
+| 2026-07-06 | 44 | **Shiny variants:** just **one** secret shiny Fakeamon exists in the whole game — a rare legend to hunt | "its cool" (option C) |
+| 2026-07-06 | 45 | **Sound & music:** full chiptune — retro music for map, battle, and bosses | (option C) |
 
 <!--
 Template for a new row:

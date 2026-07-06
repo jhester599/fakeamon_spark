@@ -33,11 +33,20 @@
   .fighter h2 {
     margin: 0 0 4px 0;
   }
-  /* The colored "sprite" box — placeholder art for M1 (no sprites yet). */
+  /* The colored box is now a "stage" behind the real Tuxemon-based art,
+     so the type color is still visible at a glance. */
   .sprite {
-    height: 90px;
+    height: 120px;
     border-radius: 12px;
     margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sprite img {
+    height: 100%;
+    width: auto;
+    image-rendering: pixelated; /* keep pixel art crisp, no blur */
   }
   .type-fire  { background: #ff8a5c; }
   .type-water { background: #5ca8ff; }
@@ -170,13 +179,13 @@ const MOVES = {
 
 // ---- FAKEAMON ----  Each fighter: name, type, stats, and its 4 moves.
 const GROWLER = {
-  name: "Growler", type: "fire",
+  name: "Growler", type: "fire", sprite: "assets/sprites/growler.png",
   maxHP: 40, attack: 13, defense: 10, speed: 12,
   moves: ["tackle", "bite", "burn", "flare"],
 };
 
 const WHALEY = {
-  name: "Whaley", type: "water",
+  name: "Whaley", type: "water", sprite: "assets/sprites/whaley.png",
   maxHP: 44, attack: 12, defense: 12, speed: 9,
   moves: ["tackle", "splash", "spout", "breech"],
 };
@@ -228,7 +237,9 @@ function showFighter(fakeamon, currentHP) {
     '<div class="fighter">' +
       "<h2>" + fakeamon.name + "</h2>" +
       '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
-      '<div class="sprite type-' + fakeamon.type + '"></div>' +
+      '<div class="sprite type-' + fakeamon.type + '">' +
+        '<img src="' + fakeamon.sprite + '" alt="' + fakeamon.name + '">' +
+      "</div>" +
       '<div class="hp-bar-track">' +
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +

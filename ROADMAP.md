@@ -42,6 +42,12 @@ this section gets updated.)
 **Goal:** one full turn-based fight — **Growler vs Whaley**. Pick a move,
 deal damage, HP drops, someone faints, win/lose screen. Nothing else.
 
+**Bonus, ahead of schedule:** Growler and Whaley now show real Tuxemon-based
+art (`assets/sprites/growler.png` / `whaley.png`) instead of colored boxes —
+see `CREDITS.md`. The rest of the roster's art is still planned for **M3
+Step 3** below, once Phaser is in and we need proper sprite-sheet slicing
+for the overworld anyway.
+
 A good fight lasts about **3–5 hits per side**, misses are **rare**, and
 **type advantage clearly matters**.
 
@@ -89,7 +95,7 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 |---|---|---|
 | **1** | Add **Phaser** and show a tiny **tile map** (grass + paths) | A little world on screen |
 | **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid | Walk around the map |
-| **3** | **Real sprites** art pass — drop in Tuxemon PNGs for the starters (scaled up, nearest-neighbor), and start `CREDITS.md` | Actual creature art instead of colored boxes |
+| **3** | **Real sprites** art pass for the rest of the roster (Leafick + everyone in M4/M5) — Growler/Whaley already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map; walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
 

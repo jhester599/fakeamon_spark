@@ -130,7 +130,8 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.
 - Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
 - When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
-- **M1 needs no art** — placeholders only. Real art integration is planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
+- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, Growler and Whaley now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
+- **⚠️ Two sprites currently in use (Growler's Hissiorite, and Leafick's future Frondly) have no listed attribution** in Tuxemon's own `ATTRIBUTIONS.md`. Don't distribute the game publicly until a human checks `wiki.tuxemon.org/Hissiorite` and `/Frondly` by hand (automated fetches to that wiki are blocked from this environment).
 
 ## Git
 

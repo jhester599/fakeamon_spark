@@ -1,8 +1,8 @@
 {
   "_comment": [
     "One entry per vendored battle sheet in assets/sprites/battle/.",
-    "slice-sheets.mjs REFUSES to slice a sheet with no entry here — that is",
-    "on purpose: no asset ships without attribution (CONTENT_REFERENCE.md §14).",
+    "slice-sheets.mjs REFUSES to slice a sheet with no entry here \u2014 that is",
+    "on purpose: no asset ships without attribution (CONTENT_REFERENCE.md \u00a714).",
     "Before adding an entry, verify the artist/license in Tuxemon's",
     "ATTRIBUTIONS.md, or the creature's wiki.tuxemon.org page when it is",
     "missing there. sourceCommit is the Tuxemon commit the sheet was pulled from."
@@ -23,6 +23,264 @@
     "ourName": "Leafick",
     "artists": "Leo (design), ReallyDarkandWindie (art), Levaine (sprites), Sanglorian (back sprite)",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Frondly)",
+    "sourceCommit": "c34a9c72"
+  },
+  "aardart": {
+    "ourName": null,
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "aardorn": {
+    "ourName": null,
+    "artists": "Magic-Purple-Hermit",
+    "license": "CC BY-SA 3.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "anoleaf": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "arthrobolt": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "axolightl": {
+    "ourName": null,
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "bolt": {
+    "ourName": null,
+    "artists": "TacoBot",
+    "license": "Public Domain (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cairfrey": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "capiti": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardiling": {
+    "ourName": null,
+    "artists": "Spalding004, Kyu",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardinale": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "cardiwing": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chillimp": {
+    "ourName": null,
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "chloragon": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "corvix": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dandylion": {
+    "ourName": null,
+    "artists": "Leo, ProfessorGreen, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dracune": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "dragarbor": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eyenemy": {
+    "ourName": null,
+    "artists": "Cavalcadeur",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "eyesore": {
+    "ourName": null,
+    "artists": "Cavalcadeur, josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "firomenis": {
+    "ourName": null,
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "fluttaflap": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "foxfire": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "gectile": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "hydrone": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "lambert": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "legko": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "merlicun": {
+    "ourName": null,
+    "artists": "Princess-pheonix",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "moloch": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "noctalo": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "noctula": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nostray": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudiflot_female": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nudiflot_male": {
+    "ourName": null,
+    "artists": "Sanglorian",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "nut": {
+    "ourName": null,
+    "artists": "TacoBot",
+    "license": "Public Domain (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "pigabyte": {
+    "ourName": null,
+    "artists": "josepharaoh99",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "possessun": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "sapragon": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "selket": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "selmatek": {
+    "ourName": null,
+    "artists": "Catch Challenger",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "snowrilla": {
+    "ourName": null,
+    "artists": "Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "tumbleworm": {
+    "ourName": null,
+    "artists": "tamashihoshi",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "vamporm": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "velocitile": {
+    "ourName": null,
+    "artists": "Spalding004",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
     "sourceCommit": "c34a9c72"
   }
 }

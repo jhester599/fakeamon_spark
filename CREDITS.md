@@ -33,6 +33,13 @@ The unmodified source sheets for the three starters are also vendored at
 for everything it cuts into `tools/credits-fragment.md`, so new creatures'
 rows are generated, not hand-typed.
 
+**Wild-roster sheets (staged 2026-07-06, not yet in the game):** the
+license-verified part of the 200-monster wild-encounter pool
+(`CONTENT_REFERENCE.md` §16) also lives in `assets/sprites/battle/` — its
+attribution ledger is the *generated* **`CREDITS_ROSTER.md`** (43 sheets so
+far; the other 157 stay out of the repo until their wiki license check —
+see that file for the one-command workflow).
+
 **How the portraits were made:** each source sheet is 128×88: a large front
 pose (64×64), a large back pose (64×64), and a small 2-frame standing/idle
 pose (24×24 each). For the portrait PNGs we cropped one idle frame, added a

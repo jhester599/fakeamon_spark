@@ -4,7 +4,10 @@
   "type": "module",
   "description": "Developer-only helper scripts (never loaded by the game). The game itself stays plain HTML/JS with no build step — see CLAUDE.md.",
   "scripts": {
-    "slice": "node slice-sheets.mjs"
+    "slice": "node slice-sheets.mjs",
+    "wiki-credits": "node fetch-wiki-credits.mjs",
+    "vendor-sheets": "node vendor-sheets.mjs",
+    "roster-credits": "node make-roster-credits.mjs"
   },
   "dependencies": {
     "sharp": "^0.35.3"

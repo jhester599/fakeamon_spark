@@ -69,11 +69,12 @@ for (const file of sheets) {
     await sharp(src).extract(cell).toFile(join(OUT, kind, `${slug}.png`));
   }
 
+  const ourName = entry.ourName ?? `*(unnamed — ${slug})*`; // Lewis's rename pass fills these in
   creditRows.push(
-    `| ${entry.ourName} (front/back/idle sprites) | \`assets/sprites/{front,back,idle}/${slug}.png\` | ` +
+    `| ${ourName} (front/back/idle sprites) | \`assets/sprites/{front,back,idle}/${slug}.png\` | ` +
       `\`mods/tuxemon/gfx/sprites/battle/${slug}-sheet.png\` | ${slug} | ${entry.artists} | ${entry.license} |`
   );
-  console.log(`✂️  ${slug} → front/back/idle (for ${entry.ourName})`);
+  console.log(`✂️  ${slug} → front/back/idle (for ${ourName})`);
   sliced++;
 }
 

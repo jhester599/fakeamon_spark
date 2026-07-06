@@ -114,6 +114,13 @@
     background: #a7b4cf;
     cursor: not-allowed;
   }
+  /* Step 3: Run sits apart from the moves so it doesn't look like an attack */
+  .run-btn {
+    background: #8a94a6;
+  }
+  .run-btn:hover {
+    background: #6f7789;
+  }
   .result-message {
     width: 100%;
     text-align: center;
@@ -166,10 +173,15 @@
 <p class="section-label">Battle Log</p>
 <div id="log"></div>
 
-<!-- Game code lives in src/ now — data files first, then the battle logic
-     that uses them. Plain scripts (not modules) on purpose, so double-
-     clicking index.html still works with no server needed. -->
+<!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
+     double-clicking index.html still works with no server needed — which
+     means load ORDER is how files depend on each other. Required order:
+       data/*  →  battle.js  →  main.js
+     (state.js and progression.js will slot in between data/* and battle.js
+     once the individuals/save-system work lands — see
+     PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
 <script src="src/battle.js"></script>
+<script src="src/main.js"></script>

@@ -1,11 +1,16 @@
 // ===========================================================================
 //  BATTLE STATE
-//  Step 2: player and opponent are chosen on the starter-select screen,
-//  not hardcoded — see showStarterSelect() below. hp is keyed by name.
+//  Step 3: this file's only public entry point is startBattle(config) below
+//  — see PLANS/M3_OVERWORLD_PLAN.md §5 for the full contract it's built
+//  from. player/opponent/hp stay simple module-level vars for now (only one
+//  battle ever runs at a time); the individuals/state-bag upgrade that
+//  retires this hp-by-name map lands before M2 Step 5.
 // ===========================================================================
 let player;
 let opponent;
 const hp = {};
+let canFlee = true;
+let resolveBattle; // set by startBattle(); called once the fight is over
 
 // ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
@@ -186,7 +191,9 @@ function resolveTurn(playerMove) {
 }
 
 // ===========================================================================
-//  WIN / LOSE — Step 8: swap the move buttons for a result + Play Again.
+//  WIN / LOSE — Step 8 (M1) / Step 3 (M2): swap the move buttons for a
+//  result + Continue button. Clicking Continue resolves startBattle()'s
+//  promise so main.js can decide what happens next.
 // ===========================================================================
 function endBattle(winner) {
   const playerWon = winner === player;
@@ -197,64 +204,27 @@ function endBattle(winner) {
   const controls = document.getElementById("controls");
   controls.innerHTML =
     '<p class="result-message">' + message + "</p>" +
-    '<button id="playAgainBtn" class="move-btn">Play Again</button>';
+    '<button id="continueBtn" class="move-btn">Continue</button>';
 
-  document.getElementById("playAgainBtn").addEventListener("click", startNewBattle);
-}
-
-// Reset both fighters to full HP and start a fresh battle (same starter).
-function startNewBattle() {
-  hp[player.name] = player.maxHP;
-  hp[opponent.name] = opponent.maxHP;
-
-  document.getElementById("controls-label").textContent = "Choose your move:";
-
-  logLines.length = 0;
-  document.getElementById("log").innerHTML = "";
-
-  renderArena();
-  showMoveButtons(player);
-  addLogLine("A wild " + opponent.name + " appears! Choose a move for " + player.name + ".");
-}
-
-// ===========================================================================
-//  STARTER SELECT — Step 2: pick which Fakeamon you'll play as. Whoever
-//  you don't pick becomes your opponent for now (a random wild opponent
-//  arrives in Step 3).
-// ===========================================================================
-function showStarterSelect() {
-  document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
-  document.getElementById("controls-label").textContent = "";
-  document.getElementById("log").innerHTML = "";
-
-  document.getElementById("arena").innerHTML = STARTERS.map(function (starter) {
-    return (
-      '<div class="starter-card">' +
-        showFighter(starter, starter.maxHP) +
-        '<button class="move-btn choose-btn" data-name="' + starter.name + '">Choose ' + starter.name + '!</button>' +
-      "</div>"
-    );
-  }).join("");
-
-  document.querySelectorAll(".choose-btn").forEach(function (button) {
-    button.addEventListener("click", function () {
-      const chosen = STARTERS.find(function (starter) {
-        return starter.name === button.dataset.name;
-      });
-      chooseStarter(chosen);
-    });
+  document.getElementById("continueBtn").addEventListener("click", function () {
+    resolveBattle({ result: playerWon ? "win" : "lose", xpGained: 0 });
   });
 }
 
-function chooseStarter(starter) {
-  player = starter;
-  opponent = STARTERS.find(function (s) { return s !== player; });
-  document.getElementById("title").textContent = "Fakeamon Battle — " + player.name + " vs " + opponent.name;
-  startNewBattle();
+// Lewis's B1 pick: Run always works — no risk, no free hit for the wild
+// Fakeamon. A short pause so the log line is readable before the screen
+// moves on.
+function runAway() {
+  setControlsEnabled(false);
+  addLogLine(player.name + " got away safely!");
+  setTimeout(function () {
+    resolveBattle({ result: "fled", xpGained: 0 });
+  }, 900);
 }
 
 // ===========================================================================
-//  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn above).
+//  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn
+//  above). A Run button sits alongside them when the battle allows fleeing.
 // ===========================================================================
 function showMoveButtons(fakeamon) {
   const controls = document.getElementById("controls");
@@ -270,6 +240,48 @@ function showMoveButtons(fakeamon) {
     });
     controls.appendChild(button);
   });
+
+  if (canFlee) {
+    const runButton = document.createElement("button");
+    runButton.className = "move-btn run-btn";
+    runButton.textContent = "Run";
+    runButton.addEventListener("click", runAway);
+    controls.appendChild(runButton);
+  }
 }
 
-showStarterSelect();
+// ===========================================================================
+//  START A BATTLE — the one function the rest of the game calls. Runs a
+//  fight in #arena/#controls/#log and resolves once it's over.
+//
+//    config  = { player: <species>, enemy: <species>, canFlee }
+//    outcome = { result: "win" | "lose" | "fled", xpGained }
+//
+//  This is the M2-sized version of the full contract in
+//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty/enemy.level and
+//  outcome.caught arrive with catching in Step 4 and individuals/levels
+//  before Step 5 — see PLANS/M5_STATE_AND_SAVE_PLAN.md §6).
+// ===========================================================================
+function startBattle(config) {
+  return new Promise(function (resolve) {
+    resolveBattle = resolve;
+
+    player = config.player;
+    opponent = config.enemy;
+    canFlee = config.canFlee !== false;
+
+    hp[player.name] = player.maxHP;
+    hp[opponent.name] = opponent.maxHP;
+
+    document.getElementById("title").textContent =
+      "Fakeamon Battle — " + player.name + " vs " + opponent.name;
+    document.getElementById("controls-label").textContent = "Choose your move:";
+
+    logLines.length = 0;
+    document.getElementById("log").innerHTML = "";
+
+    renderArena();
+    showMoveButtons(player);
+    addLogLine("A wild " + opponent.name + " appears! Choose a move for " + player.name + ".");
+  });
+}

@@ -56,7 +56,11 @@ project. After the step works, briefly reflect: was the model pick right?
 ## Current project structure
 
 ```
-index.html         → the game (M1: battle slice, plain HTML/CSS/JS, no build step)
+index.html         → loads the game scripts (plain <script> tags, no build step, no modules)
+src/data/moves.js       → MOVES data (tweak power/accuracy here)
+src/data/fakeamon.js    → GROWLER, WHALEY data (stats, sprite paths)
+src/data/typechart.js   → TYPE_CHART matchup table
+src/battle.js       → all battle logic (turns, damage, HP, win/lose)
 roadmap.html        → visual quest map (mirrors ROADMAP.md), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
 /assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
@@ -74,8 +78,11 @@ CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from +
 README.md    → repo front page, links to the live site
 ```
 
-*(Future milestones add `/src`-style code files as the game grows past a
-single HTML file — not needed yet.)*
+**Why plain `<script src="...">` and not ES modules (`import`/`export`)?**
+Modules require a server — they fail with a CORS error when you just
+double-click `index.html`. Plain scripts sharing the global scope keep
+"open the file and it just works" true. Revisit this if the project ever
+needs real modules (e.g. bundling for Phaser at M3).
 
 ## How to run
 
@@ -136,19 +143,21 @@ Don't re-invent these — they're specified in `DESIGN.md`:
 Keep game content as **plain data**, separate from logic, so it's easy to read and tweak:
 
 ```js
-// data/moves.js
-export const MOVES = {
+// src/data/moves.js
+const MOVES = {
   flare: { name: "Flare", type: "fire", power: 18, accuracy: 85 },
   // …
 };
 
-// data/fakeamon.js
-export const GROWLER = {
+// src/data/fakeamon.js
+const GROWLER = {
   name: "Growler", type: "fire",
   maxHP: 40, attack: 13, defense: 10, speed: 12,
   moves: ["tackle", "bite", "burn", "flare"],
 };
 ```
+
+No `export`/`import` — see "Why plain `<script src="...">`" above for why.
 
 Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, `"normal"`, `"cosmic"`).
 

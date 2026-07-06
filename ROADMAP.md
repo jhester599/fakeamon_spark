@@ -71,13 +71,13 @@ few hits each.
 
 ---
 
-## 🔴 M2 — Catching & Team
+## 🟡 M2 — Catching & Team  *(started!)*
 
 **Goal:** turn a one-off fight into "catch creatures and build a team."
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | Split game code into small files: `src/data/moves.js`, `src/data/fakeamon.js`, `src/data/typechart.js`, plus `src/battle.js`. Same game, tidier code | Game plays exactly the same — just easier to read and grow |
+| **1** ✅ | Split game code into small files: `src/data/moves.js`, `src/data/fakeamon.js`, `src/data/typechart.js`, plus `src/battle.js`. Same game, tidier code | Game plays exactly the same — just easier to read and grow — *done!* |
 | **2** | Add the third starter **Leafick** (Grass) to the data, and a simple **"Choose your starter"** screen | Pick Growler, Whaley, or Leafick before the fight |
 | **3** | A **wild Fakeamon** appears (pick a random one to fight) instead of always Whaley | Different opponents each battle |
 | **4** | Add the **Catch** action + a **Fakeaball**, using the capture formula (50% base chance, better at low HP — Lewis's call) | A "Throw Fakeaball" button; sometimes "Gotcha! …was caught!" |

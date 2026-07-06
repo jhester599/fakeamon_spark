@@ -1,0 +1,232 @@
+// ===========================================================================
+//  BATTLE STATE — current HP for each fighter, keyed by name.
+// ===========================================================================
+const hp = {
+  Growler: GROWLER.maxHP,
+  Whaley: WHALEY.maxHP,
+};
+
+// ===========================================================================
+//  SHOW THE FIGHTERS ON SCREEN
+// ===========================================================================
+
+// Step 4: pick the HP bar color — green when healthy, yellow when hurt,
+// red when in real danger. Easy to retune these thresholds/colors later.
+function hpBarColor(percent) {
+  if (percent > 50) return "#4bbd6b"; // green
+  if (percent > 20) return "#f5c445"; // yellow
+  return "#e05252";                   // red
+}
+
+function showFighter(fakeamon, currentHP) {
+  // Build the list of this Fakeamon's moves as text.
+  const moveItems = fakeamon.moves.map(function (moveKey) {
+    const move = MOVES[moveKey];
+    return "<li>" + move.name +
+           " — " + move.type +
+           ", power " + move.power +
+           ", " + move.accuracy + "% hit</li>";
+  }).join("");
+
+  const percent = Math.max(0, Math.min(100, Math.round((currentHP / fakeamon.maxHP) * 100)));
+
+  return (
+    '<div class="fighter">' +
+      "<h2>" + fakeamon.name + "</h2>" +
+      '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
+      '<div class="sprite type-' + fakeamon.type + '">' +
+        '<img src="' + fakeamon.sprite + '" alt="' + fakeamon.name + '">' +
+      "</div>" +
+      '<div class="hp-bar-track">' +
+        '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
+      "</div>" +
+      '<div class="stats">' +
+        "HP " + currentHP + "/" + fakeamon.maxHP +
+        " &nbsp;•&nbsp; Attack " + fakeamon.attack +
+        " &nbsp;•&nbsp; Defense " + fakeamon.defense +
+        " &nbsp;•&nbsp; Speed " + fakeamon.speed +
+      "</div>" +
+      "<strong>Moves</strong>" +
+      '<ul class="moves">' + moveItems + "</ul>" +
+    "</div>"
+  );
+}
+
+// Redraw both fighters with their current HP.
+function renderArena() {
+  document.getElementById("arena").innerHTML =
+    showFighter(GROWLER, hp.Growler) + showFighter(WHALEY, hp.Whaley);
+}
+
+// ===========================================================================
+//  DAMAGE FORMULA — full version from DESIGN.md §6:
+//    raw    = move power + attacker's Attack − defender's Defense (min 1)
+//    damage = round(raw × typeMultiplier × random(0.85–1.15))
+//  Returns both the damage and the type multiplier, so the battle log can
+//  say "super effective" or "not very effective" when it matters.
+// ===========================================================================
+function calculateDamage(move, attacker, defender) {
+  const raw = Math.max(1, move.power + attacker.attack - defender.defense);
+  const typeMultiplier = TYPE_CHART[move.type][defender.type];
+  const wiggle = 0.85 + Math.random() * 0.30; // a random number from 0.85 to 1.15
+  const damage = Math.round(raw * typeMultiplier * wiggle);
+
+  return { damage: damage, typeMultiplier: typeMultiplier };
+}
+
+// ===========================================================================
+//  BATTLE LOG — a running list of what's happened so far.
+// ===========================================================================
+const logLines = [];
+
+function addLogLine(text) {
+  logLines.push(text);
+  const logBox = document.getElementById("log");
+  logBox.innerHTML = logLines.map(function (line) {
+    return "<div>" + line + "</div>";
+  }).join("");
+  logBox.scrollTop = logBox.scrollHeight; // keep the newest line in view
+}
+
+// ===========================================================================
+//  ONE ATTACK — attacker hits defender with a move, HP and log both update.
+//  Step 7: first roll for accuracy. A miss does nothing but announce itself.
+// ===========================================================================
+function performAttack(attacker, defender, move) {
+  const accuracyRoll = Math.random() * 100;
+  if (accuracyRoll >= move.accuracy) {
+    addLogLine(attacker.name + " used " + move.name + ", but it missed!");
+    return;
+  }
+
+  const result = calculateDamage(move, attacker, defender);
+  hp[defender.name] = Math.max(0, hp[defender.name] - result.damage);
+
+  let line = attacker.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
+  if (result.typeMultiplier >= 2) {
+    line += " It's super effective!";
+  } else if (result.typeMultiplier <= 0.5) {
+    line += " It's not very effective...";
+  }
+  addLogLine(line);
+}
+
+// Whaley doesn't think ahead yet — she just picks one of her moves at random.
+function pickRandomMove(fakeamon) {
+  const index = Math.floor(Math.random() * fakeamon.moves.length);
+  return MOVES[fakeamon.moves[index]];
+}
+
+// Turn-out the buttons while a turn is playing, so a fast second click can't
+// start a new turn before the first one has finished showing itself.
+function setControlsEnabled(enabled) {
+  document.querySelectorAll(".move-btn").forEach(function (button) {
+    button.disabled = !enabled;
+  });
+}
+
+// A random pause between the two attacks, so the turn reads as "first this
+// happens, THEN that happens" instead of both landing at once. Tweak these
+// two numbers (in milliseconds) to make battles feel snappier or slower.
+const TURN_PAUSE_MIN_MS = 1000;
+const TURN_PAUSE_MAX_MS = 1500;
+
+function randomTurnPause() {
+  return TURN_PAUSE_MIN_MS + Math.random() * (TURN_PAUSE_MAX_MS - TURN_PAUSE_MIN_MS);
+}
+
+// Step 8: has this Fakeamon fainted? If so, announce it in the log.
+function checkForFaint(fakeamon) {
+  if (hp[fakeamon.name] > 0) return false;
+  addLogLine(fakeamon.name + " fainted!");
+  return true;
+}
+
+// ===========================================================================
+//  ONE TURN — Growler attacks AND Whaley attacks back, with a pause between
+//  so it feels like a real back-and-forth. Whoever has higher Speed swings
+//  first; a tie goes to the player. If either fighter faints, the battle
+//  ends right there instead of playing out the rest of the turn.
+// ===========================================================================
+function resolveTurn(playerMove) {
+  setControlsEnabled(false);
+
+  const enemyMove = pickRandomMove(WHALEY);
+  const playerGoesFirst = GROWLER.speed >= WHALEY.speed;
+
+  const first  = playerGoesFirst ? { attacker: GROWLER, defender: WHALEY, move: playerMove }
+                                  : { attacker: WHALEY,  defender: GROWLER, move: enemyMove };
+  const second = playerGoesFirst ? { attacker: WHALEY,  defender: GROWLER, move: enemyMove }
+                                  : { attacker: GROWLER, defender: WHALEY, move: playerMove };
+
+  performAttack(first.attacker, first.defender, first.move);
+  renderArena();
+
+  if (checkForFaint(first.defender)) {
+    endBattle(first.attacker);
+    return;
+  }
+
+  setTimeout(function () {
+    performAttack(second.attacker, second.defender, second.move);
+    renderArena();
+
+    if (checkForFaint(second.defender)) {
+      endBattle(second.attacker);
+      return;
+    }
+
+    setControlsEnabled(true);
+  }, randomTurnPause());
+}
+
+// ===========================================================================
+//  WIN / LOSE — Step 8: swap the move buttons for a result + Play Again.
+// ===========================================================================
+function endBattle(winner) {
+  const playerWon = winner === GROWLER;
+  const message = playerWon
+    ? "🎉 " + GROWLER.name + " wins!"
+    : "💀 " + GROWLER.name + " fainted — " + WHALEY.name + " wins.";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML =
+    '<p class="result-message">' + message + "</p>" +
+    '<button id="playAgainBtn" class="move-btn">Play Again</button>';
+
+  document.getElementById("playAgainBtn").addEventListener("click", startNewBattle);
+}
+
+// Reset both fighters to full HP and start a fresh battle.
+function startNewBattle() {
+  hp.Growler = GROWLER.maxHP;
+  hp.Whaley = WHALEY.maxHP;
+
+  logLines.length = 0;
+  document.getElementById("log").innerHTML = "";
+
+  renderArena();
+  showMoveButtons(GROWLER);
+  addLogLine("A wild " + WHALEY.name + " appears! Choose a move for " + GROWLER.name + ".");
+}
+
+// ===========================================================================
+//  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn above).
+// ===========================================================================
+function showMoveButtons(fakeamon) {
+  const controls = document.getElementById("controls");
+  controls.innerHTML = ""; // clear any old buttons first
+
+  fakeamon.moves.forEach(function (moveKey) {
+    const move = MOVES[moveKey];
+    const button = document.createElement("button");
+    button.className = "move-btn";
+    button.textContent = move.name;
+    button.addEventListener("click", function () {
+      resolveTurn(move);
+    });
+    controls.appendChild(button);
+  });
+}
+
+startNewBattle();

@@ -7,7 +7,8 @@
   "attribution.status=pending-wiki means: run fetch-wiki-credits.mjs (see tools/).",
   "Player-facing names come from Lewis's rename pass, area by area - slugs are",
   "working IDs only.",
-  "attribution blocks synced from sheet-manifest.json after the 2026-07-06 wiki-credit run; status 'flagged' = vendored but license terms still need confirming (the OPMon-derived trio)."
+  "attribution blocks synced from sheet-manifest.json after the 2026-07-06 wiki-credit run; status 'flagged' = vendored but license terms still need confirming (the OPMon-derived trio).",
+  "areaProposed (added 2026-07-06) is a PROPOSED home area per monster - a draft for Lewis to react to (homework B37, worksheet: VENTA_ROSTER_DRAFT.md). Lines stay together: every stage of an evolution line shares one area."
  ],
  "monsters": {
   "aardart": {
@@ -28,7 +29,8 @@
     "license": "CC BY-SA 3.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "aardorn": {
    "ourTypeProposed": "normal",
@@ -48,7 +50,8 @@
     "license": "CC BY-SA 3.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "agnsher": {
    "ourTypeProposed": "fire",
@@ -68,7 +71,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Agnsher",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "ampystoma": {
    "ourTypeProposed": "water",
@@ -89,7 +93,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Ampystoma",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "anoleaf": {
    "ourTypeProposed": "grass",
@@ -110,7 +115,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "apeoro": {
    "ourTypeProposed": "metal",
@@ -131,7 +137,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Apeoro",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "arthrobolt": {
    "ourTypeProposed": "metal",
@@ -153,7 +160,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "axolightl": {
    "ourTypeProposed": "water",
@@ -173,7 +181,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "babysnitch": {
    "ourTypeProposed": "grass",
@@ -194,7 +203,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Babysnitch",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "baddrscratch": {
    "ourTypeProposed": "grass",
@@ -215,7 +225,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Baddrscratch",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "baobaraffe": {
    "ourTypeProposed": "grass",
@@ -235,7 +246,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Baobaraffe",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "baoby": {
    "ourTypeProposed": "grass",
@@ -255,7 +267,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Baoby",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "bedoo": {
    "ourTypeProposed": "water",
@@ -275,7 +288,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Bedoo",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "bewhich": {
    "ourTypeProposed": "normal",
@@ -297,7 +311,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Bewhich",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "birdee": {
    "ourTypeProposed": "normal",
@@ -318,7 +333,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Birdee",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "birdling": {
    "ourTypeProposed": "normal",
@@ -338,7 +354,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Birdling",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "blasdoor": {
    "ourTypeProposed": "metal",
@@ -358,7 +375,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Blasdoor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "bolt": {
    "ourTypeProposed": "metal",
@@ -379,7 +397,8 @@
     "license": "Public Domain",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "boltnu": {
    "ourTypeProposed": "metal",
@@ -399,7 +418,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Boltnu",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "brachifor": {
    "ourTypeProposed": "grass",
@@ -420,7 +440,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Brachifor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "breem": {
    "ourTypeProposed": "grass",
@@ -440,7 +461,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Breem",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "bricgard": {
    "ourTypeProposed": "grass",
@@ -462,7 +484,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Bricgard",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "brickhemoth": {
    "ourTypeProposed": "grass",
@@ -484,7 +507,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Brickhemoth",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "brumi": {
    "ourTypeProposed": "normal",
@@ -506,7 +530,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Brumi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "bumbulus": {
    "ourTypeProposed": "metal",
@@ -526,7 +551,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Bumbulus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "burrlock": {
    "ourTypeProposed": "grass",
@@ -546,7 +572,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Burrlock",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "bursa": {
    "ourTypeProposed": "fire",
@@ -567,7 +594,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Bursa",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "cacaburr": {
    "ourTypeProposed": "grass",
@@ -587,7 +615,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Cacaburr",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "cackleen": {
    "ourTypeProposed": "normal",
@@ -609,7 +638,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Cackleen",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "cairfrey": {
    "ourTypeProposed": "normal",
@@ -629,7 +659,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "caper": {
    "ourTypeProposed": "normal",
@@ -650,7 +681,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Caper",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "capinyah": {
    "ourTypeProposed": "normal",
@@ -670,7 +702,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Capinyah",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "capiti": {
    "ourTypeProposed": "normal",
@@ -690,7 +723,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "cardiling": {
    "ourTypeProposed": "fire",
@@ -712,7 +746,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "cardinale": {
    "ourTypeProposed": "fire",
@@ -734,7 +769,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "cardiwing": {
    "ourTypeProposed": "fire",
@@ -756,7 +792,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "cataspike": {
    "ourTypeProposed": "metal",
@@ -778,7 +815,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Cataspike",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "chenipode": {
    "ourTypeProposed": "normal",
@@ -798,7 +836,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Chenipode",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "chickadee": {
    "ourTypeProposed": "normal",
@@ -819,7 +858,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Chickadee",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "chillimp": {
    "ourTypeProposed": "water",
@@ -840,7 +880,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "chloragon": {
    "ourTypeProposed": "grass",
@@ -861,7 +902,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "chrome_robo": {
    "ourTypeProposed": "metal",
@@ -880,7 +922,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Chrome_Robo",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "claymorior": {
    "ourTypeProposed": "grass",
@@ -901,7 +944,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Claymorior",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "coaldiak": {
    "ourTypeProposed": "fire",
@@ -923,7 +967,8 @@
     "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
     "source": "wiki.tuxemon.org/Coaldiak",
     "status": "flagged"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "cohldrabi": {
    "ourTypeProposed": "grass",
@@ -945,7 +990,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Cohldrabi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "coppi": {
    "ourTypeProposed": "grass",
@@ -967,7 +1013,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Coppi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "corvix": {
    "ourTypeProposed": "normal",
@@ -988,7 +1035,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "crankus": {
    "ourTypeProposed": "normal",
@@ -1009,7 +1057,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Crankus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "criniotherme": {
    "ourTypeProposed": "fire",
@@ -1030,7 +1079,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Criniotherme",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "crustagu": {
    "ourTypeProposed": "water",
@@ -1052,7 +1102,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Crustagu",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "dandicub": {
    "ourTypeProposed": "grass",
@@ -1072,7 +1123,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Dandicub",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "dandylion": {
    "ourTypeProposed": "grass",
@@ -1092,7 +1144,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "dark_robo": {
    "ourTypeProposed": "metal",
@@ -1111,7 +1164,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Dark_Robo",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "devidin": {
    "ourTypeProposed": "fire",
@@ -1133,7 +1187,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Devidin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "devidra": {
    "ourTypeProposed": "fire",
@@ -1155,7 +1210,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Devidra",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "deviraptor": {
    "ourTypeProposed": "fire",
@@ -1177,7 +1233,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Deviraptor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "dracune": {
    "ourTypeProposed": "normal",
@@ -1199,7 +1256,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "dragarbor": {
    "ourTypeProposed": "grass",
@@ -1221,7 +1279,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "drokoro": {
    "ourTypeProposed": "fire",
@@ -1240,7 +1299,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Drokoro",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "duggot": {
    "ourTypeProposed": "grass",
@@ -1261,7 +1321,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Duggot",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "elofly": {
    "ourTypeProposed": "normal",
@@ -1283,7 +1344,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Elofly",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "elostorm": {
    "ourTypeProposed": "normal",
@@ -1305,7 +1367,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Elostorm",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "elowind": {
    "ourTypeProposed": "normal",
@@ -1327,7 +1390,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Elowind",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "embazook": {
    "ourTypeProposed": "fire",
@@ -1349,7 +1413,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Embazook",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "embra": {
    "ourTypeProposed": "fire",
@@ -1369,7 +1434,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Embra",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "equill": {
    "ourTypeProposed": "grass",
@@ -1391,7 +1457,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Equill",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "eruptibus": {
    "ourTypeProposed": "fire",
@@ -1413,7 +1480,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Eruptibus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "eskipup": {
    "ourTypeProposed": "water",
@@ -1433,7 +1501,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Eskipup",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "exapode": {
    "ourTypeProposed": "normal",
@@ -1453,7 +1522,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Exapode",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "exclawvate": {
    "ourTypeProposed": "metal",
@@ -1473,7 +1543,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Exclawvate",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "eyenemy": {
    "ourTypeProposed": "normal",
@@ -1493,7 +1564,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "eyesore": {
    "ourTypeProposed": "normal",
@@ -1513,7 +1585,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "firomenis": {
    "ourTypeProposed": "metal",
@@ -1534,7 +1607,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "flacono": {
    "ourTypeProposed": "normal",
@@ -1555,7 +1629,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Flacono",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "flambear": {
    "ourTypeProposed": "fire",
@@ -1576,7 +1651,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Flambear",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "flounce": {
    "ourTypeProposed": "fire",
@@ -1596,7 +1672,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Flounce",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "flummack": {
    "ourTypeProposed": "normal",
@@ -1616,7 +1693,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Flummack",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "flummby": {
    "ourTypeProposed": "normal",
@@ -1636,7 +1714,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Flummby",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "fluoresfin": {
    "ourTypeProposed": "water",
@@ -1658,7 +1737,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Fluoresfin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "fluttaflap": {
    "ourTypeProposed": "normal",
@@ -1680,7 +1760,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "fordin": {
    "ourTypeProposed": "grass",
@@ -1701,7 +1782,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Fordin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "forturtle": {
    "ourTypeProposed": "fire",
@@ -1721,7 +1803,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Forturtle",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "foxfire": {
    "ourTypeProposed": "fire",
@@ -1741,7 +1824,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "frostuce": {
    "ourTypeProposed": "grass",
@@ -1763,7 +1847,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Frostuce",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "furnursus": {
    "ourTypeProposed": "fire",
@@ -1784,7 +1869,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Furnursus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "fuzzina": {
    "ourTypeProposed": "normal",
@@ -1805,7 +1891,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Fuzzina",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "fuzzlet": {
    "ourTypeProposed": "normal",
@@ -1826,7 +1913,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Fuzzlet",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "galasces": {
    "ourTypeProposed": "water",
@@ -1848,7 +1936,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Galasces",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "gectile": {
    "ourTypeProposed": "grass",
@@ -1869,7 +1958,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "golnagi": {
    "ourTypeProposed": "water",
@@ -1891,7 +1981,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Golnagi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "grimachin": {
    "ourTypeProposed": "metal",
@@ -1911,7 +2002,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Grimachin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "grinflare": {
    "ourTypeProposed": "metal",
@@ -1933,7 +2025,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Grinflare",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "grintot": {
    "ourTypeProposed": "metal",
@@ -1954,7 +2047,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Grintot",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "grintrock": {
    "ourTypeProposed": "metal",
@@ -1976,7 +2070,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Grintrock",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "gryfix": {
    "ourTypeProposed": "normal",
@@ -1997,7 +2092,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Gryfix",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "gupphire": {
    "ourTypeProposed": "water",
@@ -2019,7 +2115,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Gupphire",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "gupphish": {
    "ourTypeProposed": "water",
@@ -2041,7 +2138,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Gupphish",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "hatchling": {
    "ourTypeProposed": "normal",
@@ -2061,7 +2159,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Hatchling",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "helipi": {
    "ourTypeProposed": "grass",
@@ -2083,7 +2182,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Helipi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "hoarse": {
    "ourTypeProposed": "grass",
@@ -2105,7 +2205,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Hoarse",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "hoarseshoo": {
    "ourTypeProposed": "grass",
@@ -2127,7 +2228,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Hoarseshoo",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "hoodoll": {
    "ourTypeProposed": "grass",
@@ -2148,7 +2250,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Hoodoll",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "houndice": {
    "ourTypeProposed": "water",
@@ -2168,7 +2271,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Houndice",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "hydrone": {
    "ourTypeProposed": "metal",
@@ -2188,7 +2292,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "ignibus": {
    "ourTypeProposed": "fire",
@@ -2209,7 +2314,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Ignibus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "imbrickcile": {
    "ourTypeProposed": "grass",
@@ -2231,7 +2337,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Imbrickcile",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "incandesfin": {
    "ourTypeProposed": "water",
@@ -2253,7 +2360,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Incandesfin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "jelillow": {
    "ourTypeProposed": "water",
@@ -2273,7 +2381,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Jelillow",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "jemuar": {
    "ourTypeProposed": "grass",
@@ -2295,7 +2404,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Jemuar",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "knindling": {
    "ourTypeProposed": "fire",
@@ -2315,7 +2425,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Knindling",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "komodraw": {
    "ourTypeProposed": "normal",
@@ -2335,7 +2446,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Komodraw",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "komoduel": {
    "ourTypeProposed": "normal",
@@ -2355,7 +2467,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Komoduel",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "kroki": {
    "ourTypeProposed": "water",
@@ -2376,7 +2489,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Kroki",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "krokivip": {
    "ourTypeProposed": "water",
@@ -2398,7 +2512,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Krokivip",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "lambert": {
    "ourTypeProposed": "grass",
@@ -2419,7 +2534,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "legko": {
    "ourTypeProposed": "grass",
@@ -2440,7 +2556,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "lesmagu": {
    "ourTypeProposed": "water",
@@ -2462,7 +2579,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Lesmagu",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "lettice": {
    "ourTypeProposed": "grass",
@@ -2484,7 +2602,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Lettice",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "leviadile": {
    "ourTypeProposed": "water",
@@ -2506,7 +2625,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Leviadile",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "lightmare": {
    "ourTypeProposed": "water",
@@ -2528,7 +2648,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Lightmare",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "marvantis": {
    "ourTypeProposed": "normal",
@@ -2549,7 +2670,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Marvantis",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "marvillar": {
    "ourTypeProposed": "normal",
@@ -2569,7 +2691,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Marvillar",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "merlicun": {
    "ourTypeProposed": "metal",
@@ -2590,7 +2713,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "metesaur": {
    "ourTypeProposed": "fire",
@@ -2611,7 +2735,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Metesaur",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "mingdyn": {
    "ourTypeProposed": "fire",
@@ -2631,7 +2756,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Mingdyn",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "moloch": {
    "ourTypeProposed": "grass",
@@ -2653,7 +2779,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "myrmison": {
    "ourTypeProposed": "grass",
@@ -2675,7 +2802,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Myrmison",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "narcileaf": {
    "ourTypeProposed": "grass",
@@ -2695,7 +2823,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Narcileaf",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "nebufin": {
    "ourTypeProposed": "water",
@@ -2717,7 +2846,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Nebufin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nimbulex": {
    "ourTypeProposed": "metal",
@@ -2738,7 +2868,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Nimbulex",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "ninjasmine": {
    "ourTypeProposed": "grass",
@@ -2760,7 +2891,8 @@
     "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
     "source": "wiki.tuxemon.org/Ninjasmine",
     "status": "flagged"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "noctalo": {
    "ourTypeProposed": "normal",
@@ -2781,7 +2913,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "noctula": {
    "ourTypeProposed": "normal",
@@ -2802,7 +2935,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "nostray": {
    "ourTypeProposed": "water",
@@ -2822,7 +2956,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "novaquarius": {
    "ourTypeProposed": "water",
@@ -2844,7 +2979,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Novaquarius",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nudiflot_female": {
    "ourTypeProposed": "water",
@@ -2865,7 +3001,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nudiflot_male": {
    "ourTypeProposed": "water",
@@ -2886,7 +3023,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nudikill": {
    "ourTypeProposed": "water",
@@ -2907,7 +3045,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Nudikill",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nudimind": {
    "ourTypeProposed": "water",
@@ -2928,7 +3067,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Nudimind",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "nut": {
    "ourTypeProposed": "metal",
@@ -2949,7 +3089,8 @@
     "license": "Public Domain",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "octabode": {
    "ourTypeProposed": "normal",
@@ -2970,7 +3111,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Octabode",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "ouroboutlet": {
    "ourTypeProposed": "metal",
@@ -2992,7 +3134,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Ouroboutlet",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "pairagrim": {
    "ourTypeProposed": "normal",
@@ -3012,7 +3155,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pairagrim",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "pairagrin": {
    "ourTypeProposed": "normal",
@@ -3032,7 +3176,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pairagrin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "pantherafira": {
    "ourTypeProposed": "fire",
@@ -3053,7 +3198,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pantherafira",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "parappi": {
    "ourTypeProposed": "grass",
@@ -3075,7 +3221,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Parappi",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "pickoon": {
    "ourTypeProposed": "normal",
@@ -3095,7 +3242,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pickoon",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "pigabyte": {
    "ourTypeProposed": "metal",
@@ -3115,7 +3263,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "pipis": {
    "ourTypeProposed": "normal",
@@ -3136,7 +3285,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pipis",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "possessun": {
    "ourTypeProposed": "normal",
@@ -3156,7 +3306,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "potturmeist": {
    "ourTypeProposed": "grass",
@@ -3177,7 +3328,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Potturmeist",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "potturney": {
    "ourTypeProposed": "grass",
@@ -3198,7 +3350,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Potturney",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "primordia": {
    "ourTypeProposed": "fire",
@@ -3218,7 +3371,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Primordia",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "prophetoise": {
    "ourTypeProposed": "fire",
@@ -3239,7 +3393,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Prophetoise",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "puparmor": {
    "ourTypeProposed": "metal",
@@ -3261,7 +3416,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Puparmor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "pythwire": {
    "ourTypeProposed": "metal",
@@ -3283,7 +3439,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Pythwire",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "qetzlrokilus": {
    "ourTypeProposed": "fire",
@@ -3304,7 +3461,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Qetzlrokilus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "raccscal": {
    "ourTypeProposed": "normal",
@@ -3324,7 +3482,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Raccscal",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "regalance": {
    "ourTypeProposed": "grass",
@@ -3344,7 +3503,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Regalance",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "rockat": {
    "ourTypeProposed": "grass",
@@ -3365,7 +3525,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Rockat",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "rockitten": {
    "ourTypeProposed": "grass",
@@ -3386,7 +3547,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Rockitten",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "rosarin": {
    "ourTypeProposed": "grass",
@@ -3407,7 +3569,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Rosarin",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "ruption": {
    "ourTypeProposed": "fire",
@@ -3427,7 +3590,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Ruption",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "sapragon": {
    "ourTypeProposed": "grass",
@@ -3448,7 +3612,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "scarlant": {
    "ourTypeProposed": "grass",
@@ -3470,7 +3635,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Scarlant",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "selket": {
    "ourTypeProposed": "grass",
@@ -3491,7 +3657,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "selmatek": {
    "ourTypeProposed": "grass",
@@ -3512,7 +3679,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "shelagu": {
    "ourTypeProposed": "water",
@@ -3534,7 +3702,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Shelagu",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "shnark": {
    "ourTypeProposed": "water",
@@ -3554,7 +3723,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Shnark",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "shull": {
    "ourTypeProposed": "grass",
@@ -3576,7 +3746,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Shull",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "shybulb": {
    "ourTypeProposed": "grass",
@@ -3596,7 +3767,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Shybulb",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "skwib": {
    "ourTypeProposed": "normal",
@@ -3616,7 +3788,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Skwib",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theLagoon"
   },
   "snaki": {
    "ourTypeProposed": "normal",
@@ -3636,7 +3809,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Snaki",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "snokari": {
    "ourTypeProposed": "normal",
@@ -3656,7 +3830,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Snokari",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "snowrilla": {
    "ourTypeProposed": "water",
@@ -3677,7 +3852,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "sockeserp": {
    "ourTypeProposed": "metal",
@@ -3699,7 +3875,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Sockeserp",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "solight": {
    "ourTypeProposed": "fire",
@@ -3719,7 +3896,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Solight",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "sphake": {
    "ourTypeProposed": "metal",
@@ -3739,7 +3917,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Sphake",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "sprorm": {
    "ourTypeProposed": "metal",
@@ -3759,7 +3938,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Sprorm",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "statursus": {
    "ourTypeProposed": "fire",
@@ -3781,7 +3961,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Statursus",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "stegofor": {
    "ourTypeProposed": "grass",
@@ -3802,7 +3983,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Stegofor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "strella": {
    "ourTypeProposed": "normal",
@@ -3823,7 +4005,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Strella",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "tetrchimp": {
    "ourTypeProposed": "metal",
@@ -3844,7 +4027,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Tetrchimp",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "thumpurn": {
    "ourTypeProposed": "fire",
@@ -3865,7 +4049,8 @@
     "license": "CC BY 4.0",
     "source": "wiki.tuxemon.org/Thumpurn",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "tigrock": {
    "ourTypeProposed": "metal",
@@ -3885,7 +4070,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Tigrock",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "toxiris": {
    "ourTypeProposed": "grass",
@@ -3907,7 +4093,8 @@
     "license": "\u26a0\ufe0f OPMon-derived \u2014 confirm OPMon terms",
     "source": "wiki.tuxemon.org/Toxiris",
     "status": "flagged"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "trojerror": {
    "ourTypeProposed": "metal",
@@ -3928,7 +4115,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Trojerror",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "tumblebee": {
    "ourTypeProposed": "grass",
@@ -3948,7 +4136,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Tumblebee",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "tumbleworm": {
    "ourTypeProposed": "grass",
@@ -3968,7 +4157,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theMeadows"
   },
   "vamporm": {
    "ourTypeProposed": "normal",
@@ -3990,7 +4180,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "velocitile": {
    "ourTypeProposed": "grass",
@@ -4011,7 +4202,8 @@
     "license": "CC BY-SA 4.0",
     "source": "Tuxemon ATTRIBUTIONS.md",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "virware": {
    "ourTypeProposed": "metal",
@@ -4032,7 +4224,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Virware",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "volconey": {
    "ourTypeProposed": "fire",
@@ -4053,7 +4246,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Volconey",
     "status": "verified"
-   }
+   },
+   "areaProposed": "snowMountain"
   },
   "vulpyre": {
    "ourTypeProposed": "fire",
@@ -4073,7 +4267,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Vulpyre",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theForest"
   },
   "weavifly": {
    "ourTypeProposed": "metal",
@@ -4095,7 +4290,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Weavifly",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   },
   "wolololl": {
    "ourTypeProposed": "grass",
@@ -4116,7 +4312,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Wolololl",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "woodoor": {
    "ourTypeProposed": "metal",
@@ -4136,7 +4333,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Woodoor",
     "status": "verified"
-   }
+   },
+   "areaProposed": "foggyCity"
   },
   "xeon": {
    "ourTypeProposed": "metal",
@@ -4155,7 +4353,8 @@
     "license": "CC BY-SA 3.0",
     "source": "wiki.tuxemon.org/Xeon",
     "status": "verified"
-   }
+   },
+   "areaProposed": "theFactory"
   }
  }
 }

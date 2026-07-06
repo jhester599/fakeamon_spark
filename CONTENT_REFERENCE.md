@@ -373,8 +373,11 @@ unblocked once that lands.
 > broken; the pool is now **198**, and the tables below mark them dropped.
 > Three staged monsters (`coaldiak`, `ninjasmine`, `toxiris`) are ⚠️
 > **OPMon-derived** — confirm that project's terms before they enter the
-> game. What remains creative (unstaged on purpose): Lewis's rename pass
-> and per-area encounter tables.
+> game. What remains creative: Lewis's rename pass and per-area encounter
+> tables — and to give those a running start, every monster now carries a
+> **proposed** home area (`areaProposed` in the JSON, worksheet in
+> **`VENTA_ROSTER_DRAFT.md`**, Lewis's homework **B37**). Proposed ≠
+> decided — Lewis reshuffles freely.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every

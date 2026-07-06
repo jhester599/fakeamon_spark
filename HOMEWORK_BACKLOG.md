@@ -71,7 +71,7 @@ how it reads. How should we label the wild one?
 
 ---
 
-## ✅ M3 — Overworld & Map *(all 7 answered 2026-07-06!)*
+## 🟡 M3 — Overworld & Map *(7 of 8 answered — new B37 is open, no rush)*
 
 ### ✅ B6. One big map, or connected areas?  *(needed by M3 Step 1)*
 
@@ -114,6 +114,20 @@ appear at night**.
 ### ✅ B12. How do other people (NPCs) work?  *(needed by M3/M4)*
 
 **Lewis picks:** B — a few villagers with one line of advice each.
+
+### 🔲 B37. Review the Venta wild-roster draft 🗺️  *(anytime before an area's roster gets wired in — M3-late at the earliest)*
+
+All 198 wild Fakeamon have been dealt a **draft** home area matching your
+six area vibes (B8) — see **`VENTA_ROSTER_DRAFT.md`** (it has all the art!).
+For each area: does the crew feel right? Move anyone you want — evolution
+lines move together, and there are no wrong answers. (Renaming everyone is
+a separate, ongoing job — one area at a time, whenever you like.)
+
+- [ ] **A) Looks great** — keep the draft as-is.
+- [ ] **B) Mostly good, with trades** — list who moves where.
+- [ ] **C) Big reshuffle** — grab a printout and go wild.
+
+**Lewis picks:** ____________  **Moves:** ________________________________
 
 ---
 
@@ -257,11 +271,11 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 | Milestone | Questions | Answered |
 |---|---|---|
 | M2 | B1–B5, B34 | 5 / 6 |
-| M3 | B6–B12 | 7 / 7 |
+| M3 | B6–B12, B37 | 7 / 8 |
 | M4 | B13–B18 | 6 / 6 |
 | M5 | B19–B26, B33, B35, B36 | 8 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **32 / 36** |
+| **Total** | | **32 / 37** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

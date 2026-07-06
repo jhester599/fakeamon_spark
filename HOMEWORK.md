@@ -3,10 +3,11 @@
 > **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
 > batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
 > ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Four questions are still open, none urgent: **B33** (where you swap
-> boxed Fakeamon), **B34** (new — found while testing Step 3), and **B35**/
+> Five questions are still open, none urgent: **B33** (where you swap
+> boxed Fakeamon), **B34** (new — found while testing Step 3), **B35**/
 > **B36** (new — follow-ups on two design bits Lewis invented outside a
-> homework round, see below).
+> homework round), and **B37** (new, the fun one — review the draft of
+> which wild Fakeamon live in which area of Venta, see below).
 >
 > Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
 > see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
@@ -40,7 +41,7 @@ flee always works (B1), caught Fakeamon join fully healed (B2), wild level
 uses team-average as a stand-in until M3's map exists (B4), and the catch
 messages are locked in (B5). Steps 3 and 4 are both built and live.
 
-**Four open questions, no rush:**
+**Five open questions, no rush:**
 
 - **B33** — where do you swap a boxed Fakeamon onto your active team? (At
   a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
@@ -57,6 +58,11 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
 - **B36** — you said Cooking Cabins are more common in Snow Mountain. Is
   Snow Mountain the *only* place with one, or is there a smaller cabin
   near the start too (so cooking isn't gated behind that area's badge)?
+- **B37** — NEW, and it's a big fun one: all **198 wild Fakeamon** now have
+  a **draft home area** matched to your six area vibes — crocodiles in The
+  Lagoon, war robots in The Factory, yetis on Snow Mountain… Open
+  **`VENTA_ROSTER_DRAFT.md`** (it shows everyone's art) and tell us who's
+  in the wrong place. Evolution lines move together; no wrong answers.
 
 ---
 
@@ -99,4 +105,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33–B36 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*Serve B33–B37 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

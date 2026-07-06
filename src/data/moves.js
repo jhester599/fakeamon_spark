@@ -14,4 +14,9 @@ const MOVES = {
   splash: { name: "Splash", type: "water",  power: 8,  accuracy: 100 },
   spout:  { name: "Spout",  type: "water",  power: 12, accuracy: 95  },
   breech: { name: "Breech", type: "water",  power: 16, accuracy: 90  },
+
+  // Leafick's moves
+  leafage:   { name: "Leafage",   type: "grass",  power: 12, accuracy: 95 },
+  pounce:    { name: "Pounce",    type: "normal", power: 10, accuracy: 95 },
+  confusion: { name: "Confusion", type: "normal", power: 10, accuracy: 95 },
 };

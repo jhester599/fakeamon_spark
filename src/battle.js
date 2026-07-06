@@ -1,10 +1,11 @@
 // ===========================================================================
-//  BATTLE STATE — current HP for each fighter, keyed by name.
+//  BATTLE STATE
+//  Step 2: player and opponent are chosen on the starter-select screen,
+//  not hardcoded — see showStarterSelect() below. hp is keyed by name.
 // ===========================================================================
-const hp = {
-  Growler: GROWLER.maxHP,
-  Whaley: WHALEY.maxHP,
-};
+let player;
+let opponent;
+const hp = {};
 
 // ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
@@ -30,13 +31,17 @@ function showFighter(fakeamon, currentHP) {
 
   const percent = Math.max(0, Math.min(100, Math.round((currentHP / fakeamon.maxHP) * 100)));
 
+  // Not every Fakeamon has real art yet (Leafick's lands at M3 Step 3) —
+  // fall back to just the colored box instead of a broken image.
+  const spriteImg = fakeamon.sprite
+    ? '<img src="' + fakeamon.sprite + '" alt="' + fakeamon.name + '">'
+    : "";
+
   return (
     '<div class="fighter">' +
       "<h2>" + fakeamon.name + "</h2>" +
       '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
-      '<div class="sprite type-' + fakeamon.type + '">' +
-        '<img src="' + fakeamon.sprite + '" alt="' + fakeamon.name + '">' +
-      "</div>" +
+      '<div class="sprite type-' + fakeamon.type + '">' + spriteImg + "</div>" +
       '<div class="hp-bar-track">' +
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +
@@ -55,7 +60,7 @@ function showFighter(fakeamon, currentHP) {
 // Redraw both fighters with their current HP.
 function renderArena() {
   document.getElementById("arena").innerHTML =
-    showFighter(GROWLER, hp.Growler) + showFighter(WHALEY, hp.Whaley);
+    showFighter(player, hp[player.name]) + showFighter(opponent, hp[opponent.name]);
 }
 
 // ===========================================================================
@@ -111,7 +116,7 @@ function performAttack(attacker, defender, move) {
   addLogLine(line);
 }
 
-// Whaley doesn't think ahead yet — she just picks one of her moves at random.
+// The opponent doesn't think ahead yet — it just picks one of its moves at random.
 function pickRandomMove(fakeamon) {
   const index = Math.floor(Math.random() * fakeamon.moves.length);
   return MOVES[fakeamon.moves[index]];
@@ -143,21 +148,21 @@ function checkForFaint(fakeamon) {
 }
 
 // ===========================================================================
-//  ONE TURN — Growler attacks AND Whaley attacks back, with a pause between
-//  so it feels like a real back-and-forth. Whoever has higher Speed swings
-//  first; a tie goes to the player. If either fighter faints, the battle
-//  ends right there instead of playing out the rest of the turn.
+//  ONE TURN — you attack AND your opponent attacks back, with a pause
+//  between so it feels like a real back-and-forth. Whoever has higher
+//  Speed swings first; a tie goes to the player. If either fighter faints,
+//  the battle ends right there instead of playing out the rest of the turn.
 // ===========================================================================
 function resolveTurn(playerMove) {
   setControlsEnabled(false);
 
-  const enemyMove = pickRandomMove(WHALEY);
-  const playerGoesFirst = GROWLER.speed >= WHALEY.speed;
+  const enemyMove = pickRandomMove(opponent);
+  const playerGoesFirst = player.speed >= opponent.speed;
 
-  const first  = playerGoesFirst ? { attacker: GROWLER, defender: WHALEY, move: playerMove }
-                                  : { attacker: WHALEY,  defender: GROWLER, move: enemyMove };
-  const second = playerGoesFirst ? { attacker: WHALEY,  defender: GROWLER, move: enemyMove }
-                                  : { attacker: GROWLER, defender: WHALEY, move: playerMove };
+  const first  = playerGoesFirst ? { attacker: player, defender: opponent, move: playerMove }
+                                  : { attacker: opponent, defender: player, move: enemyMove };
+  const second = playerGoesFirst ? { attacker: opponent, defender: player, move: enemyMove }
+                                  : { attacker: player, defender: opponent, move: playerMove };
 
   performAttack(first.attacker, first.defender, first.move);
   renderArena();
@@ -184,10 +189,10 @@ function resolveTurn(playerMove) {
 //  WIN / LOSE — Step 8: swap the move buttons for a result + Play Again.
 // ===========================================================================
 function endBattle(winner) {
-  const playerWon = winner === GROWLER;
+  const playerWon = winner === player;
   const message = playerWon
-    ? "🎉 " + GROWLER.name + " wins!"
-    : "💀 " + GROWLER.name + " fainted — " + WHALEY.name + " wins.";
+    ? "🎉 " + player.name + " wins!"
+    : "💀 " + player.name + " fainted — " + opponent.name + " wins.";
 
   const controls = document.getElementById("controls");
   controls.innerHTML =
@@ -197,17 +202,55 @@ function endBattle(winner) {
   document.getElementById("playAgainBtn").addEventListener("click", startNewBattle);
 }
 
-// Reset both fighters to full HP and start a fresh battle.
+// Reset both fighters to full HP and start a fresh battle (same starter).
 function startNewBattle() {
-  hp.Growler = GROWLER.maxHP;
-  hp.Whaley = WHALEY.maxHP;
+  hp[player.name] = player.maxHP;
+  hp[opponent.name] = opponent.maxHP;
+
+  document.getElementById("controls-label").textContent = "Choose your move:";
 
   logLines.length = 0;
   document.getElementById("log").innerHTML = "";
 
   renderArena();
-  showMoveButtons(GROWLER);
-  addLogLine("A wild " + WHALEY.name + " appears! Choose a move for " + GROWLER.name + ".");
+  showMoveButtons(player);
+  addLogLine("A wild " + opponent.name + " appears! Choose a move for " + player.name + ".");
+}
+
+// ===========================================================================
+//  STARTER SELECT — Step 2: pick which Fakeamon you'll play as. Whoever
+//  you don't pick becomes your opponent for now (a random wild opponent
+//  arrives in Step 3).
+// ===========================================================================
+function showStarterSelect() {
+  document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("log").innerHTML = "";
+
+  document.getElementById("arena").innerHTML = STARTERS.map(function (starter) {
+    return (
+      '<div class="starter-card">' +
+        showFighter(starter, starter.maxHP) +
+        '<button class="move-btn choose-btn" data-name="' + starter.name + '">Choose ' + starter.name + '!</button>' +
+      "</div>"
+    );
+  }).join("");
+
+  document.querySelectorAll(".choose-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const chosen = STARTERS.find(function (starter) {
+        return starter.name === button.dataset.name;
+      });
+      chooseStarter(chosen);
+    });
+  });
+}
+
+function chooseStarter(starter) {
+  player = starter;
+  opponent = STARTERS.find(function (s) { return s !== player; });
+  document.getElementById("title").textContent = "Fakeamon Battle — " + player.name + " vs " + opponent.name;
+  startNewBattle();
 }
 
 // ===========================================================================
@@ -229,4 +272,4 @@ function showMoveButtons(fakeamon) {
   });
 }
 
-startNewBattle();
+showStarterSelect();

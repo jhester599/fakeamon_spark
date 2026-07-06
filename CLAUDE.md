@@ -125,10 +125,12 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 
 ## Assets & attribution
 
-- Starting art is **Tuxemon** sprites, mostly **CC BY-SA 3.0** (a few differ — e.g., Allagon is CC BY 4.0). Usable with credit; keep art edits under the same license.
-- Pull sprites from `github.com/Tuxemon/Tuxemon` (consistent naming + JSON DB), not the wiki. Battle sprites are ~64×64 PNG; scale up 3–4× with nearest-neighbor.
-- When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source page, artist(s), license.
-- **M1 needs no art** — placeholders only.
+- Starting art is **Tuxemon** sprites. License is **mixed per asset** (mostly CC BY-SA 4.0, some CC BY 3.0/4.0, a couple Public Domain) — **check each file's actual license before using it**, don't assume one blanket license. Usable with credit; keep art edits under the same (share-alike) license where that applies.
+- **Verified source path:** `mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png` on the `development` branch of `github.com/Tuxemon/Tuxemon` — not the wiki, not a guess. Full details, per-creature file list, and the two open attribution gaps (Hissiorite, Frondly) are in `DESIGN.md` §12.
+- These are **2×2 sprite sheets (128×88px)**, not flat single sprites — front pose / back pose × a 2-frame idle animation, each cell ~64×44px. Slice frames from the sheet, then scale 3–4× with nearest-neighbor.
+- Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
+- When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
+- **M1 needs no art** — placeholders only. Real art integration is planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
 
 ## Git
 

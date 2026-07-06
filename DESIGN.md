@@ -264,47 +264,67 @@ Berries: **Fakeaberry, Greenberry, Raspberry, Cosmicberry, Greatberry, Bossberry
 
 ## 12. Assets & Attribution (Tuxemon references)
 
-**License:** Tuxemon art is **Creative Commons Attribution-ShareAlike (CC BY-SA 3.0)** — usable with (a) credit to the artists and (b) keeping the art (and edits) under the same license. **Exception noticed:** Allagon comes from Spalding004's Sitran Fakedex under **CC BY 4.0** (no share-alike). So **check the license per asset** — most are BY-SA 3.0, some differ. Our own *code* can be any license; the CC obligation rides with the images.
+**Verified 2026-07-06 directly against the `Tuxemon/Tuxemon` GitHub repo** (not just the wiki — see §13 for the exact source path). Two corrections from earlier versions of this doc:
+
+**License:** the repo's own `ATTRIBUTIONS.md` lists most relevant assets as **CC BY-SA 4.0** (not 3.0 as previously written here), with a genuine mix per asset — some entries are CC BY 3.0, CC BY 4.0, or even Public Domain in the same file. **Allagon is CC BY-SA 4.0** (share-alike) per that file — the earlier note calling it a non-share-alike "CC BY 4.0" exception appears to have been wrong. **Bottom line: check the license per asset before using it; don't assume a blanket license for the whole project.** Our own *code* can be any license; the CC obligation rides with the images.
+
+**⚠️ Attribution gap:** the repo's `ATTRIBUTIONS.md` has **no entry at all** for **Hissiorite** or **Frondly** — two of our three starters' base sprites. The wiki pages linked below might still have artist credit, but automated tools couldn't load them (blocked). **Someone needs to check `wiki.tuxemon.org/Hissiorite` and `wiki.tuxemon.org/Frondly` by hand** before we credit/use those two sprites publicly.
 
 ### Starters
 
-| Ours | Tuxemon | Wiki | Artists to credit |
-|---|---|---|---|
-| Growler | Hissiorite | https://wiki.tuxemon.org/Hissiorite | princess-phoenix |
-| Whaley | Bigfin | https://wiki.tuxemon.org/Bigfin | Cavalcadeur, extyrannomon, + sprite team |
-| Leafick | Frondly | https://wiki.tuxemon.org/Frondly | Leo, ReallyDarkandWindie, Levaine, Sanglorian |
+| Ours | Tuxemon | Battle sprite file | Wiki | Artists to credit |
+|---|---|---|---|---|
+| Growler | Hissiorite | `battle/hissiorite-sheet.png` | https://wiki.tuxemon.org/Hissiorite | princess-phoenix — **⚠️ not in repo's ATTRIBUTIONS.md, verify on wiki** |
+| Whaley | Bigfin | `battle/bigfin-sheet.png` | https://wiki.tuxemon.org/Bigfin | Cavalcadeur, rsg167 (per repo `ATTRIBUTIONS.md`) |
+| Leafick | Frondly | `battle/frondly-sheet.png` | https://wiki.tuxemon.org/Frondly | Leo, ReallyDarkandWindie, Levaine, Sanglorian — **⚠️ not in repo's ATTRIBUTIONS.md, verify on wiki** |
 
 ### Legendary
 
-| Ours | Tuxemon | Wiki | Artists |
-|---|---|---|---|
-| Artemis | Djinnbo | https://wiki.tuxemon.org/Djinnbo | Cavalcadeur, rsg167, Sanglorian, slickedbackArtisan |
+| Ours | Tuxemon | Battle sprite file | Wiki | Artists |
+|---|---|---|---|---|
+| Artemis | Djinnbo | `battle/djinnbo-sheet.png` | https://wiki.tuxemon.org/Djinnbo | Cavalcadeur, rsg167 (per repo `ATTRIBUTIONS.md`; wiki also lists Sanglorian, slickedbackArtisan) |
 
 ### Mini-bosses
 
-| Ours | Wiki | Artists |
-|---|---|---|
-| Banvengeance | https://wiki.tuxemon.org/Banvengeance | HippasusTwo, Jaskrendix, WDFA-Final |
-| Saurchin | https://wiki.tuxemon.org/Saurchin | Serpexnessie, Sanglorian, PandiRocks-17 |
-| Sharpfin | https://wiki.tuxemon.org/Sharpfin | Leo, extyrannomon, Sanglorian |
-| Gastronium | https://wiki.tuxemon.org/Gastronium | WDFA-Final, JaskRendix |
-| Tobishimi | https://wiki.tuxemon.org/Tobishimi | princess-phoenix, Lejun |
+All 5 confirmed present at `battle/<slug>-sheet.png`.
+
+| Ours | Battle sprite file | Wiki | Artists |
+|---|---|---|---|
+| Banvengeance | `battle/banvengeance-sheet.png` | https://wiki.tuxemon.org/Banvengeance | HippasusTwo, Jaskrendix, WDFA-Final |
+| Saurchin | `battle/saurchin-sheet.png` | https://wiki.tuxemon.org/Saurchin | Serpexnessie, Sanglorian, PandiRocks-17 |
+| Sharpfin | `battle/sharpfin-sheet.png` | https://wiki.tuxemon.org/Sharpfin | Leo, extyrannomon, Sanglorian |
+| Gastronium | `battle/gastronium-sheet.png` | https://wiki.tuxemon.org/Gastronium | WDFA-Final, JaskRendix |
+| Tobishimi | `battle/tobishimi-sheet.png` | https://wiki.tuxemon.org/Tobishimi | princess-phoenix, Lejun |
 
 ### Gyms
 
-| Role | Ours | Wiki | Artists / notes |
-|---|---|---|---|
-| Gym 1 leader | Enforcer Boss | https://wiki.tuxemon.org/Enforcer_Boss | trainer/NPC sprite — confirm credits on page |
-| Gym 1 standard | Allagon | https://wiki.tuxemon.org/Allagon | Spalding004, Chickenshowman — **CC BY 4.0** |
-| Gym 1 ace | AV8R | https://wiki.tuxemon.org/AV8R | Leo, josepharaoh99, Sanglorian |
-| Gym 2 leader | Goth | https://wiki.tuxemon.org/Goth | trainer/NPC sprite — confirm credits |
-| Gym 2 standard | Agnite | https://wiki.tuxemon.org/Agnite | Leo, aviculor, Sanglorian, Levaine |
-| Gym 2 ace | Windeye | https://wiki.tuxemon.org/Windeye | DevilDman, Levaine, Sanglorian |
-| Gym 3 leader | Child Actor | https://wiki.tuxemon.org/Child_Actor | trainer/NPC sprite — confirm credits |
-| Gym 3 standard | Spectera | https://wiki.tuxemon.org/Spectera | Leo, HippasusTwo |
-| Gym 3 ace | Eaglace | https://wiki.tuxemon.org/Eaglace | Leo, DevilDman, Levaine, Sanglorian |
+Standard/ace battle sprites all confirmed present at `battle/<slug>-sheet.png`. Leader sprites are **NPC trainer art**, a different folder: `mods/tuxemon/sprites/<name>.png` (often color-variant palette swaps of a reusable archetype, not one-off art).
 
-**Getting files:** pull sprites from the Tuxemon GitHub repo (`github.com/Tuxemon/Tuxemon`) — consistent naming + JSON DB — not the wiki. Battle sprites are mostly **64×64 PNG**; scale up 3–4× with nearest-neighbor. Evolution/base sprites (Cobarett, Pythonova, Dollfin, Budaye, Poinchin, Stomic, etc.) are available too. Maintain a **`CREDITS.md`** in the repo: file, our name, source page, artist(s), license.
+| Role | Ours | Sprite file | Wiki | Artists / notes |
+|---|---|---|---|---|
+| Gym 1 leader | Enforcer Boss | `sprites/boss.png` (archetype — confirm exact variant) | https://wiki.tuxemon.org/Enforcer_Boss | trainer/NPC sprite — confirm credits on page |
+| Gym 1 standard | Allagon | `battle/allagon-sheet.png` | https://wiki.tuxemon.org/Allagon | Spalding004, Chickenshowman — **CC BY-SA 4.0** (corrected, was mislabeled) |
+| Gym 1 ace | AV8R | `battle/av8r-sheet.png` | https://wiki.tuxemon.org/AV8R | Leo, josepharaoh99, Sanglorian |
+| Gym 2 leader | Goth | `sprites/goth.png` | https://wiki.tuxemon.org/Goth | trainer/NPC sprite — confirm credits |
+| Gym 2 standard | Agnite | `battle/agnite-sheet.png` | https://wiki.tuxemon.org/Agnite | Leo, aviculor, Sanglorian, Levaine |
+| Gym 2 ace | Windeye | `battle/windeye-sheet.png` | https://wiki.tuxemon.org/Windeye | DevilDman, Levaine, Sanglorian |
+| Gym 3 leader | Child Actor | `sprites/childactor.png` | https://wiki.tuxemon.org/Child_Actor | trainer/NPC sprite — confirm credits |
+| Gym 3 standard | Spectera | `battle/spectera-sheet.png` | https://wiki.tuxemon.org/Spectera | Leo, HippasusTwo |
+| Gym 3 ace | Eaglace | `battle/eaglace-sheet.png` | https://wiki.tuxemon.org/Eaglace | Leo, DevilDman, Levaine, Sanglorian |
+
+**Getting files — verified path:** battle sprites live at
+
+```
+mods/tuxemon/gfx/sprites/battle/<slug>-sheet.png
+```
+
+on the `development` branch of `github.com/Tuxemon/Tuxemon` (e.g. `.../battle/hissiorite-sheet.png`). Confirmed present for all 3 starters, Djinnbo, all 5 mini-bosses, and all 6 gym standard/ace Fakeamon named in this doc. Evolution/base sprites (Cobarett, Pythonova, Dollfin, Budaye, Poinchin, Stomic, etc.) are there too, same pattern. Trainer/NPC sprites (gym leaders) live in a **different** folder, `mods/tuxemon/sprites/` — e.g. our "Goth" and "Child Actor" leaders match `goth.png` / `childactor.png` directly, and "Enforcer Boss" likely maps to the generic `boss.png` archetype (Tuxemon reuses named NPC templates with palette-swapped color variants rather than one-off art per trainer — confirm the closest match before use).
+
+**Not flat 64×64 images — they're 2×2 sprite sheets, 128×88px.** Each `-sheet.png` is a grid: one column is the "front" (enemy-facing) pose, the other is a "back" (player's-own-Fakeamon) pose, and each is duplicated across the two rows as a simple 2-frame idle-breathing animation. Each individual cell is roughly 64×44px. Plan to slice frames out of the sheet (not just scale the whole file) when this gets wired into the game at M3. Scale the sliced frame 3–4× with nearest-neighbor, same as before.
+
+**Curiosity, not a blocker:** both `dollfin-sheet.png` and `d0llf1n-sheet.png` (stylized zero/one spelling) exist in the repo as two different files. Doesn't affect us — Whaley has no pre-evolution (§3, Lewis's decision), so we don't need either.
+
+Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 3, per `ROADMAP.md`): file, our name, source path, artist(s), license, and the commit/date it was pulled from (the `development` branch moves — note the commit SHA at pull time so we can find the exact source again later).
 
 ---
 

@@ -22,7 +22,7 @@ Context for Claude Code. Read this first every session. The full design lives in
 ## Current status
 
 > **Milestone: M1 — Battle Slice. Complete! 🎉** *(Update this line as we progress.)*
-> Growler vs Whaley is a full playable battle: move buttons, damage, type advantage, misses, HP bars, fainting, and a win/lose screen with Play Again. M2 (Catching & Team) is next — see `ROADMAP.md`.
+> Growler vs Whaley is a full playable battle: move buttons, damage, type advantage, misses, HP bars, fainting, and a win/lose screen with Play Again. M2 (Catching & Team) is next — see `ROADMAP.md`. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
 
 ## Scope guardrails
 
@@ -40,21 +40,36 @@ Context for Claude Code. Read this first every session. The full design lives in
 
 Confirm or override before writing code.
 
-## Suggested project structure
+## Current project structure
 
 ```
-/                → index.html (M1 lives here to start)
-/src             → game code (battle.js, damage.js, data/…)
-/src/data        → fakeamon.js, moves.js, typechart.js  (the tweakable game values)
-/assets          → sprites, added later
-DESIGN.md        → full design spec (source of truth)
-CLAUDE.md        → this file
-CREDITS.md       → asset attribution (create when we add art)
+index.html         → the game (M1: battle slice, plain HTML/CSS/JS, no build step)
+roadmap.html        → visual quest map (mirrors ROADMAP.md), also served live
+homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
+/assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png)
+/assets/sprites/battle → vendored original source sheets, for future slicing (M3)
+.github/workflows    → deploy-pages.yml (auto-publishes to GitHub Pages on push to main)
+
+DESIGN.md    → full design spec (source of truth)
+CLAUDE.md    → this file — working brief + current milestone
+ROADMAP.md   → stepwise M1–M5 build plan, what's done/next
+DECISIONS.md → decision log + the loop for folding Lewis's picks into DESIGN.md
+HOMEWORK.md  → open questions waiting on Lewis and Jeff
+CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
+README.md    → repo front page, links to the live site
 ```
+
+*(Future milestones add `/src`-style code files as the game grows past a
+single HTML file — not needed yet.)*
 
 ## How to run
 
-M1 needs no tooling — open `index.html` in a browser (or use a simple local server like `python3 -m http.server`). *(Update this section once the stack is confirmed.)*
+**Play it live:** [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)
+— auto-deployed from `main` on every push, always current.
+
+**Or run it locally:** no tooling needed — open `index.html` in a browser,
+or use a simple local server like `python3 -m http.server`. *(Update this
+section once the tech stack is formally confirmed — see Tech stack above.)*
 
 ---
 

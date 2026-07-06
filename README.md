@@ -9,8 +9,8 @@ legendary Fakeamon named **Artemis** from dropping a meteor on the world.
 
 **[jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)**
 
-That link goes live automatically once the one-time setup below is done —
-see **Publishing this site**.
+Live and auto-updating — every push to `main` redeploys it automatically
+(see **Deployment** below).
 
 Other pages from the same site:
 - **[Quest map](https://jhester599.github.io/fakeamon_spark/roadmap.html)** — our step-by-step build plan, with progress tracked live
@@ -52,23 +52,21 @@ project, used under Creative Commons licenses (mostly CC BY-SA 4.0 — see
 `CREDITS.md` for exact per-file license and artist credit). Fakeamon is
 inspired by Pokémon in spirit only — no Nintendo names, sprites, or music.
 
-## Publishing this site (one-time setup)
+## Deployment
 
 A GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) deploys
 `index.html`, `roadmap.html`, `homework.html`, and `assets/` to GitHub Pages
-automatically on every push to `main`. Two one-time steps get it live
-(both done by hand — GitHub deliberately doesn't let a workflow enable
-Pages for the first time on its own, even with the right permissions):
+automatically on every push to `main` — no build step, nothing to run by
+hand. Check progress anytime under the repo's **Actions** tab.
 
-1. ✅ **Make the repo public** — done. (Private-repo Pages needs a paid
-   GitHub plan, and even then stays access-restricted to collaborators.)
-2. **Turn on Pages, once:** go to **Settings → Pages**, and under
-   "Build and deployment" set **Source: GitHub Actions**. That's the actual
-   switch that was missing — our workflow tried to flip it automatically
-   and GitHub blocked it with *"Resource not accessible by integration"*,
-   which is expected/by-design, not a bug in our setup.
+**If you ever fork this repo or set it up somewhere new,** two one-time
+manual steps are required before the workflow can succeed (GitHub
+deliberately blocks a workflow from doing these itself, even with full
+`pages: write` permission):
 
-After that one click, this workflow runs itself forever — no more manual
-steps for future pushes. Check progress under the repo's **Actions** tab;
-the site will be at
-**[jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)**.
+1. The repo must be **public** (private-repo Pages needs a paid GitHub plan,
+   and even then stays access-restricted to collaborators).
+2. **Settings → Pages** → under "Build and deployment," set
+   **Source: GitHub Actions**. Skipping this makes the first deploy fail
+   with *"Resource not accessible by integration"* — that error means this
+   step hasn't been done yet, not that anything is broken.

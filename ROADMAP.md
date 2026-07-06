@@ -24,7 +24,10 @@ whole idea: build a little, play it, then build the next little bit.
 
 ## How to run the game
 
-Right now (M1) there's no setup — just open the file:
+**Easiest — play it live, no setup:** [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/)
+(auto-deployed from `main` on every push, always current).
+
+**Or run it locally:**
 
 ```bash
 # from the project folder

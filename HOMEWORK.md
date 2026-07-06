@@ -65,6 +65,10 @@ Not blocking M2, but shouldn't be forgotten:
 3. Decide whether to open one PR now bundling everything since the last
    merge (M1 steps 3–8, the turn-pacing fix, and the art bonus), or keep
    stacking commits before opening it.
+4. **Make the repo public** (Settings → General → Danger Zone → Change
+   visibility → Public) so the GitHub Pages site actually goes live — see
+   "Publishing this site" in `README.md`. Not something I can do for you;
+   GitHub requires the owner to confirm this directly.
 
 **No rush — later milestones:** evolution level per starter & XP curve (M5),
 capture-formula exact numbers beyond the basic rate above (M2, fine-tuning

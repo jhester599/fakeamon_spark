@@ -4,6 +4,11 @@
 //  Step 3: starter-select moved here out of battle.js (see
 //  PLANS/M5_STATE_AND_SAVE_PLAN.md §A.2) — this file will also own the
 //  title screen once save/load lands.
+//
+//  M5-plan S1: every fighter is now an *individual* (src/state.js), made
+//  fresh from a species key with newIndividual(). Starter-select shows a
+//  full-HP preview individual per starter; picking one carries its species
+//  key forward into each new wild battle.
 // ===========================================================================
 
 function showStarterSelect() {
@@ -11,38 +16,40 @@ function showStarterSelect() {
   document.getElementById("controls-label").textContent = "";
   document.getElementById("log").innerHTML = "";
 
-  document.getElementById("arena").innerHTML = STARTERS.map(function (starter) {
+  document.getElementById("arena").innerHTML = STARTER_KEYS.map(function (speciesKey) {
+    const species = FAKEAMON[speciesKey];
+    const preview = newIndividual(speciesKey, STARTING_LEVEL);
     return (
       '<div class="starter-card">' +
-        showFighter(starter, starter.maxHP) +
-        '<button class="move-btn choose-btn" data-name="' + starter.name + '">Choose ' + starter.name + '!</button>' +
+        showFighter(preview) +
+        '<button class="move-btn choose-btn" data-key="' + speciesKey + '">Choose ' + species.name + '!</button>' +
       "</div>"
     );
   }).join("");
 
   document.querySelectorAll(".choose-btn").forEach(function (button) {
     button.addEventListener("click", function () {
-      const chosen = STARTERS.find(function (starter) {
-        return starter.name === button.dataset.name;
-      });
-      fightRandomWildFakeamon(chosen);
+      fightRandomWildFakeamon(button.dataset.key);
     });
   });
 }
 
 // Step 3: a random wild Fakeamon, not always Whaley.
-function pickRandomWildOpponent() {
-  const index = Math.floor(Math.random() * STARTERS.length);
-  return STARTERS[index];
+function pickRandomWildSpeciesKey() {
+  const index = Math.floor(Math.random() * STARTER_KEYS.length);
+  return STARTER_KEYS[index];
 }
 
 // Runs one wild battle, then — whatever happens (win, lose, flee, or catch)
 // — starts another with a fresh random opponent. A caught Fakeamon doesn't
-// join a persistent team yet; that lands at M2 Step 5 with the state bag.
-function fightRandomWildFakeamon(starter) {
-  const wildOpponent = pickRandomWildOpponent();
-  startBattle({ player: starter, enemy: wildOpponent, canFlee: true, canCatch: true }).then(function () {
-    fightRandomWildFakeamon(starter);
+// join a persistent team yet; that lands at M2 Step 5 with the team list.
+function fightRandomWildFakeamon(playerSpeciesKey) {
+  const wildSpeciesKey = pickRandomWildSpeciesKey();
+  const playerIndividual = newIndividual(playerSpeciesKey, STARTING_LEVEL);
+  const wildIndividual = newIndividual(wildSpeciesKey, STARTING_LEVEL);
+
+  startBattle({ player: playerIndividual, enemy: wildIndividual, canFlee: true, canCatch: true }).then(function () {
+    fightRandomWildFakeamon(playerSpeciesKey);
   });
 }
 

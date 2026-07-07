@@ -183,12 +183,12 @@
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  battle.js  →  main.js
-     (state.js and progression.js will slot in between data/* and battle.js
-     once the individuals/save-system work lands — see
-     PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+       data/*  →  state.js  →  battle.js  →  main.js
+     (progression.js will slot in between state.js and battle.js once M5's
+     leveling/save work lands — see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
+<script src="src/state.js"></script>
 <script src="src/battle.js"></script>
 <script src="src/main.js"></script>

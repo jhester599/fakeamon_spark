@@ -46,11 +46,15 @@ The M2 refactor (Steps 1–2, merged as PRs #10–#11) diverged from
    Starter-select then moves out of `battle.js` (it's a *game flow* screen,
    not a battle) — into `src/main.js`, the small conductor script that will
    also own the M5 title screen (§4.3).
-3. **⚠️ Latent bug to fix during M2 Step 5 (team list):** HP lives in a
-   name-keyed map — `hp[player.name]` — and fighters are the shared species
-   objects themselves. The moment the party contains two Growlers, or a wild
-   Growler fights your Growler, both read the same HP slot. The fix is
-   structural, not a patch, and it's §1's individual-vs-species split.
+3. **✅ Fixed by S1 (2026-07-07):** HP used to live in a name-keyed map —
+   `hp[player.name]` — with fighters as the shared species objects
+   themselves, so the moment the party contained two Growlers, or a wild
+   Growler fought your Growler, both would've read the same HP slot. (Step
+   3 papered over the exact-mirror-match case with role-keying, but the
+   deeper species-vs-individual gap remained.) S1's individual/species
+   split (below) retired the map entirely — HP now lives on each
+   individual object, so it's structurally impossible for two creatures to
+   share a slot.
 
 ### Added 2026-07-06 — docs-integration session, checked against `main` @ `e237770`
 
@@ -305,7 +309,7 @@ state foundation early, persistence when it pays, depth features in M5:
 
 | # | When | Step | What gets built | Model / effort |
 |---|---|---|---|---|
-| **S1** | **M2, before Step 5** | Individuals & state bag | `src/state.js` + `newIndividual()` + `statsFor()`; battle reads/writes `individual.currentHP`; retire `hp[name]` map (§A.3); load-order comment in `index.html`; verify M1 fight feels unchanged | Sonnet 5 / **high** — touches battle internals; this is the step where two-Growlers stops being a bug |
+| **S1** ✅ | **M2, before Step 5** | Individuals & state bag | `src/state.js` + `newIndividual()` + `statsFor()`; battle reads/writes `individual.currentHP`; retire `hp[name]` map (§A.3); load-order comment in `index.html`; verify M1 fight feels unchanged | Sonnet 5 / **high** — touches battle internals; this is the step where two-Growlers stops being a bug — *done 2026-07-07: `FAKEAMON` is now keyed by species (`growler`/`whaley`/`leafick`, `base*` stat fields), `src/state.js` adds `newIndividual()`/`statsFor()` (level always 1, `STAT_GROWTH_PER_LEVEL` all zero until M5's progression.js), and `battle.js`/`main.js` pass individuals everywhere — a caught wild Fakeamon's outcome is now the healed individual itself, ready for Step 5 to actually add to a team* |
 | **S2** | M2 Steps 3–4 (as planned there) | Battle contract | Global `startBattle(config) → Promise<outcome>` per M3 plan §5; starter-select moves to `src/main.js` | Sonnet 5 / high |
 | **S3** | End of M2 | Save v1 | `src/save.js` (§4.1–4.2); autosave after battles/catches; Continue/New Game title flow | Sonnet 5 / medium |
 | **S4** | Anytime after S3 | Export/import | §4.3; a settings corner on the title screen | Sonnet 5 / low — great short session for Lewis to drive |

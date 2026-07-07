@@ -46,3 +46,20 @@ function statsFor(individual) {
     speed:    species.baseSpeed   + Math.floor(grow.speed   * levelsAboveOne),
   };
 }
+
+// ===========================================================================
+//  THE TEAM — Step 5. Up to MAX_PARTY_SIZE individuals fight for you
+//  (party[0] is always the one currently in battle); anything caught
+//  beyond that overflows into the box. No nicknames — species names only
+//  (Lewis's B3 call), so an individual's species + level is its whole
+//  identity for display.
+// ===========================================================================
+const MAX_PARTY_SIZE = 4; // Lewis's call — a 5th catch overflows to the Boxes
+
+// ALL persistent facts live in this one object (PLANS/M5_STATE_AND_SAVE_PLAN.md
+// §1). Only party + box exist so far — inventory/flags/world join later,
+// each as the feature that needs them lands.
+const gameState = {
+  party: [],
+  box: [],
+};

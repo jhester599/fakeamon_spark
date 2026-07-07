@@ -169,6 +169,68 @@
       transition: none;
     }
   }
+
+  /* ---- Step 5: team list + Boxes ---- */
+  .team-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    max-width: 760px;
+    margin: 20px auto 0;
+  }
+  /* Deliberately NOT .move-btn: that class gets mass-disabled mid-turn by
+     setControlsEnabled() in battle.js, which would also lock out Boxes. */
+  .boxes-btn {
+    background: #2a4d8f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .boxes-btn:hover {
+    background: #1d3868;
+  }
+  #team, #boxes {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 760px;
+    margin: 10px auto 0;
+  }
+  #boxes {
+    display: none; /* toggled open by the Boxes button */
+  }
+  #boxes.visible {
+    display: flex;
+  }
+  #boxes p {
+    color: #778;
+    font-size: 14px;
+  }
+  .team-card {
+    background: white;
+    border: 2px solid #d0d8e8;
+    border-radius: 12px;
+    padding: 10px;
+    width: 130px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .team-card.active-card {
+    border-color: #2a4d8f;
+    box-shadow: 0 0 0 2px rgba(42, 77, 143, 0.25);
+  }
+  .team-sprite {
+    height: 60px;
+  }
+  .team-hp-text {
+    font-size: 12px;
+    color: #556;
+  }
 </style>
 
 <h1 id="title">Fakeamon Battle</h1>
@@ -180,15 +242,22 @@
 <p class="section-label">Battle Log</p>
 <div id="log"></div>
 
+<div class="team-header">
+  <p class="section-label">Your Team</p>
+  <button id="boxesBtn" class="boxes-btn">Boxes (0)</button>
+</div>
+<div id="team"></div>
+<div id="boxes"></div>
+
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  battle.js  →  main.js
-     (state.js and progression.js will slot in between data/* and battle.js
-     once the individuals/save-system work lands — see
-     PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+       data/*  →  state.js  →  battle.js  →  main.js
+     (progression.js will slot in between state.js and battle.js once M5's
+     leveling/save work lands — see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
+<script src="src/state.js"></script>
 <script src="src/battle.js"></script>
 <script src="src/main.js"></script>

@@ -2,29 +2,23 @@
 //  BATTLE STATE
 //  Step 3: this file's only public entry point is startBattle(config) below
 //  — see PLANS/M3_OVERWORLD_PLAN.md §5 for the full contract it's built
-//  from. player/opponent/hp stay simple module-level vars for now (only one
-//  battle ever runs at a time); the individuals/state-bag upgrade lands
-//  before M2 Step 5.
+//  from.
 //
-//  Bug fix (found testing Step 3): in a mirror match (e.g. Whaley vs a wild
-//  Whaley) player and opponent can be the exact same species object — the
-//  STARTERS array holds one shared object per species, not a fresh copy
-//  per battler. That broke two things at once: hp used to be keyed by
-//  fakeamon.name (same name → same slot, so attacking hit both fighters'
-//  HP), and win/lose was decided with `winner === player` (also always
-//  true when player and opponent are literally the same object). Fixed by
-//  tracking everything through the battle *role* ("player" / "opponent")
-//  instead of the fighter object — a role is always distinct even when the
-//  species behind it isn't.
+//  M5-plan S1: player/opponent are now *individuals* (src/state.js), not
+//  bare species objects — each one carries its own currentHP, so a mirror
+//  match (e.g. Whaley vs a wild Whaley) is two separate individuals that
+//  happen to point at the same species, never two things sharing one HP
+//  slot. Everything still gets tracked through the battle *role* ("player"
+//  / "opponent") rather than the individual itself, since resolveTurn
+//  needs to say "whoever's turn is first" before it knows who that is.
 // ===========================================================================
 let player;
 let opponent;
-const hp = { player: 0, opponent: 0 };
 let canFlee = true;
 let canCatch = true;
 let resolveBattle; // set by startBattle(); called once the fight is over
 
-// The Fakeamon currently playing this role.
+// The individual currently playing this role.
 function fighterFor(role) {
   return role === "player" ? player : opponent;
 }
@@ -41,9 +35,14 @@ function hpBarColor(percent) {
   return "#e05252";                   // red
 }
 
-function showFighter(fakeamon, currentHP) {
+// Renders one individual as a fighter card: species art/name/type + this
+// individual's current stats and HP.
+function showFighter(individual) {
+  const species = FAKEAMON[individual.speciesKey];
+  const stats = statsFor(individual);
+
   // Build the list of this Fakeamon's moves as text.
-  const moveItems = fakeamon.moves.map(function (moveKey) {
+  const moveItems = species.moves.map(function (moveKey) {
     const move = MOVES[moveKey];
     return "<li>" + move.name +
            " — " + move.type +
@@ -51,27 +50,27 @@ function showFighter(fakeamon, currentHP) {
            ", " + move.accuracy + "% hit</li>";
   }).join("");
 
-  const percent = Math.max(0, Math.min(100, Math.round((currentHP / fakeamon.maxHP) * 100)));
+  const percent = Math.max(0, Math.min(100, Math.round((individual.currentHP / stats.maxHP) * 100)));
 
   // Not every Fakeamon has real art yet (Leafick's lands at M3 Step 3) —
   // fall back to just the colored box instead of a broken image.
-  const spriteImg = fakeamon.sprite
-    ? '<img src="' + fakeamon.sprite + '" alt="' + fakeamon.name + '">'
+  const spriteImg = species.sprite
+    ? '<img src="' + species.sprite + '" alt="' + species.name + '">'
     : "";
 
   return (
     '<div class="fighter">' +
-      "<h2>" + fakeamon.name + "</h2>" +
-      '<span class="type-badge type-' + fakeamon.type + '">' + fakeamon.type + "</span>" +
-      '<div class="sprite type-' + fakeamon.type + '">' + spriteImg + "</div>" +
+      "<h2>" + species.name + "</h2>" +
+      '<span class="type-badge type-' + species.type + '">' + species.type + "</span>" +
+      '<div class="sprite type-' + species.type + '">' + spriteImg + "</div>" +
       '<div class="hp-bar-track">' +
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +
       '<div class="stats">' +
-        "HP " + currentHP + "/" + fakeamon.maxHP +
-        " &nbsp;•&nbsp; Attack " + fakeamon.attack +
-        " &nbsp;•&nbsp; Defense " + fakeamon.defense +
-        " &nbsp;•&nbsp; Speed " + fakeamon.speed +
+        "HP " + individual.currentHP + "/" + stats.maxHP +
+        " &nbsp;•&nbsp; Attack " + stats.attack +
+        " &nbsp;•&nbsp; Defense " + stats.defense +
+        " &nbsp;•&nbsp; Speed " + stats.speed +
       "</div>" +
       "<strong>Moves</strong>" +
       '<ul class="moves">' + moveItems + "</ul>" +
@@ -81,20 +80,21 @@ function showFighter(fakeamon, currentHP) {
 
 // Redraw both fighters with their current HP.
 function renderArena() {
-  document.getElementById("arena").innerHTML =
-    showFighter(player, hp.player) + showFighter(opponent, hp.opponent);
+  document.getElementById("arena").innerHTML = showFighter(player) + showFighter(opponent);
 }
 
 // ===========================================================================
 //  DAMAGE FORMULA — full version from DESIGN.md §6:
 //    raw    = move power + attacker's Attack − defender's Defense (min 1)
 //    damage = round(raw × typeMultiplier × random(0.85–1.15))
+//  Takes each fighter's *current* stats (from statsFor), not the individual
+//  itself, since the damage math never needs to know anything about HP.
 //  Returns both the damage and the type multiplier, so the battle log can
 //  say "super effective" or "not very effective" when it matters.
 // ===========================================================================
-function calculateDamage(move, attacker, defender) {
-  const raw = Math.max(1, move.power + attacker.attack - defender.defense);
-  const typeMultiplier = TYPE_CHART[move.type][defender.type];
+function calculateDamage(move, attackerStats, defenderStats, defenderType) {
+  const raw = Math.max(1, move.power + attackerStats.attack - defenderStats.defense);
+  const typeMultiplier = TYPE_CHART[move.type][defenderType];
   const wiggle = 0.85 + Math.random() * 0.30; // a random number from 0.85 to 1.15
   const damage = Math.round(raw * typeMultiplier * wiggle);
 
@@ -117,23 +117,28 @@ function addLogLine(text) {
 
 // ===========================================================================
 //  ONE ATTACK — attacker hits defender with a move, HP and log both update.
-//  Takes battle *roles*, not fighter objects — see the bug-fix note above.
+//  Takes battle *roles*, not individuals directly — see the note up top.
 //  Step 7: first roll for accuracy. A miss does nothing but announce itself.
 // ===========================================================================
 function performAttack(attackerRole, defenderRole, move) {
   const attacker = fighterFor(attackerRole);
   const defender = fighterFor(defenderRole);
+  const attackerName = FAKEAMON[attacker.speciesKey].name;
 
   const accuracyRoll = Math.random() * 100;
   if (accuracyRoll >= move.accuracy) {
-    addLogLine(attacker.name + " used " + move.name + ", but it missed!");
+    addLogLine(attackerName + " used " + move.name + ", but it missed!");
     return;
   }
 
-  const result = calculateDamage(move, attacker, defender);
-  hp[defenderRole] = Math.max(0, hp[defenderRole] - result.damage);
+  const attackerStats = statsFor(attacker);
+  const defenderStats = statsFor(defender);
+  const defenderType = FAKEAMON[defender.speciesKey].type;
 
-  let line = attacker.name + " used " + move.name + "! It dealt " + result.damage + " damage.";
+  const result = calculateDamage(move, attackerStats, defenderStats, defenderType);
+  defender.currentHP = Math.max(0, defender.currentHP - result.damage);
+
+  let line = attackerName + " used " + move.name + "! It dealt " + result.damage + " damage.";
   if (result.typeMultiplier >= 2) {
     line += " It's super effective!";
   } else if (result.typeMultiplier <= 0.5) {
@@ -143,9 +148,10 @@ function performAttack(attackerRole, defenderRole, move) {
 }
 
 // The opponent doesn't think ahead yet — it just picks one of its moves at random.
-function pickRandomMove(fakeamon) {
-  const index = Math.floor(Math.random() * fakeamon.moves.length);
-  return MOVES[fakeamon.moves[index]];
+function pickRandomMove(individual) {
+  const species = FAKEAMON[individual.speciesKey];
+  const index = Math.floor(Math.random() * species.moves.length);
+  return MOVES[species.moves[index]];
 }
 
 // Turn-out the buttons while a turn is playing, so a fast second click can't
@@ -180,8 +186,9 @@ function randomCatchPause() {
 
 // Step 8: has this role's Fakeamon fainted? If so, announce it in the log.
 function checkForFaint(role) {
-  if (hp[role] > 0) return false;
-  addLogLine(fighterFor(role).name + " fainted!");
+  const individual = fighterFor(role);
+  if (individual.currentHP > 0) return false;
+  addLogLine(FAKEAMON[individual.speciesKey].name + " fainted!");
   return true;
 }
 
@@ -199,7 +206,7 @@ const CATCH_CHANCE_CAP = 0.95;    // room for stronger balls later
 // You only ever throw a ball at the wild Fakeamon, so this always reads
 // the opponent's HP.
 function catchChance() {
-  const missingHPFraction = 1 - hp.opponent / opponent.maxHP;
+  const missingHPFraction = 1 - opponent.currentHP / statsFor(opponent).maxHP;
   const raw = BASE_CATCH_RATE * missingHPFraction; // ballBonus = 1 for now
   return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
 }
@@ -214,7 +221,10 @@ const CATCH_WOBBLE_COUNT = 2;
 // onDone(caught) once the whole sequence has finished, since the log now
 // takes a few beats to play out instead of resolving instantly.
 function throwFakeaball(onDone) {
-  addLogLine(player.name + " threw a Fakeaball at " + opponent.name + "!");
+  const playerName = FAKEAMON[player.speciesKey].name;
+  const opponentName = FAKEAMON[opponent.speciesKey].name;
+
+  addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
   const caught = Math.random() < catchChance();
 
   function wobble(remaining) {
@@ -231,9 +241,9 @@ function throwFakeaball(onDone) {
   function reveal() {
     setTimeout(function () {
       if (caught) {
-        addLogLine("Gotcha! " + opponent.name + " was caught!");
+        addLogLine("Gotcha! " + opponentName + " was caught!");
       } else {
-        addLogLine("Oh no! " + opponent.name + " broke free!");
+        addLogLine("Oh no! " + opponentName + " broke free!");
       }
       onDone(caught);
     }, randomCatchPause());
@@ -247,7 +257,7 @@ function throwFakeaball(onDone) {
 // Fakeamon is faster, it may get its attack in before you even throw.
 function attemptCatch() {
   setControlsEnabled(false);
-  const playerGoesFirst = player.speed >= opponent.speed;
+  const playerGoesFirst = statsFor(player).speed >= statsFor(opponent).speed;
 
   function enemyCounterAttack(afterAttack) {
     const enemyMove = pickRandomMove(opponent);
@@ -263,13 +273,15 @@ function attemptCatch() {
   }
 
   // Caught Fakeamon join fully healed, per Lewis's B2 pick (joining your
-  // team is a fresh start — the actual team join lands with the state bag
-  // at Step 5; for now the encounter just ends).
+  // team is a fresh start). The individual itself — species, level, XP,
+  // now-full HP — is what rides along in the outcome; actually adding it
+  // to a persistent team lands with M2 Step 5.
   function afterThrow(caught) {
     if (caught) {
+      opponent.currentHP = statsFor(opponent).maxHP;
       resolveBattle({
         result: "caught",
-        caught: { species: opponent, currentHP: opponent.maxHP },
+        caught: opponent,
         xpGained: 0,
       });
       return;
@@ -305,7 +317,7 @@ function resolveTurn(playerMove) {
   setControlsEnabled(false);
 
   const enemyMove = pickRandomMove(opponent);
-  const playerGoesFirst = player.speed >= opponent.speed;
+  const playerGoesFirst = statsFor(player).speed >= statsFor(opponent).speed;
 
   const first  = playerGoesFirst ? { attackerRole: "player", defenderRole: "opponent", move: playerMove }
                                   : { attackerRole: "opponent", defenderRole: "player", move: enemyMove };
@@ -340,9 +352,11 @@ function resolveTurn(playerMove) {
 // ===========================================================================
 function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
+  const playerName = FAKEAMON[player.speciesKey].name;
+  const opponentName = FAKEAMON[opponent.speciesKey].name;
   const message = playerWon
-    ? "🎉 " + player.name + " wins!"
-    : "💀 " + player.name + " fainted — " + opponent.name + " wins.";
+    ? "🎉 " + playerName + " wins!"
+    : "💀 " + playerName + " fainted — " + opponentName + " wins.";
 
   const controls = document.getElementById("controls");
   controls.innerHTML =
@@ -359,7 +373,7 @@ function endBattle(winnerRole) {
 // moves on.
 function runAway() {
   setControlsEnabled(false);
-  addLogLine(player.name + " got away safely!");
+  addLogLine(FAKEAMON[player.speciesKey].name + " got away safely!");
   setTimeout(function () {
     resolveBattle({ result: "fled", xpGained: 0 });
   }, 900);
@@ -369,11 +383,12 @@ function runAway() {
 //  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn
 //  above). Catch and Run sit alongside them when the battle allows it.
 // ===========================================================================
-function showMoveButtons(fakeamon) {
+function showMoveButtons(individual) {
   const controls = document.getElementById("controls");
   controls.innerHTML = ""; // clear any old buttons first
 
-  fakeamon.moves.forEach(function (moveKey) {
+  const species = FAKEAMON[individual.speciesKey];
+  species.moves.forEach(function (moveKey) {
     const move = MOVES[moveKey];
     const button = document.createElement("button");
     button.className = "move-btn";
@@ -405,14 +420,13 @@ function showMoveButtons(fakeamon) {
 //  START A BATTLE — the one function the rest of the game calls. Runs a
 //  fight in #arena/#controls/#log and resolves once it's over.
 //
-//    config  = { player: <species>, enemy: <species>, canFlee, canCatch }
+//    config  = { player: <individual>, enemy: <individual>, canFlee, canCatch }
 //    outcome = { result: "win" | "lose" | "fled" | "caught",
-//                caught: { species, currentHP } | null, xpGained }
+//                caught: <individual> | null, xpGained }
 //
 //  This is the M2-sized version of the full contract in
-//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty/enemy.level and a
-//  persistent team to actually add outcome.caught to arrive with
-//  individuals/levels before Step 5 — see PLANS/M5_STATE_AND_SAVE_PLAN.md §6).
+//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty and a persistent team
+//  to actually add outcome.caught to arrive with M2 Step 5).
 // ===========================================================================
 function startBattle(config) {
   return new Promise(function (resolve) {
@@ -423,11 +437,11 @@ function startBattle(config) {
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
 
-    hp.player = player.maxHP;
-    hp.opponent = opponent.maxHP;
+    const playerSpecies = FAKEAMON[player.speciesKey];
+    const opponentSpecies = FAKEAMON[opponent.speciesKey];
 
     document.getElementById("title").textContent =
-      "Fakeamon Battle — " + player.name + " vs " + opponent.name;
+      "Fakeamon Battle — " + playerSpecies.name + " vs " + opponentSpecies.name;
     document.getElementById("controls-label").textContent = "Choose your move:";
 
     logLines.length = 0;
@@ -435,6 +449,6 @@ function startBattle(config) {
 
     renderArena();
     showMoveButtons(player);
-    addLogLine("A wild " + opponent.name + " appears! Choose a move for " + player.name + ".");
+    addLogLine("A wild " + opponentSpecies.name + " appears! Choose a move for " + playerSpecies.name + ".");
   });
 }

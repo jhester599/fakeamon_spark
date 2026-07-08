@@ -135,9 +135,11 @@ Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
 **Damage formula (tuned for 3–5 hits per battle):**
 ```
-raw = move.power + attacker.Attack − defender.Defense   (minimum 1)
-damage = round( raw × typeMultiplier × random(0.85 … 1.15) )
+raw    = move.power + attacker.Attack − defender.Defense   (minimum 1)
+damage = max( 1, round( raw × typeMultiplier × random(0.85 … 1.15) ) )
 ```
+
+**DECIDED (2026-07-08) — the minimum-1 floor applies to the *final* damage, not just `raw`:** a connecting hit always deals at least 1. Without the outer `max(1, …)`, a resisted hit (`×0.5`) on a low roll (`×0.85`) with a small `raw` can round down to 0 — a move that "hits" but does nothing. Not reachable at today's level-5 numbers (the smallest `raw` is ~6), but it becomes possible once M5 scales Defense up, so we harden it now. *(Pre-M3 peer-review checkpoint, F11.)*
 
 ### Movesets
 

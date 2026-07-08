@@ -150,6 +150,20 @@ battle elements inside a scene, stop — the architecture is being violated.
   Pin the exact version in the URL. Never use `@latest`. Record the version
   in `DECISIONS.md` when installed. (The Phaser 4 `import` breaking change —
   wildcard imports from npm — does **not** apply to CDN-global loading.)
+- **Add Subresource Integrity (SRI), or vendor the file — decide at S1**
+  *(pre-M3 peer-review checkpoint, F6; open decision, see `DECISIONS.md`).*
+  A pinned CDN URL still trusts the CDN not to swap the file (the polyfill.io
+  supply-chain attack in 2024 is the cautionary tale). Two safe options:
+  1. **CDN + SRI:** add `integrity="sha384-…" crossorigin="anonymous"` to the
+     `<script>`. Put a one-line comment above it — *"this long code makes sure
+     nobody swapped out Phaser on us"* — which turns the noise into a teachable
+     security lesson rather than a plainness violation. Regenerate the hash if
+     the pinned version ever bumps.
+  2. **Vendor `phaser.min.js` into `/assets`** (we already vendor Tuxemon art
+     and the Phaser skill docs). Removes CDN trust entirely and keeps
+     double-click-`index.html` working offline, at the cost of a ~1 MB file in
+     the repo. Pick this if offline/double-click reliability matters more than
+     repo size; record the version + source in `CREDITS.md`.
 - **⚠️ Training-data skew:** LLMs have far more Phaser 3 than Phaser 4 in
   training. Two mitigations, both mandatory:
   1. **Vendor the official AI skills.** The Phaser 4 repo ships a `skills/`
@@ -194,6 +208,14 @@ Implementation notes (each is a real bug avoided):
   shows, call `worldScene.input.keyboard.enabled = false` and re-enable on
   return — otherwise arrow-key presses during battle silently walk the
   hidden player around the map.
+- **Also disable pointer input on battle show** *(pre-M3 peer-review
+  checkpoint, F3).* A documented Phaser behavior lets a click on an HTML
+  element overlaying the canvas *also* fire `pointerdown` on the sprite
+  underneath — so a click on "Throw Fakeaball" could double as a click on a
+  map tile. Pausing the WorldScene mostly neutralizes this (a paused scene
+  stops updating), but set `worldScene.input.enabled = false` on battle show
+  and re-enable on return as belt-and-suspenders. Cheap now, annoying to
+  debug later.
 - **Pause, don't destroy:** use `scene.pause()` / `scene.resume()` on the
   WorldScene. Never destroy/recreate the Phaser game per battle — it leaks
   and resets the camera.

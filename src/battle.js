@@ -97,17 +97,22 @@ function renderArena() {
 // ===========================================================================
 //  DAMAGE FORMULA — full version from DESIGN.md §6:
 //    raw    = move power + attacker's Attack − defender's Defense (min 1)
-//    damage = round(raw × typeMultiplier × random(0.85–1.15))
+//    damage = max(1, round(raw × typeMultiplier × random(0.85–1.15)))
 //  Takes each fighter's *current* stats (from statsFor), not the individual
 //  itself, since the damage math never needs to know anything about HP.
 //  Returns both the damage and the type multiplier, so the battle log can
 //  say "super effective" or "not very effective" when it matters.
+//
+//  The final Math.max(1, …) guarantees a connecting hit always deals at
+//  least 1 — otherwise a resisted hit (×0.5) on a low roll (×0.85) with a
+//  small raw could round to 0. Harmless at today's numbers, but it matters
+//  once M5 scales Defense up (pre-M3 peer-review checkpoint, F11).
 // ===========================================================================
 function calculateDamage(move, attackerStats, defenderStats, defenderType) {
   const raw = Math.max(1, move.power + attackerStats.attack - defenderStats.defense);
   const typeMultiplier = TYPE_CHART[move.type][defenderType];
   const wiggle = 0.85 + Math.random() * 0.30; // a random number from 0.85 to 1.15
-  const damage = Math.round(raw * typeMultiplier * wiggle);
+  const damage = Math.max(1, Math.round(raw * typeMultiplier * wiggle));
 
   return { damage: damage, typeMultiplier: typeMultiplier };
 }

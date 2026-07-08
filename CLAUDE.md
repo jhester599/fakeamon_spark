@@ -187,7 +187,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 
 - Commit **often**, after each small working step, with plain messages ("add damage formula", "growler can now use Flare").
 - Keep `main` runnable. Nothing fancy needed — small frequent commits beat big ones.
-- **Ticking a step done? Update `ROADMAP.md` and `roadmap.html` together, same commit.** See ROADMAP.md golden rule #6 — they drifted once and it shipped as a real bug.
+- **Ticking a step done (or adding/moving/removing one)? Update `ROADMAP.md` and `roadmap.html` together, same commit — and recount the totals**, including `roadmap.html`'s **overall** `X / Y steps` header + meter, not just the per-zone counts. See ROADMAP.md golden rule #6 — the header counter has drifted twice and shipped as a real bug both times.
 
 ## Design decision loop (Lewis is creative director)
 

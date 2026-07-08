@@ -21,12 +21,22 @@ whole idea: build a little, play it, then build the next little bit.
    `"growler can now use Flare"`.
 5. **Stay in scope.** If a step starts dragging in a *later* milestone, stop
    and flag it.
-6. **Tick both trackers, same commit.** This file and `roadmap.html` (the
-   live quest map) show the same steps two ways — every time a step's
-   status changes here (✅, step count, progress bar), update `roadmap.html`
-   too, in the same commit. They drifted apart once (2026-07-06, Steps 3–4
-   shipped here but not there) and Jeff & Lewis caught it during testing —
-   don't let it happen again.
+6. **Tick both trackers, same commit — and recount the totals.** This file
+   and `roadmap.html` (the live quest map) show the same steps two ways.
+   Whenever a step is finished **or** the step list changes (adding, moving,
+   or removing a step), update `roadmap.html` in the *same commit*, and
+   recompute **every derived number**, not just the ✅ marks:
+   - the **overall** header — `X / Y steps · Milestone N of 5` and its meter
+     `width:` — where **X = steps marked done across all milestones**,
+     **Y = total steps**, and the meter width is `X / Y` as a percent;
+   - each milestone's **`N of M steps done`** line and its zone-meter `width:`.
+
+   This is the rule's whole point: the header counter drifted **twice** —
+   Steps 3–4 shipped here but not there (2026-07-06), and later M2's overall
+   count sat at `12` after all 6 M2 steps were done (should've been `14`,
+   caught 2026-07-08). The per-zone "6 of 6" was right both times; the
+   **overall** line is the one that gets forgotten. When in doubt, recount
+   all five zones from scratch and re-add them.
 
 ## How to run the game
 
@@ -111,14 +121,15 @@ see it join a team you can swap between.
 bring in **Phaser** (a game engine that handles tile maps and movement).
 
 > **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
-> Its nine finer-grained steps (**S1–S9**, in its §9) supersede the five
-> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
+> Its nine finer-grained steps (**S1–S9**, in its §9) supersede **rows 1–5**
+> below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
 > (cleanup: remove the temporary "Battle test" button below, flip status/
 > ticks, clear stale `M3 PLACEHOLDER` comments, verify the live Pages build
 > plays start-to-finish) — S9 doesn't get its own row since it's wrap-up,
 > not new player-visible behavior, but it still has to happen before M3 is
-> actually done. The table below stays as the short version; build from
-> the plan.
+> actually done. **Row 6 (expand the wild roster) is new work *beyond* that
+> plan** — the plan deliberately left the roster for "later," and this is the
+> "later." The table below stays as the short version; build from the plan.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|

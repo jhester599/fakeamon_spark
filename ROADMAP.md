@@ -37,6 +37,25 @@ whole idea: build a little, play it, then build the next little bit.
    caught 2026-07-08). The per-zone "6 of 6" was right both times; the
    **overall** line is the one that gets forgotten. When in doubt, recount
    all five zones from scratch and re-add them.
+7. **Peer-review checkpoint at each milestone boundary.** Before starting a
+   new milestone, get an *outside/expert* pair of eyes on the **next**
+   milestone's design, roadmap, and licensing — a deep-research / Fable
+   research-mode pass is a good fit (external, cited, benchmarked). It's a
+   ritual, like the Model Huddle, **not** a numbered step (it doesn't change
+   the counter). Keep it to these rules:
+   - **Scope it** to what's decided or about to be built — not speculative
+     later milestones.
+   - **Hold it to our teaching constraints.** Plain, readable, no-build,
+     kid-friendly. A reviewer who says "add TypeScript, a bundler, an ECS,
+     a test framework" is fighting the whole point — accept such advice only
+     with eyes open, and mark it "much later, optional."
+   - **Pair it with a code pass.** Deep research judges *design*, not code
+     correctness — run the local `/code-review` on the real files for bugs.
+   - **Fold accepted findings in** through the normal Decision loop
+     (`DECISIONS.md`).
+   - **First checkpoint: now, before M3 S1** — the M2→M3 Phaser handoff is the
+     riskiest step, so it's cheapest to de-risk on paper. Run one at every
+     later boundary too, when there's a playable slice to critique.
 
 ## How to run the game
 

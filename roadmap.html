@@ -234,9 +234,9 @@
     <div class="overall">
       <div class="row">
         <b>Whole game progress</b>
-        <span class="count">12 / 29 steps · Milestone 2 of 5</span>
+        <span class="count">14 / 31 steps · Milestone 2 of 5</span>
       </div>
-      <div class="meter"><span style="width:41.4%"></span></div>
+      <div class="meter"><span style="width:45.2%"></span></div>
     </div>
 
     <div class="legend">
@@ -356,7 +356,7 @@
         </div>
         <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>(M3 now has a full blueprint — <code>PLANS/M3_OVERWORLD_PLAN.md</code>, nine finer steps S1–S9 (1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, plus S9 cleanup with no row of its own); the five below are the short version.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
-        <div class="zone-count">0 of 5 steps done</div>
+        <div class="zone-count">0 of 6 steps done</div>
       </div>
       <ol class="steps">
         <li><span class="num">1</span><div class="step-body"><p class="step-what">Add <b>Phaser</b> + show a tiny <b>tile map</b> — pull a real Tuxemon tileset (+ a <code>CREDITS.md</code> row); wire a temporary <b>"Battle test" button</b> so the battle stays reachable until Step 4</p><p class="see"><span class="tag">▶ You'll see</span> A little world on screen, built from real tile art, with a button to jump into a battle</p></div></li>
@@ -364,9 +364,10 @@
         <li><span class="num">3</span><div class="step-body"><p class="step-what"><b>Real sprites</b> — drop in Tuxemon art + start <code>CREDITS.md</code></p><p class="see"><span class="tag">▶ You'll see</span> Real creature art instead of colored boxes</p></div></li>
         <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Visible encounters</b> — walk into a creature to start a battle <i>(starts with just a small pool, e.g. the 3 starters)</i></p><p class="see"><span class="tag">▶ You'll see</span> Touch the creature → the battle opens</p></div></li>
         <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Return to the map</b> after a battle</p><p class="see"><span class="tag">▶ You'll see</span> Win/catch/flee → back to walking</p></div></li>
+        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Expand the wild roster</b> — swap The Meadows' 3-starter test pool for its real slice of the approved <b>198-Fakeamon</b> pool (<code>CONTENT_REFERENCE.md</code> §16), plus Lewis's Tuxemon → Fakeamon <b>rename pass</b> for that area</p><p class="see"><span class="tag">▶ You'll see</span> The Meadows fills with a proper cast of wild Fakeamon — not just the 3 starters</p></div></li>
       </ol>
-      <p class="done-when"><b>🎉 Done when:</b> you explore a map, meet a wild Fakeamon, battle it, and return to exploring.</p>
-      <p class="done-when"><b>🎒 Not yet scheduled — expanding the wild roster:</b> <code>CONTENT_REFERENCE.md</code> §16 already has <b>200 Tuxemon</b> selected, typed, and sourced as the approved wild-encounter pool — way beyond the 3 starters Step 4 needs. Widening it is an <b>M3-late-through-M5, area-by-area task</b>: each of the six Venta areas (The Meadows, The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) gets its own slice of the 200 as that area gets built. Since Snow Mountain/The Factory/The Lagoon only unlock via gym badges, this can't be one step — revisit once the first new area is actually in progress.</p>
+      <p class="done-when"><b>🎉 Done when:</b> you explore a map, meet a wild Fakeamon (a real Meadows cast, not just the starters), battle it, and return to exploring.</p>
+      <p class="done-when"><b>🎒 The rest of the pool comes area-by-area:</b> Step 6 wires in only <b>The Meadows'</b> slice — the one map M3 builds. The other five Venta areas (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) each get their own slice of the 198-Fakeamon pool <b>as they open</b>. Since Snow Mountain/The Factory/The Lagoon only unlock via gym badges, that's now a scheduled, repeating job in <b>M4 (Step 6)</b> that carries on into M5's late-game areas. Art/licensing for the whole pool is already staged (<code>CONTENT_REFERENCE.md</code> §16); what lands per area is the creative wiring — renames, encounter tables, stats.</p>
     </section>
 
     <!-- ============ M4 ============ -->
@@ -377,17 +378,19 @@
           <h2 class="zone-title">World Systems</h2>
           <span class="status locked">🔒 Locked</span>
         </div>
-        <p class="zone-goal">Reasons to explore — heal, shop, and the first trainer challenge. <i>(Each area a gym badge opens is also a chance to widen the wild roster — see the M3 note above.)</i></p>
+        <p class="zone-goal">Reasons to explore — heal, shop, cook, and the first trainer challenge. <i>(Beating a gym opens a new area — and Step 6 stocks each new area with its own wild Fakeamon.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
-        <div class="zone-count">0 of 4 steps done</div>
+        <div class="zone-count">0 of 6 steps done</div>
       </div>
       <ol class="steps">
         <li><span class="num">1</span><div class="step-body"><p class="step-what"><b>Tokens</b> — earn them from winning battles</p><p class="see"><span class="tag">▶ You'll see</span> A number that goes up when you win</p></div></li>
         <li><span class="num">2</span><div class="step-body"><p class="step-what"><b>Fakeatent</b> — heal your whole team to full</p><p class="see"><span class="tag">▶ You'll see</span> A tent; HP refills</p></div></li>
         <li><span class="num">3</span><div class="step-body"><p class="step-what"><b>Tall Tower</b> — spend tokens to buy Fakeaballs</p><p class="see"><span class="tag">▶ You'll see</span> A shop; your ball count goes up</p></div></li>
         <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Gym 1</b> — a trainer with a 2-Fakeamon team (standard + ace)</p><p class="see"><span class="tag">▶ You'll see</span> A two-creature trainer battle</p></div></li>
+        <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Cooking Cabin</b> — combine berries into healing dishes (self-serve, walk in and cook) <i>(moved here from M5 — it's a world system, not story)</i></p><p class="see"><span class="tag">▶ You'll see</span> A cooking screen; recipes that heal different amounts</p></div></li>
+        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Grow the wild roster, area-by-area</b> — as each gym badge opens a new area, stock it with its own slice of the <b>198-Fakeamon</b> pool + Lewis's renames <i>(keeps going into M5's late-game areas)</i></p><p class="see"><span class="tag">▶ You'll see</span> Every new area you unlock has its own fresh cast of wild Fakeamon</p></div></li>
       </ol>
-      <p class="done-when"><b>🎉 Done when:</b> you can win tokens, heal at a Fakeatent, buy balls, and beat your first gym.</p>
+      <p class="done-when"><b>🎉 Done when:</b> you can win tokens, heal at a Fakeatent, buy balls, beat your first gym, cook healing dishes, and each new area you open comes stocked with its own wild Fakeamon.</p>
     </section>
 
     <!-- ============ M5 ============ -->
@@ -398,19 +401,18 @@
           <h2 class="zone-title">Depth &amp; Story · The Finale</h2>
           <span class="status locked">🔒 Locked</span>
         </div>
-        <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠 <i>(Same ongoing roster-widening applies to any late-game areas.)</i></p>
+        <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠 <i>(New late-game areas keep getting their own wild-roster slice — the same area-by-area job that starts in M4 Step 6.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>
-        <div class="zone-count">0 of 6 steps done</div>
+        <div class="zone-count">0 of 5 steps done</div>
       </div>
       <ol class="steps">
         <li><span class="num">1</span><div class="step-body"><p class="step-what"><b>Evolutions</b> — reach a level → new sprite + higher stats</p><p class="see"><span class="tag">▶ You'll see</span> "Growler is evolving!" with new art</p></div></li>
         <li><span class="num">2</span><div class="step-body"><p class="step-what">The <b>5 mini-bosses</b> placed in the world</p><p class="see"><span class="tag">▶ You'll see</span> Tough special battles worth big XP</p></div></li>
         <li><span class="num">3</span><div class="step-body"><p class="step-what">The <b>"beat all 5 → unlock Artemis"</b> gate</p><p class="see"><span class="tag">▶ You'll see</span> A locked area that opens once all five are down</p></div></li>
-        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Cooking Cabin</b> — combine berries into healing dishes</p><p class="see"><span class="tag">▶ You'll see</span> Recipes that heal different amounts</p></div></li>
-        <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Artemis finale</b> — boss with self-hitting <b>Meteor Shower</b> (Lewis's idea!)</p><p class="see"><span class="tag">▶ You'll see</span> A huge-HP battle that's hard but winnable</p></div></li>
-        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Win screen</b> — beat Artemis, stop the meteor</p><p class="see"><span class="tag">▶ You'll see</span> "You saved the Fakeamon world!"</p></div></li>
+        <li><span class="num">4</span><div class="step-body"><p class="step-what"><b>Artemis finale</b> — boss with self-hitting <b>Meteor Shower</b> (Lewis's idea!)</p><p class="see"><span class="tag">▶ You'll see</span> A huge-HP battle that's hard but winnable</p></div></li>
+        <li><span class="num">5</span><div class="step-body"><p class="step-what"><b>Win screen</b> — beat Artemis, stop the meteor</p><p class="see"><span class="tag">▶ You'll see</span> "You saved the Fakeamon world!"</p></div></li>
       </ol>
-      <p class="done-when"><b>🎉 Done when:</b> you can evolve creatures, clear all 5 mini-bosses, cook dishes, and defeat Artemis to win.</p>
+      <p class="done-when"><b>🎉 Done when:</b> you can evolve creatures, clear all 5 mini-bosses, and defeat Artemis to win.</p>
     </section>
 
   </div>

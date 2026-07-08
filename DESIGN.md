@@ -338,8 +338,8 @@ Berries: **Fakeaberry, Greenberry, Raspberry, Cosmicberry, Greatberry, Bossberry
 **M1 — Battle Slice (start here):** Growler vs Whaley, movesets + stats + type chart + damage formula. Turn loop, rare misses, HP bars, faint, win/lose. No overworld/catching/menus yet.
 **M2 — Catching & Team:** Fakeaballs, capture formula, party/inventory.
 **M3 — Overworld:** tile map, movement, encounter → battle.
-**M4 — World Systems:** Fakeatents, Tall Towers, tokens, first gym.
-**M5 — Depth & Story:** evolutions, the 5 mini-bosses, cooking, and the Artemis finale.
+**M4 — World Systems:** Fakeatents, Tall Towers, tokens, first gym, the Cooking Cabin, and area-by-area wild-roster growth.
+**M5 — Depth & Story:** evolutions, the 5 mini-bosses, and the Artemis finale.
 
 ---
 

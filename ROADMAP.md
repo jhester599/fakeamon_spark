@@ -39,8 +39,9 @@ whole idea: build a little, play it, then build the next little bit.
    all five zones from scratch and re-add them.
 7. **Peer-review checkpoint at each milestone boundary.** Before starting a
    new milestone, get an *outside/expert* pair of eyes on the **next**
-   milestone's design, roadmap, and licensing — a deep-research / Fable
-   research-mode pass is a good fit (external, cited, benchmarked). It's a
+   milestone's design and roadmap — a deep-research / Fable research-mode
+   pass is a good fit (external, cited, benchmarked). **Use the ready-made
+   prompt template in `MODELS.md`** ("The Peer-Review Checkpoint"). It's a
    ritual, like the Model Huddle, **not** a numbered step (it doesn't change
    the counter). Keep it to these rules:
    - **Scope it** to what's decided or about to be built — not speculative

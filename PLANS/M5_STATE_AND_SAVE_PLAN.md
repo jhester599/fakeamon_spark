@@ -267,6 +267,15 @@ function migrate(save) {
 - `loadGame()` = parse (inside try/catch — corrupt JSON → `null`, never a
   crash) → `migrate` → merge onto a fresh default state (so *added* fields
   get defaults for free; only *reshaped* fields need a migration entry).
+- `saveGame()` must wrap its `localStorage.setItem` in try/catch **too**
+  *(pre-M3 peer-review checkpoint, F8).* The load path already guards parse,
+  but the *write* can throw: Safari Private Browsing gives localStorage a
+  quota of **0**, so the very first `setItem` throws `QuotaExceededError`
+  even though nothing is stored. On failure, keep playing in-memory and show
+  a gentle "couldn't save" note — never let an unguarded `setItem` surface as
+  an uncaught crash that looks like the game broke. (Our saves are well under
+  100 KB, so real quota pressure won't bite in normal play — this is purely
+  about the private-mode / storage-disabled case.)
 - **During active development** it's fine for a schema change to just wipe
   dev saves — but the version bump + a stub migration comment is still
   required, so the discipline exists before the first real save Lewis

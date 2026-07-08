@@ -122,6 +122,84 @@ Then build the step, and after it works, Claude briefly notes: *did the model
 pick feel right? Too much brain, too little, or just right?* If the answer
 teaches us something, update the table above.
 
+## 🔎 The Peer-Review Checkpoint (do this at each milestone boundary)
+
+`ROADMAP.md` golden rule #7: before starting a new milestone, get an
+outside/expert design review of the **next** milestone — a Fable research-mode
+pass is a good fit. It's a ritual, not a numbered step. Paste the results back
+into a Claude Code session; Claude triages them against the rule (do-before vs
+later; flag anything fighting the teaching constraints), runs a paired
+`/code-review` on the real `src/` files, and folds accepted findings into the
+plans and `DECISIONS.md`.
+
+**The prompt template** — fill in the milestone under review, then run it in a
+Fable research-mode session:
+
+```
+Do a design & roadmap peer review of an open-source hobby game project before
+we start its next milestone. It's a turn-based monster-catching RPG ("Fakeamon")
+built by a dad and his 10-year-old son as a *teaching* project. I want cited,
+externally-benchmarked improvement opportunities and roadmap guidance — NOT a
+line-by-line code audit.
+
+MILESTONE UNDER REVIEW: [fill in, e.g. "M3, the Phaser overworld"]. This review
+runs BEFORE that milestone's code is written, to de-risk it on paper.
+
+WHAT TO READ (all public — read the ACTUAL files, do not infer from summaries):
+- Repo: https://github.com/jhester599/fakeamon_spark
+- Source of truth: DESIGN.md, ROADMAP.md.
+- The architecture plans, IN FULL — they hold the real design decisions:
+  PLANS/M3_OVERWORLD_PLAN.md and PLANS/M5_STATE_AND_SAVE_PLAN.md. If a rendered
+  blob won't load, fetch the raw file view.
+- The actual code, every file under src/ (src/battle.js, src/state.js,
+  src/main.js, src/data/*.js) — the code itself, not a description of it.
+- Also: CLAUDE.md, MODELS.md, DECISIONS.md, CONTENT_REFERENCE.md.
+- Play the live game: https://jhester599.github.io/fakeamon_spark/
+- Quest map:      https://jhester599.github.io/fakeamon_spark/roadmap.html
+
+DEDUPE AGAINST WHAT ALREADY EXISTS (important): before reporting any finding,
+confirm it is NOT already handled in the plans (PLANS/*.md) or the code (src/).
+If it already is, list it under "already covered — validated, no action" instead
+of as a new recommendation. Do not recommend something the plan or code already
+does.
+
+HARD CONSTRAINTS your recommendations MUST respect (these are features, not
+flaws — do not recommend removing them):
+- It must stay understandable to a 10-year-old. Plain, readable, small steps.
+- No build step / no bundler through M2; plain <script> globals, no ES modules.
+- Phaser is adopted only at M3, loaded via CDN global (still no bundler).
+- Game numbers (HP, power, catch rate) must stay easy to find and tweak.
+- Do NOT recommend TypeScript, a build pipeline, an ECS, or a test framework
+  UNLESS you can make a strong case; if you do, frame it as strictly optional
+  and much later, and explain the pedagogy trade-off.
+
+FOCUS your review on these, most valuable first (add milestone-specific
+questions for the milestone under review):
+1. Architecture soundness of the next milestone's plan — is the approach
+   community-proven? Cite comparable projects and flag concrete pitfalls.
+2. Latent correctness bugs the design/formulas imply — CHECK THE ACTUAL CODE in
+   src/ before claiming one; confirm, don't assume from DESIGN.md.
+3. State/save robustness for whatever the next milestone adds.
+4. Roadmap sequencing & scope — common failure modes for hobby games of this
+   kind (scope creep, content treadmill, balancing) and how to guard them.
+5. Balancing sanity-check vs genre norms — reasonable for a kid to tune?
+6. Pedagogy — is "one small runnable step, numbers in obvious spots, no build
+   step" well-aligned with how kids best learn to code?
+
+OUTPUT: a prioritized list of concrete, actionable findings, each tagged with
+(a) severity/impact, (b) the milestone it applies to, (c) at least one citation,
+and (d) ALREADY COVERED (in plans/code) vs genuinely NEW. Separate "do before
+the milestone" from "later." Call out anything that contradicts our hard
+constraints so we can consciously accept or reject it.
+```
+
+> **Why these two tweaks (2026-07-08, after checkpoint #1):** the first run's
+> reviewer couldn't fetch `PLANS/*.md` or `src/`, so it re-derived guidance the
+> project already had — hence the "read the actual plans/code + dedupe" emphasis.
+> And the licensing-review bullet was dropped: we don't intend to distribute the
+> game, and the art licenses were already reviewed heavily (`DECISIONS.md` →
+> Jeff's technical calls; `CREDITS.md` / `CREDITS_ROSTER.md`).
+
 ## 💰 Budget notes (Jeff)
 
 - We're on the **Pro plan** — chat and Claude Code share **one usage pool**

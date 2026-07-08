@@ -125,7 +125,7 @@ const gameState = {
   box: [],                        // storage overflow — §5
   inventory: {
     balls: { fakeaball: 5, great: 0, ultra: 0, cosmic: 0 },  // DECISIONS #3
-    berries: {},                  // M5 cooking — berry key → count
+    berries: {},                  // M4 cooking — berry key → count
     tokens: 0,                    // M4
   },
   flags: {

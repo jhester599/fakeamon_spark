@@ -47,7 +47,7 @@ project. After the step works, briefly reflect: was the model pick right?
 
 **Do NOT build yet:** overworld/map and anything Phaser (M3 — but M2's battle module must end up matching the M3 plan's §5 contract), gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). If a change starts pulling in out-of-scope systems, pause and flag it.
 
-**Not yet scheduled anywhere — flag before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has 200 Tuxemon pre-selected and typed for this, but no roadmap step wires them in — it's an **M3-late-through-M5, area-by-area task** tied to when each of the six Venta areas (`DESIGN.md` §7, `DECISIONS.md` B8) actually gets built. See the note in `ROADMAP.md`'s M3 section before starting any of this work. *(The art/licensing legwork for this pool IS pre-staged — §16's staging note — but the creative wiring: Lewis's renames, encounter tables, stats — stays unscheduled.)*
+**Scheduled but paced area-by-area — check the step before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has ~200 Tuxemon (198 staged) pre-selected and typed for this. As of the 2026-07-08 roadmap reorg it's now on the roadmap, split by area: **M3 Step 6** wires in The Meadows' slice (the one map M3 builds), and **M4 Step 6** grows the roster area-by-area as gym badges open each new area (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon — `DESIGN.md` §7, `DECISIONS.md` B8), carrying on into M5's late-game areas. Don't front-run it: only wire in the slice for the area actually being built. *(The art/licensing legwork for the whole pool IS pre-staged — §16's staging note — the per-area work is the creative wiring: Lewis's renames, encounter tables, stats.)*
 
 ## Tech stack
 
@@ -187,7 +187,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 
 - Commit **often**, after each small working step, with plain messages ("add damage formula", "growler can now use Flare").
 - Keep `main` runnable. Nothing fancy needed — small frequent commits beat big ones.
-- **Ticking a step done? Update `ROADMAP.md` and `roadmap.html` together, same commit.** See ROADMAP.md golden rule #6 — they drifted once and it shipped as a real bug.
+- **Ticking a step done (or adding/moving/removing one)? Update `ROADMAP.md` and `roadmap.html` together, same commit — and recount the totals**, including `roadmap.html`'s **overall** `X / Y steps` header + meter, not just the per-zone counts. See ROADMAP.md golden rule #6 — the header counter has drifted twice and shipped as a real bug both times.
 
 ## Design decision loop (Lewis is creative director)
 

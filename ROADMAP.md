@@ -21,12 +21,22 @@ whole idea: build a little, play it, then build the next little bit.
    `"growler can now use Flare"`.
 5. **Stay in scope.** If a step starts dragging in a *later* milestone, stop
    and flag it.
-6. **Tick both trackers, same commit.** This file and `roadmap.html` (the
-   live quest map) show the same steps two ways — every time a step's
-   status changes here (✅, step count, progress bar), update `roadmap.html`
-   too, in the same commit. They drifted apart once (2026-07-06, Steps 3–4
-   shipped here but not there) and Jeff & Lewis caught it during testing —
-   don't let it happen again.
+6. **Tick both trackers, same commit — and recount the totals.** This file
+   and `roadmap.html` (the live quest map) show the same steps two ways.
+   Whenever a step is finished **or** the step list changes (adding, moving,
+   or removing a step), update `roadmap.html` in the *same commit*, and
+   recompute **every derived number**, not just the ✅ marks:
+   - the **overall** header — `X / Y steps · Milestone N of 5` and its meter
+     `width:` — where **X = steps marked done across all milestones**,
+     **Y = total steps**, and the meter width is `X / Y` as a percent;
+   - each milestone's **`N of M steps done`** line and its zone-meter `width:`.
+
+   This is the rule's whole point: the header counter drifted **twice** —
+   Steps 3–4 shipped here but not there (2026-07-06), and later M2's overall
+   count sat at `12` after all 6 M2 steps were done (should've been `14`,
+   caught 2026-07-08). The per-zone "6 of 6" was right both times; the
+   **overall** line is the one that gets forgotten. When in doubt, recount
+   all five zones from scratch and re-add them.
 
 ## How to run the game
 
@@ -111,14 +121,15 @@ see it join a team you can swap between.
 bring in **Phaser** (a game engine that handles tile maps and movement).
 
 > **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
-> Its nine finer-grained steps (**S1–S9**, in its §9) supersede the five
-> rows below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
+> Its nine finer-grained steps (**S1–S9**, in its §9) supersede **rows 1–5**
+> below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
 > (cleanup: remove the temporary "Battle test" button below, flip status/
 > ticks, clear stale `M3 PLACEHOLDER` comments, verify the live Pages build
 > plays start-to-finish) — S9 doesn't get its own row since it's wrap-up,
 > not new player-visible behavior, but it still has to happen before M3 is
-> actually done. The table below stays as the short version; build from
-> the plan.
+> actually done. **Row 6 (expand the wild roster) is new work *beyond* that
+> plan** — the plan deliberately left the roster for "later," and this is the
+> "later." The table below stays as the short version; build from the plan.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -127,32 +138,30 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 | **3** | **Real sprites** art pass for the rest of the roster (mini-bosses, gyms, evolutions — everyone in M4/M5) — all 3 starters already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
+| **6** | **Expand the wild roster** — swap The Meadows' 3-starter test pool (from Step 4) for its real slice of the approved **198-Fakeamon** encounter pool (`CONTENT_REFERENCE.md` §16), including Lewis's Tuxemon-slug → Fakeamon **rename pass** for that area | The Meadows fills up with a proper cast of wild Fakeamon — not just the 3 starters |
 
-**🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon, battle it,
-and return to exploring.
+**🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon — a real
+Meadows cast, not just the starters — battle it, and return to exploring.
 
-> **🎒 Not yet scheduled — expanding the wild roster:** `CONTENT_REFERENCE.md`
-> §16 already has **200 Tuxemon selected, typed, and sourced** as the approved
-> wild-encounter pool — way beyond the 3 starters Step 4 needs to prove the
-> mechanic works. No step above wires any of the 200 in yet; that's not an
-> oversight, it's sequencing — widening the roster only means something once
-> a map exists to place encounters on. It's naturally an **M3-late-through-M5,
-> area-by-area task**: each of the six Venta areas (B8 — The Meadows, The
-> Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) gets its own
-> slice of the 200 as that area gets built, with Lewis doing the
-> Tuxemon-slug → Fakeamon rename pass per area (`CONTENT_REFERENCE.md` §16's
-> own suggested workflow). Since Snow Mountain/The Factory/The Lagoon only
-> unlock via gym badges (B14), full-roster work can't land as one step
-> anyway — revisit this note once the *first* area beyond the starting map
-> is actually in progress, and turn it into real numbered steps then.
+> **🎒 The rest of the pool comes area-by-area:** Step 6 wires in only **The
+> Meadows'** slice, because The Meadows is the one map M3 builds. The other five
+> Venta areas (B8 — The Forest, Foggy City, Snow Mountain, The Factory, The
+> Lagoon) each get their own slice of the 198-Fakeamon pool **as they open** —
+> and since Snow Mountain / The Factory / The Lagoon only unlock via gym badges
+> (B14), that can't be one step. So it's now a scheduled, repeating job in
+> **M4 (Step 6)** that carries on into M5's late-game areas — no longer
+> "unscheduled," just paced to when each area actually gets built. The art and
+> licensing for the whole pool is already staged (`CONTENT_REFERENCE.md` §16);
+> what lands per area is the creative wiring — Lewis's renames, encounter
+> tables, and stats.
 
 ---
 
 ## 🔴 M4 — World Systems (places to visit)
 
-**Goal:** reasons to explore — heal, shop, and the first trainer challenge.
-*(Each area a gym badge opens is also a chance to widen the wild roster —
-see the M3 note above and `CONTENT_REFERENCE.md` §16.)*
+**Goal:** reasons to explore — heal, shop, cook, and the first trainer
+challenge. *(Beating a gym opens a new area — and Step 6 stocks each new area
+with its own wild Fakeamon.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -160,29 +169,31 @@ see the M3 note above and `CONTENT_REFERENCE.md` §16.)*
 | **2** | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens) | A tent building; HP refills |
 | **3** | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |
+| **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |
+| **6** | **Grow the wild roster, area-by-area** — as each gym badge opens a new area (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon), stock it with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16). A repeating job that keeps going into M5's late-game areas | Every new area you unlock has its own fresh cast of wild Fakeamon |
 
 **🎉 M4 done when:** you can win tokens, heal at a Fakeatent, buy balls at a
-Tall Tower, and beat your first gym.
+Tall Tower, beat your first gym, cook healing dishes at a Cooking Cabin, and
+each new area you open comes stocked with its own wild Fakeamon.
 
 ---
 
 ## 🔴 M5 — Depth & Story (the finale)
 
 **Goal:** the big finish — evolutions, the mini-bosses, and stopping Artemis.
-*(Same ongoing roster-widening applies to any late-game areas —
-`CONTENT_REFERENCE.md` §16.)*
+*(New late-game areas keep getting their own wild-roster slice — the same
+area-by-area job that starts in M4 Step 6.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** | **Evolutions** — a Fakeamon that reaches its evolve level gets a **new sprite + higher stats** | "Growler is evolving!" with new art |
 | **2** | The **5 mini-bosses** (single strong encounters) placed in the world | Tough special battles worth big XP |
 | **3** | **"Beat all 5 → unlock Artemis"** gate | A locked area that opens once all five are down |
-| **4** | **Cooking Cabin** — combine berries into healing dishes | A cooking screen; recipes that heal different amounts |
-| **5** | **Artemis finale** — the legendary boss with **Meteor Shower** (hits your Fakeamon **and** damages Artemis itself — Lewis's idea!) | An epic, huge-HP battle that's hard but winnable |
-| **6** | **Win screen** — beat Artemis, stop the meteor 🌠 | "You saved the Fakeamon world!" |
+| **4** | **Artemis finale** — the legendary boss with **Meteor Shower** (hits your Fakeamon **and** damages Artemis itself — Lewis's idea!) | An epic, huge-HP battle that's hard but winnable |
+| **5** | **Win screen** — beat Artemis, stop the meteor 🌠 | "You saved the Fakeamon world!" |
 
-**🎉 M5 done when:** you can evolve creatures, clear all 5 mini-bosses, cook
-healing dishes, and defeat Artemis to win the game.
+**🎉 M5 done when:** you can evolve creatures, clear all 5 mini-bosses, and
+defeat Artemis to win the game.
 
 ---
 

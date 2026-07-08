@@ -90,7 +90,7 @@ Consequences (both make M3 *easier*):
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
 | Phaser version check | — | newest stable 4.x on npm as of 2026-07-06 is **4.2.0** — §2's "4.2.1" guess doesn't exist. Re-check and pin at S1; record in `DECISIONS.md` |
-| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by any M3 step — staged for the area-by-area roster work later |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S9; first wired in at **ROADMAP M3 row 6** (The Meadows' slice), then grown area-by-area through M4–M5 |
 
 What S1 still owns: the pinned CDN script tag, `src/world/config.js`,
 BootScene + empty WorldScene, the "Battle test" button, Jeff's zoom pick.
@@ -434,8 +434,9 @@ this plan in hand. Add these constraints to that session's prompt:
 ## 9. Build order — M3 in nine session-sized steps
 
 Each step keeps the game runnable and ends in a commit. Model/effort per
-`MODELS.md` (Huddle can override). ROADMAP.md's five M3 rows map onto these
-as: R1≈S1–S2, R2≈S3–S4, R3≈S5, R4≈S6–S7, R5≈S8.
+`MODELS.md` (Huddle can override). ROADMAP.md's M3 rows 1–5 map onto these
+as: R1≈S1–S2, R2≈S3–S4, R3≈S5, R4≈S6–S7, R5≈S8. ROADMAP's row 6 (expand the
+wild roster — The Meadows' slice) is new work beyond this plan.
 
 | # | Step | What gets built | ▶ You'll see | Model / effort |
 |---|---|---|---|---|

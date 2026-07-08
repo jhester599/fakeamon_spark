@@ -154,6 +154,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-06 | 45 | **Sound & music:** full chiptune — retro music for map, battle, and bosses | (option C) |
 | 2026-07-06 | 46 | **Berries can be found on the ground** while exploring the overworld | invented — volunteered outside a formal homework round; follow-up detail (area-themed vs. anywhere) filed as **B35** |
 | 2026-07-06 | 47 | **Cooking Cabins are more common in the Snow Mountain area** | invented — volunteered outside a formal homework round; follow-up detail (Snow-Mountain-only vs. a starter cabin too) filed as **B36** |
+| 2026-07-08 | 48 | **Switch is a real mid-battle action** (M2 Step 6) — bringing in a teammate costs your turn, with the same speed-order risk as every other action: faster switches in safely, slower means the opponent hits your *current* Fakeamon first | invented live with Jeff during Step 6 — wanted Switch to feel like a real strategic choice, not a free out |
 
 <!--
 Template for a new row:

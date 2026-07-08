@@ -126,10 +126,12 @@ Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
 ## 6. Battle System
 
-**Turn order:** by Speed (ties → player). **Actions:** Attack, Catch, Item, Flee.
+**Turn order:** by Speed (ties → player). **Actions:** Attack, Catch, Item, Flee, Switch.
 **Accuracy:** moves can miss, but rarely (most 90–100%; only the biggest hitters dip lower). **No PP** — unlimited uses.
 
 **DECIDED (2026-07-06) — fleeing:** Run **always works** — a "Run" button that never fails. *(Lewis's call, B1.)*
+
+**DECIDED (2026-07-08) — Switch mid-battle costs a turn:** bringing in a different teammate follows the same speed-order rule as every other action. If you're faster, the switch happens safely and your new Fakeamon just takes the opponent's attack that turn. If you're slower, the opponent gets a free hit on your *current* Fakeamon first — and if that faint ends the battle, the switch never completes. Picking from the switch menu is the only thing that costs the turn; backing out (Cancel) is free. *(Jeff & Lewis's call.)*
 
 **Damage formula (tuned for 3–5 hits per battle):**
 ```

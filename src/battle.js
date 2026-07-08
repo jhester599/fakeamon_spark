@@ -4,23 +4,32 @@
 //  — see PLANS/M3_OVERWORLD_PLAN.md §5 for the full contract it's built
 //  from.
 //
-//  M5-plan S1: player/opponent are now *individuals* (src/state.js), not
-//  bare species objects — each one carries its own currentHP, so a mirror
-//  match (e.g. Whaley vs a wild Whaley) is two separate individuals that
-//  happen to point at the same species, never two things sharing one HP
-//  slot. Everything still gets tracked through the battle *role* ("player"
-//  / "opponent") rather than the individual itself, since resolveTurn
-//  needs to say "whoever's turn is first" before it knows who that is.
+//  M5-plan S1: opponent is an *individual* (src/state.js), not a bare
+//  species object — it carries its own currentHP.
+//
+//  Step 6: the player side is now `party` — a LIVE reference to
+//  gameState.party (per the M3 plan's §5 contract: config.playerParty).
+//  activePlayer() is always party[0]; switching just reorders the array,
+//  so there's never a separate "player" variable to fall out of sync.
+//  Battle still tracks everything through a *role* ("player"/"opponent")
+//  rather than an individual, since resolveTurn needs to say "whoever's
+//  turn is first" before it knows who that is.
 // ===========================================================================
-let player;
+let party;    // config.playerParty
 let opponent;
 let canFlee = true;
 let canCatch = true;
 let resolveBattle; // set by startBattle(); called once the fight is over
+let onStateChange = function () {}; // optional; lets the host UI stay in sync
+
+// The individual currently fighting for the player.
+function activePlayer() {
+  return party[0];
+}
 
 // The individual currently playing this role.
 function fighterFor(role) {
-  return role === "player" ? player : opponent;
+  return role === "player" ? activePlayer() : opponent;
 }
 
 // ===========================================================================
@@ -78,9 +87,11 @@ function showFighter(individual) {
   );
 }
 
-// Redraw both fighters with their current HP.
+// Redraw both fighters with their current HP, then let the host UI (e.g.
+// main.js's team row) know something changed — HP, or who's active.
 function renderArena() {
-  document.getElementById("arena").innerHTML = showFighter(player) + showFighter(opponent);
+  document.getElementById("arena").innerHTML = showFighter(activePlayer()) + showFighter(opponent);
+  onStateChange();
 }
 
 // ===========================================================================
@@ -221,7 +232,7 @@ const CATCH_WOBBLE_COUNT = 2;
 // onDone(caught) once the whole sequence has finished, since the log now
 // takes a few beats to play out instead of resolving instantly.
 function throwFakeaball(onDone) {
-  const playerName = FAKEAMON[player.speciesKey].name;
+  const playerName = FAKEAMON[activePlayer().speciesKey].name;
   const opponentName = FAKEAMON[opponent.speciesKey].name;
 
   addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
@@ -253,11 +264,11 @@ function throwFakeaball(onDone) {
 }
 
 // Throwing a ball takes your turn, just like an attack — same speed-order
-// rule as DESIGN.md §6 ("Actions: Attack, Catch, Item, Flee"). If the wild
-// Fakeamon is faster, it may get its attack in before you even throw.
+// rule as DESIGN.md §6. If the wild Fakeamon is faster, it may get its
+// attack in before you even throw.
 function attemptCatch() {
   setControlsEnabled(false);
-  const playerGoesFirst = statsFor(player).speed >= statsFor(opponent).speed;
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
 
   function enemyCounterAttack(afterAttack) {
     const enemyMove = pickRandomMove(opponent);
@@ -308,6 +319,70 @@ function attemptCatch() {
 }
 
 // ===========================================================================
+//  SWITCH — Step 6: swap in a different teammate mid-battle. Costs your
+//  turn, same speed-order risk as Catch: if you're faster, the switch
+//  happens safely and the new fighter just eats the opponent's attack; if
+//  you're slower, the opponent gets a free hit on your CURRENT fighter
+//  first — and if that faint ends the battle, the switch never completes.
+// ===========================================================================
+
+// Is there anyone healthy on the bench to switch to?
+function hasHealthySwitchTarget() {
+  return party.some(function (individual, index) {
+    return index !== 0 && individual.currentHP > 0;
+  });
+}
+
+function attemptSwitch(targetIndex) {
+  setControlsEnabled(false);
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
+
+  function enemyCounterAttack(afterAttack) {
+    const enemyMove = pickRandomMove(opponent);
+    performAttack("opponent", "player", enemyMove);
+    renderArena();
+
+    if (checkForFaint("player")) {
+      endBattle("opponent");
+      return;
+    }
+
+    afterAttack();
+  }
+
+  // Always succeeds (unlike a catch) — swap party[0] and party[targetIndex].
+  function performSwitch() {
+    const incomingName = FAKEAMON[party[targetIndex].speciesKey].name;
+    const outgoing = party[0];
+    party[0] = party[targetIndex];
+    party[targetIndex] = outgoing;
+    addLogLine("Go, " + incomingName + "!");
+    renderArena();
+  }
+
+  function afterSwitchTurn() {
+    setControlsEnabled(true);
+    showMoveButtons(activePlayer());
+  }
+
+  if (playerGoesFirst) {
+    // Fast enough to switch before the opponent can react.
+    performSwitch();
+    setTimeout(function () {
+      enemyCounterAttack(afterSwitchTurn);
+    }, randomTurnPause());
+  } else {
+    // Too slow — the opponent hits your CURRENT fighter before you can
+    // switch out. If that faints them, the battle's over and the switch
+    // never happens.
+    enemyCounterAttack(function () {
+      performSwitch();
+      afterSwitchTurn();
+    });
+  }
+}
+
+// ===========================================================================
 //  ONE TURN — you attack AND your opponent attacks back, with a pause
 //  between so it feels like a real back-and-forth. Whoever has higher
 //  Speed swings first; a tie goes to the player. If either fighter faints,
@@ -317,7 +392,7 @@ function resolveTurn(playerMove) {
   setControlsEnabled(false);
 
   const enemyMove = pickRandomMove(opponent);
-  const playerGoesFirst = statsFor(player).speed >= statsFor(opponent).speed;
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
 
   const first  = playerGoesFirst ? { attackerRole: "player", defenderRole: "opponent", move: playerMove }
                                   : { attackerRole: "opponent", defenderRole: "player", move: enemyMove };
@@ -352,7 +427,7 @@ function resolveTurn(playerMove) {
 // ===========================================================================
 function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
-  const playerName = FAKEAMON[player.speciesKey].name;
+  const playerName = FAKEAMON[activePlayer().speciesKey].name;
   const opponentName = FAKEAMON[opponent.speciesKey].name;
   const message = playerWon
     ? "🎉 " + playerName + " wins!"
@@ -373,7 +448,7 @@ function endBattle(winnerRole) {
 // moves on.
 function runAway() {
   setControlsEnabled(false);
-  addLogLine(FAKEAMON[player.speciesKey].name + " got away safely!");
+  addLogLine(FAKEAMON[activePlayer().speciesKey].name + " got away safely!");
   setTimeout(function () {
     resolveBattle({ result: "fled", xpGained: 0 });
   }, 900);
@@ -381,7 +456,8 @@ function runAway() {
 
 // ===========================================================================
 //  MOVE BUTTONS — clicking one plays out a full turn (see resolveTurn
-//  above). Catch and Run sit alongside them when the battle allows it.
+//  above). Switch, Catch, and Run sit alongside them when the battle
+//  allows it.
 // ===========================================================================
 function showMoveButtons(individual) {
   const controls = document.getElementById("controls");
@@ -398,6 +474,14 @@ function showMoveButtons(individual) {
     });
     controls.appendChild(button);
   });
+
+  if (hasHealthySwitchTarget()) {
+    const switchButton = document.createElement("button");
+    switchButton.className = "move-btn switch-btn";
+    switchButton.textContent = "Switch";
+    switchButton.addEventListener("click", showSwitchPicker);
+    controls.appendChild(switchButton);
+  }
 
   if (canCatch) {
     const catchButton = document.createElement("button");
@@ -416,28 +500,57 @@ function showMoveButtons(individual) {
   }
 }
 
+// Step 6: a sub-menu of who you could switch to. Cancel goes back to the
+// normal move screen for free — only actually picking someone costs a turn.
+function showSwitchPicker() {
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  party.forEach(function (individual, index) {
+    if (index === 0 || individual.currentHP <= 0) return;
+    const species = FAKEAMON[individual.speciesKey];
+    const button = document.createElement("button");
+    button.className = "move-btn switch-btn";
+    button.textContent = "Switch to " + species.name;
+    button.addEventListener("click", function () {
+      attemptSwitch(index);
+    });
+    controls.appendChild(button);
+  });
+
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "move-btn run-btn";
+  cancelButton.textContent = "Cancel";
+  cancelButton.addEventListener("click", function () {
+    showMoveButtons(activePlayer());
+  });
+  controls.appendChild(cancelButton);
+}
+
 // ===========================================================================
 //  START A BATTLE — the one function the rest of the game calls. Runs a
 //  fight in #arena/#controls/#log and resolves once it's over.
 //
-//    config  = { player: <individual>, enemy: <individual>, canFlee, canCatch }
+//    config  = { playerParty: <live array>, enemy: <individual>,
+//                canFlee, canCatch, onStateChange }
 //    outcome = { result: "win" | "lose" | "fled" | "caught",
 //                caught: <individual> | null, xpGained }
 //
-//  This is the M2-sized version of the full contract in
-//  PLANS/M3_OVERWORLD_PLAN.md §5 (config.playerParty and a persistent team
-//  to actually add outcome.caught to arrive with M2 Step 5).
+//  playerParty is a LIVE reference (per PLANS/M3_OVERWORLD_PLAN.md §5) —
+//  battle.js mutates it directly (HP, switches), so the caller always sees
+//  up-to-date state without needing to copy anything back out.
 // ===========================================================================
 function startBattle(config) {
   return new Promise(function (resolve) {
     resolveBattle = resolve;
 
-    player = config.player;
+    party = config.playerParty;
     opponent = config.enemy;
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
+    onStateChange = config.onStateChange || function () {};
 
-    const playerSpecies = FAKEAMON[player.speciesKey];
+    const playerSpecies = FAKEAMON[activePlayer().speciesKey];
     const opponentSpecies = FAKEAMON[opponent.speciesKey];
 
     document.getElementById("title").textContent =
@@ -448,7 +561,7 @@ function startBattle(config) {
     document.getElementById("log").innerHTML = "";
 
     renderArena();
-    showMoveButtons(player);
+    showMoveButtons(activePlayer());
     addLogLine("A wild " + opponentSpecies.name + " appears! Choose a move for " + playerSpecies.name + ".");
   });
 }

@@ -128,6 +128,15 @@
   .catch-btn:hover {
     background: #b83f3c;
   }
+  /* Step 6: the in-battle Switch button (and its "who to switch to"
+     picker) get a teal accent — a genuine .move-btn on purpose, since
+     using it correctly costs a turn like an attack does. */
+  .switch-btn {
+    background: #2ea8a8;
+  }
+  .switch-btn:hover {
+    background: #22807f;
+  }
   .result-message {
     width: 100%;
     text-align: center;
@@ -230,6 +239,25 @@
   .team-hp-text {
     font-size: 12px;
     color: #556;
+  }
+  /* Step 6: Switch buttons. Deliberately NOT .move-btn — same reason as
+     .boxes-btn above (battle.js's setControlsEnabled() would grab it). */
+  .team-switch-btn {
+    margin-top: 8px;
+    background: #4bbd6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .team-switch-btn:hover {
+    background: #3aa058;
+  }
+  .team-switch-btn:disabled {
+    background: #bcdcc4;
+    cursor: not-allowed;
   }
 </style>
 

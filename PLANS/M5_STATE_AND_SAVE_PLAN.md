@@ -46,6 +46,16 @@ The M2 refactor (Steps 1–2, merged as PRs #10–#11) diverged from
    Starter-select then moves out of `battle.js` (it's a *game flow* screen,
    not a battle) — into `src/main.js`, the small conductor script that will
    also own the M5 title screen (§4.3).
+   **✅ `config.playerParty` landed at M2 Step 6 (2026-07-08),** later than
+   this note originally implied — Steps 3–5 shipped with a simpler
+   `config.player` (one individual) since nothing needed the whole party
+   yet. It became necessary the moment Switch became a real mid-battle
+   action: switching means changing *which* individual is `party[0]`
+   mid-fight, which only works if `battle.js` holds the live array, not a
+   snapshot of one fighter. `config.onStateChange` (not in the M3 plan's
+   original sketch) was added alongside it — an optional callback
+   `battle.js` fires after every `renderArena()`, so `main.js`'s team row
+   stays in sync during a fight instead of only refreshing once it ends.
 3. **✅ Fixed by S1 (2026-07-07):** HP used to live in a name-keyed map —
    `hp[player.name]` — with fighters as the shared species objects
    themselves, so the moment the party contained two Growlers, or a wild

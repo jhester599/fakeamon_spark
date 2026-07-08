@@ -78,7 +78,7 @@ few hits each.
 
 ---
 
-## 🟡 M2 — Catching & Team  *(started!)*
+## 🟡 M2 — Catching & Team  *(all 6 steps done — save v1 still to come!)*
 
 **Goal:** turn a one-off fight into "catch creatures and build a team."
 
@@ -87,6 +87,9 @@ few hits each.
 > Steps 3–4, "individuals & the state bag" lands **before Step 5**, and
 > save v1 + export/import land at the **end of M2**. Read that plan's §A
 > before starting Step 3 — it maps the plans onto our global-script style.
+> **Status (2026-07-08):** Steps 1–6 below are all done. What's left before
+> M2 is truly finished: the M5 plan's **S3** (save v1) and **S4**
+> (export/import) — see its §6 build order.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -95,7 +98,7 @@ few hits each.
 | **3** ✅ | A **wild Fakeamon** appears (pick a random one to fight) instead of always Whaley | Different opponents each battle — *done!* |
 | **4** ✅ | Add the **Catch** action + a **Fakeaball**, using the capture formula (50% base chance, better at low HP — Lewis's call) | A "Throw Fakeaball" button; sometimes "Gotcha! …was caught!" — *done!* |
 | **5** ✅ | A **team list** — caught Fakeamon join your party, up to **4 active** (Lewis's call). A 5th catch goes to your **Boxes** | A row of up to 4 creatures below the battle, plus a Boxes screen for overflow — *done!* |
-| **6** | **Switch** which Fakeamon is fighting, including swapping one in from your Boxes | A "Switch" button swaps in a teammate |
+| **6** ✅ | **Switch** which Fakeamon is fighting, including swapping one in from your Boxes | A "Switch" button swaps in a teammate — *done! Switch works two ways: mid-battle (costs your turn, same speed-order risk as any other action) and between encounters from the team screen (free, since no fight's happening)* |
 
 **🎉 M2 done when:** you can fight a wild Fakeamon, weaken it, catch it, and
 see it join a team you can swap between.

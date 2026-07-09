@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Fakeamon — Battle</title>
+<title>Fakeamon</title>
 
 <style>
   /* ---- Simple, friendly styling ---- */
@@ -259,33 +259,110 @@
     background: #bcdcc4;
     cursor: not-allowed;
   }
+
+  /* ---- M3 Step S1: the overworld (Phaser canvas) ---- */
+  /* #world is where Phaser drops its <canvas>. We just center it and give it
+     the same friendly rounded border as the fighter cards. */
+  #world {
+    display: flex;
+    justify-content: center;
+    margin: 8px auto 0;
+  }
+  #world canvas {
+    border: 3px solid #d0d8e8;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    image-rendering: pixelated; /* keep the pixel art crisp when scaled up */
+  }
+
+  /* The temporary "Battle test" bar (removed at Step S7 when walking into a
+     wild Fakeamon starts the battle for real). */
+  #test-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 760px;
+    margin: 14px auto 4px;
+  }
+  .test-btn {
+    background: #2a4d8f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .test-btn:hover {
+    background: #1d3868;
+  }
+  .test-btn:disabled {
+    background: #a7b4cf;
+    cursor: not-allowed;
+  }
+  .test-note {
+    color: #889;
+    font-size: 13px;
+    font-style: italic;
+  }
 </style>
 
-<h1 id="title">Fakeamon Battle</h1>
-<div id="arena"></div>
+<h1 id="title">Fakeamon</h1>
 
-<p class="section-label" id="controls-label">Choose your starter:</p>
-<div id="controls"></div>
+<!-- M3 Step S1: the OVERWORLD. Phaser draws its canvas in here. Right now
+     it's just an empty grass-green screen — proof Phaser is wired in. The
+     real meadow map arrives at Step S2. (PLANS/M3_OVERWORLD_PLAN.md §1) -->
+<div id="world"></div>
 
-<p class="section-label">Battle Log</p>
-<div id="log"></div>
-
-<div class="team-header">
-  <p class="section-label">Your Team</p>
-  <button id="boxesBtn" class="boxes-btn">Boxes (0)</button>
+<!-- Temporary bridge to the battle while the overworld is being built. Until
+     Step S7 makes "walk into a wild Fakeamon" start a fight for real, this
+     button is how you reach the battle to test it. The whole bar gets removed
+     at Step S7/S9 (M3 plan §9). -->
+<div id="test-bar">
+  <button id="battleTestBtn" class="test-btn">⚔️ Battle test</button>
+  <span class="test-note">temporary — real map encounters arrive at Step 7</span>
 </div>
-<div id="team"></div>
-<div id="boxes"></div>
+
+<!-- The BATTLE room — the plain-HTML fight screen from M1/M2, unchanged.
+     Wrapped in one #battle box so a later step can show/hide it as a unit
+     when we jump between the map and a battle (M3 plan §3). -->
+<div id="battle">
+  <div id="arena"></div>
+
+  <p class="section-label" id="controls-label">Choose your starter:</p>
+  <div id="controls"></div>
+
+  <p class="section-label">Battle Log</p>
+  <div id="log"></div>
+
+  <div class="team-header">
+    <p class="section-label">Your Team</p>
+    <button id="boxesBtn" class="boxes-btn">Boxes (0)</button>
+  </div>
+  <div id="team"></div>
+  <div id="boxes"></div>
+</div>
+
+<!-- Phaser (the game engine for the overworld) — M3 Step S1. Vendored, not
+     loaded from a CDN, so double-clicking index.html still works offline and
+     nothing can swap the file out from under us (M3 plan §2; DECISIONS.md).
+     Pinned to Phaser 4.2.1 — see assets/vendor/phaser-LICENSE.md. This must
+     load BEFORE src/world/config.js, which uses the global Phaser it defines. -->
+<script src="assets/vendor/phaser.min.js"></script>
 
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  state.js  →  battle.js  →  main.js
-     (progression.js will slot in between state.js and battle.js once M5's
-     leveling/save work lands — see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+       data/*  →  state.js  →  battle.js  →  world/config.js  →  main.js
+     (world/config.js needs the Phaser global above; main.js starts both the
+     overworld and the battle game, so it goes last. progression.js will slot
+     in between state.js and battle.js once M5's leveling/save work lands —
+     see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
 <script src="src/state.js"></script>
 <script src="src/battle.js"></script>
+<script src="src/world/config.js"></script>
 <script src="src/main.js"></script>

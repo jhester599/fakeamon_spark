@@ -20,6 +20,12 @@
 //  be used to dodge the in-battle turn cost. Either way, gameState.party
 //  is a LIVE array battle.js reads directly (config.playerParty), so a
 //  mid-battle switch is instantly visible here too, via onStateChange.
+//
+//  M3 Step S1: main.js now also boots the OVERWORLD (the Phaser map, from
+//  src/world/config.js) on load, alongside the battle game. The map and the
+//  battle don't talk to each other yet — that doorway gets built at Step S7.
+//  Until then, a temporary "Battle test" button (runBattleTest below) is how
+//  you reach a fight from the new page.
 // ===========================================================================
 
 // True while a battle's startBattle() promise hasn't resolved yet.
@@ -117,6 +123,24 @@ function handleBattleOutcome(outcome) {
 }
 
 // ===========================================================================
+//  BATTLE TEST BUTTON — M3 Step S1, temporary. Until Step S7 makes walking
+//  into a wild Fakeamon start a fight for real, this button is the bridge
+//  from the new Phaser page into a battle, so we can confirm the battle
+//  module still works. If you haven't picked a starter yet, it lends you a
+//  random one so a fight can still happen. The whole test bar (and this
+//  function) gets removed at Step S7/S9.
+// ===========================================================================
+function runBattleTest() {
+  if (battleInProgress) return;               // already fighting — ignore
+  if (gameState.party.length === 0) {
+    gameState.party = [newIndividual(pickRandomWildSpeciesKey(), STARTING_LEVEL)];
+    renderTeamList();
+  }
+  if (gameState.party[0].currentHP <= 0) return; // fainted — Switch first
+  fightRandomWildFakeamon();
+}
+
+// ===========================================================================
 //  SWITCH — Step 6: pick who fights next. switchToPartyMember() reorders
 //  your own team; switchInFromBox() trades places with someone in
 //  storage. Both just swap array positions — party[0] is always "who's
@@ -202,6 +226,11 @@ function renderTeamList() {
 
   document.getElementById("boxesBtn").textContent = "Boxes (" + gameState.box.length + ")";
 
+  // Grey out the temporary Battle test button while a fight is happening, so
+  // you can't start a second battle on top of the current one (M3 Step S1).
+  const testBtn = document.getElementById("battleTestBtn");
+  if (testBtn) testBtn.disabled = battleInProgress;
+
   if (boxesVisible) renderBoxList(); // keep an open Boxes panel in sync too
 }
 
@@ -235,5 +264,9 @@ function toggleBoxes() {
 }
 
 document.getElementById("boxesBtn").addEventListener("click", toggleBoxes);
+document.getElementById("battleTestBtn").addEventListener("click", runBattleTest);
 
+// M3 Step S1: draw the overworld (an empty grass screen for now) at the top
+// of the page, then run the M1/M2 battle game below it, exactly as before.
+startWorld();
 showStarterSelect();

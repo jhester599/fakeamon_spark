@@ -9,11 +9,13 @@
 > is superseded by the finer-grained step list in §9 below. The Model Huddle
 > from `MODELS.md` still runs before every step.
 >
-> **Status:** plan complete; execution not started. Prerequisite: M2 finished
-> (especially the Step 1 refactor — see §8, which constrains *how* that
-> refactor must be done). **Read §A below first** — it reconciles this plan
-> against the code and decisions as they actually stand, and lists the prep
-> work already staged in the repo.
+> **Status:** plan complete; **execution underway — S1 done ✅ (2026-07-09),
+> S2 next.** See **§A.5** for what S1 actually built. Prerequisite (M2
+> finished) was substantially met — M2's gameplay + the §5 battle contract are
+> done; only save v1/export-import (M5-plan S3–S4) were deferred when Jeff
+> chose to start M3. **Read §A below first** — it reconciles this plan against
+> the code and decisions as they actually stand, and lists the prep work
+> already staged in the repo.
 
 ---
 
@@ -89,13 +91,44 @@ Consequences (both make M3 *easier*):
 | The slicer tool (S5, built early) | `tools/slice-sheets.mjs` + `sheet-manifest.json` | corrected geometry per §A.3; refuses to slice unattributed sheets; regenerates `tools/credits-fragment.md`. S5 shrinks to "add manifest entries + re-run" |
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
-| Phaser version check | — | newest stable 4.x on npm as of 2026-07-06 is **4.2.0** — §2's "4.2.1" guess doesn't exist. Re-check and pin at S1; record in `DECISIONS.md` |
+| Phaser version check | — | ✅ **Re-checked & pinned at S1 (2026-07-09): 4.2.1** ("Giedi"), now the newest stable 4.x on npm (was 4.2.0 at M3S0). Vendored to `assets/vendor/`, logged in `DECISIONS.md` + `CREDITS.md` |
 | Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S9; first wired in at **ROADMAP M3 row 6** (The Meadows' slice), then grown area-by-area through M4–M5 |
 
-What S1 still owns: the pinned CDN script tag, `src/world/config.js`,
-BootScene + empty WorldScene, the "Battle test" button, Jeff's zoom pick.
+~~What S1 still owns:~~ **✅ S1 is done (2026-07-09) — see §A.5.** It owned:
+the pinned Phaser script tag (vendored, not CDN), `src/world/config.js`,
+BootScene + empty WorldScene, the "Battle test" button, Jeff's zoom pick (2×).
 The map *renders* at S2, the hero *walks* at S3 — the staged files just mean
 those sessions start from data and art that already exist.
+
+### §A.5 What S1 actually built (execution session, 2026-07-09)
+
+Built with **Opus 4.8 / high** (Jeff's Model-Huddle override of the table's
+Sonnet-5 pick — "big, important step"). Faithful to §9 S1; nothing from S2+
+was pulled forward (no tileset load, no map draw, no movement, no
+`gameState.world`, no `src/screens.js` — those stay for their steps).
+
+- **Phaser 4.2.1 vendored** → `assets/vendor/phaser.min.js` (+ `phaser-LICENSE.md`).
+  Delivery decision (F6) resolved to *vendor*; version re-checked & pinned. See §2, §A.4.
+- **`src/world/config.js`** — a `BootScene` (hands straight to WorldScene; it'll
+  preload the tileset/hero at S2/S3) and an empty **`WorldScene`** that paints the
+  camera grass-green and shows a "The Meadows — coming at Step 2!" label. Plus
+  `startWorld()`, which builds the Phaser config (`Phaser.AUTO`, `pixelArt: true`,
+  `parent: "world"`, 480×320, `scale: { zoom: 2 }`) and boots the game once.
+  Every world number is a labeled constant at the top of the file.
+- **`index.html`** — added `#world` (the canvas mount) above the battle UI, which
+  is now wrapped in `#battle`; loads `assets/vendor/phaser.min.js` before
+  `src/world/config.js`; added the temporary "Battle test" bar. New load order:
+  `phaser → data/* → state → battle → world/config → main`.
+- **`src/main.js`** — calls `startWorld()` on load, wires the "Battle test" button
+  (`runBattleTest()`; lends a random starter if the party's empty, gated so it
+  can't stack a second battle), and greys the button out mid-fight.
+- **Verified in a real browser** (headless Chromium): Phaser 4.2.1 boots, canvas
+  renders at 2× (480×320 → 960×640 on screen), the starter-select + full battle
+  still work through the "Battle test" button, and **double-click (`file://`)
+  still runs with zero page errors** — confirming the vendor decision's payoff.
+- **Not touched on purpose:** `ROADMAP.md` / `roadmap.html` counters (S1 is only
+  half of ROADMAP M3 row 1 — S2 is the other half — so no *row* flipped to done
+  and no count changed; granular S1 status lives here + in `CLAUDE.md`).
 
 ---
 
@@ -135,11 +168,12 @@ battle elements inside a scene, stop — the architecture is being violated.
 
 ## 2. Engine choice: Phaser 4, pinned, loaded from CDN as a global
 
-- **Version:** Phaser **4.x** (current stable at planning time: **4.2.1**;
-  the executing session should check https://phaser.io/download/stable and
-  pin the newest 4.x). Phaser 4 is a ground-up renderer rebuild but keeps a
-  mostly-familiar v3 API, and it is actively developed; starting a new
-  project on 3.90 in mid-2026 would be building on the legacy line.
+- **Version:** Phaser **4.x**. **✅ RESOLVED at S1 (2026-07-09): pinned to
+  4.2.1** (release "Giedi"), verified as the newest stable 4.x against the npm
+  registry — so the plan's original "4.2.1" guess *does* now exist, and it
+  superseded M3S0's interim "4.2.0". Phaser 4 is a ground-up renderer rebuild
+  but keeps a mostly-familiar v3 API, and it is actively developed; starting a
+  new project on 3.90 in mid-2026 would be building on the legacy line.
 - **Load method:** classic script tag before our modules, so `Phaser` is a
   global — no bundler, preserving our no-build-step rule:
 
@@ -150,7 +184,14 @@ battle elements inside a scene, stop — the architecture is being violated.
   Pin the exact version in the URL. Never use `@latest`. Record the version
   in `DECISIONS.md` when installed. (The Phaser 4 `import` breaking change —
   wildcard imports from npm — does **not** apply to CDN-global loading.)
-- **Add Subresource Integrity (SRI), or vendor the file — decide at S1**
+- **✅ RESOLVED at S1 (2026-07-09): VENDORED (option 2 below).** Phaser lives
+  at `assets/vendor/phaser.min.js` (loaded by a plain `<script>` tag), with its
+  MIT license beside it and a `CREDITS.md` row. This removes CDN trust
+  entirely and keeps double-click-`index.html` working offline (verified in a
+  browser at S1) — the deciding factor for a father-son project whose whole
+  ethos is "open the file and it just works." (`DECISIONS.md`; F6 closed.) The
+  original decision text follows, kept for the record.
+- ~~**Add Subresource Integrity (SRI), or vendor the file — decide at S1**~~
   *(pre-M3 peer-review checkpoint, F6; open decision, see `DECISIONS.md`).*
   A pinned CDN URL still trusts the CDN not to swap the file (the polyfill.io
   supply-chain attack in 2024 is the cautionary tale). Two safe options:
@@ -462,7 +503,7 @@ wild roster — The Meadows' slice) is new work beyond this plan.
 
 | # | Step | What gets built | ▶ You'll see | Model / effort |
 |---|---|---|---|---|
-| **S1** | Phaser hello-world | CDN script pinned; `src/world/config.js` + BootScene; empty WorldScene renders a solid color into `#world`; battle still reachable via a temporary "Battle test" button calling `startBattle` directly | A colored game canvas above the old battle UI | Sonnet 5 / high |
+| **S1** ✅ | Phaser hello-world *(done 2026-07-09 — §A.5)* | **Vendored** (not CDN) Phaser **4.2.1** pinned; `src/world/config.js` + BootScene; empty grass WorldScene renders into `#world`; battle still reachable via a temporary "Battle test" button calling `startBattle` directly | A colored game canvas above the old battle UI | ~~Sonnet 5 / high~~ built with **Opus 4.8 / high** (Jeff's call) |
 | **S2** | Tile map renders | Pull tileset (+CREDITS row); `src/data/maps.js` with `starterMeadow`; WorldScene draws ground layer | A little meadow with a path and tree border | Sonnet 5 / high |
 | **S3** | Player on the grid | Player sheet (+CREDITS row); sprite placed from `gameState.world.player`; tap-to-turn + tween-step movement per §6.2; collision vs `blocked` | Walk the meadow; trees stop you | Sonnet 5 / **high** — the movement feel step; budget time for tuning with Lewis |
 | **S4** | Walk animation + input polish | 4-direction walk cycles; held-key continuous walking; arrow-key page-scroll capture | Walking looks like walking | Sonnet 5 / medium |

@@ -18,24 +18,28 @@ Other pages from the same site:
 
 ## Status
 
-**Milestone M2 — Catching & Team: in progress.** M1 (a full turn-based
-battle — moves, damage, type advantage, misses, HP bars, fainting, win/lose
-screen) is complete 🎉. M2 so far: the code is split into tidy `src/` files,
-and there's a **Choose Your Starter** screen with all three starters
-(Growler, Whaley, Leafick). Next up: random wild opponents and catching.
-See `ROADMAP.md` for the full plan — and `PLANS/` for the architecture
-plans covering the M3 overworld and the save system.
+**Milestone M3 — Overworld: just started (Step S1 done).** M1 (a full
+turn-based battle — moves, damage, type advantage, misses, HP bars,
+fainting, win/lose screen) is complete 🎉, and M2 (catching, a team of 4
+with Boxes overflow, and switching fighters) is playable — only save v1 is
+left before M2 fully wraps. **M3 Step S1** brings in **Phaser** (the game
+engine for the map): the top of the page now shows a little overworld canvas
+(an empty grass screen for now — the real meadow map is Step S2), with a
+temporary "Battle test" button to jump into the existing battle. See
+`ROADMAP.md` for the full plan and `PLANS/M3_OVERWORLD_PLAN.md` for the
+overworld architecture.
 
 ## Run it locally
 
-No build step — it's plain HTML/CSS/JS.
+No build step — it's plain HTML/CSS/JS, and Phaser is vendored (kept in the
+repo), so nothing needs the network.
 
 ```bash
 python3 -m http.server
 # then open http://localhost:8000
 ```
 
-Or just double-click `index.html`.
+Or just double-click `index.html` — it still works offline.
 
 ## Project docs
 
@@ -56,8 +60,10 @@ Or just double-click `index.html`.
 
 Starting art is based on sprites from the **[Tuxemon](https://github.com/Tuxemon/Tuxemon)**
 project, used under Creative Commons licenses (mostly CC BY-SA 4.0 — see
-`CREDITS.md` for exact per-file license and artist credit). Fakeamon is
-inspired by Pokémon in spirit only — no Nintendo names, sprites, or music.
+`CREDITS.md` for exact per-file license and artist credit). The overworld
+map (M3+) runs on **[Phaser](https://phaser.io)** 4.2.1, vendored under the
+MIT license. Fakeamon is inspired by Pokémon in spirit only — no Nintendo
+names, sprites, or music.
 
 ## Deployment
 

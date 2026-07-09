@@ -12,6 +12,19 @@ the original again.
 
 ---
 
+## Game engine
+
+| What | File in our repo | Source | Version | License |
+|---|---|---|---|---|
+| Phaser (overworld game engine, M3+) | `assets/vendor/phaser.min.js` | [phaser.io](https://phaser.io) / `github.com/phaserjs/phaser` (via the npm `phaser` package) | 4.2.1 ("Giedi") | MIT — full text at `assets/vendor/phaser-LICENSE.md` |
+
+Phaser is **vendored** (kept in the repo), not loaded from a CDN, so
+double-clicking `index.html` still works offline and the exact version is
+locked in (`DECISIONS.md`, M3 S1 decision). Only the overworld map uses it;
+the battle screen is still plain HTML/CSS/JS.
+
+---
+
 ## In use
 
 | Our name | File in our repo | Source in Tuxemon repo | Tuxemon name | Artist(s) | License |

@@ -73,6 +73,14 @@ function pickRandomWildSpeciesKey() {
 // Runs one wild battle for party[0] — the active fighter — against a
 // fresh random wild opponent.
 function fightRandomWildFakeamon() {
+  // Never start a battle on top of another. This matters because after a
+  // catch we briefly wait (setTimeout below) before the next fight begins,
+  // and during that gap battleInProgress is false — so without this guard,
+  // clicking the temporary "Battle test" button (or a between-encounter
+  // Switch) in that window could start a second, overlapping battle and
+  // strand the first one's promise. One line closes the whole class of bug.
+  if (battleInProgress) return;
+
   battleInProgress = true;
   const wildSpeciesKey = pickRandomWildSpeciesKey();
   const wildIndividual = newIndividual(wildSpeciesKey, STARTING_LEVEL);

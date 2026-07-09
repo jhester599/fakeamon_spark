@@ -167,7 +167,8 @@ HARD CONSTRAINTS your recommendations MUST respect (these are features, not
 flaws — do not recommend removing them):
 - It must stay understandable to a 10-year-old. Plain, readable, small steps.
 - No build step / no bundler through M2; plain <script> globals, no ES modules.
-- Phaser is adopted only at M3, loaded via CDN global (still no bundler).
+- Phaser is adopted only at M3, loaded as a vendored `<script>` global
+  (`assets/vendor/phaser.min.js`, pinned 4.2.1 — decided at S1), still no bundler.
 - Game numbers (HP, power, catch rate) must stay easy to find and tweak.
 - Do NOT recommend TypeScript, a build pipeline, an ECS, or a test framework
   UNLESS you can make a strong case; if you do, frame it as strictly optional

@@ -166,7 +166,7 @@ battle elements inside a scene, stop — the architecture is being violated.
 
 ---
 
-## 2. Engine choice: Phaser 4, pinned, loaded from CDN as a global
+## 2. Engine choice: Phaser 4, pinned, vendored as a global
 
 - **Version:** Phaser **4.x**. **✅ RESOLVED at S1 (2026-07-09): pinned to
   4.2.1** (release "Giedi"), verified as the newest stable 4.x against the npm
@@ -174,16 +174,19 @@ battle elements inside a scene, stop — the architecture is being violated.
   superseded M3S0's interim "4.2.0". Phaser 4 is a ground-up renderer rebuild
   but keeps a mostly-familiar v3 API, and it is actively developed; starting a
   new project on 3.90 in mid-2026 would be building on the legacy line.
-- **Load method:** classic script tag before our modules, so `Phaser` is a
-  global — no bundler, preserving our no-build-step rule:
+- **Load method:** classic `<script>` tag before our own scripts, so `Phaser`
+  is a global — no bundler, preserving our no-build-step rule. **As shipped at
+  S1 (vendored — see the resolved decision below):**
 
   ```html
-  <script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+  <script src="assets/vendor/phaser.min.js"></script>
   ```
 
-  Pin the exact version in the URL. Never use `@latest`. Record the version
-  in `DECISIONS.md` when installed. (The Phaser 4 `import` breaking change —
-  wildcard imports from npm — does **not** apply to CDN-global loading.)
+  Pin the exact version (we pin **4.2.1**). Never use `@latest`. Record it in
+  `DECISIONS.md` (done). (The Phaser 4 `import` breaking change — wildcard
+  imports from npm — does **not** apply to plain-global loading.) *(This plan
+  originally sketched a `cdn.jsdelivr.net` URL here; the vendoring decision
+  below replaced it.)*
 - **✅ RESOLVED at S1 (2026-07-09): VENDORED (option 2 below).** Phaser lives
   at `assets/vendor/phaser.min.js` (loaded by a plain `<script>` tag), with its
   MIT license beside it and a `CREDITS.md` row. This removes CDN trust

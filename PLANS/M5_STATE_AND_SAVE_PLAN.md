@@ -25,8 +25,9 @@ The M2 refactor (Steps 1–2, merged as PRs #10–#11) diverged from
 1. **Plain script tags, not ES modules — deliberately.** `index.html` loads
    `src/data/*.js` then `src/battle.js` as classic scripts sharing globals,
    keeping double-click-to-play alive. **Verdict: keep it.** It's simpler,
-   Lewis-friendlier, and Phaser-via-CDN-global is the same style. Amendments
-   to the M3 plan:
+   Lewis-friendlier, and Phaser-as-a-vendored-`<script>`-global is the same
+   style (delivery decided at M3 S1, 2026-07-09 — vendored, not a CDN).
+   Amendments to the M3 plan:
    - §8.3 (the `file://` breakage warning + dev-server doc changes) is
      **void** — double-click keeps working through M3.
    - All `export`/`import` syntax in both plans should be read as "define a
@@ -86,8 +87,10 @@ The M2 refactor (Steps 1–2, merged as PRs #10–#11) diverged from
    flipped to "CONFIRMED (2026-07-06) by Jeff" *before* these plans were
    committed, so the M3 plan §11 item "flip it when committing this file"
    was already done. This session refined the §13 wording (global scripts
-   through M2; Phaser 4 pinned via CDN global at M3, per the M3 plan §2 and
-   §A.1 above) and logged it in `DECISIONS.md` as a Jeff call.
+   through M2; Phaser 4 pinned as a script global at M3, per the M3 plan §2 and
+   §A.1 above) and logged it in `DECISIONS.md` as a Jeff call. *(Delivery was
+   later settled at M3 S1, 2026-07-09: vendored `phaser.min.js` 4.2.1, not a
+   CDN — M3 plan §2, `DECISIONS.md`.)*
 7. **Where the two plans' `gameState` sketches disagree** (the M3 plan §4
    has a flatter `inventory`, no `box`), **this plan's §1 wins** — it's the
    later, fuller drawing of the same object. M3 sessions should take state

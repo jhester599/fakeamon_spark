@@ -43,16 +43,27 @@ class BootScene extends Phaser.Scene {
     super("BootScene");
   }
 
+  // S2: load the art the overworld needs before we draw anything. Right now
+  // that's just the meadow tileset (the little 16×16 tiles the map is built
+  // from). The hero walk sheet joins this at S3.
+  preload() {
+    const meadow = MAPS.theMeadows;
+    this.load.image("meadow-tiles", meadow.tileset); // assets/tilesets/meadow.png
+  }
+
   create() {
     this.scene.start("WorldScene");
   }
 }
 
 // ---------------------------------------------------------------------------
-//  WorldScene — the overworld itself. Empty for S1: it paints the screen
-//  grass-green and shows a friendly "coming soon" label, just so the blank
-//  canvas isn't confusing. The meadow map (S2), the hero (S3), and the wild
-//  Fakeamon standing in the grass (S6) all get added here later.
+//  WorldScene — the overworld itself.
+//
+//  S2: draws The Meadows from the plain-number arrays in src/data/maps.js.
+//  Each number in `ground` is a tile index into meadow.png (see that file's
+//  TILE LEGEND) — change a number there, refresh, and the world changes. The
+//  hero (S3) and the wild Fakeamon standing in the grass (S6) get added here
+//  later.
 // ---------------------------------------------------------------------------
 class WorldScene extends Phaser.Scene {
   constructor() {
@@ -60,16 +71,23 @@ class WorldScene extends Phaser.Scene {
   }
 
   create() {
+    // Grass-green shows through any gap (there shouldn't be any — the map
+    // fills the whole screen — but it's a friendly fallback).
     this.cameras.main.setBackgroundColor(WORLD_GRASS_COLOR);
 
-    // A small centered label. Confirms create() actually ran (so we know
-    // Phaser is really drawing, not just showing a background color).
-    this.add.text(
-      WORLD_WIDTH / 2,
-      WORLD_HEIGHT / 2,
-      "The Meadows\ncoming at Step 2!",
-      { fontFamily: "monospace", fontSize: "16px", color: "#ffffff", align: "center" }
-    ).setOrigin(0.5);
+    const mapData = MAPS.theMeadows;
+
+    // Build a Phaser tilemap straight from our 2D array of tile numbers.
+    const map = this.make.tilemap({
+      data: mapData.ground,
+      tileWidth: mapData.tileSize,
+      tileHeight: mapData.tileSize,
+    });
+
+    // Link the tileset image to the map, then draw the ground layer. The
+    // tile numbers in mapData.ground index into this image (6 tiles wide).
+    const tileset = map.addTilesetImage("meadow", "meadow-tiles", mapData.tileSize, mapData.tileSize);
+    map.createLayer(0, tileset, 0, 0);
   }
 }
 

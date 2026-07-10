@@ -9,13 +9,14 @@
 > is superseded by the finer-grained step list in §9 below. The Model Huddle
 > from `MODELS.md` still runs before every step.
 >
-> **Status:** plan complete; **execution underway — S1 done ✅ (2026-07-09),
-> S2 next.** See **§A.5** for what S1 actually built. Prerequisite (M2
-> finished) was substantially met — M2's gameplay + the §5 battle contract are
-> done; only save v1/export-import (M5-plan S3–S4) were deferred when Jeff
-> chose to start M3. **Read §A below first** — it reconciles this plan against
-> the code and decisions as they actually stand, and lists the prep work
-> already staged in the repo.
+> **Status:** plan complete; **execution underway — S1–S4 done ✅ (S1
+> 2026-07-09; S2–S4 2026-07-10). Next: S5/S6 → S7 (the handoff).** See **§A.5**
+> for S1 and **§A.6** for S2–S4. M2 is now fully finished (incl. save
+> v1/export-import). You can walk The Meadows with an animated hero; trees
+> block you; a battle is reachable via the temporary "Battle test" button and
+> returns you to the map. **Read §A below first** — it reconciles this plan
+> against the code and decisions as they actually stand, and lists the prep
+> work already staged in the repo.
 
 ---
 
@@ -85,7 +86,7 @@ Consequences (both make M3 *easier*):
 |---|---|---|
 | Meadow tileset, composed | `assets/tilesets/meadow.png` | 24-tile 16×16 set (6×4); index legend lives in `src/data/maps.js`. Built from the two George originals below (CC BY 3.0) |
 | Tileset source originals | `assets/tilesets/terrain_george.png`, `vegetation_george.png` | unmodified Tuxemon pulls, kept for re-composition |
-| Hero walk sheet | `assets/sprites/player/hero.png` | Tuxemon "adventurer" (cap + backpack — matches B10); 48×128, 3 frames × 4 rows (observed down/left/right/up), 16×32 cells — verify frame order at S3. ⚠️ license check pending, see `CREDITS.md` |
+| Hero walk sheet | `assets/sprites/player/hero.png` | Tuxemon "adventurer" (cap + backpack — matches B10); 48×128, 3 frames × 4 rows, 16×32 cells. **Row order VERIFIED at S3 (2026-07-10): down / up / right / left** (the earlier "down/left/right/up" guess was wrong). ⚠️ license check pending, see `CREDITS.md` |
 | Frondly battle sheet + Leafick portrait | `assets/sprites/battle/frondly-sheet.png`, `assets/sprites/leafick.png` | Leafick's portrait is wired into `src/data/fakeamon.js` — all three starters now have art |
 | Sliced starter sprites | `assets/sprites/front|back|idle/<slug>.png` | hissiorite, bigfin, frondly |
 | The slicer tool (S5, built early) | `tools/slice-sheets.mjs` + `sheet-manifest.json` | corrected geometry per §A.3; refuses to slice unattributed sheets; regenerates `tools/credits-fragment.md`. S5 shrinks to "add manifest entries + re-run" |
@@ -129,6 +130,37 @@ was pulled forward (no tileset load, no map draw, no movement, no
 - **Not touched on purpose:** `ROADMAP.md` / `roadmap.html` counters (S1 is only
   half of ROADMAP M3 row 1 — S2 is the other half — so no *row* flipped to done
   and no count changed; granular S1 status lives here + in `CLAUDE.md`).
+
+### §A.6 What S2–S4 built (execution session, 2026-07-10)
+
+Built with **Opus 4.8**. Completes ROADMAP M3 **rows 1 & 2** (R1≈S1–S2,
+R2≈S3–S4), so the step counter moved **14 → 16** and both trackers were updated.
+
+- **S2 — the meadow renders.** `index.html` now loads the dormant
+  `src/data/maps.js`; `WorldScene` builds a Phaser tilemap from `theMeadows.ground`
+  via `make.tilemap({ data })` + `addTilesetImage` + `createLayer`, drawn with the
+  already-vendored `meadow.png`. Tree border, path, flowers, rocks, log — all live.
+- **S3 — the hero walks.** Loads the hero sheet; spawns from `gameState.world.player`
+  (new `world` state, defaulting to the start tile); arrow-key **tween** movement
+  (no physics, §6.2); turn-to-face is free, a step needs a walkable tile; blocked by
+  `blocked` + map edges; each step autosaves. **Verified the sheet's row order —
+  down/up/right/left, NOT the §A.4 guess — and fixed the standing frames.**
+  `addCapture` stops page-scroll; `worldActive` gates walking off during
+  battles/menus (a light stand-in for the S7 screen manager).
+- **S4 — walking animates.** Four looping walk cycles; `ignoreIfPlaying` keeps a
+  held-key walk smooth; settles on the standing pose when idle.
+- **Flow change (deliberate, in-scope for M3):** the M2 "endless auto-battle loop"
+  is **retired**. The overworld (`enterOverworld`) is the hub; choosing a starter /
+  Continue / Import drops you on the map; a battle (via the temporary Battle test
+  button until S7) is a discrete detour that returns you to the map. Loss uses the
+  §6.4 placeholder (heal + back to start). `gameState.world` is additive, so old
+  saves still load (no version bump).
+- **Verified in a browser:** walk all four ways; trees & edges block; hold-to-walk
+  is continuous and animated; reload → Continue restores the exact tile; walking is
+  frozen during a battle; return-to-map after win/flee/catch/loss. Zero page errors.
+- **Not yet built (on purpose):** the real map encounters + handoff (S6–S7), the
+  slicer re-run for encounter art (S5), catch-on-map depth (S8). The Battle test
+  bar is still the bridge and is hidden until you have a team.
 
 ---
 
@@ -507,9 +539,9 @@ wild roster — The Meadows' slice) is new work beyond this plan.
 | # | Step | What gets built | ▶ You'll see | Model / effort |
 |---|---|---|---|---|
 | **S1** ✅ | Phaser hello-world *(done 2026-07-09 — §A.5)* | **Vendored** (not CDN) Phaser **4.2.1** pinned; `src/world/config.js` + BootScene; empty grass WorldScene renders into `#world`; battle still reachable via a temporary "Battle test" button calling `startBattle` directly | A colored game canvas above the old battle UI | ~~Sonnet 5 / high~~ built with **Opus 4.8 / high** (Jeff's call) |
-| **S2** | Tile map renders | Pull tileset (+CREDITS row); `src/data/maps.js` with `starterMeadow`; WorldScene draws ground layer | A little meadow with a path and tree border | Sonnet 5 / high |
-| **S3** | Player on the grid | Player sheet (+CREDITS row); sprite placed from `gameState.world.player`; tap-to-turn + tween-step movement per §6.2; collision vs `blocked` | Walk the meadow; trees stop you | Sonnet 5 / **high** — the movement feel step; budget time for tuning with Lewis |
-| **S4** | Walk animation + input polish | 4-direction walk cycles; held-key continuous walking; arrow-key page-scroll capture | Walking looks like walking | Sonnet 5 / medium |
+| **S2** ✅ | Tile map renders *(done 2026-07-10 — §A.6)* | Meadow tileset (already vendored + credited at M3S0); `src/data/maps.js` (`theMeadows`) now loaded; WorldScene draws the ground layer via `make.tilemap({data})` | A little meadow with a path and tree border | ~~Sonnet 5 / high~~ Opus 4.8 |
+| **S3** ✅ | Player on the grid *(done 2026-07-10 — §A.6)* | Hero sheet loaded; sprite placed from `gameState.world.player`; turn-to-face + tween-step movement per §6.2; collision vs `blocked` + edges; per-step autosave; **retired the M2 auto-battle-loop — the map is the hub now** | Walk the meadow; trees stop you | ~~Sonnet 5 / high~~ Opus 4.8 |
+| **S4** ✅ | Walk animation + input polish *(done 2026-07-10 — §A.6)* | 4-direction walk cycles (down/up/right/left); held-key continuous walking + arrow-key page-scroll capture (both landed with S3) | Walking looks like walking | ~~Sonnet 5 / medium~~ Opus 4.8 |
 | **S5** | Slicer tool | `tools/slice-sheets.mjs` per §7.3; run it for the creatures M3 uses; generated CREDITS rows | New files in `assets/sprites/front|back/` (no gameplay change) | Sonnet 5 / medium (Haiku can run/re-run it) |
 | **S6** | Encounters stand in the world | Encounter entries in map data; idle-animated sprites on tiles; bump detection stubs `handleEncounter` (logs to console) | A wild Fakeamon idling in the grass; bumping it logs a message | Sonnet 5 / medium |
 | **S7** | **The handoff** 🌉 | `src/screens.js` per §3; `handleEncounter` per §5: pause → hide → `await startBattle` → apply outcome → show → resume; keyboard enable/disable + canvas refocus | Bump a creature → the real battle opens → win/catch/flee → back on the map, creature gone (or not, if fled) | Sonnet 5 / **high** — the whole plan converges here; if it fights back twice, escalate to Opus 4.8 |

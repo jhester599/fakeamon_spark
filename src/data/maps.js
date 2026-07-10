@@ -1,12 +1,12 @@
 // ===========================================================================
 //  MAPS — the world as plain data (PLANS/M3_OVERWORLD_PLAN.md §6.1).
 //  Each map is 2D arrays of numbers you can edit right here in the file —
-//  change a number, refresh the browser (once M3 wires this in), and the
-//  world changes. No tools needed.
+//  change a number, refresh the browser, and the world changes. No tools
+//  needed.
 //
-//  ⚠️ Nothing loads this file yet — it's staged ahead of M3 Step S2, when
-//  the Phaser WorldScene starts drawing it. It isn't in index.html's
-//  script list until then.
+//  ✅ Loaded by index.html and drawn by the Phaser WorldScene as of M3 Step
+//  S2 (2026-07-10). The `encounters` list below isn't wired to battles yet —
+//  that lands at S6/S7.
 //
 //  TILE LEGEND for assets/tilesets/meadow.png (index = row*6 + column):
 //     0 grass         1 light grass    2 white flowers

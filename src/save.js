@@ -53,8 +53,10 @@ function isValidIndividual(ind) {
 // A brand-new, empty adventure — the shape everything else expects. Loading
 // merges an old save ON TOP of this, so any field added in a later version
 // gets a sensible default for free (only *reshaped* fields need a migration).
+// That's why adding `world` (M3) needed no version bump: an old party-only
+// save still loads and just gains a fresh world here.
 function defaultState() {
-  return { version: SAVE_VERSION, party: [], box: [] };
+  return { version: SAVE_VERSION, party: [], box: [], world: defaultWorld() };
 }
 
 // Write gameState to localStorage. Wrapped in try/catch because the WRITE can
@@ -113,7 +115,31 @@ function parseSave(text) {
       (!Array.isArray(migrated.box) || !migrated.box.every(isValidIndividual))) return null;
 
   // Merge onto a fresh default so newly-added fields get defaults for free.
-  return Object.assign(defaultState(), migrated);
+  const state = Object.assign(defaultState(), migrated);
+
+  // The world (map position) is just where you're standing — if a hand-edited
+  // save breaks it, reset it to the start tile rather than crash the map or
+  // throw away the whole (valid) team. Party/box being garbage rejects the
+  // save above; a garbled world is more forgiving. We check: a known map, a
+  // valid facing, and coordinates actually ON that map (an off-map position
+  // would strand the hero with no way back except New Game).
+  const w = state.world;
+  const FACINGS = { up: true, down: true, left: true, right: true };
+  let worldOk = w && typeof w === "object" && w.player &&
+    typeof w.player.tileX === "number" && typeof w.player.tileY === "number" &&
+    FACINGS[w.player.facing] && typeof w.mapId === "string" && MAPS[w.mapId];
+  if (worldOk) {
+    const ground = MAPS[w.mapId].ground;
+    const cols = ground[0].length, rows = ground.length;
+    if (w.player.tileX < 0 || w.player.tileY < 0 ||
+        w.player.tileX >= cols || w.player.tileY >= rows) worldOk = false;
+  }
+  if (!worldOk) {
+    state.world = defaultWorld();
+  } else if (!Array.isArray(w.defeatedEncounters)) {
+    w.defeatedEncounters = []; // fill a missing sub-field (future-proofs S8)
+  }
+  return state;
 }
 
 // Is there a real, loadable save right now? (Used to decide whether to show

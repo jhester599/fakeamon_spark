@@ -10,7 +10,9 @@ variants from memory.
 ## Where these came from
 
 - **Source:** the `skills/` folder of the official Phaser repo,
-  `github.com/phaserjs/phaser`, commit **`539e718`** (pulled 2026-07-06).
+  `github.com/phaserjs/phaser`, commit **`539e718`** (pulled 2026-07-06;
+  `scale-and-responsive` pulled from the same commit, 2026-07-10 — see
+  below).
 - **License:** MIT, same as Phaser itself.
 - **Version note:** the newest stable Phaser at *pull* time (2026-07-06) was
   **4.2.0**. **Update: at S1 (2026-07-09) the game pinned & vendored 4.2.1** —
@@ -31,6 +33,7 @@ variants from memory.
 | `animations/` | S4, S6 — walk cycles and idle animations |
 | `cameras/` | S1 zoom; camera-follow stays out of scope until a map outgrows the screen |
 | `v3-to-v4-migration/` | everything — what changed from the Phaser the model "remembers" |
+| `scale-and-responsive/` | **S10** (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §5) — the Scale Manager, FIT mode, `min`/`max` sizing for phone/tablet play. Pulled 2026-07-10, same `539e718` pin; a single `SKILL.md`, no `references/` subfolder |
 
 The source repo has ~17 more skills (physics, particles, audio, filters…).
 We deliberately did **not** vendor those: M3 uses none of them (no physics —

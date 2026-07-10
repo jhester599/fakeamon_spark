@@ -67,6 +67,12 @@ function showTitleScreen() {
   controls.innerHTML = "";
   if (saveExists) addTitleButton(controls, "move-btn", "Continue", continueGame);
   addTitleButton(controls, "move-btn", "New Game", startNewGame);
+
+  // The little "settings corner" (M5-plan S4): Export a copy of your save,
+  // or Import one (handy on a new computer, or if the browser forgets). These
+  // are secondary, so they get the smaller grey .save-btn look.
+  if (saveExists) addTitleButton(controls, "save-btn", "Export Save", exportSave);
+  addTitleButton(controls, "save-btn", "Import Save", importSave);
 }
 
 // Small helper so each title button reads as one line.
@@ -102,6 +108,32 @@ function startNewGame() {
   gameState.party = [];
   gameState.box = [];
   showStarterSelect();
+}
+
+// Import Save: pop up a file picker, and if they choose a real Fakeamon save,
+// make it THIS browser's game and jump in. A file that isn't a valid save
+// changes nothing (parseSave in save.js rejects it) — we just say so.
+function importSave() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json,.json";
+  input.addEventListener("change", function () {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    importSaveFromFile(file, function (loaded) {
+      if (!loaded) {
+        window.alert("That file doesn't look like a Fakeamon save — nothing was changed.");
+        return;
+      }
+      gameState.version = loaded.version;
+      gameState.party = loaded.party;
+      gameState.box = loaded.box;
+      saveGame();        // the imported adventure is now this browser's save
+      renderTeamList();
+      resumeAdventure(); // jump straight into the imported game
+    });
+  });
+  input.click();
 }
 
 // After loading, drop back into the wild-battle loop — unless your lead

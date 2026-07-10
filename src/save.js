@@ -111,6 +111,58 @@ function clearSave() {
   }
 }
 
+// ===========================================================================
+//  EXPORT / IMPORT — M5-plan S4 (§4.3). The safety net (browsers DO clear
+//  localStorage — storage pressure, "clear browsing data," a different
+//  browser) and, honestly, the best lesson in the whole project: your entire
+//  game world is one little JSON file you can download, read, and — inevitably
+//  — edit. Give yourself 999 Fakeaballs by hand; that's not cheating, that's
+//  understanding how saving works.
+// ===========================================================================
+
+// Download the saved game as "fakeamon-save.json".
+//
+// We export what's IN localStorage, not the in-memory gameState — because
+// Export lives on the title screen, where gameState hasn't been loaded yet
+// (it's still the empty default until you press Continue). Autosave keeps
+// localStorage current with the live game, so this is always the real save.
+// (Fallback: if storage is off — e.g. Safari Private — export whatever is in
+// memory, so an in-progress game can still be rescued to a file.)
+function exportSave() {
+  let text = null;
+  try {
+    text = localStorage.getItem(SAVE_KEY);
+  } catch (err) {
+    text = null;
+  }
+  if (!text) text = JSON.stringify(gameState); // storage off → use memory
+
+  const blob = new Blob([text], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "fakeamon-save.json";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+// Read a picked file and hand back a validated state (or null if it isn't a
+// real Fakeamon save). Goes through the SAME parseSave() checks as loading,
+// so a bad or hand-edited file can never corrupt the game — worst case is
+// "nothing changed." Calls onDone(stateOrNull) when the read finishes.
+function importSaveFromFile(file, onDone) {
+  const reader = new FileReader();
+  reader.onload = function () {
+    onDone(parseSave(String(reader.result)));
+  };
+  reader.onerror = function () {
+    onDone(null);
+  };
+  reader.readAsText(file);
+}
+
 // Gentle one-time "couldn't save" note, shown in the battle log (the one text
 // area that's always on screen). Only fires once so it never nags.
 let saveFailureAnnounced = false;

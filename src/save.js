@@ -115,7 +115,18 @@ function parseSave(text) {
       (!Array.isArray(migrated.box) || !migrated.box.every(isValidIndividual))) return null;
 
   // Merge onto a fresh default so newly-added fields get defaults for free.
-  return Object.assign(defaultState(), migrated);
+  const state = Object.assign(defaultState(), migrated);
+
+  // The world (map position) is just where you're standing — if a hand-edited
+  // save breaks it, reset it to the start tile rather than crash the map or
+  // throw away the whole (valid) team. Party/box being garbage rejects the
+  // save above; a garbled world is more forgiving.
+  const w = state.world;
+  if (!w || typeof w !== "object" || !w.player ||
+      typeof w.player.tileX !== "number" || typeof w.player.tileY !== "number") {
+    state.world = defaultWorld();
+  }
+  return state;
 }
 
 // Is there a real, loadable save right now? (Used to decide whether to show

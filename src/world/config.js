@@ -34,15 +34,16 @@ const WORLD_HEIGHT = WORLD_TILES_TALL * WORLD_TILE_SIZE;  // 320
 
 // --- Hero (S3) ------------------------------------------------------------
 // The walk sheet is 48×128: 3 frames across × 4 rows down, each cell 16×32.
-// Row order, VERIFIED at S3 by eyeballing the sheet: down, up, right, left.
-// (The old M3-plan §A.4 guess of "down/left/right/up" was wrong.)
+// Row order (confirmed by in-game testing 2026-07-10): down, LEFT, right, UP —
+// the standard RPG-Maker order. (An earlier S3 attempt mis-read the sheet and
+// swapped up/left; the sheet's left-profile and back-view look alike at 16px.)
 const HERO_SHEET   = "assets/sprites/player/hero.png";
 const HERO_FRAME_W = 16;
 const HERO_FRAME_H = 32;
 // The middle frame of each row is the "standing still" pose for that facing.
-// Frames number left→right, top→bottom: row0 = 0,1,2 (down); row1 = 3,4,5 (up);
-// row2 = 6,7,8 (right); row3 = 9,10,11 (left).
-const HERO_STAND_FRAME = { down: 1, up: 4, right: 7, left: 10 };
+// Frames number left→right, top→bottom: row0 = 0,1,2 (down); row1 = 3,4,5 (left);
+// row2 = 6,7,8 (right); row3 = 9,10,11 (up).
+const HERO_STAND_FRAME = { down: 1, left: 4, right: 7, up: 10 };
 // How long one tile-step takes, in milliseconds. Lower = zippier, higher =
 // more deliberate. The classics feel right around 150–220 (plan §6.2).
 const MOVE_DURATION_MS = 180;
@@ -93,7 +94,8 @@ class BootScene extends Phaser.Scene {
 //
 //  S2: draws The Meadows from the plain-number arrays in src/data/maps.js.
 //  S3: puts the hero on the grid and walks them tile-by-tile with the arrow
-//  keys, blocked by trees/rocks/water. Movement is a TWEEN between tiles (no
+//  keys, blocked by solid tiles (trees/rocks/boulders/stumps/logs — see
+//  SOLID_TILE_INDICES in maps.js). Movement is a TWEEN between tiles (no
 //  physics — plan §6.2), so the hero is always ON a tile or sliding cleanly
 //  between two, never drifting. The wild Fakeamon standing in the grass (S6)
 //  get added here later.
@@ -110,7 +112,8 @@ class WorldScene extends Phaser.Scene {
 
     const mapData = MAPS.theMeadows;
     this.tileSize = mapData.tileSize;
-    this.blocked = mapData.blocked;          // 1 = can't walk there
+    this.ground = mapData.ground;            // the tile-number grid
+    this.solid = new Set(SOLID_TILE_INDICES); // which tile numbers you can't walk on
     this.mapCols = mapData.ground[0].length; // 30
     this.mapRows = mapData.ground.length;    // 20
 
@@ -154,9 +157,9 @@ class WorldScene extends Phaser.Scene {
       repeat: -1,
     });
     make("walk-down",  [0, 1, 2, 1]);
-    make("walk-up",    [3, 4, 5, 4]);
+    make("walk-left",  [3, 4, 5, 4]);
     make("walk-right", [6, 7, 8, 7]);
-    make("walk-left",  [9, 10, 11, 10]);
+    make("walk-up",    [9, 10, 11, 10]);
   }
 
   // Stop walking and settle on the standing pose for the current facing.
@@ -193,10 +196,15 @@ class WorldScene extends Phaser.Scene {
     this.isMoving = false;
   }
 
-  // Can the hero stand on this tile? No if it's off the map or blocked.
+  // Can the hero stand on this tile? No if it's off the map, or if the tile
+  // there is a "solid" one (tree, rock, boulder, stump, log). We read
+  // solidity straight from the tile the map already shows — so anything you
+  // can SEE is an obstacle blocks you automatically, and there's no separate
+  // collision list to keep in sync (that parallel list is exactly what drifted
+  // and let you walk through a couple of rocks).
   canWalk(tileX, tileY) {
     if (tileX < 0 || tileY < 0 || tileX >= this.mapCols || tileY >= this.mapRows) return false;
-    return this.blocked[tileY][tileX] !== 1;
+    return !this.solid.has(this.ground[tileY][tileX]);
   }
 
   // Try to walk one tile in a direction. Turning to face a new way is free

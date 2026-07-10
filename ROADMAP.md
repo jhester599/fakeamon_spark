@@ -138,7 +138,7 @@ see it join a team you can swap between.
 
 ---
 
-## 🔴 M3 — Overworld (the map)
+## 🟡 M3 — Overworld (the map)  *(in progress — rows 1–2 done via S1–S4)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
@@ -156,8 +156,8 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | Add **Phaser** and show a tiny **tile map** — pull a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15) rather than placeholder colors; wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable/testable until the real map↔battle handoff lands at Step 4 | A little world on screen, built from real tile art, with a button to jump into a battle |
-| **2** | A **player character** you move with the **arrow keys**, four directions, grid by grid — pull a real Tuxemon player walk-sheet (+ a `CREDITS.md` row) for the hero's sprite | Walk around the map with real character art |
+| **1** ✅ | Add **Phaser** and show a tiny **tile map** — pull a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15) rather than placeholder colors; wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable/testable until the real map↔battle handoff lands at Step 4 | A little world on screen, built from real tile art, with a button to jump into a battle — *done! (S1 Phaser + S2 the meadow renders)* |
+| **2** ✅ | A **player character** you move with the **arrow keys**, four directions, grid by grid — pull a real Tuxemon player walk-sheet (+ a `CREDITS.md` row) for the hero's sprite | Walk around the map with real character art — *done! (S3 grid movement + collision, S4 walk animation)* |
 | **3** | **Real sprites** art pass for the rest of the roster (mini-bosses, gyms, evolutions — everyone in M4/M5) — all 3 starters already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |

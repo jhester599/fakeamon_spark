@@ -136,6 +136,22 @@ few hits each.
 **🎉 M2 done when:** you can fight a wild Fakeamon, weaken it, catch it, and
 see it join a team you can swap between.
 
+> **⚠️ Two small follow-ups on Step 4 (catching), added 2026-07-10 —
+> Lewis's design, not yet built:** M2 Step 4 shipped catching before these
+> were decided, so the current game doesn't do either of them yet:
+> 1. **Limited Fakeaballs.** Start with **5**; each throw (catch or miss)
+>    uses one from `gameState.inventory.fakeaball`; the "Throw Fakeaball"
+>    button disables at **zero**. Tall Tower purchases (M4 Step 3) add
+>    more to the same count.
+> 2. **Pause after a catch.** Show a **Continue** button (like a battle
+>    win/lose does) instead of resolving straight into a new battle, so
+>    the "Gotcha!" message has a beat before the screen changes.
+>
+> See `DECISIONS.md` #49–50 and `DESIGN.md` §6/§9 for the full decisions.
+> Small, self-contained fix — a good next-session pickup, doesn't need its
+> own M2 step number since M2's table above stays the historical record
+> of what Step 4 originally shipped.
+
 ---
 
 ## 🟡 M3 — Overworld (the map)  *(in progress — rows 1–2 done via S1–S4)*
@@ -144,7 +160,7 @@ see it join a team you can swap between.
 bring in **Phaser** (a game engine that handles tile maps and movement).
 
 > **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
-> Its nine finer-grained steps (**S1–S9**, in its §9) supersede **rows 1–5**
+> Its finer-grained steps (**S1–S9**, in its §9) supersede **rows 1–5**
 > below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
 > (cleanup: remove the temporary "Battle test" button below, flip status/
 > ticks, clear stale `M3 PLACEHOLDER` comments, verify the live Pages build
@@ -152,7 +168,10 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 > not new player-visible behavior, but it still has to happen before M3 is
 > actually done. **Row 6 (expand the wild roster) is new work *beyond* that
 > plan** — the plan deliberately left the roster for "later," and this is the
-> "later." The table below stays as the short version; build from the plan.
+> "later." **Row 7 (play it on a tablet) is the plan's tenth step, S10** —
+> adopted 2026-07-10 via `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`, landing after
+> S9 (see that plan's §7 and the M3 plan's §A.7). The table below stays as
+> the short version; build from the plans.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -162,6 +181,7 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 | **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
 | **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
 | **6** | **Expand the wild roster** — swap The Meadows' 3-starter test pool (from Step 4) for its real slice of the approved **198-Fakeamon** encounter pool (`CONTENT_REFERENCE.md` §16), including Lewis's Tuxemon-slug → Fakeamon **rename pass** for that area | The Meadows fills up with a proper cast of wild Fakeamon — not just the 3 starters |
+| **7** | **Play it on a tablet** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs, no keyboard (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`; the plan's S10, landing after S9) | You'll see: walk the meadow with your thumbs on the live site |
 
 **🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon — a real
 Meadows cast, not just the starters — battle it, and return to exploring.

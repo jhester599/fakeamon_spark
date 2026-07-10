@@ -71,7 +71,7 @@ how it reads. How should we label the wild one?
 
 ---
 
-## 🟡 M3 — Overworld & Map *(7 of 8 answered — new B37 is open, no rush)*
+## 🟡 M3 — Overworld & Map *(7 of 13 answered — new B38–B42 are open, no rush)*
 
 ### ✅ B6. One big map, or connected areas?  *(needed by M3 Step 1)*
 
@@ -128,6 +128,61 @@ a separate, ongoing job — one area at a time, whenever you like.)
 - [ ] **C) Big reshuffle** — grab a printout and go wild.
 
 **Lewis picks:** ____________  **Moves:** ________________________________
+
+### 🔲 B38. Pad look — classic cross or floating arrows? 🎮  *(needed by M3 Step S10 — playing on a tablet)*
+
+The touch & mobile plan (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) adds an
+on-screen D-pad so you can walk the meadow with your thumbs. What should
+it look like?
+
+- [ ] **A) Classic cross** — one solid Game-Boy-style D-pad shape.
+- [ ] **B) Four floating arrow buttons** — separate ▲▼◀▶ buttons with gaps
+  between them.
+- [ ] **C) Something else** — invent it!
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 B39. Which side of the screen?  *(needed by M3 Step S10)*
+
+Bottom-left is tradition for a D-pad, but which thumb does Lewis actually
+want to steer with on the iPad? Worth testing both during S10 before
+locking it in.
+
+- [ ] **A) Bottom-left**
+- [ ] **B) Bottom-right**
+- [ ] **C) Let me try both and decide during testing**
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 B40. How see-through should the pad be?  *(needed by M3 Step S10)*
+
+The pad sits right on top of the meadow. Too solid and it blocks the
+view; too see-through and it's hard to find with a thumb.
+
+- [ ] **A) Mostly solid** — easy to see, a bit more of the meadow is covered.
+- [ ] **B) Half see-through** — a balance.
+- [ ] **C) Barely there** — just visible enough to find, mostly see-through.
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 B41. Should mouse/desktop players see the pad too?  *(needed by M3 Step S10)*
+
+The pad can default to showing only on touch devices (fingers), or Lewis
+might just want it on for everyone, including desktop players using a
+mouse.
+
+- [ ] **A) Touch only** — fingers get the pad, mouse players use arrow keys.
+- [ ] **B) Everyone** — show it always, even on desktop.
+- [ ] **C) A toggle** — a small button to turn it on/off either way.
+
+**Lewis picks:** ____________  **Because:** ________________________________
+
+### 🔲 B42. INVENT: name the feature 🎬  *(anytime — needed by M3 Step S10's changelog)*
+
+"Pocket Venta" is the plan's placeholder name for playing on a phone or
+tablet. Got a better one?
+
+Name: ________________________________
 
 ---
 
@@ -271,11 +326,11 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 | Milestone | Questions | Answered |
 |---|---|---|
 | M2 | B1–B5, B34 | 5 / 6 |
-| M3 | B6–B12, B37 | 7 / 8 |
+| M3 | B6–B12, B37–B42 | 7 / 13 |
 | M4 | B13–B18 | 6 / 6 |
 | M5 | B19–B26, B33, B35, B36 | 8 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **32 / 37** |
+| **Total** | | **32 / 42** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

@@ -16,7 +16,9 @@
 > block you; a battle is reachable via the temporary "Battle test" button and
 > returns you to the map. **Read §A below first** — it reconciles this plan
 > against the code and decisions as they actually stand, and lists the prep
-> work already staged in the repo.
+> work already staged in the repo. **Touch/mobile play is now adopted as a
+> tenth step, S10, landing after S9 — see §A.7 and
+> `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`.**
 
 ---
 
@@ -163,6 +165,20 @@ R2≈S3–S4), so the step counter moved **14 → 16** and both trackers were up
 - **Not yet built (on purpose):** the real map encounters + handoff (S6–S7), the
   slicer re-run for encounter art (S5), catch-on-map depth (S8). The Battle test
   bar is still the bridge and is hidden until you have a team.
+
+### §A.7 Touch & mobile — adopted as S10 (2026-07-10)
+
+Touch controls are on this plan's §9 do-not-build list for S1–S9 (they
+stay there — see below), but a peer-reviewed proposal for tablet/phone
+play was drafted, reconciled against the code as it actually stands, and
+**adopted** by Jeff: `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`. Read its §A
+before touching any of it. Short version: an on-screen DOM D-pad feeds a
+`heldDirection()` seam that wraps the existing keyboard poll in
+`WorldScene.update()`, plus a viewport tag + Scale Manager FIT mode so
+the canvas fits a phone/tablet screen. All of it lands as the new **S10**,
+added to §9 below — after S9, never folded into S1–S9. The do-not-build
+list right below stays true for S1–S9; S10 is the one sanctioned
+exception, scoped to exactly the touch plan's §3–§6.
 
 ---
 
@@ -562,6 +578,7 @@ wild roster — The Meadows' slice) is new work beyond this plan.
 | **S7** | **The handoff** 🌉 | `src/screens.js` per §3; `handleEncounter` per §5: pause → hide → `await startBattle` → apply outcome → show → resume; keyboard enable/disable + canvas refocus | Bump a creature → the real battle opens → win/catch/flee → back on the map, creature gone (or not, if fled) | Sonnet 5 / **high** — the whole plan converges here; if it fights back twice, escalate to Opus 4.8 |
 | **S8** | Outcome depth | Catch → party (team UI from M2 reflects it); XP applied; loss placeholder per §6.4; `defeatedEncounters` respawn-proofing on scene rebuild | Catch a wild Leafick on the map and see it join the team | Sonnet 5 / medium |
 | **S9** | Cleanup + docs | Remove "Battle test" button; update `CLAUDE.md` status + `ROADMAP.md` M3 ticks; kill any `M3 PLACEHOLDER` that's now real; verify GitHub Pages build plays start-to-finish | The live site is a tiny but complete monster-catching game | Sonnet 5 / low |
+| **S10** — "Pocket Venta" *(adopted 2026-07-10 — §A.7)* | Touch & mobile play, per `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §3–§6. Three commits: **(1)** `heldDirection()` seam retrofit — pure refactor, keyboard-only, verified identical by playing; **(2)** viewport `<meta>` tag + Scale Manager FIT scaling, 960×640 max (desktop unchanged); **(3)** DOM D-pad + `src/screens.js` wiring + a phone-width CSS pass | Walk the meadow with your thumbs on the live site — no keyboard needed | Sonnet 5 / medium–high |
 
 **Definition of done for M3** (unchanged from ROADMAP, now measurable): on
 the *live GitHub Pages URL*, you can walk the meadow, bump a visible wild
@@ -571,7 +588,12 @@ restarts (no save yet; that's M5).
 
 **Do NOT build in M3:** multi-map travel, towns/buildings, NPCs, tokens,
 shops, camera-follow scrolling (unless a map outgrows the screen), touch
-controls, save/load, sound. Flag and stop, per the golden rules.
+controls, save/load, sound. Flag and stop, per the golden rules. *(Touch
+controls: this holds for **S1–S9**. **S10 is the one sanctioned
+exception** — adopted 2026-07-10, §A.7 — scoped to exactly
+`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §3–§6, landing after S9. Every other
+item on this list — multi-map travel, towns, NPCs, tokens, shops,
+camera-follow, save/load, sound — still stays out of M3 entirely.)*
 
 ---
 

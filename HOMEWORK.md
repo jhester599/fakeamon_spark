@@ -3,11 +3,14 @@
 > **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
 > batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
 > ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Five questions are still open, none urgent: **B33** (where you swap
+> Ten questions are still open, none urgent: **B33** (where you swap
 > boxed Fakeamon), **B34** (new — found while testing Step 3), **B35**/
 > **B36** (new — follow-ups on two design bits Lewis invented outside a
-> homework round), and **B37** (new, the fun one — review the draft of
-> which wild Fakeamon live in which area of Venta, see below).
+> homework round), **B37** (the fun one — review the draft of which wild
+> Fakeamon live in which area of Venta), and **B38–B42** (new, 2026-07-10 —
+> the touch & mobile plan's five creative calls: what the on-screen D-pad
+> looks like, which side of the screen it's on, how see-through it is,
+> whether desktop players see it too, and naming the feature).
 >
 > Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
 > see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
@@ -31,6 +34,13 @@
   in the Snow Mountain area. Both are logged as decisions (`DECISIONS.md`
   #46–47) and folded into `DESIGN.md` §8–9. Each has one follow-up detail
   filed as new homework — B35 and B36 below.
+- **2026-07-10 — the touch & mobile plan was adopted.** Jeff signed off on
+  `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`: an on-screen D-pad so you can walk
+  the meadow with your thumbs on a phone or tablet, plus fitting the game
+  to a smaller screen. It lands as a new build step (**S10**, after M3's
+  current steps) — no code yet, but Lewis's creative calls (pad look,
+  which side, opacity, desktop-too, feature name) are ready now as
+  **B38–B42** below, so the answers are waiting when S10 gets built.
 
 ---
 
@@ -41,7 +51,7 @@ flee always works (B1), caught Fakeamon join fully healed (B2), wild level
 uses team-average as a stand-in until M3's map exists (B4), and the catch
 messages are locked in (B5). Steps 3 and 4 are both built and live.
 
-**Five open questions, no rush:**
+**Ten open questions, no rush:**
 
 - **B33** — where do you swap a boxed Fakeamon onto your active team? (At
   a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
@@ -58,11 +68,21 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
 - **B36** — you said Cooking Cabins are more common in Snow Mountain. Is
   Snow Mountain the *only* place with one, or is there a smaller cabin
   near the start too (so cooking isn't gated behind that area's badge)?
-- **B37** — NEW, and it's a big fun one: all **198 wild Fakeamon** now have
+- **B37** — a big fun one: all **198 wild Fakeamon** now have
   a **draft home area** matched to your six area vibes — crocodiles in The
   Lagoon, war robots in The Factory, yetis on Snow Mountain… Open
   **`VENTA_ROSTER_DRAFT.md`** (it shows everyone's art) and tell us who's
   in the wrong place. Evolution lines move together; no wrong answers.
+- **B38** — NEW: what should the on-screen D-pad look like — a classic
+  solid cross (Game Boy style), or four separate floating arrow buttons?
+- **B39** — NEW: which side of the screen should the D-pad sit on —
+  bottom-left, bottom-right, or try both during testing and decide then?
+- **B40** — NEW: how see-through should the D-pad be, sitting over the
+  meadow — mostly solid, half see-through, or barely-there?
+- **B41** — NEW: should mouse/desktop players see the D-pad too, or is it
+  touch-only (fingers get it, keyboard/mouse players don't)?
+- **B42** — NEW, INVENT: name the touch-play feature. "Pocket Venta" is
+  just the plan's placeholder — got a better one?
 
 ---
 
@@ -107,4 +127,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33–B37 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*Serve B33–B42 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠

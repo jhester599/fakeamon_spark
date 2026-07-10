@@ -71,11 +71,13 @@ messages are locked in (B5). Steps 3 and 4 are both built and live.
 Nothing blocking the next session. The M3S0 prep session (2026-07-06)
 knocked out most of the old list:
 
-1. **Zoom level (2× vs 3×)** — still open; eyeball it on the family screen
-   when the first Phaser canvas is up (M3 plan §11).
-2. ✅ ~~Pin Phaser 4~~ — *prepped 2026-07-06:* newest stable 4.x on npm is
-   **4.2.0** (the plan's "4.2.1" guess doesn't exist). Re-verify and pin in
-   the CDN URL at S1, and record it in `DECISIONS.md` then.
+1. ✅ ~~Zoom level (2× vs 3×)~~ — *decided at S1 (2026-07-09):* **2×** (Jeff's
+   call). It's a labeled constant — `WORLD_ZOOM` in `src/world/config.js` —
+   so try 3× anytime to compare (`DECISIONS.md`).
+2. ✅ ~~Pin Phaser 4~~ — *done at S1 (2026-07-09):* pinned **4.2.1** (it now
+   exists — supersedes the M3S0 "4.2.0" note) and **vendored** to
+   `assets/vendor/phaser.min.js` rather than a CDN, so double-click still
+   works offline (`DECISIONS.md`).
 3. ✅ ~~Vendor the Phaser skills~~ — *done 2026-07-06:* 10 skills + README
    in `PLANS/phaser-skills/`, from `phaserjs/phaser` @ `539e718`.
 4. ✅ ~~**NEW — hero walk-sheet license check**~~ — *done 2026-07-06 (Cowork):*

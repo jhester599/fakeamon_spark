@@ -1,9 +1,15 @@
 // ===========================================================================
-//  MAIN — the conductor. Owns the starter-select screen, the team list, and
-//  picks each new wild opponent, then hands the fight to src/battle.js's
-//  startBattle(). Step 3: starter-select moved here out of battle.js (see
-//  PLANS/M5_STATE_AND_SAVE_PLAN.md §A.2) — this file will also own the
-//  title screen once save/load lands.
+//  MAIN — the conductor. Owns the title screen, the starter-select screen,
+//  the team list, and picks each new wild opponent, then hands the fight to
+//  src/battle.js's startBattle(). Step 3: starter-select moved here out of
+//  battle.js (see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.2).
+//
+//  M5-plan S3/S4 (save v1 + export/import): the game now REMEMBERS itself.
+//  On load we look for a saved adventure (src/save.js) and show a title
+//  screen — Continue / New Game, plus Export / Import Save. Autosave runs on
+//  its own after every catch, battle, and switch (any function that changes
+//  gameState ends by calling saveGame()), so there's no Save button and
+//  progress is never lost by forgetting.
 //
 //  M5-plan S1: every fighter is an *individual* (src/state.js), made fresh
 //  from a species key with newIndividual().
@@ -20,16 +26,144 @@
 //  be used to dodge the in-battle turn cost. Either way, gameState.party
 //  is a LIVE array battle.js reads directly (config.playerParty), so a
 //  mid-battle switch is instantly visible here too, via onStateChange.
+//
+//  M3 Step S1: main.js now also boots the OVERWORLD (the Phaser map, from
+//  src/world/config.js) on load, alongside the battle game. The map and the
+//  battle don't talk to each other yet — that doorway gets built at Step S7.
+//  Until then, a temporary "Battle test" button (runBattleTest below) is how
+//  you reach a fight from the new page.
 // ===========================================================================
 
 // True while a battle's startBattle() promise hasn't resolved yet.
 let battleInProgress = false;
 
-function showStarterSelect() {
-  document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
+// ===========================================================================
+//  TITLE SCREEN + SAVE FLOW — M5-plan S3. On load we check for a saved
+//  adventure (src/save.js). If there is one, you get Continue / New Game;
+//  if not, New Game is the only path. Autosave runs on its own (see the
+//  saveGame() calls dotted through the mutating functions below).
+// ===========================================================================
+
+// The first thing you see. Shows the game's name and, when a save exists,
+// a Continue button beside New Game.
+function showTitleScreen() {
+  const saveExists = hasSave();
+
+  document.getElementById("title").textContent = "Fakeamon Spark ☄️";
   document.getElementById("controls-label").textContent = "";
   document.getElementById("log").innerHTML = "";
   document.getElementById("team").innerHTML = "";
+
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Fakeamon Spark ☄️</h2>" +
+      "<p>" + (saveExists
+        ? "Welcome back! Your adventure is waiting."
+        : "Catch creatures, build a team, and save the world of Venta.") +
+      "</p>" +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+  if (saveExists) addTitleButton(controls, "move-btn", "Continue", continueGame);
+  addTitleButton(controls, "move-btn", "New Game", startNewGame);
+
+  // The little "settings corner" (M5-plan S4): Export a copy of your save,
+  // or Import one (handy on a new computer, or if the browser forgets). These
+  // are secondary, so they get the smaller grey .save-btn look.
+  if (saveExists) addTitleButton(controls, "save-btn", "Export Save", exportSave);
+  addTitleButton(controls, "save-btn", "Import Save", importSave);
+
+  updateTestBar(); // no team on the title screen → hide the Battle test bar
+}
+
+// Small helper so each title button reads as one line.
+function addTitleButton(container, className, label, onClick) {
+  const button = document.createElement("button");
+  button.className = className;
+  button.textContent = label;
+  button.addEventListener("click", onClick);
+  container.appendChild(button);
+}
+
+// Continue: load the saved adventure back into gameState and jump in.
+function continueGame() {
+  const loaded = loadGame();
+  if (!loaded) { showStarterSelect(); return; } // save vanished between clicks
+  document.getElementById("controls").innerHTML = ""; // clear the title buttons
+  gameState.version = loaded.version;
+  gameState.party = loaded.party;
+  gameState.box = loaded.box;
+  renderTeamList();
+  resumeAdventure();
+}
+
+// New Game: if a save exists, make sure before erasing it. Then wipe the
+// state and go pick a starter.
+function startNewGame() {
+  if (hasSave()) {
+    const reallyErase = window.confirm(
+      "Start a new game? This will erase your saved adventure.");
+    if (!reallyErase) return;
+  }
+  clearSave();
+  gameState.version = SAVE_VERSION;
+  gameState.party = [];
+  gameState.box = [];
+  showStarterSelect();
+}
+
+// Import Save: pop up a file picker, and if they choose a real Fakeamon save,
+// make it THIS browser's game and jump in. A file that isn't a valid save
+// changes nothing (parseSave in save.js rejects it) — we just say so.
+function importSave() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json,.json";
+  input.addEventListener("change", function () {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    importSaveFromFile(file, function (loaded) {
+      if (!loaded) {
+        window.alert("That file doesn't look like a Fakeamon save — nothing was changed.");
+        return;
+      }
+      // Importing replaces your current save, so make sure — just like New Game.
+      if (hasSave() && !window.confirm(
+        "Import this save? It will replace your current adventure.")) {
+        return;
+      }
+      gameState.version = loaded.version;
+      gameState.party = loaded.party;
+      gameState.box = loaded.box;
+      saveGame();        // the imported adventure is now this browser's save
+      renderTeamList();
+      resumeAdventure(); // jump straight into the imported game
+    });
+  });
+  input.click();
+}
+
+// After loading, drop back into the wild-battle loop — unless your lead
+// Fakeamon has fainted, in which case wait for a Switch (same as the in-game
+// pause). Once M3's map lands, "resume" will mean "stand where you saved."
+function resumeAdventure() {
+  if (gameState.party.length === 0) { showStarterSelect(); return; }
+  if (gameState.party[0].currentHP > 0) {
+    fightRandomWildFakeamon();
+  } else {
+    addLogLine(FAKEAMON[gameState.party[0].speciesKey].name +
+      " needs to rest — Switch in a teammate to keep going!");
+  }
+}
+
+function showStarterSelect() {
+  document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("controls").innerHTML = ""; // clear the title screen's buttons
+  document.getElementById("log").innerHTML = "";
+  document.getElementById("team").innerHTML = "";
+  updateTestBar(); // no team yet → keep the Battle test bar hidden
 
   document.getElementById("arena").innerHTML = STARTER_KEYS.map(function (speciesKey) {
     const species = FAKEAMON[speciesKey];
@@ -55,6 +189,7 @@ function chooseStarter(speciesKey) {
   gameState.party = [newIndividual(speciesKey, STARTING_LEVEL)];
   gameState.box = [];
   renderTeamList();
+  saveGame(); // your brand-new adventure now survives a refresh
   fightRandomWildFakeamon();
 }
 
@@ -67,6 +202,14 @@ function pickRandomWildSpeciesKey() {
 // Runs one wild battle for party[0] — the active fighter — against a
 // fresh random wild opponent.
 function fightRandomWildFakeamon() {
+  // Never start a battle on top of another. This matters because after a
+  // catch we briefly wait (setTimeout below) before the next fight begins,
+  // and during that gap battleInProgress is false — so without this guard,
+  // clicking the temporary "Battle test" button (or a between-encounter
+  // Switch) in that window could start a second, overlapping battle and
+  // strand the first one's promise. One line closes the whole class of bug.
+  if (battleInProgress) return;
+
   battleInProgress = true;
   const wildSpeciesKey = pickRandomWildSpeciesKey();
   const wildIndividual = newIndividual(wildSpeciesKey, STARTING_LEVEL);
@@ -101,11 +244,13 @@ function handleBattleOutcome(outcome) {
     }
 
     renderTeamList();
+    saveGame(); // remember the new teammate (and everyone's post-battle HP)
     setTimeout(fightRandomWildFakeamon, 1500);
     return;
   }
 
   renderTeamList();
+  saveGame(); // remember the result + everyone's HP after the fight
 
   const activeFighter = gameState.party[0];
   if (activeFighter.currentHP <= 0) {
@@ -114,6 +259,32 @@ function handleBattleOutcome(outcome) {
   }
 
   fightRandomWildFakeamon();
+}
+
+// ===========================================================================
+//  BATTLE TEST BUTTON — M3 Step S1, temporary. Until Step S7 makes walking
+//  into a wild Fakeamon start a fight for real, this button is the bridge
+//  from the new Phaser page into a battle, so we can confirm the battle
+//  module still works. If you haven't picked a starter yet, it lends you a
+//  random one so a fight can still happen. The whole test bar (and this
+//  function) gets removed at Step S7/S9.
+// ===========================================================================
+function runBattleTest() {
+  if (battleInProgress) return;                  // already fighting — ignore
+  if (gameState.party.length === 0) return;      // no team yet (the bar is
+                                                 // hidden here anyway) — do NOT
+                                                 // lend a starter, or the fight
+                                                 // would autosave over a real
+                                                 // saved game
+  if (gameState.party[0].currentHP <= 0) return; // fainted — Switch first
+  fightRandomWildFakeamon();
+}
+
+// Show the temporary "Battle test" bar only while a game is in progress (you
+// have a team). On the title/starter screens it's hidden so it can't start a
+// throwaway fight that autosaves over your real adventure.
+function updateTestBar() {
+  document.getElementById("test-bar").classList.toggle("visible", gameState.party.length > 0);
 }
 
 // ===========================================================================
@@ -146,6 +317,7 @@ function switchInFromBox(boxIndex) {
 // paused waiting for a healthy fighter — picks it back up automatically.
 function afterSwitch() {
   renderTeamList();
+  saveGame(); // the new team order is part of your progress too
   if (!battleInProgress && gameState.party[0].currentHP > 0) {
     fightRandomWildFakeamon();
   }
@@ -202,6 +374,12 @@ function renderTeamList() {
 
   document.getElementById("boxesBtn").textContent = "Boxes (" + gameState.box.length + ")";
 
+  // Grey out the temporary Battle test button while a fight is happening, so
+  // you can't start a second battle on top of the current one (M3 Step S1).
+  const testBtn = document.getElementById("battleTestBtn");
+  if (testBtn) testBtn.disabled = battleInProgress;
+  updateTestBar(); // show the bar now that there's a team (hide it when empty)
+
   if (boxesVisible) renderBoxList(); // keep an open Boxes panel in sync too
 }
 
@@ -235,5 +413,10 @@ function toggleBoxes() {
 }
 
 document.getElementById("boxesBtn").addEventListener("click", toggleBoxes);
+document.getElementById("battleTestBtn").addEventListener("click", runBattleTest);
 
-showStarterSelect();
+// M3 Step S1: draw the overworld (an empty grass screen for now) at the top
+// of the page. Then (M5-plan S3) show the title screen — which offers Continue
+// if there's a saved adventure, or New Game (→ choose a starter) if not.
+startWorld();
+showTitleScreen();

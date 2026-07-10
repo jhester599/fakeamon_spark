@@ -12,9 +12,10 @@ variants from memory.
 - **Source:** the `skills/` folder of the official Phaser repo,
   `github.com/phaserjs/phaser`, commit **`539e718`** (pulled 2026-07-06).
 - **License:** MIT, same as Phaser itself.
-- **Version note:** the newest stable Phaser at pull time was **4.2.0**
-  (checked against the npm registry — the M3 plan's "4.2.1" guess doesn't
-  exist; re-check and pin at S1, per the plan).
+- **Version note:** the newest stable Phaser at *pull* time (2026-07-06) was
+  **4.2.0**. **Update: at S1 (2026-07-09) the game pinned & vendored 4.2.1** —
+  which had since shipped — so the M3 plan's original "4.2.1" is now correct.
+  These skill docs (pulled at `539e718`) still describe the 4.x API accurately.
 
 ## What's here (chosen for M3's build steps)
 

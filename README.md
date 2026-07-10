@@ -18,24 +18,42 @@ Other pages from the same site:
 
 ## Status
 
-**Milestone M2 — Catching & Team: in progress.** M1 (a full turn-based
-battle — moves, damage, type advantage, misses, HP bars, fainting, win/lose
-screen) is complete 🎉. M2 so far: the code is split into tidy `src/` files,
-and there's a **Choose Your Starter** screen with all three starters
-(Growler, Whaley, Leafick). Next up: random wild opponents and catching.
-See `ROADMAP.md` for the full plan — and `PLANS/` for the architecture
-plans covering the M3 overworld and the save system.
+**Milestone M3 — Overworld: just started (Step S1 done).** M1 (a full
+turn-based battle) is complete 🎉, and **M2 is fully done** — catching, a
+team of 4 with Boxes overflow, switching fighters, **and now saving**: the
+game autosaves and opens on a **Continue / New Game** title screen, with
+**Export / Import Save** so you can carry your adventure between browsers.
+**M3 Step S1** brings in **Phaser** (the game engine for the map): the top
+of the page shows a little overworld canvas (an empty grass screen for now —
+the real meadow map is Step S2), with a temporary "Battle test" button to
+jump into the battle. See `ROADMAP.md` for the full plan and
+`PLANS/M3_OVERWORLD_PLAN.md` for the overworld architecture.
+
+## Saving
+
+The game **autosaves to your browser** (localStorage) after every catch,
+battle, and switch — there's no Save button, and progress is never lost by
+forgetting. A few things worth knowing:
+
+- Saves are **per site**: your save at `http://localhost` is a *different*
+  save from the one on the live site or a double-clicked file. (That's on
+  purpose — dev saves don't touch the real game — but it surprises people, so
+  a "vanished" save usually means a different address.)
+- **Incognito / Private** windows throw the save away when you close them.
+- Use **Export Save** (title screen) to download `fakeamon-save.json` as a
+  backup, and **Import Save** to load it on another browser or computer.
 
 ## Run it locally
 
-No build step — it's plain HTML/CSS/JS.
+No build step — it's plain HTML/CSS/JS, and Phaser is vendored (kept in the
+repo), so nothing needs the network.
 
 ```bash
 python3 -m http.server
 # then open http://localhost:8000
 ```
 
-Or just double-click `index.html`.
+Or just double-click `index.html` — it still works offline.
 
 ## Project docs
 
@@ -56,8 +74,10 @@ Or just double-click `index.html`.
 
 Starting art is based on sprites from the **[Tuxemon](https://github.com/Tuxemon/Tuxemon)**
 project, used under Creative Commons licenses (mostly CC BY-SA 4.0 — see
-`CREDITS.md` for exact per-file license and artist credit). Fakeamon is
-inspired by Pokémon in spirit only — no Nintendo names, sprites, or music.
+`CREDITS.md` for exact per-file license and artist credit). The overworld
+map (M3+) runs on **[Phaser](https://phaser.io)** 4.2.1, vendored under the
+MIT license. Fakeamon is inspired by Pokémon in spirit only — no Nintendo
+names, sprites, or music.
 
 ## Deployment
 

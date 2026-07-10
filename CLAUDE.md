@@ -36,7 +36,7 @@ project. After the step works, briefly reflect: was the model pick right?
 
 ## Current status
 
-> **Milestone: M3 — Overworld. Step S1 done ✅ (Phaser is in). M2 is playable — all 6 roadmap steps ✅ + M5-plan S1 ✅ — but its save v1 (S3) + export/import (S4) were deferred: Jeff chose to start M3 ahead of them (2026-07-09). Circle back to save v1 before M3 grows much bigger.** *(Update this line as we progress.)*
+> **Milestone: M3 — Overworld. Step S1 done ✅ (Phaser is in). M2 is now FULLY complete ✅ — all 6 roadmap steps + M5-plan S1 (individuals) + S3 (save v1) + S4 (export/import), landed 2026-07-10. The game autosaves and has a Continue/New Game title screen with Export/Import. Next M3 step: S2 (draw the meadow map).** *(Update this line as we progress.)*
 > M1 (the battle slice) is complete and live. M2's steps: code split into `src/` files (Step 1), Leafick + a Choose Your Starter screen (Step 2), a random wild opponent every battle via the `startBattle(config)` contract with a Run button that always works (Step 3), a **Throw Fakeaball** catch action using the 50%-base capture formula (Step 4), the M5-plan **S1** state foundation (species keyed in `FAKEAMON`, `src/state.js`'s `newIndividual()`/`statsFor()`, every fighter an individual with its own `currentHP`), **Step 5**'s **team list** (`gameState.party`/`gameState.box`, up to 4 active + Boxes overflow, no nicknames — Lewis's B3), and now **Step 6** (2026-07-08): **Switch** works two ways — mid-battle, it's a real turn-costing action next to Attack/Catch/Run (same speed-order risk as Catch: faster switches in safely, slower risks your current fighter fainting before the swap completes — Jeff & Lewis's live call, decision #48), and between encounters it's free from the team screen. Mid-battle switching required upgrading `battle.js` to the M3 plan's full contract shape (`config.playerParty` — a live reference to `gameState.party` — instead of a single `config.player`), so `party[0]` is always "who's fighting" and a switch is instantly visible everywhere via a new `onStateChange` hook that keeps the team row in sync live. **Next up:** the M5-plan's **S3** (save v1 — autosave, Continue/New Game) before M2 is fully closed out. Lewis cleared the whole homework backlog (B1–B32) on 2026-07-06 — see `DECISIONS.md` rows 14–45. Only B33 (where to swap boxed Fakeamon) is still open, not needed until M5. Live at [jhester599.github.io/fakeamon_spark](https://jhester599.github.io/fakeamon_spark/), auto-deployed via GitHub Pages.
 >
 > **M3 prep is staged ("M3S0", 2026-07-06):** meadow tilesets + hero walk sheet + Frondly vendored (Leafick has real art now — all three starters do), the sprite-slicer tool built and run, `src/data/maps.js` drafted with The Meadows, and Phaser 4 skills vendored. Full inventory: `PLANS/M3_OVERWORLD_PLAN.md` **§A.4** — read §A before any M3 session. **M3 *code* steps have begun: S1 (Phaser hello-world) is done ✅ (2026-07-09) — Phaser 4.2.1 vendored to `assets/vendor/`, `src/world/config.js` renders an empty grass WorldScene into a new `#world` div, and a temporary "Battle test" button bridges to the battle until Step S7. S2 (draw the meadow map from `src/data/maps.js`) is next.** **Wild-roster art is FULLY staged (2026-07-06, Jeff's Cowork wiki run):** the entire §16 pool — now **198** after `bearloch`/`foxko` were dropped for having no credit anywhere — is vendored with verified attribution (**198 staged, 0 pending** in `CREDITS_ROSTER.md`), reference data in `tools/roster-200.json`. Two ⚠️ remain before those specific sprites reach the live game: the OPMon-derived trio (coaldiak/ninjasmine/toxiris — confirm OPMon's terms) and the hero sheet's Catch Challenger share-alike confirmation (`CREDITS.md`). **Every wild Fakeamon also has a PROPOSED home area** (`VENTA_ROSTER_DRAFT.md` + `areaProposed` in `tools/roster-200.json`) — that's Lewis's homework **B37**, a draft to react to, not a decision.
@@ -67,8 +67,9 @@ src/data/fakeamon.js    → GROWLER, WHALEY, LEAFICK data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
 src/data/maps.js        → The Meadows map draft (tile arrays + encounters) — staged for M3, NOT loaded by index.html yet (S2 wires it)
 src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
+src/save.js         → save v1 (M5-plan S3/S4): saveGame/loadGame/clearSave + version/migration, and exportSave/importSaveFromFile. localStorage single slot "fakeamon-save"
 src/world/config.js → M3 Step S1: the Phaser overworld — BootScene, an (empty for now) WorldScene, and startWorld(). All world numbers (size, zoom, color) are labeled constants here
-src/main.js         → the conductor: boots the overworld (startWorld), runs the starter-select screen, picks each random wild opponent, and drives the temporary "Battle test" button
+src/main.js         → the conductor: title screen (Continue/New Game + Export/Import), boots the overworld (startWorld), runs starter-select, picks each random wild opponent, autosaves after every change, and drives the temporary "Battle test" button
 roadmap.html        → visual quest map — mirrors ROADMAP.md; update BOTH in the same commit whenever a step's done-status changes (they drifted once, 2026-07-06 — see ROADMAP.md golden rule #6), also served live
 homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWORK.md)
 /assets/sprites      → real Tuxemon-based art in use (growler.png, whaley.png, leafick.png)
@@ -117,18 +118,18 @@ or use a simple local server like `python3 -m http.server`.
 
 ## Milestone 2 — build this
 
-Turn the one-off battle into "catch creatures and build a team." Steps 1–4
-are done. What's left, in order (full tables: `ROADMAP.md` M2 +
-`PLANS/M5_STATE_AND_SAVE_PLAN.md` §6):
+Turn the one-off battle into "catch creatures and build a team." **All of
+this is now done ✅ (M2 complete, 2026-07-10)** — kept here as the record
+(full tables: `ROADMAP.md` M2 + `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6):
 
 | Step | What we build | Where it's specced |
 |---|---|---|
 | **3** ✅ | A **random wild opponent** — the global `startBattle(config) → Promise<outcome>` contract lives in `src/battle.js`; starter-select moved to `src/main.js`. Flee (Run button) always works (B1); wild level uses the team-average as an M2 stand-in until M3's areas exist (B4, `DESIGN.md` §5). *(Note: this M2-sized contract uses plain `player`/`enemy` species objects, not yet `playerParty`/species-key+level — those arrive with individuals at M5-plan S1 and leveling at M5-plan S5.)* | contract shape: M3 plan §5 · globals version: M5 plan §A.2 |
 | **4** ✅ | **Catch action + Fakeaball** — "Throw Fakeaball" button, capture formula (50% base rate × missing-HP fraction, floor/cap; Lewis's call), only the basic ball for now (Great/Ultra/Cosmic bonuses are Jeff's number-tuning). Throwing a ball takes your turn, same speed-order rule as attacking — a failed throw lets the wild Fakeamon counter-attack. Caught Fakeamon are logged as fully healed (B2) with `"Gotcha! <name> was caught!"` / `"Oh no! <name> broke free!"` (B5); the encounter just ends for now — actually joining a team lands with the state bag at Step 5 | formula: `DESIGN.md` §6 |
 | *M5-plan **S1** — before Step 5* | **Individuals & the state bag** — `src/state.js`, `newIndividual()`, `statsFor()`; retires the `hp[name]` map so two Growlers don't share HP | M5 plan §1 + §A.3 |
-| **5** | **Team list** — up to 4 active, overflow to Boxes. No nicknames — species names only (B3, decided) | decision #11 |
-| **6** | **Switch** which Fakeamon fights, including from Boxes | — |
-| *M5-plan **S3–S4** — end of M2* | **Save v1** (autosave to localStorage, Continue/New Game), then **export/import** | M5 plan §4 |
+| **5** ✅ | **Team list** — up to 4 active, overflow to Boxes. No nicknames — species names only (B3, decided) | decision #11 |
+| **6** ✅ | **Switch** which Fakeamon fights, including from Boxes | — |
+| *M5-plan **S3–S4** — end of M2* ✅ | **Save v1** (autosave to localStorage, Continue/New Game title screen) + **export/import** — `src/save.js` | M5 plan §4 |
 
 Battle rules (damage, accuracy, type chart, stats) are unchanged from M1 —
 they live in `src/battle.js` and `src/data/*.js` now; those files are the

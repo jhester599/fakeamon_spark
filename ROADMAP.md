@@ -108,7 +108,7 @@ few hits each.
 
 ---
 
-## 🟡 M2 — Catching & Team  *(all 6 steps done — save v1 still to come!)*
+## ✅ M2 — Catching & Team  *(complete! 🎉 all 6 steps + save v1 + export/import)*
 
 **Goal:** turn a one-off fight into "catch creatures and build a team."
 
@@ -117,9 +117,12 @@ few hits each.
 > Steps 3–4, "individuals & the state bag" lands **before Step 5**, and
 > save v1 + export/import land at the **end of M2**. Read that plan's §A
 > before starting Step 3 — it maps the plans onto our global-script style.
-> **Status (2026-07-08):** Steps 1–6 below are all done. What's left before
-> M2 is truly finished: the M5 plan's **S3** (save v1) and **S4**
-> (export/import) — see its §6 build order.
+> **Status (2026-07-10):** Steps 1–6 below AND the M5-plan follow-ups **S3
+> (save v1 — autosave + Continue/New Game)** and **S4 (export/import)** are
+> all done — so M2 is fully wrapped. (These two aren't numbered rows here, so
+> the step counter stays 14/31; they're the "still to come" items the plan
+> folded into M2.) On to **M3** — its **S1** is already done (see the M3
+> section + `PLANS/M3_OVERWORLD_PLAN.md` §A.5).
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|

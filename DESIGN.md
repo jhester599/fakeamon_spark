@@ -416,6 +416,7 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 ## 13. Technical Notes
 
 - **Stack: CONFIRMED (2026-07-06) by Jeff** — plain HTML/CSS/JS with global `<script>` tags (no build step, no ES modules) through M2, so double-clicking `index.html` keeps working; **Phaser 4** at M3, pinned to an exact version and loaded as a classic script global (same no-build style — see `PLANS/M3_OVERWORLD_PLAN.md` §2 and `PLANS/M5_STATE_AND_SAVE_PLAN.md` §A.1). **DECIDED at M3 S1 (2026-07-09):** Phaser is **vendored** (`assets/vendor/phaser.min.js`, pinned **4.2.1**, MIT), not loaded from a CDN — this keeps double-click-to-play working offline and removes CDN trust, at a ~1.3 MB repo cost (`DECISIONS.md`). Built from scratch with Claude Code, Tuxemon as art source/reference (not a forked codebase).
+- **Saving (built at end of M2 — M5-plan S3/S4):** the whole game is one plain-data object (`gameState`) autosaved to the browser's `localStorage` (single slot `"fakeamon-save"`, `JSON.stringify`), with a version/migration path and **Export/Import** to a `.json` file. No Save button — it saves after every change. Details: `PLANS/M5_STATE_AND_SAVE_PLAN.md` §4; code in `src/save.js`.
 - **Repo:** add `CLAUDE.md` (design + current milestone) and `CREDITS.md` (attribution).
 - **Type system decision (new):** confirm adding Metal + Cosmic and lock the mapping in §4.
 - **IP:** inspired by Pokémon only — no Nintendo names/sprites/music. Borrowed base art is Tuxemon's, credited. *(Not legal advice; none of this bites until public distribution.)*

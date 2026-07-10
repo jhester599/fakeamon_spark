@@ -28,6 +28,7 @@ const MIGRATIONS = {
 };
 
 function migrateSave(save) {
+  if (save.version > SAVE_VERSION) return null; // from a NEWER game — we can't understand it
   while (save.version < SAVE_VERSION) {
     const step = MIGRATIONS[save.version];
     if (!step) return null; // we don't know how to upgrade it — treat as no save
@@ -35,6 +36,18 @@ function migrateSave(save) {
     save.version = save.version + 1;
   }
   return save;
+}
+
+// Does this look like a real creature (not garbage from a hand-edited file)?
+// A saved individual needs a species we actually know about, plus numeric
+// level/HP/xp. Anything else and we'd crash trying to render or fight it —
+// so a save containing a bad one is rejected (worst case: New Game).
+function isValidIndividual(ind) {
+  return ind && typeof ind === "object" &&
+    typeof ind.speciesKey === "string" && FAKEAMON[ind.speciesKey] &&
+    typeof ind.level === "number" &&
+    typeof ind.currentHP === "number" &&
+    typeof ind.xp === "number";
 }
 
 // A brand-new, empty adventure — the shape everything else expects. Loading
@@ -92,6 +105,13 @@ function parseSave(text) {
   const migrated = migrateSave(save);
   if (!migrated) return null;
 
+  // Deep check: the party (and box, if present) must contain only well-formed
+  // creatures. This is what makes "you can edit your save" safe — a typo'd
+  // species or a missing field costs a New Game, never a crash mid-game.
+  if (!Array.isArray(migrated.party) || !migrated.party.every(isValidIndividual)) return null;
+  if (migrated.box !== undefined &&
+      (!Array.isArray(migrated.box) || !migrated.box.every(isValidIndividual))) return null;
+
   // Merge onto a fresh default so newly-added fields get defaults for free.
   return Object.assign(defaultState(), migrated);
 }
@@ -126,8 +146,8 @@ function clearSave() {
 // Export lives on the title screen, where gameState hasn't been loaded yet
 // (it's still the empty default until you press Continue). Autosave keeps
 // localStorage current with the live game, so this is always the real save.
-// (Fallback: if storage is off — e.g. Safari Private — export whatever is in
-// memory, so an in-progress game can still be rescued to a file.)
+// (Defensive fallback if storage is somehow empty: export whatever is in
+// memory. Only reachable if Export is ever surfaced mid-game — harmless now.)
 function exportSave() {
   let text = null;
   try {

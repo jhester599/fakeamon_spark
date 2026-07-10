@@ -73,6 +73,8 @@ function showTitleScreen() {
   // are secondary, so they get the smaller grey .save-btn look.
   if (saveExists) addTitleButton(controls, "save-btn", "Export Save", exportSave);
   addTitleButton(controls, "save-btn", "Import Save", importSave);
+
+  updateTestBar(); // no team on the title screen → hide the Battle test bar
 }
 
 // Small helper so each title button reads as one line.
@@ -88,6 +90,7 @@ function addTitleButton(container, className, label, onClick) {
 function continueGame() {
   const loaded = loadGame();
   if (!loaded) { showStarterSelect(); return; } // save vanished between clicks
+  document.getElementById("controls").innerHTML = ""; // clear the title buttons
   gameState.version = loaded.version;
   gameState.party = loaded.party;
   gameState.box = loaded.box;
@@ -125,6 +128,11 @@ function importSave() {
         window.alert("That file doesn't look like a Fakeamon save — nothing was changed.");
         return;
       }
+      // Importing replaces your current save, so make sure — just like New Game.
+      if (hasSave() && !window.confirm(
+        "Import this save? It will replace your current adventure.")) {
+        return;
+      }
       gameState.version = loaded.version;
       gameState.party = loaded.party;
       gameState.box = loaded.box;
@@ -152,8 +160,10 @@ function resumeAdventure() {
 function showStarterSelect() {
   document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
   document.getElementById("controls-label").textContent = "";
+  document.getElementById("controls").innerHTML = ""; // clear the title screen's buttons
   document.getElementById("log").innerHTML = "";
   document.getElementById("team").innerHTML = "";
+  updateTestBar(); // no team yet → keep the Battle test bar hidden
 
   document.getElementById("arena").innerHTML = STARTER_KEYS.map(function (speciesKey) {
     const species = FAKEAMON[speciesKey];
@@ -260,13 +270,21 @@ function handleBattleOutcome(outcome) {
 //  function) gets removed at Step S7/S9.
 // ===========================================================================
 function runBattleTest() {
-  if (battleInProgress) return;               // already fighting — ignore
-  if (gameState.party.length === 0) {
-    gameState.party = [newIndividual(pickRandomWildSpeciesKey(), STARTING_LEVEL)];
-    renderTeamList();
-  }
+  if (battleInProgress) return;                  // already fighting — ignore
+  if (gameState.party.length === 0) return;      // no team yet (the bar is
+                                                 // hidden here anyway) — do NOT
+                                                 // lend a starter, or the fight
+                                                 // would autosave over a real
+                                                 // saved game
   if (gameState.party[0].currentHP <= 0) return; // fainted — Switch first
   fightRandomWildFakeamon();
+}
+
+// Show the temporary "Battle test" bar only while a game is in progress (you
+// have a team). On the title/starter screens it's hidden so it can't start a
+// throwaway fight that autosaves over your real adventure.
+function updateTestBar() {
+  document.getElementById("test-bar").classList.toggle("visible", gameState.party.length > 0);
 }
 
 // ===========================================================================
@@ -360,6 +378,7 @@ function renderTeamList() {
   // you can't start a second battle on top of the current one (M3 Step S1).
   const testBtn = document.getElementById("battleTestBtn");
   if (testBtn) testBtn.disabled = battleInProgress;
+  updateTestBar(); // show the bar now that there's a team (hide it when empty)
 
   if (boxesVisible) renderBoxList(); // keep an open Boxes panel in sync too
 }

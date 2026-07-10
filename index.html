@@ -276,14 +276,20 @@
   }
 
   /* The temporary "Battle test" bar (removed at Step S7 when walking into a
-     wild Fakeamon starts the battle for real). */
+     wild Fakeamon starts the battle for real). Hidden until a game is actually
+     in progress — on the title screen it would just start a throwaway fight
+     and autosave over your real adventure. JS adds .visible once you have a
+     team. */
   #test-bar {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 10px;
     max-width: 760px;
     margin: 14px auto 4px;
+  }
+  #test-bar.visible {
+    display: flex;
   }
   .test-btn {
     background: #2a4d8f;

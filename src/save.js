@@ -53,8 +53,10 @@ function isValidIndividual(ind) {
 // A brand-new, empty adventure — the shape everything else expects. Loading
 // merges an old save ON TOP of this, so any field added in a later version
 // gets a sensible default for free (only *reshaped* fields need a migration).
+// That's why adding `world` (M3) needed no version bump: an old party-only
+// save still loads and just gains a fresh world here.
 function defaultState() {
-  return { version: SAVE_VERSION, party: [], box: [] };
+  return { version: SAVE_VERSION, party: [], box: [], world: defaultWorld() };
 }
 
 // Write gameState to localStorage. Wrapped in try/catch because the WRITE can

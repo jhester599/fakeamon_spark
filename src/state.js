@@ -56,15 +56,30 @@ function statsFor(individual) {
 // ===========================================================================
 const MAX_PARTY_SIZE = 4; // Lewis's call — a 5th catch overflows to the Boxes
 
+// The OVERWORLD slice of the save (M3): where the hero is standing, which map
+// they're on, and which encounters have been cleared. A brand-new world puts
+// the hero on The Meadows' start tile (from src/data/maps.js). Kept as a
+// function so both the initial state and a New Game start from the same fresh
+// copy (and src/save.js reuses it for its defaults).
+function defaultWorld() {
+  const start = MAPS.theMeadows.startTile;
+  return {
+    mapId: "theMeadows",
+    player: { tileX: start.x, tileY: start.y, facing: "down" },
+    defeatedEncounters: [], // encounter ids removed from the map (M3 Step S8)
+  };
+}
+
 // ALL persistent facts live in this one object (PLANS/M5_STATE_AND_SAVE_PLAN.md
-// §1). Only party + box exist so far — inventory/flags/world join later,
-// each as the feature that needs them lands. Everything in here is plain data
-// (no functions, no DOM, no sprites) so the save system (src/save.js) can turn
-// the whole thing into text with JSON.stringify — that's the one rule.
+// §1). party + box + world exist so far — inventory/flags join later, each as
+// the feature that needs them lands. Everything in here is plain data (no
+// functions, no DOM, no sprites) so the save system (src/save.js) can turn the
+// whole thing into text with JSON.stringify — that's the one rule.
 const gameState = {
   // Save-format version. Must match SAVE_VERSION in src/save.js — bump both
   // together (and add a migration there) whenever this object's SHAPE changes.
   version: 1,
   party: [],
   box: [],
+  world: defaultWorld(),
 };

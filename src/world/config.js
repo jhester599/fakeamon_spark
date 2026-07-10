@@ -32,6 +32,36 @@ const WORLD_GRASS_COLOR = "#6cc24a"; // meadow green, a stand-in for S2's tiles
 const WORLD_WIDTH  = WORLD_TILES_WIDE * WORLD_TILE_SIZE;  // 480
 const WORLD_HEIGHT = WORLD_TILES_TALL * WORLD_TILE_SIZE;  // 320
 
+// --- Hero (S3) ------------------------------------------------------------
+// The walk sheet is 48×128: 3 frames across × 4 rows down, each cell 16×32.
+// Row order, VERIFIED at S3 by eyeballing the sheet: down, up, right, left.
+// (The old M3-plan §A.4 guess of "down/left/right/up" was wrong.)
+const HERO_SHEET   = "assets/sprites/player/hero.png";
+const HERO_FRAME_W = 16;
+const HERO_FRAME_H = 32;
+// The middle frame of each row is the "standing still" pose for that facing.
+// Frames number left→right, top→bottom: row0 = 0,1,2 (down); row1 = 3,4,5 (up);
+// row2 = 6,7,8 (right); row3 = 9,10,11 (left).
+const HERO_STAND_FRAME = { down: 1, up: 4, right: 7, left: 10 };
+// How long one tile-step takes, in milliseconds. Lower = zippier, higher =
+// more deliberate. The classics feel right around 150–220 (plan §6.2).
+const MOVE_DURATION_MS = 180;
+
+// How each arrow shifts the hero, in tiles.
+const STEP = {
+  left:  { dx: -1, dy: 0 },
+  right: { dx: 1, dy: 0 },
+  up:    { dx: 0, dy: -1 },
+  down:  { dx: 0, dy: 1 },
+};
+
+// The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
+// loading a save). Set in create(). worldActive gates walking: it's false on
+// the title/starter/battle screens so arrow keys don't walk a hero you can't
+// see — a lightweight stand-in for the S7 screen manager (plan §3).
+let worldScene = null;
+let worldActive = false;
+
 // ---------------------------------------------------------------------------
 //  BootScene — the first scene Phaser runs. Its job is to get everything
 //  ready and then hand over to the WorldScene. For S1 there's nothing to
@@ -49,6 +79,8 @@ class BootScene extends Phaser.Scene {
   preload() {
     const meadow = MAPS.theMeadows;
     this.load.image("meadow-tiles", meadow.tileset); // assets/tilesets/meadow.png
+    // S3: the hero walk sheet, sliced into 16×32 frames.
+    this.load.spritesheet("hero", HERO_SHEET, { frameWidth: HERO_FRAME_W, frameHeight: HERO_FRAME_H });
   }
 
   create() {
@@ -60,10 +92,11 @@ class BootScene extends Phaser.Scene {
 //  WorldScene — the overworld itself.
 //
 //  S2: draws The Meadows from the plain-number arrays in src/data/maps.js.
-//  Each number in `ground` is a tile index into meadow.png (see that file's
-//  TILE LEGEND) — change a number there, refresh, and the world changes. The
-//  hero (S3) and the wild Fakeamon standing in the grass (S6) get added here
-//  later.
+//  S3: puts the hero on the grid and walks them tile-by-tile with the arrow
+//  keys, blocked by trees/rocks/water. Movement is a TWEEN between tiles (no
+//  physics — plan §6.2), so the hero is always ON a tile or sliding cleanly
+//  between two, never drifting. The wild Fakeamon standing in the grass (S6)
+//  get added here later.
 // ---------------------------------------------------------------------------
 class WorldScene extends Phaser.Scene {
   constructor() {
@@ -76,6 +109,10 @@ class WorldScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(WORLD_GRASS_COLOR);
 
     const mapData = MAPS.theMeadows;
+    this.tileSize = mapData.tileSize;
+    this.blocked = mapData.blocked;          // 1 = can't walk there
+    this.mapCols = mapData.ground[0].length; // 30
+    this.mapRows = mapData.ground.length;    // 20
 
     // Build a Phaser tilemap straight from our 2D array of tile numbers.
     const map = this.make.tilemap({
@@ -88,6 +125,97 @@ class WorldScene extends Phaser.Scene {
     // tile numbers in mapData.ground index into this image (6 tiles wide).
     const tileset = map.addTilesetImage("meadow", "meadow-tiles", mapData.tileSize, mapData.tileSize);
     map.createLayer(0, tileset, 0, 0);
+
+    // The hero. Origin bottom-centre so they "stand on" their tile (the 16×32
+    // sprite is two tiles tall — the head pokes up into the tile above).
+    this.hero = this.add.sprite(0, 0, "hero", HERO_STAND_FRAME.down);
+    this.hero.setOrigin(0.5, 1);
+    this.isMoving = false;
+    this.syncHeroToState(); // place them wherever gameState says (start tile, or a loaded save)
+
+    // Arrow keys. addCapture stops the browser from scrolling the page when
+    // you press them (plan §6.2 / §3).
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.addCapture("UP,DOWN,LEFT,RIGHT");
+
+    worldScene = this; // let main.js reach us (e.g. to re-place the hero on Continue)
+  }
+
+  // Pixel centre-bottom of a tile — where the hero's feet go.
+  tilePixel(tileX, tileY) {
+    return { x: tileX * this.tileSize + this.tileSize / 2, y: (tileY + 1) * this.tileSize };
+  }
+
+  // Put the hero on a tile facing a way, without any animation. Used to spawn
+  // and to snap to a loaded save position.
+  placeHeroAtTile(tileX, tileY, facing) {
+    const p = this.tilePixel(tileX, tileY);
+    this.hero.x = p.x;
+    this.hero.y = p.y;
+    this.hero.setFrame(HERO_STAND_FRAME[facing] !== undefined ? HERO_STAND_FRAME[facing] : HERO_STAND_FRAME.down);
+  }
+
+  // Read the hero's spot straight from the shared save state and match it.
+  // main.js calls this after loading/continuing a game.
+  syncHeroToState() {
+    if (!this.hero) return;
+    const p = gameState.world.player;
+    this.placeHeroAtTile(p.tileX, p.tileY, p.facing);
+    this.isMoving = false;
+  }
+
+  // Can the hero stand on this tile? No if it's off the map or blocked.
+  canWalk(tileX, tileY) {
+    if (tileX < 0 || tileY < 0 || tileX >= this.mapCols || tileY >= this.mapRows) return false;
+    return this.blocked[tileY][tileX] !== 1;
+  }
+
+  // Try to walk one tile in a direction. Turning to face a new way is free
+  // (costs no step — how the classics do it); only a step into a walkable
+  // tile actually moves you.
+  tryWalk(dir) {
+    const player = gameState.world.player;
+
+    // Facing a new way? Just turn this press.
+    if (dir !== player.facing) {
+      player.facing = dir;
+      this.hero.setFrame(HERO_STAND_FRAME[dir]);
+      return;
+    }
+
+    const targetX = player.tileX + STEP[dir].dx;
+    const targetY = player.tileY + STEP[dir].dy;
+    if (!this.canWalk(targetX, targetY)) return; // bumped a tree/rock/edge
+
+    this.isMoving = true;
+    const dest = this.tilePixel(targetX, targetY);
+    this.tweens.add({
+      targets: this.hero,
+      x: dest.x,
+      y: dest.y,
+      duration: MOVE_DURATION_MS,
+      ease: "Linear",
+      onComplete: () => {
+        player.tileX = targetX;
+        player.tileY = targetY;
+        this.isMoving = false;
+        saveGame(); // remember where you're standing (tiny — per-step is fine, plan §4.1)
+      },
+    });
+  }
+
+  // Called every frame by Phaser. Poll the arrow keys and walk the grid.
+  update() {
+    if (!worldActive || this.isMoving) return;
+
+    const c = this.cursors;
+    let dir = null;
+    if (c.left.isDown) dir = "left";
+    else if (c.right.isDown) dir = "right";
+    else if (c.up.isDown) dir = "up";
+    else if (c.down.isDown) dir = "down";
+
+    if (dir) this.tryWalk(dir);
   }
 }
 

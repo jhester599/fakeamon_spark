@@ -27,11 +27,15 @@
 //  is a LIVE array battle.js reads directly (config.playerParty), so a
 //  mid-battle switch is instantly visible here too, via onStateChange.
 //
-//  M3 Step S1: main.js now also boots the OVERWORLD (the Phaser map, from
-//  src/world/config.js) on load, alongside the battle game. The map and the
-//  battle don't talk to each other yet — that doorway gets built at Step S7.
-//  Until then, a temporary "Battle test" button (runBattleTest below) is how
-//  you reach a fight from the new page.
+//  M3 (S1–S3): the OVERWORLD (the Phaser map, src/world/config.js) is now the
+//  hub. Choosing a starter or pressing Continue drops the hero onto The
+//  Meadows (enterOverworld); you walk it with the arrow keys. A battle is a
+//  discrete detour that returns you to the map when it ends — the old M2
+//  "auto-loop of endless wild fights" is retired, since the map is the game
+//  now. The map↔battle handoff (bump a wild Fakeamon → fight) lands at S7;
+//  until then the temporary "Battle test" button (runBattleTest) starts a
+//  fight. `worldActive` (in config.js) gates walking so arrow keys don't move
+//  the hero while a battle or menu is on screen.
 // ===========================================================================
 
 // True while a battle's startBattle() promise hasn't resolved yet.
@@ -47,6 +51,7 @@ let battleInProgress = false;
 // The first thing you see. Shows the game's name and, when a save exists,
 // a Continue button beside New Game.
 function showTitleScreen() {
+  worldActive = false; // no walking the map while the title screen is up
   const saveExists = hasSave();
 
   document.getElementById("title").textContent = "Fakeamon Spark ☄️";
@@ -86,20 +91,20 @@ function addTitleButton(container, className, label, onClick) {
   container.appendChild(button);
 }
 
-// Continue: load the saved adventure back into gameState and jump in.
+// Continue: load the saved adventure back into gameState and drop the hero
+// right back where they were standing on the map.
 function continueGame() {
   const loaded = loadGame();
   if (!loaded) { showStarterSelect(); return; } // save vanished between clicks
-  document.getElementById("controls").innerHTML = ""; // clear the title buttons
   gameState.version = loaded.version;
   gameState.party = loaded.party;
   gameState.box = loaded.box;
-  renderTeamList();
-  resumeAdventure();
+  gameState.world = loaded.world;
+  enterOverworld();
 }
 
 // New Game: if a save exists, make sure before erasing it. Then wipe the
-// state and go pick a starter.
+// state (including the map position) and go pick a starter.
 function startNewGame() {
   if (hasSave()) {
     const reallyErase = window.confirm(
@@ -110,7 +115,42 @@ function startNewGame() {
   gameState.version = SAVE_VERSION;
   gameState.party = [];
   gameState.box = [];
+  gameState.world = defaultWorld();
   showStarterSelect();
+}
+
+// ===========================================================================
+//  THE OVERWORLD (M3) — from S3 on, the map is where you live between fights.
+//  Choosing a starter or pressing Continue drops you onto The Meadows to walk
+//  around; a battle is a discrete detour that returns you here when it ends.
+//  (Until Step S7 wires wild Fakeamon on the map, the temporary "Battle test"
+//  button is how you start a fight.)
+// ===========================================================================
+function enterOverworld() {
+  battleInProgress = false;
+  worldActive = true; // arrow keys walk the hero now
+
+  document.getElementById("title").textContent = "The Meadows";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("controls").innerHTML = "";
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Exploring The Meadows 🌱</h2>" +
+      "<p>Use the <b>arrow keys</b> to walk around." +
+      "<br><small>(Wild Fakeamon will stand on the map at a later step — for " +
+      "now, tap ⚔️ Battle test to practise a fight.)</small></p>" +
+    "</div>";
+
+  renderTeamList();
+  if (worldScene) worldScene.syncHeroToState(); // stand where the save says
+  saveGame();
+}
+
+// Heal everyone to full — used by the M3 loss placeholder below.
+function healParty() {
+  gameState.party.forEach(function (individual) {
+    individual.currentHP = statsFor(individual).maxHP;
+  });
 }
 
 // Import Save: pop up a file picker, and if they choose a real Fakeamon save,
@@ -136,28 +176,16 @@ function importSave() {
       gameState.version = loaded.version;
       gameState.party = loaded.party;
       gameState.box = loaded.box;
-      saveGame();        // the imported adventure is now this browser's save
-      renderTeamList();
-      resumeAdventure(); // jump straight into the imported game
+      gameState.world = loaded.world;
+      saveGame();       // the imported adventure is now this browser's save
+      enterOverworld(); // drop the hero onto the map where the save left off
     });
   });
   input.click();
 }
 
-// After loading, drop back into the wild-battle loop — unless your lead
-// Fakeamon has fainted, in which case wait for a Switch (same as the in-game
-// pause). Once M3's map lands, "resume" will mean "stand where you saved."
-function resumeAdventure() {
-  if (gameState.party.length === 0) { showStarterSelect(); return; }
-  if (gameState.party[0].currentHP > 0) {
-    fightRandomWildFakeamon();
-  } else {
-    addLogLine(FAKEAMON[gameState.party[0].speciesKey].name +
-      " needs to rest — Switch in a teammate to keep going!");
-  }
-}
-
 function showStarterSelect() {
+  worldActive = false; // no walking while choosing a starter
   document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
   document.getElementById("controls-label").textContent = "";
   document.getElementById("controls").innerHTML = ""; // clear the title screen's buttons
@@ -183,14 +211,14 @@ function showStarterSelect() {
   });
 }
 
-// Starting your adventure: your chosen starter is the only teammate you've
-// got, and it's the one that fights first.
+// Starting your adventure: your chosen starter is your only teammate, and
+// then you step out onto The Meadows to explore (M3). A fresh world puts you
+// on the start tile.
 function chooseStarter(speciesKey) {
   gameState.party = [newIndividual(speciesKey, STARTING_LEVEL)];
   gameState.box = [];
-  renderTeamList();
-  saveGame(); // your brand-new adventure now survives a refresh
-  fightRandomWildFakeamon();
+  gameState.world = defaultWorld();
+  enterOverworld(); // renders the team, places the hero, and autosaves
 }
 
 // Step 3: a random wild Fakeamon, not always Whaley.
@@ -200,17 +228,14 @@ function pickRandomWildSpeciesKey() {
 }
 
 // Runs one wild battle for party[0] — the active fighter — against a
-// fresh random wild opponent.
+// fresh random wild opponent. A battle is a detour off the map; when it ends
+// (handleBattleOutcome) you return to the overworld.
 function fightRandomWildFakeamon() {
-  // Never start a battle on top of another. This matters because after a
-  // catch we briefly wait (setTimeout below) before the next fight begins,
-  // and during that gap battleInProgress is false — so without this guard,
-  // clicking the temporary "Battle test" button (or a between-encounter
-  // Switch) in that window could start a second, overlapping battle and
-  // strand the first one's promise. One line closes the whole class of bug.
+  // Never start a battle on top of another.
   if (battleInProgress) return;
 
   battleInProgress = true;
+  worldActive = false; // freeze map-walking while the fight is on screen
   const wildSpeciesKey = pickRandomWildSpeciesKey();
   const wildIndividual = newIndividual(wildSpeciesKey, STARTING_LEVEL);
 
@@ -223,42 +248,42 @@ function fightRandomWildFakeamon() {
   }).then(handleBattleOutcome);
 }
 
-// Step 5: whatever the battle decided, this is where it becomes a team
-// fact. A catch joins the team (an open slot) or overflows to the Boxes
-// if the team's already full (Lewis's call — max 4 active). Any other
-// result just starts the next encounter — unless party[0] fainted, in
-// which case we pause here until a Step 6 Switch brings in someone healthy.
+// Whatever the battle decided, this is where it becomes a team fact — then
+// you head back to the map (M3). A catch joins the team (open slot) or
+// overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
+// loss placeholder (heal + back to start) until M4's Fakeatents exist.
 function handleBattleOutcome(outcome) {
   battleInProgress = false;
 
   if (outcome.result === "caught") {
     const caughtName = FAKEAMON[outcome.caught.speciesKey].name;
-    const joinedParty = gameState.party.length < MAX_PARTY_SIZE;
-
-    if (joinedParty) {
+    if (gameState.party.length < MAX_PARTY_SIZE) {
       gameState.party.push(outcome.caught);
       addLogLine(caughtName + " joined your team!");
     } else {
       gameState.box.push(outcome.caught);
       addLogLine(caughtName + " was sent to your Boxes — your team is full!");
     }
-
-    renderTeamList();
-    saveGame(); // remember the new teammate (and everyone's post-battle HP)
-    setTimeout(fightRandomWildFakeamon, 1500);
-    return;
+  } else if (outcome.result === "lose") {
+    // M3 PLACEHOLDER (plan §6.4): no Fakeatents until M4, so a wipe just heals
+    // the team and pops you back to the map's start tile. Replaced by the real
+    // faint + token-loss rule at M4.
+    healParty();
+    gameState.world.player = defaultWorld().player;
+    addLogLine("You hurry back to safety, and your team rests up.");
   }
 
   renderTeamList();
-  saveGame(); // remember the result + everyone's HP after the fight
+  saveGame();
 
-  const activeFighter = gameState.party[0];
-  if (activeFighter.currentHP <= 0) {
-    addLogLine(FAKEAMON[activeFighter.speciesKey].name + " needs to rest — Switch in a teammate to keep going!");
-    return; // pause instead of starting a new fight a fainted fighter can't win
+  // Back to exploring. A short beat first when the fight auto-resolved (catch
+  // or wipe) so the last log line is readable; immediate when the player just
+  // clicked Continue / Run.
+  if (outcome.result === "caught" || outcome.result === "lose") {
+    setTimeout(enterOverworld, 1200);
+  } else {
+    enterOverworld();
   }
-
-  fightRandomWildFakeamon();
 }
 
 // ===========================================================================
@@ -313,14 +338,12 @@ function switchInFromBox(boxIndex) {
   afterSwitch();
 }
 
-// Re-renders the team after any switch, and — if the encounter loop was
-// paused waiting for a healthy fighter — picks it back up automatically.
+// Re-renders the team after a between-encounter switch (from the team screen)
+// and saves the new order. You stay on the map — no fight starts (that was
+// the retired M2 auto-loop). Mid-battle switches are handled inside battle.js.
 function afterSwitch() {
   renderTeamList();
   saveGame(); // the new team order is part of your progress too
-  if (!battleInProgress && gameState.party[0].currentHP > 0) {
-    fightRandomWildFakeamon();
-  }
 }
 
 // ===========================================================================
@@ -415,8 +438,8 @@ function toggleBoxes() {
 document.getElementById("boxesBtn").addEventListener("click", toggleBoxes);
 document.getElementById("battleTestBtn").addEventListener("click", runBattleTest);
 
-// M3 Step S1: draw the overworld (an empty grass screen for now) at the top
-// of the page. Then (M5-plan S3) show the title screen — which offers Continue
-// if there's a saved adventure, or New Game (→ choose a starter) if not.
+// Boot: draw the overworld (the meadow map, from S2) at the top of the page,
+// then show the title screen — Continue if there's a saved adventure, or New
+// Game (→ choose a starter → step onto the map) if not.
 startWorld();
 showTitleScreen();

@@ -1,9 +1,15 @@
 // ===========================================================================
-//  MAIN — the conductor. Owns the starter-select screen, the team list, and
-//  picks each new wild opponent, then hands the fight to src/battle.js's
-//  startBattle(). Step 3: starter-select moved here out of battle.js (see
-//  PLANS/M5_STATE_AND_SAVE_PLAN.md §A.2) — this file will also own the
-//  title screen once save/load lands.
+//  MAIN — the conductor. Owns the title screen, the starter-select screen,
+//  the team list, and picks each new wild opponent, then hands the fight to
+//  src/battle.js's startBattle(). Step 3: starter-select moved here out of
+//  battle.js (see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.2).
+//
+//  M5-plan S3/S4 (save v1 + export/import): the game now REMEMBERS itself.
+//  On load we look for a saved adventure (src/save.js) and show a title
+//  screen — Continue / New Game, plus Export / Import Save. Autosave runs on
+//  its own after every catch, battle, and switch (any function that changes
+//  gameState ends by calling saveGame()), so there's no Save button and
+//  progress is never lost by forgetting.
 //
 //  M5-plan S1: every fighter is an *individual* (src/state.js), made fresh
 //  from a species key with newIndividual().
@@ -30,6 +36,86 @@
 
 // True while a battle's startBattle() promise hasn't resolved yet.
 let battleInProgress = false;
+
+// ===========================================================================
+//  TITLE SCREEN + SAVE FLOW — M5-plan S3. On load we check for a saved
+//  adventure (src/save.js). If there is one, you get Continue / New Game;
+//  if not, New Game is the only path. Autosave runs on its own (see the
+//  saveGame() calls dotted through the mutating functions below).
+// ===========================================================================
+
+// The first thing you see. Shows the game's name and, when a save exists,
+// a Continue button beside New Game.
+function showTitleScreen() {
+  const saveExists = hasSave();
+
+  document.getElementById("title").textContent = "Fakeamon Spark ☄️";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("log").innerHTML = "";
+  document.getElementById("team").innerHTML = "";
+
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Fakeamon Spark ☄️</h2>" +
+      "<p>" + (saveExists
+        ? "Welcome back! Your adventure is waiting."
+        : "Catch creatures, build a team, and save the world of Venta.") +
+      "</p>" +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+  if (saveExists) addTitleButton(controls, "move-btn", "Continue", continueGame);
+  addTitleButton(controls, "move-btn", "New Game", startNewGame);
+}
+
+// Small helper so each title button reads as one line.
+function addTitleButton(container, className, label, onClick) {
+  const button = document.createElement("button");
+  button.className = className;
+  button.textContent = label;
+  button.addEventListener("click", onClick);
+  container.appendChild(button);
+}
+
+// Continue: load the saved adventure back into gameState and jump in.
+function continueGame() {
+  const loaded = loadGame();
+  if (!loaded) { showStarterSelect(); return; } // save vanished between clicks
+  gameState.version = loaded.version;
+  gameState.party = loaded.party;
+  gameState.box = loaded.box;
+  renderTeamList();
+  resumeAdventure();
+}
+
+// New Game: if a save exists, make sure before erasing it. Then wipe the
+// state and go pick a starter.
+function startNewGame() {
+  if (hasSave()) {
+    const reallyErase = window.confirm(
+      "Start a new game? This will erase your saved adventure.");
+    if (!reallyErase) return;
+  }
+  clearSave();
+  gameState.version = SAVE_VERSION;
+  gameState.party = [];
+  gameState.box = [];
+  showStarterSelect();
+}
+
+// After loading, drop back into the wild-battle loop — unless your lead
+// Fakeamon has fainted, in which case wait for a Switch (same as the in-game
+// pause). Once M3's map lands, "resume" will mean "stand where you saved."
+function resumeAdventure() {
+  if (gameState.party.length === 0) { showStarterSelect(); return; }
+  if (gameState.party[0].currentHP > 0) {
+    fightRandomWildFakeamon();
+  } else {
+    addLogLine(FAKEAMON[gameState.party[0].speciesKey].name +
+      " needs to rest — Switch in a teammate to keep going!");
+  }
+}
 
 function showStarterSelect() {
   document.getElementById("title").textContent = "Fakeamon — Choose Your Starter";
@@ -61,6 +147,7 @@ function chooseStarter(speciesKey) {
   gameState.party = [newIndividual(speciesKey, STARTING_LEVEL)];
   gameState.box = [];
   renderTeamList();
+  saveGame(); // your brand-new adventure now survives a refresh
   fightRandomWildFakeamon();
 }
 
@@ -115,11 +202,13 @@ function handleBattleOutcome(outcome) {
     }
 
     renderTeamList();
+    saveGame(); // remember the new teammate (and everyone's post-battle HP)
     setTimeout(fightRandomWildFakeamon, 1500);
     return;
   }
 
   renderTeamList();
+  saveGame(); // remember the result + everyone's HP after the fight
 
   const activeFighter = gameState.party[0];
   if (activeFighter.currentHP <= 0) {
@@ -178,6 +267,7 @@ function switchInFromBox(boxIndex) {
 // paused waiting for a healthy fighter — picks it back up automatically.
 function afterSwitch() {
   renderTeamList();
+  saveGame(); // the new team order is part of your progress too
   if (!battleInProgress && gameState.party[0].currentHP > 0) {
     fightRandomWildFakeamon();
   }
@@ -275,6 +365,7 @@ document.getElementById("boxesBtn").addEventListener("click", toggleBoxes);
 document.getElementById("battleTestBtn").addEventListener("click", runBattleTest);
 
 // M3 Step S1: draw the overworld (an empty grass screen for now) at the top
-// of the page, then run the M1/M2 battle game below it, exactly as before.
+// of the page. Then (M5-plan S3) show the title screen — which offers Continue
+// if there's a saved adventure, or New Game (→ choose a starter) if not.
 startWorld();
-showStarterSelect();
+showTitleScreen();

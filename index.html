@@ -306,6 +306,42 @@
     font-size: 13px;
     font-style: italic;
   }
+
+  /* ---- Save v1 (M5-plan S3/S4): title screen + save settings ---- */
+  .title-card {
+    background: white;
+    border: 3px solid #d0d8e8;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+  .title-card h2 {
+    margin: 0 0 8px;
+    color: #2a4d8f;
+    font-size: 28px;
+  }
+  .title-card p {
+    color: #556;
+    margin: 0;
+  }
+  /* Export / Import buttons — the "settings corner" of the title screen.
+     Styled smaller/greyer so they read as secondary to Continue/New Game.
+     They live in #controls with the others, so switching screens clears them. */
+  .save-btn {
+    background: #6b7a99;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .save-btn:hover {
+    background: #566484;
+  }
 </style>
 
 <h1 id="title">Fakeamon</h1>
@@ -354,15 +390,17 @@
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  state.js  →  battle.js  →  world/config.js  →  main.js
-     (world/config.js needs the Phaser global above; main.js starts both the
-     overworld and the battle game, so it goes last. progression.js will slot
-     in between state.js and battle.js once M5's leveling/save work lands —
-     see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+       data/*  →  state.js  →  battle.js  →  save.js  →  world/config.js  →  main.js
+     (save.js reads gameState + uses battle.js's addLogLine; world/config.js
+     needs the Phaser global above; main.js starts both the overworld and the
+     battle game, so it goes last. progression.js will slot in between state.js
+     and battle.js once M5's leveling work lands — see
+     PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
 <script src="src/state.js"></script>
 <script src="src/battle.js"></script>
+<script src="src/save.js"></script>
 <script src="src/world/config.js"></script>
 <script src="src/main.js"></script>

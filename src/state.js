@@ -58,8 +58,13 @@ const MAX_PARTY_SIZE = 4; // Lewis's call — a 5th catch overflows to the Boxes
 
 // ALL persistent facts live in this one object (PLANS/M5_STATE_AND_SAVE_PLAN.md
 // §1). Only party + box exist so far — inventory/flags/world join later,
-// each as the feature that needs them lands.
+// each as the feature that needs them lands. Everything in here is plain data
+// (no functions, no DOM, no sprites) so the save system (src/save.js) can turn
+// the whole thing into text with JSON.stringify — that's the one rule.
 const gameState = {
+  // Save-format version. Must match SAVE_VERSION in src/save.js — bump both
+  // together (and add a migration there) whenever this object's SHAPE changes.
+  version: 1,
   party: [],
   box: [],
 };

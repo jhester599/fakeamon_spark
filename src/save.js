@@ -120,11 +120,24 @@ function parseSave(text) {
   // The world (map position) is just where you're standing — if a hand-edited
   // save breaks it, reset it to the start tile rather than crash the map or
   // throw away the whole (valid) team. Party/box being garbage rejects the
-  // save above; a garbled world is more forgiving.
+  // save above; a garbled world is more forgiving. We check: a known map, a
+  // valid facing, and coordinates actually ON that map (an off-map position
+  // would strand the hero with no way back except New Game).
   const w = state.world;
-  if (!w || typeof w !== "object" || !w.player ||
-      typeof w.player.tileX !== "number" || typeof w.player.tileY !== "number") {
+  const FACINGS = { up: true, down: true, left: true, right: true };
+  let worldOk = w && typeof w === "object" && w.player &&
+    typeof w.player.tileX === "number" && typeof w.player.tileY === "number" &&
+    FACINGS[w.player.facing] && typeof w.mapId === "string" && MAPS[w.mapId];
+  if (worldOk) {
+    const ground = MAPS[w.mapId].ground;
+    const cols = ground[0].length, rows = ground.length;
+    if (w.player.tileX < 0 || w.player.tileY < 0 ||
+        w.player.tileX >= cols || w.player.tileY >= rows) worldOk = false;
+  }
+  if (!worldOk) {
     state.world = defaultWorld();
+  } else if (!Array.isArray(w.defeatedEncounters)) {
+    w.defeatedEncounters = []; // fill a missing sub-field (future-proofs S8)
   }
   return state;
 }

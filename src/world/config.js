@@ -182,9 +182,12 @@ class WorldScene extends Phaser.Scene {
   }
 
   // Read the hero's spot straight from the shared save state and match it.
-  // main.js calls this after loading/continuing a game.
+  // main.js calls this after loading/continuing a game. Killing any in-flight
+  // step tween first makes the reposition authoritative — belt-and-suspenders
+  // today, and it matters at S7 when a battle can fire mid-step.
   syncHeroToState() {
     if (!this.hero) return;
+    this.tweens.killTweensOf(this.hero);
     const p = gameState.world.player;
     this.placeHeroAtTile(p.tileX, p.tileY, p.facing);
     this.isMoving = false;
@@ -212,7 +215,13 @@ class WorldScene extends Phaser.Scene {
 
     const targetX = player.tileX + STEP[dir].dx;
     const targetY = player.tileY + STEP[dir].dy;
-    if (!this.canWalk(targetX, targetY)) return; // bumped a tree/rock/edge
+    if (!this.canWalk(targetX, targetY)) {
+      // Bumped a tree/rock/edge — settle on the standing pose so the legs
+      // don't keep cycling in place while you hold the key against the wall.
+      this.hero.anims.stop();
+      this.hero.setFrame(HERO_STAND_FRAME[dir]);
+      return;
+    }
 
     // Start the legs moving (ignoreIfPlaying: true keeps a continuous walk
     // smooth across tiles instead of restarting the cycle each step).

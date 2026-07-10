@@ -295,12 +295,14 @@ function handleBattleOutcome(outcome) {
 //  function) gets removed at Step S7/S9.
 // ===========================================================================
 function runBattleTest() {
+  // Only start a fight while actually exploring the map. worldActive is false
+  // during battles, on the title/starter screens, AND during the ~1.2s beat
+  // after a catch/loss before we return to the map — so this closes the window
+  // where the button was briefly clickable and could start a second battle
+  // that the pending "back to map" timeout would then strand.
+  if (!worldActive) return;
   if (battleInProgress) return;                  // already fighting — ignore
-  if (gameState.party.length === 0) return;      // no team yet (the bar is
-                                                 // hidden here anyway) — do NOT
-                                                 // lend a starter, or the fight
-                                                 // would autosave over a real
-                                                 // saved game
+  if (gameState.party.length === 0) return;      // no team yet
   if (gameState.party[0].currentHP <= 0) return; // fainted — Switch first
   fightRandomWildFakeamon();
 }

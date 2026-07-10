@@ -131,6 +131,7 @@ class WorldScene extends Phaser.Scene {
     this.hero = this.add.sprite(0, 0, "hero", HERO_STAND_FRAME.down);
     this.hero.setOrigin(0.5, 1);
     this.isMoving = false;
+    this.createWalkAnims(); // S4: the four walk cycles
     this.syncHeroToState(); // place them wherever gameState says (start tile, or a loaded save)
 
     // Arrow keys. addCapture stops the browser from scrolling the page when
@@ -139,6 +140,31 @@ class WorldScene extends Phaser.Scene {
     this.input.keyboard.addCapture("UP,DOWN,LEFT,RIGHT");
 
     worldScene = this; // let main.js reach us (e.g. to re-place the hero on Continue)
+  }
+
+  // S4: build the four walk cycles, one per facing. Each row is 3 frames
+  // (step, stand, step); [a, mid, b, mid] makes a smooth left–right–left gait.
+  // frameRate is a Lewis-tweakable dial: higher = faster legs.
+  createWalkAnims() {
+    if (this.anims.exists("walk-down")) return; // only make them once
+    const make = (key, frames) => this.anims.create({
+      key: key,
+      frames: this.anims.generateFrameNumbers("hero", { frames: frames }),
+      frameRate: 8,
+      repeat: -1,
+    });
+    make("walk-down",  [0, 1, 2, 1]);
+    make("walk-up",    [3, 4, 5, 4]);
+    make("walk-right", [6, 7, 8, 7]);
+    make("walk-left",  [9, 10, 11, 10]);
+  }
+
+  // Stop walking and settle on the standing pose for the current facing.
+  stopWalk() {
+    if (this.hero.anims.isPlaying) {
+      this.hero.anims.stop();
+      this.hero.setFrame(HERO_STAND_FRAME[gameState.world.player.facing]);
+    }
   }
 
   // Pixel centre-bottom of a tile — where the hero's feet go.
@@ -176,9 +202,10 @@ class WorldScene extends Phaser.Scene {
   tryWalk(dir) {
     const player = gameState.world.player;
 
-    // Facing a new way? Just turn this press.
+    // Facing a new way? Just turn this press (no step, no walk cycle).
     if (dir !== player.facing) {
       player.facing = dir;
+      this.hero.anims.stop();
       this.hero.setFrame(HERO_STAND_FRAME[dir]);
       return;
     }
@@ -187,6 +214,9 @@ class WorldScene extends Phaser.Scene {
     const targetY = player.tileY + STEP[dir].dy;
     if (!this.canWalk(targetX, targetY)) return; // bumped a tree/rock/edge
 
+    // Start the legs moving (ignoreIfPlaying: true keeps a continuous walk
+    // smooth across tiles instead of restarting the cycle each step).
+    this.hero.play("walk-" + dir, true);
     this.isMoving = true;
     const dest = this.tilePixel(targetX, targetY);
     this.tweens.add({
@@ -206,7 +236,8 @@ class WorldScene extends Phaser.Scene {
 
   // Called every frame by Phaser. Poll the arrow keys and walk the grid.
   update() {
-    if (!worldActive || this.isMoving) return;
+    if (!worldActive) return;
+    if (this.isMoving) return; // mid-tween — let the step finish
 
     const c = this.cursors;
     let dir = null;
@@ -215,7 +246,11 @@ class WorldScene extends Phaser.Scene {
     else if (c.up.isDown) dir = "up";
     else if (c.down.isDown) dir = "down";
 
-    if (dir) this.tryWalk(dir);
+    if (dir) {
+      this.tryWalk(dir);
+    } else {
+      this.stopWalk(); // no key held → settle on the standing pose
+    }
   }
 }
 

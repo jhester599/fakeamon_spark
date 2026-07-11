@@ -27,15 +27,16 @@
 //  is a LIVE array battle.js reads directly (config.playerParty), so a
 //  mid-battle switch is instantly visible here too, via onStateChange.
 //
-//  M3 (S1–S3): the OVERWORLD (the Phaser map, src/world/config.js) is now the
-//  hub. Choosing a starter or pressing Continue drops the hero onto The
-//  Meadows (enterOverworld); you walk it with the arrow keys. A battle is a
-//  discrete detour that returns you to the map when it ends — the old M2
-//  "auto-loop of endless wild fights" is retired, since the map is the game
-//  now. The map↔battle handoff (bump a wild Fakeamon → fight) lands at S7;
-//  until then the temporary "Battle test" button (runBattleTest) starts a
-//  fight. `worldActive` (in config.js) gates walking so arrow keys don't move
-//  the hero while a battle or menu is on screen.
+//  M3: the OVERWORLD (the Phaser map, src/world/config.js) is the hub. Choosing
+//  a starter or pressing Continue drops the hero onto The Meadows
+//  (enterOverworld); you walk it with the arrow keys. S7 — the handoff: walking
+//  into a wild Fakeamon starts a real battle against THAT creature
+//  (startMapEncounter → enterBattle), and returns you to the map when it ends —
+//  beaten/caught creatures are gone, fled/wiped ones stay. The screen manager
+//  (src/screens.js) hides + freezes the map during the fight. The temporary
+//  "Battle test" button (runBattleTest) still triggers a random fight until it's
+//  removed at S9. `worldActive` (config.js) gates walking so arrow keys don't
+//  move the hero while a battle or menu is on screen.
 // ===========================================================================
 
 // True while a battle's startBattle() promise hasn't resolved yet.
@@ -137,14 +138,13 @@ function enterOverworld() {
     '<div class="title-card">' +
       "<h2>Exploring The Meadows 🌱</h2>" +
       "<p>Use the <b>arrow keys</b> to walk around. Wild Fakeamon are standing " +
-      "in the grass — <b>walk into one</b> to meet it!" +
-      "<br><small>(For now a bump just says hello in the console — the real " +
-      "battle opens at the next step. Tap ⚔️ Battle test to practise a fight.)" +
-      "</small></p>" +
+      "in the grass — <b>walk into one to battle it!</b>" +
+      "<br><small>(Beat it or catch it and it's gone from the map; run away and " +
+      "it stays put. The ⚔️ Battle test button still works too.)</small></p>" +
     "</div>";
 
   renderTeamList();
-  if (worldScene) worldScene.syncHeroToState(); // stand where the save says
+  showWorld(); // bring the map back, unfreeze it, and hand it the keyboard (screens.js)
   saveGame();
 }
 
@@ -229,32 +229,56 @@ function pickRandomWildSpeciesKey() {
   return STARTER_KEYS[index];
 }
 
-// Runs one wild battle for party[0] — the active fighter — against a
-// fresh random wild opponent. A battle is a detour off the map; when it ends
-// (handleBattleOutcome) you return to the overworld.
-function fightRandomWildFakeamon() {
-  // Never start a battle on top of another.
-  if (battleInProgress) return;
+// ===========================================================================
+//  THE HANDOFF (M3 S7) — bump a wild Fakeamon on the map → a real battle →
+//  back to walking. enterBattle is the ONE shared entry both the map handoff
+//  and the temporary Battle test button go through, so "freeze the map, fight,
+//  come back" lives in exactly one place.
+// ===========================================================================
 
+// Freeze + hide the map (screens.js's showBattle), run the fight, then hand the
+// result to handleBattleOutcome (which brings us back to the map). `encounter`
+// is the map creature you bumped, or null for a Battle test fight.
+function enterBattle(config, encounter) {
   battleInProgress = true;
-  worldActive = false; // freeze map-walking while the fight is on screen
-  const wildSpeciesKey = pickRandomWildSpeciesKey();
-  const wildIndividual = newIndividual(wildSpeciesKey, STARTING_LEVEL);
+  worldActive = false; // no map-walking while the fight is on screen
+  showBattle();        // hide the map + freeze the world scene
+  startBattle(config).then(function (outcome) {
+    handleBattleOutcome(outcome, encounter);
+  });
+}
 
-  startBattle({
+// The map handoff: fight THIS specific wild Fakeamon (its own species + level).
+// src/world/config.js's WorldScene.handleEncounter calls this when you bump one.
+function startMapEncounter(encounter) {
+  if (battleInProgress) return;
+  enterBattle({
     playerParty: gameState.party,
-    enemy: wildIndividual,
+    enemy: newIndividual(encounter.species, encounter.level),
     canFlee: true,
     canCatch: true,
     onStateChange: renderTeamList,
-  }).then(handleBattleOutcome);
+  }, encounter);
+}
+
+// The temporary Battle test button's fight: a fresh RANDOM wild opponent, not
+// tied to any creature on the map (so nothing gets removed when it ends).
+function fightRandomWildFakeamon() {
+  if (battleInProgress) return;
+  enterBattle({
+    playerParty: gameState.party,
+    enemy: newIndividual(pickRandomWildSpeciesKey(), STARTING_LEVEL),
+    canFlee: true,
+    canCatch: true,
+    onStateChange: renderTeamList,
+  }, null);
 }
 
 // Whatever the battle decided, this is where it becomes a team fact — then
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
 // loss placeholder (heal + back to start) until M4's Fakeatents exist.
-function handleBattleOutcome(outcome) {
+function handleBattleOutcome(outcome, encounter) {
   battleInProgress = false;
 
   if (outcome.result === "caught") {
@@ -275,6 +299,14 @@ function handleBattleOutcome(outcome) {
     addLogLine("You hurry back to safety, and your team rests up.");
   }
 
+  // A wild Fakeamon you beat or caught leaves the map for good; a wipe or a
+  // flee leaves it standing (you didn't win). Only a map bump passes an
+  // `encounter` — the temporary Battle test button passes null, so nothing's
+  // removed there.
+  if (encounter && (outcome.result === "win" || outcome.result === "caught")) {
+    if (worldScene) worldScene.removeEncounter(encounter.id);
+  }
+
   renderTeamList();
   saveGame();
 
@@ -289,12 +321,10 @@ function handleBattleOutcome(outcome) {
 }
 
 // ===========================================================================
-//  BATTLE TEST BUTTON — M3 Step S1, temporary. Until Step S7 makes walking
-//  into a wild Fakeamon start a fight for real, this button is the bridge
-//  from the new Phaser page into a battle, so we can confirm the battle
-//  module still works. If you haven't picked a starter yet, it lends you a
-//  random one so a fight can still happen. The whole test bar (and this
-//  function) gets removed at Step S7/S9.
+//  BATTLE TEST BUTTON — M3 Step S1, temporary. Now that S7 makes walking into
+//  a wild Fakeamon start a real fight, this is just a quick way to trigger a
+//  random battle for testing (only while you're exploring with a healthy
+//  team). The whole test bar and this function get removed at Step S9.
 // ===========================================================================
 function runBattleTest() {
   // Only start a fight while actually exploring the map. worldActive is false

@@ -120,8 +120,9 @@ class BootScene extends Phaser.Scene {
 //  SOLID_TILE_INDICES in maps.js). Movement is a TWEEN between tiles (no
 //  physics — plan §6.2), so the hero is always ON a tile or sliding cleanly
 //  between two, never drifting.
-//  S6: wild Fakeamon now stand in the grass (spawnEncounters); walking into
-//  one "bumps" it (handleEncounter) — the real battle handoff lands at S7.
+//  S6: wild Fakeamon stand in the grass (spawnEncounters). S7: walking into
+//  one hands off to a real battle (handleEncounter → main.js's
+//  startMapEncounter) and clears it from the map on a win/catch (removeEncounter).
 // ---------------------------------------------------------------------------
 class WorldScene extends Phaser.Scene {
   constructor() {
@@ -227,8 +228,7 @@ class WorldScene extends Phaser.Scene {
   // later step (caught/beaten) are skipped, so this stays correct once S8 lands.
   spawnEncounters(mapData) {
     this.encounterByTile = new Map(); // "x,y" -> encounter, for bump detection
-    this.encounterSprites = [];       // the sprites, so S8 can remove them
-    this.bumpedEncounterId = null;    // which one you're currently leaning on
+    this.encounterSprites = [];       // the sprites, so removeEncounter can clear one
     const cleared = gameState.world.defeatedEncounters || [];
 
     (mapData.encounters || []).forEach((enc) => {
@@ -265,27 +265,30 @@ class WorldScene extends Phaser.Scene {
     return this.encounterByTile.get(tileX + "," + tileY) || null;
   }
 
-  // S6 seam — the "hallway" (plan §5). Walking into a wild Fakeamon calls this.
-  // For now it just announces the bump and gives the creature a little pop;
-  // Step S7 grows THIS one method into the real handoff (pause → hide the map →
-  // await startBattle → apply the outcome → back to walking).
+  // S7 — the handoff (the "hallway", plan §5). Walking into a wild Fakeamon
+  // hands off to the conductor (main.js's startMapEncounter), which freezes the
+  // map (screens.js), runs the real battle against THIS creature, applies the
+  // outcome, and brings us back to walking. On a win or a catch the conductor
+  // calls removeEncounter below, so the creature is gone from the map.
   handleEncounter(encounter) {
-    // Only fire once per bump, so holding the arrow key against a creature
-    // doesn't announce it every frame. It re-arms when you step away or let go
-    // of the key (see tryWalk's onComplete and update's no-key branch).
-    if (this.bumpedEncounterId === encounter.id) return;
-    this.bumpedEncounterId = encounter.id;
+    if (battleInProgress) return;  // never stack a battle on top of another
+    startMapEncounter(encounter);  // → src/main.js
+  }
 
-    const name = FAKEAMON[encounter.species].name;
-    console.log("Bumped the wild " + name + " (Lv " + encounter.level +
-      ")! The real battle opens here at Step S7.");
-
-    // A little "!" pop so you can SEE the bump land even without the console.
-    // A yoyo scale returns to exactly 1, so the sprite never drifts off its tile.
-    const sprite = this.encounterSprites.find((s) => s.encounterId === encounter.id);
-    if (sprite) {
-      this.tweens.add({ targets: sprite, scale: 1.2, duration: 100, yoyo: true });
+  // Take a beaten/caught wild Fakeamon off the map for good: destroy its
+  // sprite, forget its tile, and remember it's gone so it doesn't reappear if
+  // the scene is ever rebuilt (a page reload — spawnEncounters skips these ids).
+  removeEncounter(id) {
+    const sprite = this.encounterSprites.find((s) => s.encounterId === id);
+    if (sprite) sprite.destroy();
+    this.encounterSprites = this.encounterSprites.filter((s) => s.encounterId !== id);
+    for (const [tileKey, enc] of this.encounterByTile) {
+      if (enc.id === id) this.encounterByTile.delete(tileKey);
     }
+    if (gameState.world.defeatedEncounters.indexOf(id) === -1) {
+      gameState.world.defeatedEncounters.push(id);
+    }
+    saveGame();
   }
 
   // Can the hero stand on this tile? No if it's off the map, or if the tile
@@ -350,7 +353,6 @@ class WorldScene extends Phaser.Scene {
         player.tileX = targetX;
         player.tileY = targetY;
         this.isMoving = false;
-        this.bumpedEncounterId = null; // stepped somewhere new → next bump is fresh
         saveGame(); // remember where you're standing (tiny — per-step is fine, plan §4.1)
       },
     });
@@ -372,7 +374,6 @@ class WorldScene extends Phaser.Scene {
       this.tryWalk(dir);
     } else {
       this.stopWalk(); // no key held → settle on the standing pose
-      this.bumpedEncounterId = null; // let go of the key → next push is a fresh bump
     }
   }
 }

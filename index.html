@@ -260,6 +260,10 @@
     cursor: not-allowed;
   }
 
+  /* One shared "hide me" switch. The screen manager (src/screens.js) toggles
+     this on #world to swap between the map and a battle (M3 S7). */
+  .hidden { display: none !important; }
+
   /* ---- M3 Step S1: the overworld (Phaser canvas) ---- */
   /* #world is where Phaser drops its <canvas>. We just center it and give it
      the same friendly rounded border as the fighter cards. */
@@ -363,7 +367,7 @@
      at Step S7/S9 (M3 plan §9). -->
 <div id="test-bar">
   <button id="battleTestBtn" class="test-btn">⚔️ Battle test</button>
-  <span class="test-note">temporary — real map encounters arrive at Step 7</span>
+  <span class="test-note">temporary — walk into a wild Fakeamon to battle for real; this just triggers a random test fight (removed at Step 9)</span>
 </div>
 
 <!-- The BATTLE room — the plain-HTML fight screen from M1/M2, unchanged.
@@ -396,12 +400,14 @@
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  state.js  →  battle.js  →  save.js  →  world/config.js  →  main.js
+       data/*  →  state.js  →  battle.js  →  save.js  →  world/config.js
+       →  screens.js  →  main.js
      (save.js reads gameState + uses battle.js's addLogLine; world/config.js
-     needs the Phaser global above; main.js starts both the overworld and the
-     battle game, so it goes last. progression.js will slot in between state.js
-     and battle.js once M5's leveling work lands — see
-     PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+     needs the Phaser global above; screens.js swaps the map/battle screens and
+     uses config.js's worldScene/worldGame; main.js starts both the overworld
+     and the battle game and calls the screen manager, so it goes last.
+     progression.js will slot in between state.js and battle.js once M5's
+     leveling work lands — see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
@@ -410,4 +416,5 @@
 <script src="src/battle.js"></script>
 <script src="src/save.js"></script>
 <script src="src/world/config.js"></script>
+<script src="src/screens.js"></script>
 <script src="src/main.js"></script>

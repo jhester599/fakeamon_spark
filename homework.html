@@ -167,12 +167,13 @@
   <header>
     <div class="eyebrow">Fakeamon · Stopping Point</div>
     <h1 class="title disp">Homework Before We Continue</h1>
-    <p class="subtitle">Lewis cleared the whole backlog in one sitting — B1 through B32! Ten questions left. 🌙</p>
+    <p class="subtitle">Lewis cleared the whole backlog — B1 through B42, every question answered! 🎉 The last ten are folded into the docs.</p>
   </header>
 
   <div class="recap">
     <h2>✅ What happened this session</h2>
     <ul>
+      <li><span class="tag">Round 4 ✅</span><b>2026-07-11 — the last ten (B33–B42) are answered</b>, so every creative-director question B1–B42 is now decided. Picks folded into <code>DECISIONS.md</code> (#51–60), <code>DESIGN.md</code>, the touch plan, and the roster draft: Fakeatent swap, "the wild &lt;name&gt;" battle text, area-themed berries, a starter Cooking Cabin, the roster draft kept as-is, and the D-pad (four floating arrows, bottom-right, half see-through, a toggle) still called "Pocket Venta."</li>
       <li><span class="tag">Huge round</span>Lewis answered <b>32 of 36</b> backlog questions in one go: flee/catch/nickname rules, the world's name (<b>Venta</b>) and its six areas, gym re-themes and badges, the story spine, the evolution ceremony, sound &amp; music, and more. All logged in <code>DECISIONS.md</code> (rows 14–45) and folded into <code>DESIGN.md</code>.</li>
       <li><span class="tag">IP check</span>B10's hero look referenced an existing character, so it was redirected to an <b>original design</b> in the same spirit — no Nintendo IP in the repo. See <code>DESIGN.md</code> §1.</li>
       <li><span class="tag">Bug found</span>Testing Step 3 turned up a real bug (mirror matches shared HP) — fixed — plus a cosmetic question, <b>B34</b> below, about how a mirror match should read in the log.</li>
@@ -193,7 +194,7 @@
 
   <section class="sec s-water">
     <h2 class="sec-title">🌊 Lewis's last ten questions</h2>
-    <p class="sec-sub">None are urgent — everything blocking M2 is already answered.</p>
+    <p class="sec-sub">✅ All ten answered on 2026-07-11 and folded into the docs (see <code>DECISIONS.md</code> #51–60) — kept below for reference.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
@@ -325,8 +326,8 @@
         <li>✅ <b><s>Zoom level (2× vs 3×)</s></b> — <i>decided at S1 (2026-07-09):</i> <b>2×</b> (Jeff's call). It's the <code>WORLD_ZOOM</code> constant in <code>src/world/config.js</code>, so try 3× anytime to compare.</li>
         <li>✅ <b><s>Pin Phaser 4</s></b> — <i>done at S1 (2026-07-09):</i> pinned <b>4.2.1</b> (it now exists — supersedes the "4.2.0" note) and <b>vendored</b> to <code>assets/vendor/phaser.min.js</code>, not a CDN, so double-click still works offline (<code>DECISIONS.md</code>).</li>
         <li>✅ <b><s>Vendor the Phaser skills</s></b> — <i>done:</i> 10 skills + README in <code>PLANS/phaser-skills/</code>.</li>
-        <li><b>NEW — hero walk-sheet license check</b> — <code>assets/sprites/player/hero.png</code> (Tuxemon's "adventurer") isn't in Tuxemon's <code>ATTRIBUTIONS.md</code>; check <a href="https://wiki.tuxemon.org">wiki.tuxemon.org</a> and fill in the ⚠️ row in <code>CREDITS.md</code> — same 2-minute drill that cleared Hissiorite/Frondly.</li>
-        <li><b>NEW — wild-roster wiki credits (157 monsters, one command)</b> — 43 of the 200-monster pool are staged with verified credits (<code>CREDITS_ROSTER.md</code>); the rest need a machine with normal internet (the remote Claude proxy blocks the wiki — confirmed). From <code>tools\</code>, with Node 18+, no npm install: <code>node .\fetch-wiki-credits.mjs --write</code> → review the diff → <code>node .\vendor-sheets.mjs</code> → <code>node .\make-roster-credits.mjs</code> → commit. Or just tell Claude Code/Cowork on your machine: "Do HOMEWORK item 5, review ambiguous credits with me, then commit." No deadline — needed M3-late at the earliest.</li>
+        <li>✅ <b><s>NEW — hero walk-sheet license check</s></b> — <i>done 2026-07-06 (Cowork):</i> <code>wiki.tuxemon.org/Adventurer</code> credits the overland walk sheet to <b>Catch Challenger, adapted by Sanglorian</b>; <code>CREDITS.md</code>'s hero row is filled in (CC BY-SA 3.0), with a ⚠️ flag to confirm Catch Challenger's share-alike terms before any public deploy that features hero art.</li>
+        <li>✅ <b><s>NEW — wild-roster wiki credits</s></b> — <i>done 2026-07-06 (Cowork wiki run):</i> the credit pipeline resolved the remaining monsters; <code>bearloch</code>/<code>foxko</code> were dropped for having no credit anywhere, leaving <b>198 staged, 0 pending</b> in <code>CREDITS_ROSTER.md</code>. Still ⚠️: the OPMon-derived trio (coaldiak / ninjasmine / toxiris) needs OPMon's terms confirmed before those three appear in-game.</li>
       </ol>
     </div>
 

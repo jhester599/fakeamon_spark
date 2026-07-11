@@ -28,7 +28,7 @@ whenever he has time — and Jeff serves them up a few at a time.
 
 ---
 
-## 🟡 M2 — Catching & Team *(5 of 6 answered — B34 is new, found during Step 3 testing)*
+## ✅ M2 — Catching & Team *(6 of 6 answered)*
 
 ### ✅ B1. Can you run away from a wild battle?  *(needed by M2 Step 3)*
 
@@ -53,7 +53,7 @@ uses the player's team-average level as a stand-in until M3's areas exist
 Caught: `"Gotcha! <name> was caught!"`
 Broke free: `"Oh no! <name> broke free!"` *(Lewis kept the example wording.)*
 
-### 🔲 B34. INVENT: telling apart a mirror match  *(anytime — no rush, found during M2 Step 3 testing)*
+### ✅ B34. INVENT: telling apart a mirror match  *(answered 2026-07-11)*
 Since B3 decided no nicknames, a battle where your Fakeamon and the wild
 one are the **same species** (like Whaley vs. a wild Whaley) can read
 confusingly in the log and the win/lose message — e.g. "Whaley used
@@ -67,11 +67,11 @@ how it reads. How should we label the wild one?
   enough, don't bother.
 - [ ] **C) Invent something else** — a label, a title, your own idea.
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **A** — the wild opponent is written **"the wild `<name>`"** everywhere it appears in the log and result messages.
 
 ---
 
-## 🟡 M3 — Overworld & Map *(7 of 13 answered — new B38–B42 are open, no rush)*
+## ✅ M3 — Overworld & Map *(13 of 13 answered)*
 
 ### ✅ B6. One big map, or connected areas?  *(needed by M3 Step 1)*
 
@@ -115,7 +115,7 @@ appear at night**.
 
 **Lewis picks:** B — a few villagers with one line of advice each.
 
-### 🔲 B37. Review the Venta wild-roster draft 🗺️  *(anytime before an area's roster gets wired in — M3-late at the earliest)*
+### ✅ B37. Review the Venta wild-roster draft 🗺️  *(answered 2026-07-11)*
 
 All 198 wild Fakeamon have been dealt a **draft** home area matching your
 six area vibes (B8) — see **`VENTA_ROSTER_DRAFT.md`** (it has all the art!).
@@ -127,9 +127,9 @@ a separate, ongoing job — one area at a time, whenever you like.)
 - [ ] **B) Mostly good, with trades** — list who moves where.
 - [ ] **C) Big reshuffle** — grab a printout and go wild.
 
-**Lewis picks:** ____________  **Moves:** ________________________________
+**Lewis picks:** **A** — looks great, keep the draft as-is. *(Approved 2026-07-11; see `VENTA_ROSTER_DRAFT.md`.)*
 
-### 🔲 B38. Pad look — classic cross or floating arrows? 🎮  *(needed by M3 Step S10 — playing on a tablet)*
+### ✅ B38. Pad look — classic cross or floating arrows? 🎮  *(answered 2026-07-11)*
 
 The touch & mobile plan (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) adds an
 on-screen D-pad so you can walk the meadow with your thumbs. What should
@@ -140,9 +140,9 @@ it look like?
   between them.
 - [ ] **C) Something else** — invent it!
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **B** — four separate floating arrow buttons, not a solid cross.
 
-### 🔲 B39. Which side of the screen?  *(needed by M3 Step S10)*
+### ✅ B39. Which side of the screen?  *(answered 2026-07-11)*
 
 Bottom-left is tradition for a D-pad, but which thumb does Lewis actually
 want to steer with on the iPad? Worth testing both during S10 before
@@ -152,9 +152,9 @@ locking it in.
 - [ ] **B) Bottom-right**
 - [ ] **C) Let me try both and decide during testing**
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **B** — bottom-right.
 
-### 🔲 B40. How see-through should the pad be?  *(needed by M3 Step S10)*
+### ✅ B40. How see-through should the pad be?  *(answered 2026-07-11)*
 
 The pad sits right on top of the meadow. Too solid and it blocks the
 view; too see-through and it's hard to find with a thumb.
@@ -163,9 +163,9 @@ view; too see-through and it's hard to find with a thumb.
 - [ ] **B) Half see-through** — a balance.
 - [ ] **C) Barely there** — just visible enough to find, mostly see-through.
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **B** — half see-through.
 
-### 🔲 B41. Should mouse/desktop players see the pad too?  *(needed by M3 Step S10)*
+### ✅ B41. Should mouse/desktop players see the pad too?  *(answered 2026-07-11)*
 
 The pad can default to showing only on touch devices (fingers), or Lewis
 might just want it on for everyone, including desktop players using a
@@ -175,14 +175,14 @@ mouse.
 - [ ] **B) Everyone** — show it always, even on desktop.
 - [ ] **C) A toggle** — a small button to turn it on/off either way.
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **C** — a toggle, so it works for touch and desktop players either way.
 
-### 🔲 B42. INVENT: name the feature 🎬  *(anytime — needed by M3 Step S10's changelog)*
+### ✅ B42. INVENT: name the feature 🎬  *(answered 2026-07-11)*
 
 "Pocket Venta" is the plan's placeholder name for playing on a phone or
 tablet. Got a better one?
 
-Name: ________________________________
+Name: **Pocket Venta** — Lewis kept the placeholder ("the same, pocket venta").
 
 ---
 
@@ -219,7 +219,7 @@ Name: ________________________________
 
 ---
 
-## 🟡 M5 — Story, Bosses & the Finale *(8 of 11 answered — B33, B35, B36 still open)*
+## ✅ M5 — Story, Bosses & the Finale *(11 of 11 answered)*
 
 ### ✅ B19. INVENT: how the adventure starts 🎬  *(needed by M5 — but fun to answer early!)*
 
@@ -258,7 +258,7 @@ evolving!", big sprite reveal.
 
 **Lewis picks:** A — Nobody, it's a self-serve kitchen.
 
-### 🔲 B33. Where do you swap team members with boxed ones? 📦  *(needed by M5's Boxes screen — your team-of-4 pick made this real!)*
+### ✅ B33. Where do you swap team members with boxed ones? 📦  *(answered 2026-07-11)*
 You decided a full team sends new catches to your **Boxes**. Where do you go
 to swap a boxed Fakeamon onto your active team?
 
@@ -266,9 +266,9 @@ to swap a boxed Fakeamon onto your active team?
 - [ ] **B) Anywhere** — open the team screen and swap on the spot.
 - [ ] **C) A brand-new building** — invent it! Name: ____________
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **A** — at a Fakeatent (heal *and* swap in one spot).
 
-### 🔲 B35. Berries on the ground — themed by area, or anywhere?  *(anytime — you already invented this one, just needs one more detail)*
+### ✅ B35. Berries on the ground — themed by area, or anywhere?  *(answered 2026-07-11)*
 You said: "you can find berries on the ground" while exploring. Do certain
 areas of Venta tend to grow certain berries (matching that area's vibe —
 B8), or can any of the 6 berries turn up in any area?
@@ -277,9 +277,9 @@ B8), or can any of the 6 berries turn up in any area?
 - [ ] **B) Anywhere** — any of the 6 berries can appear in any area, pure luck.
 - [ ] **C) Something else** — invent it!
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **A** — themed by area; each area mostly grows berries that fit its vibe.
 
-### 🔲 B36. Cooking Cabins — Snow Mountain only, or elsewhere too?  *(anytime — you already invented this one, just needs one more detail)*
+### ✅ B36. Cooking Cabins — Snow Mountain only, or elsewhere too?  *(answered 2026-07-11)*
 You said: "cooking cabins are more common in the snow mountain area." Does
 that mean:
 
@@ -289,7 +289,7 @@ that mean:
   gated entirely behind Snow Mountain's gym badge — plus more once you're there.
 - [ ] **C) Something else** — invent it (e.g. one per area)!
 
-**Lewis picks:** ____________  **Because:** ________________________________
+**Lewis picks:** **B** — a smaller cabin near the start too, so cooking isn't gated behind Snow Mountain's badge.
 
 ---
 
@@ -325,12 +325,12 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 
 | Milestone | Questions | Answered |
 |---|---|---|
-| M2 | B1–B5, B34 | 5 / 6 |
-| M3 | B6–B12, B37–B42 | 7 / 13 |
+| M2 | B1–B5, B34 | 6 / 6 |
+| M3 | B6–B12, B37–B42 | 13 / 13 |
 | M4 | B13–B18 | 6 / 6 |
-| M5 | B19–B26, B33, B35, B36 | 8 / 11 |
+| M5 | B19–B26, B33, B35, B36 | 11 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **32 / 42** |
+| **Total** | | **42 / 42** ✅ |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

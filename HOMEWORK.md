@@ -1,19 +1,19 @@
 # Homework Before We Continue 🌙
 
-> **Round 3 is done! (2026-07-06)** Lewis answered **B1–B32** in one giant
-> batch — basically the *entire* `HOMEWORK_BACKLOG.md` question bank. All
-> ran through the decision loop into `DECISIONS.md` and `DESIGN.md`.
-> Ten questions are still open, none urgent: **B33** (where you swap
-> boxed Fakeamon), **B34** (new — found while testing Step 3), **B35**/
-> **B36** (new — follow-ups on two design bits Lewis invented outside a
-> homework round), **B37** (the fun one — review the draft of which wild
-> Fakeamon live in which area of Venta), and **B38–B42** (new, 2026-07-10 —
-> the touch & mobile plan's five creative calls: what the on-screen D-pad
-> looks like, which side of the screen it's on, how see-through it is,
-> whether desktop players see it too, and naming the feature).
+> **🎉 Round 4 is done! (2026-07-11)** Lewis answered the **last ten** —
+> **B33–B42** — so **every creative-director question B1–B42 is now
+> decided.** All ran through the decision loop into `DECISIONS.md` (#51–60),
+> `DESIGN.md`, the touch plan, and the roster draft. What he picked: swap
+> boxed Fakeamon **at a Fakeatent** (B33); the wild opponent reads **"the
+> wild `<name>`"** (B34); berries are **themed by area** (B35); a **small
+> starter Cooking Cabin** exists too (B36); the Venta wild-roster draft is
+> **kept as-is** (B37); and the touch D-pad is **four floating arrows,
+> bottom-right, half see-through, with a show/hide toggle**, still called
+> **"Pocket Venta"** (B38–B42).
 >
-> Round 2 is ✅ done — team of **4** with **Boxes**, **50%** base catch rate —
-> see `DECISIONS.md` #11–12. Round 1's ten picks are all in there too.
+> **Earlier rounds:** Round 3 (2026-07-06) cleared B1–B32; Round 2 set the
+> team of **4** with **Boxes** and the **50%** base catch rate
+> (`DECISIONS.md` #11–12); Round 1's ten picks are in there too.
 
 ---
 
@@ -44,45 +44,28 @@
 
 ---
 
-## 🎉 Nothing blocking right now
+## 🎉 All caught up — every question answered!
 
-M2 Steps 3–4 (wild opponents + catching) have everything they need:
-flee always works (B1), caught Fakeamon join fully healed (B2), wild level
-uses team-average as a stand-in until M3's map exists (B4), and the catch
-messages are locked in (B5). Steps 3 and 4 are both built and live.
+M2 Steps 3–4 (wild opponents + catching) have everything they need, and as
+of **2026-07-11** the whole backlog is answered too. **B33–B42 — the last
+ten — are decided and folded into the docs** (`DECISIONS.md` #51–60):
 
-**Ten open questions, no rush:**
+- **B33** — swap a boxed Fakeamon **at a Fakeatent** (heal *and* swap in one spot).
+- **B34** — the wild opponent is written **"the wild `<name>`"** in the log
+  and result messages, so a same-species fight reads clearly. *(A small M2
+  battle-text tweak, now unblocked.)*
+- **B35** — berries are **themed by area** — each area mostly grows the
+  berries that fit its vibe.
+- **B36** — there's a **smaller Cooking Cabin near the start too**, so
+  cooking isn't gated entirely behind Snow Mountain's badge.
+- **B37** — the **Venta wild-roster draft is approved as-is**
+  (`VENTA_ROSTER_DRAFT.md`); area assignments get wired in per area, M3-late onward.
+- **B38–B42** — the touch D-pad is **four floating arrow buttons**,
+  **bottom-right**, **half see-through**, with a **show/hide toggle** for
+  everyone, and the feature keeps the name **"Pocket Venta."**
 
-- **B33** — where do you swap a boxed Fakeamon onto your active team? (At
-  a Fakeatent / anywhere / a new building — needed by M5's Boxes screen,
-  not before.)
-- **B34** — new, found while testing Step 3: when you fight a wild
-  Fakeamon that's the *same species* as yours (like Whaley vs. a wild
-  Whaley), the log can't tell them apart ("Whaley used Splash!", "Whaley
-  fainted — Whaley wins"). The battle plays correctly either way — this
-  is purely about how it reads. Should we label the wild one somehow
-  (e.g. "the wild Whaley"), leave it as-is, or invent something else?
-- **B35** — you said berries can be found on the ground. Do specific
-  areas of Venta tend to grow specific berries (matching that area's
-  vibe), or can any of the 6 turn up anywhere?
-- **B36** — you said Cooking Cabins are more common in Snow Mountain. Is
-  Snow Mountain the *only* place with one, or is there a smaller cabin
-  near the start too (so cooking isn't gated behind that area's badge)?
-- **B37** — a big fun one: all **198 wild Fakeamon** now have
-  a **draft home area** matched to your six area vibes — crocodiles in The
-  Lagoon, war robots in The Factory, yetis on Snow Mountain… Open
-  **`VENTA_ROSTER_DRAFT.md`** (it shows everyone's art) and tell us who's
-  in the wrong place. Evolution lines move together; no wrong answers.
-- **B38** — NEW: what should the on-screen D-pad look like — a classic
-  solid cross (Game Boy style), or four separate floating arrow buttons?
-- **B39** — NEW: which side of the screen should the D-pad sit on —
-  bottom-left, bottom-right, or try both during testing and decide then?
-- **B40** — NEW: how see-through should the D-pad be, sitting over the
-  meadow — mostly solid, half see-through, or barely-there?
-- **B41** — NEW: should mouse/desktop players see the D-pad too, or is it
-  touch-only (fingers get it, keyboard/mouse players don't)?
-- **B42** — NEW, INVENT: name the touch-play feature. "Pocket Venta" is
-  just the plan's placeholder — got a better one?
+Nothing creative is blocking the build now — the only open items are Jeff's
+number-tuning list (below) and future per-step calls as they come up.
 
 ---
 
@@ -127,4 +110,4 @@ working), Windeye/Spectera re-theme or swap for Gyms 2/3 (M4).
 
 ---
 
-*Serve B33–B42 whenever Lewis is ready — `DECISIONS.md` has the loop.* 🌠
+*B33–B42 answered 2026-07-11 — the whole B1–B42 bank is now cleared. New questions get added to `HOMEWORK_BACKLOG.md` as they come up.* 🌠

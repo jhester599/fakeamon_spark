@@ -183,9 +183,13 @@ Caught Fakeamon join your team.
 
 **DECIDED (2026-07-06) — nicknames:** **no nicknames** — species names only, keeps the roster clear. *(Lewis's call, B3.)*
 
+**DECIDED (2026-07-11) — telling apart a mirror match:** the **wild opponent is written as "the wild `<name>`"** everywhere it appears in the battle log and result messages — "the wild Whaley used Splash!", "the wild Whaley fainted!". Because there are no nicknames (B3), this is what keeps a same-species fight (your Whaley vs. a wild Whaley) readable. A small M2 battle-text tweak, now unblocked. *(Lewis's call, B34.)*
+
 **DECIDED (2026-07-06) — the "Gotcha!" moment:** caught → `"Gotcha! <name> was caught!"`; breaks free → `"Oh no! <name> broke free!"` *(Lewis's call, B5 — he kept the example wording as-is: "the same … are fine.")*
 
 **DECIDED (2026-07-06) — team size = 4** *(Lewis's call: "a little room to experiment").* A caught Fakeamon beyond your 4 active slots goes to **Boxes** — storage you can open to **switch** a boxed Fakeamon in for one on your active team. Nothing is ever lost; it just waits in the Boxes until you want it.
+
+**DECIDED (2026-07-11) — where you swap a boxed Fakeamon in: at a Fakeatent (B33).** The home base does one more job — it heals your team *and* is where you move a boxed Fakeamon onto your active four. *(Lewis's call. Needed by M5's Boxes UI.)*
 
 **DECIDED (2026-07-05) — Fakeaball tiers (Lewis's design):**
 
@@ -277,7 +281,7 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 **DECIDED (2026-07-06) — the Cooking Cabin:** self-serve — nobody runs it, walk in and cook. *(Lewis's call, B26.)*
 
-**DECIDED (2026-07-06) — where Cooking Cabins are:** they're **more common in the Snow Mountain area**. *(Lewis's invention, volunteered outside a homework round.)* Whether Snow Mountain is the *only* place with one, or there's also a smaller cabin somewhere earlier so cooking isn't gated entirely behind that area's gym badge, is still open — see **B36** in `HOMEWORK_BACKLOG.md`.
+**DECIDED (2026-07-06) — where Cooking Cabins are:** they're **more common in the Snow Mountain area**. *(Lewis's invention, volunteered outside a homework round.)* **DECIDED (2026-07-11) — there's a smaller cabin near the start too (B36):** a small starter-area Cooking Cabin exists so cooking **isn't gated entirely behind Snow Mountain's gym badge** — Snow Mountain still has the most (and coziest) cabins. *(Lewis's call.)*
 
 ---
 
@@ -293,7 +297,7 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 **Berries & Recipes** — found while exploring; cooked into healing dishes.
 
-**DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)* Whether specific berries are themed to specific areas (matching each area's vibe, §7) or any of the 6 can turn up anywhere is still open — see **B35** in `HOMEWORK_BACKLOG.md`.
+**DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)* **DECIDED (2026-07-11) — berries are themed by area (B35):** each area of Venta mostly grows the berries that fit its vibe (§7), rather than any of the 6 turning up anywhere — so where you explore shapes what you can cook. *(Lewis's call.)*
 
 **DECIDED (2026-07-05) — Lewis's berries & recipes:**
 
@@ -451,4 +455,4 @@ Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 
 5. Windeye's and Spectera's off-type re-theme/swap for Gyms 2/3, at M4 build time (§8).
 6. Wild-level location scaling — the real per-area numbers, once M3's areas (§7) exist.
 
-**Still open — Lewis, whenever:** B33 — where you swap boxed Fakeamon onto your active team (needed by M5's Boxes UI).
+**Resolved by Lewis (2026-07-11 — the last ten):** swap boxed Fakeamon **at a Fakeatent** (B33, §6); the wild opponent is written **"the wild `<name>`"** in battle text (B34, §6); berries are **themed by area** (B35, §9); a **smaller starter Cooking Cabin** exists too (B36, §8); the **Venta wild-roster area draft is approved as-is** (B37, `VENTA_ROSTER_DRAFT.md`); and the touch D-pad's look/side/opacity/visibility/name — four floating arrows, bottom-right, half see-through, a show/hide toggle, "Pocket Venta" (B38–B42, `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`). Every creative-director question B1–B42 is now answered; only Jeff's number-tuning list above remains.

@@ -90,14 +90,20 @@ Use this to jump straight to the right spot when recording a decision.
 | 43 | (B30) Lewis's own credit line | §12 Assets & Attribution | ✅ Decided (declined) |
 | 44 | (B31) Shiny variants | §3 Fakeamon | ✅ Decided |
 | 45 | (B32) Sound & music vibe | §13 Technical Notes | ✅ Decided |
-| — | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | 🔲 Still open |
+| 51 | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | ✅ Decided |
 | 46 | Berries found on the ground | §9 Economy & Items | ✅ Decided |
-| — | (B34) Telling apart a mirror match | §6 Battle System | 🔲 Still open |
-| — | (B35) Berries — area-themed or anywhere | §9 Economy & Items | 🔲 Still open |
+| 52 | (B34) Telling apart a mirror match | §6 Battle System | ✅ Decided |
+| 53 | (B35) Berries — area-themed or anywhere | §9 Economy & Items | ✅ Decided |
 | 47 | Cooking Cabins more common in Snow Mountain | §7/§8 World Locations | ✅ Decided |
-| — | (B36) Cooking Cabins — Snow-Mountain-only or elsewhere too | §8 World Locations & Roster | 🔲 Still open |
+| 54 | (B36) Cooking Cabins — Snow-Mountain-only or elsewhere too | §8 World Locations & Roster | ✅ Decided |
 | 49 | Fakeaballs are limited (start with 5, decrement per throw, block at zero) | §6 Battle System (Capturing) / §9 Economy & Items | ✅ Decided |
 | 50 | Pause with a Continue button after a catch | §6 Battle System (Capturing) | ✅ Decided |
+| 55 | (B37) Venta wild-roster area draft | `VENTA_ROSTER_DRAFT.md` (roster areas, §7–§8) | ✅ Decided |
+| 56 | (B38) Touch D-pad look | `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §4/§9 | ✅ Decided |
+| 57 | (B39) Touch D-pad screen side | `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §4/§9 | ✅ Decided |
+| 58 | (B40) Touch D-pad opacity | `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §4/§9 | ✅ Decided |
+| 59 | (B41) Touch D-pad shows on desktop? | `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §4/§9 | ✅ Decided |
+| 60 | (B42) Touch feature name | `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §9 | ✅ Decided |
 
 *(Evolution **level** per starter is still open — that's Jeff's number-tuning, not a creative call. So are the exact Great/Ultra/Cosmic ball bonus multipliers from Q12.)*
 
@@ -159,6 +165,16 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-08 | 48 | **Switch is a real mid-battle action** (M2 Step 6) — bringing in a teammate costs your turn, with the same speed-order risk as every other action: faster switches in safely, slower means the opponent hits your *current* Fakeamon first | invented live with Jeff during Step 6 — wanted Switch to feel like a real strategic choice, not a free out |
 | 2026-07-10 | 49 | **Fakeaballs are limited** — you start with **5**; each throw (catch or miss) uses one; a Tall Tower purchase (M4) adds more; the "Throw Fakeaball" button disables at **zero** | Lewis's design — catching shouldn't be a free, infinite action; not yet built (M2 Step 4 shipped before the ball count existed in `gameState`) — tracked as a follow-up fix, see `ROADMAP.md` M2 |
 | 2026-07-10 | 50 | **Pause after a catch** — a caught Fakeamon shows a **Continue** button (like a battle win) instead of jumping straight into a new battle | Lewis's design — wanted a beat to actually see "Gotcha!" before the screen moves on; not yet built (today a catch resolves immediately) — tracked as a follow-up fix, see `ROADMAP.md` M2 |
+| 2026-07-11 | 51 | **Swap boxed Fakeamon at a Fakeatent** — the home base heals *and* manages your team, all in one stop (needed by M5's Boxes UI) | (option A) — the Fakeatent already exists as home base, so it does one more job |
+| 2026-07-11 | 52 | **Label the wild opponent "the wild `<name>`"** in the battle log and result messages (e.g. "the wild Whaley used Splash!") — clears up same-species mirror matches now that there are no nicknames (B3). A small M2 battle-text tweak, now unblocked | (option A) — "add wild everywhere the opponent is mentioned" |
+| 2026-07-11 | 53 | **Berries are themed by area** — each Venta area mostly grows berries that fit its vibe (§7), rather than any of the 6 turning up anywhere | (option A) |
+| 2026-07-11 | 54 | **A smaller Cooking Cabin near the start too** — so cooking isn't gated entirely behind Snow Mountain's gym badge; Snow Mountain still has the most (and coziest) cabins | (option B) |
+| 2026-07-11 | 55 | **Venta wild-roster area draft approved as-is** — the proposed home areas in `VENTA_ROSTER_DRAFT.md` stand; `areaProposed` becomes the real `area` as each area's roster is wired in (M3 row 6 → M4) | (option A) — "looks great, keep the draft" |
+| 2026-07-11 | 56 | **Touch D-pad = four floating arrow buttons** (separate ▲▼◀▶ with gaps between them), not one solid Game-Boy cross | (option B) |
+| 2026-07-11 | 57 | **Touch D-pad sits on the bottom-right** of the screen | (option B) |
+| 2026-07-11 | 58 | **Touch D-pad is half see-through** (~0.5 opacity) — findable with a thumb but doesn't block the meadow | (option B) |
+| 2026-07-11 | 59 | **A toggle controls whether the D-pad shows** — a small on/off button so it works for touch and desktop players either way, instead of auto-hiding on a mouse | (option C) |
+| 2026-07-11 | 60 | **The touch-play feature keeps the name "Pocket Venta"** | "the same, pocket venta" — Lewis kept the plan's placeholder |
 
 <!--
 Template for a new row:

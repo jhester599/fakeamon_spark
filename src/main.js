@@ -136,9 +136,11 @@ function enterOverworld() {
   document.getElementById("arena").innerHTML =
     '<div class="title-card">' +
       "<h2>Exploring The Meadows 🌱</h2>" +
-      "<p>Use the <b>arrow keys</b> to walk around." +
-      "<br><small>(Wild Fakeamon will stand on the map at a later step — for " +
-      "now, tap ⚔️ Battle test to practise a fight.)</small></p>" +
+      "<p>Use the <b>arrow keys</b> to walk around. Wild Fakeamon are standing " +
+      "in the grass — <b>walk into one</b> to meet it!" +
+      "<br><small>(For now a bump just says hello in the console — the real " +
+      "battle opens at the next step. Tap ⚔️ Battle test to practise a fight.)" +
+      "</small></p>" +
     "</div>";
 
   renderTeamList();

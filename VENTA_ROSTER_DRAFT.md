@@ -6,7 +6,7 @@
 > and Lewis kept the whole draft ("looks great"). These area assignments now
 > **stand as the plan**: `areaProposed` in `tools/roster-200.json` becomes the
 > real `area` for each creature **as that area's roster is actually wired in**
-> (M3 row 6 for The Meadows → M4 for the badge-gated areas). Lewis can still
+> (M3S11 for The Meadows → M4S6 for the badge-gated areas). Lewis can still
 > move anyone later — evolution lines move together — but nothing's blocking.
 >
 > Rules baked into the draft: **evolution lines stay together** (all stages

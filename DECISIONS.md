@@ -169,7 +169,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-11 | 52 | **Label the wild opponent "the wild `<name>`"** in the battle log and result messages (e.g. "the wild Whaley used Splash!") — clears up same-species mirror matches now that there are no nicknames (B3). A small M2 battle-text tweak, now unblocked | (option A) — "add wild everywhere the opponent is mentioned" |
 | 2026-07-11 | 53 | **Berries are themed by area** — each Venta area mostly grows berries that fit its vibe (§7), rather than any of the 6 turning up anywhere | (option A) |
 | 2026-07-11 | 54 | **A smaller Cooking Cabin near the start too** — so cooking isn't gated entirely behind Snow Mountain's gym badge; Snow Mountain still has the most (and coziest) cabins | (option B) |
-| 2026-07-11 | 55 | **Venta wild-roster area draft approved as-is** — the proposed home areas in `VENTA_ROSTER_DRAFT.md` stand; `areaProposed` becomes the real `area` as each area's roster is wired in (M3 row 6 → M4) | (option A) — "looks great, keep the draft" |
+| 2026-07-11 | 55 | **Venta wild-roster area draft approved as-is** — the proposed home areas in `VENTA_ROSTER_DRAFT.md` stand; `areaProposed` becomes the real `area` as each area's roster is wired in (M3S11 → M4S6) | (option A) — "looks great, keep the draft" |
 | 2026-07-11 | 56 | **Touch D-pad = four floating arrow buttons** (separate ▲▼◀▶ with gaps between them), not one solid Game-Boy cross | (option B) |
 | 2026-07-11 | 57 | **Touch D-pad sits on the bottom-right** of the screen | (option B) |
 | 2026-07-11 | 58 | **Touch D-pad is half see-through** (~0.5 opacity) — findable with a thumb but doesn't block the meadow | (option B) |

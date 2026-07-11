@@ -95,7 +95,7 @@ Consequences (both make M3 *easier*):
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
 | Phaser version check | — | ✅ **Re-checked & pinned at S1 (2026-07-09): 4.2.1** ("Giedi"), now the newest stable 4.x on npm (was 4.2.0 at M3S0). Vendored to `assets/vendor/`, logged in `DECISIONS.md` + `CREDITS.md` |
-| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S9; first wired in at **ROADMAP M3 row 6** (The Meadows' slice), then grown area-by-area through M4–M5 |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S10; first wired in at **M3S11** (The Meadows' slice), then grown area-by-area through M4–M5 |
 
 ~~What S1 still owns:~~ **✅ S1 is done (2026-07-09) — see §A.5.** It owned:
 the pinned Phaser script tag (vendored, not CDN), `src/world/config.js`,
@@ -560,12 +560,14 @@ this plan in hand. Add these constraints to that session's prompt:
 
 ---
 
-## 9. Build order — M3 in nine session-sized steps
+## 9. Build order — M3 in ten session-sized steps
 
 Each step keeps the game runnable and ends in a commit. Model/effort per
-`MODELS.md` (Huddle can override). ROADMAP.md's M3 rows 1–5 map onto these
-as: R1≈S1–S2, R2≈S3–S4, R3≈S5, R4≈S6–S7, R5≈S8. ROADMAP's row 6 (expand the
-wild roster — The Meadows' slice) is new work beyond this plan.
+`MODELS.md` (Huddle can override). `ROADMAP.md` and `roadmap.html` now list
+these **one-to-one as `M3S1`–`M3S10`** (same S-numbers as below), plus a
+**`M3S11`** row for the wild-roster expansion — new content work beyond this
+plan. (The older "rows 1–7 that bundled several S-steps each" scheme was
+retired 2026-07-11; roadmap ↔ plan share one numbering now.)
 
 | # | Step | What gets built | ▶ You'll see | Model / effort |
 |---|---|---|---|---|
@@ -573,7 +575,7 @@ wild roster — The Meadows' slice) is new work beyond this plan.
 | **S2** ✅ | Tile map renders *(done 2026-07-10 — §A.6)* | Meadow tileset (already vendored + credited at M3S0); `src/data/maps.js` (`theMeadows`) now loaded; WorldScene draws the ground layer via `make.tilemap({data})` | A little meadow with a path and tree border | ~~Sonnet 5 / high~~ Opus 4.8 |
 | **S3** ✅ | Player on the grid *(done 2026-07-10 — §A.6)* | Hero sheet loaded; sprite placed from `gameState.world.player`; turn-to-face + tween-step movement per §6.2; collision vs solid tiles + edges; per-step autosave; **retired the M2 auto-battle-loop — the map is the hub now** | Walk the meadow; trees stop you | ~~Sonnet 5 / high~~ Opus 4.8 |
 | **S4** ✅ | Walk animation + input polish *(done 2026-07-10 — §A.6)* | 4-direction walk cycles (down/left/right/up); held-key continuous walking + arrow-key page-scroll capture (both landed with S3) | Walking looks like walking | ~~Sonnet 5 / medium~~ Opus 4.8 |
-| **S5** ✅ | Slicer tool *(done — satisfied at M3S0 for M3's pool)* | `tools/slice-sheets.mjs` exists (§7.3) and was run for the creatures M3 actually uses — the 3 starters — producing `assets/sprites/{front,back,idle}/<slug>.png` with generated CREDITS rows. Growing this to the full 198-roster slice is M3 row 6 / M4 work, not S5 | Sliced front/back/idle files already in the repo (no gameplay change) | Sonnet 5 / medium (Haiku can run/re-run it) |
+| **S5** ✅ | Slicer tool *(done — satisfied at M3S0 for M3's pool)* | `tools/slice-sheets.mjs` exists (§7.3) and was run for the creatures M3 actually uses — the 3 starters — producing `assets/sprites/{front,back,idle}/<slug>.png` with generated CREDITS rows. Growing this to the full 198-roster slice is M3S11 / M4S6 work, not S5 | Sliced front/back/idle files already in the repo (no gameplay change) | Sonnet 5 / medium (Haiku can run/re-run it) |
 | **S6** ✅ | Encounters stand in the world *(done 2026-07-11)* | `theMeadows.encounters` (already in map data) now render as **idle-animated sprites** (`spawnEncounters` in `src/world/config.js`, using each species' new `overworld` idle sheet — `FAKEAMON[key].overworld`); the encounter tile blocks movement and walking into it fires the `handleEncounter` seam, which **logs + gives the creature a little pop** (the real battle is S7). Verified headless: 3 sprites render, bump fires, hero can't walk onto the tile, 0 errors | A wild Fakeamon idling in the grass; bumping it logs a message | Sonnet 5 / medium |
 | **S7** | **The handoff** 🌉 | `src/screens.js` per §3; `handleEncounter` per §5: pause → hide → `await startBattle` → apply outcome → show → resume; keyboard enable/disable + canvas refocus | Bump a creature → the real battle opens → win/catch/flee → back on the map, creature gone (or not, if fled) | Sonnet 5 / **high** — the whole plan converges here; if it fights back twice, escalate to Opus 4.8 |
 | **S8** | Outcome depth | Catch → party (team UI from M2 reflects it); XP applied; loss placeholder per §6.4; `defeatedEncounters` respawn-proofing on scene rebuild | Catch a wild Leafick on the map and see it join the team | Sonnet 5 / medium |

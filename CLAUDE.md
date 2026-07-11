@@ -45,11 +45,11 @@ project. After the step works, briefly reflect: was the model pick right?
 
 ## Scope guardrails
 
-**Build now (M2 only):** wild opponents, catching with Fakeaballs, a team of 4 with Boxes overflow, switching fighters — **plus** the state/save foundation steps the M5 plan schedules *into* M2 (individuals & the state bag, the `startBattle` contract, save v1 — see `PLANS/M5_STATE_AND_SAVE_PLAN.md` §6, steps S1–S4).
+**Build now (M3 — the overworld):** M1 and M2 are complete; **M3S1–M3S7 are done** (Phaser's in, The Meadows renders, you walk it with an animated hero, wild Fakeamon stand in the grass, and walking into one opens the real battle and returns you to the map). **Next is M3S8** (catch-on-map depth + XP), then M3S9 (cleanup + docs), M3S10 (touch / "Pocket Venta"), M3S11 (the wild-roster expansion). Build against the settled map↔battle seam: `src/screens.js` + the `startMapEncounter` → `enterBattle` → `handleBattleOutcome` handoff (M3 plan §3/§5).
 
-**Do NOT build yet:** overworld/map and anything Phaser (M3 — but M2's battle module must end up matching the M3 plan's §5 contract), gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). If a change starts pulling in out-of-scope systems, pause and flag it.
+**Do NOT build yet:** gyms, mini-bosses, shops, tokens, cooking, evolution machinery (M4–M5). Touch/mobile controls are sanctioned **only** at M3S10 (after S9) and scoped to `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`. If a change starts pulling in an M4–M5 system, pause and flag it. *(M1/M2 are the historical record — the battle slice, then catching + a team of 4 with Boxes + switching + save v1/export-import; full detail in `ROADMAP.md`.)*
 
-**Scheduled but paced area-by-area — check the step before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has ~200 Tuxemon (198 staged) pre-selected and typed for this. As of the 2026-07-08 roadmap reorg it's now on the roadmap, split by area: **M3 Step 6** wires in The Meadows' slice (the one map M3 builds), and **M4 Step 6** grows the roster area-by-area as gym badges open each new area (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon — `DESIGN.md` §7, `DECISIONS.md` B8), carrying on into M5's late-game areas. Don't front-run it: only wire in the slice for the area actually being built. *(The art/licensing legwork for the whole pool IS pre-staged — §16's staging note — the per-area work is the creative wiring: Lewis's renames, encounter tables, stats.)*
+**Scheduled but paced area-by-area — check the step before touching:** expanding the wild-encounter roster beyond the starters. `CONTENT_REFERENCE.md` §16 has ~200 Tuxemon (198 staged) pre-selected and typed for this. It's on the roadmap, split by area: **M3S11** wires in The Meadows' slice (the one map M3 builds), and **M4S6** grows the roster area-by-area as gym badges open each new area (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon — `DESIGN.md` §7, `DECISIONS.md` B8), carrying on into M5's late-game areas. Don't front-run it: only wire in the slice for the area actually being built. *(The art/licensing legwork for the whole pool IS pre-staged — §16's staging note — the per-area work is the creative wiring: Lewis's renames, encounter tables, stats.)*
 
 ## Tech stack
 
@@ -67,7 +67,7 @@ assets/vendor/phaser.min.js → the Phaser game engine, vendored & pinned to 4.2
 src/data/moves.js       → MOVES data (tweak power/accuracy here)
 src/data/fakeamon.js    → GROWLER, WHALEY, LEAFICK data (stats, sprite paths)
 src/data/typechart.js   → TYPE_CHART matchup table
-src/data/maps.js        → The Meadows as plain tile arrays + encounters; loaded by index.html and drawn by src/world/config.js (S2). Edit a number, refresh, the world changes. (Encounters aren't wired to battles until S6/S7.)
+src/data/maps.js        → The Meadows as plain tile arrays + encounters; loaded by index.html and drawn by src/world/config.js (S2). Edit a number, refresh, the world changes. (Encounters became wired to battles at S6/S7 — walking into one starts the fight.)
 src/battle.js       → the startBattle(config) contract + all battle logic (turns, damage, HP, win/lose/flee)
 src/save.js         → save v1 (M5-plan S3/S4): saveGame/loadGame/clearSave + version/migration, and exportSave/importSaveFromFile. localStorage single slot "fakeamon-save"
 src/world/config.js → the Phaser overworld — BootScene, WorldScene (draws The Meadows, walks the hero, stands wild Fakeamon in the grass via spawnEncounters, and handleEncounter → the S7 battle handoff / removeEncounter), and startWorld(). World numbers (size, zoom, color) are labeled constants here
@@ -96,7 +96,7 @@ PLANS/       → architecture plans from high-end planning sessions:
                state, XP, evolution, and saving — read its §A first, it
                reconciles the plans against the code as it actually exists
 HOMEWORK.md  → open questions waiting on Lewis and Jeff
-HOMEWORK_BACKLOG.md → the big question bank (B1–B36) for the whole game;
+HOMEWORK_BACKLOG.md → the big question bank (B1–B42, all decided) for the whole game;
                HOMEWORK.md gets served 2–4 questions at a time from here
 CREDITS.md   → art attribution: file, source, artist, license, commit pulled from
 CONTENT_REFERENCE.md → where Tuxemon-sourced art/data/roster ideas come from + licensing rules
@@ -186,7 +186,7 @@ Type names lowercase and consistent (`"fire"`, `"water"`, `"grass"`, `"metal"`, 
 - These are **composite sprite sheets (128×88px)**, not flat single sprites — a 64×64 front pose at (0,0), a 64×64 back pose at (64,0), and a small 2-frame idle animation (two 24×24 frames) at (0,64)/(24,64). *(Corrected 2026-07-06 by measurement — an older "2×2 grid of ~64×44 cells" description was wrong.)* `tools/slice-sheets.mjs` cuts them; scale with nearest-neighbor only.
 - Gym-leader (trainer NPC) art lives in a *different* folder: `mods/tuxemon/sprites/<name>.png`.
 - When we add any asset, record it in **`CREDITS.md`**: file, our name for it, source path, artist(s), license, and the commit the file was pulled from (the branch moves).
-- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, all 3 starters (Growler, Whaley, Leafick) now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster is still planned for **M3 Step 3** (see `ROADMAP.md`) — this section documents what we already confirmed so that step is fast when we get there.
+- **M1's gameplay never needed art** — but as a bonus, ahead of schedule, all 3 starters (Growler, Whaley, Leafick) now show real Tuxemon-based art (see `CREDITS.md`). The rest of the roster's art comes later (the slicer is **M3S5**, done; the wild-roster expansion is **M3S11** → **M4S6**, see `ROADMAP.md`) — this section documents what we already confirmed so those steps are fast when we get there.
 - **✅ Resolved:** Growler's (Hissiorite) and Leafick's (Frondly) sprites have no entry in Tuxemon's own `ATTRIBUTIONS.md`, but both artists are now confirmed via the wiki — see `CONTENT_REFERENCE.md` §13 and `CREDITS.md`. No longer a blocker for public distribution.
 
 ## Git

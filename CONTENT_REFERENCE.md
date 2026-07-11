@@ -374,10 +374,12 @@ unblocked once that lands.
 > Three staged monsters (`coaldiak`, `ninjasmine`, `toxiris`) are ⚠️
 > **OPMon-derived** — confirm that project's terms before they enter the
 > game. What remains creative: Lewis's rename pass and per-area encounter
-> tables — and to give those a running start, every monster now carries a
-> **proposed** home area (`areaProposed` in the JSON, worksheet in
-> **`VENTA_ROSTER_DRAFT.md`**, Lewis's homework **B37**). Proposed ≠
-> decided — Lewis reshuffles freely.
+> tables — and to give those a running start, every monster carries a
+> home area (`areaProposed` in the JSON, worksheet in
+> **`VENTA_ROSTER_DRAFT.md`**, Lewis's homework **B37** — **approved as-is
+> 2026-07-11**, `DECISIONS.md` #55). `areaProposed` becomes the real `area`
+> as each area's roster is wired in (M3S11 → M4S6); Lewis can still move
+> anyone later.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every

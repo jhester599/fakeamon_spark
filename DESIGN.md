@@ -417,7 +417,7 @@ on the `development` branch of `github.com/Tuxemon/Tuxemon` (e.g. `.../battle/hi
 
 **Curiosity, not a blocker:** both `dollfin-sheet.png` and `d0llf1n-sheet.png` (stylized zero/one spelling) exist in the repo as two different files. Doesn't affect us — Whaley has no pre-evolution (§3, Lewis's decision), so we don't need either.
 
-Maintain a **`CREDITS.md`** in the repo once we actually pull files in (M3 step 3, per `ROADMAP.md`): file, our name, source path, artist(s), license, and the commit/date it was pulled from (the `development` branch moves — note the commit SHA at pull time so we can find the exact source again later).
+Maintain a **`CREDITS.md`** in the repo (in place since the starter art landed; grows as more art is pulled in — the roster slicer is M3S5, the wild-roster expansion M3S11 → M4S6): file, our name, source path, artist(s), license, and the commit/date it was pulled from (the `development` branch moves — note the commit SHA at pull time so we can find the exact source again later).
 
 **DECIDED (2026-07-06) — Lewis's own credit line:** declined — "don't have any credits, the game keeps going." *(B30.)* `CREDITS.md` stays focused on art attribution only.
 

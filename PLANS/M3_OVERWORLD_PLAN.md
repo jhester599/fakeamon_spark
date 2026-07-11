@@ -6,18 +6,22 @@
 >
 > **How to use it:** this document is authoritative for M3 *architecture*.
 > `DESIGN.md` remains authoritative for *game rules*. `ROADMAP.md`'s M3 table
-> is superseded by the finer-grained step list in §9 below. The Model Huddle
-> from `MODELS.md` still runs before every step.
+> now mirrors the finer-grained step list in §9 below (one row per **MxSy**
+> step, reconciled 2026-07-11). The Model Huddle from `MODELS.md` still runs
+> before every step.
 >
-> **Status:** plan complete; **execution underway — S1–S4 done ✅ (S1
-> 2026-07-09; S2–S4 2026-07-10). Next: S5/S6 → S7 (the handoff).** See **§A.5**
-> for S1 and **§A.6** for S2–S4. M2 is now fully finished (incl. save
-> v1/export-import). You can walk The Meadows with an animated hero; trees
-> block you; a battle is reachable via the temporary "Battle test" button and
-> returns you to the map. **Read §A below first** — it reconciles this plan
+> **Status:** plan complete; **execution underway — S1–S7 done ✅ (S1
+> 2026-07-09; S2–S4 2026-07-10; S5–S7 2026-07-11). Next: S8 (catch-on-map
+> depth + XP).** See **§A.5** for S1, **§A.6** for S2–S4, and the §9 table for
+> S5–S7. M2 is fully finished (incl. save v1/export-import). You can walk The
+> Meadows with an animated hero; trees block you; wild Fakeamon idle in the
+> grass, and **walking into one now opens the real battle** (`src/screens.js`
+> hides + freezes the map) and returns you to the map — beat/catch clears the
+> creature, fleeing leaves it. The temporary "Battle test" button still works
+> too (removed at S9). **Read §A below first** — it reconciles this plan
 > against the code and decisions as they actually stand, and lists the prep
-> work already staged in the repo. **Touch/mobile play is now adopted as a
-> tenth step, S10, landing after S9 — see §A.7 and
+> work already staged in the repo. **Touch/mobile play is adopted as a tenth
+> step, S10, landing after S9 — see §A.7 and
 > `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`.**
 
 ---
@@ -343,7 +347,7 @@ export const gameState = {
   tokens: 0,                       // *M4
   flags: {},                       // badges, unlocked areas, bosses beaten *M4/M5
   world: {
-    mapId: "starterMeadow",
+    mapId: "theMeadows",           // was "starterMeadow" before B6–B8 named the world
     player: { tileX: 5, tileY: 7, facing: "down" },
     defeatedEncounters: [],        // encounter ids removed from the map
   },
@@ -445,8 +449,9 @@ const MAPS = {
 ```
 
 First map: **one screen, ~30×20 tiles**, grass + a dirt path + tree border.
-No scrolling camera until the map is bigger than the screen (M3 step 6 —
-camera-follow is one line in Phaser, but keep it out of the first playable).
+No scrolling camera until the map is bigger than the screen (camera-follow is
+one line in Phaser, but it's on M3's do-not-build list — keep it out until a
+map actually outgrows the screen).
 
 > **Homework dependency — resolved, see §A.2:** B6/B7/B8 are decided
 > (connected areas; the world is **Venta**; the first area is **The
@@ -497,7 +502,7 @@ line ("You hurry back to safety…"). Mark it `// M3 PLACEHOLDER` in code.
 
 ---
 
-## 7. Asset pipeline (M3 Step 3 in ROADMAP terms)
+## 7. Asset pipeline (the M3S5 slicer)
 
 All sourcing rules in `CONTENT_REFERENCE.md` remain law; this section only
 adds M3 mechanics. Every pulled file gets a `CREDITS.md` row (file, our

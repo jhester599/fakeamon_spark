@@ -72,10 +72,12 @@ wins). **`M3S11`** (expand the wild roster — The Meadows' slice) is new work
 | Step | What we build | Model | Effort | Why |
 |---|---|---|---|---|
 | **Planning session** ✅ | *Done!* How Phaser (map) and our HTML battle hand off — produced `PLANS/M3_OVERWORLD_PLAN.md` (+ the M5 state & save plan), via **Fable 5** in chat | — | — | The riskiest design decision in the whole project, now on paper |
-| S1–S3 | Phaser hello-world, tile map, player walking the grid | **Sonnet 5** | high | Executing the Architect's plan, but new territory (S3 is the movement-*feel* step — budget tuning time with Lewis) |
-| S4–S6 | Walk animation, the sprite-slicer tool, encounters standing on the map | **Sonnet 5** (slicer re-runs: **Haiku**) | medium | Batch work + CREDITS.md bookkeeping |
-| S7 | **The handoff** 🌉 — bump a creature → real battle → back to the map | **Sonnet 5** | high | The whole plan converges here; if it fights back twice, escalate to **Opus 4.8** |
-| S8–S9 | Catch/XP outcomes on the map + cleanup & docs | **Sonnet 5** | medium → low | Features against a settled seam |
+| S1–S3 ✅ | Phaser hello-world, tile map, player walking the grid *(done)* | ~~Sonnet 5~~ **Opus 4.8** | high | Executing the Architect's plan, but new territory (S3 is the movement-*feel* step — budget tuning time with Lewis) |
+| S4–S6 ✅ | Walk animation, the sprite-slicer tool, encounters standing on the map *(done)* | ~~Sonnet 5~~ **Opus 4.8** (slicer: **Haiku** ok) | medium | Batch work + CREDITS.md bookkeeping |
+| S7 ✅ | **The handoff** 🌉 — bump a creature → real battle → back to the map *(done, Opus 4.8)* | ~~Sonnet 5~~ **Opus 4.8** | high | The whole plan converges here; the family pre-emptively used Opus and it landed clean |
+| S8 | Catch/XP outcomes on the map — **next** | **Sonnet 5** | medium | Features against the settled S7 seam |
+| S9 | Cleanup & docs (remove the Battle test button; verify the live build) | **Sonnet 5** | low | Wrap-up, not new behavior |
+| S10 — touch / "Pocket Venta" | On-screen D-pad + fit-to-screen scaling (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) | **Sonnet 5** | medium–high | DOM + CSS event handling, no new Phaser |
 | M3S11 — expand the wild roster | Swap The Meadows' test pool for its real slice of the 198-Fakeamon pool + Lewis's renames | **Sonnet 5** | medium | Data-entry against a settled encounter seam; the creative part is Lewis's renames, not model strength |
 
 ### M4 — World Systems

@@ -171,7 +171,7 @@ see it join a team you can swap between.
 
 ---
 
-## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S6 done, M3S7 next)*
+## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S7 done, M3S8 next)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
@@ -186,9 +186,11 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 > it's numbered last only because it was added after the plan. Build from the
 > plans; this table is the short version.
 >
-> **Status (2026-07-11):** M3S1–M3S6 are done — Phaser's in, the meadow
-> renders, you walk it with an animated hero, and wild Fakeamon now idle on
-> the map (bump one → a console message). **Next: M3S7**, the handoff.
+> **Status (2026-07-11):** M3S1–M3S7 are done — Phaser's in, the meadow
+> renders, you walk it with an animated hero, wild Fakeamon idle on the map,
+> and **walking into one now opens the real battle** and returns you to
+> walking (win/catch clears it; fleeing leaves it). **Next: M3S8**,
+> catch-on-map depth + XP.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -198,7 +200,7 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 | **M3S4** ✅ | **Walk animation** — the hero's legs move as you walk | Walking looks like walking — *done!* |
 | **M3S5** ✅ | The **sprite-slicer tool** — cut creature sheets into front/back/idle poses (done at M3S0 for the 3 starters; the full-roster slice is M3S11 / M4) | New sliced sprite files, no gameplay change — *done!* |
 | **M3S6** ✅ | **Wild Fakeamon stand on the map** — creatures idle in the grass; walking into one bumps it (a console message for now; the real battle is M3S7) | A wild Fakeamon idling in the grass; bump it → a message — *done! (2026-07-11)* |
-| **M3S7** | **The handoff** 🌉 — bump a wild Fakeamon → the real battle opens → back on the map (creature gone, unless you fled) | Touch the creature → the M1/M2 battle → back on the map |
+| **M3S7** ✅ | **The handoff** 🌉 — walk into a wild Fakeamon → the real battle opens (a tiny `src/screens.js` hides + freezes the map) → win/catch/flee → back on the map (creature gone unless you fled) | Touch the creature → the M1/M2 battle → back on the map — *done! (2026-07-11)* |
 | **M3S8** | **Outcome depth** — a catch on the map joins your team; XP applied; beaten/caught creatures don't respawn | Catch a wild Leafick on the map and see it join the team |
 | **M3S9** | **Cleanup + docs** — remove the temporary "Battle test" button; clear stale `M3 PLACEHOLDER` comments; verify the live Pages build plays start-to-finish | A tiny but complete monster-catching game on the live site |
 | **M3S10** | **Play it on a tablet ("Pocket Venta")** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) | Walk the meadow with your thumbs on the live site |

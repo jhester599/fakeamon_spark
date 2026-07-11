@@ -1,12 +1,13 @@
 # Venta Wild-Roster Draft — who lives where? 🗺️
 
-> **PROPOSED — this is Lewis's homework B37, not a decision.** Every wild
-> Fakeamon in the pool has been dealt a *draft* home area, matched to the
-> six area vibes he invented (B8) and each creature's type, look, and blurb.
-> **There are no wrong answers** — to move someone, just tell Claude
-> ("the crocodiles go to Snow Mountain!") or scribble on a printout. When
-> Lewis signs off (or reshuffles), the picks get logged in `DECISIONS.md`
-> and `tools/roster-200.json` is updated to match.
+> **✅ APPROVED AS-IS (2026-07-11) — Lewis signed off (B37, `DECISIONS.md` #55).**
+> Every wild Fakeamon in the pool was dealt a home area, matched to the
+> six area vibes he invented (B8) and each creature's type, look, and blurb —
+> and Lewis kept the whole draft ("looks great"). These area assignments now
+> **stand as the plan**: `areaProposed` in `tools/roster-200.json` becomes the
+> real `area` for each creature **as that area's roster is actually wired in**
+> (M3 row 6 for The Meadows → M4 for the badge-gated areas). Lewis can still
+> move anyone later — evolution lines move together — but nothing's blocking.
 >
 > Rules baked into the draft: **evolution lines stay together** (all stages
 > share an area — the basic stage is common, evolved stages rarer), levels

@@ -238,8 +238,9 @@ Retrofit rules (this is S10's first, separate commit):
 ## §4. The D-pad itself (built at S10)
 
 A `#dpad` div inside `#world` (which becomes `position: relative`),
-anchored bottom-left, a 3×3 CSS grid with four arrow buttons in the
-cross positions. All it does is write to the stub from §3:
+anchored **bottom-right** (B39), a 3×3 CSS grid with **four separate,
+floating arrow buttons** in the cross positions — spaced with gaps, *not*
+one solid Game-Boy cross (B38). All it does is write to the stub from §3:
 
 ```js
 // pointerdown on the ▲ button:  virtualPad.direction = "up"
@@ -262,15 +263,16 @@ requirements, not suggestions:
   *and* the canvas; `preventDefault()` in `pointerdown`; CSS
   `user-select: none` and `-webkit-tap-highlight-color: transparent`;
   swallow `contextmenu` on the pad (long-press menu on iPad).
-- **Thumb-sized targets:** direction buttons ≥ 56px, semi-transparent
-  (`opacity` is a Lewis dial, §9), with a dead center cell so diagonals
+- **Thumb-sized targets:** direction buttons ≥ 56px, **half see-through
+  (~0.5 opacity — B40; still a Lewis dial, §9)**, with a dead center cell so diagonals
   can't happen by accident — the grid walker only knows four directions.
 - **One finger is enough.** Track the active `pointerId`; ignore extra
   fingers rather than letting them fight.
-- **When to show it:** default to the `(pointer: coarse)` media query
-  (fingers = pad appears, mouse = it doesn't), plus a small manual
-  toggle so it can be tested on desktop. Lewis may simply want it always
-  on — his call (§9).
+- **When to show it:** **DECIDED (B41) — a show/hide toggle.** A small
+  on/off button controls the pad for *everyone*, touch and desktop alike,
+  rather than auto-hiding on a mouse. Reasonable starting state: on when
+  `(pointer: coarse)` (a phone/tablet), off on a plain mouse — but either
+  way the toggle is always there to flip it.
 - **Layout note:** center cell stays empty in M3. It's the reserved
   parking spot for an **A button** when M4's NPCs and doors need a
   "talk/interact" action — the pad is built as a 3×3 grid *now* so that
@@ -398,6 +400,14 @@ Following the `DECISIONS.md` loop — these are his to decide. Filed as
    touch-only? (Ties to the `(pointer: coarse)` default in §4.)
 5. **Name the feature** for the changelog. ("Pocket Venta" is a
    placeholder — he'll beat it.)
+
+**✅ DECIDED (2026-07-11) — Lewis's picks (folded into §4 above):**
+1. **Pad look:** four separate floating arrow buttons, *not* a solid
+   cross (B38).
+2. **Which side:** **bottom-right** (B39).
+3. **How see-through:** **half** (~0.5 opacity, B40).
+4. **Desktop too:** a **show/hide toggle** for everyone (B41).
+5. **Name:** he kept **"Pocket Venta"** (B42).
 
 ---
 

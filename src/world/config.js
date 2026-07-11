@@ -56,6 +56,16 @@ const STEP = {
   down:  { dx: 0, dy: 1 },
 };
 
+// --- Wild Fakeamon standing on the map (S6) ------------------------------
+// Each entry in a map's `encounters` list (src/data/maps.js) is drawn as a
+// little creature idling in the grass, using its 2-frame idle pair (24×24 per
+// frame, already tile-scale — see PLANS/M3_OVERWORLD_PLAN.md §6.3). They never
+// walk around — they just wiggle in place. Walking INTO one "bumps" it; for
+// now that only logs + gives a little pop (the real battle handoff is S7).
+const IDLE_FRAME_W  = 24;
+const IDLE_FRAME_H  = 24;
+const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dial)
+
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
 // loading a save). Set in create(). worldActive gates walking: it's false on
 // the title/starter/battle screens so arrow keys don't walk a hero you can't
@@ -82,6 +92,18 @@ class BootScene extends Phaser.Scene {
     this.load.image("meadow-tiles", meadow.tileset); // assets/tilesets/meadow.png
     // S3: the hero walk sheet, sliced into 16×32 frames.
     this.load.spritesheet("hero", HERO_SHEET, { frameWidth: HERO_FRAME_W, frameHeight: HERO_FRAME_H });
+
+    // S6: the little idle sprite for each kind of wild Fakeamon that stands on
+    // this map — 2 frames of 24×24, keyed "idle-<species>" (one load per
+    // species, even if several of that species appear).
+    const seenSpecies = new Set();
+    (meadow.encounters || []).forEach((enc) => {
+      const species = FAKEAMON[enc.species];
+      if (!species || !species.overworld || seenSpecies.has(enc.species)) return;
+      seenSpecies.add(enc.species);
+      this.load.spritesheet("idle-" + enc.species, species.overworld,
+        { frameWidth: IDLE_FRAME_W, frameHeight: IDLE_FRAME_H });
+    });
   }
 
   create() {
@@ -97,8 +119,9 @@ class BootScene extends Phaser.Scene {
 //  keys, blocked by solid tiles (trees/rocks/boulders/stumps/logs — see
 //  SOLID_TILE_INDICES in maps.js). Movement is a TWEEN between tiles (no
 //  physics — plan §6.2), so the hero is always ON a tile or sliding cleanly
-//  between two, never drifting. The wild Fakeamon standing in the grass (S6)
-//  get added here later.
+//  between two, never drifting.
+//  S6: wild Fakeamon now stand in the grass (spawnEncounters); walking into
+//  one "bumps" it (handleEncounter) — the real battle handoff lands at S7.
 // ---------------------------------------------------------------------------
 class WorldScene extends Phaser.Scene {
   constructor() {
@@ -136,6 +159,8 @@ class WorldScene extends Phaser.Scene {
     this.isMoving = false;
     this.createWalkAnims(); // S4: the four walk cycles
     this.syncHeroToState(); // place them wherever gameState says (start tile, or a loaded save)
+
+    this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass
 
     // Arrow keys. addCapture stops the browser from scrolling the page when
     // you press them (plan §6.2 / §3).
@@ -196,6 +221,73 @@ class WorldScene extends Phaser.Scene {
     this.isMoving = false;
   }
 
+  // S6: stand a wild Fakeamon on each of this map's encounter tiles, wiggling
+  // its idle animation. We remember which tile each one is on (encounterByTile)
+  // so walking into that tile can "bump" it. Encounters already cleared in a
+  // later step (caught/beaten) are skipped, so this stays correct once S8 lands.
+  spawnEncounters(mapData) {
+    this.encounterByTile = new Map(); // "x,y" -> encounter, for bump detection
+    this.encounterSprites = [];       // the sprites, so S8 can remove them
+    this.bumpedEncounterId = null;    // which one you're currently leaning on
+    const cleared = gameState.world.defeatedEncounters || [];
+
+    (mapData.encounters || []).forEach((enc) => {
+      if (cleared.indexOf(enc.id) !== -1) return;  // already gone (S8) — don't respawn
+      const species = FAKEAMON[enc.species];
+      if (!species || !species.overworld) return;  // no idle art → skip quietly
+
+      // One slow idle wiggle per species (made once, then reused).
+      const animKey = "idle-" + enc.species;
+      if (!this.anims.exists(animKey)) {
+        this.anims.create({
+          key: animKey,
+          frames: this.anims.generateFrameNumbers(animKey, { frames: [0, 1] }),
+          frameRate: IDLE_FRAME_RATE,
+          repeat: -1,
+        });
+      }
+
+      // Stand it on its tile, feet on the tile's bottom edge (same origin trick
+      // as the hero) so a chunky 24×24 creature sits nicely on a 16px tile.
+      const p = this.tilePixel(enc.tileX, enc.tileY);
+      const sprite = this.add.sprite(p.x, p.y, animKey, 0);
+      sprite.setOrigin(0.5, 1);
+      sprite.play(animKey);
+      sprite.encounterId = enc.id;
+
+      this.encounterSprites.push(sprite);
+      this.encounterByTile.set(enc.tileX + "," + enc.tileY, enc);
+    });
+  }
+
+  // Is a wild Fakeamon standing on this tile? Returns the encounter or null.
+  encounterAt(tileX, tileY) {
+    return this.encounterByTile.get(tileX + "," + tileY) || null;
+  }
+
+  // S6 seam — the "hallway" (plan §5). Walking into a wild Fakeamon calls this.
+  // For now it just announces the bump and gives the creature a little pop;
+  // Step S7 grows THIS one method into the real handoff (pause → hide the map →
+  // await startBattle → apply the outcome → back to walking).
+  handleEncounter(encounter) {
+    // Only fire once per bump, so holding the arrow key against a creature
+    // doesn't announce it every frame. It re-arms when you step away or let go
+    // of the key (see tryWalk's onComplete and update's no-key branch).
+    if (this.bumpedEncounterId === encounter.id) return;
+    this.bumpedEncounterId = encounter.id;
+
+    const name = FAKEAMON[encounter.species].name;
+    console.log("Bumped the wild " + name + " (Lv " + encounter.level +
+      ")! The real battle opens here at Step S7.");
+
+    // A little "!" pop so you can SEE the bump land even without the console.
+    // A yoyo scale returns to exactly 1, so the sprite never drifts off its tile.
+    const sprite = this.encounterSprites.find((s) => s.encounterId === encounter.id);
+    if (sprite) {
+      this.tweens.add({ targets: sprite, scale: 1.2, duration: 100, yoyo: true });
+    }
+  }
+
   // Can the hero stand on this tile? No if it's off the map, or if the tile
   // there is a "solid" one (tree, rock, boulder, stump, log). We read
   // solidity straight from the tile the map already shows — so anything you
@@ -223,6 +315,18 @@ class WorldScene extends Phaser.Scene {
 
     const targetX = player.tileX + STEP[dir].dx;
     const targetY = player.tileY + STEP[dir].dy;
+
+    // S6: is a wild Fakeamon standing there? Then bump it instead of walking
+    // on — the creature's tile blocks you, and bumping is what starts a battle
+    // (at S7). Checked before canWalk so the bump wins over a plain "can't walk".
+    const encounter = this.encounterAt(targetX, targetY);
+    if (encounter) {
+      this.hero.anims.stop();
+      this.hero.setFrame(HERO_STAND_FRAME[dir]);
+      this.handleEncounter(encounter);
+      return;
+    }
+
     if (!this.canWalk(targetX, targetY)) {
       // Bumped a tree/rock/edge — settle on the standing pose so the legs
       // don't keep cycling in place while you hold the key against the wall.
@@ -246,6 +350,7 @@ class WorldScene extends Phaser.Scene {
         player.tileX = targetX;
         player.tileY = targetY;
         this.isMoving = false;
+        this.bumpedEncounterId = null; // stepped somewhere new → next bump is fresh
         saveGame(); // remember where you're standing (tiny — per-step is fine, plan §4.1)
       },
     });
@@ -267,6 +372,7 @@ class WorldScene extends Phaser.Scene {
       this.tryWalk(dir);
     } else {
       this.stopWalk(); // no key held → settle on the standing pose
+      this.bumpedEncounterId = null; // let go of the key → next push is a fresh bump
     }
   }
 }

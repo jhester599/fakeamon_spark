@@ -154,7 +154,7 @@ see it join a team you can swap between.
 
 ---
 
-## 🟡 M3 — Overworld (the map)  *(in progress — rows 1–2 done via S1–S4)*
+## 🟡 M3 — Overworld (the map)  *(in progress — rows 1–2 done via S1–S4; S5–S6 also done 2026-07-11, S7 next — see the S-number note below)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
@@ -172,6 +172,14 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 > adopted 2026-07-10 via `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`, landing after
 > S9 (see that plan's §7 and the M3 plan's §A.7). The table below stays as
 > the short version; build from the plans.
+>
+> **Status (2026-07-11):** S1–S6 are all done — wild Fakeamon now stand on
+> the map and bumping one logs a message (S6). But **no roadmap *row* fully
+> completes yet:** S6 is only *half* of row 4 (row 4 = S6+S7, and its "→ the
+> battle opens" needs S7), so the row counter stays **16/32**. This row↔S
+> mismatch — rows 3/4 bundling S5/S6/S7 unevenly — is confusing to follow, so
+> a **naming reconciliation to the `MxSy` convention is queued right after S6
+> merges** (splitting these rows so each `MxSy` step is its own row).
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|

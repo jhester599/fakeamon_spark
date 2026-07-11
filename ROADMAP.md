@@ -5,8 +5,11 @@ almost every step you can **open the game and see something new**. That's the
 whole idea: build a little, play it, then build the next little bit.
 
 > **How to read this:** Big sections are **Milestones (M1–M5)**. Inside each
-> milestone are **numbered steps**. Every step says what we build and, in
-> **▶ You'll see:**, what shows up on screen when it works.
+> milestone are **numbered steps**, named **`MxSy`** — M‹milestone›S‹step›, so
+> M3's 7th step is **M3S7**. That's the same S-numbering the `PLANS/` docs use,
+> so a step has **one name everywhere** (this file, `roadmap.html`, the plans,
+> `CLAUDE.md`). Every step says what we build and, in **▶ You'll see:**, what
+> shows up on screen when it works.
 >
 > **Source of truth:** `DESIGN.md` (the full plan). This roadmap is the
 > *order we do things in*. If a step and DESIGN.md ever disagree, DESIGN.md wins.
@@ -37,6 +40,20 @@ whole idea: build a little, play it, then build the next little bit.
    caught 2026-07-08). The per-zone "6 of 6" was right both times; the
    **overall** line is the one that gets forgotten. When in doubt, recount
    all five zones from scratch and re-add them.
+
+   **✅ The recurring check (do this every time, don't rely on memory):** after
+   any step change, run
+
+   ```bash
+   node tools/check-roadmap.mjs
+   ```
+
+   It recomputes every count straight from the actual done-marks (`class="done"`
+   in `roadmap.html`, `✅` in this file), checks the meters, and **fails if the
+   two files disagree or any counter is wrong.** It must print `✅ PASS` before
+   you commit a step change — that's what turns "keep both roadmaps current"
+   from a thing you remember into a thing the tooling enforces. (The naming
+   scheme it assumes: one row per **`MxSy`** step — see "How to read this" above.)
 7. **Peer-review checkpoint at each milestone boundary.** Before starting a
    new milestone, get an *outside/expert* pair of eyes on the **next**
    milestone's design and roadmap — a deep-research / Fable research-mode
@@ -154,53 +171,49 @@ see it join a team you can swap between.
 
 ---
 
-## 🟡 M3 — Overworld (the map)  *(in progress — rows 1–2 done via S1–S4; S5–S6 also done 2026-07-11, S7 next — see the S-number note below)*
+## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S6 done, M3S7 next)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
 
-> **📐 M3 now has a full architecture plan:** `PLANS/M3_OVERWORLD_PLAN.md`.
-> Its finer-grained steps (**S1–S9**, in its §9) supersede **rows 1–5**
-> below — roughly 1≈S1–S2, 2≈S3–S4, 3≈S5, 4≈S6–S7, 5≈S8, **plus S9**
-> (cleanup: remove the temporary "Battle test" button below, flip status/
-> ticks, clear stale `M3 PLACEHOLDER` comments, verify the live Pages build
-> plays start-to-finish) — S9 doesn't get its own row since it's wrap-up,
-> not new player-visible behavior, but it still has to happen before M3 is
-> actually done. **Row 6 (expand the wild roster) is new work *beyond* that
-> plan** — the plan deliberately left the roster for "later," and this is the
-> "later." **Row 7 (play it on a tablet) is the plan's tenth step, S10** —
-> adopted 2026-07-10 via `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`, landing after
-> S9 (see that plan's §7 and the M3 plan's §A.7). The table below stays as
-> the short version; build from the plans.
+> **📐 M3 is numbered `M3S1…M3S11`, matching `PLANS/M3_OVERWORLD_PLAN.md` §9.**
+> The rows below **are** those steps — the roadmap and the plans finally share
+> one numbering. (This replaced an older, confusing scheme where a single row
+> bundled several S-steps, e.g. one row covered both S3 and S4.) **M3S1–M3S10
+> are the plan's S1–S10; M3S11 (expand the wild roster) is content work
+> *beyond* the core plan** — the plan left the roster for "later," so it's its
+> own step here; in practice it lands right after battles work (M3S7/S8), and
+> it's numbered last only because it was added after the plan. Build from the
+> plans; this table is the short version.
 >
-> **Status (2026-07-11):** S1–S6 are all done — wild Fakeamon now stand on
-> the map and bumping one logs a message (S6). But **no roadmap *row* fully
-> completes yet:** S6 is only *half* of row 4 (row 4 = S6+S7, and its "→ the
-> battle opens" needs S7), so the row counter stays **16/32**. This row↔S
-> mismatch — rows 3/4 bundling S5/S6/S7 unevenly — is confusing to follow, so
-> a **naming reconciliation to the `MxSy` convention is queued right after S6
-> merges** (splitting these rows so each `MxSy` step is its own row).
+> **Status (2026-07-11):** M3S1–M3S6 are done — Phaser's in, the meadow
+> renders, you walk it with an animated hero, and wild Fakeamon now idle on
+> the map (bump one → a console message). **Next: M3S7**, the handoff.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** ✅ | Add **Phaser** and show a tiny **tile map** — pull a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15) rather than placeholder colors; wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable/testable until the real map↔battle handoff lands at Step 4 | A little world on screen, built from real tile art, with a button to jump into a battle — *done! (S1 Phaser + S2 the meadow renders)* |
-| **2** ✅ | A **player character** you move with the **arrow keys**, four directions, grid by grid — pull a real Tuxemon player walk-sheet (+ a `CREDITS.md` row) for the hero's sprite | Walk around the map with real character art — *done! (S3 grid movement + collision, S4 walk animation)* |
-| **3** | **Real sprites** art pass for the rest of the roster (mini-bosses, gyms, evolutions — everyone in M4/M5) — all 3 starters already done, see `CREDITS.md` | Actual creature art instead of colored boxes, full roster |
-| **4** | **Visible encounters** — a wild Fakeamon stands on the map (to start: just a small pool, e.g. the 3 starters, per `PLANS/M3_OVERWORLD_PLAN.md` §6.1's one-map slice); walking into it **starts a battle** | Touch the creature → the M1/M2 battle opens |
-| **5** | **Return to the map** after a battle ends | Win/catch/flee → back to walking |
-| **6** | **Expand the wild roster** — swap The Meadows' 3-starter test pool (from Step 4) for its real slice of the approved **198-Fakeamon** encounter pool (`CONTENT_REFERENCE.md` §16), including Lewis's Tuxemon-slug → Fakeamon **rename pass** for that area | The Meadows fills up with a proper cast of wild Fakeamon — not just the 3 starters |
-| **7** | **Play it on a tablet** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs, no keyboard (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`; the plan's S10, landing after S9) | You'll see: walk the meadow with your thumbs on the live site |
+| **M3S1** ✅ | Add **Phaser** + a game canvas from a real Tuxemon tileset (+ a `CREDITS.md` row, per `CONTENT_REFERENCE.md` §15); wire a temporary **"Battle test" button** so the M1/M2 battle stays reachable until the M3S7 handoff | A colored game canvas above the old battle — *done!* |
+| **M3S2** ✅ | Draw **The Meadows** tile map from the real tile art | A meadow with a path and a tree border — *done!* |
+| **M3S3** ✅ | A **player character** you walk with the **arrow keys**, four directions, tile by tile; trees/edges block you — real Tuxemon walk-sheet (+ a `CREDITS.md` row) | Walk the meadow with real character art — *done!* |
+| **M3S4** ✅ | **Walk animation** — the hero's legs move as you walk | Walking looks like walking — *done!* |
+| **M3S5** ✅ | The **sprite-slicer tool** — cut creature sheets into front/back/idle poses (done at M3S0 for the 3 starters; the full-roster slice is M3S11 / M4) | New sliced sprite files, no gameplay change — *done!* |
+| **M3S6** ✅ | **Wild Fakeamon stand on the map** — creatures idle in the grass; walking into one bumps it (a console message for now; the real battle is M3S7) | A wild Fakeamon idling in the grass; bump it → a message — *done! (2026-07-11)* |
+| **M3S7** | **The handoff** 🌉 — bump a wild Fakeamon → the real battle opens → back on the map (creature gone, unless you fled) | Touch the creature → the M1/M2 battle → back on the map |
+| **M3S8** | **Outcome depth** — a catch on the map joins your team; XP applied; beaten/caught creatures don't respawn | Catch a wild Leafick on the map and see it join the team |
+| **M3S9** | **Cleanup + docs** — remove the temporary "Battle test" button; clear stale `M3 PLACEHOLDER` comments; verify the live Pages build plays start-to-finish | A tiny but complete monster-catching game on the live site |
+| **M3S10** | **Play it on a tablet ("Pocket Venta")** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) | Walk the meadow with your thumbs on the live site |
+| **M3S11** | **Expand the wild roster** — swap The Meadows' 3-starter test pool for its real slice of the approved **198-Fakeamon** pool (`CONTENT_REFERENCE.md` §16) + Lewis's Tuxemon-slug → Fakeamon **rename pass**. *Beyond the core plan; in practice built right after M3S7/S8* | The Meadows fills up with a proper cast — not just the 3 starters |
 
 **🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon — a real
 Meadows cast, not just the starters — battle it, and return to exploring.
 
-> **🎒 The rest of the pool comes area-by-area:** Step 6 wires in only **The
+> **🎒 The rest of the pool comes area-by-area:** M3S11 wires in only **The
 > Meadows'** slice, because The Meadows is the one map M3 builds. The other five
 > Venta areas (B8 — The Forest, Foggy City, Snow Mountain, The Factory, The
 > Lagoon) each get their own slice of the 198-Fakeamon pool **as they open** —
 > and since Snow Mountain / The Factory / The Lagoon only unlock via gym badges
 > (B14), that can't be one step. So it's now a scheduled, repeating job in
-> **M4 (Step 6)** that carries on into M5's late-game areas — no longer
+> **M4S6** that carries on into M5's late-game areas — no longer
 > "unscheduled," just paced to when each area actually gets built. The art and
 > licensing for the whole pool is already staged (`CONTENT_REFERENCE.md` §16);
 > what lands per area is the creative wiring — Lewis's renames, encounter

@@ -63,11 +63,11 @@ Huddle can override them (that's the point of huddling!).
 
 ### M3 — Overworld ⚠️ *the big architecture moment*
 
-Step numbers here are the **S1–S9** from `PLANS/M3_OVERWORLD_PLAN.md` §9,
-which supersede ROADMAP's M3 **rows 1–5** (that plan's table carries the same
-per-step picks — if the two ever disagree, the plan wins). ROADMAP's **row 6**
-(expand the wild roster — The Meadows' slice) is new work *beyond* the plan;
-its pick is the roster row at the bottom of this section.
+Steps here are named **`M3S1`–`M3S10`** — the same names `PLANS/M3_OVERWORLD_PLAN.md`
+§9, `ROADMAP.md`, and `roadmap.html` all use now, one row per step (the plan's
+table carries the same per-step picks — if the two ever disagree, the plan
+wins). **`M3S11`** (expand the wild roster — The Meadows' slice) is new work
+*beyond* the plan; its pick is the roster row at the bottom of this section.
 
 | Step | What we build | Model | Effort | Why |
 |---|---|---|---|---|
@@ -76,7 +76,7 @@ its pick is the roster row at the bottom of this section.
 | S4–S6 | Walk animation, the sprite-slicer tool, encounters standing on the map | **Sonnet 5** (slicer re-runs: **Haiku**) | medium | Batch work + CREDITS.md bookkeeping |
 | S7 | **The handoff** 🌉 — bump a creature → real battle → back to the map | **Sonnet 5** | high | The whole plan converges here; if it fights back twice, escalate to **Opus 4.8** |
 | S8–S9 | Catch/XP outcomes on the map + cleanup & docs | **Sonnet 5** | medium → low | Features against a settled seam |
-| Row 6 — expand the wild roster | Swap The Meadows' test pool for its real slice of the 198-Fakeamon pool + Lewis's renames | **Sonnet 5** | medium | Data-entry against a settled encounter seam; the creative part is Lewis's renames, not model strength |
+| M3S11 — expand the wild roster | Swap The Meadows' test pool for its real slice of the 198-Fakeamon pool + Lewis's renames | **Sonnet 5** | medium | Data-entry against a settled encounter seam; the creative part is Lewis's renames, not model strength |
 
 ### M4 — World Systems
 
@@ -84,7 +84,7 @@ its pick is the roster row at the bottom of this section.
 |---|---|---|---|---|
 | 1–4 | Tokens, Fakeatent, Tall Tower, Gym 1 | **Sonnet 5** | medium | Features against a settled architecture. Price tuning is playtesting, not model strength! |
 | 5 | Cooking Cabin (berries → healing dishes) | **Sonnet 5** | medium | A self-contained screen + recipe data; specs in DESIGN.md §9 |
-| 6 | Grow the wild roster, area-by-area | **Sonnet 5** | medium | Same data-entry job as M3 row 6, repeated per new area as gyms open |
+| 6 | Grow the wild roster, area-by-area | **Sonnet 5** | medium | Same data-entry job as M3S11, repeated per new area as gyms open |
 
 ### M5 — Depth & Story
 

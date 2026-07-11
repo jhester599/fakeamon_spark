@@ -265,29 +265,22 @@ defeat Artemis to win the game.
 
 ## Decisions to make *when we get there*
 
-The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B36). Lewis cleared
-**B1–B32** in one big homework round (2026-07-06) — see `DECISIONS.md` rows
-14–45 and `DESIGN.md` for where each landed. Four are still open, none
-urgent:
+The full question bank is **`HOMEWORK_BACKLOG.md`** (B1–B42). **All of it is
+now decided** — Lewis cleared B1–B32 (2026-07-06) and the last ten, B33–B42,
+on 2026-07-11 (see `DECISIONS.md` rows 14–45 and 51–60, folded into
+`DESIGN.md`). The last ten: swap boxed Fakeamon at a **Fakeatent** (B33); the
+wild opponent reads **"the wild ‹name›"** in battle text (B34); berries are
+**themed by area** (B35); a **smaller starter Cooking Cabin** exists too (B36);
+the **Venta wild-roster area draft is approved as-is** (B37); and the touch
+D-pad is **four floating arrows, bottom-right, half see-through, with a
+show/hide toggle**, still named **"Pocket Venta"** (B38–B42).
 
-- **M5:** where you swap boxed Fakeamon onto your team (B33) — needed by
-  the Boxes UI, no rush.
-- **M2 (flavor):** how a mirror match (same species on both sides) should
-  read in the battle log (B34) — found during Step 3 testing; the battle
-  itself plays correctly either way.
-- **M5 (flavor):** Lewis invented two new design bits outside a homework
-  round — berries on the ground (B35: themed by area or anywhere?) and
-  Cooking Cabins being more common in Snow Mountain (B36: only there, or
-  a starter cabin too?) — see `DECISIONS.md` rows 46–47.
-
-Plus Jeff's ongoing number-tuning list (not creative calls, just math):
+What's left is **only Jeff's number-tuning** (not creative calls, just math):
 evolution levels per starter, the XP curve, exact Great/Ultra/Cosmic ball
 multipliers, token prices (feel is decided — B16), and the Gym 2/3 ace
 re-theme/swap (Windeye, Spectera).
 
-*(Everything else — ball tiers, mini-boss catching, party size, badges,
-auto-evolve, Cosmic chart, berries, Artemis, plus this whole B1–B32 batch —
-is decided. See `DECISIONS.md`.)*
+*(Every creative-director question B1–B42 is decided — see `DECISIONS.md`.)*
 
 ---
 

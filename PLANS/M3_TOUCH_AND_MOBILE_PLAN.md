@@ -18,7 +18,7 @@
 > for S1–S9.
 >
 > **Status:** ADOPTED (2026-07-09, Jeff; reconciled 2026-07-10 — see §A).
-> Lewis's creative calls (§9) are now open homework (`HOMEWORK.md` B38–B42).
+> Lewis's creative calls (§9) — B38–B42 — are **decided (2026-07-11)** and folded into §4/§9 below (four floating arrows, bottom-right, half see-through, a show/hide toggle, name kept as "Pocket Venta").
 > Drafted against `main` @ `bbe4a9e` (S1 done); **S2–S4 have landed
 > since**, so §1's code findings and §3's framing describe the repo *as
 > drafted* — §A below records what's actually true now. All code for this

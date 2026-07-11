@@ -137,7 +137,7 @@ const gameState = {
     artemisDefeated: false,
   },
   world: {                        // added by M3 per its plan §4
-    mapId: "starterMeadow",
+    mapId: "theMeadows",           // was "starterMeadow" before B6–B8 named the world
     player: { tileX: 5, tileY: 7, facing: "down" },
     defeatedEncounters: [],
   },
@@ -332,7 +332,7 @@ state foundation early, persistence when it pays, depth features in M5:
 | # | When | Step | What gets built | Model / effort |
 |---|---|---|---|---|
 | **S1** ✅ | **M2, before Step 5** | Individuals & state bag | `src/state.js` + `newIndividual()` + `statsFor()`; battle reads/writes `individual.currentHP`; retire `hp[name]` map (§A.3); load-order comment in `index.html`; verify M1 fight feels unchanged | Sonnet 5 / **high** — touches battle internals; this is the step where two-Growlers stops being a bug — *done 2026-07-07: `FAKEAMON` is now keyed by species (`growler`/`whaley`/`leafick`, `base*` stat fields), `src/state.js` adds `newIndividual()`/`statsFor()` (level always 1, `STAT_GROWTH_PER_LEVEL` all zero until M5's progression.js), and `battle.js`/`main.js` pass individuals everywhere — a caught wild Fakeamon's outcome is now the healed individual itself, ready for Step 5 to actually add to a team* |
-| **S2** | M2 Steps 3–4 (as planned there) | Battle contract | Global `startBattle(config) → Promise<outcome>` per M3 plan §5; starter-select moves to `src/main.js` | Sonnet 5 / high |
+| **S2** ✅ | M2 Steps 3–4 (as planned there) | Battle contract *(done)* | Global `startBattle(config) → Promise<outcome>` per M3 plan §5; starter-select moved to `src/main.js`. `config.playerParty` (live-array) shape landed at M2 Step 6 (§A.2) | Sonnet 5 / high |
 | **S3** ✅ | End of M2 | Save v1 | `src/save.js` (§4.1–4.2); autosave after battles/catches; Continue/New Game title flow — *done 2026-07-10: single localStorage slot `"fakeamon-save"`, `version`+`MIGRATIONS` path, merge-onto-defaults loader, both read AND write wrapped in try/catch (F8); autosave after every starter pick / battle outcome / catch / switch; title screen "Fakeamon Spark" with Continue (if a save exists) / New Game (confirms before erasing)* | ~~Sonnet 5 / medium~~ built Opus 4.8 / high |
 | **S4** ✅ | Anytime after S3 | Export/import | §4.3; a settings corner on the title screen — *done 2026-07-10: `exportSave()` downloads `fakeamon-save.json` (reads localStorage, since Export runs from the title screen where in-memory state isn't loaded — caught in testing), `importSaveFromFile()` validates through the same `parseSave()` path; Export/Import buttons in the title screen's settings corner; a non-save file is rejected without changing anything* | ~~Sonnet 5 / low~~ built Opus 4.8 / high |
 | **S5** | M5 Step 1 (ROADMAP) | XP & leveling | `src/progression.js` per §2; constants marked `[TUNE]`; log lines | Sonnet 5 / medium |

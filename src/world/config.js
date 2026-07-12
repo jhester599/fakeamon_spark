@@ -80,6 +80,12 @@ const RESPAWN_CHANCE = 0.3; // [TUNE] rolled once per battle in main.js
 let worldScene = null;
 let worldActive = false;
 
+// TOUCH SEAM (see PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §3) — the on-screen D-pad
+// (src/world/dpad.js, S10) writes here; heldDirection() below reads it before
+// falling back to the keyboard. Stays { direction: null } if the pad is never
+// touched, so keyboard-only play is unaffected.
+let virtualPad = { direction: null };
+
 // ---------------------------------------------------------------------------
 //  BootScene — the first scene Phaser runs. Its job is to get everything
 //  ready and then hand over to the WorldScene. For S1 there's nothing to
@@ -394,22 +400,29 @@ class WorldScene extends Phaser.Scene {
     });
   }
 
-  // Called every frame by Phaser. Poll the arrow keys and walk the grid.
+  // TOUCH SEAM (M3 plan §3 / PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §3) — which
+  // way is the player asking to walk right now? The on-screen pad wins if
+  // it's being held; otherwise fall back to the arrow keys. null = neither.
+  heldDirection() {
+    if (virtualPad.direction) return virtualPad.direction;
+    const c = this.cursors;
+    if (c.left.isDown) return "left";
+    if (c.right.isDown) return "right";
+    if (c.up.isDown) return "up";
+    if (c.down.isDown) return "down";
+    return null;
+  }
+
+  // Called every frame by Phaser. Poll for a held direction and walk the grid.
   update() {
     if (!worldActive) return;
     if (this.isMoving) return; // mid-tween — let the step finish
 
-    const c = this.cursors;
-    let dir = null;
-    if (c.left.isDown) dir = "left";
-    else if (c.right.isDown) dir = "right";
-    else if (c.up.isDown) dir = "up";
-    else if (c.down.isDown) dir = "down";
-
+    const dir = this.heldDirection();
     if (dir) {
       this.tryWalk(dir);
     } else {
-      this.stopWalk(); // no key held → settle on the standing pose
+      this.stopWalk(); // nothing held → settle on the standing pose
     }
   }
 }

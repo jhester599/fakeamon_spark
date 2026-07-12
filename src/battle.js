@@ -295,10 +295,11 @@ function attemptCatch() {
   function afterThrow(caught) {
     if (caught) {
       opponent.currentHP = statsFor(opponent).maxHP;
+      const xpGained = grantXP(CATCH_XP_FRACTION);
       resolveBattle({
         result: "caught",
         caught: opponent,
-        xpGained: 0,
+        xpGained: xpGained,
       });
       return;
     }
@@ -321,6 +322,25 @@ function attemptCatch() {
       }, randomTurnPause());
     });
   }
+}
+
+// ===========================================================================
+//  XP — Step 8: winning (or catching) a wild Fakeamon earns your active
+//  fighter some XP. It's just banked on the individual for now — there's no
+//  curve to spend it on yet (that's M5's job,
+//  PLANS/M5_STATE_AND_SAVE_PLAN.md §2); this only makes sure xpGained is a
+//  real number instead of the placeholder 0 every outcome used to resolve
+//  with. Tweak these two numbers to change how fast XP piles up.
+// ===========================================================================
+const XP_REWARD_BASE = 4;      // [TUNE] a win's XP = XP_REWARD_BASE × opponent's level
+const CATCH_XP_FRACTION = 0.5; // [TUNE] catching earns this fraction of a win's XP
+
+function grantXP(fraction) {
+  const individual = activePlayer(); // v1: the active fighter gets it all (M5 plan §2)
+  const amount = Math.round(XP_REWARD_BASE * opponent.level * fraction);
+  individual.xp += amount;
+  addLogLine(FAKEAMON[individual.speciesKey].name + " earned " + amount + " XP!");
+  return amount;
 }
 
 // ===========================================================================
@@ -434,6 +454,7 @@ function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
   const playerName = FAKEAMON[activePlayer().speciesKey].name;
   const opponentName = FAKEAMON[opponent.speciesKey].name;
+  const xpGained = playerWon ? grantXP(1) : 0;
   const message = playerWon
     ? "🎉 " + playerName + " wins!"
     : "💀 " + playerName + " fainted — " + opponentName + " wins.";
@@ -444,7 +465,7 @@ function endBattle(winnerRole) {
     '<button id="continueBtn" class="move-btn">Continue</button>';
 
   document.getElementById("continueBtn").addEventListener("click", function () {
-    resolveBattle({ result: playerWon ? "win" : "lose", xpGained: 0 });
+    resolveBattle({ result: playerWon ? "win" : "lose", xpGained: xpGained });
   });
 }
 

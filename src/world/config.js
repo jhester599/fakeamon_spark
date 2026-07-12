@@ -66,6 +66,13 @@ const IDLE_FRAME_W  = 24;
 const IDLE_FRAME_H  = 24;
 const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dial)
 
+// --- Respawning (S8) -------------------------------------------------------
+// A beaten/caught wild Fakeamon leaves the map, but The Meadows shouldn't
+// stay empty forever — see PLANS/M3_OVERWORLD_PLAN.md §6.3. After every
+// battle there's this chance one previously-cleared encounter wanders back.
+// Lower = the map empties out slower; higher = it fills back in faster.
+const RESPAWN_CHANCE = 0.3; // [TUNE] rolled once per battle in main.js
+
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
 // loading a save). Set in create(). worldActive gates walking: it's false on
 // the title/starter/battle screens so arrow keys don't walk a hero you can't
@@ -135,6 +142,7 @@ class WorldScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(WORLD_GRASS_COLOR);
 
     const mapData = MAPS.theMeadows;
+    this.mapData = mapData; // kept for later lookups (S8: respawnEncounter)
     this.tileSize = mapData.tileSize;
     this.ground = mapData.ground;            // the tile-number grid
     this.solid = new Set(SOLID_TILE_INDICES); // which tile numbers you can't walk on
@@ -232,32 +240,60 @@ class WorldScene extends Phaser.Scene {
     const cleared = gameState.world.defeatedEncounters || [];
 
     (mapData.encounters || []).forEach((enc) => {
-      if (cleared.indexOf(enc.id) !== -1) return;  // already gone (S8) — don't respawn
-      const species = FAKEAMON[enc.species];
-      if (!species || !species.overworld) return;  // no idle art → skip quietly
-
-      // One slow idle wiggle per species (made once, then reused).
-      const animKey = "idle-" + enc.species;
-      if (!this.anims.exists(animKey)) {
-        this.anims.create({
-          key: animKey,
-          frames: this.anims.generateFrameNumbers(animKey, { frames: [0, 1] }),
-          frameRate: IDLE_FRAME_RATE,
-          repeat: -1,
-        });
-      }
-
-      // Stand it on its tile, feet on the tile's bottom edge (same origin trick
-      // as the hero) so a chunky 24×24 creature sits nicely on a 16px tile.
-      const p = this.tilePixel(enc.tileX, enc.tileY);
-      const sprite = this.add.sprite(p.x, p.y, animKey, 0);
-      sprite.setOrigin(0.5, 1);
-      sprite.play(animKey);
-      sprite.encounterId = enc.id;
-
-      this.encounterSprites.push(sprite);
-      this.encounterByTile.set(enc.tileX + "," + enc.tileY, enc);
+      if (cleared.indexOf(enc.id) !== -1) return;  // already gone — don't respawn here
+      this.spawnOneEncounter(enc);
     });
+  }
+
+  // Stand one wild Fakeamon's idle sprite on its tile. Shared by
+  // spawnEncounters above (page load / Continue, spawns everyone not yet
+  // cleared) and respawnEncounter below (S8: bringing ONE cleared one back
+  // mid-session, without rebuilding the whole scene).
+  spawnOneEncounter(enc) {
+    const species = FAKEAMON[enc.species];
+    if (!species || !species.overworld) return;  // no idle art → skip quietly
+
+    // One slow idle wiggle per species (made once, then reused).
+    const animKey = "idle-" + enc.species;
+    if (!this.anims.exists(animKey)) {
+      this.anims.create({
+        key: animKey,
+        frames: this.anims.generateFrameNumbers(animKey, { frames: [0, 1] }),
+        frameRate: IDLE_FRAME_RATE,
+        repeat: -1,
+      });
+    }
+
+    // Stand it on its tile, feet on the tile's bottom edge (same origin trick
+    // as the hero) so a chunky 24×24 creature sits nicely on a 16px tile.
+    const p = this.tilePixel(enc.tileX, enc.tileY);
+    const sprite = this.add.sprite(p.x, p.y, animKey, 0);
+    sprite.setOrigin(0.5, 1);
+    sprite.play(animKey);
+    sprite.encounterId = enc.id;
+
+    this.encounterSprites.push(sprite);
+    this.encounterByTile.set(enc.tileX + "," + enc.tileY, enc);
+  }
+
+  // S8: bring back a previously-cleared wild Fakeamon — same species, level,
+  // and tile as before (see main.js's respawn roll in handleBattleOutcome).
+  // This is really "undo removeEncounter" plus redrawing the sprite, since
+  // the scene never gets rebuilt between battles.
+  respawnEncounter(id) {
+    const enc = this.mapData.encounters.find((e) => e.id === id);
+    if (!enc) return; // unknown id — nothing to bring back
+
+    // Don't pop one in right under the hero's feet — try again next battle.
+    const player = gameState.world.player;
+    if (player.tileX === enc.tileX && player.tileY === enc.tileY) return;
+
+    this.spawnOneEncounter(enc);
+
+    const cleared = gameState.world.defeatedEncounters;
+    const index = cleared.indexOf(id);
+    if (index !== -1) cleared.splice(index, 1);
+    saveGame();
   }
 
   // Is a wild Fakeamon standing on this tile? Returns the encounter or null.

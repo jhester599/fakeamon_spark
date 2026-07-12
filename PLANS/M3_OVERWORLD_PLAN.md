@@ -184,6 +184,40 @@ added to §9 below — after S9, never folded into S1–S9. The do-not-build
 list right below stays true for S1–S9; S10 is the one sanctioned
 exception, scoped to exactly the touch plan's §3–§6.
 
+### §A.8 What S8 actually built (execution session, 2026-07-12)
+
+Built with **Sonnet 5 / medium**, per the table. Going in, three of the four
+things this row lists (catch → party, the §6.4 loss placeholder,
+`defeatedEncounters` respawn-proofing) turned out to have **already shipped
+during S7** — the S7 session over-delivered slightly, and the code comments
+even said so (`// already gone (S8) — don't respawn`). The only real gap was
+XP: every outcome hardcoded `xpGained: 0` and nothing read it.
+
+- **Real XP** — `src/battle.js`: a new `grantXP(fraction)` helper banks
+  `XP_REWARD_BASE × opponent.level × fraction` onto `activePlayer().xp` and
+  logs it ("Growler earned 12 XP!"). A win calls `grantXP(1)`; a catch calls
+  `grantXP(CATCH_XP_FRACTION)` (0.5). Both constants are `[TUNE]`. **No
+  leveling** — that's still M5 S5's job (`PLANS/M5_STATE_AND_SAVE_PLAN.md`
+  §2); this step just makes the number real instead of always 0.
+- **Team card XP** — `src/main.js`'s `teamCard()` gained a one-line `XP: N`
+  readout (`index.html` adds the matching `.team-xp-text` style) so the
+  number is visibly proven to persist across battles.
+- **Respawn** (Jeff's call, §6.3 above) — `WorldScene` gained
+  `spawnOneEncounter(enc)` (factored out of `spawnEncounters` so it's not
+  duplicated) and `respawnEncounter(id)`, its mirror of `removeEncounter`.
+  `main.js`'s `handleBattleOutcome` rolls `maybeRespawnEncounter` after every
+  battle, excluding whatever was just fought.
+- **Verified** with a headless-Chromium smoke test (not committed — a
+  throwaway script): a win against a level-3 encounter banks exactly 12 XP
+  and shows it on the team card; a forced catch banks exactly 6; respawn
+  fired within 25 battles at `RESPAWN_CHANCE = 0.3` (expected — the odds of
+  zero hits in 25 tries are under 0.1%) and redrew the sprite; a second
+  Growler caught via `meadows-02` proved two individuals of the same species
+  still track HP/XP independently. Zero page errors (the one console hit
+  was the browser's automatic, pre-existing `favicon.ico` 404 — unrelated).
+- **Not touched:** the "Battle test" button (removed at S9) and any
+  leveling/evolution machinery (M5).
+
 ---
 
 ## 1. The core decision: two rooms, one hallway

@@ -234,9 +234,9 @@
     <div class="overall">
       <div class="row">
         <b>Whole game progress</b>
-        <span class="count">21 / 36 steps · Milestone 3 of 5</span>
+        <span class="count">22 / 36 steps · Milestone 3 of 5</span>
       </div>
-      <div class="meter"><span style="width:58.3%"></span></div>
+      <div class="meter"><span style="width:61.1%"></span></div>
       <p style="margin:12px 0 0; font-size:12.5px; color:var(--ink-soft);">Every step is <b>M‹milestone›S‹step›</b> — e.g. the 7th M3 step is <b>M3S7</b>. Each row below is one such step, matching the S-numbers in the <code>PLANS/</code> docs, so "what's next" reads the same everywhere.</p>
     </div>
 
@@ -356,9 +356,9 @@
           <h2 class="zone-title">Overworld (the map)</h2>
           <span class="status now">Playing now</span>
         </div>
-        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>Steps are named <b>M3S1…M3S11</b> — the same S-numbers as <code>PLANS/M3_OVERWORLD_PLAN.md</code> §9, so the roadmap and the plans use one shared numbering now. <b>Done so far:</b> M3S1–M3S7 — Phaser's in, the meadow renders, you walk it with an animated hero, wild Fakeamon idle in the grass, and <b>walking into one now opens the real battle</b> (win/catch removes it from the map; fleeing leaves it) and returns you to walking. <b>Next: M3S8</b>, catch-on-map depth + XP.</i></p>
-        <div class="zone-meter"><span style="width:63.6%"></span></div>
-        <div class="zone-count">7 of 11 steps done</div>
+        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>Steps are named <b>M3S1…M3S11</b> — the same S-numbers as <code>PLANS/M3_OVERWORLD_PLAN.md</code> §9, so the roadmap and the plans use one shared numbering now. <b>Done so far:</b> M3S1–M3S8 — Phaser's in, the meadow renders, you walk it with an animated hero, wild Fakeamon idle in the grass, <b>walking into one now opens the real battle</b> (win/catch removes it from the map; fleeing leaves it), catching or beating one earns real XP, and cleared wild Fakeamon now <b>respawn over time</b> so The Meadows never stays empty. <b>Next: M3S9</b>, cleanup + docs.</i></p>
+        <div class="zone-meter"><span style="width:72.7%"></span></div>
+        <div class="zone-count">8 of 11 steps done</div>
       </div>
       <ol class="steps">
         <li class="done"><span class="num">S1</span><div class="step-body"><p class="step-what"><b>M3S1 · Phaser hello-world</b> — add Phaser + a game canvas; a temporary <b>"Battle test" button</b> keeps the battle reachable until M3S7</p><p class="see"><span class="tag">▶ You'll see</span> A colored game canvas above the old battle — done!</p></div></li>
@@ -368,7 +368,7 @@
         <li class="done"><span class="num">S5</span><div class="step-body"><p class="step-what"><b>M3S5 · Sprite-slicer tool</b> — cut creature sheets into front/back/idle poses (done at M3S0 for the starters)</p><p class="see"><span class="tag">▶ You'll see</span> New sliced sprite files (no gameplay change) — done!</p></div></li>
         <li class="done"><span class="num">S6</span><div class="step-body"><p class="step-what"><b>M3S6 · Wild Fakeamon on the map</b> — creatures idle in the grass; walking into one bumps it (a console message for now)</p><p class="see"><span class="tag">▶ You'll see</span> A wild Fakeamon idling in the grass; bump it → a message — done! (2026-07-11)</p></div></li>
         <li class="done"><span class="num">S7</span><div class="step-body"><p class="step-what"><b>M3S7 · The handoff 🌉</b> — walk into a wild Fakeamon → the real battle opens → win/catch/flee → back on the map (creature gone unless you fled)</p><p class="see"><span class="tag">▶ You'll see</span> Touch a creature → the battle → back on the map — done! (2026-07-11)</p></div></li>
-        <li><span class="num">S8</span><div class="step-body"><p class="step-what"><b>M3S8 · Outcome depth</b> — a catch on the map joins your team; XP applied; beaten/caught creatures don't respawn</p><p class="see"><span class="tag">▶ You'll see</span> Catch a wild Leafick on the map and see it join the team</p></div></li>
+        <li class="done"><span class="num">S8</span><div class="step-body"><p class="step-what"><b>M3S8 · Outcome depth</b> — a catch on the map joins your team; real XP (win = full, catch = half); and wild Fakeamon now <b>respawn over time</b> instead of staying gone for good (Jeff's call)</p><p class="see"><span class="tag">▶ You'll see</span> Catch a wild Leafick, watch it join the team and earn XP — and if you clear an area out, one may wander back later — done! (2026-07-12)</p></div></li>
         <li><span class="num">S9</span><div class="step-body"><p class="step-what"><b>M3S9 · Cleanup + docs</b> — remove the temporary "Battle test" button; verify the live site plays start-to-finish</p><p class="see"><span class="tag">▶ You'll see</span> A tiny but complete monster-catching game on the live site</p></div></li>
         <li><span class="num">S10</span><div class="step-body"><p class="step-what"><b>M3S10 · Play on a tablet ("Pocket Venta")</b> — an on-screen D-pad + fit-to-screen scaling (<code>PLANS/M3_TOUCH_AND_MOBILE_PLAN.md</code>)</p><p class="see"><span class="tag">▶ You'll see</span> Walk the meadow with your thumbs on the live site</p></div></li>
         <li><span class="num">S11</span><div class="step-body"><p class="step-what"><b>M3S11 · Expand the wild roster</b> — swap The Meadows' 3-starter test pool for its real slice of the <b>198-Fakeamon</b> pool (<code>CONTENT_REFERENCE.md</code> §16) + Lewis's renames <i>(beyond the core plan — in practice built once battles work, right after M3S7/S8)</i></p><p class="see"><span class="tag">▶ You'll see</span> The Meadows fills with a proper cast — not just the 3 starters</p></div></li>

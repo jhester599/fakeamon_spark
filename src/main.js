@@ -274,6 +274,20 @@ function fightRandomWildFakeamon() {
   }, null);
 }
 
+// S8: after a battle, maybe bring one previously-cleared wild Fakeamon back
+// onto the map — never the one you JUST fought (justFoughtId), so nothing
+// pops back the instant you clear it; it can only return on a LATER roll.
+function maybeRespawnEncounter(justFoughtId) {
+  const candidates = gameState.world.defeatedEncounters.filter(function (id) {
+    return id !== justFoughtId;
+  });
+  if (candidates.length === 0) return;
+  if (Math.random() >= RESPAWN_CHANCE) return;
+
+  const pick = candidates[Math.floor(Math.random() * candidates.length)];
+  if (worldScene) worldScene.respawnEncounter(pick);
+}
+
 // Whatever the battle decided, this is where it becomes a team fact — then
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
@@ -306,6 +320,11 @@ function handleBattleOutcome(outcome, encounter) {
   if (encounter && (outcome.result === "win" || outcome.result === "caught")) {
     if (worldScene) worldScene.removeEncounter(encounter.id);
   }
+
+  // S8: The Meadows shouldn't stay empty forever — see the respawn note in
+  // PLANS/M3_OVERWORLD_PLAN.md §6.3. Rolled after EVERY battle, not just wins,
+  // so pacing stays steady no matter how the fight ended.
+  maybeRespawnEncounter(encounter ? encounter.id : null);
 
   renderTeamList();
   saveGame();
@@ -404,6 +423,7 @@ function teamCard(individual, isActive, buttonHtml) {
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +
       '<div class="team-hp-text">' + individual.currentHP + "/" + stats.maxHP + "</div>" +
+      '<div class="team-xp-text">XP: ' + individual.xp + "</div>" +
       (buttonHtml || "") +
     "</div>"
   );

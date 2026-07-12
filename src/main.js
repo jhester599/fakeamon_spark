@@ -433,6 +433,17 @@ function toggleBoxes() {
 
 document.getElementById("boxesBtn").addEventListener("click", toggleBoxes);
 
+// Offline play (added 2026-07-12): register the service worker so the game
+// keeps working with the wifi off, after being visited once online. Feature-
+// detected because older/unusual browsers may not support it at all — the
+// game plays fine without it, just not offline. See service-worker.js's
+// header comment for the one sharp edge (bumping CACHE_VERSION on updates).
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").catch(function (err) {
+    console.warn("Offline play unavailable (service worker registration failed):", err);
+  });
+}
+
 // Boot: draw the overworld (the meadow map, from S2) at the top of the page,
 // then show the title screen — Continue if there's a saved adventure, or New
 // Game (→ choose a starter → step onto the map) if not.

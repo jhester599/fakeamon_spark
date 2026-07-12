@@ -2,6 +2,13 @@
 <!-- M3 Step S10: without this, phones render the page at a ~980px virtual
      width and force a pinch-zoom. PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §5.1. -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Offline play (added 2026-07-12): the manifest is what makes "Add to
+     Home Screen" on Android install a real app icon instead of a bookmark.
+     The actual offline caching is service-worker.js, registered from
+     src/main.js. See its header comment before changing any asset paths. -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2a4d8f">
+<link rel="icon" href="assets/icons/icon-192.png">
 <title>Fakeamon</title>
 
 <style>

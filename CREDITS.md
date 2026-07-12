@@ -53,6 +53,7 @@ the battle screen is still plain HTML/CSS/JS.
 | Shybulb *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/shybulb.png` | `mods/tuxemon/gfx/sprites/battle/shybulb-sheet.png` | Shybulb | Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Shybulb) |
 | Snaki *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/snaki.png` | `mods/tuxemon/gfx/sprites/battle/snaki-sheet.png` | Snaki | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki) |
 | Tumbleworm *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/tumbleworm.png` | `mods/tuxemon/gfx/sprites/battle/tumbleworm-sheet.png` | Tumbleworm | tamashihoshi | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| PWA app icon *(placeholder — Growler's sprite on a white square, made by `tools/make-icon.mjs`)* | `assets/icons/icon-192.png`, `icon-512.png` | derived from `assets/sprites/front/hissiorite.png` | Hissiorite | princess-phoenix (same credit as Growler's rows above) | CC BY-SA 3.0 (derived work, credit princess-phoenix) |
 
 The unmodified source sheets for the three starters are also vendored at
 `assets/sprites/battle/<slug>-sheet.png` (inputs for `tools/slice-sheets.mjs`)

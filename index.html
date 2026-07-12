@@ -284,45 +284,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     image-rendering: pixelated; /* keep the pixel art crisp when scaled up */
   }
-
-  /* The temporary "Battle test" bar (removed at Step S7 when walking into a
-     wild Fakeamon starts the battle for real). Hidden until a game is actually
-     in progress — on the title screen it would just start a throwaway fight
-     and autosave over your real adventure. JS adds .visible once you have a
-     team. */
-  #test-bar {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 760px;
-    margin: 14px auto 4px;
-  }
-  #test-bar.visible {
-    display: flex;
-  }
-  .test-btn {
-    background: #2a4d8f;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 15px;
-    cursor: pointer;
-  }
-  .test-btn:hover {
-    background: #1d3868;
-  }
-  .test-btn:disabled {
-    background: #a7b4cf;
-    cursor: not-allowed;
-  }
-  .test-note {
-    color: #889;
-    font-size: 13px;
-    font-style: italic;
-  }
-
   /* ---- Save v1 (M5-plan S3/S4): title screen + save settings ---- */
   .title-card {
     background: white;
@@ -366,15 +327,6 @@
      it's just an empty grass-green screen — proof Phaser is wired in. The
      real meadow map arrives at Step S2. (PLANS/M3_OVERWORLD_PLAN.md §1) -->
 <div id="world"></div>
-
-<!-- Temporary bridge to the battle while the overworld is being built. Until
-     Step S7 makes "walk into a wild Fakeamon" start a fight for real, this
-     button is how you reach the battle to test it. The whole bar gets removed
-     at Step S7/S9 (M3 plan §9). -->
-<div id="test-bar">
-  <button id="battleTestBtn" class="test-btn">⚔️ Battle test</button>
-  <span class="test-note">temporary — walk into a wild Fakeamon to battle for real; this just triggers a random test fight (removed at Step 9)</span>
-</div>
 
 <!-- The BATTLE room — the plain-HTML fight screen from M1/M2, unchanged.
      Wrapped in one #battle box so a later step can show/hide it as a unit

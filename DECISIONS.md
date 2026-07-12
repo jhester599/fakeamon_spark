@@ -175,6 +175,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-11 | 58 | **Touch D-pad is half see-through** (~0.5 opacity) — findable with a thumb but doesn't block the meadow | (option B) |
 | 2026-07-11 | 59 | **A toggle controls whether the D-pad shows** — a small on/off button so it works for touch and desktop players either way, instead of auto-hiding on a mouse | (option C) |
 | 2026-07-11 | 60 | **The touch-play feature keeps the name "Pocket Venta"** | "the same, pocket venta" — Lewis kept the plan's placeholder |
+| 2026-07-12 | 61 | **Wild Fakeamon respawn on the map** — overrides the M3 plan's earlier "gone is gone, respawn is an M4 question" note. After every battle, a `RESPAWN_CHANCE` roll (starts at 0.3, a tunable dial) can bring back one previously-cleared encounter, same species/level/spot as before | Jeff's call, made live during the M3S8 huddle — "the intent is to keep wild Fakeamon on the map" |
 
 <!--
 Template for a new row:

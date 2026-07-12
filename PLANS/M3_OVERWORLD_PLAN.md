@@ -491,7 +491,19 @@ Pokémon-style movement is **discrete**: the player is always *on* a tile or
   move — fire `handleEncounter(id)` instead.
 - Defeated/caught/fled-from encounters: **win or catch removes** the sprite
   (id → `defeatedEncounters`); **fleeing leaves it** (you ran, it didn't).
-  Respawn policy is an M4 question — for M3, gone is gone.
+- **Respawn — decided at S8 (2026-07-12), overriding the line that used to be
+  here** (*"Respawn policy is an M4 question — for M3, gone is gone"*). Jeff's
+  call: The Meadows should never permanently empty out, so cleared encounters
+  trickle back. Mechanism: after **every** battle (any outcome — win, lose,
+  catch, or flee), roll `RESPAWN_CHANCE` (a Lewis dial in `world/config.js`,
+  starting at **0.3**); if it hits and `defeatedEncounters` has a candidate
+  (excluding whichever encounter you *just* fought, so nothing pops back
+  the instant you clear it), pick one at random and call
+  `worldScene.respawnEncounter(id)` — the mirror of `removeEncounter`. It
+  looks up that id's original `species`/`level`/`tileX`/`tileY` from this
+  map's `encounters` list (same creature, same spot — no re-rolling) and
+  recreates its idle sprite, skipping quietly if the hero happens to be
+  standing on that exact tile right now (tries again next battle).
 
 ### 6.4 Losing in M3 (placeholder rule)
 

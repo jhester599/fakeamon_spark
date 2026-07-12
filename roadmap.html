@@ -229,14 +229,14 @@
     <div class="eyebrow">Fakeamon · Build Plan</div>
     <h1 class="title disp">The Quest Map</h1>
     <p class="subtitle">Our step-by-step plan to build the game. Finish a step, play it, then build the next little bit. 🎮</p>
-    <p class="livebadge">🔄 Keep this tab open — it auto-refreshes every minute as we ship steps · <b>M2 complete ✅ · M3 in progress</b></p>
+    <p class="livebadge">🔄 Keep this tab open — it auto-refreshes every minute as we ship steps · <b>M3 complete ✅ · M4 in progress</b></p>
 
     <div class="overall">
       <div class="row">
         <b>Whole game progress</b>
-        <span class="count">24 / 36 steps · Milestone 3 of 5</span>
+        <span class="count">25 / 36 steps · Milestone 4 of 5</span>
       </div>
-      <div class="meter"><span style="width:66.7%"></span></div>
+      <div class="meter"><span style="width:69.4%"></span></div>
       <p style="margin:12px 0 0; font-size:12.5px; color:var(--ink-soft);">Every step is <b>M‹milestone›S‹step›</b> — e.g. the 7th M3 step is <b>M3S7</b>. Each row below is one such step, matching the S-numbers in the <code>PLANS/</code> docs, so "what's next" reads the same everywhere.</p>
     </div>
 
@@ -354,11 +354,11 @@
         <div class="zone-top">
           <span class="badge-m">M3 · GRASS</span>
           <h2 class="zone-title">Overworld (the map)</h2>
-          <span class="status now">Playing now</span>
+          <span class="status done">✅ Complete</span>
         </div>
-        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>Steps are named <b>M3S1…M3S11</b> — the same S-numbers as <code>PLANS/M3_OVERWORLD_PLAN.md</code> §9, so the roadmap and the plans use one shared numbering now. <b>Done so far:</b> M3S1–M3S10 — Phaser's in, the meadow renders, you walk it with an animated hero, wild Fakeamon idle in the grass, <b>walking into one now opens the real battle</b> (win/catch removes it from the map; fleeing leaves it), catching or beating one earns real XP, cleared wild Fakeamon now <b>respawn over time</b> so The Meadows never stays empty, the temporary "Battle test" button is gone, and it's now playable on a phone/tablet with an on-screen D-pad ("Pocket Venta"). <b>Next: M3S11</b>, expand the wild roster.</i></p>
-        <div class="zone-meter"><span style="width:90.9%"></span></div>
-        <div class="zone-count">10 of 11 steps done</div>
+        <p class="zone-goal">Walk around a world and bump into wild Fakeamon. Here we bring in <b>Phaser</b>, a game engine for tile maps and movement. <i>Steps are named <b>M3S1…M3S11</b> — the same S-numbers as <code>PLANS/M3_OVERWORLD_PLAN.md</code> §9, so the roadmap and the plans use one shared numbering now. <b>M3 is complete! 🎉</b> Phaser's in, the meadow renders, you walk it with an animated hero, <b>walking into a wild Fakeamon opens the real battle</b> (win/catch removes it from the map; fleeing leaves it), catching or beating one earns real XP, cleared wild Fakeamon <b>respawn over time</b>, it's playable on a phone/tablet with an on-screen D-pad ("Pocket Venta"), and The Meadows is stocked with its real 14-line wild-roster slice (⚠️ Lewis's rename pass still pending — placeholder names for now). On to <b>M4</b>.</i></p>
+        <div class="zone-meter"><span style="width:100%"></span></div>
+        <div class="zone-count">11 of 11 steps done</div>
       </div>
       <ol class="steps">
         <li class="done"><span class="num">S1</span><div class="step-body"><p class="step-what"><b>M3S1 · Phaser hello-world</b> — add Phaser + a game canvas; a temporary <b>"Battle test" button</b> keeps the battle reachable until M3S7</p><p class="see"><span class="tag">▶ You'll see</span> A colored game canvas above the old battle — done!</p></div></li>
@@ -371,7 +371,7 @@
         <li class="done"><span class="num">S8</span><div class="step-body"><p class="step-what"><b>M3S8 · Outcome depth</b> — a catch on the map joins your team; real XP (win = full, catch = half); and wild Fakeamon now <b>respawn over time</b> instead of staying gone for good (Jeff's call)</p><p class="see"><span class="tag">▶ You'll see</span> Catch a wild Leafick, watch it join the team and earn XP — and if you clear an area out, one may wander back later — done! (2026-07-12)</p></div></li>
         <li class="done"><span class="num">S9</span><div class="step-body"><p class="step-what"><b>M3S9 · Cleanup + docs</b> — removed the temporary "Battle test" button/bar and its dead code; verified the full play loop start-to-finish</p><p class="see"><span class="tag">▶ You'll see</span> A tiny but complete monster-catching game — done! (2026-07-12)</p></div></li>
         <li class="done"><span class="num">S10</span><div class="step-body"><p class="step-what"><b>M3S10 · Play on a tablet ("Pocket Venta")</b> — an on-screen D-pad + fit-to-screen scaling (<code>PLANS/M3_TOUCH_AND_MOBILE_PLAN.md</code>)</p><p class="see"><span class="tag">▶ You'll see</span> Walk the meadow with your thumbs — done! (2026-07-12)</p></div></li>
-        <li><span class="num">S11</span><div class="step-body"><p class="step-what"><b>M3S11 · Expand the wild roster</b> — swap The Meadows' 3-starter test pool for its real slice of the <b>198-Fakeamon</b> pool (<code>CONTENT_REFERENCE.md</code> §16) + Lewis's renames <i>(beyond the core plan — in practice built once battles work, right after M3S7/S8)</i></p><p class="see"><span class="tag">▶ You'll see</span> The Meadows fills with a proper cast — not just the 3 starters</p></div></li>
+        <li class="done"><span class="num">S11</span><div class="step-body"><p class="step-what"><b>M3S11 · Expand the wild roster</b> — swapped The Meadows' 3-starter test pool for its real 14-line slice of the <b>198-Fakeamon</b> pool (<code>CONTENT_REFERENCE.md</code> §16); stats from a per-type archetype table, sprites sliced. ⚠️ Lewis's rename pass is still pending — names are placeholder Tuxemon slugs for now</p><p class="see"><span class="tag">▶ You'll see</span> The Meadows fills with a proper cast — done! (2026-07-12, renames pending)</p></div></li>
       </ol>
       <p class="done-when"><b>🎉 Done when:</b> you explore a map, meet a wild Fakeamon (a real Meadows cast, not just the starters), battle it, and return to exploring.</p>
       <p class="done-when"><b>🎒 The rest of the pool comes area-by-area:</b> M3S11 wires in only <b>The Meadows'</b> slice — the one map M3 builds. The other five Venta areas (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon) each get their own slice of the 198-Fakeamon pool <b>as they open</b>. Since Snow Mountain/The Factory/The Lagoon only unlock via gym badges, that's now a scheduled, repeating job in <b>M4S6</b> that carries on into M5's late-game areas. Art/licensing for the whole pool is already staged (<code>CONTENT_REFERENCE.md</code> §16); what lands per area is the creative wiring — renames, encounter tables, stats.</p>
@@ -384,7 +384,7 @@
         <div class="zone-top">
           <span class="badge-m">M4 · METAL</span>
           <h2 class="zone-title">World Systems</h2>
-          <span class="status locked">🔒 Locked</span>
+          <span class="status now">Playing now</span>
         </div>
         <p class="zone-goal">Reasons to explore — heal, shop, cook, and the first trainer challenge. <i>(Beating a gym opens a new area — and Step 6 stocks each new area with its own wild Fakeamon.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>

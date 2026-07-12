@@ -99,7 +99,7 @@ Consequences (both make M3 *easier*):
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
 | Phaser version check | — | ✅ **Re-checked & pinned at S1 (2026-07-09): 4.2.1** ("Giedi"), now the newest stable 4.x on npm (was 4.2.0 at M3S0). Vendored to `assets/vendor/`, logged in `DECISIONS.md` + `CREDITS.md` |
-| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S10; first wired in at **M3S11** (The Meadows' slice), then grown area-by-area through M4–M5 |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. **M3S11 (2026-07-12) wired in The Meadows' 14-line slice** (`src/data/fakeamon.js`/`maps.js`, `CREDITS.md`); the rest grows area-by-area through M4S6–M5 |
 
 ~~What S1 still owns:~~ **✅ S1 is done (2026-07-09) — see §A.5.** It owned:
 the pinned Phaser script tag (vendored, not CDN), `src/world/config.js`,

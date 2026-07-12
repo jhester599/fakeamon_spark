@@ -39,6 +39,21 @@ the battle screen is still plain HTML/CSS/JS.
 | Meadow vegetation tiles | `assets/tilesets/vegetation_george.png` | `mods/tuxemon/gfx/tilesets/Vegetation_and_Outdoor_Fittings_by_George.png` | "Vegetation and outdoor fittings" | George_ (per Tuxemon `ATTRIBUTIONS.md`) | CC BY 3.0 |
 | The Meadows tileset (composed) | `assets/tilesets/meadow.png` | derived from the two George tilesets above | — | tiles by George_; selection/composition ours | CC BY 3.0 (derived work, credit George_) |
 | Hero (walk sheet) | `assets/sprites/player/hero.png` | `mods/tuxemon/sprites/adventurer.png` | Adventurer (overworld walk sheet) | Overland sprites by Catch Challenger, adapted by Sanglorian (full sheet also credits front sprite & art by Leo, small back sprite by tamashihoshi) — per `wiki.tuxemon.org/Adventurer` | CC BY-SA 3.0 (per `wiki.tuxemon.org/Adventurer`). ⚠️ Overland frames trace back to the Catch Challenger project — confirm its share-alike terms before a public deploy that features hero art. |
+| Aardorn *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/aardorn.png` | `mods/tuxemon/gfx/sprites/battle/aardorn-sheet.png` | Aardorn | Magic-Purple-Hermit | CC BY-SA 3.0 (per Tuxemon ATTRIBUTIONS.md) |
+| Baoby *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/baoby.png` | `mods/tuxemon/gfx/sprites/battle/baoby-sheet.png` | Baoby | Name, art, sprites and blurb by princess-phoenix | CC BY-SA 3.0 (per wiki.tuxemon.org/Baoby) |
+| Capiti *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/capiti.png` | `mods/tuxemon/gfx/sprites/battle/capiti-sheet.png` | Capiti | Catch Challenger | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| Chenipode *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/chenipode.png` | `mods/tuxemon/gfx/sprites/battle/chenipode-sheet.png` | Chenipode | Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Chenipode) |
+| Chickadee *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/chickadee.png` | `mods/tuxemon/gfx/sprites/battle/chickadee-sheet.png` | Chickadee | Front sprite by Isaiah658; Back and face sprites by Jaskrendix; Alternative sprites by Isaiah658 | CC BY-SA 3.0 (per wiki.tuxemon.org/Chickadee) |
+| Dandicub *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/dandicub.png` | `mods/tuxemon/gfx/sprites/battle/dandicub-sheet.png` | Dandicub | Original design and sprites by Sanglorian; Art by slickedbackArtisan | CC BY-SA 3.0 (per wiki.tuxemon.org/Dandicub) |
+| Hatchling *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/hatchling.png` | `mods/tuxemon/gfx/sprites/battle/hatchling-sheet.png` | Hatchling | Original design and sprites by tamashihoshi | CC BY-SA 3.0 (per wiki.tuxemon.org/Hatchling) |
+| Lambert *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/lambert.png` | `mods/tuxemon/gfx/sprites/battle/lambert-sheet.png` | Lambert | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| Marvillar *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/marvillar.png` | `mods/tuxemon/gfx/sprites/battle/marvillar-sheet.png` | Marvillar | Original design and sprite by Georg Eckert; Front, back and face sprites by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Marvillar) |
+| Pairagrin *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/pairagrin.png` | `mods/tuxemon/gfx/sprites/battle/pairagrin-sheet.png` | Pairagrin | Art by tamashihoshi | CC BY-SA 3.0 (per wiki.tuxemon.org/Pairagrin) |
+| Pantherafira *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/pantherafira.png` | `mods/tuxemon/gfx/sprites/battle/pantherafira-sheet.png` | Pantherafira | Original design and sprites by Catch Challenger; Face sprites tweaked by Sanglorian; Alternative sprites by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Pantherafira) |
+| Shybulb *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/shybulb.png` | `mods/tuxemon/gfx/sprites/battle/shybulb-sheet.png` | Shybulb | Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Shybulb) |
+| Snaki *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/snaki.png` | `mods/tuxemon/gfx/sprites/battle/snaki-sheet.png` | Snaki | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki) |
+| Tumbleworm *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/tumbleworm.png` | `mods/tuxemon/gfx/sprites/battle/tumbleworm-sheet.png` | Tumbleworm | tamashihoshi | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| PWA app icon *(placeholder — Growler's sprite on a white square, made by `tools/make-icon.mjs`)* | `assets/icons/icon-192.png`, `icon-512.png` | derived from `assets/sprites/front/hissiorite.png` | Hissiorite | princess-phoenix (same credit as Growler's rows above) | CC BY-SA 3.0 (derived work, credit princess-phoenix) |
 
 The unmodified source sheets for the three starters are also vendored at
 `assets/sprites/battle/<slug>-sheet.png` (inputs for `tools/slice-sheets.mjs`)
@@ -46,11 +61,13 @@ The unmodified source sheets for the three starters are also vendored at
 for everything it cuts into `tools/credits-fragment.md`, so new creatures'
 rows are generated, not hand-typed.
 
-**Wild-roster sheets (staged 2026-07-06, not yet in the game):** the full
-wild-encounter pool (`CONTENT_REFERENCE.md` §16 — now 198 monsters, after
-`bearloch`/`foxko` were dropped for having no credit anywhere) lives in
-`assets/sprites/battle/`, with the *generated* **`CREDITS_ROSTER.md`** as
-its attribution ledger — **198 staged, 0 pending**. Three of them
+**Wild-roster sheets:** the full wild-encounter pool (`CONTENT_REFERENCE.md`
+§16 — now 198 monsters, after `bearloch`/`foxko` were dropped for having no
+credit anywhere) lives in `assets/sprites/battle/`, with the *generated*
+**`CREDITS_ROSTER.md`** as its attribution ledger — **198 staged, 0
+pending**. **The Meadows' 14-line slice is now in the game (M3S11,
+2026-07-12 — the 14 rows above)**; the other five areas' slices land
+area-by-area at M4S6, per `VENTA_ROSTER_DRAFT.md`. Three of them
 (coaldiak, ninjasmine, toxiris) are ⚠️ OPMon-derived — confirm that
 project's terms before they appear in the game.
 

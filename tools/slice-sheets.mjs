@@ -3,6 +3,9 @@
 //
 //  Run it from the tools/ folder (never in the browser):
 //      cd tools && npm install && npm run slice
+//      cd tools && node slice-sheets.mjs aardorn baoby   (only those slugs —
+//        M3 plan §7.3's "pay per use": slice just what an area actually
+//        needs, not the whole 200-monster pool, until a later area needs more)
 //
 //  INPUT:  ../assets/sprites/battle/<slug>-sheet.png   (vendored sheets)
 //          sheet-manifest.json                          (attribution per slug)
@@ -48,6 +51,11 @@ const CELLS = {
 
 const manifest = JSON.parse(readFileSync(join(TOOLS, "sheet-manifest.json"), "utf8"));
 
+// Optional: `node slice-sheets.mjs slug1 slug2 ...` slices only those slugs.
+// With no args, it slices every vendored sheet that has a manifest entry —
+// the right choice ONLY when a session genuinely needs the whole pool.
+const onlySlugs = process.argv.slice(2);
+
 const sheets = readdirSync(SHEETS).filter((f) => f.endsWith("-sheet.png"));
 const creditRows = [];
 let sliced = 0;
@@ -55,6 +63,7 @@ let skipped = 0;
 
 for (const file of sheets) {
   const slug = file.replace("-sheet.png", "");
+  if (onlySlugs.length && !onlySlugs.includes(slug)) continue;
   const entry = manifest[slug];
 
   if (!entry) {

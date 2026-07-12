@@ -171,7 +171,7 @@ see it join a team you can swap between.
 
 ---
 
-## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S7 done, M3S8 next)*
+## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S8 done, M3S9 next)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
@@ -186,11 +186,18 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 > it's numbered last only because it was added after the plan. Build from the
 > plans; this table is the short version.
 >
-> **Status (2026-07-11):** M3S1–M3S7 are done — Phaser's in, the meadow
+> **Status (2026-07-12):** M3S1–M3S8 are done — Phaser's in, the meadow
 > renders, you walk it with an animated hero, wild Fakeamon idle on the map,
 > and **walking into one now opens the real battle** and returns you to
-> walking (win/catch clears it; fleeing leaves it). **Next: M3S8**,
-> catch-on-map depth + XP.
+> walking (win/catch clears it; fleeing leaves it). **M3S8** added real XP
+> (a win banks `XP_REWARD_BASE × opponent level`; a catch banks half —
+> `src/battle.js`, shown via a log line + a new XP line on each team card)
+> and, on Jeff's call, a **respawn mechanic**: after every battle, a
+> `RESPAWN_CHANCE` roll (0.3, tunable in `src/world/config.js`) can bring one
+> previously-cleared wild Fakeamon back so The Meadows doesn't empty out for
+> good — this overrides the plan's earlier "gone is gone, M4 question" note
+> (`DECISIONS.md` #61, `PLANS/M3_OVERWORLD_PLAN.md` §6.3). **Next: M3S9**,
+> cleanup + docs.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -201,10 +208,10 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 | **M3S5** ✅ | The **sprite-slicer tool** — cut creature sheets into front/back/idle poses (done at M3S0 for the 3 starters; the full-roster slice is M3S11 / M4) | New sliced sprite files, no gameplay change — *done!* |
 | **M3S6** ✅ | **Wild Fakeamon stand on the map** — creatures idle in the grass; walking into one bumps it (a console message for now; the real battle is M3S7) | A wild Fakeamon idling in the grass; bump it → a message — *done! (2026-07-11)* |
 | **M3S7** ✅ | **The handoff** 🌉 — walk into a wild Fakeamon → the real battle opens (a tiny `src/screens.js` hides + freezes the map) → win/catch/flee → back on the map (creature gone unless you fled) | Touch the creature → the M1/M2 battle → back on the map — *done! (2026-07-11)* |
-| **M3S8** | **Outcome depth** — a catch on the map joins your team; XP applied; beaten/caught creatures don't respawn | Catch a wild Leafick on the map and see it join the team |
-| **M3S9** | **Cleanup + docs** — remove the temporary "Battle test" button; clear stale `M3 PLACEHOLDER` comments; verify the live Pages build plays start-to-finish | A tiny but complete monster-catching game on the live site |
-| **M3S10** | **Play it on a tablet ("Pocket Venta")** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) | Walk the meadow with your thumbs on the live site |
-| **M3S11** | **Expand the wild roster** — swap The Meadows' 3-starter test pool for its real slice of the approved **198-Fakeamon** pool (`CONTENT_REFERENCE.md` §16) + Lewis's Tuxemon-slug → Fakeamon **rename pass**. *Beyond the core plan; in practice built right after M3S7/S8* | The Meadows fills up with a proper cast — not just the 3 starters |
+| **M3S8** ✅ | **Outcome depth** — a catch on the map joins your team; real XP (win = full, catch = half); and wild Fakeamon now **respawn over time** instead of staying gone (Jeff's call, overriding this row's old wording) | Catch a wild Leafick on the map, see it join the team and earn XP — and if you clear one out, it may wander back later — *done! (2026-07-12)* |
+| **M3S9** ✅ | **Cleanup + docs** — removed the temporary "Battle test" button/bar and its now-dead code (`runBattleTest`, `fightRandomWildFakeamon`, `updateTestBar`, `pickRandomWildSpeciesKey`); checked for stale `M3 PLACEHOLDER` comments (the one that exists, the M4-loss placeholder, is still genuinely a placeholder — left as-is); verified the full title→walk→battle→win→save/reload loop plays start-to-finish with zero page errors | A tiny but complete monster-catching game — *done! (2026-07-12)* |
+| **M3S10** ✅ | **Play it on a tablet ("Pocket Venta")** — an on-screen D-pad + fit-to-screen scaling, so The Meadows is walkable with your thumbs (`PLANS/M3_TOUCH_AND_MOBILE_PLAN.md`) | Walk the meadow with your thumbs — *done! (2026-07-12)* |
+| **M3S11** ✅ | **Expand the wild roster** — swapped The Meadows' 3-starter test pool for its real 14-line slice of the approved **198-Fakeamon** pool (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`); stats from a `[TUNE]` per-type archetype table (`src/data/fakeamon.js`), sprites sliced (`tools/slice-sheets.mjs`), 14 spread across the open grass. ⚠️ **Lewis's Tuxemon-slug → Fakeamon rename pass is still pending** — names are Title-Cased slugs (clear placeholders) since only he can pick the real ones; nothing here guesses on his behalf. *Beyond the core plan; built after M3S10* | The Meadows fills up with a proper cast — *done! (2026-07-12, renames pending Lewis)* |
 
 **🎉 M3 done when:** you explore a map, meet a visible wild Fakeamon — a real
 Meadows cast, not just the starters — battle it, and return to exploring.

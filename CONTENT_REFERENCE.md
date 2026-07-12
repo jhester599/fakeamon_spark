@@ -379,7 +379,11 @@ unblocked once that lands.
 > **`VENTA_ROSTER_DRAFT.md`**, Lewis's homework **B37** — **approved as-is
 > 2026-07-11**, `DECISIONS.md` #55). `areaProposed` becomes the real `area`
 > as each area's roster is wired in (M3S11 → M4S6); Lewis can still move
-> anyone later.
+> anyone later. **M3S11 (2026-07-12): The Meadows' 14-line slice is wired
+> in and playable** (`src/data/fakeamon.js`/`maps.js`) — placeholder names
+> (Title-Cased slugs) pending Lewis's rename pass, stats from a `[TUNE]`
+> per-type archetype table rather than hand-authored (`DECISIONS.md`,
+> 2026-07-12). The other five areas' slices land at M4S6.
 
 1. **Roster exclusion** — the 17 creatures already cast in `DESIGN.md`
    (starters, evolutions, Artemis, mini-bosses, gym monsters) *and every

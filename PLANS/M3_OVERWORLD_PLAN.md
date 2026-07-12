@@ -99,7 +99,7 @@ Consequences (both make M3 *easier*):
 | Map data draft (S2's data half) | `src/data/maps.js` | `theMeadows`, 30×20, ground/blocked/encounters/startTile — **not** yet loaded by `index.html`; S2 wires it |
 | Phaser 4 skills | `PLANS/phaser-skills/` | 10 skills + README, from `phaserjs/phaser` @ `539e718` (§2's mandate) |
 | Phaser version check | — | ✅ **Re-checked & pinned at S1 (2026-07-09): 4.2.1** ("Giedi"), now the newest stable 4.x on npm (was 4.2.0 at M3S0). Vendored to `assets/vendor/`, logged in `DECISIONS.md` + `CREDITS.md` |
-| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. Not used by S1–S10; first wired in at **M3S11** (The Meadows' slice), then grown area-by-area through M4–M5 |
+| Wild-roster art (M3-late→M5 pool) | `assets/sprites/battle/` + `CREDITS_ROSTER.md` + `tools/roster-200.json` | **Complete (2026-07-06):** the whole §16 pool — 198 monsters after two credit-less drops — vendored with verified attribution (198 staged, 0 pending); reference data (types/lines/catch rates/blurbs) in the JSON. ⚠️ 3 OPMon-derived monsters need their terms confirmed before appearing in-game. **M3S11 (2026-07-12) wired in The Meadows' 14-line slice** (`src/data/fakeamon.js`/`maps.js`, `CREDITS.md`); the rest grows area-by-area through M4S6–M5 |
 
 ~~What S1 still owns:~~ **✅ S1 is done (2026-07-09) — see §A.5.** It owned:
 the pinned Phaser script tag (vendored, not CDN), `src/world/config.js`,
@@ -183,6 +183,40 @@ the canvas fits a phone/tablet screen. All of it lands as the new **S10**,
 added to §9 below — after S9, never folded into S1–S9. The do-not-build
 list right below stays true for S1–S9; S10 is the one sanctioned
 exception, scoped to exactly the touch plan's §3–§6.
+
+### §A.8 What S8 actually built (execution session, 2026-07-12)
+
+Built with **Sonnet 5 / medium**, per the table. Going in, three of the four
+things this row lists (catch → party, the §6.4 loss placeholder,
+`defeatedEncounters` respawn-proofing) turned out to have **already shipped
+during S7** — the S7 session over-delivered slightly, and the code comments
+even said so (`// already gone (S8) — don't respawn`). The only real gap was
+XP: every outcome hardcoded `xpGained: 0` and nothing read it.
+
+- **Real XP** — `src/battle.js`: a new `grantXP(fraction)` helper banks
+  `XP_REWARD_BASE × opponent.level × fraction` onto `activePlayer().xp` and
+  logs it ("Growler earned 12 XP!"). A win calls `grantXP(1)`; a catch calls
+  `grantXP(CATCH_XP_FRACTION)` (0.5). Both constants are `[TUNE]`. **No
+  leveling** — that's still M5 S5's job (`PLANS/M5_STATE_AND_SAVE_PLAN.md`
+  §2); this step just makes the number real instead of always 0.
+- **Team card XP** — `src/main.js`'s `teamCard()` gained a one-line `XP: N`
+  readout (`index.html` adds the matching `.team-xp-text` style) so the
+  number is visibly proven to persist across battles.
+- **Respawn** (Jeff's call, §6.3 above) — `WorldScene` gained
+  `spawnOneEncounter(enc)` (factored out of `spawnEncounters` so it's not
+  duplicated) and `respawnEncounter(id)`, its mirror of `removeEncounter`.
+  `main.js`'s `handleBattleOutcome` rolls `maybeRespawnEncounter` after every
+  battle, excluding whatever was just fought.
+- **Verified** with a headless-Chromium smoke test (not committed — a
+  throwaway script): a win against a level-3 encounter banks exactly 12 XP
+  and shows it on the team card; a forced catch banks exactly 6; respawn
+  fired within 25 battles at `RESPAWN_CHANCE = 0.3` (expected — the odds of
+  zero hits in 25 tries are under 0.1%) and redrew the sprite; a second
+  Growler caught via `meadows-02` proved two individuals of the same species
+  still track HP/XP independently. Zero page errors (the one console hit
+  was the browser's automatic, pre-existing `favicon.ico` 404 — unrelated).
+- **Not touched:** the "Battle test" button (removed at S9) and any
+  leveling/evolution machinery (M5).
 
 ---
 
@@ -491,7 +525,19 @@ Pokémon-style movement is **discrete**: the player is always *on* a tile or
   move — fire `handleEncounter(id)` instead.
 - Defeated/caught/fled-from encounters: **win or catch removes** the sprite
   (id → `defeatedEncounters`); **fleeing leaves it** (you ran, it didn't).
-  Respawn policy is an M4 question — for M3, gone is gone.
+- **Respawn — decided at S8 (2026-07-12), overriding the line that used to be
+  here** (*"Respawn policy is an M4 question — for M3, gone is gone"*). Jeff's
+  call: The Meadows should never permanently empty out, so cleared encounters
+  trickle back. Mechanism: after **every** battle (any outcome — win, lose,
+  catch, or flee), roll `RESPAWN_CHANCE` (a Lewis dial in `world/config.js`,
+  starting at **0.3**); if it hits and `defeatedEncounters` has a candidate
+  (excluding whichever encounter you *just* fought, so nothing pops back
+  the instant you clear it), pick one at random and call
+  `worldScene.respawnEncounter(id)` — the mirror of `removeEncounter`. It
+  looks up that id's original `species`/`level`/`tileX`/`tileY` from this
+  map's `encounters` list (same creature, same spot — no re-rolling) and
+  recreates its idle sprite, skipping quietly if the hero happens to be
+  standing on that exact tile right now (tries again next battle).
 
 ### 6.4 Losing in M3 (placeholder rule)
 
@@ -584,8 +630,8 @@ retired 2026-07-11; roadmap ↔ plan share one numbering now.)
 | **S6** ✅ | Encounters stand in the world *(done 2026-07-11)* | `theMeadows.encounters` (already in map data) now render as **idle-animated sprites** (`spawnEncounters` in `src/world/config.js`, using each species' new `overworld` idle sheet — `FAKEAMON[key].overworld`); the encounter tile blocks movement and walking into it fires the `handleEncounter` seam, which **logs + gives the creature a little pop** (the real battle is S7). Verified headless: 3 sprites render, bump fires, hero can't walk onto the tile, 0 errors | A wild Fakeamon idling in the grass; bumping it logs a message | Sonnet 5 / medium |
 | **S7** ✅ | **The handoff** 🌉 *(done 2026-07-11)* | `src/screens.js` (`showWorld`/`showBattle` per §3 — hide+pause the map, disable its keyboard+pointer, refocus the canvas on return); `WorldScene.handleEncounter` → main.js's `startMapEncounter` → shared `enterBattle` (showBattle → `startBattle` → `handleBattleOutcome` → `enterOverworld`/showWorld); win/catch `removeEncounter` (despawn + `defeatedEncounters`), flee/wipe leaves it. Verified headless: 19/19 assertions, 0 errors | Bump a creature → the real battle opens → win/catch/flee → back on the map, creature gone (or not, if fled) | ~~Sonnet 5 / high~~ built with **Opus 4.8 / high** (Jeff & Lewis's call) |
 | **S8** | Outcome depth | Catch → party (team UI from M2 reflects it); XP applied; loss placeholder per §6.4; `defeatedEncounters` respawn-proofing on scene rebuild | Catch a wild Leafick on the map and see it join the team | Sonnet 5 / medium |
-| **S9** | Cleanup + docs | Remove "Battle test" button; update `CLAUDE.md` status + `ROADMAP.md` M3 ticks; kill any `M3 PLACEHOLDER` that's now real; verify GitHub Pages build plays start-to-finish | The live site is a tiny but complete monster-catching game | Sonnet 5 / low |
-| **S10** — "Pocket Venta" *(adopted 2026-07-10 — §A.7)* | Touch & mobile play, per `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §3–§6. Three commits: **(1)** `heldDirection()` seam retrofit — pure refactor, keyboard-only, verified identical by playing; **(2)** viewport `<meta>` tag + Scale Manager FIT scaling, 960×640 max (desktop unchanged); **(3)** DOM D-pad + `src/screens.js` wiring + a phone-width CSS pass | Walk the meadow with your thumbs on the live site — no keyboard needed | Sonnet 5 / medium–high |
+| **S9** ✅ | Cleanup + docs *(done 2026-07-12)* | Removed "Battle test" button/bar (`index.html`) and its dead code (`runBattleTest`/`fightRandomWildFakeamon`/`updateTestBar`/`pickRandomWildSpeciesKey` in `main.js`); updated `CLAUDE.md` + `ROADMAP.md`/`roadmap.html`; the one `M3 PLACEHOLDER` (the M4 loss/Fakeatent stand-in) checked and left as-is — still genuinely a placeholder, not stale; verified locally (headless-browser smoke test, not committed) that title→New Game→starter→real keyboard walk→real map-encounter battle→win via real UI clicks→XP banked→reload+Continue all still work, zero page errors | The live site is a tiny but complete monster-catching game | Sonnet 5 / low |
+| **S10** — "Pocket Venta" ✅ *(done 2026-07-12, see `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §A.8)* | Touch & mobile play, per `PLANS/M3_TOUCH_AND_MOBILE_PLAN.md` §3–§6, as three commits: **(1)** `heldDirection()` seam retrofit — pure refactor, verified identical to keyboard-only play; **(2)** viewport `<meta>` tag + Scale Manager FIT scaling, capped at 960×640 (desktop unchanged) — plus a real bug found & fixed: `#world` needed an explicit bounded size (`aspect-ratio`) for FIT mode to work at all, or Phaser fell back to the full window; **(3)** `src/world/dpad.js` (new) — a Pointer-Events D-pad with the three-way stuck-walk clear + `src/screens.js` wiring | Walk the meadow with your thumbs on the live site — no keyboard needed | Sonnet 5 / medium–high |
 
 **Definition of done for M3** (unchanged from ROADMAP, now measurable): on
 the *live GitHub Pages URL*, you can walk the meadow, bump a visible wild

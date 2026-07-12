@@ -63,10 +63,28 @@ const MAPS = {
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
     [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
     ],
+    // M3 Step S11: the starter-species placeholders (leafick/growler/whaley —
+    // an M2 stand-in, since nothing else existed yet) are swapped for The
+    // Meadows' real 14-line slice of the approved 200-monster pool
+    // (CONTENT_REFERENCE.md §16, VENTA_ROSTER_DRAFT.md). Levels 2-5 per the
+    // draft's "wild levels 2-5 [TUNE]" — cosmetic for now (no stat growth
+    // until M5), a head start for when leveling exists. Tile spots are
+    // spread across the open grass, clear of trees/rocks/the path.
     encounters: [
-      { id: "meadows-01", species: "leafick", level: 3, tileX: 20, tileY: 5 },
-      { id: "meadows-02", species: "growler", level: 3, tileX: 9, tileY: 14 },
-      { id: "meadows-03", species: "whaley", level: 4, tileX: 24, tileY: 13 },
+      { id: "meadows-aardorn",      species: "aardorn",      level: 2, tileX: 4,  tileY: 2  },
+      { id: "meadows-capiti",       species: "capiti",       level: 2, tileX: 9,  tileY: 3  },
+      { id: "meadows-chickadee",    species: "chickadee",    level: 2, tileX: 14, tileY: 2  },
+      { id: "meadows-hatchling",    species: "hatchling",    level: 2, tileX: 19, tileY: 3  },
+      { id: "meadows-pairagrin",    species: "pairagrin",    level: 3, tileX: 24, tileY: 2  },
+      { id: "meadows-chenipode",    species: "chenipode",    level: 3, tileX: 6,  tileY: 6  },
+      { id: "meadows-snaki",        species: "snaki",        level: 3, tileX: 21, tileY: 6  },
+      { id: "meadows-marvillar",    species: "marvillar",    level: 3, tileX: 9,  tileY: 14 },
+      { id: "meadows-baoby",        species: "baoby",        level: 4, tileX: 24, tileY: 13 },
+      { id: "meadows-dandicub",     species: "dandicub",     level: 4, tileX: 5,  tileY: 16 },
+      { id: "meadows-lambert",      species: "lambert",      level: 4, tileX: 14, tileY: 17 },
+      { id: "meadows-shybulb",      species: "shybulb",      level: 4, tileX: 19, tileY: 11 },
+      { id: "meadows-tumbleworm",   species: "tumbleworm",   level: 5, tileX: 9,  tileY: 17 },
+      { id: "meadows-pantherafira", species: "pantherafira", level: 5, tileX: 24, tileY: 16 }, // "the Meadows' one scary line" — VENTA_ROSTER_DRAFT.md
     ],
     exits: [],                       // M4: doorways to the other five areas
   },

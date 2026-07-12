@@ -339,6 +339,50 @@ plan's own sequencing, S7 will already be done.)*
 
 ---
 
+## §A.8 What S10 actually built (execution session, 2026-07-12)
+
+Built with **Sonnet 5**, as three separate commits per §7's plan — each left
+the game playable, verified with headless-browser smoke tests before moving
+to the next.
+
+1. **Seam retrofit** — `heldDirection()` on `WorldScene` (§A.2's exact call
+   site), backed by a module-level `virtualPad = { direction: null }`.
+   Verified as a pure no-op: keyboard-only walking and the map→battle
+   handoff behave identically.
+2. **Fit the screen** — the viewport `<meta>` tag (`index.html`) and Phaser's
+   `scale: { mode: FIT, autoCenter: CENTER_BOTH, max: {...} }` (§5.2), capped
+   at `WORLD_WIDTH/HEIGHT × WORLD_ZOOM` (960×640 — unchanged from before).
+3. **The pad + wiring** — `src/world/dpad.js` (new file): Pointer Events,
+   the three-way stuck-walk clear (`pointerup`/`pointercancel`/
+   `pointerleave`, plus `visibilitychange`/`blur`), one-finger tracking via
+   `pointerId`, and the show/hide toggle defaulting on `(pointer: coarse)`.
+   `src/screens.js` gained the two-line §6 wiring (`hideDpadForBattle()` /
+   `restoreDpadAfterBattle()`).
+
+**⚠️ A real bug this plan didn't anticipate, found and fixed during
+verification:** giving `#world` `position: relative` (so the pad/toggle
+could overlay the canvas) was not enough on its own. Phaser's FIT scale
+mode needs a parent element with a *bounded* size to fit the game into —
+`#world` had never had an explicit width/height (it just sized to its flex
+content), and without one, Phaser's Scale Manager fell back to sizing
+against the full window, which (a) threw off Phaser's own canvas-centering
+inline margin and (b) left the pad/toggle — correctly positioned relative
+to `#world` — anchored to a box far larger than the visible canvas, so they
+rendered nowhere near it (confirmed via `getBoundingClientRect`, not just
+eyeballing a screenshot — the toggle sat right under the page title, the
+pad sat well below the canvas). **Fix:** `#world` now gets
+`width: 100%; max-width: 960px; aspect-ratio: 480 / 320;` — a real,
+bounded box for Phaser to fit into, and the correct anchor for the overlay.
+Verified after the fix: `#world`'s rect matches the canvas's rect on both a
+960-wide desktop and a 390px-wide phone viewport, and the pad/toggle render
+exactly on the canvas's corners at both sizes (screenshots taken, not
+committed). **Lesson for future Scale-Manager work:** always give a Phaser
+`parent` element an explicit CSS size before turning on FIT/RESIZE modes —
+Phaser's docs mention this, but it's easy to miss since fixed-zoom mode
+(what S1–S9 used) never needed it.
+
+---
+
 ## §7. Proposed sequencing (Jeff's call)
 
 *(Revised after S2–S4 landed: the original "seam into S3's prompt" and

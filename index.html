@@ -1,4 +1,14 @@
 <meta charset="utf-8">
+<!-- M3 Step S10: without this, phones render the page at a ~980px virtual
+     width and force a pinch-zoom. PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §5.1. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Offline play (added 2026-07-12): the manifest is what makes "Add to
+     Home Screen" on Android install a real app icon instead of a bookmark.
+     The actual offline caching is service-worker.js, registered from
+     src/main.js. See its header comment before changing any asset paths. -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2a4d8f">
+<link rel="icon" href="assets/icons/icon-192.png">
 <title>Fakeamon</title>
 
 <style>
@@ -240,6 +250,12 @@
     font-size: 12px;
     color: #556;
   }
+  /* Step 8: a running XP count, so it's visible that it's really banking up
+     even though nothing levels up yet (that's M5's job). */
+  .team-xp-text {
+    font-size: 12px;
+    color: #7a5cb0;
+  }
   /* Step 6: Switch buttons. Deliberately NOT .move-btn — same reason as
      .boxes-btn above (battle.js's setControlsEnabled() would grab it). */
   .team-switch-btn {
@@ -271,6 +287,15 @@
     display: flex;
     justify-content: center;
     margin: 8px auto 0;
+    position: relative; /* M3 S10: lets #dpad + #dpadToggle overlay the canvas */
+    /* M3 S10: Phaser's FIT scale mode needs a parent with a BOUNDED size to
+       fit into — without this, #world had no explicit height and Phaser
+       fell back to the full window height, which threw off its own
+       canvas-centering math (and our overlay). width/aspect-ratio give it
+       one, capped at the same 960x640 desktop max as before. */
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 480 / 320;
   }
   #world canvas {
     border: 3px solid #d0d8e8;
@@ -279,42 +304,63 @@
     image-rendering: pixelated; /* keep the pixel art crisp when scaled up */
   }
 
-  /* The temporary "Battle test" bar (removed at Step S7 when walking into a
-     wild Fakeamon starts the battle for real). Hidden until a game is actually
-     in progress — on the title screen it would just start a throwaway fight
-     and autosave over your real adventure. JS adds .visible once you have a
-     team. */
-  #test-bar {
+  /* ---- "Pocket Venta" — the on-screen D-pad (M3 Step S10) ----
+     PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §4. Four separate floating arrows
+     (not one solid cross — Lewis's B38), bottom-right (B39), half
+     see-through (B40) so the meadow underneath still shows through. Hidden
+     unless .visible (the toggle, B41) AND not .battle-hidden (src/screens.js,
+     §6 — a thumb resting on the pad can't walk the hidden hero mid-battle). */
+  #dpad {
     display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 760px;
-    margin: 14px auto 4px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    grid-template-columns: 52px 52px 52px;
+    grid-template-rows: 52px 52px 52px;
+    gap: 6px;
+    touch-action: none;   /* stop the browser's own scroll/zoom gestures here */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  #test-bar.visible {
-    display: flex;
+  #dpad.visible:not(.battle-hidden) {
+    display: grid;
   }
-  .test-btn {
+  #dpad button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #2a4d8f;
+    color: white;
+    font-size: 22px;
+    opacity: 0.5; /* half see-through — B40 */
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  #dpad button:active {
+    opacity: 0.8;
+  }
+  #dpad-up    { grid-column: 2; grid-row: 1; }
+  #dpad-left  { grid-column: 1; grid-row: 2; }
+  #dpad-right { grid-column: 3; grid-row: 2; }
+  #dpad-down  { grid-column: 2; grid-row: 3; }
+  /* Center cell (col 2, row 2) stays empty on purpose — reserved for a
+     future A button once M4's NPCs/doors need a "talk" action (plan §4). */
+
+  #dpadToggle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
     background: #2a4d8f;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 15px;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    opacity: 0.7;
     cursor: pointer;
-  }
-  .test-btn:hover {
-    background: #1d3868;
-  }
-  .test-btn:disabled {
-    background: #a7b4cf;
-    cursor: not-allowed;
-  }
-  .test-note {
-    color: #889;
-    font-size: 13px;
-    font-style: italic;
   }
 
   /* ---- Save v1 (M5-plan S3/S4): title screen + save settings ---- */
@@ -359,15 +405,18 @@
 <!-- M3 Step S1: the OVERWORLD. Phaser draws its canvas in here. Right now
      it's just an empty grass-green screen — proof Phaser is wired in. The
      real meadow map arrives at Step S2. (PLANS/M3_OVERWORLD_PLAN.md §1) -->
-<div id="world"></div>
-
-<!-- Temporary bridge to the battle while the overworld is being built. Until
-     Step S7 makes "walk into a wild Fakeamon" start a fight for real, this
-     button is how you reach the battle to test it. The whole bar gets removed
-     at Step S7/S9 (M3 plan §9). -->
-<div id="test-bar">
-  <button id="battleTestBtn" class="test-btn">⚔️ Battle test</button>
-  <span class="test-note">temporary — walk into a wild Fakeamon to battle for real; this just triggers a random test fight (removed at Step 9)</span>
+<div id="world">
+  <!-- "Pocket Venta" (M3 Step S10) — a touch D-pad overlaid on the map
+       canvas, plus its show/hide toggle (B41). Plain DOM, wired in
+       src/world/dpad.js; Phaser never touches these buttons directly
+       (PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §4). -->
+  <div id="dpad">
+    <button id="dpad-up" type="button" aria-label="Walk up">▲</button>
+    <button id="dpad-left" type="button" aria-label="Walk left">◀</button>
+    <button id="dpad-right" type="button" aria-label="Walk right">▶</button>
+    <button id="dpad-down" type="button" aria-label="Walk down">▼</button>
+  </div>
+  <button id="dpadToggle" type="button">🕹️ Show pad</button>
 </div>
 
 <!-- The BATTLE room — the plain-HTML fight screen from M1/M2, unchanged.
@@ -416,5 +465,6 @@
 <script src="src/battle.js"></script>
 <script src="src/save.js"></script>
 <script src="src/world/config.js"></script>
+<script src="src/world/dpad.js"></script>
 <script src="src/screens.js"></script>
 <script src="src/main.js"></script>

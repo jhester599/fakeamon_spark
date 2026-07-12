@@ -22,10 +22,14 @@
 // The map is 30×20 tiles, each 16 pixels, so the world is 480×320 pixels.
 // Then we ZOOM it up so it looks big and chunky on screen. Change WORLD_ZOOM
 // to 3 for a closer-in view — Jeff's pick for now is 2× (M3 plan §A.2).
+// M3 Step S10: this is now the desktop MAX, not a fixed zoom — the Scale
+// Manager's FIT mode (below, in startWorld) shrinks the canvas to fit a
+// smaller screen, but never grows past WORLD_ZOOM's cap, so nothing changes
+// on a desktop.
 const WORLD_TILES_WIDE = 30;   // matches src/data/maps.js theMeadows width
 const WORLD_TILES_TALL  = 20;  // matches src/data/maps.js theMeadows height
 const WORLD_TILE_SIZE   = 16;  // pixels per tile (the tileset's tile size)
-const WORLD_ZOOM        = 2;   // 2× (try 3 for a closer view) — Jeff's call
+const WORLD_ZOOM        = 2;   // 2× cap on desktop (try 3 for a closer view) — Jeff's call
 const WORLD_GRASS_COLOR = "#6cc24a"; // meadow green, a stand-in for S2's tiles
 
 // The whole world in pixels, worked out from the dials above.
@@ -66,12 +70,25 @@ const IDLE_FRAME_W  = 24;
 const IDLE_FRAME_H  = 24;
 const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dial)
 
+// --- Respawning (S8) -------------------------------------------------------
+// A beaten/caught wild Fakeamon leaves the map, but The Meadows shouldn't
+// stay empty forever — see PLANS/M3_OVERWORLD_PLAN.md §6.3. After every
+// battle there's this chance one previously-cleared encounter wanders back.
+// Lower = the map empties out slower; higher = it fills back in faster.
+const RESPAWN_CHANCE = 0.3; // [TUNE] rolled once per battle in main.js
+
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
 // loading a save). Set in create(). worldActive gates walking: it's false on
 // the title/starter/battle screens so arrow keys don't walk a hero you can't
 // see — a lightweight stand-in for the S7 screen manager (plan §3).
 let worldScene = null;
 let worldActive = false;
+
+// TOUCH SEAM (see PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §3) — the on-screen D-pad
+// (src/world/dpad.js, S10) writes here; heldDirection() below reads it before
+// falling back to the keyboard. Stays { direction: null } if the pad is never
+// touched, so keyboard-only play is unaffected.
+let virtualPad = { direction: null };
 
 // ---------------------------------------------------------------------------
 //  BootScene — the first scene Phaser runs. Its job is to get everything
@@ -135,6 +152,7 @@ class WorldScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(WORLD_GRASS_COLOR);
 
     const mapData = MAPS.theMeadows;
+    this.mapData = mapData; // kept for later lookups (S8: respawnEncounter)
     this.tileSize = mapData.tileSize;
     this.ground = mapData.ground;            // the tile-number grid
     this.solid = new Set(SOLID_TILE_INDICES); // which tile numbers you can't walk on
@@ -232,32 +250,60 @@ class WorldScene extends Phaser.Scene {
     const cleared = gameState.world.defeatedEncounters || [];
 
     (mapData.encounters || []).forEach((enc) => {
-      if (cleared.indexOf(enc.id) !== -1) return;  // already gone (S8) — don't respawn
-      const species = FAKEAMON[enc.species];
-      if (!species || !species.overworld) return;  // no idle art → skip quietly
-
-      // One slow idle wiggle per species (made once, then reused).
-      const animKey = "idle-" + enc.species;
-      if (!this.anims.exists(animKey)) {
-        this.anims.create({
-          key: animKey,
-          frames: this.anims.generateFrameNumbers(animKey, { frames: [0, 1] }),
-          frameRate: IDLE_FRAME_RATE,
-          repeat: -1,
-        });
-      }
-
-      // Stand it on its tile, feet on the tile's bottom edge (same origin trick
-      // as the hero) so a chunky 24×24 creature sits nicely on a 16px tile.
-      const p = this.tilePixel(enc.tileX, enc.tileY);
-      const sprite = this.add.sprite(p.x, p.y, animKey, 0);
-      sprite.setOrigin(0.5, 1);
-      sprite.play(animKey);
-      sprite.encounterId = enc.id;
-
-      this.encounterSprites.push(sprite);
-      this.encounterByTile.set(enc.tileX + "," + enc.tileY, enc);
+      if (cleared.indexOf(enc.id) !== -1) return;  // already gone — don't respawn here
+      this.spawnOneEncounter(enc);
     });
+  }
+
+  // Stand one wild Fakeamon's idle sprite on its tile. Shared by
+  // spawnEncounters above (page load / Continue, spawns everyone not yet
+  // cleared) and respawnEncounter below (S8: bringing ONE cleared one back
+  // mid-session, without rebuilding the whole scene).
+  spawnOneEncounter(enc) {
+    const species = FAKEAMON[enc.species];
+    if (!species || !species.overworld) return;  // no idle art → skip quietly
+
+    // One slow idle wiggle per species (made once, then reused).
+    const animKey = "idle-" + enc.species;
+    if (!this.anims.exists(animKey)) {
+      this.anims.create({
+        key: animKey,
+        frames: this.anims.generateFrameNumbers(animKey, { frames: [0, 1] }),
+        frameRate: IDLE_FRAME_RATE,
+        repeat: -1,
+      });
+    }
+
+    // Stand it on its tile, feet on the tile's bottom edge (same origin trick
+    // as the hero) so a chunky 24×24 creature sits nicely on a 16px tile.
+    const p = this.tilePixel(enc.tileX, enc.tileY);
+    const sprite = this.add.sprite(p.x, p.y, animKey, 0);
+    sprite.setOrigin(0.5, 1);
+    sprite.play(animKey);
+    sprite.encounterId = enc.id;
+
+    this.encounterSprites.push(sprite);
+    this.encounterByTile.set(enc.tileX + "," + enc.tileY, enc);
+  }
+
+  // S8: bring back a previously-cleared wild Fakeamon — same species, level,
+  // and tile as before (see main.js's respawn roll in handleBattleOutcome).
+  // This is really "undo removeEncounter" plus redrawing the sprite, since
+  // the scene never gets rebuilt between battles.
+  respawnEncounter(id) {
+    const enc = this.mapData.encounters.find((e) => e.id === id);
+    if (!enc) return; // unknown id — nothing to bring back
+
+    // Don't pop one in right under the hero's feet — try again next battle.
+    const player = gameState.world.player;
+    if (player.tileX === enc.tileX && player.tileY === enc.tileY) return;
+
+    this.spawnOneEncounter(enc);
+
+    const cleared = gameState.world.defeatedEncounters;
+    const index = cleared.indexOf(id);
+    if (index !== -1) cleared.splice(index, 1);
+    saveGame();
   }
 
   // Is a wild Fakeamon standing on this tile? Returns the encounter or null.
@@ -358,22 +404,29 @@ class WorldScene extends Phaser.Scene {
     });
   }
 
-  // Called every frame by Phaser. Poll the arrow keys and walk the grid.
+  // TOUCH SEAM (M3 plan §3 / PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §3) — which
+  // way is the player asking to walk right now? The on-screen pad wins if
+  // it's being held; otherwise fall back to the arrow keys. null = neither.
+  heldDirection() {
+    if (virtualPad.direction) return virtualPad.direction;
+    const c = this.cursors;
+    if (c.left.isDown) return "left";
+    if (c.right.isDown) return "right";
+    if (c.up.isDown) return "up";
+    if (c.down.isDown) return "down";
+    return null;
+  }
+
+  // Called every frame by Phaser. Poll for a held direction and walk the grid.
   update() {
     if (!worldActive) return;
     if (this.isMoving) return; // mid-tween — let the step finish
 
-    const c = this.cursors;
-    let dir = null;
-    if (c.left.isDown) dir = "left";
-    else if (c.right.isDown) dir = "right";
-    else if (c.up.isDown) dir = "up";
-    else if (c.down.isDown) dir = "down";
-
+    const dir = this.heldDirection();
     if (dir) {
       this.tryWalk(dir);
     } else {
-      this.stopWalk(); // no key held → settle on the standing pose
+      this.stopWalk(); // nothing held → settle on the standing pose
     }
   }
 }
@@ -398,7 +451,15 @@ function startWorld() {
     height: WORLD_HEIGHT,
     pixelArt: true,             // crisp pixel art — no blurry scaling
     backgroundColor: WORLD_GRASS_COLOR,
-    scale: { zoom: WORLD_ZOOM },
+    // M3 Step S10: FIT shrinks the canvas to whatever screen it's on
+    // (a phone gets the whole meadow scaled to its width) but never grows
+    // past WORLD_ZOOM's cap, so a desktop still looks pixel-identical to
+    // before (PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §5.2).
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      max: { width: WORLD_WIDTH * WORLD_ZOOM, height: WORLD_HEIGHT * WORLD_ZOOM },
+    },
     scene: [BootScene, WorldScene], // BootScene runs first, then WorldScene
   };
 

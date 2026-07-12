@@ -22,10 +22,14 @@
 // The map is 30×20 tiles, each 16 pixels, so the world is 480×320 pixels.
 // Then we ZOOM it up so it looks big and chunky on screen. Change WORLD_ZOOM
 // to 3 for a closer-in view — Jeff's pick for now is 2× (M3 plan §A.2).
+// M3 Step S10: this is now the desktop MAX, not a fixed zoom — the Scale
+// Manager's FIT mode (below, in startWorld) shrinks the canvas to fit a
+// smaller screen, but never grows past WORLD_ZOOM's cap, so nothing changes
+// on a desktop.
 const WORLD_TILES_WIDE = 30;   // matches src/data/maps.js theMeadows width
 const WORLD_TILES_TALL  = 20;  // matches src/data/maps.js theMeadows height
 const WORLD_TILE_SIZE   = 16;  // pixels per tile (the tileset's tile size)
-const WORLD_ZOOM        = 2;   // 2× (try 3 for a closer view) — Jeff's call
+const WORLD_ZOOM        = 2;   // 2× cap on desktop (try 3 for a closer view) — Jeff's call
 const WORLD_GRASS_COLOR = "#6cc24a"; // meadow green, a stand-in for S2's tiles
 
 // The whole world in pixels, worked out from the dials above.
@@ -447,7 +451,15 @@ function startWorld() {
     height: WORLD_HEIGHT,
     pixelArt: true,             // crisp pixel art — no blurry scaling
     backgroundColor: WORLD_GRASS_COLOR,
-    scale: { zoom: WORLD_ZOOM },
+    // M3 Step S10: FIT shrinks the canvas to whatever screen it's on
+    // (a phone gets the whole meadow scaled to its width) but never grows
+    // past WORLD_ZOOM's cap, so a desktop still looks pixel-identical to
+    // before (PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §5.2).
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      max: { width: WORLD_WIDTH * WORLD_ZOOM, height: WORLD_HEIGHT * WORLD_ZOOM },
+    },
     scene: [BootScene, WorldScene], // BootScene runs first, then WorldScene
   };
 

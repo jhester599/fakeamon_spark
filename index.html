@@ -280,6 +280,15 @@
     display: flex;
     justify-content: center;
     margin: 8px auto 0;
+    position: relative; /* M3 S10: lets #dpad + #dpadToggle overlay the canvas */
+    /* M3 S10: Phaser's FIT scale mode needs a parent with a BOUNDED size to
+       fit into — without this, #world had no explicit height and Phaser
+       fell back to the full window height, which threw off its own
+       canvas-centering math (and our overlay). width/aspect-ratio give it
+       one, capped at the same 960x640 desktop max as before. */
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 480 / 320;
   }
   #world canvas {
     border: 3px solid #d0d8e8;
@@ -287,6 +296,66 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     image-rendering: pixelated; /* keep the pixel art crisp when scaled up */
   }
+
+  /* ---- "Pocket Venta" — the on-screen D-pad (M3 Step S10) ----
+     PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §4. Four separate floating arrows
+     (not one solid cross — Lewis's B38), bottom-right (B39), half
+     see-through (B40) so the meadow underneath still shows through. Hidden
+     unless .visible (the toggle, B41) AND not .battle-hidden (src/screens.js,
+     §6 — a thumb resting on the pad can't walk the hidden hero mid-battle). */
+  #dpad {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    grid-template-columns: 52px 52px 52px;
+    grid-template-rows: 52px 52px 52px;
+    gap: 6px;
+    touch-action: none;   /* stop the browser's own scroll/zoom gestures here */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #dpad.visible:not(.battle-hidden) {
+    display: grid;
+  }
+  #dpad button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #2a4d8f;
+    color: white;
+    font-size: 22px;
+    opacity: 0.5; /* half see-through — B40 */
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  #dpad button:active {
+    opacity: 0.8;
+  }
+  #dpad-up    { grid-column: 2; grid-row: 1; }
+  #dpad-left  { grid-column: 1; grid-row: 2; }
+  #dpad-right { grid-column: 3; grid-row: 2; }
+  #dpad-down  { grid-column: 2; grid-row: 3; }
+  /* Center cell (col 2, row 2) stays empty on purpose — reserved for a
+     future A button once M4's NPCs/doors need a "talk" action (plan §4). */
+
+  #dpadToggle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #2a4d8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
   /* ---- Save v1 (M5-plan S3/S4): title screen + save settings ---- */
   .title-card {
     background: white;
@@ -329,7 +398,19 @@
 <!-- M3 Step S1: the OVERWORLD. Phaser draws its canvas in here. Right now
      it's just an empty grass-green screen — proof Phaser is wired in. The
      real meadow map arrives at Step S2. (PLANS/M3_OVERWORLD_PLAN.md §1) -->
-<div id="world"></div>
+<div id="world">
+  <!-- "Pocket Venta" (M3 Step S10) — a touch D-pad overlaid on the map
+       canvas, plus its show/hide toggle (B41). Plain DOM, wired in
+       src/world/dpad.js; Phaser never touches these buttons directly
+       (PLANS/M3_TOUCH_AND_MOBILE_PLAN.md §4). -->
+  <div id="dpad">
+    <button id="dpad-up" type="button" aria-label="Walk up">▲</button>
+    <button id="dpad-left" type="button" aria-label="Walk left">◀</button>
+    <button id="dpad-right" type="button" aria-label="Walk right">▶</button>
+    <button id="dpad-down" type="button" aria-label="Walk down">▼</button>
+  </div>
+  <button id="dpadToggle" type="button">🕹️ Show pad</button>
+</div>
 
 <!-- The BATTLE room — the plain-HTML fight screen from M1/M2, unchanged.
      Wrapped in one #battle box so a later step can show/hide it as a unit
@@ -377,5 +458,6 @@
 <script src="src/battle.js"></script>
 <script src="src/save.js"></script>
 <script src="src/world/config.js"></script>
+<script src="src/world/dpad.js"></script>
 <script src="src/screens.js"></script>
 <script src="src/main.js"></script>

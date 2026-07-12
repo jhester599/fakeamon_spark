@@ -31,6 +31,9 @@ function showBattle() {
     worldScene.input.keyboard.enabled = false;
     worldScene.input.enabled = false;
   }
+  // M3 S10: a thumb resting on the D-pad can't walk the hidden hero into an
+  // encounter (same bug class as the keyboard guards just above — plan §6).
+  hideDpadForBattle();
 }
 
 // Show the map: bring it back, un-freeze it, and give the canvas keyboard
@@ -49,4 +52,5 @@ function showWorld() {
     worldGame.canvas.setAttribute("tabindex", "0"); // focusable → it can hold the keyboard
     worldGame.canvas.focus();
   }
+  restoreDpadAfterBattle(); // M3 S10: let the D-pad's own show/hide toggle show through again
 }

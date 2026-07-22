@@ -53,10 +53,11 @@ function isValidIndividual(ind) {
 // A brand-new, empty adventure — the shape everything else expects. Loading
 // merges an old save ON TOP of this, so any field added in a later version
 // gets a sensible default for free (only *reshaped* fields need a migration).
-// That's why adding `world` (M3) needed no version bump: an old party-only
-// save still loads and just gains a fresh world here.
+// That's why adding `world` (M3) and `inventory` (the M2 follow-up,
+// DECISIONS.md #49) needed no version bump: an old save still loads and just
+// gains a fresh one here.
 function defaultState() {
-  return { version: SAVE_VERSION, party: [], box: [], world: defaultWorld() };
+  return { version: SAVE_VERSION, party: [], box: [], world: defaultWorld(), inventory: defaultInventory() };
 }
 
 // Write gameState to localStorage. Wrapped in try/catch because the WRITE can
@@ -139,6 +140,15 @@ function parseSave(text) {
   } else if (!Array.isArray(w.defeatedEncounters)) {
     w.defeatedEncounters = []; // fill a missing sub-field (future-proofs S8)
   }
+
+  // Inventory (the M2 follow-up, DECISIONS.md #49): a malformed one just
+  // resets to the starting ball count rather than rejecting the whole save —
+  // same forgiving spirit as the world check above.
+  const balls = state.inventory && state.inventory.balls;
+  if (!balls || typeof balls.fakeaball !== "number" || balls.fakeaball < 0) {
+    state.inventory = defaultInventory();
+  }
+
   return state;
 }
 

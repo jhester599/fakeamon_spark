@@ -56,6 +56,20 @@ function statsFor(individual) {
 // ===========================================================================
 const MAX_PARTY_SIZE = 4; // Lewis's call — a 5th catch overflows to the Boxes
 
+// ===========================================================================
+//  INVENTORY — the M2 follow-up (DECISIONS.md #49): Fakeaballs are limited,
+//  not infinite. Nested under `balls` (not a flat inventory.fakeaball) per
+//  PLANS/M5_STATE_AND_SAVE_PLAN.md §1's gameState sketch — §A notes that
+//  where the M3 and M5 plans' sketches disagree, §1's nested shape wins.
+//  That's the shape Great/Ultra/Cosmic balls join later (Jeff's number-tuning
+//  list) without reshaping anything that already exists.
+// ===========================================================================
+const STARTING_FAKEABALLS = 5; // Lewis's call — Tall Tower purchases (M4S3) add more
+
+function defaultInventory() {
+  return { balls: { fakeaball: STARTING_FAKEABALLS } };
+}
+
 // The OVERWORLD slice of the save (M3): where the hero is standing, which map
 // they're on, and which encounters have been cleared. A brand-new world puts
 // the hero on The Meadows' start tile (from src/data/maps.js). Kept as a
@@ -82,4 +96,5 @@ const gameState = {
   party: [],
   box: [],
   world: defaultWorld(),
+  inventory: defaultInventory(),
 };

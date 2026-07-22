@@ -100,6 +100,7 @@ function continueGame() {
   gameState.party = loaded.party;
   gameState.box = loaded.box;
   gameState.world = loaded.world;
+  gameState.inventory = loaded.inventory;
   enterOverworld();
 }
 
@@ -116,6 +117,7 @@ function startNewGame() {
   gameState.party = [];
   gameState.box = [];
   gameState.world = defaultWorld();
+  gameState.inventory = defaultInventory();
   showStarterSelect();
 }
 
@@ -176,6 +178,7 @@ function importSave() {
       gameState.party = loaded.party;
       gameState.box = loaded.box;
       gameState.world = loaded.world;
+      gameState.inventory = loaded.inventory;
       saveGame();       // the imported adventure is now this browser's save
       enterOverworld(); // drop the hero onto the map where the save left off
     });
@@ -244,6 +247,7 @@ function startMapEncounter(encounter) {
   enterBattle({
     playerParty: gameState.party,
     enemy: newIndividual(encounter.species, encounter.level),
+    inventory: gameState.inventory,
     canFlee: true,
     canCatch: true,
     onStateChange: renderTeamList,

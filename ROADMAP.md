@@ -153,21 +153,20 @@ few hits each.
 **🎉 M2 done when:** you can fight a wild Fakeamon, weaken it, catch it, and
 see it join a team you can swap between.
 
-> **⚠️ Two small follow-ups on Step 4 (catching), added 2026-07-10 —
-> Lewis's design, not yet built:** M2 Step 4 shipped catching before these
-> were decided, so the current game doesn't do either of them yet:
+> **✅ Two small follow-ups on Step 4 (catching) — decided 2026-07-10, built
+> 2026-07-22:**
 > 1. **Limited Fakeaballs.** Start with **5**; each throw (catch or miss)
->    uses one from `gameState.inventory.fakeaball`; the "Throw Fakeaball"
->    button disables at **zero**. Tall Tower purchases (M4 Step 3) add
->    more to the same count.
-> 2. **Pause after a catch.** Show a **Continue** button (like a battle
->    win/lose does) instead of resolving straight into a new battle, so
->    the "Gotcha!" message has a beat before the screen changes.
+>    uses one from `gameState.inventory.balls.fakeaball`; the "Throw
+>    Fakeaball" button shows the live count and disables at **zero**. Tall
+>    Tower purchases (M4 Step 3) add more to the same count.
+> 2. **Pause after a catch.** A successful catch now shows a **Continue**
+>    button (like a battle win/lose does) instead of resolving straight
+>    into a new battle, so the "Gotcha!" message has a beat before the
+>    screen changes.
 >
 > See `DECISIONS.md` #49–50 and `DESIGN.md` §6/§9 for the full decisions.
-> Small, self-contained fix — a good next-session pickup, doesn't need its
-> own M2 step number since M2's table above stays the historical record
-> of what Step 4 originally shipped.
+> Doesn't have its own M2 step number — M2's table above stays the
+> historical record of what Step 4 originally shipped.
 
 ---
 

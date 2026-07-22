@@ -202,9 +202,9 @@ Caught Fakeamon join your team.
 
 **DECIDED (2026-07-05):** you **can catch a mini-boss**, but **only with a Cosmic Fakeaball**. *(Lewis's call.)* Artemis stays uncatchable (see §10).
 
-**DECIDED (2026-07-10) — Fakeaballs are limited (Lewis's design):** you start with **5 Fakeaballs**. Each throw uses one, whether the catch succeeds or the Fakeamon breaks free. **Tall Tower purchases (§9, M4) add more** to the same count. When you're down to **zero**, the "Throw Fakeaball" button is disabled — no throwing on an empty inventory. *(Not yet built: M2 Step 4 shipped catching before the ball count existed in `gameState`, so today's game lets you throw forever. Tracked as a follow-up fix — see `ROADMAP.md`'s M2 section.)*
+**DECIDED (2026-07-10) — Fakeaballs are limited (Lewis's design):** you start with **5 Fakeaballs**. Each throw uses one, whether the catch succeeds or the Fakeamon breaks free. **Tall Tower purchases (§9, M4) add more** to the same count. When you're down to **zero**, the "Throw Fakeaball" button is disabled — no throwing on an empty inventory. *(Built 2026-07-22 — `gameState.inventory.balls.fakeaball`, `src/state.js`/`src/battle.js`.)*
 
-**DECIDED (2026-07-10) — pause after a catch (Lewis's design):** when a Fakeamon is caught, don't jump straight into a new battle. Show a **Continue** button, the same way a battle win does, so the player has a beat to see "Gotcha! `<name>` was caught!" before moving on. *(Not yet built: today a successful catch resolves the battle immediately, with no Continue step — that's the gap this decision fixes. Tracked as a follow-up fix — see `ROADMAP.md`'s M2 section.)*
+**DECIDED (2026-07-10) — pause after a catch (Lewis's design):** when a Fakeamon is caught, don't jump straight into a new battle. Show a **Continue** button, the same way a battle win does, so the player has a beat to see "Gotcha! `<name>` was caught!" before moving on. *(Built 2026-07-22 — `showContinueButton()`, `src/battle.js`.)*
 
 **Losing:** **DECIDED (2026-07-05):** when your whole team faints, you wake up at the last **Fakeatent**, fully healed, and **drop a few tokens** — a small sting, not harsh. *(Lewis's call.)*
 

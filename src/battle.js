@@ -17,6 +17,7 @@
 // ===========================================================================
 let party;    // config.playerParty
 let opponent;
+let inventory; // config.inventory — a LIVE reference, same trick as party
 let canFlee = true;
 let canCatch = true;
 let resolveBattle; // set by startBattle(); called once the fight is over
@@ -241,6 +242,7 @@ function throwFakeaball(onDone) {
   const opponentName = FAKEAMON[opponent.speciesKey].name;
 
   addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
+  inventory.balls.fakeaball -= 1; // used up the moment it's actually thrown — DECISIONS.md #49
   const caught = Math.random() < catchChance();
 
   function wobble(remaining) {
@@ -291,25 +293,38 @@ function attemptCatch() {
   // Caught Fakeamon join fully healed, per Lewis's B2 pick (joining your
   // team is a fresh start). The individual itself — species, level, XP,
   // now-full HP — is what rides along in the outcome; actually adding it
-  // to a persistent team lands with M2 Step 5.
+  // to a persistent team lands with M2 Step 5. DECISIONS.md #50: a catch
+  // now pauses on a Continue button, the same way a win/loss does, instead
+  // of resolving the battle immediately.
   function afterThrow(caught) {
     if (caught) {
+      const opponentName = FAKEAMON[opponent.speciesKey].name;
       opponent.currentHP = statsFor(opponent).maxHP;
       const xpGained = grantXP(CATCH_XP_FRACTION);
-      resolveBattle({
-        result: "caught",
-        caught: opponent,
-        xpGained: xpGained,
+      showContinueButton("🎉 Gotcha! " + opponentName + " was caught!", function () {
+        resolveBattle({
+          result: "caught",
+          caught: opponent,
+          xpGained: xpGained,
+        });
       });
       return;
     }
 
+    // A miss redraws the move buttons (not just re-enables them) so the
+    // Throw Fakeaball button's count updates — same reason attemptSwitch
+    // redraws below: the button set on screen can depend on state that
+    // just changed.
     if (playerGoesFirst) {
       setTimeout(function () {
-        enemyCounterAttack(function () { setControlsEnabled(true); });
+        enemyCounterAttack(function () {
+          setControlsEnabled(true);
+          showMoveButtons(activePlayer());
+        });
       }, randomTurnPause());
     } else {
       setControlsEnabled(true);
+      showMoveButtons(activePlayer());
     }
   }
 
@@ -446,10 +461,22 @@ function resolveTurn(playerMove) {
 }
 
 // ===========================================================================
-//  WIN / LOSE — Step 8 (M1) / Step 3 (M2): swap the move buttons for a
-//  result + Continue button. Clicking Continue resolves startBattle()'s
-//  promise so main.js can decide what happens next.
+//  CONTINUE SCREENS — swap the move buttons for a result message + a
+//  Continue button, so the player gets a beat to read what just happened
+//  before the game moves on. Used by win/lose (Step 8/M2 Step 3) and, as of
+//  DECISIONS.md #50, a successful catch too.
 // ===========================================================================
+function showContinueButton(message, onContinue) {
+  const controls = document.getElementById("controls");
+  controls.innerHTML =
+    '<p class="result-message">' + message + "</p>" +
+    '<button id="continueBtn" class="move-btn">Continue</button>';
+
+  document.getElementById("continueBtn").addEventListener("click", onContinue);
+}
+
+// Clicking Continue resolves startBattle()'s promise so main.js can decide
+// what happens next.
 function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
   const playerName = FAKEAMON[activePlayer().speciesKey].name;
@@ -459,12 +486,7 @@ function endBattle(winnerRole) {
     ? "🎉 " + playerName + " wins!"
     : "💀 " + playerName + " fainted — " + opponentName + " wins.";
 
-  const controls = document.getElementById("controls");
-  controls.innerHTML =
-    '<p class="result-message">' + message + "</p>" +
-    '<button id="continueBtn" class="move-btn">Continue</button>';
-
-  document.getElementById("continueBtn").addEventListener("click", function () {
+  showContinueButton(message, function () {
     resolveBattle({ result: playerWon ? "win" : "lose", xpGained: xpGained });
   });
 }
@@ -510,9 +532,11 @@ function showMoveButtons(individual) {
   }
 
   if (canCatch) {
+    const ballCount = inventory.balls.fakeaball;
     const catchButton = document.createElement("button");
     catchButton.className = "move-btn catch-btn";
-    catchButton.textContent = "Throw Fakeaball";
+    catchButton.textContent = "Throw Fakeaball (" + ballCount + ")";
+    catchButton.disabled = ballCount <= 0; // DECISIONS.md #49 — no throwing on empty
     catchButton.addEventListener("click", attemptCatch);
     controls.appendChild(catchButton);
   }
@@ -558,13 +582,14 @@ function showSwitchPicker() {
 //  fight in #arena/#controls/#log and resolves once it's over.
 //
 //    config  = { playerParty: <live array>, enemy: <individual>,
+//                inventory: <live gameState.inventory>,
 //                canFlee, canCatch, onStateChange }
 //    outcome = { result: "win" | "lose" | "fled" | "caught",
 //                caught: <individual> | null, xpGained }
 //
-//  playerParty is a LIVE reference (per PLANS/M3_OVERWORLD_PLAN.md §5) —
-//  battle.js mutates it directly (HP, switches), so the caller always sees
-//  up-to-date state without needing to copy anything back out.
+//  playerParty and inventory are LIVE references (per PLANS/M3_OVERWORLD_PLAN.md
+//  §5) — battle.js mutates them directly (HP, switches, ball count), so the
+//  caller always sees up-to-date state without needing to copy anything back out.
 // ===========================================================================
 function startBattle(config) {
   return new Promise(function (resolve) {
@@ -572,6 +597,7 @@ function startBattle(config) {
 
     party = config.playerParty;
     opponent = config.enemy;
+    inventory = config.inventory;
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
     onStateChange = config.onStateChange || function () {};

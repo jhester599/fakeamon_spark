@@ -170,7 +170,7 @@ see it join a team you can swap between.
 
 ---
 
-## 🟡 M3 — Overworld (the map)  *(in progress — M3S1–M3S8 done, M3S9 next)*
+## ✅ M3 — Overworld (the map)  *(complete! 🎉 all 11 steps — on to M4)*
 
 **Goal:** walk around a world and bump into wild Fakeamon. This is where we
 bring in **Phaser** (a game engine that handles tile maps and movement).
@@ -185,18 +185,17 @@ bring in **Phaser** (a game engine that handles tile maps and movement).
 > it's numbered last only because it was added after the plan. Build from the
 > plans; this table is the short version.
 >
-> **Status (2026-07-12):** M3S1–M3S8 are done — Phaser's in, the meadow
-> renders, you walk it with an animated hero, wild Fakeamon idle on the map,
-> and **walking into one now opens the real battle** and returns you to
-> walking (win/catch clears it; fleeing leaves it). **M3S8** added real XP
-> (a win banks `XP_REWARD_BASE × opponent level`; a catch banks half —
-> `src/battle.js`, shown via a log line + a new XP line on each team card)
-> and, on Jeff's call, a **respawn mechanic**: after every battle, a
-> `RESPAWN_CHANCE` roll (0.3, tunable in `src/world/config.js`) can bring one
-> previously-cleared wild Fakeamon back so The Meadows doesn't empty out for
-> good — this overrides the plan's earlier "gone is gone, M4 question" note
-> (`DECISIONS.md` #61, `PLANS/M3_OVERWORLD_PLAN.md` §6.3). **Next: M3S9**,
-> cleanup + docs.
+> **Status (M3 complete 2026-07-12 · M4 peer-review checkpoint 2026-07-22):**
+> all 11 M3 steps are done — Phaser's in, the meadow renders, you walk it with
+> an animated hero (keyboard or the "Pocket Venta" touch D-pad), wild Fakeamon
+> idle in the grass, **walking into one opens the real battle** and returns you
+> to the map (win/catch clears it; cleared ones respawn over time via a
+> `RESPAWN_CHANCE` roll — `src/world/config.js`, `DECISIONS.md` #61; fleeing
+> leaves it), catching or beating one earns real XP, and The Meadows is stocked
+> with its real 14-line wild-roster slice (⚠️ Lewis's rename pass still
+> pending). **On to M4** — its architecture is now planned in
+> `PLANS/M4_WORLD_SYSTEMS_PLAN.md` (produced from the M4 peer-review
+> checkpoint + a paired code review). **Next: M4 Step 1 (Tokens).**
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -220,9 +219,10 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 > Venta areas (B8 — The Forest, Foggy City, Snow Mountain, The Factory, The
 > Lagoon) each get their own slice of the 198-Fakeamon pool **as they open** —
 > and since Snow Mountain / The Factory / The Lagoon only unlock via gym badges
-> (B14), that can't be one step. So it's now a scheduled, repeating job in
-> **M4S6** that carries on into M5's late-game areas — no longer
-> "unscheduled," just paced to when each area actually gets built. The art and
+> (B14), that can't be one step. So **M4S6** opens and stocks the **first**
+> badge-gated area (The Lagoon), and the job **carries on through M5** for the
+> rest — no longer "unscheduled," just paced to when each area actually gets
+> built (`PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7). The art and
 > licensing for the whole pool is already staged (`CONTENT_REFERENCE.md` §16);
 > what lands per area is the creative wiring — Lewis's renames, encounter
 > tables, and stats.
@@ -232,8 +232,9 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 ## 🔴 M4 — World Systems (places to visit)
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
-challenge. *(Beating a gym opens a new area — and Step 6 stocks each new area
-with its own wild Fakeamon.)*
+challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
+seam and stocks the **first** new area; the remaining areas follow in M5.)*
+Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -242,11 +243,12 @@ with its own wild Fakeamon.)*
 | **3** | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |
 | **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |
-| **6** | **Grow the wild roster, area-by-area** — as each gym badge opens a new area (The Forest, Foggy City, Snow Mountain, The Factory, The Lagoon), stock it with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16). A repeating job that keeps going into M5's late-game areas | Every new area you unlock has its own fresh cast of wild Fakeamon |
+| **6** | **Open a new area** — build the **area-travel seam** (walk between maps through doorways), so Gym 1's **Gear Badge** opens **one** new area (**The Lagoon**), stocked with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`). *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7.)* | Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon |
 
 **🎉 M4 done when:** you can win tokens, heal at a Fakeatent, buy balls at a
 Tall Tower, beat your first gym, cook healing dishes at a Cooking Cabin, and
-each new area you open comes stocked with its own wild Fakeamon.
+walk through the badge-opened gate into **one** new area stocked with its own
+wild Fakeamon. *(The remaining areas open, one at a time, in M5.)*
 
 ---
 
@@ -254,7 +256,8 @@ each new area you open comes stocked with its own wild Fakeamon.
 
 **Goal:** the big finish — evolutions, the mini-bosses, and stopping Artemis.
 *(New late-game areas keep getting their own wild-roster slice — the same
-area-by-area job that starts in M4 Step 6.)*
+area-by-area job M4 Step 6 begins with the first area, now carried through the
+rest of Venta.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|

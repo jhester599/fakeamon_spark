@@ -17,6 +17,28 @@
 
 ---
 
+## 🆕 New — two questions from the M4 checkpoint (2026-07-22) 🌟
+
+Before building **M4 (World Systems)** we ran the milestone peer-review — an
+outside look at the plan, plus a code check (`PLANS/M4_WORLD_SYSTEMS_PLAN.md`).
+Almost everything it found was grown-up architecture, but **two creative calls
+are yours, Lewis.** No rush — M4's first steps (Tokens, Fakeatent, Tall Tower)
+don't need them; they're for the gym and the cooking later.
+
+- **B43 — the two "wrong-type" gym aces.** Gym 2 is all-Fire and Gym 3 all-Water,
+  but their tough *ace* creatures (Windeye, Spectera) are the wrong type. Swap
+  them for on-type creatures, or keep them and re-theme them? *(Options in
+  `HOMEWORK_BACKLOG.md` B43. Really for M5's later gyms — Gym 1 in M4 is already
+  all-Metal and fine.)*
+- **B44 — which berries grow where?** 🫐 You already said berries are found on
+  the ground and *themed by area*. Which berries show up in **The Meadows**
+  (and later **The Lagoon**)? Invent it, or say "surprise me" and we'll pick a
+  starter set you can change any time. *(Prompt in `HOMEWORK_BACKLOG.md` B44.)*
+
+Answer whenever — we'll run the decision loop when you do.
+
+---
+
 ## 🗺️ What happened this session
 
 - **Lewis cleared the whole backlog.** One homework round answered B1–B32:
@@ -66,6 +88,9 @@ ten — are decided and folded into the docs** (`DECISIONS.md` #51–60):
 
 Nothing creative is blocking the build now — the only open items are Jeff's
 number-tuning list (below) and future per-step calls as they come up.
+*(Update 2026-07-22: the M4 peer-review checkpoint has since added **B43** and
+**B44** — see the "🆕 New" section at the top of this file. Neither blocks M4's
+start.)*
 
 ---
 

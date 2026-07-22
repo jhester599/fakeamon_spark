@@ -186,7 +186,7 @@ Name: **Pocket Venta** — Lewis kept the placeholder ("the same, pocket venta")
 
 ---
 
-## ✅ M4 — Gyms, Shops & Economy *(all 6 answered 2026-07-06!)*
+## 🟡 M4 — Gyms, Shops & Economy *(6 of 8 answered — B43 & B44 opened at the M4 peer-review checkpoint, 2026-07-22)*
 
 ### ✅ B13. Re-theme Gyms 2 & 3 to single types  *(needed by M4 Step 4)*
 
@@ -216,6 +216,39 @@ Name: **Pocket Venta** — Lewis kept the placeholder ("the same, pocket venta")
 ### ✅ B18. Should Tall Towers sell anything besides Fakeaballs?  *(anytime during M4)*
 
 **Lewis picks:** A — Just balls, cooking covers healing.
+
+### 🔲 B43. Windeye & Spectera — swap or re-flavor the off-type gym aces?  *(needed by M5's Gyms 2 & 3 — but the pattern is set when Gym 1 is built, so it's raised now)*
+
+Gym 2 is all-**Fire** 🔥 and Gym 3 all-**Water** 💧 (B13), but their *ace*
+creatures are the wrong type: **Windeye** is a Metal/Lightning tower-bot and
+**Spectera** is a Grass/Sky fruit bat. Two clean ways to fix it:
+
+- [ ] **A) Swap them** — replace Windeye/Spectera with on-type aces from the
+  roster (a Fire ace for Gym 2, a Water ace for Gym 3). The rest of that gym is
+  already on-type.
+- [ ] **B) Re-flavor them** — keep Windeye & Spectera but re-theme them as Fire
+  / Water (a recolor can come later).
+- [ ] **C) Something else** — invent it!
+
+**Lewis picks:** _(open — filed at the M4 peer-review checkpoint, 2026-07-22.
+Only affects M5's later gyms; nothing blocks M4's Gym 1, which is cleanly
+Metal.)_
+
+### 🔲 B44. INVENT: which berries grow in which area? 🫐  *(needed by M4 Step 5 — cooking; a sensible default prototypes it)*
+
+You decided berries are **found on the ground** while exploring and **themed by
+area** (B35) — each area mostly grows berries that fit its vibe. This is the
+actual map: which of the **5 findable** berries (Fakeaberry, Greenberry,
+Raspberry, Cosmicberry, Greatberry) turn up where? *(The 6th, Bossberry, is
+already decided to drop only from mini-bosses, so it isn't an overworld find.)* Start with **The
+Meadows** (where cooking is first demoed) and **The Lagoon** (M4's new area);
+the rest can wait, one area at a time.
+
+- [ ] **Invent it** 🎨 — list a couple of berries per area…
+- [ ] **…or "surprise me"** — we'll pick a sensible default you can change any
+  time by editing a number.
+
+**Lewis picks:** _(open — filed at the M4 peer-review checkpoint, 2026-07-22.)_
 
 ---
 
@@ -327,10 +360,10 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 |---|---|---|
 | M2 | B1–B5, B34 | 6 / 6 |
 | M3 | B6–B12, B37–B42 | 13 / 13 |
-| M4 | B13–B18 | 6 / 6 |
+| M4 | B13–B18, B43–B44 | 6 / 8 |
 | M5 | B19–B26, B33, B35, B36 | 11 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **42 / 42** ✅ |
+| **Total** | | **42 / 44** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

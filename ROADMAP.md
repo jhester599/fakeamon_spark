@@ -229,27 +229,37 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 
 ---
 
-## 🟡 M4 — World Systems (places to visit)  *(in progress — Step 1 done; Step 2 (Fakeatent) next)*
+## 🟡 M4 — World Systems (places to visit)  *(in progress — Steps 1–2 done; Step 3 (Tall Tower) next)*
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
 challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
 seam and stocks the **first** new area; the remaining areas follow in M5.)*
 Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 
-> **Status (2026-07-24):** **Step 1 (Tokens) is done** — you earn 🪙 tokens for
-> winning a wild battle, shown in a HUD counter; the tunable numbers live in the
-> new `src/data/economy.js`. This session also folded in the **S0 groundwork**
-> the plan front-loads (§2, §8): **save v2** — new `tokens` / `flags` /
-> `inventory.berries` fields with a v1→v2 migration and defensive back-fills —
-> plus three pre-M4 fixes: the live **CR-A** bug (beaten wild Fakeamon no longer
-> reappear after Continue, closing the reload XP-farm — via a scene-resync seam
-> M4S6 will reuse), **CR-C** type colors for normal/metal creatures, and the
-> service-worker cache bump. **Next: Step 2 (Fakeatent).**
+> **Status (2026-07-24):** **Steps 1–2 are done.** **Step 1 (Tokens)** — you
+> earn 🪙 tokens for winning a wild battle, shown in a HUD counter; the tunable
+> numbers live in the new `src/data/economy.js`. That session also folded in
+> the **S0 groundwork** the plan front-loads (§2, §8): **save v2** — new
+> `tokens` / `flags` / `inventory.berries` fields with a v1→v2 migration and
+> defensive back-fills — plus three pre-M4 fixes: the live **CR-A** bug (beaten
+> wild Fakeamon no longer reappear after Continue, closing the reload XP-farm —
+> via a scene-resync seam M4S6 will reuse), **CR-C** type colors for
+> normal/metal creatures, and a service-worker cache bump. **Step 2
+> (Fakeatent)** — a building tile in The Meadows you bump to open a heal panel
+> (10 🪙 for a full-team heal, Lewis & Jeff's call); the map stays visible
+> behind the panel (a HUD overlay, not a battle takeover, per plan §5.1). It
+> also **replaces the old M3 loss placeholder**: a whole-team wipe now sends you
+> to the Fakeatent (healed, minus `TEAM_WIPE_TOKEN_LOSS` tokens, floored at
+> zero) instead of the map's plain start tile. ⚠️ **Placeholder art** — Jeff has
+> a real pink canvas-tent sprite ready, but it's only reached us as a chat
+> image, not a file in the repo, so the tent draws as a colored marker for now
+> (swap-in spot: `BUILDING_LOOKS` in `src/world/config.js`). **Next: Step 3
+> (Tall Tower).**
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** ✅ | **Tokens** — earn them from winning battles; show a token counter *(landed with the S0 groundwork: save v2, the CR-A Continue fix, and CR-C type colors)* | A number that goes up when you win — *done! (2026-07-24)* |
-| **2** | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens) | A tent building; HP refills |
+| **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, placeholder art)* |
 | **3** | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |
 | **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |

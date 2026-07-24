@@ -19,12 +19,23 @@
 // ===========================================================================
 
 const SAVE_KEY = "fakeamon-save";
-const SAVE_VERSION = 1; // bump when gameState's SHAPE changes (+ add a migration)
+const SAVE_VERSION = 2; // bump when gameState's SHAPE changes (+ add a migration)
 
-// Turning an OLD save into a newer shape. Empty for now (we're on v1). When
-// the shape changes: bump SAVE_VERSION above, then add an entry here, e.g.
-//   1: function (old) { old.newField = []; return old; }   // v1 -> v2
+// Turning an OLD save into a newer shape. Each entry upgrades ONE version to
+// the next: MIGRATIONS[1] turns a v1 save into a v2 one, and so on.
 const MIGRATIONS = {
+  // v1 -> v2 (M4): the save gained `tokens`, `flags`, and `inventory.berries`.
+  // The loader below ALSO merges an old save onto defaultState(), so the two
+  // TOP-LEVEL fields (tokens, flags) would get defaults even without this — but
+  // the NESTED one (inventory.berries) would NOT, because the merge copies the
+  // old `inventory` object whole. We fill all three here so a v1 save upgrades
+  // cleanly on its own terms (belt-and-suspenders with the merge + back-fills).
+  1: function (old) {
+    if (typeof old.tokens !== "number") old.tokens = 0;
+    if (!old.flags) old.flags = defaultFlags();
+    if (old.inventory && !old.inventory.berries) old.inventory.berries = {};
+    return old;
+  },
 };
 
 function migrateSave(save) {
@@ -51,13 +62,23 @@ function isValidIndividual(ind) {
 }
 
 // A brand-new, empty adventure — the shape everything else expects. Loading
-// merges an old save ON TOP of this, so any field added in a later version
-// gets a sensible default for free (only *reshaped* fields need a migration).
-// That's why adding `world` (M3) and `inventory` (the M2 follow-up,
-// DECISIONS.md #49) needed no version bump: an old save still loads and just
-// gains a fresh one here.
+// merges an old save ON TOP of this, so a new TOP-LEVEL field gets a sensible
+// default for free (that's why `world` and `inventory` needed no version bump
+// when they were added). ⚠️ The catch (M4 CR-B): the merge is SHALLOW, so a new
+// field nested INSIDE an existing object — like inventory.berries — is NOT
+// filled by the merge (the old `inventory` is copied whole). Those need an
+// explicit back-fill in parseSave (see the berries check there), the same way
+// world.defeatedEncounters and inventory.balls already do.
 function defaultState() {
-  return { version: SAVE_VERSION, party: [], box: [], world: defaultWorld(), inventory: defaultInventory() };
+  return {
+    version: SAVE_VERSION,
+    tokens: 0,
+    party: [],
+    box: [],
+    flags: defaultFlags(),
+    world: defaultWorld(),
+    inventory: defaultInventory(),
+  };
 }
 
 // Write gameState to localStorage. Wrapped in try/catch because the WRITE can
@@ -147,6 +168,27 @@ function parseSave(text) {
   const balls = state.inventory && state.inventory.balls;
   if (!balls || typeof balls.fakeaball !== "number" || balls.fakeaball < 0) {
     state.inventory = defaultInventory();
+  }
+
+  // Berries (M4 cooking input) live NESTED under inventory, so the shallow merge
+  // onto defaults can't fill them for a v1 save — back-fill an empty map here
+  // (the shallow-merge trap, CR-B). Harmless if inventory was just reset above,
+  // since defaultInventory() already includes berries.
+  if (!state.inventory.berries || typeof state.inventory.berries !== "object") {
+    state.inventory.berries = {};
+  }
+
+  // Tokens + flags (M4) are TOP-level, so a MISSING one is already filled by the
+  // merge — these guards only catch a present-but-garbage value from a hand-
+  // edited/imported file, keeping the "a bad save costs a New Game, never a
+  // crash" promise (a string `tokens` would break the counter; a broken `flags`
+  // would crash the badge checks). Same forgiving spirit as the world/inventory
+  // resets above.
+  if (typeof state.tokens !== "number" || state.tokens < 0) state.tokens = 0;
+  const f = state.flags;
+  if (!f || typeof f !== "object" ||
+      !Array.isArray(f.badges) || !Array.isArray(f.gymsCleared) || !Array.isArray(f.unlockedAreas)) {
+    state.flags = defaultFlags();
   }
 
   return state;

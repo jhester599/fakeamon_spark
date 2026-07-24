@@ -67,7 +67,29 @@ const MAX_PARTY_SIZE = 4; // Lewis's call — a 5th catch overflows to the Boxes
 const STARTING_FAKEABALLS = 5; // Lewis's call — Tall Tower purchases (M4S3) add more
 
 function defaultInventory() {
-  return { balls: { fakeaball: STARTING_FAKEABALLS } };
+  return {
+    balls: { fakeaball: STARTING_FAKEABALLS },
+    // *M4 Step 5 — cooking input. berryKey → how many you're holding, empty to
+    // start. This is NESTED under inventory, so an old (v1) save that predates
+    // it needs a back-fill in src/save.js's parseSave: the loader's merge is
+    // SHALLOW — it copies the whole old inventory object and so misses brand-new
+    // sub-fields like this one.
+    berries: {},
+  };
+}
+
+// M4 — the "what have you unlocked?" facts: gym badges earned, and which maps
+// you're allowed to walk into. Its own fresh-copy function (like defaultWorld /
+// defaultInventory) so a New Game and the save defaults always start from the
+// same clean slate. Badges are earned at gyms (M4S4) and open new areas (M4S6).
+function defaultFlags() {
+  return {
+    badges: [],                    // gym badge ids you've earned, e.g. ["gearBadge"]
+    gymsCleared: [],               // gym ids beaten — same as badges for now, but kept
+                                   //   separate so a rematch (Lewis's B17) can tell a first
+                                   //   clear (big reward) from a repeat (small one)
+    unlockedAreas: ["theMeadows"], // maps you may enter — beating a gym pushes a new one here
+  };
 }
 
 // The OVERWORLD slice of the save (M3): where the hero is standing, which map
@@ -85,16 +107,19 @@ function defaultWorld() {
 }
 
 // ALL persistent facts live in this one object (PLANS/M5_STATE_AND_SAVE_PLAN.md
-// §1). party + box + world exist so far — inventory/flags join later, each as
-// the feature that needs them lands. Everything in here is plain data (no
-// functions, no DOM, no sprites) so the save system (src/save.js) can turn the
-// whole thing into text with JSON.stringify — that's the one rule.
+// §1). party + box + world + inventory came first; M4 adds tokens + flags (each
+// landed as the feature that needed it arrived). Everything in here is plain
+// data (no functions, no DOM, no sprites) so the save system (src/save.js) can
+// turn the whole thing into text with JSON.stringify — that's the one rule.
 const gameState = {
   // Save-format version. Must match SAVE_VERSION in src/save.js — bump both
   // together (and add a migration there) whenever this object's SHAPE changes.
-  version: 1,
+  // Bumped to 2 for M4's new fields (tokens, flags, inventory.berries).
+  version: 2,
+  tokens: 0,              // *M4 Step 1 — the currency: wild wins + gyms pay it, shops + heals spend it
   party: [],
   box: [],
+  flags: defaultFlags(),  // *M4 — badges earned + areas unlocked (see defaultFlags above)
   world: defaultWorld(),
   inventory: defaultInventory(),
 };

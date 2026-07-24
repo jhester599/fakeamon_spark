@@ -44,9 +44,11 @@ function showWorld() {
     worldScene.input.enabled = true;
     worldScene.input.keyboard.enabled = true;
     if (worldScene.scene.isPaused()) worldScene.scene.resume();
-    // Snap the hero to wherever the save says (unchanged normally; the start
-    // tile after a loss reset it) so the sprite matches the state on return.
-    worldScene.syncHeroToState();
+    // Rebuild the map's wild Fakeamon from the save AND snap the hero to where
+    // the save says (M4 CR-A fix — see WorldScene.rebuildFromState). Doing this
+    // on every return means beaten creatures never re-appear after Continue, and
+    // the map always matches your saved progress.
+    worldScene.rebuildFromState();
   }
   if (worldGame && worldGame.canvas) {
     worldGame.canvas.setAttribute("tabindex", "0"); // focusable → it can hold the keyboard

@@ -240,6 +240,23 @@ class WorldScene extends Phaser.Scene {
     this.isMoving = false;
   }
 
+  // Rebuild which wild Fakeamon stand on the map, straight from the save — the
+  // CR-A fix (PLANS/M4_WORLD_SYSTEMS_PLAN.md §5.2 / §A.3). The scene's encounter
+  // sprites are created ONCE at create(), before a loaded save is applied — so
+  // after Continue/Import the map could still show creatures you already beat,
+  // and let you re-fight them for free XP. This wipes the current encounter
+  // sprites and re-spawns exactly the ones the save says are still out there
+  // (spawnEncounters skips defeatedEncounters), then re-places the hero.
+  // showWorld() (src/screens.js) calls this every time we step onto the map, so
+  // what you see always matches your save. (Multi-map travel at M4S6 reuses this
+  // same seam to switch maps.)
+  rebuildFromState() {
+    if (!this.hero) return; // scene not ready yet — nothing to rebuild
+    (this.encounterSprites || []).forEach(function (sprite) { sprite.destroy(); });
+    this.spawnEncounters(this.mapData); // resets the sprite/tile maps; skips defeated
+    this.syncHeroToState();             // put the hero where the save says
+  }
+
   // S6: stand a wild Fakeamon on each of this map's encounter tiles, wiggling
   // its idle animation. We remember which tile each one is on (encounterByTile)
   // so walking into that tile can "bump" it. Encounters already cleared in a

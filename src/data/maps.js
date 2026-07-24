@@ -95,6 +95,10 @@ const MAPS = {
     buildings: [
       { id: "meadows-fakeatent", kind: "fakeatent", tileX: 5, tileY: 7,
         spawnTile: { x: 5, y: 8, facing: "up" } },
+      // M4S3: the Tall Tower — a shop, no spawnTile (only the Fakeatent is a
+      // home base). Sits a few tiles right of the tent, same row, so both
+      // buildings read as one little "town row" north of the path.
+      { id: "meadows-talltower", kind: "talltower", tileX: 10, tileY: 7 },
     ],
     exits: [],                       // M4: doorways to the other five areas
   },

@@ -145,7 +145,8 @@ function enterOverworld() {
       "<br><small>(Beat it or catch it and it leaves the map for a while; run " +
       "away and it stays put. Cleared ones may wander back later.)</small></p>" +
       "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
-      "your team for " + ECONOMY.HEAL_COST + " 🪙.</small></p>" +
+      "your team for " + ECONOMY.HEAL_COST + " 🪙. 🗼 The Tall Tower next to it " +
+      "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each.</small></p>" +
     "</div>";
 
   renderTeamList();
@@ -393,7 +394,8 @@ function afterSwitch() {
 function enterBuilding(building) {
   worldActive = false; // no walking while a building's panel is open
   if (building.kind === "fakeatent") showFakeatentPanel();
-  // Tall Tower (M4S3) and the Cooking Cabin (M4S5) join this switch later.
+  if (building.kind === "talltower") showTallTowerPanel();
+  // The Cooking Cabin (M4S5) joins this switch later.
 }
 
 // The Fakeatent: rest your whole team to full HP for tokens. Self-serve, no
@@ -444,6 +446,55 @@ function restAtFakeatent() {
 
 function leaveFakeatent() {
   enterOverworld(); // back to exploring — re-renders the team and re-saves
+}
+
+// The Tall Tower: buy Fakeaballs for tokens. Only the basic ball is sold
+// (Lewis's B18/#31) — Great/Ultra/Cosmic are a later feature, so there's
+// just one item here, same self-serve spirit as the Fakeatent.
+function showTallTowerPanel() {
+  document.getElementById("title").textContent = "Tall Tower 🗼";
+  document.getElementById("controls-label").textContent = "";
+
+  const ballCount = gameState.inventory.balls.fakeaball;
+  const canAfford = gameState.tokens >= ECONOMY.BALL_COST;
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Tall Tower 🗼</h2>" +
+      "<p>Buy a Fakeaball?</p>" +
+      "<p><b>Cost: " + ECONOMY.BALL_COST + " 🪙</b> — you have " + gameState.tokens + " 🪙</p>" +
+      "<p>You're holding <b>" + ballCount + "</b> Fakeaball" + (ballCount === 1 ? "" : "s") + ".</p>" +
+      (canAfford ? "" : "<p><small>Come back after a few more wins!</small></p>") +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  const buyButton = document.createElement("button");
+  buyButton.className = "move-btn";
+  buyButton.innerHTML =
+    '<img src="assets/sprites/items/fakeaball.png" class="ball-icon" alt="">' +
+    "Buy — " + ECONOMY.BALL_COST + " 🪙";
+  buyButton.disabled = !canAfford;
+  buyButton.addEventListener("click", buyFakeaball);
+  controls.appendChild(buyButton);
+
+  addTitleButton(controls, "save-btn", "Leave", leaveTallTower);
+}
+
+// Buying re-renders the SAME panel (unlike resting, which leaves right away)
+// so you can buy several in a row without walking back in each time — the
+// way a real shop works.
+function buyFakeaball() {
+  gameState.tokens -= ECONOMY.BALL_COST;
+  gameState.inventory.balls.fakeaball += 1;
+  addLogLine("🛍️ You bought a Fakeaball!");
+  renderTeamList();
+  saveGame();
+  showTallTowerPanel(); // stay in the shop, refreshed with the new counts
+}
+
+function leaveTallTower() {
+  enterOverworld();
 }
 
 // ===========================================================================

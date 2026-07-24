@@ -91,6 +91,7 @@ const BUILDING_ART = {
 };
 const BUILDING_LOOKS = {
   fakeatent: { emoji: "⛺", color: "#e8659f" }, // pink — echoes the real sprite's color
+  talltower: { emoji: "🗼", color: "#d4a24c" }, // warm gold — a shop (M4S3), no art sourced yet
 };
 
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after

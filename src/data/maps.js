@@ -90,9 +90,8 @@ const MAPS = {
     // "walk into it" trick as encounters (src/world/config.js's spawnBuildings).
     // spawnTile is where the hero wakes up after a whole-team faint — one tile
     // in front of the building, facing it (src/main.js's homeBaseTile()).
-    // ⚠️ PLACEHOLDER ART: Jeff & Lewis have a real pink canvas-tent sprite
-    // ready, but it's only reached us as a chat image so far, not a file in
-    // the repo — see BUILDING_LOOKS in src/world/config.js for the swap-in spot.
+    // Art: assets/sprites/buildings/fakeatent.png (Jeff's own AI-generated
+    // sprite — CREDITS.md) via BUILDING_ART in src/world/config.js.
     buildings: [
       { id: "meadows-fakeatent", kind: "fakeatent", tileX: 5, tileY: 7,
         spawnTile: { x: 5, y: 8, facing: "up" } },

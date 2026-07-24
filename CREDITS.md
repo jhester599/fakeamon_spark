@@ -54,6 +54,28 @@ the battle screen is still plain HTML/CSS/JS.
 | Snaki *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/snaki.png` | `mods/tuxemon/gfx/sprites/battle/snaki-sheet.png` | Snaki | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki) |
 | Tumbleworm *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/tumbleworm.png` | `mods/tuxemon/gfx/sprites/battle/tumbleworm-sheet.png` | Tumbleworm | tamashihoshi | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
 | PWA app icon *(placeholder — Growler's sprite on a white square, made by `tools/make-icon.mjs`)* | `assets/icons/icon-192.png`, `icon-512.png` | derived from `assets/sprites/front/hissiorite.png` | Hissiorite | princess-phoenix (same credit as Growler's rows above) | CC BY-SA 3.0 (derived work, credit princess-phoenix) |
+| Fakeaball (item icon, live on the "Throw Fakeaball" button) | `assets/sprites/items/fakeaball.png` | `mods/tuxemon/gfx/items/tuxeball_earth.png` | Tuxeball Earth | JaskRendix (adapted from a sprite by tamashihoshi) | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+
+**Fakeaball tiers — 1 of 4 wired in, 2 more staged (2026-07-24):** `DESIGN.md`
+§6 decided a 4-tier ball design (Fakeaball / Great / Ultra / Cosmic); only the
+basic **Fakeaball** is a real feature so far (the row above). Jeff & Lewis
+sourced real Tuxemon icons for the next two tiers, verified against
+`ATTRIBUTIONS.md` and pulled from the same pinned commit (`c34a9c72`) as
+everything else here — vendored now so the art is ready, but **not yet wired
+into any screen**, since the tier mechanics themselves (catch-rate bonuses, a
+shop, separate inventory counts) are explicitly a later build (`CLAUDE.md`'s
+scope guardrails; `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §10 lists Great/Ultra/Cosmic
+acquisition as deferred).
+
+| Our name | File in our repo | Source in Tuxemon repo | Tuxemon name | Artist(s) | License |
+|---|---|---|---|---|---|
+| Great Fakeaball (item icon, vendored, not yet wired) | `assets/sprites/items/greatfakeaball.png` | `mods/tuxemon/gfx/items/tuxeball_metal.png` | Tuxeball Metal | JaskRendix (adapted from a sprite by tamashihoshi) | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| Ultra Fakeaball (item icon, vendored, not yet wired) | `assets/sprites/items/ultrafakeaball.png` | `mods/tuxemon/gfx/items/tuxeball_ancient.png` | Tuxeball Ancient | JaskRendix (adapted from a sprite by tamashihoshi) | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+
+The **Cosmic Fakeaball** (4th tier) isn't a Tuxemon asset — Jeff & Lewis made a
+custom one with an AI image tool "to make it more dramatic" (their words);
+it'll get its own "Original art" row once it's in the repo, same as the
+Fakeatent sprite below.
 
 The unmodified source sheets for the three starters are also vendored at
 `assets/sprites/battle/<slug>-sheet.png` (inputs for `tools/slice-sheets.mjs`)

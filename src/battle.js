@@ -535,7 +535,12 @@ function showMoveButtons(individual) {
     const ballCount = inventory.balls.fakeaball;
     const catchButton = document.createElement("button");
     catchButton.className = "move-btn catch-btn";
-    catchButton.textContent = "Throw Fakeaball (" + ballCount + ")";
+    // The real Fakeaball sprite (Tuxemon's "Tuxeball Earth" — CREDITS.md),
+    // added M4 once the art was sourced; ballCount is always a number, so no
+    // escaping risk building this as a string.
+    catchButton.innerHTML =
+      '<img src="assets/sprites/items/fakeaball.png" class="ball-icon" alt="">' +
+      "Throw Fakeaball (" + ballCount + ")";
     catchButton.disabled = ballCount <= 0; // DECISIONS.md #49 — no throwing on empty
     catchButton.addEventListener("click", attemptCatch);
     controls.appendChild(catchButton);

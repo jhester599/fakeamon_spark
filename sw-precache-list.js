@@ -54,6 +54,7 @@ const PRECACHE_URLS = [
   "assets/sprites/idle/shybulb.png",
   "assets/sprites/idle/snaki.png",
   "assets/sprites/idle/tumbleworm.png",
+  "assets/sprites/items/cosmicfakeaball.png",
   "assets/sprites/items/fakeaball.png",
   "assets/sprites/items/greatfakeaball.png",
   "assets/sprites/items/ultrafakeaball.png",

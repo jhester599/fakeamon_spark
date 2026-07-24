@@ -229,16 +229,26 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 
 ---
 
-## 🔴 M4 — World Systems (places to visit)
+## 🟡 M4 — World Systems (places to visit)  *(in progress — Step 1 done; Step 2 (Fakeatent) next)*
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
 challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
 seam and stocks the **first** new area; the remaining areas follow in M5.)*
 Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 
+> **Status (2026-07-24):** **Step 1 (Tokens) is done** — you earn 🪙 tokens for
+> winning a wild battle, shown in a HUD counter; the tunable numbers live in the
+> new `src/data/economy.js`. This session also folded in the **S0 groundwork**
+> the plan front-loads (§2, §8): **save v2** — new `tokens` / `flags` /
+> `inventory.berries` fields with a v1→v2 migration and defensive back-fills —
+> plus three pre-M4 fixes: the live **CR-A** bug (beaten wild Fakeamon no longer
+> reappear after Continue, closing the reload XP-farm — via a scene-resync seam
+> M4S6 will reuse), **CR-C** type colors for normal/metal creatures, and the
+> service-worker cache bump. **Next: Step 2 (Fakeatent).**
+
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | **Tokens** — earn them from winning battles; show a token counter | A number that goes up when you win |
+| **1** ✅ | **Tokens** — earn them from winning battles; show a token counter *(landed with the S0 groundwork: save v2, the CR-A Continue fix, and CR-C type colors)* | A number that goes up when you win — *done! (2026-07-24)* |
 | **2** | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens) | A tent building; HP refills |
 | **3** | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |

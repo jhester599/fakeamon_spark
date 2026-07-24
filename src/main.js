@@ -97,8 +97,10 @@ function continueGame() {
   const loaded = loadGame();
   if (!loaded) { showStarterSelect(); return; } // save vanished between clicks
   gameState.version = loaded.version;
+  gameState.tokens = loaded.tokens;    // M4 — the currency
   gameState.party = loaded.party;
   gameState.box = loaded.box;
+  gameState.flags = loaded.flags;      // M4 — badges earned + areas unlocked
   gameState.world = loaded.world;
   gameState.inventory = loaded.inventory;
   enterOverworld();
@@ -114,8 +116,10 @@ function startNewGame() {
   }
   clearSave();
   gameState.version = SAVE_VERSION;
+  gameState.tokens = 0;
   gameState.party = [];
   gameState.box = [];
+  gameState.flags = defaultFlags();
   gameState.world = defaultWorld();
   gameState.inventory = defaultInventory();
   showStarterSelect();
@@ -175,8 +179,10 @@ function importSave() {
         return;
       }
       gameState.version = loaded.version;
+      gameState.tokens = loaded.tokens;    // M4 — the currency
       gameState.party = loaded.party;
       gameState.box = loaded.box;
+      gameState.flags = loaded.flags;      // M4 — badges earned + areas unlocked
       gameState.world = loaded.world;
       gameState.inventory = loaded.inventory;
       saveGame();       // the imported adventure is now this browser's save
@@ -274,6 +280,15 @@ function maybeRespawnEncounter(justFoughtId) {
 // loss placeholder (heal + back to start) until M4's Fakeatents exist.
 function handleBattleOutcome(outcome, encounter) {
   battleInProgress = false;
+
+  // M4S1: beating a wild Fakeamon pays out tokens — the currency M4's healing
+  // tent and shop will spend. Only a WIN pays: catching spends a ball instead,
+  // and fleeing/fainting pays nothing. (Small, reversible rule — should a catch
+  // also earn tokens? One for Jeff & Lewis.)
+  if (outcome.result === "win") {
+    gameState.tokens += ECONOMY.TOKENS_PER_WILD_WIN;
+    addLogLine("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");
+  }
 
   if (outcome.result === "caught") {
     const caughtName = FAKEAMON[outcome.caught.speciesKey].name;
@@ -402,8 +417,18 @@ function renderTeamList() {
   });
 
   document.getElementById("boxesBtn").textContent = "Boxes (" + gameState.box.length + ")";
+  renderTokens(); // M4S1 — refresh the token counter alongside the team
 
   if (boxesVisible) renderBoxList(); // keep an open Boxes panel in sync too
+}
+
+// M4S1: keep the on-screen token counter matching gameState.tokens. Called from
+// renderTeamList, so any state change that re-renders the team also refreshes
+// the tokens — and it shows on both the map and the battle screen, since the
+// #tokens chip lives in the always-present team header (index.html).
+function renderTokens() {
+  const el = document.getElementById("tokens");
+  if (el) el.textContent = "🪙 " + gameState.tokens;
 }
 
 function renderBoxList() {

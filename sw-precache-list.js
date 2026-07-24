@@ -5,6 +5,7 @@ const PRECACHE_URLS = [
   "index.html",
   "manifest.webmanifest",
   "src/battle.js",
+  "src/data/economy.js",
   "src/data/fakeamon.js",
   "src/data/maps.js",
   "src/data/moves.js",

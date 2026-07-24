@@ -68,6 +68,13 @@
   .type-fire  { background: #ff8a5c; }
   .type-water { background: #5ca8ff; }
   .type-grass { background: #6cc24a; }
+  /* CR-C fix (M4): The Meadows roster has normal-type creatures, and Gym 1 is
+     metal — without a color their type "stage" and badge were invisible (white
+     text on white). Cosmic is Artemis's type (M5), added now so it's ready.
+     Tweak these colors freely. */
+  .type-normal { background: #b3a878; } /* warm tan */
+  .type-metal  { background: #8fa3b8; } /* steely blue-grey */
+  .type-cosmic { background: #8f79d6; } /* deep periwinkle */
   .type-badge {
     display: inline-block;
     padding: 2px 10px;
@@ -211,6 +218,14 @@
   }
   .boxes-btn:hover {
     background: #1d3868;
+  }
+  /* M4S1: the token counter chip, sat in the team header between "Your Team"
+     and the Boxes button. Goldenrod so it reads as coins at a glance. */
+  .token-count {
+    font-weight: bold;
+    color: #b8860b;
+    font-size: 15px;
+    white-space: nowrap;
   }
   #team, #boxes {
     display: flex;
@@ -433,6 +448,9 @@
 
   <div class="team-header">
     <p class="section-label">Your Team</p>
+    <!-- M4S1: the token counter — the currency you earn from battles. In the
+         team header so it shows on both the map and the battle screen. -->
+    <span id="tokens" class="token-count">🪙 0</span>
     <button id="boxesBtn" class="boxes-btn">Boxes (0)</button>
   </div>
   <div id="team"></div>
@@ -460,6 +478,7 @@
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
+<script src="src/data/economy.js"></script>
 <script src="src/data/maps.js"></script>
 <script src="src/state.js"></script>
 <script src="src/battle.js"></script>

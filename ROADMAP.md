@@ -270,7 +270,7 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** ✅ | **Tokens** — earn them from winning battles; show a token counter *(landed with the S0 groundwork: save v2, the CR-A Continue fix, and CR-C type colors)* | A number that goes up when you win — *done! (2026-07-24)* |
-| **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, placeholder art)* |
+| **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, real art — Jeff's own AI-generated tent, background fixed in GIMP)* |
 | **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24, placeholder building art; real Fakeaball icon on the Buy button)* |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |
 | **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |

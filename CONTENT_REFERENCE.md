@@ -353,7 +353,7 @@ unblocked once that lands.
 
 | Milestone | Pull from Tuxemon |
 |---|---|
-| **M2 — Catching & Team** | `gfx/items/tuxeball*.png` (recolor into our 4 ball tiers); `catch_rate` values from our creatures' YAMLs to seed the capture formula; `animations/item/` capture animation (optional) |
+| **M2 — Catching & Team** | `gfx/items/tuxeball*.png` (recolor into our 4 ball tiers); `catch_rate` values from our creatures' YAMLs to seed the capture formula; `animations/item/` capture animation (optional). *Ball art pulled 2026-07-24 (3 of 4 tiers — see CREDITS.md): `tuxeball_earth`/`_metal`/`_ancient` vendored, `_earth` (Fakeaball) wired into the catch button; Great/Ultra staged for when the tier mechanics are built (still deferred).* |
 | **M3 — Overworld** | `gfx/tilesets/` (start with Buch/George/ArMM1998 exterior+interior sets); hero walk sheet from `sprites/` — top level, *not* `gfx/sprites/player/` (see §9's corrected rows); slice the vendored battle sheets per DESIGN.md §12; `maps/*.tmx` as Tiled structure reference. *Mostly staged 2026-07-06 (M3S0) — see the M3 plan §A.4 for what's already vendored.* |
 | **M4 — World Systems** | `sprites/goth.png`, `childactor.png`, `boss.png` (gym leaders); shop item icons from `gfx/items/`; `sounds/interface/` UI sounds; a town + battle track from `music/` |
 | **M5 — Depth & Story** | evolution-stage sheets (cobarett, pythonova, budaye); berry/food icons from `gfx/items/`; `animations/technique/` battle effects; monster cries from `sounds/monster/`; description blurbs from `l18n/en_US/LC_MESSAGES/base.po` |

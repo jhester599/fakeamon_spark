@@ -77,6 +77,23 @@ const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dia
 // Lower = the map empties out slower; higher = it fills back in faster.
 const RESPAWN_CHANCE = 0.3; // [TUNE] rolled once per battle in main.js
 
+// --- Buildings on the map (M4S2) -------------------------------------------
+// Same "special tile you bump" trick S6 proved for wild encounters (M4 plan
+// §5.1): a building occupies a tile, the tile is solid, and walking into it
+// fires a handler instead of a battle. Only the Fakeatent exists so far.
+//
+// BUILDING_ART: kind -> real sprite file, once art exists for that kind.
+// BUILDING_LOOKS (below) is the FALLBACK placeholder (a colored emoji marker)
+// for any building kind not listed here yet — e.g. the Tall Tower (M4S3) and
+// Cooking Cabin (M4S5), until their own art shows up.
+const BUILDING_ART = {
+  fakeatent: "assets/sprites/buildings/fakeatent.png", // Jeff's own AI-generated art (CREDITS.md)
+};
+const BUILDING_LOOKS = {
+  fakeatent: { emoji: "⛺", color: "#e8659f" }, // pink — echoes the real sprite's color
+  talltower: { emoji: "🗼", color: "#d4a24c" }, // warm gold — a shop (M4S3), no art sourced yet
+};
+
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
 // loading a save). Set in create(). worldActive gates walking: it's false on
 // the title/starter/battle screens so arrow keys don't walk a hero you can't
@@ -120,6 +137,17 @@ class BootScene extends Phaser.Scene {
       seenSpecies.add(enc.species);
       this.load.spritesheet("idle-" + enc.species, species.overworld,
         { frameWidth: IDLE_FRAME_W, frameHeight: IDLE_FRAME_H });
+    });
+
+    // M4S2: real building art, where BUILDING_ART lists it — same "only load
+    // what THIS map actually uses" spirit as the encounter sprites just above.
+    // A building kind with no entry here falls back to the BUILDING_LOOKS
+    // placeholder marker (see spawnOneBuilding).
+    const seenBuildingKinds = new Set();
+    (meadow.buildings || []).forEach((b) => {
+      if (!BUILDING_ART[b.kind] || seenBuildingKinds.has(b.kind)) return;
+      seenBuildingKinds.add(b.kind);
+      this.load.image("building-" + b.kind, BUILDING_ART[b.kind]);
     });
   }
 
@@ -180,6 +208,7 @@ class WorldScene extends Phaser.Scene {
     this.syncHeroToState(); // place them wherever gameState says (start tile, or a loaded save)
 
     this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass
+    this.spawnBuildings(mapData);  // M4S2: stand the Fakeatent (and later, other buildings)
 
     // Arrow keys. addCapture stops the browser from scrolling the page when
     // you press them (plan §6.2 / §3).
@@ -253,7 +282,11 @@ class WorldScene extends Phaser.Scene {
   rebuildFromState() {
     if (!this.hero) return; // scene not ready yet — nothing to rebuild
     (this.encounterSprites || []).forEach(function (sprite) { sprite.destroy(); });
+    (this.buildingSprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S2
     this.spawnEncounters(this.mapData); // resets the sprite/tile maps; skips defeated
+    this.spawnBuildings(this.mapData);  // M4S2: buildings don't change yet, but rebuilding
+                                         // them here too keeps this seam symmetric — M4S6's
+                                         // map-switch work reuses it as-is.
     this.syncHeroToState();             // put the hero where the save says
   }
 
@@ -354,6 +387,56 @@ class WorldScene extends Phaser.Scene {
     saveGame();
   }
 
+  // M4S2: stand every building on this map (right now, just the Fakeatent).
+  // Mirrors spawnEncounters — buildingByTile is how tryWalk detects a bump.
+  spawnBuildings(mapData) {
+    this.buildingByTile = new Map();
+    this.buildingSprites = [];
+    (mapData.buildings || []).forEach((b) => this.spawnOneBuilding(b));
+  }
+
+  // Draw one building: real sprite art if BootScene preloaded it (BUILDING_ART),
+  // else the BUILDING_LOOKS colored emoji marker as a placeholder.
+  spawnOneBuilding(building) {
+    const p = this.tilePixel(building.tileX, building.tileY);
+    const textureKey = "building-" + building.kind;
+    let marker;
+
+    if (this.textures.exists(textureKey)) {
+      // Real art — same bottom-center origin trick as the hero/idle sprites,
+      // so it "stands on" its tile instead of floating above it.
+      marker = this.add.image(p.x, p.y, textureKey);
+    } else {
+      const look = BUILDING_LOOKS[building.kind] || { emoji: "❓", color: "#888888" };
+      // Phaser Text supports a CSS-like backgroundColor, so one Text object
+      // gives us "a colored badge with a symbol on it" with nothing else to
+      // track/destroy.
+      marker = this.add.text(p.x, p.y, look.emoji, {
+        fontSize: "18px",
+        backgroundColor: look.color,
+        padding: { x: 3, y: 2 },
+      });
+    }
+    marker.setOrigin(0.5, 1);
+    marker.buildingId = building.id;
+
+    this.buildingSprites.push(marker);
+    this.buildingByTile.set(building.tileX + "," + building.tileY, building);
+  }
+
+  // Is a building standing on this tile? Returns it or null (mirrors encounterAt).
+  buildingAt(tileX, tileY) {
+    return this.buildingByTile.get(tileX + "," + tileY) || null;
+  }
+
+  // M4S2 — bumping a building opens its panel instead of a battle. Unlike a
+  // battle, the map stays visible and playing behind the panel (M4 plan
+  // §5.1); src/main.js's enterBuilding() just freezes walking while it's open.
+  handleBuilding(building) {
+    if (battleInProgress) return; // never open a panel mid-battle
+    enterBuilding(building); // → src/main.js
+  }
+
   // Can the hero stand on this tile? No if it's off the map, or if the tile
   // there is a "solid" one (tree, rock, boulder, stump, log). We read
   // solidity straight from the tile the map already shows — so anything you
@@ -390,6 +473,16 @@ class WorldScene extends Phaser.Scene {
       this.hero.anims.stop();
       this.hero.setFrame(HERO_STAND_FRAME[dir]);
       this.handleEncounter(encounter);
+      return;
+    }
+
+    // M4S2: same bump trick, for a building tile (the Fakeatent) instead of a
+    // wild Fakeamon — walking into it opens a panel rather than a battle.
+    const building = this.buildingAt(targetX, targetY);
+    if (building) {
+      this.hero.anims.stop();
+      this.hero.setFrame(HERO_STAND_FRAME[dir]);
+      this.handleBuilding(building);
       return;
     }
 

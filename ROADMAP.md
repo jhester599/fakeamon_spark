@@ -229,28 +229,49 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 
 ---
 
-## 🟡 M4 — World Systems (places to visit)  *(in progress — Step 1 done; Step 2 (Fakeatent) next)*
+## 🟡 M4 — World Systems (places to visit)  *(in progress — Steps 1–3 done; Step 4 (Gym 1) next)*
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
 challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
 seam and stocks the **first** new area; the remaining areas follow in M5.)*
 Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 
-> **Status (2026-07-24):** **Step 1 (Tokens) is done** — you earn 🪙 tokens for
-> winning a wild battle, shown in a HUD counter; the tunable numbers live in the
-> new `src/data/economy.js`. This session also folded in the **S0 groundwork**
-> the plan front-loads (§2, §8): **save v2** — new `tokens` / `flags` /
-> `inventory.berries` fields with a v1→v2 migration and defensive back-fills —
-> plus three pre-M4 fixes: the live **CR-A** bug (beaten wild Fakeamon no longer
-> reappear after Continue, closing the reload XP-farm — via a scene-resync seam
-> M4S6 will reuse), **CR-C** type colors for normal/metal creatures, and the
-> service-worker cache bump. **Next: Step 2 (Fakeatent).**
+> **Status (2026-07-24):** **Steps 1–3 are done.** **Step 1 (Tokens)** — you
+> earn 🪙 tokens for winning a wild battle, shown in a HUD counter; the tunable
+> numbers live in the new `src/data/economy.js`. That session also folded in
+> the **S0 groundwork** the plan front-loads (§2, §8): **save v2** — new
+> `tokens` / `flags` / `inventory.berries` fields with a v1→v2 migration and
+> defensive back-fills — plus three pre-M4 fixes: the live **CR-A** bug (beaten
+> wild Fakeamon no longer reappear after Continue, closing the reload XP-farm —
+> via a scene-resync seam M4S6 will reuse), **CR-C** type colors for
+> normal/metal creatures, and a service-worker cache bump. **Step 2
+> (Fakeatent)** — a building tile in The Meadows you bump to open a heal panel
+> (10 🪙 for a full-team heal, Lewis & Jeff's call); the map stays visible
+> behind the panel (a HUD overlay, not a battle takeover, per plan §5.1). It
+> also **replaces the old M3 loss placeholder**: a whole-team wipe now sends you
+> to the Fakeatent (healed, minus `TEAM_WIPE_TOKEN_LOSS` tokens, floored at
+> zero) instead of the map's plain start tile. Real art landed for the tent
+> mid-session (Jeff's own AI-generated sprite, background fixed in GIMP) — see
+> `CREDITS.md`'s "Original art" section. **Step 3 (Tall Tower)** — a second
+> building right beside the Fakeatent; bump it to open a shop panel and buy
+> Fakeaballs for 5 🪙 each (`BALL_COST`) into the same count the catch button
+> already reads. Unlike the Fakeatent's one-and-done Rest, buying **stays in
+> the shop** so you can buy several in one visit, closer to how a real shop
+> works. Only the basic Fakeaball is sold (Lewis's B18/#31) — Great/Ultra/Cosmic
+> are still a later feature. Real Tuxemon ball-tier art was also sourced this
+> session (all 4 tiers, `assets/sprites/items/`); only the basic Fakeaball's
+> icon is wired in (on both the catch button and the shop's Buy button) — the
+> other three are vendored and credited, staged for whenever the tier mechanics
+> get built. ⚠️ **Placeholder art** — the Tall Tower itself still draws as a
+> colored marker (no real building sprite sourced yet; swap-in spot:
+> `BUILDING_ART`/`BUILDING_LOOKS` in `src/world/config.js`). **Next: Step 4
+> (Gym 1)** — the first engine change (an enemy party) plus a metal move.
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
 | **1** ✅ | **Tokens** — earn them from winning battles; show a token counter *(landed with the S0 groundwork: save v2, the CR-A Continue fix, and CR-C type colors)* | A number that goes up when you win — *done! (2026-07-24)* |
-| **2** | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens) | A tent building; HP refills |
-| **3** | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up |
+| **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, placeholder art)* |
+| **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24, placeholder building art; real Fakeaball icon on the Buy button)* |
 | **4** | **Gym 1** — a trainer NPC with a **2-Fakeamon team** (a standard + a stronger ace); beating them gives tokens | Talk to the leader → a two-creature trainer battle |
 | **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |
 | **6** | **Open a new area** — build the **area-travel seam** (walk between maps through doorways), so Gym 1's **Gear Badge** opens **one** new area (**The Lagoon**), stocked with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`). *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7.)* | Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon |

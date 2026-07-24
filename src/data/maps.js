@@ -86,6 +86,20 @@ const MAPS = {
       { id: "meadows-tumbleworm",   species: "tumbleworm",   level: 5, tileX: 9,  tileY: 17 },
       { id: "meadows-pantherafira", species: "pantherafira", level: 5, tileX: 24, tileY: 16 }, // "the Meadows' one scary line" — VENTA_ROSTER_DRAFT.md
     ],
+    // M4S2: special tiles you bump to open a panel (heal/shop/cook), the same
+    // "walk into it" trick as encounters (src/world/config.js's spawnBuildings).
+    // spawnTile is where the hero wakes up after a whole-team faint — one tile
+    // in front of the building, facing it (src/main.js's homeBaseTile()).
+    // Art: assets/sprites/buildings/fakeatent.png (Jeff's own AI-generated
+    // sprite — CREDITS.md) via BUILDING_ART in src/world/config.js.
+    buildings: [
+      { id: "meadows-fakeatent", kind: "fakeatent", tileX: 5, tileY: 7,
+        spawnTile: { x: 5, y: 8, facing: "up" } },
+      // M4S3: the Tall Tower — a shop, no spawnTile (only the Fakeatent is a
+      // home base). Sits a few tiles right of the tent, same row, so both
+      // buildings read as one little "town row" north of the path.
+      { id: "meadows-talltower", kind: "talltower", tileX: 10, tileY: 7 },
+    ],
     exits: [],                       // M4: doorways to the other five areas
   },
 };

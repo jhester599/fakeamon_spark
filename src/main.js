@@ -144,6 +144,8 @@ function enterOverworld() {
       "in the grass — <b>walk into one to battle it!</b>" +
       "<br><small>(Beat it or catch it and it leaves the map for a while; run " +
       "away and it stays put. Cleared ones may wander back later.)</small></p>" +
+      "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
+      "your team for " + ECONOMY.HEAL_COST + " 🪙.</small></p>" +
     "</div>";
 
   renderTeamList();
@@ -151,11 +153,24 @@ function enterOverworld() {
   saveGame();
 }
 
-// Heal everyone to full — used by the M3 loss placeholder below.
+// Heal everyone to full — used by the Fakeatent (M4S2) and a team-wipe below.
 function healParty() {
   gameState.party.forEach(function (individual) {
     individual.currentHP = statsFor(individual).maxHP;
   });
+}
+
+// M4S2: where you wake up after your whole team faints — right outside this
+// map's Fakeatent (replaces the old "back to the map's start tile" M3 stand-
+// in). Falls back to the plain start tile if this map has no Fakeatent yet —
+// defensive for whenever M4S6/M5 open areas before their tent is built.
+function homeBaseTile(mapId) {
+  const map = MAPS[mapId];
+  const tent = (map.buildings || []).find(function (b) { return b.kind === "fakeatent"; });
+  if (tent && tent.spawnTile) {
+    return { tileX: tent.spawnTile.x, tileY: tent.spawnTile.y, facing: tent.spawnTile.facing };
+  }
+  return defaultWorld().player;
 }
 
 // Import Save: pop up a file picker, and if they choose a real Fakeamon save,
@@ -300,12 +315,13 @@ function handleBattleOutcome(outcome, encounter) {
       addLogLine(caughtName + " was sent to your Boxes — your team is full!");
     }
   } else if (outcome.result === "lose") {
-    // M3 PLACEHOLDER (plan §6.4): no Fakeatents until M4, so a wipe just heals
-    // the team and pops you back to the map's start tile. Replaced by the real
-    // faint + token-loss rule at M4.
+    // M4S2: a wipe now sends you to this map's Fakeatent instead of the old M3
+    // stand-in — healed for free, but a few tokens poorer (never below zero).
     healParty();
-    gameState.world.player = defaultWorld().player;
-    addLogLine("You hurry back to safety, and your team rests up.");
+    gameState.world.player = homeBaseTile(gameState.world.mapId);
+    gameState.tokens = Math.max(0, gameState.tokens - ECONOMY.TEAM_WIPE_TOKEN_LOSS);
+    addLogLine("😪 Your team is worn out — the Fakeatent nurses you back to " +
+      "health! (−" + ECONOMY.TEAM_WIPE_TOKEN_LOSS + " 🪙)");
   }
 
   // A wild Fakeamon you beat or caught leaves the map (it may respawn later —
@@ -364,6 +380,70 @@ function switchInFromBox(boxIndex) {
 function afterSwitch() {
   renderTeamList();
   saveGame(); // the new team order is part of your progress too
+}
+
+// ===========================================================================
+//  BUILDINGS (M4S2) — bump one on the map to open its panel. Unlike a battle,
+//  the map stays visible and playing behind the panel (M4 plan §5.1: "a HUD
+//  overlay, not the full battle takeover") — we just freeze walking
+//  (worldActive = false, the same trick the title/starter-select screens
+//  already use) and reuse the same #arena/#controls swap every other screen
+//  uses. src/world/config.js's WorldScene.handleBuilding calls this.
+// ===========================================================================
+function enterBuilding(building) {
+  worldActive = false; // no walking while a building's panel is open
+  if (building.kind === "fakeatent") showFakeatentPanel();
+  // Tall Tower (M4S3) and the Cooking Cabin (M4S5) join this switch later.
+}
+
+// The Fakeatent: rest your whole team to full HP for tokens. Self-serve, no
+// NPC dialogue — just a panel with a price and a button (same spirit as the
+// Cooking Cabin will be, B26). Also the hook for M5's box-swap UI (B33).
+function showFakeatentPanel() {
+  document.getElementById("title").textContent = "Fakeatent 🏕️";
+  document.getElementById("controls-label").textContent = "";
+
+  const canAfford = gameState.tokens >= ECONOMY.HEAL_COST;
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Fakeatent 🏕️</h2>" +
+      "<p>Rest your whole team back to full health?</p>" +
+      "<p><b>Cost: " + ECONOMY.HEAL_COST + " 🪙</b> — you have " + gameState.tokens + " 🪙</p>" +
+      (canAfford ? "" : "<p><small>Come back after a few more wins!</small></p>") +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  const restButton = document.createElement("button");
+  restButton.className = "move-btn";
+  restButton.textContent = "Rest — " + ECONOMY.HEAL_COST + " 🪙";
+  restButton.disabled = !canAfford;
+  restButton.addEventListener("click", restAtFakeatent);
+  controls.appendChild(restButton);
+
+  // M5's box-swap UI (Lewis's B33: the Fakeatent is also where you swap a
+  // boxed Fakeamon onto your active four) lands later — greyed out for now.
+  const manageButton = document.createElement("button");
+  manageButton.className = "save-btn";
+  manageButton.textContent = "Manage Team (coming in M5)";
+  manageButton.disabled = true;
+  controls.appendChild(manageButton);
+
+  addTitleButton(controls, "save-btn", "Leave", leaveFakeatent);
+}
+
+function restAtFakeatent() {
+  gameState.tokens -= ECONOMY.HEAL_COST;
+  healParty();
+  addLogLine("😴 You rested at the Fakeatent — your team is fully healed!");
+  renderTeamList();
+  saveGame();
+  leaveFakeatent();
+}
+
+function leaveFakeatent() {
+  enterOverworld(); // back to exploring — re-renders the team and re-saves
 }
 
 // ===========================================================================

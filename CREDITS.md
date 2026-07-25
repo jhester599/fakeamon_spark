@@ -35,6 +35,7 @@ the battle screen is still plain HTML/CSS/JS.
 | Growler (front/back/idle sprites) | `assets/sprites/{front,back,idle}/hissiorite.png` | `mods/tuxemon/gfx/sprites/battle/hissiorite-sheet.png` | Hissiorite | princess-phoenix | CC BY-SA 3.0 |
 | Whaley (front/back/idle sprites) | `assets/sprites/{front,back,idle}/bigfin.png` | `mods/tuxemon/gfx/sprites/battle/bigfin-sheet.png` | Bigfin | Cavalcadeur, rsg167 | CC BY-SA 4.0 |
 | Leafick (front/back/idle sprites) | `assets/sprites/{front,back,idle}/frondly.png` | `mods/tuxemon/gfx/sprites/battle/frondly-sheet.png` | Frondly | Leo (design), ReallyDarkandWindie (art), Levaine (sprites), Sanglorian (back sprite) | CC BY-SA 3.0 |
+| Allagon (Gym 1 standard) (front/back/idle sprites) | `assets/sprites/{front,back,idle}/allagon.png` | `mods/tuxemon/gfx/sprites/battle/allagon-sheet.png` | Allagon | Spalding004, Chickenshowman | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
 | Meadow terrain tiles | `assets/tilesets/terrain_george.png` | `mods/tuxemon/gfx/tilesets/Terrain_by_George.png` | "Terrain" | George_ (per Tuxemon `ATTRIBUTIONS.md`) | CC BY 3.0 |
 | Meadow vegetation tiles | `assets/tilesets/vegetation_george.png` | `mods/tuxemon/gfx/tilesets/Vegetation_and_Outdoor_Fittings_by_George.png` | "Vegetation and outdoor fittings" | George_ (per Tuxemon `ATTRIBUTIONS.md`) | CC BY 3.0 |
 | The Meadows tileset (composed) | `assets/tilesets/meadow.png` | derived from the two George tilesets above | — | tiles by George_; selection/composition ours | CC BY 3.0 (derived work, credit George_) |
@@ -123,8 +124,27 @@ Full detail is in `DESIGN.md` §12.
 
 **Mini-bosses:** Banvengeance, Saurchin, Sharpfin, Gastronium, Tobishimi
 
-**Gyms (standard/ace):** Allagon (Spalding004, Chickenshowman — CC BY-SA 4.0),
-AV8R, Agnite, Windeye, Spectera, Eaglace
+**Gyms (standard/ace):** ~~Allagon~~ *(pulled in at M4S4 — see the table
+above)*, Agnite, Windeye, Spectera, Eaglace
+
+⚠️ **AV8R (Gym 1's ace) is BLOCKED on attribution, not on effort.** Its
+battle sheet exists at the pinned commit
+(`mods/tuxemon/gfx/sprites/battle/av8r-sheet.png`), but the monster has **no
+entry in Tuxemon's `ATTRIBUTIONS.md`** — the only "AV8R" mention there is
+under *Character Front Sprites* for the human trainer **"Aviator"** ("front
+sprite by Sanglorian from the AV8R design by Leo"), which is a different
+asset. The documented fallback is `wiki.tuxemon.org` (how Hissiorite and
+Frondly were resolved), and **that domain is blocked by the Claude remote
+environment's network policy** — the exact limitation
+`tools/fetch-wiki-credits.mjs` was written for. So the sheet was deliberately
+**not vendored**, and AV8R plays with the colored-box fallback instead
+(`src/data/fakeamon.js` has no `sprite` for it, on purpose).
+
+**To finish it, from a machine that can reach the wiki:**
+`cd tools && npm run wiki-credits` → check the credit it finds → add an
+`av8r` entry to `sheet-manifest.json` → `npm run vendor-sheets` →
+`node slice-sheets.mjs av8r` → add `sprite`/`overworld` to `av8r` in
+`src/data/fakeamon.js` → re-run `tools/generate-sw-manifest.mjs`.
 
 **Gym leaders (NPC trainer art — different folder, `mods/tuxemon/sprites/`):**
 Goth → `goth.png`, Child Actor → `childactor.png`, Enforcer Boss → likely the

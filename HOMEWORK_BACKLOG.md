@@ -186,7 +186,7 @@ Name: **Pocket Venta** — Lewis kept the placeholder ("the same, pocket venta")
 
 ---
 
-## 🟡 M4 — Gyms, Shops & Economy *(6 of 8 answered — B43 & B44 opened at the M4 peer-review checkpoint, 2026-07-22)*
+## 🟡 M4 — Gyms, Shops & Economy *(6 of 9 answered — B43 & B44 opened at the M4 peer-review checkpoint, 2026-07-22; B45 found while building Gym 1, 2026-07-25)*
 
 ### ✅ B13. Re-theme Gyms 2 & 3 to single types  *(needed by M4 Step 4)*
 
@@ -249,6 +249,31 @@ the rest can wait, one area at a time.
   time by editing a number.
 
 **Lewis picks:** _(open — filed at the M4 peer-review checkpoint, 2026-07-22.)_
+
+---
+
+### 🔲 B45. Should ONE fainted Fakeamon lose you the whole battle? 🛡️  *(found while building Gym 1, M4S4 — affects every battle in the game)*
+
+Right now, the moment the Fakeamon you're fighting with faints, **the whole
+battle ends** — even if the other three on your team are perfectly healthy.
+Nobody chose that; it's just how the very first battle was written back in M1,
+when you only ever had one Fakeamon.
+
+It matters much more now that gyms exist: **Enforcer Boss gets to send out a
+second Fakeamon when his first one drops, but you don't.** That's why building
+up a team of four doesn't help you survive a gym at the moment.
+
+- [ ] **A — Keep it as is.** One faint = battle over. Simple, and it makes you
+  really careful about healing before a gym.
+- [ ] **B — You send out your next one too.** Just like the gym leader does. You
+  only lose when *all* your Fakeamon have fainted. Fairest, and it finally makes
+  having a team of four matter — but it's the bigger change.
+- [ ] **C — You get to CHOOSE who comes out next.** Same as B, but instead of the
+  game picking, you get a "Who's next?" screen. The most control, the most
+  clicking.
+
+**Lewis picks:** _(open — found during the M4S4 build, 2026-07-25. Nothing is
+broken today; this is a real design choice, so nobody guessed on your behalf.)_
 
 ---
 
@@ -360,10 +385,10 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 |---|---|---|
 | M2 | B1–B5, B34 | 6 / 6 |
 | M3 | B6–B12, B37–B42 | 13 / 13 |
-| M4 | B13–B18, B43–B44 | 6 / 8 |
+| M4 | B13–B18, B43–B45 | 6 / 9 |
 | M5 | B19–B26, B33, B35, B36 | 11 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **42 / 44** |
+| **Total** | | **42 / 45** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

@@ -1212,5 +1212,11 @@
     "artists": "From the open-source game OPMon; Jaskrendix",
     "license": "⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Toxiris)",
     "sourceCommit": "c34a9c72"
+  },
+  "allagon": {
+    "ourName": "Allagon",
+    "artists": "Spalding004, Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
   }
 }

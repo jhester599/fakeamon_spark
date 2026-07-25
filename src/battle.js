@@ -14,9 +14,18 @@
 //  Battle still tracks everything through a *role* ("player"/"opponent")
 //  rather than an individual, since resolveTurn needs to say "whoever's
 //  turn is first" before it knows who that is.
+//
+//  M4S4: the ENEMY has a bench too. A gym leader brings a team (a standard
+//  Fakeamon plus a stronger ace), so the other side is now `enemyParty` — an
+//  array — with `enemyIndex` marking who's currently out. It's the exact
+//  mirror of the player side: activePlayer() is party[0], activeOpponent() is
+//  enemyParty[enemyIndex]. A WILD battle is just a bench of one, so nothing
+//  about wild fights had to change.
 // ===========================================================================
-let party;    // config.playerParty
-let opponent;
+let party;       // config.playerParty — YOUR bench (party[0] is who's out)
+let enemyParty;  // the other side's bench (a wild Fakeamon = a bench of one)
+let enemyIndex;  // which of enemyParty is out right now; 0 for a wild battle
+let trainerName; // "Enforcer Boss" in a gym battle; null in a wild one
 let inventory; // config.inventory — a LIVE reference, same trick as party
 let canFlee = true;
 let canCatch = true;
@@ -28,9 +37,17 @@ function activePlayer() {
   return party[0];
 }
 
+// The individual currently fighting for the other side. Deliberately a
+// function, not a saved-off variable, for the same reason activePlayer() is:
+// there's then only ONE place that decides who's out, so the two can never
+// drift apart.
+function activeOpponent() {
+  return enemyParty[enemyIndex];
+}
+
 // The individual currently playing this role.
 function fighterFor(role) {
-  return role === "player" ? activePlayer() : opponent;
+  return role === "player" ? activePlayer() : activeOpponent();
 }
 
 // ===========================================================================
@@ -91,7 +108,7 @@ function showFighter(individual) {
 // Redraw both fighters with their current HP, then let the host UI (e.g.
 // main.js's team row) know something changed — HP, or who's active.
 function renderArena() {
-  document.getElementById("arena").innerHTML = showFighter(activePlayer()) + showFighter(opponent);
+  document.getElementById("arena").innerHTML = showFighter(activePlayer()) + showFighter(activeOpponent());
   onStateChange();
 }
 
@@ -223,7 +240,7 @@ const CATCH_CHANCE_CAP = 0.95;    // room for stronger balls later
 // You only ever throw a ball at the wild Fakeamon, so this always reads
 // the opponent's HP.
 function catchChance() {
-  const missingHPFraction = 1 - opponent.currentHP / statsFor(opponent).maxHP;
+  const missingHPFraction = 1 - activeOpponent().currentHP / statsFor(activeOpponent()).maxHP;
   const raw = BASE_CATCH_RATE * missingHPFraction; // ballBonus = 1 for now
   return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
 }
@@ -239,7 +256,7 @@ const CATCH_WOBBLE_COUNT = 2;
 // takes a few beats to play out instead of resolving instantly.
 function throwFakeaball(onDone) {
   const playerName = FAKEAMON[activePlayer().speciesKey].name;
-  const opponentName = FAKEAMON[opponent.speciesKey].name;
+  const opponentName = FAKEAMON[activeOpponent().speciesKey].name;
 
   addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
   inventory.balls.fakeaball -= 1; // used up the moment it's actually thrown — DECISIONS.md #49
@@ -275,10 +292,10 @@ function throwFakeaball(onDone) {
 // attack in before you even throw.
 function attemptCatch() {
   setControlsEnabled(false);
-  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(activeOpponent()).speed;
 
   function enemyCounterAttack(afterAttack) {
-    const enemyMove = pickRandomMove(opponent);
+    const enemyMove = pickRandomMove(activeOpponent());
     performAttack("opponent", "player", enemyMove);
     renderArena();
 
@@ -298,14 +315,15 @@ function attemptCatch() {
   // of resolving the battle immediately.
   function afterThrow(caught) {
     if (caught) {
-      const opponentName = FAKEAMON[opponent.speciesKey].name;
-      opponent.currentHP = statsFor(opponent).maxHP;
-      const xpGained = grantXP(CATCH_XP_FRACTION);
+      const caughtOne = activeOpponent(); // the individual itself, not the yes/no
+      const opponentName = FAKEAMON[caughtOne.speciesKey].name;
+      caughtOne.currentHP = statsFor(caughtOne).maxHP;
+      grantXP(CATCH_XP_FRACTION);
       showContinueButton("🎉 Gotcha! " + opponentName + " was caught!", function () {
         resolveBattle({
           result: "caught",
-          caught: opponent,
-          xpGained: xpGained,
+          caught: caughtOne,
+          xpGained: xpEarnedThisBattle,
         });
       });
       return;
@@ -350,12 +368,60 @@ function attemptCatch() {
 const XP_REWARD_BASE = 4;      // [TUNE] a win's XP = XP_REWARD_BASE × opponent's level
 const CATCH_XP_FRACTION = 0.5; // [TUNE] catching earns this fraction of a win's XP
 
+// M4S4: a trainer battle can hand out XP more than once (one payout per
+// Fakeamon you knock out), so we keep a running total for the whole fight and
+// report THAT at the end, instead of just the last payout. A wild battle only
+// ever adds to it once, so nothing changed there.
+let xpEarnedThisBattle = 0;
+
 function grantXP(fraction) {
   const individual = activePlayer(); // v1: the active fighter gets it all (M5 plan §2)
-  const amount = Math.round(XP_REWARD_BASE * opponent.level * fraction);
+  const amount = Math.round(XP_REWARD_BASE * activeOpponent().level * fraction);
   individual.xp += amount;
+  xpEarnedThisBattle += amount;
   addLogLine(FAKEAMON[individual.speciesKey].name + " earned " + amount + " XP!");
   return amount;
+}
+
+// ===========================================================================
+//  THE ENEMY'S BENCH (M4S4) — a gym leader doesn't go down with one Fakeamon.
+//  When theirs faints, the NEXT one steps up and the fight carries on; only
+//  when the last one drops is the battle actually won.
+// ===========================================================================
+
+// Is the other side still holding someone back? Always false in a wild
+// battle, where enemyParty is a bench of exactly one.
+function hasBenchedEnemy() {
+  return enemyIndex < enemyParty.length - 1;
+}
+
+// The trainer's next Fakeamon walks out. A pause first so the faint line has a
+// moment to land before the replacement is announced.
+function sendOutNextEnemy() {
+  enemyIndex += 1;
+  const nextName = FAKEAMON[activeOpponent().speciesKey].name;
+
+  setTimeout(function () {
+    addLogLine(trainerName + " sent out " + nextName + "!");
+    renderArena();
+    setControlsEnabled(true);
+    showMoveButtons(activePlayer()); // your move against the new arrival
+  }, randomTurnPause());
+}
+
+// Somebody just fainted. Usually that ends the battle — but if it was the
+// enemy's and the trainer still has one waiting, the fight continues instead.
+// This is the ONE spot that branches "next fighter vs. game over", which is
+// why the faint checks below all funnel through here.
+function resolveFaint(faintedRole, winnerRole) {
+  if (faintedRole === "opponent") {
+    grantXP(1); // you earn the XP for THIS Fakeamon right away, not just at the end
+    if (hasBenchedEnemy()) {
+      sendOutNextEnemy();
+      return;
+    }
+  }
+  endBattle(winnerRole);
 }
 
 // ===========================================================================
@@ -375,10 +441,10 @@ function hasHealthySwitchTarget() {
 
 function attemptSwitch(targetIndex) {
   setControlsEnabled(false);
-  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(activeOpponent()).speed;
 
   function enemyCounterAttack(afterAttack) {
-    const enemyMove = pickRandomMove(opponent);
+    const enemyMove = pickRandomMove(activeOpponent());
     performAttack("opponent", "player", enemyMove);
     renderArena();
 
@@ -431,8 +497,8 @@ function attemptSwitch(targetIndex) {
 function resolveTurn(playerMove) {
   setControlsEnabled(false);
 
-  const enemyMove = pickRandomMove(opponent);
-  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(opponent).speed;
+  const enemyMove = pickRandomMove(activeOpponent());
+  const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(activeOpponent()).speed;
 
   const first  = playerGoesFirst ? { attackerRole: "player", defenderRole: "opponent", move: playerMove }
                                   : { attackerRole: "opponent", defenderRole: "player", move: enemyMove };
@@ -442,8 +508,10 @@ function resolveTurn(playerMove) {
   performAttack(first.attackerRole, first.defenderRole, first.move);
   renderArena();
 
+  // M4S4: resolveFaint (not endBattle) decides what a faint means now — it
+  // might be "game over", or it might be "the trainer sends out their next one".
   if (checkForFaint(first.defenderRole)) {
-    endBattle(first.attackerRole);
+    resolveFaint(first.defenderRole, first.attackerRole);
     return;
   }
 
@@ -452,7 +520,7 @@ function resolveTurn(playerMove) {
     renderArena();
 
     if (checkForFaint(second.defenderRole)) {
-      endBattle(second.attackerRole);
+      resolveFaint(second.defenderRole, second.attackerRole);
       return;
     }
 
@@ -480,14 +548,18 @@ function showContinueButton(message, onContinue) {
 function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
   const playerName = FAKEAMON[activePlayer().speciesKey].name;
-  const opponentName = FAKEAMON[opponent.speciesKey].name;
-  const xpGained = playerWon ? grantXP(1) : 0;
+  // In a trainer battle the loser/winner the player cares about is the TRAINER,
+  // not whichever Fakeamon happened to be out at the end.
+  const rivalName = trainerName || FAKEAMON[activeOpponent().speciesKey].name;
+
+  // XP is handed out per knockout now (see resolveFaint), so by the time we
+  // get here it's already been earned — we just report the running total.
   const message = playerWon
-    ? "🎉 " + playerName + " wins!"
-    : "💀 " + playerName + " fainted — " + opponentName + " wins.";
+    ? (trainerName ? "🎉 You beat " + trainerName + "!" : "🎉 " + playerName + " wins!")
+    : "💀 " + playerName + " fainted — " + rivalName + " wins.";
 
   showContinueButton(message, function () {
-    resolveBattle({ result: playerWon ? "win" : "lose", xpGained: xpGained });
+    resolveBattle({ result: playerWon ? "win" : "lose", xpGained: xpEarnedThisBattle });
   });
 }
 
@@ -586,11 +658,18 @@ function showSwitchPicker() {
 //  START A BATTLE — the one function the rest of the game calls. Runs a
 //  fight in #arena/#controls/#log and resolves once it's over.
 //
-//    config  = { playerParty: <live array>, enemy: <individual>,
+//    config  = { playerParty: <live array>,
+//                enemy:      <individual>,        ← a WILD fight: one creature
+//                enemyParty: [<individual>, …],   ← a TRAINER fight: a team (M4S4)
+//                trainerName: <string>,           ← set for a gym; omit for wild
 //                inventory: <live gameState.inventory>,
 //                canFlee, canCatch, onStateChange }
 //    outcome = { result: "win" | "lose" | "fled" | "caught",
 //                caught: <individual> | null, xpGained }
+//
+//  Pass EITHER `enemy` (one) or `enemyParty` (a team) — a lone `enemy` is just
+//  turned into a team of one below, so every wild battle in the game kept
+//  working, untouched, when trainers arrived.
 //
 //  playerParty and inventory are LIVE references (per PLANS/M3_OVERWORLD_PLAN.md
 //  §5) — battle.js mutates them directly (HP, switches, ball count), so the
@@ -601,17 +680,21 @@ function startBattle(config) {
     resolveBattle = resolve;
 
     party = config.playerParty;
-    opponent = config.enemy;
+    enemyParty = config.enemyParty || [config.enemy]; // one wild creature = a bench of one
+    enemyIndex = 0;
+    trainerName = config.trainerName || null;
     inventory = config.inventory;
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
     onStateChange = config.onStateChange || function () {};
+    xpEarnedThisBattle = 0; // fresh count for this fight
 
     const playerSpecies = FAKEAMON[activePlayer().speciesKey];
-    const opponentSpecies = FAKEAMON[opponent.speciesKey];
+    const opponentSpecies = FAKEAMON[activeOpponent().speciesKey];
 
-    document.getElementById("title").textContent =
-      "Fakeamon Battle — " + playerSpecies.name + " vs " + opponentSpecies.name;
+    document.getElementById("title").textContent = trainerName
+      ? "Gym Battle — " + playerSpecies.name + " vs " + trainerName
+      : "Fakeamon Battle — " + playerSpecies.name + " vs " + opponentSpecies.name;
     document.getElementById("controls-label").textContent = "Choose your move:";
 
     logLines.length = 0;
@@ -619,6 +702,15 @@ function startBattle(config) {
 
     renderArena();
     showMoveButtons(activePlayer());
-    addLogLine("A wild " + opponentSpecies.name + " appears! Choose a move for " + playerSpecies.name + ".");
+
+    if (trainerName) {
+      // A trainer challenges you by name and shows how many Fakeamon they've
+      // brought, so a two-creature team is no surprise halfway through.
+      addLogLine(trainerName + " wants to battle — " + enemyParty.length +
+        " Fakeamon! You can't run from a gym.");
+      addLogLine(trainerName + " sent out " + opponentSpecies.name + "!");
+    } else {
+      addLogLine("A wild " + opponentSpecies.name + " appears! Choose a move for " + playerSpecies.name + ".");
+    }
   });
 }

@@ -131,6 +131,12 @@ Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
 **DECIDED (2026-07-06) — fleeing:** Run **always works** — a "Run" button that never fails. *(Lewis's call, B1.)*
 
+**DECIDED (2026-07-25) — fleeing a GYM:** you **can't**. B1 above was decided
+about *wild* battles; a gym is a challenge you accept on purpose, so gym
+battles pass `canFlee: false` (and `canCatch: false` — a leader's Fakeamon
+aren't yours to catch). Lose and you wipe to the Fakeatent like any other
+loss. *(Jeff & Lewis's call at the M4S4 huddle, `DECISIONS.md` #62.)*
+
 **DECIDED (2026-07-08) — Switch mid-battle costs a turn:** bringing in a different teammate follows the same speed-order rule as every other action. If you're faster, the switch happens safely and your new Fakeamon just takes the opponent's attack that turn. If you're slower, the opponent gets a free hit on your *current* Fakeamon first — and if that faint ends the battle, the switch never completes. Picking from the switch menu is the only thing that costs the turn; backing out (Cancel) is free. *(Jeff & Lewis's call.)*
 
 **Damage formula (tuned for 3–5 hits per battle):**
@@ -261,7 +267,7 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 | Gym | Leader (trainer NPC) | Standard | Ace (stronger) | Gym typing |
 |---|---|---|---|---|
-| **1** | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | **Metal** |
+| **1** ✅ *(built M4S4)* | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | **Metal** |
 | **2** | Goth | **Agnite** — Fire "false dragon" iguana | **Windeye** — Metal/Lightning "tower" bot *(needs a Fire re-theme or swap at M4 build time)* | **Fire** |
 | **3** | Child Actor | **Spectera** — Grass/Sky leaf-winged fruit bat | **Eaglace** — Water/Frost ice eagle *(Spectera needs a Water re-theme or swap at M4 build time)* | **Water** |
 

@@ -146,7 +146,9 @@ function enterOverworld() {
       "away and it stays put. Cleared ones may wander back later.)</small></p>" +
       "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
       "your team for " + ECONOMY.HEAL_COST + " 🪙. 🗼 The Tall Tower next to it " +
-      "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each.</small></p>" +
+      "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each. ⚙️ And further " +
+      "along, " + GYMS.gym1.leader + " is waiting in the Gym — beat their team " +
+      "of two to win the " + GYMS.gym1.badgeName + "!</small></p>" +
     "</div>";
 
   renderTeamList();
@@ -251,14 +253,18 @@ function chooseStarter(speciesKey) {
 // ===========================================================================
 
 // Freeze + hide the map (screens.js's showBattle), run the fight, then hand the
-// result to handleBattleOutcome (which brings us back to the map). `encounter`
-// is the map creature you bumped.
-function enterBattle(config, encounter) {
+// result to handleBattleOutcome (which brings us back to the map).
+//
+// `context` says WHY this battle happened, so the outcome handler knows what to
+// do about it: { encounter } for a wild Fakeamon you bumped on the map, or
+// { gym } for a gym challenge (M4S4). One small bag beats a growing line of
+// positional arguments that are null most of the time.
+function enterBattle(config, context) {
   battleInProgress = true;
   worldActive = false; // no map-walking while the fight is on screen
   showBattle();        // hide the map + freeze the world scene
   startBattle(config).then(function (outcome) {
-    handleBattleOutcome(outcome, encounter);
+    handleBattleOutcome(outcome, context || {});
   });
 }
 
@@ -273,7 +279,7 @@ function startMapEncounter(encounter) {
     canFlee: true,
     canCatch: true,
     onStateChange: renderTeamList,
-  }, encounter);
+  }, { encounter: encounter });
 }
 
 // S8: after a battle, maybe bring one previously-cleared wild Fakeamon back
@@ -294,14 +300,19 @@ function maybeRespawnEncounter(justFoughtId) {
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
 // loss placeholder (heal + back to start) until M4's Fakeatents exist.
-function handleBattleOutcome(outcome, encounter) {
+function handleBattleOutcome(outcome, context) {
   battleInProgress = false;
+  const encounter = context.encounter; // set when you bumped a wild Fakeamon
+  const gym = context.gym;             // set when you challenged a gym (M4S4)
 
   // M4S1: beating a wild Fakeamon pays out tokens — the currency M4's healing
   // tent and shop will spend. Only a WIN pays: catching spends a ball instead,
   // and fleeing/fainting pays nothing. (Small, reversible rule — should a catch
-  // also earn tokens? One for Jeff & Lewis.)
-  if (outcome.result === "win") {
+  // also earn tokens? One for Jeff & Lewis.) M4S4: a gym pays its own, bigger
+  // reward instead, so the two never stack.
+  if (outcome.result === "win" && gym) {
+    awardGymPrize(gym);
+  } else if (outcome.result === "win") {
     gameState.tokens += ECONOMY.TOKENS_PER_WILD_WIN;
     addLogLine("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");
   }
@@ -395,6 +406,7 @@ function enterBuilding(building) {
   worldActive = false; // no walking while a building's panel is open
   if (building.kind === "fakeatent") showFakeatentPanel();
   if (building.kind === "talltower") showTallTowerPanel();
+  if (building.kind === "gym") showGymPanel(GYMS[building.gymId]); // M4S4
   // The Cooking Cabin (M4S5) joins this switch later.
 }
 
@@ -498,6 +510,103 @@ function leaveTallTower() {
 }
 
 // ===========================================================================
+//  THE GYM (M4S4) — the first trainer challenge. Same bump-a-building seam as
+//  the Fakeatent and Tall Tower, but the button starts a real battle against a
+//  TEAM of two instead of opening a shop. Gym data: src/data/gyms.js.
+// ===========================================================================
+
+// Have you already beaten this gym? Beating it again is allowed (Lewis's B17)
+// but pays the smaller rematch reward.
+function hasCleared(gym) {
+  return gameState.flags.gymsCleared.indexOf(gym.id) !== -1;
+}
+
+// The leader's challenge screen: who they are, what they're bringing, and what
+// you'd win. Leave is always available — it's the BATTLE you can't run from.
+function showGymPanel(gym) {
+  const cleared = hasCleared(gym);
+  const reward = cleared ? ECONOMY.GYM_REMATCH_REWARD : ECONOMY.GYM_REWARD;
+
+  // Show the team you're about to face, so the two-Fakeamon team is no surprise.
+  const teamNames = gym.team.map(function (member) {
+    return FAKEAMON[member.species].name;
+  }).join(" and ");
+
+  document.getElementById("title").textContent = "Gym — " + gym.leader + " " + gym.badgeIcon;
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>" + gym.leader + " " + gym.badgeIcon + "</h2>" +
+      "<p>“" + gym.greeting + "”</p>" +
+      "<p>Team: <b>" + teamNames + "</b> " +
+        '<span class="type-badge type-' + gym.type + '">' + gym.type + "</span></p>" +
+      (cleared
+        ? "<p>You already won the <b>" + gym.badgeName + "</b>. A rematch pays " +
+          "<b>" + reward + " 🪙</b>.</p>"
+        : "<p>Win to earn the <b>" + gym.badgeName + "</b> and <b>" + reward + " 🪙</b>!</p>") +
+      "<p><small>⚠️ You <b>can't run</b> from a gym battle, and you can't throw " +
+      "Fakeaballs at a leader's team. Make sure you're healed up first!</small></p>" +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  const challengeButton = document.createElement("button");
+  challengeButton.className = "move-btn";
+  challengeButton.textContent = cleared ? "Rematch!" : "Challenge " + gym.leader + "!";
+  challengeButton.addEventListener("click", function () {
+    startGymBattle(gym);
+  });
+  controls.appendChild(challengeButton);
+
+  addTitleButton(controls, "save-btn", "Leave", enterOverworld);
+}
+
+// The gym handoff. The whole team becomes fresh individuals at full HP, handed
+// to battle.js as `enemyParty` — that's the one new thing gyms need from the
+// battle engine (PLANS/M4_WORLD_SYSTEMS_PLAN.md §4.1). canCatch/canFlee were
+// already supported; we just say no to both (Jeff & Lewis's call).
+function startGymBattle(gym) {
+  if (battleInProgress) return;
+  enterBattle({
+    playerParty: gameState.party,
+    enemyParty: gym.team.map(function (member) {
+      return newIndividual(member.species, member.level);
+    }),
+    trainerName: gym.leader,
+    inventory: gameState.inventory,
+    canFlee: false,  // no running from a gym
+    canCatch: false, // a leader's Fakeamon aren't yours to catch
+    onStateChange: renderTeamList,
+  }, { gym: gym });
+}
+
+// You won! First clear pays the big reward AND the badge (which is what opens
+// a new area at M4S6); a rematch just pays the smaller purse.
+function awardGymPrize(gym) {
+  if (hasCleared(gym)) {
+    gameState.tokens += ECONOMY.GYM_REMATCH_REWARD;
+    addLogLine("You beat " + gym.leader + " again! +" +
+      ECONOMY.GYM_REMATCH_REWARD + " 🪙");
+    return;
+  }
+
+  gameState.tokens += ECONOMY.GYM_REWARD;
+  gameState.flags.gymsCleared.push(gym.id);
+  gameState.flags.badges.push(gym.badge);
+
+  // The badge's whole point: it opens up somewhere new. The gate that reads
+  // this list gets built at M4S6 — recording it now means beating the gym
+  // today already counts when that gate arrives.
+  if (gameState.flags.unlockedAreas.indexOf(gym.opens) === -1) {
+    gameState.flags.unlockedAreas.push(gym.opens);
+  }
+
+  addLogLine("🏅 You won the " + gym.badgeName + " " + gym.badgeIcon +
+    "! +" + ECONOMY.GYM_REWARD + " 🪙");
+}
+
+// ===========================================================================
 //  TEAM LIST — Step 5: your team, up to 4 active (the rest wait in your
 //  Boxes). No nicknames — species names only (Lewis's B3 call).
 // ===========================================================================
@@ -549,6 +658,7 @@ function renderTeamList() {
 
   document.getElementById("boxesBtn").textContent = "Boxes (" + gameState.box.length + ")";
   renderTokens(); // M4S1 — refresh the token counter alongside the team
+  renderBadges(); // M4S4 — and the gym badges you've won
 
   if (boxesVisible) renderBoxList(); // keep an open Boxes panel in sync too
 }
@@ -560,6 +670,21 @@ function renderTeamList() {
 function renderTokens() {
   const el = document.getElementById("tokens");
   if (el) el.textContent = "🪙 " + gameState.tokens;
+}
+
+// M4S4: one little chip per gym badge you've won, next to the tokens. Nothing
+// shows at all until your first gym win — so the shelf filling up IS the
+// progress bar for the whole game. Looks up each badge id in GYMS so the name
+// and icon only have to be written down in one place.
+function renderBadges() {
+  const el = document.getElementById("badges");
+  if (!el) return;
+
+  el.innerHTML = gameState.flags.badges.map(function (badgeId) {
+    const gym = Object.values(GYMS).find(function (g) { return g.badge === badgeId; });
+    if (!gym) return ""; // an unknown badge id (an old save?) just doesn't draw
+    return '<span class="badge-chip">' + gym.badgeIcon + " " + gym.badgeName + "</span>";
+  }).join("");
 }
 
 function renderBoxList() {

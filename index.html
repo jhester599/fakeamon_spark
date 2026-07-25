@@ -236,6 +236,21 @@
     font-size: 15px;
     white-space: nowrap;
   }
+  /* M4S4: the badge shelf — one little chip per gym badge you've won, right
+     next to your tokens. Stays completely empty until you beat your first gym. */
+  .badge-shelf {
+    display: inline-flex;
+    gap: 5px;
+  }
+  .badge-chip {
+    background: #8a8f98;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
   #team, #boxes {
     display: flex;
     gap: 12px;
@@ -460,6 +475,8 @@
     <!-- M4S1: the token counter — the currency you earn from battles. In the
          team header so it shows on both the map and the battle screen. -->
     <span id="tokens" class="token-count">🪙 0</span>
+    <!-- M4S4: the badges you've won from gyms. Empty until you beat one. -->
+    <span id="badges" class="badge-shelf"></span>
     <button id="boxesBtn" class="boxes-btn">Boxes (0)</button>
   </div>
   <div id="team"></div>
@@ -488,6 +505,7 @@
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
 <script src="src/data/economy.js"></script>
+<script src="src/data/gyms.js"></script>
 <script src="src/data/maps.js"></script>
 <script src="src/state.js"></script>
 <script src="src/battle.js"></script>

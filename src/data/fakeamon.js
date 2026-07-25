@@ -139,6 +139,48 @@ const FAKEAMON = {
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
   },
+
+  // ---- GYM 1 — ENFORCER BOSS'S TEAM (M4S4) ----
+  // The first two creatures in the game that are NOT wild: they belong to a
+  // trainer (src/data/gyms.js). Unlike the wild roster above, these two are
+  // HAND-TUNED — the archetype table is for the ~200 background monsters,
+  // while the handful of named creatures (starters, gym teams, bosses) get
+  // their own numbers. DESIGN.md §8 picked the pair; the stats are ours.
+  //
+  // ⚠️ IMPORTANT [TUNE] NOTE: a gym mon's `level` (see gyms.js) currently
+  // changes NOTHING — STAT_GROWTH_PER_LEVEL in src/state.js is all zeros until
+  // M5 adds leveling. So a gym's difficulty comes entirely from the base
+  // numbers below. To make Gym 1 harder or easier, change THESE, not the level.
+  //
+  // The target feel (Jeff & Lewis's call): "a fair step up" — clearly stronger
+  // than The Meadows' wild roster (HP 36-41, Attack 11-14, Defense 9-13), but
+  // beatable on the first try with a healthy team.
+  //
+  // Damage-floor invariant (PLANS/M4_WORLD_SYSTEMS_PLAN.md §4.4): the weakest
+  // attacker in the game (Leafick, Attack 11) using the weakest move (Tackle,
+  // power 8) must still get through with room to spare —
+  //   vs Allagon: 8 + 11 − 14 = 5 ✅   vs AV8R: 8 + 11 − 13 = 6 ✅
+  // (both comfortably above the "≥ 3" rule), so no fight degrades into a
+  // string of minimum-1 chip hits.
+  allagon: {
+    name: "Allagon", type: "metal", sprite: "assets/sprites/front/allagon.png",
+    overworld: "assets/sprites/idle/allagon.png",
+    baseHP: 46, baseAttack: 13, baseDefense: 14, baseSpeed: 9, // [TUNE] the standard: tanky, slow
+    moves: ["tackle", "bite", "ironBeam"],
+  },
+  av8r: {
+    // ⚠️ NO `sprite` ON PURPOSE — not a mistake, and not a missing file.
+    // AV8R's art has no entry in Tuxemon's ATTRIBUTIONS.md, and this project's
+    // rule is that no asset ships without verified attribution
+    // (CONTENT_REFERENCE.md §14). Until that's confirmed, AV8R draws as the
+    // colored type box + name — the same graceful fallback Leafick used before
+    // its own art arrived (see showFighter in src/battle.js). To finish it:
+    // run `cd tools && npm run wiki-credits` from a machine that can reach
+    // wiki.tuxemon.org, then vendor + slice the sheet. See CREDITS.md.
+    name: "AV8R", type: "metal",
+    baseHP: 52, baseAttack: 15, baseDefense: 13, baseSpeed: 14, // [TUNE] the ace: faster than EVERY starter, so it strikes first
+    moves: ["tackle", "pounce", "ironBeam"],
+  },
 };
 
 // ---- STARTERS ----  The species keys shown on the "Choose your starter" screen.

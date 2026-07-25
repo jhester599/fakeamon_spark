@@ -6,6 +6,19 @@
 //      cd tools && npm run wiki-credits            # report only
 //      cd tools && npm run wiki-credits -- --write # also fill sheet-manifest.json
 //
+//  NAMED CREATURES (added M4S4) — you can also pass slugs explicitly:
+//
+//      cd tools && npm run wiki-credits -- av8r --write
+//      cd tools && npm run wiki-credits -- av8r=AV8R --write   (page name override)
+//
+//  Why this exists: roster-200.json only holds the 198 WILD monsters. Every
+//  *named* creature — gym teams, the 5 mini-bosses, Artemis — is outside it, so
+//  the roster-driven sweep above can never see them. Named slugs skip the
+//  roster entirely. Use `slug=PageTitle` when the wiki page isn't just the
+//  Capitalised slug: wiki titles are case-sensitive after the first letter, so
+//  `av8r` would otherwise be looked up as "Av8r" and 404. If the derived title
+//  misses, the script searches the wiki and tells you the closest match.
+//
 //  ⚠️ Needs normal internet access to wiki.tuxemon.org — the Claude remote
 //  environment used for M3S0 could NOT reach it (network policy), which is
 //  why this exists as a script: run it from a laptop, or add wiki.tuxemon.org
@@ -40,16 +53,55 @@ function pageFor(slug) {
   return slug.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join("_");
 }
 
-const pending = Object.keys(roster).filter(
-  (slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug]
-);
-console.log(`${pending.length} monsters need a wiki credit check…\n`);
+// Anything on the command line that isn't a --flag is an explicit slug to look
+// up, optionally as slug=PageTitle. Named creatures (gym teams, mini-bosses,
+// Artemis) live outside roster-200.json, so this is the only way to reach them.
+const pageOverrides = {};
+const explicitSlugs = process.argv.slice(2)
+  .filter((arg) => !arg.startsWith("-"))
+  .map((arg) => {
+    const [slug, page] = arg.split("=");
+    if (page) pageOverrides[slug] = page;
+    return slug;
+  });
+
+let pending;
+if (explicitSlugs.length) {
+  // Named slugs bypass the roster, but never silently overwrite an entry a
+  // human already verified by hand.
+  pending = explicitSlugs.filter((slug) => {
+    if (manifest[slug]) {
+      console.log(`• ${slug}: already in sheet-manifest.json — skipping (delete the entry to re-check)`);
+      return false;
+    }
+    return true;
+  });
+  console.log(`Looking up ${pending.length} named creature(s) by hand-picked slug…\n`);
+} else {
+  pending = Object.keys(roster).filter(
+    (slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug]
+  );
+  console.log(`${pending.length} monsters need a wiki credit check…\n`);
+}
+
+// Wiki titles are case-sensitive past the first letter, so a derived title can
+// miss ("Av8r" vs the real "AV8R"). Ask the wiki's search what it actually has.
+async function suggestTitle(slug) {
+  try {
+    const url = `${API}?action=query&list=search&srsearch=${encodeURIComponent(slug)}` +
+      `&srlimit=3&format=json&formatversion=2`;
+    const data = await (await fetch(url)).json();
+    return (data?.query?.search ?? []).map((hit) => hit.title);
+  } catch {
+    return [];
+  }
+}
 
 const found = {};
 const notFound = [];
 
 for (const slug of pending) {
-  const page = pageFor(slug);
+  const page = pageOverrides[slug] || pageFor(slug);
   const url = `${API}?action=parse&page=${encodeURIComponent(page)}&prop=wikitext&format=json&formatversion=2`;
   try {
     const res = await fetch(url);
@@ -73,7 +125,15 @@ for (const slug of pending) {
       }
     } else {
       notFound.push(slug);
-      console.log(`✗ ${slug}: page fetched but no credit sentence found — check by hand`);
+      const why = text ? "page fetched but no credit sentence found" : `no wiki page "${page}"`;
+      console.log(`✗ ${slug}: ${why} — check by hand`);
+      // Most likely cause for a named creature: the title isn't the Capitalised
+      // slug. Show what the wiki actually has so the retry is obvious.
+      const guesses = await suggestTitle(slug);
+      if (guesses.length) {
+        console.log(`   wiki search suggests: ${guesses.join(", ")}`);
+        console.log(`   retry with:  npm run wiki-credits -- ${slug}=${guesses[0].replace(/ /g, "_")} --write`);
+      }
     }
   } catch (err) {
     notFound.push(slug);

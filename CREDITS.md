@@ -140,11 +140,41 @@ environment's network policy** — the exact limitation
 **not vendored**, and AV8R plays with the colored-box fallback instead
 (`src/data/fakeamon.js` has no `sprite` for it, on purpose).
 
-**To finish it, from a machine that can reach the wiki:**
-`cd tools && npm run wiki-credits` → check the credit it finds → add an
-`av8r` entry to `sheet-manifest.json` → `npm run vendor-sheets` →
-`node slice-sheets.mjs av8r` → add `sprite`/`overworld` to `av8r` in
-`src/data/fakeamon.js` → re-run `tools/generate-sw-manifest.mjs`.
+**To finish it, from a machine that can reach the wiki** (a Cowork session
+works — that's how the 198-monster roster's credits were resolved on
+2026-07-06). Plain `npm run wiki-credits` will NOT find AV8R: that sweep only
+walks `roster-200.json`, which holds the 198 *wild* monsters, and every named
+creature (gym teams, mini-bosses, Artemis) sits outside it. Pass the slug
+explicitly instead — the script learned how at M4S4:
+
+```bash
+cd tools && npm install
+npm run wiki-credits -- av8r=AV8R --write   # writes a sheet-manifest.json entry
+                                            # (if the title is wrong it searches
+                                            #  the wiki and prints the retry line)
+```
+
+Then **review the diff** — set `ourName` to `"AV8R"`, and check the artist and
+license it recorded (it assumes CC BY-SA 3.0, the wiki's usual default; correct
+it if the page says otherwise). Then:
+
+```bash
+npm run vendor-sheets              # pulls av8r-sheet.png (manifest-driven)
+node slice-sheets.mjs av8r         # → front/back/idle
+```
+
+Finally, in the repo: add `sprite: "assets/sprites/front/av8r.png"` and
+`overworld: "assets/sprites/idle/av8r.png"` to the `av8r` entry in
+`src/data/fakeamon.js` (removing the "no sprite on purpose" note), paste the
+generated row from `tools/credits-fragment.md` into the table above, re-run
+`node tools/generate-sw-manifest.mjs`, and bump `CACHE_VERSION` in
+`service-worker.js`.
+
+**If the wiki has no credit for AV8R either**, it can't ship — same call that
+dropped `bearloch`/`foxko` from the roster. In that case the fallback is a
+creative one for Lewis: swap Gym 1's ace for a different Metal creature that
+*is* already credited (`CREDITS_ROSTER.md` has plenty), which is a one-line
+edit to `src/data/gyms.js` plus a species entry.
 
 **Gym leaders (NPC trainer art — different folder, `mods/tuxemon/sprites/`):**
 Goth → `goth.png`, Child Actor → `childactor.png`, Enforcer Boss → likely the

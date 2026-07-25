@@ -236,6 +236,17 @@
     font-size: 15px;
     white-space: nowrap;
   }
+  /* The one-line "here's what just happened" note at the top of the overworld
+     card — where token/catch/badge news goes now that the battle log is hidden
+     outside battles (playtest feedback, 2026-07-25). */
+  .world-news {
+    background: #fff6d8;
+    border: 1px solid #e8c96a;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin: 0 0 10px;
+    font-weight: bold;
+  }
   /* M4S4: the badge shelf — one little chip per gym badge you've won, right
      next to your tokens. Stays completely empty until you beat your first gym. */
   .badge-shelf {
@@ -467,8 +478,13 @@
   <p class="section-label" id="controls-label">Choose your starter:</p>
   <div id="controls"></div>
 
-  <p class="section-label">Battle Log</p>
-  <div id="log"></div>
+  <!-- The battle log belongs to BATTLES. src/screens.js hides this whole block
+       whenever you're not in a fight, so the overworld map isn't sitting above
+       a wall of old combat text (playtest feedback, 2026-07-25). -->
+  <div id="logBlock">
+    <p class="section-label">Battle Log</p>
+    <div id="log"></div>
+  </div>
 
   <div class="team-header">
     <p class="section-label">Your Team</p>

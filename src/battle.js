@@ -188,12 +188,32 @@ function pickRandomMove(individual) {
   return MOVES[species.moves[index]];
 }
 
+// Do you actually have a Fakeaball to throw? Catching can be switched off for
+// the whole battle (gyms), and you can simply be out of balls. One helper so
+// every place that asks gets the same answer — which is what the -1 balls bug
+// below was really about.
+function canThrowBall() {
+  return canCatch && inventory.balls.fakeaball > 0;
+}
+
 // Turn-out the buttons while a turn is playing, so a fast second click can't
 // start a new turn before the first one has finished showing itself.
+//
+// PLAYTEST BUG FIX (2026-07-25): this used to flip EVERY .move-btn back on,
+// including the "Throw Fakeaball" button that showMoveButtons had deliberately
+// disabled at zero balls. So after your last ball, one ordinary attack turn
+// ends with setControlsEnabled(true) and the button is live again — throw, and
+// the count went to -1. Re-enabling now respects the same rule the button was
+// drawn with.
 function setControlsEnabled(enabled) {
   document.querySelectorAll(".move-btn").forEach(function (button) {
     button.disabled = !enabled;
   });
+  if (enabled) {
+    document.querySelectorAll(".catch-btn").forEach(function (button) {
+      button.disabled = !canThrowBall();
+    });
+  }
 }
 
 // A random pause between the two attacks, so the turn reads as "first this
@@ -227,21 +247,44 @@ function checkForFaint(role) {
 }
 
 // ===========================================================================
-//  CATCHING — Step 4: throw a Fakeaball at the wild Fakeamon. Formula and
-//  base rate are from DESIGN.md §6 (Lewis's call: 50% base, better at low
-//  HP). Only the basic Fakeaball exists so far — ballBonus is always 1
-//  until Great/Ultra/Cosmic balls land (Jeff's number-tuning list).
-//  Tweak these three numbers to change how catching feels.
+//  CATCHING — Step 4: throw a Fakeaball at the wild Fakeamon. The weaker it
+//  is, the easier it is to catch (DESIGN.md §6). Only the basic Fakeaball
+//  exists so far — ballBonus is always 1 until Great/Ultra/Cosmic balls land
+//  (Jeff's number-tuning list). Tweak these three numbers to change the feel.
+//
+//  PLAYTEST FIX (2026-07-25) — "we threw a ball at 1 HP and it didn't work,
+//  which was surprising." It really was. The old formula was
+//
+//      chance = 0.5 × missingHealth
+//
+//  where 0.5 was the CEILING, not the middle — so even a Fakeamon down to its
+//  very last hit point was still a 50/50 coin flip. That's the surprise.
+//
+//  The fix: multiply the missing-health fraction BY ITSELF. That keeps Lewis's
+//  original anchor exactly (B12 — "about 1 in 4" at half health) while making a
+//  nearly-fainted Fakeamon almost a sure thing:
+//
+//      health missing │ old chance │ new chance
+//      ───────────────┼────────────┼────────────
+//         25%         │    12%     │     6%    barely hurt — don't waste a ball
+//         50%         │    25%     │    25%    ← Lewis's "about 1 in 4", unchanged
+//         75%         │    37%     │    56%
+//         90%         │    45%     │    81%
+//         98% (1 HP)  │    49%     │    95%    ← the throw that felt wrong
+//
+//  So chip damage is worth a bit less than before, and getting them REALLY low
+//  is worth a lot more — which is exactly how it ought to feel.
 // ===========================================================================
-const BASE_CATCH_RATE = 0.5;      // Lewis: "about 1 in 4" at half HP
+const CATCH_CURVE = 2;            // [TUNE] 1 = the old straight line; higher = low HP matters more
 const CATCH_CHANCE_FLOOR = 0.05;  // never truly impossible, even at full HP
-const CATCH_CHANCE_CAP = 0.95;    // room for stronger balls later
+const CATCH_CHANCE_CAP = 0.95;    // never a certainty either — 1 throw in 20 still escapes
 
 // You only ever throw a ball at the wild Fakeamon, so this always reads
 // the opponent's HP.
 function catchChance() {
-  const missingHPFraction = 1 - activeOpponent().currentHP / statsFor(activeOpponent()).maxHP;
-  const raw = BASE_CATCH_RATE * missingHPFraction; // ballBonus = 1 for now
+  const target = activeOpponent();
+  const missingHPFraction = 1 - target.currentHP / statsFor(target).maxHP;
+  const raw = Math.pow(missingHPFraction, CATCH_CURVE); // ballBonus = 1 for now
   return Math.max(CATCH_CHANCE_FLOOR, Math.min(CATCH_CHANCE_CAP, raw));
 }
 
@@ -259,7 +302,10 @@ function throwFakeaball(onDone) {
   const opponentName = FAKEAMON[activeOpponent().speciesKey].name;
 
   addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
-  inventory.balls.fakeaball -= 1; // used up the moment it's actually thrown — DECISIONS.md #49
+  // Used up the moment it's actually thrown (DECISIONS.md #49). The max(0, …)
+  // is a belt-and-braces guard so the count can never go negative even if some
+  // future button slips past the checks above.
+  inventory.balls.fakeaball = Math.max(0, inventory.balls.fakeaball - 1);
   const caught = Math.random() < catchChance();
 
   function wobble(remaining) {
@@ -291,6 +337,13 @@ function throwFakeaball(onDone) {
 // rule as DESIGN.md §6. If the wild Fakeamon is faster, it may get its
 // attack in before you even throw.
 function attemptCatch() {
+  // Second line of defence: even if a button somehow gets clicked when it
+  // shouldn't be live, you can't throw a ball you don't have.
+  if (!canThrowBall()) {
+    addLogLine("You're out of Fakeaballs! Buy more at the Tall Tower. 🗼");
+    showMoveButtons(activePlayer()); // redraw so the button shows as disabled again
+    return;
+  }
   setControlsEnabled(false);
   const playerGoesFirst = statsFor(activePlayer()).speed >= statsFor(activeOpponent()).speed;
 
@@ -606,6 +659,8 @@ function showMoveButtons(individual) {
   if (canCatch) {
     const ballCount = inventory.balls.fakeaball;
     const catchButton = document.createElement("button");
+    // .catch-btn is also how setControlsEnabled finds this button again to keep
+    // it disabled at zero balls — don't rename it without updating that.
     catchButton.className = "move-btn catch-btn";
     // The real Fakeaball sprite (Tuxemon's "Tuxeball Earth" — CREDITS.md),
     // added M4 once the art was sourced; ballCount is always a number, so no

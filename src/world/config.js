@@ -362,6 +362,13 @@ class WorldScene extends Phaser.Scene {
     return this.encounterByTile.get(tileX + "," + tileY) || null;
   }
 
+  // How many wild Fakeamon are still out on the map right now? main.js's
+  // refillEmptyMap() uses this to make sure you're never left with an empty
+  // meadow and nothing to fight (playtest feedback, 2026-07-25).
+  liveEncounterCount() {
+    return this.encounterSprites ? this.encounterSprites.length : 0;
+  }
+
   // S7 — the handoff (the "hallway", plan §5). Walking into a wild Fakeamon
   // hands off to the conductor (main.js's startMapEncounter), which freezes the
   // map (screens.js), runs the real battle against THIS creature, applies the

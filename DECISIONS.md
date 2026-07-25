@@ -181,6 +181,12 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-25 | 64 | **The first metal move is "Iron Beam"** — Lewis's invention, and the game's first metal attack (`ironBeam` in `src/data/moves.js`, power 14 / accuracy 90 `[TUNE]`). Closes the M4 plan's CR-D gap: Gym 1 is the Metal gym but no metal *move* existed | Lewis named it live in the M4S4 huddle |
 | 2026-07-25 | 65 | **Gym 1's difficulty target: "a fair step up"** — clearly stronger than The Meadows' wild roster, but beatable first try with a healthy team; not a wall you're expected to lose to | (option A) |
 
+| 2026-07-25 | 66 | **Healing costs less while you're alone** — a Fakeatent rest is 5 🪙 with a single Fakeamon, 10 🪙 with a team of two or more | Jeff & Lewis's playtest call — "this will make the beginning of the game easier until you grow your team" |
+| 2026-07-25 | 67 | **A whole-team faint costs the heal price + 5** — so 10 🪙 solo, 15 🪙 with a team. Replaces the old flat 5-token loss, and keeps fainting strictly worse than choosing to rest | Jeff & Lewis's playtest call |
+| 2026-07-25 | 68 | **Catching gets much easier at very low HP** — the chance is now the missing-health fraction *squared* rather than halved, so 1 HP left ≈ 95% instead of ≈ 49%. Lewis's B12 anchor (about 1 in 4 at half HP) is unchanged | "we had used a ball with 1 HP left and it didn't work, which was surprising" |
+| 2026-07-25 | 69 | **The battle log only shows during battles** — it's hidden on the map and menu screens; the handful of messages that mattered outside a fight (tokens won, a catch joining, what a wipe cost) now appear as a one-line note on the overworld card instead | Jeff & Lewis's playtest call — "remove the battle log from the overworld map navigation screen" |
+| 2026-07-25 | 70 | **An emptied map always refills** — clear every wild Fakeamon and a few come back (guaranteed, not a dice roll) the moment you're back on the map. The existing 30% per-battle respawn roll stays for the normal case | "if you clear all of the fakeamon on a map, new wild fakeamon should respawn to continue playing" |
+
 <!--
 Template for a new row:
 | 2026-07-05 | 6 | Gym badges open a new area to explore | "so beating a gym feels like it unlocks something" |

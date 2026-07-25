@@ -44,6 +44,31 @@
 let battleInProgress = false;
 
 // ===========================================================================
+//  "NEWS" — the one-line "here's what just happened" note shown on the map.
+//
+//  The battle log is hidden outside battles now (playtest feedback,
+//  2026-07-25, src/screens.js), and a few important messages used to live only
+//  there: how many tokens you won, that a catch joined your team, what a wipe
+//  cost you. Those would have silently vanished with the log, so they get
+//  written HERE as well and shown on the overworld card instead.
+// ===========================================================================
+let worldNews = "";
+
+function noteNews(text) {
+  worldNews = text;
+  addLogLine(text); // still goes in the battle log too — it's briefly on screen
+                    // right after a fight ends, before the map comes back
+}
+
+// Read the pending note and clear it, so a message shows once and doesn't
+// linger on the map for the rest of the game.
+function takeNews() {
+  const text = worldNews;
+  worldNews = "";
+  return text;
+}
+
+// ===========================================================================
 //  TITLE SCREEN + SAVE FLOW — M5-plan S3. On load we check for a saved
 //  adventure (src/save.js). If there is one, you get Continue / New Game;
 //  if not, New Game is the only path. Autosave runs on its own (see the
@@ -59,6 +84,7 @@ function showTitleScreen() {
   document.getElementById("title").textContent = "Fakeamon Spark ☄️";
   document.getElementById("controls-label").textContent = "";
   document.getElementById("log").innerHTML = "";
+  setLogVisible(false); // no "Battle Log" heading on the menu screens either
   document.getElementById("team").innerHTML = "";
 
   document.getElementById("arena").innerHTML =
@@ -134,26 +160,44 @@ function enterOverworld() {
   battleInProgress = false;
   worldActive = true; // arrow keys walk the hero now
 
+  const news = takeNews(); // "you earned 5 tokens", "Aardorn joined your team", …
+
   document.getElementById("title").textContent = "The Meadows";
   document.getElementById("controls-label").textContent = "";
   document.getElementById("controls").innerHTML = "";
   document.getElementById("arena").innerHTML =
     '<div class="title-card">' +
+      (news ? '<p class="world-news">' + news + "</p>" : "") +
       "<h2>Exploring The Meadows 🌱</h2>" +
       "<p>Use the <b>arrow keys</b> to walk around. Wild Fakeamon are standing " +
       "in the grass — <b>walk into one to battle it!</b>" +
       "<br><small>(Beat it or catch it and it leaves the map for a while; run " +
       "away and it stays put. Cleared ones may wander back later.)</small></p>" +
       "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
-      "your team for " + ECONOMY.HEAL_COST + " 🪙. 🗼 The Tall Tower next to it " +
+      "your team for " + healCost() + " 🪙. 🗼 The Tall Tower next to it " +
       "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each. ⚙️ And further " +
       "along, " + GYMS.gym1.leader + " is waiting in the Gym — beat their team " +
       "of two to win the " + GYMS.gym1.badgeName + "!</small></p>" +
     "</div>";
 
   renderTeamList();
-  showWorld(); // bring the map back, unfreeze it, and hand it the keyboard (screens.js)
+  showWorld();      // bring the map back, unfreeze it, and hand it the keyboard (screens.js)
+  refillEmptyMap(); // …and never leave the player standing on an empty map
   saveGame();
+}
+
+// What a full heal costs right now. It's cheaper while you're adventuring
+// alone, because the start of the game is when tokens are hardest to come by
+// (Jeff & Lewis's playtest call, 2026-07-25). Everything that mentions the
+// heal price — the tent panel, the map's tip, the wipe penalty — asks here, so
+// the number can never disagree with itself on screen.
+function healCost() {
+  return gameState.party.length <= 1 ? ECONOMY.HEAL_COST_SOLO : ECONOMY.HEAL_COST;
+}
+
+// Fainting your whole team always costs a bit more than choosing to rest.
+function teamWipeCost() {
+  return healCost() + ECONOMY.TEAM_WIPE_SURCHARGE;
 }
 
 // Heal everyone to full — used by the Fakeatent (M4S2) and a team-wipe below.
@@ -296,6 +340,35 @@ function maybeRespawnEncounter(justFoughtId) {
   if (worldScene) worldScene.respawnEncounter(pick);
 }
 
+// How many wild Fakeamon come back at once when the map runs completely dry.
+const EMPTY_MAP_RESPAWN_COUNT = 3; // [TUNE] a small welcoming party, not the whole map
+
+// PLAYTEST FIX (2026-07-25): "if you clear all of the Fakeamon on a map, new
+// wild Fakeamon should respawn to continue playing."
+//
+// The S8 respawn roll above only ever runs *after a battle* — so once the map
+// was empty there was nothing left to fight, no battle to trigger a roll, and
+// the meadow stayed empty forever. (Same dead end if you cleared the map and
+// then reloaded.) This is the safety net: whenever you step onto the map, if
+// there's nothing out there, some wild Fakeamon come back — guaranteed, not a
+// dice roll. Called from enterOverworld, so it covers both "you just cleared
+// the last one" and "you pressed Continue onto an empty map".
+function refillEmptyMap() {
+  if (!worldScene) return;
+  if (worldScene.liveEncounterCount() > 0) return; // still plenty out there
+
+  // Shuffle the cleared ones so it's a different crowd each time.
+  const cleared = gameState.world.defeatedEncounters.slice();
+  for (let i = cleared.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const swap = cleared[i]; cleared[i] = cleared[j]; cleared[j] = swap;
+  }
+
+  cleared.slice(0, EMPTY_MAP_RESPAWN_COUNT).forEach(function (id) {
+    worldScene.respawnEncounter(id); // quietly skips one standing on the hero
+  });
+}
+
 // Whatever the battle decided, this is where it becomes a team fact — then
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
@@ -314,26 +387,29 @@ function handleBattleOutcome(outcome, context) {
     awardGymPrize(gym);
   } else if (outcome.result === "win") {
     gameState.tokens += ECONOMY.TOKENS_PER_WILD_WIN;
-    addLogLine("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");
+    noteNews("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");
   }
 
   if (outcome.result === "caught") {
     const caughtName = FAKEAMON[outcome.caught.speciesKey].name;
     if (gameState.party.length < MAX_PARTY_SIZE) {
       gameState.party.push(outcome.caught);
-      addLogLine(caughtName + " joined your team!");
+      noteNews(caughtName + " joined your team!");
     } else {
       gameState.box.push(outcome.caught);
-      addLogLine(caughtName + " was sent to your Boxes — your team is full!");
+      noteNews(caughtName + " was sent to your Boxes — your team is full!");
     }
   } else if (outcome.result === "lose") {
-    // M4S2: a wipe now sends you to this map's Fakeatent instead of the old M3
-    // stand-in — healed for free, but a few tokens poorer (never below zero).
+    // M4S2: a wipe sends you to this map's Fakeatent instead of the old M3
+    // stand-in — healed up, but poorer (never below zero). Since 2026-07-25 the
+    // bill is the heal price PLUS a surcharge, so fainting always costs more
+    // than choosing to rest would have.
+    const cost = teamWipeCost();
     healParty();
     gameState.world.player = homeBaseTile(gameState.world.mapId);
-    gameState.tokens = Math.max(0, gameState.tokens - ECONOMY.TEAM_WIPE_TOKEN_LOSS);
-    addLogLine("😪 Your team is worn out — the Fakeatent nurses you back to " +
-      "health! (−" + ECONOMY.TEAM_WIPE_TOKEN_LOSS + " 🪙)");
+    gameState.tokens = Math.max(0, gameState.tokens - cost);
+    noteNews("😪 Your team is worn out — the Fakeatent nurses you back to " +
+      "health! (−" + cost + " 🪙)");
   }
 
   // A wild Fakeamon you beat or caught leaves the map (it may respawn later —
@@ -417,12 +493,17 @@ function showFakeatentPanel() {
   document.getElementById("title").textContent = "Fakeatent 🏕️";
   document.getElementById("controls-label").textContent = "";
 
-  const canAfford = gameState.tokens >= ECONOMY.HEAL_COST;
+  const cost = healCost();
+  const canAfford = gameState.tokens >= cost;
   document.getElementById("arena").innerHTML =
     '<div class="title-card">' +
       "<h2>Fakeatent 🏕️</h2>" +
       "<p>Rest your whole team back to full health?</p>" +
-      "<p><b>Cost: " + ECONOMY.HEAL_COST + " 🪙</b> — you have " + gameState.tokens + " 🪙</p>" +
+      "<p><b>Cost: " + cost + " 🪙</b> — you have " + gameState.tokens + " 🪙</p>" +
+      (gameState.party.length <= 1
+        ? "<p><small>🌱 Travelling alone, so it's half price — it goes up to " +
+          ECONOMY.HEAL_COST + " 🪙 once you have a team.</small></p>"
+        : "") +
       (canAfford ? "" : "<p><small>Come back after a few more wins!</small></p>") +
     "</div>";
 
@@ -431,7 +512,7 @@ function showFakeatentPanel() {
 
   const restButton = document.createElement("button");
   restButton.className = "move-btn";
-  restButton.textContent = "Rest — " + ECONOMY.HEAL_COST + " 🪙";
+  restButton.textContent = "Rest — " + cost + " 🪙";
   restButton.disabled = !canAfford;
   restButton.addEventListener("click", restAtFakeatent);
   controls.appendChild(restButton);
@@ -448,9 +529,9 @@ function showFakeatentPanel() {
 }
 
 function restAtFakeatent() {
-  gameState.tokens -= ECONOMY.HEAL_COST;
+  gameState.tokens -= healCost(); // read BEFORE anything changes the team
   healParty();
-  addLogLine("😴 You rested at the Fakeatent — your team is fully healed!");
+  noteNews("😴 You rested at the Fakeatent — your team is fully healed!");
   renderTeamList();
   saveGame();
   leaveFakeatent();
@@ -499,7 +580,7 @@ function showTallTowerPanel() {
 function buyFakeaball() {
   gameState.tokens -= ECONOMY.BALL_COST;
   gameState.inventory.balls.fakeaball += 1;
-  addLogLine("🛍️ You bought a Fakeaball!");
+  noteNews("🛍️ You bought a Fakeaball!");
   renderTeamList();
   saveGame();
   showTallTowerPanel(); // stay in the shop, refreshed with the new counts
@@ -586,7 +667,7 @@ function startGymBattle(gym) {
 function awardGymPrize(gym) {
   if (hasCleared(gym)) {
     gameState.tokens += ECONOMY.GYM_REMATCH_REWARD;
-    addLogLine("You beat " + gym.leader + " again! +" +
+    noteNews("You beat " + gym.leader + " again! +" +
       ECONOMY.GYM_REMATCH_REWARD + " 🪙");
     return;
   }
@@ -602,7 +683,7 @@ function awardGymPrize(gym) {
     gameState.flags.unlockedAreas.push(gym.opens);
   }
 
-  addLogLine("🏅 You won the " + gym.badgeName + " " + gym.badgeIcon +
+  noteNews("🏅 You won the " + gym.badgeName + " " + gym.badgeIcon +
     "! +" + ECONOMY.GYM_REWARD + " 🪙");
 }
 

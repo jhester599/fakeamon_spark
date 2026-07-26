@@ -5,7 +5,7 @@
 > decided.** All ran through the decision loop into `DECISIONS.md` (#51–60),
 > `DESIGN.md`, the touch plan, and the roster draft. What he picked: swap
 > boxed Fakeamon **at a Fakeatent** (B33); the wild opponent reads **"the
-> wild `<name>`"** (B34); berries are **themed by area** (B35); a **small
+> wild `<name>`"** (B34); berries are **themed by area** (B35 — ⚠️ later replaced, see B44 below); a **small
 > starter Cooking Cabin** exists too (B36); the Venta wild-roster draft is
 > **kept as-is** (B37); and the touch D-pad is **four floating arrows,
 > bottom-right, half see-through, with a show/hide toggle**, still called
@@ -17,25 +17,32 @@
 
 ---
 
-## 🆕 New — two questions from the M4 checkpoint (2026-07-22) 🌟
+## 🟡 Still open — one question, and it can wait 🌟
 
-Before building **M4 (World Systems)** we ran the milestone peer-review — an
-outside look at the plan, plus a code check (`PLANS/M4_WORLD_SYSTEMS_PLAN.md`).
-Almost everything it found was grown-up architecture, but **two creative calls
-are yours, Lewis.** No rush — M4's first steps (Tokens, Fakeatent, Tall Tower)
-don't need them; they're for the gym and the cooking later.
+Everything else is answered — **44 of 45**. This last one only affects **Gym 2
+and Gym 3**, which are M5 work, so there is genuinely no rush.
 
 - **B43 — the two "wrong-type" gym aces.** Gym 2 is all-Fire and Gym 3 all-Water,
   but their tough *ace* creatures (Windeye, Spectera) are the wrong type. Swap
   them for on-type creatures, or keep them and re-theme them? *(Options in
   `HOMEWORK_BACKLOG.md` B43. Really for M5's later gyms — Gym 1 in M4 is already
   all-Metal and fine.)*
-- **B44 — which berries grow where?** 🫐 You already said berries are found on
-  the ground and *themed by area*. Which berries show up in **The Meadows**
-  (and later **The Lagoon**)? Invent it, or say "surprise me" and we'll pick a
-  starter set you can change any time. *(Prompt in `HOMEWORK_BACKLOG.md` B44.)*
 
 Answer whenever — we'll run the decision loop when you do.
+
+---
+
+## ✅ Answered and built — B44 (berries) 🫐
+
+- **B44 — which berries grow where?** ✅ **Answered a different way (2026-07-26):
+  berries aren't split by area at all.** Every area grows every berry; what
+  changes is how *often* each one turns up — Fakeaberry common, Greenberry and
+  Raspberry medium, Greatberry unlikely, Cosmicberry extremely rare — and **The
+  Factory grows none**. Bossberry still only drops from mini-bosses.
+  ⚠️ **This replaced B35's "berries are themed by area"** (`DECISIONS.md` #75);
+  the two were different systems and this is the one we built. If you'd rather
+  have per-area berries back, Lewis, say the word — `AREA_BERRIES` in
+  `src/data/berries.js` makes it a one-line edit.
 
 ---
 
@@ -88,8 +95,7 @@ ten — are decided and folded into the docs** (`DECISIONS.md` #51–60):
 - **B34** — the wild opponent is written **"the wild `<name>`"** in the log
   and result messages, so a same-species fight reads clearly. *(A small M2
   battle-text tweak, now unblocked.)*
-- **B35** — berries are **themed by area** — each area mostly grows the
-  berries that fit its vibe.
+- ~~**B35** — berries are **themed by area**~~ — ⚠️ **superseded 2026-07-26 by B44**: every area grows every berry, only the odds differ (`DECISIONS.md` #75).
 - **B36** — there's a **smaller Cooking Cabin near the start too**, so
   cooking isn't gated entirely behind Snow Mountain's badge.
 - **B37** — the **Venta wild-roster draft is approved as-is**
@@ -100,9 +106,9 @@ ten — are decided and folded into the docs** (`DECISIONS.md` #51–60):
 
 Nothing creative is blocking the build now — the only open items are Jeff's
 number-tuning list (below) and future per-step calls as they come up.
-*(Update 2026-07-22: the M4 peer-review checkpoint has since added **B43** and
-**B44** — see the "🆕 New" section at the top of this file. Neither blocks M4's
-start.)*
+*(Update 2026-07-26: the M4 checkpoint added **B43** and **B44**, and building
+Gym 1 raised **B45**. B44 and B45 are now answered and built — only **B43**
+remains, and it's M5 work. See the sections at the top of this file.)*
 
 ---
 

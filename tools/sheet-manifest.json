@@ -1212,5 +1212,17 @@
     "artists": "From the open-source game OPMon; Jaskrendix",
     "license": "⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Toxiris)",
     "sourceCommit": "c34a9c72"
+  },
+  "allagon": {
+    "ourName": "Allagon",
+    "artists": "Spalding004, Chickenshowman",
+    "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
+    "sourceCommit": "c34a9c72"
+  },
+  "av8r": {
+    "ourName": "AV8R",
+    "artists": "Leo, Sanglorian",
+    "license": "CC BY-SA 4.0 (assumed consistent with the rest of the Tuxemon battle set — no av8r entry in ATTRIBUTIONS.md; wiki.tuxemon.org/AV8R was down 2026-07-25, recheck)",
+    "sourceCommit": "c34a9c72"
   }
 }

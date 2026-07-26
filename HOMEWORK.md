@@ -39,6 +39,20 @@ Answer whenever — we'll run the decision loop when you do.
 
 ---
 
+## 🆕 One more, found while building Gym 1 (2026-07-25) 🛡️
+
+- **B45 — should ONE fainted Fakeamon lose you the whole battle?** Right now it
+  does: the second the Fakeamon you're using faints, the battle's over — even
+  with three healthy teammates standing right there. Nobody picked that; it's
+  just how the very first battle was written back in M1, when you only *had* one
+  Fakeamon. Now that gyms exist it looks lopsided: **Enforcer Boss sends out a
+  second Fakeamon when his first drops, but you don't.** Keep it (A), let your
+  next one come out automatically (B), or get to *pick* who comes out (C)?
+  *(Options in `HOMEWORK_BACKLOG.md` B45. Nothing's broken — Gym 1 works fine
+  today — but this one's yours, so nobody guessed.)*
+
+---
+
 ## 🗺️ What happened this session
 
 - **Lewis cleared the whole backlog.** One homework round answered B1–B32:

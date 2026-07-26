@@ -6,6 +6,30 @@
 //      cd tools && npm run wiki-credits            # report only
 //      cd tools && npm run wiki-credits -- --write # also fill sheet-manifest.json
 //
+//  With no slug arguments it scans roster-200.json for anything still
+//  "pending-wiki". You can also name creatures explicitly — needed for any
+//  creature added AFTER the 200-roster pass (gym aces from DESIGN.md §12, for
+//  instance), since those have no roster entry to be "pending" in:
+//
+//      npm run wiki-credits -- av8r --write          # page name inferred
+//      npm run wiki-credits -- av8r=AV8R --write     # page name given
+//
+//  Use the slug=Page form whenever the wiki page is not simply the slug with
+//  each underscore-part capitalised. MediaWiki is case-SENSITIVE after the
+//  first letter, so the inferred "Av8r" does NOT find the page "AV8R".
+//
+//  OVERWRITE GUARD: a slug that already has a sheet-manifest.json entry is
+//  SKIPPED, because that entry is a credit a human already checked and worded
+//  by hand — av8r's, for instance, carries a deliberate "assumed, unverified,
+//  recheck" warning. A --write run would silently replace that with whatever
+//  the wiki happens to return today, which could be a thinner credit or a
+//  generic license line. To deliberately re-check and replace one, add --force:
+//
+//      npm run wiki-credits -- av8r=AV8R --write --force
+//
+//  (That is the command to use once wiki.tuxemon.org is back up and av8r's
+//  assumed credit can finally be replaced with the real one.)
+//
 //  ⚠️ Needs normal internet access to wiki.tuxemon.org — the Claude remote
 //  environment used for M3S0 could NOT reach it (network policy), which is
 //  why this exists as a script: run it from a laptop, or add wiki.tuxemon.org
@@ -29,6 +53,7 @@ import { fileURLToPath } from "node:url";
 
 const TOOLS = dirname(fileURLToPath(import.meta.url));
 const WRITE = process.argv.includes("--write");
+const FORCE = process.argv.includes("--force"); // allow replacing an existing manifest entry
 const API = "https://wiki.tuxemon.org/api.php";
 
 const roster = JSON.parse(readFileSync(join(TOOLS, "roster-200.json"), "utf8")).monsters;
@@ -40,20 +65,62 @@ function pageFor(slug) {
   return slug.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join("_");
 }
 
-const pending = Object.keys(roster).filter(
-  (slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug]
-);
-console.log(`${pending.length} monsters need a wiki credit check…\n`);
+// Anything on the command line that is not a flag is a target: "av8r" or
+// "av8r=AV8R". Explicit targets win over the roster scan entirely.
+const args = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+
+let targets;
+if (args.length) {
+  const named = args.map((arg) => {
+    const [slug, page] = arg.split("=");
+    return { slug, page: page || pageFor(slug), arg };
+  });
+  // The overwrite guard (see the header). An existing manifest entry is a
+  // hand-checked credit; don't let a routine --write quietly replace it.
+  targets = named.filter(({ slug, arg }) => {
+    if (!manifest[slug] || FORCE) return true;
+    console.log(`⏭️  ${slug} already has a hand-checked manifest entry — skipping.`);
+    console.log(`   To deliberately re-check and replace it:`);
+    console.log(`     npm run wiki-credits -- ${arg} --write --force`);
+    return false;
+  });
+  if (FORCE && targets.some(({ slug }) => manifest[slug])) {
+    console.log("⚠️  --force: existing manifest entries WILL be overwritten. Review the diff.");
+  }
+  console.log(`${targets.length} creature(s) named on the command line…\n`);
+} else {
+  targets = Object.keys(roster)
+    .filter((slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug])
+    .map((slug) => ({ slug, page: pageFor(slug) }));
+  console.log(`${targets.length} monsters need a wiki credit check…`);
+  if (targets.length === 0) {
+    console.log(
+      "Nothing pending in roster-200.json. If you are chasing a creature added\n" +
+        "after the roster pass (a DESIGN.md §12 gym ace, say), name it directly:\n" +
+        "  npm run wiki-credits -- <slug>=<WikiPage> --write"
+    );
+  }
+  console.log("");
+}
 
 const found = {};
 const notFound = [];
 
-for (const slug of pending) {
-  const page = pageFor(slug);
+for (const { slug, page } of targets) {
   const url = `${API}?action=parse&page=${encodeURIComponent(page)}&prop=wikitext&format=json&formatversion=2`;
   try {
     const res = await fetch(url);
-    const data = await res.json();
+    const body = await res.text();
+    // The wiki sometimes serves an HTML "technical difficulties" page instead
+    // of JSON (it was down on 2026-07-25). Say so plainly rather than dying on
+    // a confusing "Unexpected token '<'" from JSON.parse.
+    if (!body.trimStart().startsWith("{")) {
+      throw new Error(`wiki returned ${res.status} non-JSON — site may be down, try again later`);
+    }
+    const data = JSON.parse(body);
+    if (data?.error) {
+      throw new Error(`no wiki page "${page}" (${data.error.code}) — check spelling/CASE`);
+    }
     const text = data?.parse?.wikitext ?? "";
     // credit sentences look like "Art and sprites by princess-phoenix." or
     // "Original design by Leo. Sprites by Levaine."
@@ -73,7 +140,15 @@ for (const slug of pending) {
       }
     } else {
       notFound.push(slug);
-      console.log(`✗ ${slug}: page fetched but no credit sentence found — check by hand`);
+      const why = text ? "page fetched but no credit sentence found" : `no wiki page "${page}"`;
+      console.log(`✗ ${slug}: ${why} — check by hand`);
+      // Most likely cause for a named creature: the title isn't the Capitalised
+      // slug. Show what the wiki actually has so the retry is obvious.
+      const guesses = await suggestTitle(slug);
+      if (guesses.length) {
+        console.log(`   wiki search suggests: ${guesses.join(", ")}`);
+        console.log(`   retry with:  npm run wiki-credits -- ${slug}=${guesses[0].replace(/ /g, "_")} --write`);
+      }
     }
   } catch (err) {
     notFound.push(slug);

@@ -99,6 +99,10 @@ const MAPS = {
       // home base). Sits a few tiles right of the tent, same row, so both
       // buildings read as one little "town row" north of the path.
       { id: "meadows-talltower", kind: "talltower", tileX: 10, tileY: 7 },
+      // M4S4: the Gym — Enforcer Boss and the Gear Badge. Third along the same
+      // town row. `gymId` points at an entry in src/data/gyms.js, which is what
+      // makes adding Gym 2 later just "another building + another gym entry".
+      { id: "meadows-gym1", kind: "gym", gymId: "gym1", tileX: 15, tileY: 7 },
     ],
     exits: [],                       // M4: doorways to the other five areas
   },

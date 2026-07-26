@@ -17,6 +17,14 @@
 //  loads right after it). They may be null very early on, so we guard.
 // ===========================================================================
 
+// The battle log is battle furniture — on the map it's just a wall of stale
+// combat text under the scenery (playtest feedback, 2026-07-25). Screens own
+// what's on screen, so the show/hide lives here next to the map's own.
+function setLogVisible(visible) {
+  const logBlock = document.getElementById("logBlock");
+  if (logBlock) logBlock.classList.toggle("hidden", !visible);
+}
+
 // Show the battle: hide the map and FREEZE the world so nothing leaks through.
 // Each guard here is a real bug the plan calls out (§3):
 //   - pause the scene so it stops updating (the hero can't drift);
@@ -26,6 +34,7 @@
 //     as a click on the map tile underneath it.
 function showBattle() {
   document.getElementById("world").classList.add("hidden");
+  setLogVisible(true); // the log is only ever useful during a fight
   if (worldScene) {
     if (!worldScene.scene.isPaused()) worldScene.scene.pause();
     worldScene.input.keyboard.enabled = false;
@@ -40,6 +49,7 @@ function showBattle() {
 // focus so the arrow keys move the hero again instead of scrolling the page.
 function showWorld() {
   document.getElementById("world").classList.remove("hidden");
+  setLogVisible(false); // no combat log while you're just walking around
   if (worldScene) {
     worldScene.input.enabled = true;
     worldScene.input.keyboard.enabled = true;

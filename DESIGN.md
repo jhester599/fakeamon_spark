@@ -131,6 +131,12 @@ Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
 **DECIDED (2026-07-06) — fleeing:** Run **always works** — a "Run" button that never fails. *(Lewis's call, B1.)*
 
+**DECIDED (2026-07-25) — fleeing a GYM:** you **can't**. B1 above was decided
+about *wild* battles; a gym is a challenge you accept on purpose, so gym
+battles pass `canFlee: false` (and `canCatch: false` — a leader's Fakeamon
+aren't yours to catch). Lose and you wipe to the Fakeatent like any other
+loss. *(Jeff & Lewis's call at the M4S4 huddle, `DECISIONS.md` #62.)*
+
 **DECIDED (2026-07-08) — Switch mid-battle costs a turn:** bringing in a different teammate follows the same speed-order rule as every other action. If you're faster, the switch happens safely and your new Fakeamon just takes the opponent's attack that turn. If you're slower, the opponent gets a free hit on your *current* Fakeamon first — and if that faint ends the battle, the switch never completes. Picking from the switch menu is the only thing that costs the turn; backing out (Cancel) is free. *(Jeff & Lewis's call.)*
 
 **Damage formula (tuned for 3–5 hits per battle):**
@@ -172,10 +178,23 @@ Meteor Shower is Lewis's idea and it's a good one: because Artemis hurts itself,
 
 **Capturing:** throw a **Fakeaball** at a **wild** Fakeamon. Probability-based; higher chance at low HP.
 ```
-chance = baseCatchRate × (1 − currentHP / maxHP) × ballBonus   (with a small floor and a cap)
+missingHealth = 1 − currentHP / maxHP
+chance = missingHealth ^ CATCH_CURVE × ballBonus     (with a small floor and a cap)
 ```
 
-**DECIDED (2026-07-06) — base catch rate = 50%** *(Lewis's call: "about 1 in 4, because catching is pretty hard").* Worked backwards from his answer: a regular Fakeaball has `ballBonus = 1`, and at half HP `(1 − 0.5) = 0.5`, so `chance = baseCatchRate × 0.5`. For that to land at ~25% (his "1 in 4"), `baseCatchRate = 0.5`. **Great/Ultra/Cosmic Fakeaball exact `ballBonus` numbers are still [TO DECIDE] — Jeff, number-tuning** (Ultra's 100%-under-50%-HP rule already overrides the formula per the ball tiers below).
+**DECIDED (2026-07-06) — catching is "about 1 in 4" at half HP** *(Lewis's call: "about 1 in 4, because catching is pretty hard").* That anchor still holds exactly.
+
+**REVISED (2026-07-25) — the curve, after playtesting.** The original formula was `chance = 0.5 × missingHealth`, where `0.5` was the **ceiling**, not the middle — so a Fakeamon down to its **last hit point** was still only a 50/50 coin flip. Jeff & Lewis hit exactly that in play ("we used a ball with 1 HP left and it didn't work, which was surprising") and asked for low HP to matter much more. The fix squares the missing-health fraction instead (`CATCH_CURVE = 2`, `src/battle.js`), which keeps Lewis's 1-in-4-at-half-HP anchor **unchanged** while making a nearly-fainted Fakeamon almost a sure thing:
+
+| Health missing | Old chance | New chance |
+|---|---|---|
+| 25% | 12% | 6% |
+| 50% | 25% | **25%** *(Lewis's anchor — identical)* |
+| 75% | 37% | 56% |
+| 90% | 45% | 81% |
+| 98% (1 HP) | 49% | **95%** *(capped)* |
+
+So chip damage is worth less and really weakening a target is worth much more. Floor 5% / cap 95% are unchanged — catching is never impossible, and never a guarantee. **Great/Ultra/Cosmic Fakeaball exact `ballBonus` numbers are still [TO DECIDE] — Jeff, number-tuning** (Ultra's 100%-under-50%-HP rule already overrides the formula per the ball tiers below).
 
 Caught Fakeamon join your team.
 
@@ -207,6 +226,8 @@ Caught Fakeamon join your team.
 **DECIDED (2026-07-10) — pause after a catch (Lewis's design):** when a Fakeamon is caught, don't jump straight into a new battle. Show a **Continue** button, the same way a battle win does, so the player has a beat to see "Gotcha! `<name>` was caught!" before moving on. *(Built 2026-07-22 — `showContinueButton()`, `src/battle.js`.)*
 
 **Losing:** **DECIDED (2026-07-05):** when your whole team faints, you wake up at the last **Fakeatent**, fully healed, and **drop a few tokens** — a small sting, not harsh. *(Lewis's call.)*
+
+**DECIDED (2026-07-25) — what "a few tokens" is, exactly:** fainting costs the **price of a heal plus 5** — so it always stings a bit more than choosing to walk into the tent yourself. With one Fakeamon that's **10 🪙**; with a team of two or more, **15 🪙** (never below zero). *(Jeff & Lewis's playtest call; `ECONOMY.TEAM_WIPE_SURCHARGE`, `teamWipeCost()` in `src/main.js`.)*
 
 ---
 
@@ -261,7 +282,7 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 | Gym | Leader (trainer NPC) | Standard | Ace (stronger) | Gym typing |
 |---|---|---|---|---|
-| **1** | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | **Metal** |
+| **1** ✅ *(built M4S4)* | Enforcer Boss | **Allagon** — Metal dragon (alloy+dragon) | **AV8R** — Metal/Sky robot bird ("aviator") | **Metal** |
 | **2** | Goth | **Agnite** — Fire "false dragon" iguana | **Windeye** — Metal/Lightning "tower" bot *(needs a Fire re-theme or swap at M4 build time)* | **Fire** |
 | **3** | Child Actor | **Spectera** — Grass/Sky leaf-winged fruit bat | **Eaglace** — Water/Frost ice eagle *(Spectera needs a Water re-theme or swap at M4 build time)* | **Water** |
 
@@ -292,6 +313,8 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 **DECIDED (2026-07-06) — pricing feel:** after winning about **3** wild battles, you should be able to afford **a Fakeaball and a heal** — comfortable, keeps the adventure moving. *(Lewis's call, B16 — Jeff still sets the exact token numbers to hit this feel.)*
 
 **DECIDED (2026-07-06) — Tall Tower stock:** just Fakeaballs — cooking covers healing, keep shops simple. *(Lewis's call, B18.)*
+
+**DECIDED (2026-07-25) — healing is cheaper while you're alone:** a Fakeatent heal costs **5 🪙 when your team is a single Fakeamon** and **10 🪙 once you have two or more**. The very start of the game is when tokens are scarcest, and a solo trainer has the least to show for the price — this keeps the opening gentle without making healing trivial later. *(Jeff & Lewis's playtest call; `ECONOMY.HEAL_COST_SOLO` / `HEAL_COST`, chosen by `healCost()` in `src/main.js` — every place that shows or charges the price asks that one function.)*
 
 **DECIDED (2026-07-10) — Fakeaball inventory is limited:** you start the game with **5 Fakeaballs**; throwing one (catch or miss) uses it up, and a Tall Tower purchase adds more to the same count — see §6's ball-limit decision for the full rule and catching-out-of-balls behavior.
 
@@ -397,7 +420,7 @@ Standard/ace battle sprites all confirmed present at `battle/<slug>-sheet.png`. 
 |---|---|---|---|---|
 | Gym 1 leader | Enforcer Boss | `sprites/boss.png` (archetype — confirm exact variant) | https://wiki.tuxemon.org/Enforcer_Boss | trainer/NPC sprite — confirm credits on page |
 | Gym 1 standard | Allagon | `battle/allagon-sheet.png` | https://wiki.tuxemon.org/Allagon | Spalding004, Chickenshowman — **CC BY-SA 4.0** (corrected, was mislabeled) |
-| Gym 1 ace | AV8R | `battle/av8r-sheet.png` | https://wiki.tuxemon.org/AV8R | Leo, josepharaoh99, Sanglorian |
+| Gym 1 ace | AV8R | `battle/av8r-sheet.png` | https://wiki.tuxemon.org/AV8R | Leo (design), Sanglorian (sprite) — ⚠️ **corrected 2026-07-25**, was "Leo, josepharaoh99, Sanglorian"; josepharaoh99 could not be traced to this creature. No `av8r` monster entry exists in Tuxemon's `ATTRIBUTIONS.md`; these names come from its "Aviator" *trainer* row, a different asset. Wiki was down (500) — recheck |
 | Gym 2 leader | Goth | `sprites/goth.png` | https://wiki.tuxemon.org/Goth | trainer/NPC sprite — confirm credits |
 | Gym 2 standard | Agnite | `battle/agnite-sheet.png` | https://wiki.tuxemon.org/Agnite | Leo, aviculor, Sanglorian, Levaine |
 | Gym 2 ace | Windeye | `battle/windeye-sheet.png` | https://wiki.tuxemon.org/Windeye | DevilDman, Levaine, Sanglorian |

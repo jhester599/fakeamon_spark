@@ -103,6 +103,26 @@ const MAPS = {
       // town row. `gymId` points at an entry in src/data/gyms.js, which is what
       // makes adding Gym 2 later just "another building + another gym entry".
       { id: "meadows-gym1", kind: "gym", gymId: "gym1", tileX: 15, tileY: 7 },
+      // M4S5: the Cooking Cabin — turn two berries into a healing dish. Last
+      // along the town row. It sits at 24 rather than the "obvious" 20 because
+      // the cabin sprite is 3 tiles wide and would have covered the wild
+      // Fakeamon standing at (21,6).
+      { id: "meadows-cabin", kind: "cabin", tileX: 24, tileY: 7 },
+    ],
+    // M4S5: berry patches. These are the SPOTS where a berry can grow — which
+    // berry actually appears is rolled from src/data/berries.js's weights each
+    // time one grows back, so a spot isn't tied to one kind of berry. Walk over
+    // a berry to pick it up (no bumping — berries don't block you).
+    // Move a spot by editing its numbers; add one by copying a line.
+    // All six are on open grass, clear of the path, the buildings, and every
+    // wild Fakeamon.
+    berrySpots: [
+      { id: "meadows-berry-1", tileX: 3,  tileY: 4  },
+      { id: "meadows-berry-2", tileX: 12, tileY: 4  },
+      { id: "meadows-berry-3", tileX: 22, tileY: 3  },
+      { id: "meadows-berry-4", tileX: 4,  tileY: 12 },
+      { id: "meadows-berry-5", tileX: 13, tileY: 13 },
+      { id: "meadows-berry-6", tileX: 22, tileY: 15 },
     ],
     exits: [],                       // M4: doorways to the other five areas
   },

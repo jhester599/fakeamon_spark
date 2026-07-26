@@ -326,7 +326,22 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 **DECIDED (2026-07-26) — Greenberry's art is a blueberry, on purpose:** the Greenberry sprite is a blue fruit with green leaves. That is deliberate, not a mixed-up file — don't "correct" it. *(Confirmed by Jeff.)*
 
-**DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)* **DECIDED (2026-07-11) — berries are themed by area (B35):** each area of Venta mostly grows the berries that fit its vibe (§7), rather than any of the 6 turning up anywhere — so where you explore shapes what you can cook. *(Lewis's call.)*
+**DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)*
+
+~~**DECIDED (2026-07-11) — berries are themed by area (B35):** each area of Venta mostly grows the berries that fit its vibe (§7), rather than any of the 6 turning up anywhere.~~ **⚠️ SUPERSEDED (2026-07-26) — see the rarity rule below.**
+
+**DECIDED (2026-07-26) — how often each berry turns up (B44, supersedes B35):** every area grows **every** berry; how *often* each one appears is what differs, and it's the same everywhere:
+
+| Berry | How often | Weight |
+|---|---|---|
+| **Fakeaberry** | common | 50 |
+| **Greenberry** | medium | 20 |
+| **Raspberry** | medium | 20 |
+| **Greatberry** | unlikely | 8 |
+| **Cosmicberry** | extremely rare | 2 |
+| **Bossberry** | never found on the ground — mini-bosses drop it | — |
+
+**The Factory grows no berries at all** — it's a poisonous war zone (§7). The weights add to 100, so each one doubles as a percentage; they live in `src/data/berries.js` and are `[TUNE]`. *(Jeff & Lewis's call. This replaces B35's area-theming: the two rules describe different systems, and they picked rarity. `AREA_BERRIES` in that file still lets any single area be given its own hand-picked berry list as a pure data edit, so B35's idea can come back later without a code change.)*
 
 **DECIDED (2026-07-05) — Lewis's berries & recipes:**
 

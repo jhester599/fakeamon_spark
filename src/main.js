@@ -178,11 +178,15 @@ function enterOverworld() {
       "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each. ⚙️ And further " +
       "along, " + GYMS.gym1.leader + " is waiting in the Gym — beat their team " +
       "of two to win the " + GYMS.gym1.badgeName + "!</small></p>" +
+      "<p><small>🫐 <b>Berries</b> grow out in the grass — just walk over one to " +
+      "pick it up. 🍳 Take two to the <b>Cooking Cabin</b> at the end of the row " +
+      "and cook them into a dish that heals your Fakeamon, free.</small></p>" +
     "</div>";
 
   renderTeamList();
-  showWorld();      // bring the map back, unfreeze it, and hand it the keyboard (screens.js)
-  refillEmptyMap(); // …and never leave the player standing on an empty map
+  showWorld();        // bring the map back, unfreeze it, and hand it the keyboard (screens.js)
+  refillEmptyMap();   // …and never leave the player standing on an empty map
+  maybeGrowBerries(); // M4S5: berries grow back on empty patches over time
   saveGame();
 }
 
@@ -483,7 +487,7 @@ function enterBuilding(building) {
   if (building.kind === "fakeatent") showFakeatentPanel();
   if (building.kind === "talltower") showTallTowerPanel();
   if (building.kind === "gym") showGymPanel(GYMS[building.gymId]); // M4S4
-  // The Cooking Cabin (M4S5) joins this switch later.
+  if (building.kind === "cabin") showCookingCabinPanel();          // M4S5
 }
 
 // The Fakeatent: rest your whole team to full HP for tokens. Self-serve, no
@@ -685,6 +689,190 @@ function awardGymPrize(gym) {
 
   noteNews("🏅 You won the " + gym.badgeName + " " + gym.badgeIcon +
     "! +" + ECONOMY.GYM_REWARD + " 🪙");
+}
+
+// ===========================================================================
+//  BERRIES (M4S5) — you find them lying on the map and cook them at the
+//  Cooking Cabin. Two halves: picking them up (here), and growing them back
+//  (maybeGrowBerries below) so the map doesn't run out.
+// ===========================================================================
+
+// How many berries you're carrying of one kind (0 if none).
+function berryCount(berryKey) {
+  return gameState.inventory.berries[berryKey] || 0;
+}
+
+// Walked over a berry — it goes in the bag. src/world/config.js's tryWalk
+// calls this the moment the hero lands on the tile.
+function pickUpBerry(spotId, berryKey) {
+  gameState.inventory.berries[berryKey] = berryCount(berryKey) + 1;
+  delete gameState.world.berries[spotId]; // that spot is bare again until it regrows
+  noteNews("🫐 You picked up a " + BERRIES[berryKey].name + "!");
+  renderTeamList();
+  saveGame();
+}
+
+// [TUNE] How likely a bare berry spot is to grow something, each time you step
+// onto the map. Higher = berries come back faster. At 0.34 a spot takes about
+// three visits on average, so the map is never picked clean for long but you
+// can't farm one patch either.
+const BERRY_GROW_CHANCE = 0.34;
+
+// Grow berries back on empty spots. Called from enterOverworld, so it runs
+// after every battle and every Continue — the same rhythm as the wild-Fakeamon
+// respawn roll. Which berry appears is rolled fresh from the weights each
+// time, so a spot isn't tied to one kind.
+function maybeGrowBerries() {
+  const map = MAPS[gameState.world.mapId];
+  if (!map || !map.berrySpots) return;
+
+  let grewSomething = false;
+  map.berrySpots.forEach(function (spot) {
+    if (gameState.world.berries[spot.id]) return;       // already has one
+    if (Math.random() >= BERRY_GROW_CHANCE) return;     // not this time
+    const berryKey = randomBerryFor(gameState.world.mapId);
+    if (!berryKey) return;                              // nothing grows here (The Factory)
+    gameState.world.berries[spot.id] = berryKey;
+    grewSomething = true;
+  });
+
+  // Never leave the whole map bare. Six spots each rolling 0.34 means a brand
+  // new game shows NO berries about one time in twelve — which reads as "this
+  // game doesn't have berries" rather than "you were unlucky". So if nothing at
+  // all is growing, one is guaranteed. (Same idea as refillEmptyMap above:
+  // there should always be something out there to go and find.)
+  if (Object.keys(gameState.world.berries).length === 0) {
+    const berryKey = randomBerryFor(gameState.world.mapId);
+    if (berryKey) {
+      const spot = map.berrySpots[Math.floor(Math.random() * map.berrySpots.length)];
+      gameState.world.berries[spot.id] = berryKey;
+      grewSomething = true;
+    }
+  }
+
+  if (grewSomething && worldScene) worldScene.spawnBerries(MAPS[gameState.world.mapId]);
+}
+
+// ===========================================================================
+//  THE COOKING CABIN (M4S5) — pick two berries, cook a healing dish. Self-
+//  serve, no chef and nothing to pay (Lewis's B26). Recipes: src/data/recipes.js.
+//
+//  The panel is the same bump-a-building HUD overlay every other building uses;
+//  the only new idea is that you choose TWO things before the button does
+//  anything, so `cabinPicks` remembers what you've clicked so far.
+// ===========================================================================
+let cabinPicks = []; // berry keys chosen this visit — at most two
+
+function showCookingCabinPanel() {
+  const held = Object.keys(BERRIES).filter(function (key) { return berryCount(key) > 0; });
+
+  // The Fakeamon that eats the dish. Heals whoever is fighting (party[0]) —
+  // switch on the team row first if you want to feed someone else.
+  const eater = gameState.party[0];
+  const eaterStats = eater ? statsFor(eater) : null;
+  const eaterName = eater ? FAKEAMON[eater.speciesKey].name : "";
+
+  let body =
+    '<div class="title-card">' +
+      "<h2>Cooking Cabin 🍳</h2>";
+
+  if (held.length === 0) {
+    body +=
+      "<p>The pans are ready, but you have no berries!</p>" +
+      "<p><small>🫐 Berries grow on the ground out in the grass — walk over one " +
+      "to pick it up, then come back and cook.</small></p>";
+  } else {
+    body +=
+      "<p>Pick <b>two</b> berries to cook into a healing dish for <b>" + eaterName +
+      "</b> (" + eater.currentHP + "/" + eaterStats.maxHP + " HP).</p>" +
+      '<div class="berry-shelf">' +
+        held.map(function (key) {
+          const chosen = cabinPicks.filter(function (k) { return k === key; }).length;
+          // You can't pick the same berry more times than you're carrying.
+          const usedUp = chosen >= berryCount(key);
+          return '<button class="berry-btn' + (chosen ? " chosen" : "") + '"' +
+            ' data-berry="' + key + '"' + (usedUp ? " disabled" : "") + ">" +
+            '<img src="' + BERRIES[key].icon + '" alt="">' +
+            "<span>" + BERRIES[key].name + "</span>" +
+            '<span class="berry-count">×' + berryCount(key) +
+            (chosen ? " (picked " + chosen + ")" : "") + "</span>" +
+          "</button>";
+        }).join("") +
+      "</div>";
+
+    if (cabinPicks.length === 2) {
+      const recipe = recipeFor(cabinPicks[0], cabinPicks[1]);
+      body += "<p>👩‍🍳 " + BERRIES[cabinPicks[0]].name + " + " + BERRIES[cabinPicks[1]].name +
+        " makes <b>" + recipe.dish + "</b> — heals <b>" + recipe.heals + " HP</b>!</p>";
+    } else {
+      body += "<p><small>Chosen " + cabinPicks.length + " of 2.</small></p>";
+    }
+  }
+
+  body += "</div>";
+
+  document.getElementById("title").textContent = "Cooking Cabin 🍳";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("arena").innerHTML = body;
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  if (cabinPicks.length === 2) {
+    const cookButton = document.createElement("button");
+    cookButton.className = "move-btn";
+    cookButton.textContent = "Cook it! 🍳";
+    cookButton.addEventListener("click", cookChosenBerries);
+    controls.appendChild(cookButton);
+  }
+  if (cabinPicks.length > 0) {
+    addTitleButton(controls, "save-btn", "Start over", function () {
+      cabinPicks = [];
+      showCookingCabinPanel();
+    });
+  }
+  addTitleButton(controls, "save-btn", "Leave", leaveCookingCabin);
+
+  // Clicking a berry adds it to your picks (up to two), then redraws.
+  document.querySelectorAll("#arena .berry-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+      if (cabinPicks.length >= 2) return;
+      cabinPicks.push(button.dataset.berry);
+      showCookingCabinPanel();
+    });
+  });
+}
+
+// Cook the two chosen berries: they're used up, the dish heals your active
+// Fakeamon, and you stay in the Cabin so you can cook again.
+function cookChosenBerries() {
+  if (cabinPicks.length !== 2) return;
+  const recipe = recipeFor(cabinPicks[0], cabinPicks[1]);
+  const eater = gameState.party[0];
+
+  cabinPicks.forEach(function (key) {
+    gameState.inventory.berries[key] = Math.max(0, berryCount(key) - 1);
+    if (gameState.inventory.berries[key] === 0) delete gameState.inventory.berries[key];
+  });
+
+  const stats = statsFor(eater);
+  const before = eater.currentHP;
+  eater.currentHP = Math.min(stats.maxHP, eater.currentHP + recipe.heals);
+  const healed = eater.currentHP - before;
+
+  noteNews("🍳 You cooked a " + recipe.dish + "! " +
+    FAKEAMON[eater.speciesKey].name +
+    (healed > 0 ? " recovered " + healed + " HP." : " was already full of health."));
+
+  cabinPicks = [];
+  renderTeamList();
+  saveGame();
+  showCookingCabinPanel(); // stay in the kitchen, like the Tall Tower's shop
+}
+
+function leaveCookingCabin() {
+  cabinPicks = []; // don't remember half-finished picks for next visit
+  enterOverworld();
 }
 
 // ===========================================================================

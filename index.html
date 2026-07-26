@@ -236,6 +236,36 @@
     font-size: 15px;
     white-space: nowrap;
   }
+  /* M4S5: the Cooking Cabin's berry shelf — one button per kind of berry
+     you're carrying. Clicking one picks it for the recipe. */
+  .berry-shelf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 12px 0;
+  }
+  .berry-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 92px;
+    padding: 8px 6px;
+    background: var(--card, #fff);
+    border: 2px solid #d6ddef;
+    border-radius: 12px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    color: inherit;
+  }
+  .berry-btn img { width: 32px; height: 32px; image-rendering: pixelated; }
+  .berry-btn:hover:not(:disabled) { border-color: #2a4d8f; }
+  .berry-btn.chosen { border-color: #4bbd6b; background: #eefaf1; }
+  .berry-btn:disabled { opacity: 0.45; cursor: default; }
+  .berry-count { color: #5a6485; font-size: 12px; }
+
   /* The one-line "here's what just happened" note at the top of the overworld
      card — where token/catch/badge news goes now that the battle log is hidden
      outside battles (playtest feedback, 2026-07-25). */
@@ -522,6 +552,8 @@
 <script src="src/data/typechart.js"></script>
 <script src="src/data/economy.js"></script>
 <script src="src/data/gyms.js"></script>
+<script src="src/data/berries.js"></script>
+<script src="src/data/recipes.js"></script>
 <script src="src/data/maps.js"></script>
 <script src="src/state.js"></script>
 <script src="src/battle.js"></script>

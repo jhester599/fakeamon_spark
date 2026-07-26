@@ -19,6 +19,7 @@ const PRECACHE_URLS = [
   "src/world/dpad.js",
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
+  "assets/sprites/buildings/cabin.png",
   "assets/sprites/buildings/fakeatent.png",
   "assets/sprites/buildings/gym.png",
   "assets/sprites/buildings/talltower.png",

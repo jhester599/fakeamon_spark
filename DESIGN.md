@@ -227,6 +227,8 @@ Caught Fakeamon join your team.
 
 **Losing:** **DECIDED (2026-07-05):** when your whole team faints, you wake up at the last **Fakeatent**, fully healed, and **drop a few tokens** — a small sting, not harsh. *(Lewis's call.)*
 
+**DECIDED (2026-07-26) — one faint does NOT end the battle (B45):** when the Fakeamon you're using faints, the **next one on your team automatically joins the fight** ("Go, `<name>`!"). The battle is only lost once **every** Fakeamon you're carrying has fainted — which is what "your whole team faints" above always meant. It works exactly like the gym leader's own bench (M4S4), so both sides now follow one rule. Automatic, not a "who's next?" picker — Lewis's call. *(Until this landed, the battle ended the moment your active Fakeamon dropped, even with three healthy teammates: a leftover from M1, when you only ever had one. `resolveFaint()` in `src/battle.js` is the single place that decides.)*
+
 **DECIDED (2026-07-25) — what "a few tokens" is, exactly:** fainting costs the **price of a heal plus 5** — so it always stings a bit more than choosing to walk into the tent yourself. With one Fakeamon that's **10 🪙**; with a team of two or more, **15 🪙** (never below zero). *(Jeff & Lewis's playtest call; `ECONOMY.TEAM_WIPE_SURCHARGE`, `teamWipeCost()` in `src/main.js`.)*
 
 ---

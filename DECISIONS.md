@@ -90,6 +90,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 43 | (B30) Lewis's own credit line | §12 Assets & Attribution | ✅ Decided (declined) |
 | 44 | (B31) Shiny variants | §3 Fakeamon | ✅ Decided |
 | 45 | (B32) Sound & music vibe | §13 Technical Notes | ✅ Decided |
+| 72 | (B45) One faint vs. send out the next | §6 Battle System (Losing) | ✅ Decided |
 | 51 | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | ✅ Decided |
 | 46 | Berries found on the ground | §9 Economy & Items | ✅ Decided |
 | 52 | (B34) Telling apart a mirror match | §6 Battle System | ✅ Decided |
@@ -186,6 +187,9 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-25 | 68 | **Catching gets much easier at very low HP** — the chance is now the missing-health fraction *squared* rather than halved, so 1 HP left ≈ 95% instead of ≈ 49%. Lewis's B12 anchor (about 1 in 4 at half HP) is unchanged | "we had used a ball with 1 HP left and it didn't work, which was surprising" |
 | 2026-07-25 | 69 | **The battle log only shows during battles** — it's hidden on the map and menu screens; the handful of messages that mattered outside a fight (tokens won, a catch joining, what a wipe cost) now appear as a one-line note on the overworld card instead | Jeff & Lewis's playtest call — "remove the battle log from the overworld map navigation screen" |
 | 2026-07-25 | 70 | **An emptied map always refills** — clear every wild Fakeamon and a few come back (guaranteed, not a dice roll) the moment you're back on the map. The existing 30% per-battle respawn roll stays for the normal case | "if you clear all of the fakeamon on a map, new wild fakeamon should respawn to continue playing" |
+
+| 2026-07-26 | 71 | **Walking behind the Tall Tower and the Gym stays** — only a building's doorway tile is solid, so you can stroll behind the tall parts. Considered making the whole footprint solid; Jeff & Lewis played it and kept it | "we like how the current play works that allows you to walk behind the tower and the gym" |
+| 2026-07-26 | 72 | **(B45) When one of your Fakeamon faints, the next one joins the battle** — automatically, no picker. You only lose once **every** Fakeamon on your team has fainted. Before this, the battle ended the instant your active one fainted, even with healthy teammates on the bench | Jeff & Lewis's playtest answer to B45 (option B). It also makes the code finally match `DESIGN.md` §6, which always said "when your **whole team** faints" |
 
 <!--
 Template for a new row:

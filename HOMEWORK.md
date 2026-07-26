@@ -39,17 +39,15 @@ Answer whenever — we'll run the decision loop when you do.
 
 ---
 
-## 🆕 One more, found while building Gym 1 (2026-07-25) 🛡️
+## ✅ Answered — B45, found while building Gym 1 🛡️
 
-- **B45 — should ONE fainted Fakeamon lose you the whole battle?** Right now it
-  does: the second the Fakeamon you're using faints, the battle's over — even
-  with three healthy teammates standing right there. Nobody picked that; it's
-  just how the very first battle was written back in M1, when you only *had* one
-  Fakeamon. Now that gyms exist it looks lopsided: **Enforcer Boss sends out a
-  second Fakeamon when his first drops, but you don't.** Keep it (A), let your
-  next one come out automatically (B), or get to *pick* who comes out (C)?
-  *(Options in `HOMEWORK_BACKLOG.md` B45. Nothing's broken — Gym 1 works fine
-  today — but this one's yours, so nobody guessed.)*
+- **B45 — should ONE fainted Fakeamon lose you the whole battle?** ✅ **Lewis
+  picked B: your next one comes out automatically.** When the Fakeamon you're
+  using faints, the next on your team joins the fight ("Go, Dandicub!"), and you
+  only lose once *every* one of them has fainted — the same rule the gym leader's
+  bench already followed. **Built the same day** (`DECISIONS.md` #72,
+  `DESIGN.md` §6). Nice side effect: having a team of four finally *matters* in
+  a gym.
 
 ---
 

@@ -352,8 +352,10 @@ function attemptCatch() {
     performAttack("opponent", "player", enemyMove);
     renderArena();
 
+    // B45: same rule as any other faint — resolveFaint sends out your next
+    // Fakeamon if you have one, and only ends the battle if you don't.
     if (checkForFaint("player")) {
-      endBattle("opponent");
+      resolveFaint("player", "opponent");
       return;
     }
 
@@ -437,9 +439,17 @@ function grantXP(fraction) {
 }
 
 // ===========================================================================
-//  THE ENEMY'S BENCH (M4S4) — a gym leader doesn't go down with one Fakeamon.
-//  When theirs faints, the NEXT one steps up and the fight carries on; only
-//  when the last one drops is the battle actually won.
+//  BENCHES — when a Fakeamon faints, does the fight end, or does the next one
+//  step up? Since B45 the answer is the SAME for both sides: the next one steps
+//  up, and a side only loses once every one of its Fakeamon has fainted.
+//
+//  M4S4 gave the enemy a bench (a gym leader has two). B45 (Lewis's call,
+//  2026-07-26) gave the player theirs: before it, the battle ended the instant
+//  your active Fakeamon fainted — even with three healthy teammates standing
+//  right there. That was a leftover from M1, when you only HAD one Fakeamon; it
+//  looked plainly unfair once Enforcer Boss started sending out a second one
+//  and you couldn't. DESIGN.md §6 always said "when your WHOLE team faints" —
+//  so this makes the code finally match the design.
 // ===========================================================================
 
 // Is the other side still holding someone back? Always false in a wild
@@ -462,10 +472,37 @@ function sendOutNextEnemy() {
   }, randomTurnPause());
 }
 
-// Somebody just fainted. Usually that ends the battle — but if it was the
-// enemy's and the trainer still has one waiting, the fight continues instead.
-// This is the ONE spot that branches "next fighter vs. game over", which is
-// why the faint checks below all funnel through here.
+// B45: YOUR next Fakeamon steps up automatically — the mirror of
+// sendOutNextEnemy above. It's a straight swap with party[0] (the same move
+// performSwitch makes), so the fainted one goes to the bench slot the newcomer
+// came from and party[0] stays "whoever is fighting".
+//
+// Lewis picked the automatic version over a "who's next?" picker, so this takes
+// the first teammate still standing — no menu, no extra clicking.
+function sendOutNextPlayer() {
+  const nextIndex = party.findIndex(function (individual, index) {
+    return index !== 0 && individual.currentHP > 0;
+  });
+  if (nextIndex === -1) return false; // nobody left — caller ends the battle
+
+  const incoming = party[nextIndex];
+  party[nextIndex] = party[0];
+  party[0] = incoming;
+
+  const nextName = FAKEAMON[incoming.speciesKey].name;
+  setTimeout(function () {
+    addLogLine("Go, " + nextName + "!");
+    renderArena();
+    setControlsEnabled(true);
+    showMoveButtons(activePlayer());
+  }, randomTurnPause());
+  return true;
+}
+
+// Somebody just fainted. This is the ONE spot that branches "next fighter vs.
+// game over", which is why every faint check funnels through here. Both sides
+// are treated the same: send out the next one if there is one, otherwise the
+// battle is over.
 function resolveFaint(faintedRole, winnerRole) {
   if (faintedRole === "opponent") {
     grantXP(1); // you earn the XP for THIS Fakeamon right away, not just at the end
@@ -473,6 +510,10 @@ function resolveFaint(faintedRole, winnerRole) {
       sendOutNextEnemy();
       return;
     }
+  } else if (hasHealthySwitchTarget()) {
+    // B45: your active Fakeamon fainted, but the bench isn't empty.
+    sendOutNextPlayer();
+    return;
   }
   endBattle(winnerRole);
 }
@@ -501,8 +542,10 @@ function attemptSwitch(targetIndex) {
     performAttack("opponent", "player", enemyMove);
     renderArena();
 
+    // B45: same rule as any other faint — resolveFaint sends out your next
+    // Fakeamon if you have one, and only ends the battle if you don't.
     if (checkForFaint("player")) {
-      endBattle("opponent");
+      resolveFaint("player", "opponent");
       return;
     }
 

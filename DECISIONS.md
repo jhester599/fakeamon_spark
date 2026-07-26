@@ -94,7 +94,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 72 | (B45) One faint vs. send out the next | §6 Battle System (Losing) | ✅ Decided |
 | 51 | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | ✅ Decided |
 | 46 | Berries found on the ground | §9 Economy & Items | ✅ Decided |
-| 52 | (B34) Telling apart a mirror match | §6 Battle System | ✅ Decided |
+| 52 | (B34) Telling apart a mirror match | §6 Battle System | ✅ Decided · **built 2026-07-26** |
 | 53 | (B35) Berries — area-themed or anywhere | §9 Economy & Items | ⚠️ Superseded by #75 (2026-07-26) |
 | 47 | Cooking Cabins more common in Snow Mountain | §7/§8 World Locations | ✅ Decided |
 | 54 | (B36) Cooking Cabins — Snow-Mountain-only or elsewhere too | §8 World Locations & Roster | ✅ Decided |
@@ -168,7 +168,7 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-10 | 49 | **Fakeaballs are limited** — you start with **5**; each throw (catch or miss) uses one; a Tall Tower purchase (M4) adds more; the "Throw Fakeaball" button disables at **zero** | Lewis's design — catching shouldn't be a free, infinite action; built 2026-07-22, see `ROADMAP.md` M2 |
 | 2026-07-10 | 50 | **Pause after a catch** — a caught Fakeamon shows a **Continue** button (like a battle win) instead of jumping straight into a new battle | Lewis's design — wanted a beat to actually see "Gotcha!" before the screen moves on; built 2026-07-22, see `ROADMAP.md` M2 |
 | 2026-07-11 | 51 | **Swap boxed Fakeamon at a Fakeatent** — the home base heals *and* manages your team, all in one stop (needed by M5's Boxes UI) | (option A) — the Fakeatent already exists as home base, so it does one more job |
-| 2026-07-11 | 52 | **Label the wild opponent "the wild `<name>`"** in the battle log and result messages (e.g. "the wild Whaley used Splash!") — clears up same-species mirror matches now that there are no nicknames (B3). A small M2 battle-text tweak, now unblocked | (option A) — "add wild everywhere the opponent is mentioned" |
+| 2026-07-11 | 52 | **Label the wild opponent "the wild `<name>`"** in the battle log and result messages (e.g. "the wild Whaley used Splash!") — clears up same-species mirror matches now that there are no nicknames (B3). A small M2 battle-text tweak, now unblocked. **⚠️ Decided 2026-07-11 but not actually BUILT until 2026-07-26** — spotted during a pending-work sweep, two weeks later | (option A) — "add wild everywhere the opponent is mentioned" |
 | 2026-07-11 | 53 | **Berries are themed by area** — each Venta area mostly grows berries that fit its vibe (§7), rather than any of the 6 turning up anywhere | (option A) |
 | 2026-07-11 | 54 | **A smaller Cooking Cabin near the start too** — so cooking isn't gated entirely behind Snow Mountain's gym badge; Snow Mountain still has the most (and coziest) cabins | (option B) |
 | 2026-07-11 | 55 | **Venta wild-roster area draft approved as-is** — the proposed home areas in `VENTA_ROSTER_DRAFT.md` stand; `areaProposed` becomes the real `area` as each area's roster is wired in (M3S11 → M4S6) | (option A) — "looks great, keep the draft" |
@@ -196,6 +196,8 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-26 | 74 | **Greenberry's sprite is a blue fruit with green leaves — deliberate.** Logged so nobody "fixes" it later | Confirmed by Jeff when asked whether a filename had been swapped |
 
 | 2026-07-26 | 75 | **Berry rarity is global, not area-themed — this SUPERSEDES #53 (B35).** Every area grows every berry, weighted by kind: Fakeaberry common (50), Greenberry & Raspberry medium (20 each), Greatberry unlikely (8), Cosmicberry extremely rare (2). **The Factory grows none at all.** Bossberry still only drops from mini-bosses | Jeff & Lewis's M4S5 spec. #53 said berries were themed by area "rather than any of the 6 turning up anywhere" — the conflict was raised twice and they chose the rarity model. `AREA_BERRIES` in `src/data/berries.js` keeps per-area lists possible as a pure data edit if they ever want #53 back |
+
+| 2026-07-26 | **B34 built at last (#52), plus the gym case it didn't foresee.** The opponent is now labelled everywhere it appears — battle log, result messages, the fighter card heading, and the battle title — via one `fighterName(role)` helper in `src/battle.js`; your own Fakeamon keeps its plain name. A mirror match reads "Growler used Tackle!" vs "The wild Growler used Burn!" instead of two identical lines. **Extension:** B34 predates gyms, and "the wild Allagon" would be wrong for a leader's Fakeamon, so a trainer battle reads **"Enforcer Boss's Allagon"** instead. Verified with a 16-check suite that also asserts "the wild" never leaks into a gym battle. | Found during a pending-work sweep: the decision had sat unbuilt since 2026-07-11 while being listed as done. Worth noting as a process lesson — a ✅ in the decisions table means *decided*, not *shipped* |
 
 <!--
 Template for a new row:

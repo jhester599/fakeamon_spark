@@ -50,6 +50,33 @@ function fighterFor(role) {
   return role === "player" ? activePlayer() : activeOpponent();
 }
 
+// ---------------------------------------------------------------------------
+//  WHAT TO CALL EACH FIGHTER (B34 / DECISIONS.md #52)
+//
+//  There are no nicknames in this game (Lewis's B3), so a Growler fighting a
+//  wild Growler used to read as pure nonsense: "Growler used Tackle! Growler
+//  fainted!" — which one?? Lewis's fix: label the opponent everywhere it's
+//  mentioned. YOUR Fakeamon keeps its plain name (it's the one you picked);
+//  the other side always gets a "whose is it" prefix:
+//
+//      wild battle     → "the wild Growler"
+//      trainer battle  → "Enforcer Boss's Allagon"
+//
+//  The trainer half is a small extension of Lewis's call — B34 was decided
+//  before gyms existed, and "the wild Allagon" would be plainly wrong for a
+//  gym leader's Fakeamon.
+// ---------------------------------------------------------------------------
+function fighterName(role) {
+  const name = FAKEAMON[fighterFor(role).speciesKey].name;
+  if (role === "player") return name;
+  return trainerName ? trainerName + "'s " + name : "the wild " + name;
+}
+
+// "the wild Growler" → "The wild Growler", for names that start a sentence.
+function capitalizeFirst(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 // ===========================================================================
 //  SHOW THE FIGHTERS ON SCREEN
 // ===========================================================================
@@ -64,7 +91,11 @@ function hpBarColor(percent) {
 
 // Renders one individual as a fighter card: species art/name/type + this
 // individual's current stats and HP.
-function showFighter(individual) {
+//
+// `displayName` is optional and overrides the heading — it's how the opponent's
+// card gets its "the wild …" label (B34). Left out (the starter-select screen),
+// the card just shows the species name.
+function showFighter(individual, displayName) {
   const species = FAKEAMON[individual.speciesKey];
   const stats = statsFor(individual);
 
@@ -87,7 +118,7 @@ function showFighter(individual) {
 
   return (
     '<div class="fighter">' +
-      "<h2>" + species.name + "</h2>" +
+      "<h2>" + (displayName || species.name) + "</h2>" +
       '<span class="type-badge type-' + species.type + '">' + species.type + "</span>" +
       '<div class="sprite type-' + species.type + '">' + spriteImg + "</div>" +
       '<div class="hp-bar-track">' +
@@ -108,7 +139,9 @@ function showFighter(individual) {
 // Redraw both fighters with their current HP, then let the host UI (e.g.
 // main.js's team row) know something changed — HP, or who's active.
 function renderArena() {
-  document.getElementById("arena").innerHTML = showFighter(activePlayer()) + showFighter(activeOpponent());
+  document.getElementById("arena").innerHTML =
+    showFighter(activePlayer()) +
+    showFighter(activeOpponent(), capitalizeFirst(fighterName("opponent")));
   onStateChange();
 }
 
@@ -157,7 +190,8 @@ function addLogLine(text) {
 function performAttack(attackerRole, defenderRole, move) {
   const attacker = fighterFor(attackerRole);
   const defender = fighterFor(defenderRole);
-  const attackerName = FAKEAMON[attacker.speciesKey].name;
+  // B34: "The wild Growler used …" rather than a bare "Growler used …".
+  const attackerName = capitalizeFirst(fighterName(attackerRole));
 
   const accuracyRoll = Math.random() * 100;
   if (accuracyRoll >= move.accuracy) {
@@ -242,7 +276,7 @@ function randomCatchPause() {
 function checkForFaint(role) {
   const individual = fighterFor(role);
   if (individual.currentHP > 0) return false;
-  addLogLine(FAKEAMON[individual.speciesKey].name + " fainted!");
+  addLogLine(capitalizeFirst(fighterName(role)) + " fainted!"); // B34
   return true;
 }
 
@@ -298,8 +332,8 @@ const CATCH_WOBBLE_COUNT = 2;
 // onDone(caught) once the whole sequence has finished, since the log now
 // takes a few beats to play out instead of resolving instantly.
 function throwFakeaball(onDone) {
-  const playerName = FAKEAMON[activePlayer().speciesKey].name;
-  const opponentName = FAKEAMON[activeOpponent().speciesKey].name;
+  const playerName = fighterName("player");
+  const opponentName = fighterName("opponent"); // B34 — "the wild Aardorn"
 
   addLogLine(playerName + " threw a Fakeaball at " + opponentName + "!");
   // Used up the moment it's actually thrown (DECISIONS.md #49). The max(0, …)
@@ -322,9 +356,9 @@ function throwFakeaball(onDone) {
   function reveal() {
     setTimeout(function () {
       if (caught) {
-        addLogLine("Gotcha! " + opponentName + " was caught!");
+        addLogLine("Gotcha! " + capitalizeFirst(opponentName) + " was caught!");
       } else {
-        addLogLine("Oh no! " + opponentName + " broke free!");
+        addLogLine("Oh no! " + capitalizeFirst(opponentName) + " broke free!");
       }
       onDone(caught);
     }, randomCatchPause());
@@ -371,7 +405,7 @@ function attemptCatch() {
   function afterThrow(caught) {
     if (caught) {
       const caughtOne = activeOpponent(); // the individual itself, not the yes/no
-      const opponentName = FAKEAMON[caughtOne.speciesKey].name;
+      const opponentName = capitalizeFirst(fighterName("opponent")); // B34
       caughtOne.currentHP = statsFor(caughtOne).maxHP;
       grantXP(CATCH_XP_FRACTION);
       showContinueButton("🎉 Gotcha! " + opponentName + " was caught!", function () {
@@ -434,7 +468,7 @@ function grantXP(fraction) {
   const amount = Math.round(XP_REWARD_BASE * activeOpponent().level * fraction);
   individual.xp += amount;
   xpEarnedThisBattle += amount;
-  addLogLine(FAKEAMON[individual.speciesKey].name + " earned " + amount + " XP!");
+  addLogLine(fighterName("player") + " earned " + amount + " XP!");
   return amount;
 }
 
@@ -643,10 +677,11 @@ function showContinueButton(message, onContinue) {
 // what happens next.
 function endBattle(winnerRole) {
   const playerWon = winnerRole === "player";
-  const playerName = FAKEAMON[activePlayer().speciesKey].name;
+  const playerName = fighterName("player");
   // In a trainer battle the loser/winner the player cares about is the TRAINER,
-  // not whichever Fakeamon happened to be out at the end.
-  const rivalName = trainerName || FAKEAMON[activeOpponent().speciesKey].name;
+  // not whichever Fakeamon happened to be out at the end. In a wild one it's
+  // "the wild Growler" (B34).
+  const rivalName = trainerName || fighterName("opponent");
 
   // XP is handed out per knockout now (see resolveFaint), so by the time we
   // get here it's already been earned — we just report the running total.
@@ -664,7 +699,7 @@ function endBattle(winnerRole) {
 // moves on.
 function runAway() {
   setControlsEnabled(false);
-  addLogLine(FAKEAMON[activePlayer().speciesKey].name + " got away safely!");
+  addLogLine(fighterName("player") + " got away safely!");
   setTimeout(function () {
     resolveBattle({ result: "fled", xpGained: 0 });
   }, 900);
@@ -790,9 +825,10 @@ function startBattle(config) {
     const playerSpecies = FAKEAMON[activePlayer().speciesKey];
     const opponentSpecies = FAKEAMON[activeOpponent().speciesKey];
 
+    // B34: "Growler vs the wild Growler" rather than "Growler vs Growler".
     document.getElementById("title").textContent = trainerName
       ? "Gym Battle — " + playerSpecies.name + " vs " + trainerName
-      : "Fakeamon Battle — " + playerSpecies.name + " vs " + opponentSpecies.name;
+      : "Fakeamon Battle — " + playerSpecies.name + " vs " + fighterName("opponent");
     document.getElementById("controls-label").textContent = "Choose your move:";
 
     logLines.length = 0;

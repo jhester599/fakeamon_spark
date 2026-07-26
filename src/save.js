@@ -158,8 +158,18 @@ function parseSave(text) {
   }
   if (!worldOk) {
     state.world = defaultWorld();
-  } else if (!Array.isArray(w.defeatedEncounters)) {
-    w.defeatedEncounters = []; // fill a missing sub-field (future-proofs S8)
+  } else {
+    if (!Array.isArray(w.defeatedEncounters)) {
+      w.defeatedEncounters = []; // fill a missing sub-field (future-proofs S8)
+    }
+    // M4S5: which berries are currently sitting on the map. Nested inside
+    // `world`, so the shallow merge onto defaults can't fill it for a save made
+    // before this existed (the CR-B trap) — back-fill an empty map here. A
+    // present-but-garbage value is reset the same way, so a hand-edited save
+    // costs you the berries lying around, never a crash.
+    if (!w.berries || typeof w.berries !== "object" || Array.isArray(w.berries)) {
+      w.berries = {};
+    }
   }
 
   // Inventory (the M2 follow-up, DECISIONS.md #49): a malformed one just

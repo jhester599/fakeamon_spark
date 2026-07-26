@@ -90,6 +90,7 @@ const BUILDING_ART = {
   fakeatent: "assets/sprites/buildings/fakeatent.png", // Jeff's own AI-generated art (CREDITS.md)
   talltower: "assets/sprites/buildings/talltower.png", // ditto — added 2026-07-26, replaced the 🗼 marker
   gym:       "assets/sprites/buildings/gym.png",       // ditto — added 2026-07-26, replaced the ⚙️ marker
+  cabin:     "assets/sprites/buildings/cabin.png",     // ditto — the Cooking Cabin (M4S5)
 };
 // The FALLBACK look for any building kind with no art yet (the Cooking Cabin,
 // M4S5, is next). Kept for every kind even once art exists, so a missing or
@@ -98,6 +99,7 @@ const BUILDING_LOOKS = {
   fakeatent: { emoji: "⛺", color: "#e8659f" }, // pink — echoes the real sprite's color
   talltower: { emoji: "🗼", color: "#d4a24c" }, // warm gold — a shop (M4S3)
   gym:       { emoji: "⚙️", color: "#8a8f98" }, // steel grey — Gym 1 is Metal (M4S4)
+  cabin:     { emoji: "🍳", color: "#8b5a2b" }, // log brown — the Cooking Cabin (M4S5)
 };
 
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
@@ -154,6 +156,14 @@ class BootScene extends Phaser.Scene {
       if (!BUILDING_ART[b.kind] || seenBuildingKinds.has(b.kind)) return;
       seenBuildingKinds.add(b.kind);
       this.load.image("building-" + b.kind, BUILDING_ART[b.kind]);
+    });
+
+    // M4S5: the little berry sprites that lie on the ground. Any berry can grow
+    // at any spot, so unlike the encounter art (loaded per species actually on
+    // the map) we load every findable berry up front — there are only five.
+    Object.keys(BERRIES).forEach((key) => {
+      if (!BERRIES[key].pickup) return; // Bossberry has no art — it never grows here
+      this.load.image("berry-" + key, BERRIES[key].pickup);
     });
   }
 
@@ -215,6 +225,7 @@ class WorldScene extends Phaser.Scene {
 
     this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass
     this.spawnBuildings(mapData);  // M4S2: stand the Fakeatent (and later, other buildings)
+    this.spawnBerries(mapData);    // M4S5: lay out whatever berries are currently growing
 
     // Arrow keys. addCapture stops the browser from scrolling the page when
     // you press them (plan §6.2 / §3).
@@ -289,7 +300,9 @@ class WorldScene extends Phaser.Scene {
     if (!this.hero) return; // scene not ready yet — nothing to rebuild
     (this.encounterSprites || []).forEach(function (sprite) { sprite.destroy(); });
     (this.buildingSprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S2
+    (this.berrySprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S5
     this.spawnEncounters(this.mapData); // resets the sprite/tile maps; skips defeated
+    this.spawnBerries(this.mapData);    // M4S5: redraw from gameState.world.berries
     this.spawnBuildings(this.mapData);  // M4S2: buildings don't change yet, but rebuilding
                                          // them here too keeps this seam symmetric — M4S6's
                                          // map-switch work reuses it as-is.
@@ -360,6 +373,50 @@ class WorldScene extends Phaser.Scene {
     const index = cleared.indexOf(id);
     if (index !== -1) cleared.splice(index, 1);
     saveGame();
+  }
+
+  // ---- BERRIES (M4S5) ----------------------------------------------------
+  // Berries are the opposite of an encounter or a building: they do NOT block
+  // you. You walk right over one and it's yours (see tryWalk's onComplete).
+  // Which berry is on which spot lives in gameState.world.berries (spotId →
+  // berryKey), so it survives a save and a map rebuild.
+  spawnBerries(mapData) {
+    this.berryByTile = new Map(); // "x,y" -> { spot, berryKey }
+    this.berrySprites = [];
+    const growing = gameState.world.berries || {};
+
+    (mapData.berrySpots || []).forEach((spot) => {
+      const berryKey = growing[spot.id];
+      if (!berryKey) return;                       // nothing growing here right now
+      const textureKey = "berry-" + berryKey;
+      if (!this.textures.exists(textureKey)) return; // no art (Bossberry) — skip quietly
+
+      // Centred ON the tile, not standing on its bottom edge like a creature —
+      // a berry lies flat on the ground rather than standing up in front of it.
+      const p = this.tilePixel(spot.tileX, spot.tileY);
+      const sprite = this.add.image(p.x, p.y - this.tileSize / 2, textureKey);
+      sprite.setOrigin(0.5, 0.5);
+      sprite.spotId = spot.id;
+
+      this.berrySprites.push(sprite);
+      this.berryByTile.set(spot.tileX + "," + spot.tileY, { spot: spot, berryKey: berryKey });
+    });
+  }
+
+  // Is there a berry lying on this tile? Returns { spot, berryKey } or null.
+  berryAt(tileX, tileY) {
+    return this.berryByTile ? (this.berryByTile.get(tileX + "," + tileY) || null) : null;
+  }
+
+  // Take the berry off the map (it's in your bag now) — the mirror of
+  // removeEncounter. main.js's pickUpBerry does the inventory side.
+  removeBerry(spotId) {
+    const sprite = this.berrySprites.find((s) => s.spotId === spotId);
+    if (sprite) sprite.destroy();
+    this.berrySprites = this.berrySprites.filter((s) => s.spotId !== spotId);
+    for (const [tileKey, entry] of this.berryByTile) {
+      if (entry.spot.id === spotId) this.berryByTile.delete(tileKey);
+    }
   }
 
   // Is a wild Fakeamon standing on this tile? Returns the encounter or null.
@@ -522,6 +579,16 @@ class WorldScene extends Phaser.Scene {
         player.tileX = targetX;
         player.tileY = targetY;
         this.isMoving = false;
+
+        // M4S5: did we just step ONTO a berry? Berries don't block, so this is
+        // checked on arrival rather than before the step like encounters and
+        // buildings are.
+        const berry = this.berryAt(targetX, targetY);
+        if (berry) {
+          this.removeBerry(berry.spot.id);
+          pickUpBerry(berry.spot.id, berry.berryKey); // → src/main.js
+        }
+
         saveGame(); // remember where you're standing (tiny — per-step is fine, plan §4.1)
       },
     });

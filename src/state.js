@@ -103,6 +103,14 @@ function defaultWorld() {
     mapId: "theMeadows",
     player: { tileX: start.x, tileY: start.y, facing: "down" },
     defeatedEncounters: [], // encounter ids removed from the map (M3 Step S8)
+    // *M4 Step 5 — which berry (if any) is sitting on each berry spot right
+    // now: spotId → berryKey. Empty means every spot is bare; they grow back
+    // over time (maybeGrowBerries in src/main.js). Kept in `world` rather than
+    // `inventory` because it describes the MAP, not what you're carrying —
+    // your picked berries live in inventory.berries. This is a NESTED field,
+    // so src/save.js back-fills it for saves made before M4S5 (the shallow-
+    // merge trap, CR-B).
+    berries: {},
   };
 }
 

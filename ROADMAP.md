@@ -229,7 +229,7 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 
 ---
 
-## 🟡 M4 — World Systems (places to visit)  *(in progress — Steps 1–4 done; Step 5 (Cooking Cabin) next)*
+## 🟡 M4 — World Systems (places to visit)  *(in progress — Steps 1–5 done; Step 6 (open a new area) next)*
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
 challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
@@ -291,6 +291,24 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 > checks: the bench hand-off, badge + tokens, save survival, the rematch purse,
 > the loss path, and that wild battles are unchanged). **Next: Step 5 (Cooking
 > Cabin).**
+>
+> **Status (2026-07-26): Step 5 (Cooking Cabin) is done.** Berries now grow on
+> the overworld: `berrySpots` in `src/data/maps.js` marks six patches in The
+> Meadows, and which berry appears at one is rolled from per-berry weights in
+> the new `src/data/berries.js` — Fakeaberry common (50), Greenberry/Raspberry
+> medium (20 each), Greatberry unlikely (8), Cosmicberry extremely rare (2).
+> **The Factory grows none at all**, and Bossberry still only drops from
+> mini-bosses. Unlike everything else on the map, berries **don't block you** —
+> you walk right over one and it's yours. They grow back on empty patches each
+> time you step onto the map, and the map is never left completely bare. The
+> **Cooking Cabin** (real log-cabin art, tile 24,7) is the fourth building on
+> the town row: pick two berries, see what they'd make, cook it, and your
+> active Fakeamon eats it — free, no chef (Lewis's B26). All 13 recipes come
+> straight from `DESIGN.md` §9 (`src/data/recipes.js`), and any unlisted pair
+> still makes a Basic Dish, so cooking never fails. ⚠️ **This answered B44 in a
+> way that supersedes B35** — berries are NOT themed by area after all; every
+> area grows every berry and only the odds differ (`DECISIONS.md` #75). Verified
+> with a 27-check headless-browser suite. **Next: Step 6 (open a new area).**
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -298,7 +316,7 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 | **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, real art — Jeff's own AI-generated tent, background fixed in GIMP)* |
 | **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24; real skyscraper art added 2026-07-26)* |
 | **4** ✅ | **Gym 1** — Enforcer Boss with a **2-Fakeamon team** (Allagon + the ace AV8R); beating them gives tokens **and the Gear Badge**. Includes the one M4 engine change (`enemyParty` in `src/battle.js`) and the game's first metal move, **Iron Beam** (Lewis's invention) | Bump the ⚙️ Gym → a two-creature trainer battle → a badge on your HUD — *done! (2026-07-25, placeholder gym art; AV8R art blocked on attribution)* |
-| **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |
+| **5** ✅ | **Cooking Cabin** — berries grow on the map (walk over one to pick it up), and two of them cook into a **healing dish** at the Cabin; self-serve, free (B26). Rarity per berry: Fakeaberry common → Cosmicberry extremely rare | Berries lying in the grass; a cooking screen where recipes heal different amounts — *done! (2026-07-26)* |
 | **6** | **Open a new area** — build the **area-travel seam** (walk between maps through doorways), so Gym 1's **Gear Badge** opens **one** new area (**The Lagoon**), stocked with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`). *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7.)* | Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon |
 
 **🎉 M4 done when:** you can win tokens, heal at a Fakeatent, buy balls at a

@@ -186,7 +186,7 @@ Name: **Pocket Venta** — Lewis kept the placeholder ("the same, pocket venta")
 
 ---
 
-## 🟡 M4 — Gyms, Shops & Economy *(7 of 9 answered — B43 & B44 opened at the M4 peer-review checkpoint, 2026-07-22; B45 found while building Gym 1 and answered 2026-07-26)*
+## 🟡 M4 — Gyms, Shops & Economy *(8 of 9 answered — B43 & B44 opened at the M4 peer-review checkpoint, 2026-07-22; B45 found while building Gym 1 and answered 2026-07-26)*
 
 ### ✅ B13. Re-theme Gyms 2 & 3 to single types  *(needed by M4 Step 4)*
 
@@ -234,7 +234,7 @@ creatures are the wrong type: **Windeye** is a Metal/Lightning tower-bot and
 Only affects M5's later gyms; nothing blocks M4's Gym 1, which is cleanly
 Metal.)_
 
-### 🔲 B44. INVENT: which berries grow in which area? 🫐  *(needed by M4 Step 5 — cooking; a sensible default prototypes it)*
+### ✅ B44. INVENT: which berries grow in which area? 🫐  *(needed by M4 Step 5 — cooking; a sensible default prototypes it)*
 
 You decided berries are **found on the ground** while exploring and **themed by
 area** (B35) — each area mostly grows berries that fit its vibe. This is the
@@ -248,7 +248,7 @@ the rest can wait, one area at a time.
 - [ ] **…or "surprise me"** — we'll pick a sensible default you can change any
   time by editing a number.
 
-**Lewis picks:** _(open — filed at the M4 peer-review checkpoint, 2026-07-22.)_
+**Lewis picks:** **Answered a different way (2026-07-26): berries aren't split by area at all.** Every area grows every berry — what changes is how OFTEN each turns up (Fakeaberry common → Cosmicberry extremely rare), and **The Factory grows none**. This replaces B35's area-theming (`DECISIONS.md` #75). Built the same day.
 
 ---
 
@@ -386,10 +386,10 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 |---|---|---|
 | M2 | B1–B5, B34 | 6 / 6 |
 | M3 | B6–B12, B37–B42 | 13 / 13 |
-| M4 | B13–B18, B43–B45 | 7 / 9 |
+| M4 | B13–B18, B43–B45 | 8 / 9 |
 | M5 | B19–B26, B33, B35, B36 | 11 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **43 / 45** |
+| **Total** | | **44 / 45** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

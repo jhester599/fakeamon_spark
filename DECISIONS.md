@@ -89,12 +89,13 @@ Use this to jump straight to the right spot when recording a decision.
 | 42 | (B29) Move-name glow-up | §6 Battle System | ✅ Decided (kept as-is) |
 | 43 | (B30) Lewis's own credit line | §12 Assets & Attribution | ✅ Decided (declined) |
 | 44 | (B31) Shiny variants | §3 Fakeamon | ✅ Decided |
+| 75 | (B44) Which berries grow where | §9 Economy & Items | ✅ Decided (as global rarity — supersedes #53) |
 | 45 | (B32) Sound & music vibe | §13 Technical Notes | ✅ Decided |
 | 72 | (B45) One faint vs. send out the next | §6 Battle System (Losing) | ✅ Decided |
 | 51 | (B33) Where you swap boxed Fakeamon | §6/§8 (M5 Boxes UI) | ✅ Decided |
 | 46 | Berries found on the ground | §9 Economy & Items | ✅ Decided |
 | 52 | (B34) Telling apart a mirror match | §6 Battle System | ✅ Decided |
-| 53 | (B35) Berries — area-themed or anywhere | §9 Economy & Items | ✅ Decided |
+| 53 | (B35) Berries — area-themed or anywhere | §9 Economy & Items | ⚠️ Superseded by #75 (2026-07-26) |
 | 47 | Cooking Cabins more common in Snow Mountain | §7/§8 World Locations | ✅ Decided |
 | 54 | (B36) Cooking Cabins — Snow-Mountain-only or elsewhere too | §8 World Locations & Roster | ✅ Decided |
 | 49 | Fakeaballs are limited (start with 5, decrement per throw, block at zero) | §6 Battle System (Capturing) / §9 Economy & Items | ✅ Decided |
@@ -193,6 +194,8 @@ Use this to jump straight to the right spot when recording a decision.
 
 | 2026-07-26 | 73 | **Berries are picked up on the overworld only** — walk over one to take it. Never inside a building, and **none at all in The Factory** | Jeff & Lewis's M4S5 spec — the Cooking Cabin is where you cook them, not where you find them |
 | 2026-07-26 | 74 | **Greenberry's sprite is a blue fruit with green leaves — deliberate.** Logged so nobody "fixes" it later | Confirmed by Jeff when asked whether a filename had been swapped |
+
+| 2026-07-26 | 75 | **Berry rarity is global, not area-themed — this SUPERSEDES #53 (B35).** Every area grows every berry, weighted by kind: Fakeaberry common (50), Greenberry & Raspberry medium (20 each), Greatberry unlikely (8), Cosmicberry extremely rare (2). **The Factory grows none at all.** Bossberry still only drops from mini-bosses | Jeff & Lewis's M4S5 spec. #53 said berries were themed by area "rather than any of the 6 turning up anywhere" — the conflict was raised twice and they chose the rarity model. `AREA_BERRIES` in `src/data/berries.js` keeps per-area lists possible as a pure data edit if they ever want #53 back |
 
 <!--
 Template for a new row:

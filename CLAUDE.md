@@ -88,6 +88,7 @@ homework.html        → interactive worksheet for Lewis & Jeff (mirrors HOMEWOR
 /assets/sprites/player → hero.png walk sheet for M3 (⚠️ license check pending — see CREDITS.md)
 /assets/sprites/buildings → map building sprites: fakeatent.png (M4S2), talltower.png + gym.png (both 2026-07-26) — all three are Jeff & Lewis's own AI-generated art, trimmed + scaled to the tile grid. BUILDING_LOOKS in src/world/config.js still holds an emoji fallback per kind, used by any building with no art yet (the Cooking Cabin, M4S5, is next)
 /assets/sprites/items → Fakeaball-tier icons (M4S3): fakeaball.png (live, real Tuxemon art) + greatfakeaball.png/ultrafakeaball.png/cosmicfakeaball.png (vendored, staged — not wired into any screen yet)
+/assets/sprites/items/berries → berry art, staged for M4S5 (added 2026-07-26, Jeff & Lewis's own): <slug>.png is the 32×32 icon for the Cooking Cabin; pickup/<slug>.png is the 16×16 one that lies on a map tile. Five of the six exist — Bossberry has no art because it only drops from mini-bosses (M5). Not wired into any screen yet
 /assets/tilesets     → meadow.png (the composed tileset The Meadows draws with) + the George originals it came from
 /assets/icons        → PWA app icons (icon-192.png, icon-512.png), made by tools/make-icon.mjs — placeholder art (Growler's front sprite), swap freely
 manifest.webmanifest → PWA manifest (name, icons, standalone display) — what makes "Add to Home Screen" on Android install a real app icon

@@ -169,15 +169,15 @@ const FAKEAMON = {
     moves: ["tackle", "bite", "ironBeam"],
   },
   av8r: {
-    // ⚠️ NO `sprite` ON PURPOSE — not a mistake, and not a missing file.
-    // AV8R's art has no entry in Tuxemon's ATTRIBUTIONS.md, and this project's
-    // rule is that no asset ships without verified attribution
-    // (CONTENT_REFERENCE.md §14). Until that's confirmed, AV8R draws as the
-    // colored type box + name — the same graceful fallback Leafick used before
-    // its own art arrived (see showFighter in src/battle.js). To finish it:
-    // run `cd tools && npm run wiki-credits` from a machine that can reach
-    // wiki.tuxemon.org, then vendor + slice the sheet. See CREDITS.md.
-    name: "AV8R", type: "metal",
+    // ⚠️ Art is IN, but its credit is ASSUMED, not verified. `av8r` has no
+    // monster entry in Tuxemon's ATTRIBUTIONS.md — the only "AV8R" mention
+    // there is the "Aviator" *trainer* row, a different asset — and
+    // wiki.tuxemon.org was down when the sprite was vendored. The artists and
+    // CC BY-SA 4.0 license recorded in CREDITS.md are a best inference, to be
+    // rechecked once the wiki is back up. See CREDITS.md for the exact
+    // re-verification command.
+    name: "AV8R", type: "metal", sprite: "assets/sprites/front/av8r.png",
+    overworld: "assets/sprites/idle/av8r.png",
     baseHP: 52, baseAttack: 15, baseDefense: 13, baseSpeed: 14, // [TUNE] the ace: faster than EVERY starter, so it strikes first
     moves: ["tackle", "pounce", "ironBeam"],
   },

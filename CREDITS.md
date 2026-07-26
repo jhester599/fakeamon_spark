@@ -54,6 +54,7 @@ the battle screen is still plain HTML/CSS/JS.
 | Shybulb *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/shybulb.png` | `mods/tuxemon/gfx/sprites/battle/shybulb-sheet.png` | Shybulb | Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Shybulb) |
 | Snaki *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/snaki.png` | `mods/tuxemon/gfx/sprites/battle/snaki-sheet.png` | Snaki | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki) |
 | Tumbleworm *(placeholder name)* (front/back/idle sprites) | `assets/sprites/{front,back,idle}/tumbleworm.png` | `mods/tuxemon/gfx/sprites/battle/tumbleworm-sheet.png` | Tumbleworm | tamashihoshi | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| AV8R (front/back/idle sprites) — Gym 1 ace | `assets/sprites/{front,back,idle}/av8r.png` | `mods/tuxemon/gfx/sprites/battle/av8r-sheet.png` | av8r | Leo (design), Sanglorian (sprite) | CC BY-SA 4.0 — ⚠️ assumed consistent with the rest of the Tuxemon battle set. `av8r` has **no** monster entry in Tuxemon's `ATTRIBUTIONS.md`, and `wiki.tuxemon.org` was down (HTTP 500) on 2026-07-25. Artists inferred from the "Aviator" *trainer* entry in `ATTRIBUTIONS.md` ("Front sprite by Sanglorian from the AV8R design by Leo"), which is a different asset. Recheck the wiki page before a public deploy. |
 | PWA app icon *(placeholder — Growler's sprite on a white square, made by `tools/make-icon.mjs`)* | `assets/icons/icon-192.png`, `icon-512.png` | derived from `assets/sprites/front/hissiorite.png` | Hissiorite | princess-phoenix (same credit as Growler's rows above) | CC BY-SA 3.0 (derived work, credit princess-phoenix) |
 | Fakeaball (item icon, live on the "Throw Fakeaball" button) | `assets/sprites/items/fakeaball.png` | `mods/tuxemon/gfx/items/tuxeball_earth.png` | Tuxeball Earth | JaskRendix (adapted from a sprite by tamashihoshi) | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
 
@@ -124,57 +125,9 @@ Full detail is in `DESIGN.md` §12.
 
 **Mini-bosses:** Banvengeance, Saurchin, Sharpfin, Gastronium, Tobishimi
 
-**Gyms (standard/ace):** ~~Allagon~~ *(pulled in at M4S4 — see the table
-above)*, Agnite, Windeye, Spectera, Eaglace
-
-⚠️ **AV8R (Gym 1's ace) is BLOCKED on attribution, not on effort.** Its
-battle sheet exists at the pinned commit
-(`mods/tuxemon/gfx/sprites/battle/av8r-sheet.png`), but the monster has **no
-entry in Tuxemon's `ATTRIBUTIONS.md`** — the only "AV8R" mention there is
-under *Character Front Sprites* for the human trainer **"Aviator"** ("front
-sprite by Sanglorian from the AV8R design by Leo"), which is a different
-asset. The documented fallback is `wiki.tuxemon.org` (how Hissiorite and
-Frondly were resolved), and **that domain is blocked by the Claude remote
-environment's network policy** — the exact limitation
-`tools/fetch-wiki-credits.mjs` was written for. So the sheet was deliberately
-**not vendored**, and AV8R plays with the colored-box fallback instead
-(`src/data/fakeamon.js` has no `sprite` for it, on purpose).
-
-**To finish it, from a machine that can reach the wiki** (a Cowork session
-works — that's how the 198-monster roster's credits were resolved on
-2026-07-06). Plain `npm run wiki-credits` will NOT find AV8R: that sweep only
-walks `roster-200.json`, which holds the 198 *wild* monsters, and every named
-creature (gym teams, mini-bosses, Artemis) sits outside it. Pass the slug
-explicitly instead — the script learned how at M4S4:
-
-```bash
-cd tools && npm install
-npm run wiki-credits -- av8r=AV8R --write   # writes a sheet-manifest.json entry
-                                            # (if the title is wrong it searches
-                                            #  the wiki and prints the retry line)
-```
-
-Then **review the diff** — set `ourName` to `"AV8R"`, and check the artist and
-license it recorded (it assumes CC BY-SA 3.0, the wiki's usual default; correct
-it if the page says otherwise). Then:
-
-```bash
-npm run vendor-sheets              # pulls av8r-sheet.png (manifest-driven)
-node slice-sheets.mjs av8r         # → front/back/idle
-```
-
-Finally, in the repo: add `sprite: "assets/sprites/front/av8r.png"` and
-`overworld: "assets/sprites/idle/av8r.png"` to the `av8r` entry in
-`src/data/fakeamon.js` (removing the "no sprite on purpose" note), paste the
-generated row from `tools/credits-fragment.md` into the table above, re-run
-`node tools/generate-sw-manifest.mjs`, and bump `CACHE_VERSION` in
-`service-worker.js`.
-
-**If the wiki has no credit for AV8R either**, it can't ship — same call that
-dropped `bearloch`/`foxko` from the roster. In that case the fallback is a
-creative one for Lewis: swap Gym 1's ace for a different Metal creature that
-*is* already credited (`CREDITS_ROSTER.md` has plenty), which is a one-line
-edit to `src/data/gyms.js` plus a species entry.
+**Gyms (standard/ace):** Allagon (Spalding004, Chickenshowman — CC BY-SA 4.0),
+AV8R (Leo, Sanglorian — CC BY-SA 4.0 assumed, ⚠️ unverified, see "In use" table),
+Agnite, Windeye, Spectera, Eaglace
 
 **Gym leaders (NPC trainer art — different folder, `mods/tuxemon/sprites/`):**
 Goth → `goth.png`, Child Actor → `childactor.png`, Enforcer Boss → likely the

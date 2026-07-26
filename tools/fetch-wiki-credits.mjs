@@ -6,18 +6,29 @@
 //      cd tools && npm run wiki-credits            # report only
 //      cd tools && npm run wiki-credits -- --write # also fill sheet-manifest.json
 //
-//  NAMED CREATURES (added M4S4) — you can also pass slugs explicitly:
+//  With no slug arguments it scans roster-200.json for anything still
+//  "pending-wiki". You can also name creatures explicitly — needed for any
+//  creature added AFTER the 200-roster pass (gym aces from DESIGN.md §12, for
+//  instance), since those have no roster entry to be "pending" in:
 //
-//      cd tools && npm run wiki-credits -- av8r --write
-//      cd tools && npm run wiki-credits -- av8r=AV8R --write   (page name override)
+//      npm run wiki-credits -- av8r --write          # page name inferred
+//      npm run wiki-credits -- av8r=AV8R --write     # page name given
 //
-//  Why this exists: roster-200.json only holds the 198 WILD monsters. Every
-//  *named* creature — gym teams, the 5 mini-bosses, Artemis — is outside it, so
-//  the roster-driven sweep above can never see them. Named slugs skip the
-//  roster entirely. Use `slug=PageTitle` when the wiki page isn't just the
-//  Capitalised slug: wiki titles are case-sensitive after the first letter, so
-//  `av8r` would otherwise be looked up as "Av8r" and 404. If the derived title
-//  misses, the script searches the wiki and tells you the closest match.
+//  Use the slug=Page form whenever the wiki page is not simply the slug with
+//  each underscore-part capitalised. MediaWiki is case-SENSITIVE after the
+//  first letter, so the inferred "Av8r" does NOT find the page "AV8R".
+//
+//  OVERWRITE GUARD: a slug that already has a sheet-manifest.json entry is
+//  SKIPPED, because that entry is a credit a human already checked and worded
+//  by hand — av8r's, for instance, carries a deliberate "assumed, unverified,
+//  recheck" warning. A --write run would silently replace that with whatever
+//  the wiki happens to return today, which could be a thinner credit or a
+//  generic license line. To deliberately re-check and replace one, add --force:
+//
+//      npm run wiki-credits -- av8r=AV8R --write --force
+//
+//  (That is the command to use once wiki.tuxemon.org is back up and av8r's
+//  assumed credit can finally be replaced with the real one.)
 //
 //  ⚠️ Needs normal internet access to wiki.tuxemon.org — the Claude remote
 //  environment used for M3S0 could NOT reach it (network policy), which is
@@ -42,6 +53,7 @@ import { fileURLToPath } from "node:url";
 
 const TOOLS = dirname(fileURLToPath(import.meta.url));
 const WRITE = process.argv.includes("--write");
+const FORCE = process.argv.includes("--force"); // allow replacing an existing manifest entry
 const API = "https://wiki.tuxemon.org/api.php";
 
 const roster = JSON.parse(readFileSync(join(TOOLS, "roster-200.json"), "utf8")).monsters;
@@ -53,59 +65,62 @@ function pageFor(slug) {
   return slug.split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join("_");
 }
 
-// Anything on the command line that isn't a --flag is an explicit slug to look
-// up, optionally as slug=PageTitle. Named creatures (gym teams, mini-bosses,
-// Artemis) live outside roster-200.json, so this is the only way to reach them.
-const pageOverrides = {};
-const explicitSlugs = process.argv.slice(2)
-  .filter((arg) => !arg.startsWith("-"))
-  .map((arg) => {
+// Anything on the command line that is not a flag is a target: "av8r" or
+// "av8r=AV8R". Explicit targets win over the roster scan entirely.
+const args = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+
+let targets;
+if (args.length) {
+  const named = args.map((arg) => {
     const [slug, page] = arg.split("=");
-    if (page) pageOverrides[slug] = page;
-    return slug;
+    return { slug, page: page || pageFor(slug), arg };
   });
-
-let pending;
-if (explicitSlugs.length) {
-  // Named slugs bypass the roster, but never silently overwrite an entry a
-  // human already verified by hand.
-  pending = explicitSlugs.filter((slug) => {
-    if (manifest[slug]) {
-      console.log(`• ${slug}: already in sheet-manifest.json — skipping (delete the entry to re-check)`);
-      return false;
-    }
-    return true;
+  // The overwrite guard (see the header). An existing manifest entry is a
+  // hand-checked credit; don't let a routine --write quietly replace it.
+  targets = named.filter(({ slug, arg }) => {
+    if (!manifest[slug] || FORCE) return true;
+    console.log(`⏭️  ${slug} already has a hand-checked manifest entry — skipping.`);
+    console.log(`   To deliberately re-check and replace it:`);
+    console.log(`     npm run wiki-credits -- ${arg} --write --force`);
+    return false;
   });
-  console.log(`Looking up ${pending.length} named creature(s) by hand-picked slug…\n`);
-} else {
-  pending = Object.keys(roster).filter(
-    (slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug]
-  );
-  console.log(`${pending.length} monsters need a wiki credit check…\n`);
-}
-
-// Wiki titles are case-sensitive past the first letter, so a derived title can
-// miss ("Av8r" vs the real "AV8R"). Ask the wiki's search what it actually has.
-async function suggestTitle(slug) {
-  try {
-    const url = `${API}?action=query&list=search&srsearch=${encodeURIComponent(slug)}` +
-      `&srlimit=3&format=json&formatversion=2`;
-    const data = await (await fetch(url)).json();
-    return (data?.query?.search ?? []).map((hit) => hit.title);
-  } catch {
-    return [];
+  if (FORCE && targets.some(({ slug }) => manifest[slug])) {
+    console.log("⚠️  --force: existing manifest entries WILL be overwritten. Review the diff.");
   }
+  console.log(`${targets.length} creature(s) named on the command line…\n`);
+} else {
+  targets = Object.keys(roster)
+    .filter((slug) => roster[slug].attribution.status === "pending-wiki" && !manifest[slug])
+    .map((slug) => ({ slug, page: pageFor(slug) }));
+  console.log(`${targets.length} monsters need a wiki credit check…`);
+  if (targets.length === 0) {
+    console.log(
+      "Nothing pending in roster-200.json. If you are chasing a creature added\n" +
+        "after the roster pass (a DESIGN.md §12 gym ace, say), name it directly:\n" +
+        "  npm run wiki-credits -- <slug>=<WikiPage> --write"
+    );
+  }
+  console.log("");
 }
 
 const found = {};
 const notFound = [];
 
-for (const slug of pending) {
-  const page = pageOverrides[slug] || pageFor(slug);
+for (const { slug, page } of targets) {
   const url = `${API}?action=parse&page=${encodeURIComponent(page)}&prop=wikitext&format=json&formatversion=2`;
   try {
     const res = await fetch(url);
-    const data = await res.json();
+    const body = await res.text();
+    // The wiki sometimes serves an HTML "technical difficulties" page instead
+    // of JSON (it was down on 2026-07-25). Say so plainly rather than dying on
+    // a confusing "Unexpected token '<'" from JSON.parse.
+    if (!body.trimStart().startsWith("{")) {
+      throw new Error(`wiki returned ${res.status} non-JSON — site may be down, try again later`);
+    }
+    const data = JSON.parse(body);
+    if (data?.error) {
+      throw new Error(`no wiki page "${page}" (${data.error.code}) — check spelling/CASE`);
+    }
     const text = data?.parse?.wikitext ?? "";
     // credit sentences look like "Art and sprites by princess-phoenix." or
     // "Original design by Leo. Sprites by Levaine."

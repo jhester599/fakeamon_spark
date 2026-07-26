@@ -420,7 +420,7 @@ Standard/ace battle sprites all confirmed present at `battle/<slug>-sheet.png`. 
 |---|---|---|---|---|
 | Gym 1 leader | Enforcer Boss | `sprites/boss.png` (archetype — confirm exact variant) | https://wiki.tuxemon.org/Enforcer_Boss | trainer/NPC sprite — confirm credits on page |
 | Gym 1 standard | Allagon | `battle/allagon-sheet.png` | https://wiki.tuxemon.org/Allagon | Spalding004, Chickenshowman — **CC BY-SA 4.0** (corrected, was mislabeled) |
-| Gym 1 ace | AV8R | `battle/av8r-sheet.png` | https://wiki.tuxemon.org/AV8R | Leo, josepharaoh99, Sanglorian |
+| Gym 1 ace | AV8R | `battle/av8r-sheet.png` | https://wiki.tuxemon.org/AV8R | Leo (design), Sanglorian (sprite) — ⚠️ **corrected 2026-07-25**, was "Leo, josepharaoh99, Sanglorian"; josepharaoh99 could not be traced to this creature. No `av8r` monster entry exists in Tuxemon's `ATTRIBUTIONS.md`; these names come from its "Aviator" *trainer* row, a different asset. Wiki was down (500) — recheck |
 | Gym 2 leader | Goth | `sprites/goth.png` | https://wiki.tuxemon.org/Goth | trainer/NPC sprite — confirm credits |
 | Gym 2 standard | Agnite | `battle/agnite-sheet.png` | https://wiki.tuxemon.org/Agnite | Leo, aviculor, Sanglorian, Levaine |
 | Gym 2 ace | Windeye | `battle/windeye-sheet.png` | https://wiki.tuxemon.org/Windeye | DevilDman, Levaine, Sanglorian |

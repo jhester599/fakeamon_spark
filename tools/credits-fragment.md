@@ -3,4 +3,4 @@
 
 | Our name | File in our repo | Source in Tuxemon repo | Tuxemon name | Artist(s) | License |
 |---|---|---|---|---|---|
-| Allagon (front/back/idle sprites) | `assets/sprites/{front,back,idle}/allagon.png` | `mods/tuxemon/gfx/sprites/battle/allagon-sheet.png` | allagon | Spalding004, Chickenshowman | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) |
+| AV8R (front/back/idle sprites) | `assets/sprites/{front,back,idle}/av8r.png` | `mods/tuxemon/gfx/sprites/battle/av8r-sheet.png` | av8r | Leo, Sanglorian | CC BY-SA 4.0 (assumed consistent with the rest of the Tuxemon battle set — no av8r entry in ATTRIBUTIONS.md; wiki.tuxemon.org/AV8R was down 2026-07-25, recheck) |

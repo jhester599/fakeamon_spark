@@ -263,8 +263,8 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 > icon is wired in (on both the catch button and the shop's Buy button) — the
 > other three are vendored and credited, staged for whenever the tier mechanics
 > get built. ⚠️ **Placeholder art** — the Tall Tower itself still draws as a
-> colored marker (no real building sprite sourced yet; swap-in spot:
-> `BUILDING_ART`/`BUILDING_LOOKS` in `src/world/config.js`).
+> colored marker — **real art landed 2026-07-26** (Jeff & Lewis's own, via
+> `BUILDING_ART` in `src/world/config.js`).
 >
 > **Status (2026-07-25): Step 4 (Gym 1) is done** — the milestone's one real
 > engine change. `src/battle.js` learned that the *enemy* has a bench too:
@@ -283,11 +283,11 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 > first metal move, **Iron Beam** (Lewis's invention, `src/data/moves.js`), fills
 > the CR-D gap. XP is now paid **per knockout** rather than once at the end, so a
 > two-Fakeamon gym pays twice. ⚠️ **Placeholder art** — the Gym building draws as
-> a grey ⚙️ marker, and **AV8R has no sprite**: its art is blocked on
-> *attribution*, not effort (no entry in Tuxemon's `ATTRIBUTIONS.md`, and
-> `wiki.tuxemon.org` is blocked by the remote environment's network policy — see
-> `CREDITS.md` for the exact steps to finish it from a laptop). Allagon's art
-> **is** in, fully credited. Verified in a headless-browser smoke test (34
+> a grey ⚙️ marker, and **AV8R had no sprite**. **Both were resolved on
+> 2026-07-26:** AV8R's art was vendored (its credit recorded as an ⚠️
+> *assumption* to recheck once `wiki.tuxemon.org` is up, since `av8r` has no
+> entry in Tuxemon's `ATTRIBUTIONS.md`), and the Gym got real castle art of
+> Jeff & Lewis's own. Allagon's art **is** in, fully credited. Verified in a headless-browser smoke test (34
 > checks: the bench hand-off, badge + tokens, save survival, the rematch purse,
 > the loss path, and that wild battles are unchanged). **Next: Step 5 (Cooking
 > Cabin).**
@@ -296,7 +296,7 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 |---|---|---|
 | **1** ✅ | **Tokens** — earn them from winning battles; show a token counter *(landed with the S0 groundwork: save v2, the CR-A Continue fix, and CR-C type colors)* | A number that goes up when you win — *done! (2026-07-24)* |
 | **2** ✅ | **Fakeatent** — step on it to **heal your whole team** to full (costs tokens); also replaces the M3 team-wipe placeholder as home base | A tent building; HP refills — *done! (2026-07-24, real art — Jeff's own AI-generated tent, background fixed in GIMP)* |
-| **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24, placeholder building art; real Fakeaball icon on the Buy button)* |
+| **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24; real skyscraper art added 2026-07-26)* |
 | **4** ✅ | **Gym 1** — Enforcer Boss with a **2-Fakeamon team** (Allagon + the ace AV8R); beating them gives tokens **and the Gear Badge**. Includes the one M4 engine change (`enemyParty` in `src/battle.js`) and the game's first metal move, **Iron Beam** (Lewis's invention) | Bump the ⚙️ Gym → a two-creature trainer battle → a badge on your HUD — *done! (2026-07-25, placeholder gym art; AV8R art blocked on attribution)* |
 | **5** | **Cooking Cabin** — combine berries into **healing dishes** (recipes heal different amounts); self-serve, walk in and cook (B26). *Moved here from M5 — it's a world system, not part of the story* | A cooking screen; recipes that heal different amounts |
 | **6** | **Open a new area** — build the **area-travel seam** (walk between maps through doorways), so Gym 1's **Gear Badge** opens **one** new area (**The Lagoon**), stocked with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`). *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7.)* | Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon |

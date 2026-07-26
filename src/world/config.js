@@ -88,11 +88,16 @@ const RESPAWN_CHANCE = 0.3; // [TUNE] rolled once per battle in main.js
 // Cooking Cabin (M4S5), until their own art shows up.
 const BUILDING_ART = {
   fakeatent: "assets/sprites/buildings/fakeatent.png", // Jeff's own AI-generated art (CREDITS.md)
+  talltower: "assets/sprites/buildings/talltower.png", // ditto — added 2026-07-26, replaced the 🗼 marker
+  gym:       "assets/sprites/buildings/gym.png",       // ditto — added 2026-07-26, replaced the ⚙️ marker
 };
+// The FALLBACK look for any building kind with no art yet (the Cooking Cabin,
+// M4S5, is next). Kept for every kind even once art exists, so a missing or
+// failed image still leaves something you can walk into and open.
 const BUILDING_LOOKS = {
   fakeatent: { emoji: "⛺", color: "#e8659f" }, // pink — echoes the real sprite's color
-  talltower: { emoji: "🗼", color: "#d4a24c" }, // warm gold — a shop (M4S3), no art sourced yet
-  gym:       { emoji: "⚙️", color: "#8a8f98" }, // steel grey — Gym 1 is Metal (M4S4), no art sourced yet
+  talltower: { emoji: "🗼", color: "#d4a24c" }, // warm gold — a shop (M4S3)
+  gym:       { emoji: "⚙️", color: "#8a8f98" }, // steel grey — Gym 1 is Metal (M4S4)
 };
 
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after

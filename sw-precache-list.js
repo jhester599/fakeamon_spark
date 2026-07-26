@@ -20,6 +20,8 @@ const PRECACHE_URLS = [
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
   "assets/sprites/buildings/fakeatent.png",
+  "assets/sprites/buildings/gym.png",
+  "assets/sprites/buildings/talltower.png",
   "assets/sprites/front/aardorn.png",
   "assets/sprites/front/allagon.png",
   "assets/sprites/front/av8r.png",

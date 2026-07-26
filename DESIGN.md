@@ -322,6 +322,10 @@ Top-down, tile-based. Grid movement, four directions. **DECIDED (2026-07-05):** 
 
 **Berries & Recipes** — found while exploring; cooked into healing dishes.
 
+**DECIDED (2026-07-26) — berries lie on the OVERWORLD only:** you pick them up by walking over them on a map. They are never found inside a building (no berries in the Fakeatent, Tall Tower, Gym, or the Cooking Cabin itself) — the Cabin is where you *cook* them, not where you get them. **No berries grow in The Factory at all** (it's a poisonous war zone, §7). *(Jeff & Lewis's call.)*
+
+**DECIDED (2026-07-26) — Greenberry's art is a blueberry, on purpose:** the Greenberry sprite is a blue fruit with green leaves. That is deliberate, not a mixed-up file — don't "correct" it. *(Confirmed by Jeff.)*
+
 **DECIDED (2026-07-06) — how you find berries:** **you can find them on the ground** while exploring the overworld. *(Lewis's invention, volunteered outside a homework round.)* **DECIDED (2026-07-11) — berries are themed by area (B35):** each area of Venta mostly grows the berries that fit its vibe (§7), rather than any of the 6 turning up anywhere — so where you explore shapes what you can cook. *(Lewis's call.)*
 
 **DECIDED (2026-07-05) — Lewis's berries & recipes:**

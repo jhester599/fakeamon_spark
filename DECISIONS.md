@@ -191,6 +191,9 @@ Use this to jump straight to the right spot when recording a decision.
 | 2026-07-26 | 71 | **Walking behind the Tall Tower and the Gym stays** — only a building's doorway tile is solid, so you can stroll behind the tall parts. Considered making the whole footprint solid; Jeff & Lewis played it and kept it | "we like how the current play works that allows you to walk behind the tower and the gym" |
 | 2026-07-26 | 72 | **(B45) When one of your Fakeamon faints, the next one joins the battle** — automatically, no picker. You only lose once **every** Fakeamon on your team has fainted. Before this, the battle ended the instant your active one fainted, even with healthy teammates on the bench | Jeff & Lewis's playtest answer to B45 (option B). It also makes the code finally match `DESIGN.md` §6, which always said "when your **whole team** faints" |
 
+| 2026-07-26 | 73 | **Berries are picked up on the overworld only** — walk over one to take it. Never inside a building, and **none at all in The Factory** | Jeff & Lewis's M4S5 spec — the Cooking Cabin is where you cook them, not where you find them |
+| 2026-07-26 | 74 | **Greenberry's sprite is a blue fruit with green leaves — deliberate.** Logged so nobody "fixes" it later | Confirmed by Jeff when asked whether a filename had been swapped |
+
 <!--
 Template for a new row:
 | 2026-07-05 | 6 | Gym badges open a new area to explore | "so beating a gym feels like it unlocks something" |

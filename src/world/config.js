@@ -74,6 +74,10 @@ const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dia
 // made, and since M4S6 the hero is made first (so one hero sprite survives
 // every map change) — this pushes the grass behind everything regardless.
 const GROUND_DEPTH = -10;
+// An exit (a boat at a dock) sits ON the ground, so the hero should walk in
+// FRONT of it rather than disappear behind it. Between the ground (-10) and
+// everything that stands up — the hero, creatures, buildings (0).
+const EXIT_DEPTH = -5;
 
 // --- Respawning (S8) -------------------------------------------------------
 // A beaten/caught wild Fakeamon leaves the map, but The Meadows shouldn't
@@ -602,13 +606,16 @@ class WorldScene extends Phaser.Scene {
       const look = areaIsUnlocked(exit.toMap)
         ? (EXIT_LOOKS[exit.kind] || { emoji: "🚪", color: "#888888" })
         : EXIT_LOCKED_LOOK;
+      // Kept to roughly one tile, unlike the buildings' chunkier markers — a
+      // boat is moored on the ground, not a tower you look up at.
       marker = this.add.text(p.x, p.y, look.emoji, {
-        fontSize: "18px",
+        fontSize: "14px",
         backgroundColor: look.color,
-        padding: { x: 3, y: 2 },
+        padding: { x: 1, y: 1 },
       });
     }
     marker.setOrigin(0.5, 1);
+    marker.setDepth(EXIT_DEPTH); // the hero walks in front of it, not behind
     marker.exitId = exit.id;
 
     this.exitSprites.push(marker);

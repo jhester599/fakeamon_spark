@@ -202,8 +202,9 @@ function areaTipsHtml(mapId) {
       "here costs the same " + healCost() + " 🪙 as back home. 🫐 <b>Berries</b> " +
       "grow around the water too, but the <b>Cooking Cabin</b> is back in The " +
       "Meadows.</small></p>" +
-      "<p><small>🚤 The <b>boat</b> on the western shore takes you home again " +
-      "whenever you like. 🌊 You can't swim — walk around the water.</small></p>"
+      "<p><small>🚤 The <b>boat</b> is moored at the far <b>west</b> edge — " +
+      "straight across from the dock you sailed from — and takes you home " +
+      "whenever you like. 🌊 You can't swim, so walk around the water.</small></p>"
     );
   }
   // The Meadows (and a sensible default for any area built later).
@@ -216,9 +217,9 @@ function areaTipsHtml(mapId) {
     "<p><small>🫐 <b>Berries</b> grow out in the grass — just walk over one to " +
     "pick it up. 🍳 Take two to the <b>Cooking Cabin</b> at the end of the row " +
     "and cook them into a dish that heals your Fakeamon, free.</small></p>" +
-    "<p><small>🚤 A <b>boat</b> waits at the far east end of the path. It sails " +
-    "to <b>The Lagoon</b> — once you've earned the " + GYMS.gym1.badgeName +
-    ".</small></p>"
+    "<p><small>🚤 Follow the path <b>east</b> to the water's edge — a <b>boat</b> " +
+    "is moored at the dock there. It sails to <b>The Lagoon</b>, once you've " +
+    "earned the " + GYMS.gym1.badgeName + ".</small></p>"
   );
 }
 

@@ -22,8 +22,16 @@
 //    12 path W edge  13 path          14 path E edge
 //    15 tree bot-L   16 tree bot-R    17 fallen log
 //    18 path SW edge 19 path S edge   20 path SE edge
-//    (21–23 are empty — room to grow)
+//    21 water NW     22 water N       23 water NE
+//    24 water W      25 open water    26 water E
+//    27 water SW     28 water S       29 water SE
 //  Trees are 2×2: put 9,10 on one row and 15,16 right below them.
+//  The nine WATER tiles (21–29) were added at M4S6 by
+//  tools/add-meadow-water-tiles.mjs, which grew meadow.png from 6×4 tiles to
+//  6×5 without moving any existing tile number. They make the little inlet at
+//  the east end of the path, so the boat you sail to The Lagoon from is
+//  actually sitting on water. They tile together into a pond of any size:
+//  corners at the corners, edges along the sides, 25 repeated in the middle.
 //
 //  Each map's `solidTiles` lists which tile numbers you CAN'T walk on (trees,
 //  boulders, stumps, rocks, logs — and, in The Lagoon, water). The game reads
@@ -44,9 +52,10 @@
 
 // Tile numbers you can't walk onto in THE MEADOWS (the meadow tileset above):
 //   4 boulder · 5 stump · 9,10,15,16 tree · 11 small rock · 17 fallen log
+//   21–29 water (M4S6) — you can't swim in either area, only sail
 // Kept as a named constant because it's also the fallback for any map that
 // forgets to list its own.
-const SOLID_TILE_INDICES = [4, 5, 9, 10, 11, 15, 16, 17];
+const SOLID_TILE_INDICES = [4, 5, 9, 10, 11, 15, 16, 17, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 
 // Tile numbers you can't walk onto in THE LAGOON (assets/tilesets/lagoon.png —
 // a different tileset, so a different list). That's everything except grass,
@@ -70,10 +79,10 @@ const MAPS = {
     [15,16, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0,11, 0, 9,10],
     [15,16, 0,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
-    [ 9,10, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 9,10],
-    [15,16,12,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,14,15,16],
-    [ 9,10,18,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,20, 9,10],
-    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8,21,22],
+    [15,16,12,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,14,24,25],
+    [ 9,10,18,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,20,24,25],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,27,28],
     [ 9,10, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 9,10],
     [15,16, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 9,10],
@@ -154,7 +163,7 @@ const MAPS = {
     // Nothing else marks it locked: the one list IS the gate.
     exits: [
       { id: "meadows-boat", kind: "boat", tileX: 27, tileY: 9,
-        toMap: "theLagoon", toTile: { x: 7, y: 9, facing: "left" } },
+        toMap: "theLagoon", toTile: { x: 3, y: 9, facing: "right" } },
     ],
   },
 
@@ -175,7 +184,16 @@ const MAPS = {
   //    18 water SW    19 water S        20 water SE
   //    (21–23 are spare — room to grow)
   //  The nine water tiles fit together into a pond of any size: corners at the
-  //  four corners, edges along the sides, and 13 repeated in the middle.
+  //  four corners, edges along the sides, and 13 repeated in the middle. They
+  //  make TWO bodies of water here: the lagoon itself in the middle of the map,
+  //  and a narrow inlet running off the map's WEST edge where the boat home is
+  //  moored — the mirror of The Meadows' dock on its east edge.
+  //
+  //  ⚠️ The Lagoon's tileset is DARK — dark blue and black (Jeff & Lewis's
+  //  call). That's not a different set of tiles, it's the same George tiles put
+  //  through a "mood" pass at the end of tools/make-lagoon-tileset.mjs. If the
+  //  swamp ever wants to be brighter or gloomier, that script's MOOD block is
+  //  the dial, not this file.
   // =========================================================================
   theLagoon: {
     name: "The Lagoon",              // opened by the Gear Badge (B14 / DECISIONS.md #27)
@@ -184,7 +202,7 @@ const MAPS = {
     solidTiles: LAGOON_SOLID_TILE_INDICES, // water is solid here — see the note above
     // Only used if something ever drops you here with no saved position; the
     // normal way in is the boat, which lands you at its own toTile.
-    startTile: { x: 7, y: 9 },
+    startTile: { x: 3, y: 9 },
     ground: [
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
     [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
@@ -193,25 +211,20 @@ const MAPS = {
     [ 9,10, 1, 0, 0, 0, 0, 4, 0, 0, 2, 0, 3, 3, 0, 0, 2, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 9,10],
     [15,16, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 1,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 0, 3, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 3, 0, 0, 0, 0, 9,10],
-    [15,16, 0, 0, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 5, 0,15,16],
-    [ 9,10, 0, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 0, 0, 0, 0, 0, 9,10],
-    [15,16,11, 0, 0, 0, 0, 0, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 2, 0, 0, 0,15,16],
-    [ 9,10, 0, 0, 0, 0, 0, 2, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 0, 0, 0, 0, 9,10],
-    [15,16, 0, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0,15,16],
-    [ 9,10, 0, 1, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0, 9,10],
+    [15,16, 3, 0, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 5, 0,15,16],
+    [ 7, 8, 3, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 0, 0, 0, 0, 0, 9,10],
+    [13,14, 3, 0, 0, 0, 0, 0, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 2, 0, 0, 0,15,16],
+    [13,14, 3, 0, 0, 0, 0, 2, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 0, 0, 0, 0, 9,10],
+    [19,20, 3, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0,15,16],
+    [ 9,10, 3, 1, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0, 9,10],
     [15,16, 0, 0, 0, 0, 0, 0, 3,18,19,19,19,19,19,19,19,19,19,19,19,19,20, 3, 4, 0, 0, 0,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3, 0, 0, 0, 0, 0, 9,10],
     [15,16, 0, 9,10, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0, 9,10, 0,15,16],
     [ 9,10, 0,15,16, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16, 0, 9,10],
     [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,15,16],
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
-    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],    ],
-    // The Lagoon's 12-line slice of the approved pool (VENTA_ROSTER_DRAFT.md —
-    // "The Lagoon", 12 evolution lines). Levels 10–15 [TUNE] per that draft,
-    // which is a big jump up from The Meadows' 2–5 — but ⚠️ level still changes
-    // NO stats until M5 adds leveling (see src/state.js), so today it's flavour
-    // that says "this area is for later". They stand on the shore and the
-    // grass around the water, never in it.
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
     encounters: [
       { id: "lagoon-axolightl",       species: "axolightl",       level: 10, tileX: 10, tileY: 3  },
       { id: "lagoon-claymorior",      species: "claymorior",      level: 10, tileX: 14, tileY: 3  },
@@ -244,10 +257,12 @@ const MAPS = {
       { id: "lagoon-berry-5", tileX: 26, tileY: 12 },
       { id: "lagoon-berry-6", tileX: 16, tileY: 15 },
     ],
-    // The boat home, tied up on the lagoon's western shore. No lock on this
-    // one — you can always get back to The Meadows.
+    // The boat home, tied up at the water on the FAR WEST edge — the mirror
+    // image of The Meadows' dock on its far east, so the two ends of the
+    // crossing line up (Jeff & Lewis's call, DECISIONS.md #80). No lock on this
+    // one: you can always get back to The Meadows.
     exits: [
-      { id: "lagoon-boat", kind: "boat", tileX: 8, tileY: 9,
+      { id: "lagoon-boat", kind: "boat", tileX: 2, tileY: 9,
         toMap: "theMeadows", toTile: { x: 26, y: 9, facing: "left" } },
     ],
   },

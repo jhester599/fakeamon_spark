@@ -41,6 +41,85 @@ const TILE = 16;          // every tile in every sheet is 16×16
 const OUT_COLS = 6;       // same width as meadow.png, so index = row*6 + column
 const OUT_ROWS = 4;
 
+// ---------------------------------------------------------------------------
+//  THE MOOD DIAL  [TUNE] — what makes The Lagoon feel different from The
+//  Meadows. George's tiles are bright and cheerful, which is exactly right for
+//  a starting meadow and exactly wrong for a swamp. So after the tiles are
+//  assembled, every pixel is pushed towards DARK BLUE AND BLACK (Jeff &
+//  Lewis's call, 2026-08-10).
+//
+//  How it works, in one sentence: we work out how bright each pixel is, look
+//  that brightness up on a dark-blue ramp, and then mix that ramp colour with
+//  a dimmed version of the original — so shapes and edges stay readable, but
+//  the greens go night-time blue instead of grass green.
+//
+//  There's one extra trick. If we just darkened everything evenly, the grass
+//  (which starts off BRIGHTER than the water) would stay brighter than the
+//  water — and a lagoon where the water is the darkest thing on screen doesn't
+//  read as water at all. So the rule is: THE BLUER A PIXEL ALREADY IS, THE
+//  MORE LIGHT IT KEEPS. Water stays lit; grass, mud, sand and stone all sink
+//  towards black. Result: near-black banks with the water glowing in the
+//  middle, which is what a swamp at night actually looks like.
+//
+//  Play with these numbers and re-run the script:
+//    DIM          how much of the original colour survives (lower = darker)
+//    BLUENESS     how strongly it's dragged onto the blue ramp (0 = no
+//                 recolour, 1 = everything goes blue/black whatever it was)
+//    RAMP         the colour of "fully lit" — the blue everything heads for
+//    LIFT         a little glow in the darkest pixels so black isn't flat
+//    LAND_TO_BLACK  how far the NON-blue things (grass, mud, stone) sink
+//                 towards black (0 = none, 1 = completely black)
+// ---------------------------------------------------------------------------
+const MOOD = {
+  DIM: 0.50,
+  BLUENESS: 0.70,
+  RAMP: { r: 0.30, g: 0.42, b: 0.88 },
+  LIFT: 8,
+  LAND_TO_BLACK: 0.66,
+};
+
+// Push one image towards the MOOD palette above. Works on raw pixels — four
+// numbers per pixel (red, green, blue, and how see-through it is) — because
+// that's the most honest way to explain "make it darker and bluer".
+async function applyMood(pngBuffer) {
+  const { data, info } = await sharp(pngBuffer).ensureAlpha().raw()
+    .toBuffer({ resolveWithObject: true });
+
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] === 0) continue; // fully see-through — leave it alone
+
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    // How bright is this pixel? (The weights are the standard ones — our eyes
+    // are much more sensitive to green than to blue.)
+    let brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+
+    // How BLUE is it, from 0 (not at all) to 1 (very)? Water scores high;
+    // grass, mud, sand and grey stone all score zero. Everything that isn't
+    // blue sinks towards black, so the water ends up the brightest thing left.
+    const blueness = Math.max(0, Math.min(1, (b - Math.max(r, g)) / 255 * 3));
+    brightness *= 1 - MOOD.LAND_TO_BLACK * (1 - blueness);
+
+    // Where that brightness lands on the dark-blue ramp.
+    const rampR = brightness * MOOD.RAMP.r + MOOD.LIFT * 0.4;
+    const rampG = brightness * MOOD.RAMP.g + MOOD.LIFT * 0.6;
+    const rampB = brightness * MOOD.RAMP.b + MOOD.LIFT;
+
+    // Mix the ramp with a dimmed version of the original colour. The non-blue
+    // pixels get their original colour dimmed too, or the grass would keep a
+    // green tinge no matter how dark we made it.
+    const keep = MOOD.DIM * (1 - MOOD.BLUENESS) * (1 - MOOD.LAND_TO_BLACK * (1 - blueness));
+    const mix = (original, ramp) =>
+      Math.max(0, Math.min(255, Math.round(original * keep + ramp * MOOD.BLUENESS)));
+
+    data[i]     = mix(r, rampR);
+    data[i + 1] = mix(g, rampG);
+    data[i + 2] = mix(b, rampB);
+  }
+
+  return sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .png().toBuffer();
+}
+
 // Where things live on George's sheets, as (column, row) in tiles.
 // terrain_george.png is a grid of 3×3 "blobs", one material per blob:
 //   grass    at columns 0-2, rows 0-2      (middle tile = plain grass)
@@ -131,7 +210,7 @@ for (let i = 0; i < RECIPE.length; i++) {
   }
 }
 
-await sharp({
+const assembled = await sharp({
   create: {
     width: OUT_COLS * TILE,
     height: OUT_ROWS * TILE,
@@ -140,7 +219,11 @@ await sharp({
   },
 })
   .composite(layers)
-  .toFile(OUT);
+  .png()
+  .toBuffer();
+
+// The last step: drag the whole thing into night-time blues (see MOOD above).
+await sharp(await applyMood(assembled)).toFile(OUT);
 
 console.log(`✅ wrote ${OUT} (${OUT_COLS}×${OUT_ROWS} tiles of ${TILE}px)`);
 console.log("   Tiles by George_ (CC BY 3.0) — record the derived file in CREDITS.md.");

@@ -332,8 +332,20 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 > `defeatedEncounters` list still works; respawning is scoped to the map you're
 > on (`clearedOnThisMap`). New guard: **`tools/check-maps.mjs`** reads the real
 > `src/data/maps.js` and proves nothing on any map stands inside a tree, shares
-> a tile, or sits somewhere you can't walk to. Verified with a 52-check
-> headless-browser suite plus a 19-check regression pass over M3/M4S2–S5.
+> a tile, or sits somewhere you can't walk to.
+>
+> **Three design tweaks the same day, off the first screenshots (`DECISIONS.md`
+> #80):** The Lagoon is now **dark blue and black** — a `MOOD` block at the end
+> of `tools/make-lagoon-tileset.mjs` recolours the same George tiles, so the
+> gloom is a dial, not hand-painted art (the rule that makes it work: *the bluer
+> a pixel already is, the more light it keeps*, so the banks go near-black and
+> the water glows). **The Meadows gained a small inlet of water** beside the
+> boat so the dock reads as a dock — nine new water tiles added by
+> `tools/add-meadow-water-tiles.mjs`, which grows `meadow.png` by one row so no
+> existing tile number moves. And **The Lagoon's boat moved to the map's far
+> west edge**, mirroring The Meadows' dock on its far east. Verified with a
+> 56-check headless-browser suite plus a 19-check regression pass over
+> M3/M4S2–S5.
 > ⚠️ **Lewis's rename pass for these 12 is still pending**, same as The
 > Meadows' 14. **Next: M5 Step 1 (Evolutions).**
 
@@ -344,7 +356,7 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 | **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24; real skyscraper art added 2026-07-26)* |
 | **4** ✅ | **Gym 1** — Enforcer Boss with a **2-Fakeamon team** (Allagon + the ace AV8R); beating them gives tokens **and the Gear Badge**. Includes the one M4 engine change (`enemyParty` in `src/battle.js`) and the game's first metal move, **Iron Beam** (Lewis's invention) | Bump the ⚙️ Gym → a two-creature trainer battle → a badge on your HUD — *done! (2026-07-25, placeholder gym art; AV8R art blocked on attribution)* |
 | **5** ✅ | **Cooking Cabin** — berries grow on the map (walk over one to pick it up), and two of them cook into a **healing dish** at the Cabin; self-serve, free (B26). Rarity per berry: Fakeaberry common → Cosmicberry extremely rare | Berries lying in the grass; a cooking screen where recipes heal different amounts — *done! (2026-07-26)* |
-| **6** ✅ | **Open a new area** — build the **area-travel seam** (`exits` in map data + `WorldScene.loadMap`), so Gym 1's **Gear Badge** unlocks **The Lagoon**, stocked with its own 12-line slice of the **198-Fakeamon** pool. You travel by **boat** (Jeff & Lewis's call — a boat suits a watery area better than a gate), bumped at the east end of The Meadows' path. *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7. ⚠️ Lewis's rename pass for these 12 is still pending, same as The Meadows' 14.)* | Beat Gym 1 → the 🔒 on the boat becomes a 🚤 → sail to a whole new area with its own cast of wild Fakeamon — *done! (2026-08-10)* |
+| **6** ✅ | **Open a new area** — build the **area-travel seam** (`exits` in map data + `WorldScene.loadMap`), so Gym 1's **Gear Badge** unlocks **The Lagoon**, stocked with its own 12-line slice of the **198-Fakeamon** pool. You travel by **boat** (Jeff & Lewis's call — a boat suits a watery area better than a gate), moored at a little inlet at the east end of The Meadows' path, and arriving at the mirror-image dock on The Lagoon's west edge. *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7. ⚠️ Lewis's rename pass for these 12 is still pending, same as The Meadows' 14.)* | Beat Gym 1 → the 🔒 on the boat becomes a 🚤 → sail to a whole new area with its own cast of wild Fakeamon — *done! (2026-08-10)* |
 
 **🎉 M4 done when:** you can win tokens, heal at a Fakeatent, buy balls at a
 Tall Tower, beat your first gym, cook healing dishes at a Cooking Cabin, and

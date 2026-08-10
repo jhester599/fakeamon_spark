@@ -23,7 +23,7 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `anoleaf` | *(Lewis names it later)* | Spalding004 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `apeoro` | *(Lewis names it later)* | Original art by CrisFarias; Front, back and face sprites by Involuntary Twitch | CC BY-SA 3.0 (per wiki.tuxemon.org/Apeoro) | `c34a9c72` |
 | `arthrobolt` | *(Lewis names it later)* | josepharaoh99 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
-| `axolightl` | *(Lewis names it later)* | Cavalcadeur, josepharaoh99 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
+| `axolightl` | Axolightl | Cavalcadeur, josepharaoh99 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `babysnitch` | *(Lewis names it later)* | Art by DarkMilkyWay1701 | CC BY-SA 3.0 (per wiki.tuxemon.org/Babysnitch) | `c34a9c72` |
 | `baddrscratch` | *(Lewis names it later)* | Art by DarkMilkyWay1701 | CC BY-SA 3.0 (per wiki.tuxemon.org/Baddrscratch) | `c34a9c72` |
 | `baobaraffe` | *(Lewis names it later)* | Name, art, sprites and blurb by princess-phoenix | CC BY-SA 3.0 (per wiki.tuxemon.org/Baobaraffe) | `c34a9c72` |
@@ -58,7 +58,7 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `chillimp` | *(Lewis names it later)* | Chickenshowman | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `chloragon` | *(Lewis names it later)* | Spalding004 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `chrome_robo` | *(Lewis names it later)* | Front sprite by Redshrike; Overland sprites by Catch Challenger | CC BY-SA 3.0 (per wiki.tuxemon.org/Chrome_Robo) | `c34a9c72` |
-| `claymorior` | *(Lewis names it later)* | Design and original sprite by JustinNuggets and Piacarrot | CC BY-SA 3.0 (per wiki.tuxemon.org/Claymorior) | `c34a9c72` |
+| `claymorior` | Claymorior | Design and original sprite by JustinNuggets and Piacarrot | CC BY-SA 3.0 (per wiki.tuxemon.org/Claymorior) | `c34a9c72` |
 | `coaldiak` | *(Lewis names it later)* | From the open-source game OPMon; Jaskrendix; name by Sanglorian | ⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Coaldiak) | `c34a9c72` |
 | `cohldrabi` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Face sprites adapted by Sanglorian; Back sprite adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Cohldrabi) | `c34a9c72` |
 | `coppi` | *(Lewis names it later)* | Design and original sprite by FrozenFeathers and Piacarrot | CC BY-SA 3.0 (per wiki.tuxemon.org/Coppi) | `c34a9c72` |
@@ -94,7 +94,7 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `flounce` | *(Lewis names it later)* | Back sprite by HippasusTwo; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Flounce) | `c34a9c72` |
 | `flummack` | *(Lewis names it later)* | Designed and sprited by Georg Eckert; Front sprite by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Flummack) | `c34a9c72` |
 | `flummby` | *(Lewis names it later)* | Designed and sprited by Georg Eckert; Front sprite by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Flummby) | `c34a9c72` |
-| `fluoresfin` | *(Lewis names it later)* | Original design and sprites by Serpexnessie | CC BY-SA 3.0 (per wiki.tuxemon.org/Fluoresfin) | `c34a9c72` |
+| `fluoresfin` | Fluoresfin | Original design and sprites by Serpexnessie | CC BY-SA 3.0 (per wiki.tuxemon.org/Fluoresfin) | `c34a9c72` |
 | `fluttaflap` | *(Lewis names it later)* | Spalding004 | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `fordin` | *(Lewis names it later)* | Designed and sprited by Georg Eckert; Back and face sprites resized by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Fordin) | `c34a9c72` |
 | `forturtle` | *(Lewis names it later)* | Original design and sprites by Chickenshowman | CC BY-SA 3.0 (per wiki.tuxemon.org/Forturtle) | `c34a9c72` |
@@ -112,7 +112,7 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `grintrock` | *(Lewis names it later)* | Original design by Spalding004 and Royaba; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Grintrock) | `c34a9c72` |
 | `gryfix` | *(Lewis names it later)* | Front sprite by Catch Challenger; Back and face sprites by Lejun | CC BY-SA 3.0 (per wiki.tuxemon.org/Gryfix) | `c34a9c72` |
 | `gupphire` | *(Lewis names it later)* | Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphire) | `c34a9c72` |
-| `gupphish` | *(Lewis names it later)* | Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphish) | `c34a9c72` |
+| `gupphish` | Gupphish | Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphish) | `c34a9c72` |
 | `hatchling` | *(Lewis names it later)* | Original design and sprites by tamashihoshi | CC BY-SA 3.0 (per wiki.tuxemon.org/Hatchling) | `c34a9c72` |
 | `helipi` | *(Lewis names it later)* | Design and original sprite by FrozenFeather and Piacarrot; It flies farther with one wing by rotating than with two, but sacrifices the ability to easily aim | CC BY-SA 3.0 (per wiki.tuxemon.org/Helipi) | `c34a9c72` |
 | `hoarse` | *(Lewis names it later)* | Designed and sprited by Rsg167; Front and back sprites by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Hoarse) | `c34a9c72` |
@@ -123,16 +123,16 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `ignibus` | *(Lewis names it later)* | Originally design by Cavalcadeur; Other art by Leo; Front sprite by Leo; Back and face sprites by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Ignibus) | `c34a9c72` |
 | `imbrickcile` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Back and face sprites by Jaskrendix, based on the front sprite | CC BY-SA 3.0 (per wiki.tuxemon.org/Imbrickcile) | `c34a9c72` |
 | `incandesfin` | *(Lewis names it later)* | Original design and sprites by Serpexnessie | CC BY-SA 3.0 (per wiki.tuxemon.org/Incandesfin) | `c34a9c72` |
-| `jelillow` | *(Lewis names it later)* | Art and design by TheBritanniaRegion; Sprites by Lejun | CC BY-SA 3.0 (per wiki.tuxemon.org/Jelillow) | `c34a9c72` |
+| `jelillow` | Jelillow | Art and design by TheBritanniaRegion; Sprites by Lejun | CC BY-SA 3.0 (per wiki.tuxemon.org/Jelillow) | `c34a9c72` |
 | `jemuar` | *(Lewis names it later)* | Original design by Leo; Sprites by tamashihoshi; Back sprite by Sanglorian; Other art by extyrannomon | CC BY-SA 3.0 (per wiki.tuxemon.org/Jemuar) | `c34a9c72` |
 | `knindling` | *(Lewis names it later)* | Back sprite by HappisusTwo; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Knindling) | `c34a9c72` |
 | `komodraw` | *(Lewis names it later)* | Original design and sprites by Serpexnessie | CC BY-SA 3.0 (per wiki.tuxemon.org/Komodraw) | `c34a9c72` |
 | `komoduel` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Komoduel) | `c34a9c72` |
-| `kroki` | *(Lewis names it later)* | Designed and sprited by Georg Eckert; Face sprites by Jaskrendix; Backsprite by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Kroki) | `c34a9c72` |
+| `kroki` | Kroki | Designed and sprited by Georg Eckert; Face sprites by Jaskrendix; Backsprite by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Kroki) | `c34a9c72` |
 | `krokivip` | *(Lewis names it later)* | Designed and sprited by Georg Eckert; Face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Krokivip) | `c34a9c72` |
 | `lambert` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `legko` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
-| `lesmagu` | *(Lewis names it later)* | Art by BrasioPkmn; Sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Lesmagu) | `c34a9c72` |
+| `lesmagu` | Lesmagu | Art by BrasioPkmn; Sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Lesmagu) | `c34a9c72` |
 | `lettice` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Lettice) | `c34a9c72` |
 | `leviadile` | *(Lewis names it later)* | Designed and sprited by Georg Eckert | CC BY-SA 3.0 (per wiki.tuxemon.org/Leviadile) | `c34a9c72` |
 | `lightmare` | *(Lewis names it later)* | Original design and sprites by Serpexnessie; Back sprite tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Lightmare) | `c34a9c72` |
@@ -144,15 +144,15 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `moloch` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `myrmison` | *(Lewis names it later)* | Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Myrmison) | `c34a9c72` |
 | `narcileaf` | *(Lewis names it later)* | Original design and sprites by Spalding004; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Narcileaf) | `c34a9c72` |
-| `nebufin` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Nebufin) | `c34a9c72` |
+| `nebufin` | Nebufin | Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Nebufin) | `c34a9c72` |
 | `nimbulex` | *(Lewis names it later)* | Front sprite by Spalding004; Back and face sprites by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Nimbulex) | `c34a9c72` |
 | `ninjasmine` | *(Lewis names it later)* | From the open-source game OPMon; Jaskrendix | ⚠️ OPMon-derived — confirm OPMon terms (per wiki.tuxemon.org/Ninjasmine) | `c34a9c72` |
 | `noctalo` | *(Lewis names it later)* | Catch Challenger | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `noctula` | *(Lewis names it later)* | Catch Challenger | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
-| `nostray` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
+| `nostray` | Nostray | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `novaquarius` | *(Lewis names it later)* | Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix | CC BY-SA 3.0 (per wiki.tuxemon.org/Novaquarius) | `c34a9c72` |
-| `nudiflot_female` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
-| `nudiflot_male` | *(Lewis names it later)* | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
+| `nudiflot_female` | Nudiflot (dreamy) | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
+| `nudiflot_male` | Nudiflot (fierce) | Sanglorian | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
 | `nudikill` | *(Lewis names it later)* | Original design by Sanglorian and DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Nudikill) | `c34a9c72` |
 | `nudimind` | *(Lewis names it later)* | Original design by DevilDman; Sprites by Levaine; Back sprite by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Nudimind) | `c34a9c72` |
 | `nut` | *(Lewis names it later)* | TacoBot | Public Domain (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |
@@ -187,7 +187,7 @@ on `github.com/Tuxemon/Tuxemon`, at the commit in the last column.
 | `shnark` | *(Lewis names it later)* | Design and front and face sprites by Sanglorian; Back sprite by Impossible Realms | CC BY-SA 3.0 (per wiki.tuxemon.org/Shnark) | `c34a9c72` |
 | `shull` | *(Lewis names it later)* | Design and front and back sprites by WDFA-Final; Front, back and face sprites by HippasusTwo | CC BY-SA 3.0 (per wiki.tuxemon.org/Shull) | `c34a9c72` |
 | `shybulb` | *(Lewis names it later)* | Original design and sprites by Spalding004; Back sprites by Sanglorian; Face sprites tweaked by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Shybulb) | `c34a9c72` |
-| `skwib` | *(Lewis names it later)* | Designed and illustrated by fauxlens; Sprites by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Skwib) | `c34a9c72` |
+| `skwib` | Skwib | Designed and illustrated by fauxlens; Sprites by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Skwib) | `c34a9c72` |
 | `snaki` | *(Lewis names it later)* | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snaki) | `c34a9c72` |
 | `snokari` | *(Lewis names it later)* | Original design and front and back sprites by Catch Challenger; Face sprites tweaked from back sprite by Sanglorian | CC BY-SA 3.0 (per wiki.tuxemon.org/Snokari) | `c34a9c72` |
 | `snowrilla` | *(Lewis names it later)* | Chickenshowman | CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md) | `c34a9c72` |

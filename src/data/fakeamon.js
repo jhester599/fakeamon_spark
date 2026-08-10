@@ -140,6 +140,108 @@ const FAKEAMON = {
     moves: ["tackle", "leafage", "pounce", "confusion"],
   },
 
+  // ---- WILD ROSTER — THE LAGOON (M4S6) ----
+  // The Lagoon's 12-line slice of the same approved pool
+  // (VENTA_ROSTER_DRAFT.md → "The Lagoon"). Built exactly like The Meadows'
+  // slice above: names are Title-Cased Tuxemon slugs — PLACEHOLDERS until
+  // Lewis's rename pass reaches this area — and the stats come from the same
+  // [TUNE] type-archetype table, not hand-authored per monster.
+  //
+  //   water  (bulky, slow)      44  11  12   9
+  //   grass  (defensive)        41  11  13  10
+  //   normal (balanced/generic) 38  12  11  11
+  //
+  // ⚠️ WORTH KNOWING: ten of these twelve are water type, so ten of them have
+  // IDENTICAL stats and moves — only the picture and the name differ. That's
+  // the archetype table doing its job (it's what keeps 200 monsters possible
+  // without 200 balancing decisions), but it does mean The Lagoon fights all
+  // feel alike. The fix isn't a new system — it's Jeff & Lewis picking a
+  // handful of these to hand-tune, the way the gym team above was. Good
+  // homework once the area has been played.
+  //
+  // ⚠️ AND: The Lagoon's wild levels are 10–15 vs The Meadows' 2–5, but the
+  // stats below are the SAME archetype numbers as The Meadows' roster — so
+  // right now this area is not actually harder, just later. It becomes a real
+  // difficulty step when M5 turns level into stats (src/state.js).
+  axolightl: {
+    name: "Axolightl", type: "water", sprite: "assets/sprites/front/axolightl.png",
+    overworld: "assets/sprites/idle/axolightl.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  claymorior: {
+    name: "Claymorior", type: "grass", sprite: "assets/sprites/front/claymorior.png",
+    overworld: "assets/sprites/idle/claymorior.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle", "leafage", "pounce", "confusion"],
+  },
+  fluoresfin: {
+    name: "Fluoresfin", type: "water", sprite: "assets/sprites/front/fluoresfin.png",
+    overworld: "assets/sprites/idle/fluoresfin.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  gupphish: {
+    name: "Gupphish", type: "water", sprite: "assets/sprites/front/gupphish.png",
+    overworld: "assets/sprites/idle/gupphish.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  jelillow: {
+    name: "Jelillow", type: "water", sprite: "assets/sprites/front/jelillow.png",
+    overworld: "assets/sprites/idle/jelillow.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  kroki: {
+    name: "Kroki", type: "water", sprite: "assets/sprites/front/kroki.png",
+    overworld: "assets/sprites/idle/kroki.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  lesmagu: {
+    name: "Lesmagu", type: "water", sprite: "assets/sprites/front/lesmagu.png",
+    overworld: "assets/sprites/idle/lesmagu.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  nebufin: {
+    name: "Nebufin", type: "water", sprite: "assets/sprites/front/nebufin.png",
+    overworld: "assets/sprites/idle/nebufin.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  nostray: {
+    name: "Nostray", type: "water", sprite: "assets/sprites/front/nostray.png",
+    overworld: "assets/sprites/idle/nostray.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  nudiflot_female: {
+    // See the note on nudiflot_male below — two different creatures that would
+    // both otherwise be called "Nudiflot".
+    name: "Nudiflot (dreamy)", type: "water", sprite: "assets/sprites/front/nudiflot_female.png",
+    overworld: "assets/sprites/idle/nudiflot_female.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  nudiflot_male: {
+    // Tuxemon ships two Nudiflots. They're different creatures with different
+    // art, so they're two species here — but both would show as "Nudiflot",
+    // which reads as a bug. Until Lewis renames them they're told apart in
+    // brackets.
+    name: "Nudiflot (fierce)", type: "water", sprite: "assets/sprites/front/nudiflot_male.png",
+    overworld: "assets/sprites/idle/nudiflot_male.png",
+    baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
+    moves: ["tackle", "splash", "spout", "breech"],
+  },
+  skwib: {
+    name: "Skwib", type: "normal", sprite: "assets/sprites/front/skwib.png",
+    overworld: "assets/sprites/idle/skwib.png",
+    baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
+    moves: ["tackle", "bite", "pounce", "confusion"],
+  },
+
   // ---- GYM 1 — ENFORCER BOSS'S TEAM (M4S4) ----
   // The first two creatures in the game that are NOT wild: they belong to a
   // trainer (src/data/gyms.js). Unlike the wild roster above, these two are

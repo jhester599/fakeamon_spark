@@ -161,26 +161,20 @@ function enterOverworld() {
   worldActive = true; // arrow keys walk the hero now
 
   const news = takeNews(); // "you earned 5 tokens", "Aardorn joined your team", …
+  const map = MAPS[gameState.world.mapId]; // M4S6: which area are we in?
 
-  document.getElementById("title").textContent = "The Meadows";
+  document.getElementById("title").textContent = map.name;
   document.getElementById("controls-label").textContent = "";
   document.getElementById("controls").innerHTML = "";
   document.getElementById("arena").innerHTML =
     '<div class="title-card">' +
       (news ? '<p class="world-news">' + news + "</p>" : "") +
-      "<h2>Exploring The Meadows 🌱</h2>" +
+      "<h2>Exploring " + map.name + " " + areaEmoji(gameState.world.mapId) + "</h2>" +
       "<p>Use the <b>arrow keys</b> to walk around. Wild Fakeamon are standing " +
       "in the grass — <b>walk into one to battle it!</b>" +
       "<br><small>(Beat it or catch it and it leaves the map for a while; run " +
       "away and it stays put. Cleared ones may wander back later.)</small></p>" +
-      "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
-      "your team for " + healCost() + " 🪙. 🗼 The Tall Tower next to it " +
-      "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each. ⚙️ And further " +
-      "along, " + GYMS.gym1.leader + " is waiting in the Gym — beat their team " +
-      "of two to win the " + GYMS.gym1.badgeName + "!</small></p>" +
-      "<p><small>🫐 <b>Berries</b> grow out in the grass — just walk over one to " +
-      "pick it up. 🍳 Take two to the <b>Cooking Cabin</b> at the end of the row " +
-      "and cook them into a dish that heals your Fakeamon, free.</small></p>" +
+      areaTipsHtml(gameState.world.mapId) +
     "</div>";
 
   renderTeamList();
@@ -188,6 +182,44 @@ function enterOverworld() {
   refillEmptyMap();   // …and never leave the player standing on an empty map
   maybeGrowBerries(); // M4S5: berries grow back on empty patches over time
   saveGame();
+}
+
+// M4S6: a little picture for each area, used in the overworld card's heading.
+function areaEmoji(mapId) {
+  if (mapId === "theLagoon") return "🐊";
+  return "🌱";
+}
+
+// The "what's here?" note under the heading — one paragraph per area. It's
+// written out per map rather than generated, because the useful thing to say
+// about The Meadows ("the Gym is down the row") isn't the same shape as the
+// useful thing to say about The Lagoon ("the boat home is on the shore").
+// Adding an area = adding one branch here.
+function areaTipsHtml(mapId) {
+  if (mapId === "theLagoon") {
+    return (
+      "<p><small>🏕️ There's a <b>Fakeatent</b> up on the north bank — resting " +
+      "here costs the same " + healCost() + " 🪙 as back home. 🫐 <b>Berries</b> " +
+      "grow around the water too, but the <b>Cooking Cabin</b> is back in The " +
+      "Meadows.</small></p>" +
+      "<p><small>🚤 The <b>boat</b> on the western shore takes you home again " +
+      "whenever you like. 🌊 You can't swim — walk around the water.</small></p>"
+    );
+  }
+  // The Meadows (and a sensible default for any area built later).
+  return (
+    "<p><small>🏕️ A Fakeatent stands nearby — walk into it any time to rest " +
+    "your team for " + healCost() + " 🪙. 🗼 The Tall Tower next to it " +
+    "sells Fakeaballs for " + ECONOMY.BALL_COST + " 🪙 each. ⚙️ And further " +
+    "along, " + GYMS.gym1.leader + " is waiting in the Gym — beat their team " +
+    "of two to win the " + GYMS.gym1.badgeName + "!</small></p>" +
+    "<p><small>🫐 <b>Berries</b> grow out in the grass — just walk over one to " +
+    "pick it up. 🍳 Take two to the <b>Cooking Cabin</b> at the end of the row " +
+    "and cook them into a dish that heals your Fakeamon, free.</small></p>" +
+    "<p><small>🚤 A <b>boat</b> waits at the far east end of the path. It sails " +
+    "to <b>The Lagoon</b> — once you've earned the " + GYMS.gym1.badgeName +
+    ".</small></p>"
+  );
 }
 
 // What a full heal costs right now. It's cheaper while you're adventuring
@@ -333,8 +365,23 @@ function startMapEncounter(encounter) {
 // S8: after a battle, maybe bring one previously-cleared wild Fakeamon back
 // onto the map — never the one you JUST fought (justFoughtId), so nothing
 // pops back the instant you clear it; it can only return on a LATER roll.
+// M4S6: `defeatedEncounters` is one flat list covering EVERY area (encounter
+// ids are already namespaced — "meadows-aardorn", "lagoon-kroki" — so one list
+// is enough, and no save-version bump was needed). But respawning has to stay
+// local: only creatures belonging to the map you're standing on can wander
+// back onto it. Without this, a respawn roll in The Lagoon could pick a
+// Meadows creature and quietly do nothing.
+function clearedOnThisMap() {
+  const ids = (MAPS[gameState.world.mapId].encounters || []).map(function (enc) {
+    return enc.id;
+  });
+  return gameState.world.defeatedEncounters.filter(function (id) {
+    return ids.indexOf(id) !== -1;
+  });
+}
+
 function maybeRespawnEncounter(justFoughtId) {
-  const candidates = gameState.world.defeatedEncounters.filter(function (id) {
+  const candidates = clearedOnThisMap().filter(function (id) {
     return id !== justFoughtId;
   });
   if (candidates.length === 0) return;
@@ -361,8 +408,9 @@ function refillEmptyMap() {
   if (!worldScene) return;
   if (worldScene.liveEncounterCount() > 0) return; // still plenty out there
 
-  // Shuffle the cleared ones so it's a different crowd each time.
-  const cleared = gameState.world.defeatedEncounters.slice();
+  // Shuffle the cleared ones so it's a different crowd each time. (Only ones
+  // belonging to THIS map — see clearedOnThisMap above.)
+  const cleared = clearedOnThisMap();
   for (let i = cleared.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const swap = cleared[i]; cleared[i] = cleared[j]; cleared[j] = swap;
@@ -591,6 +639,88 @@ function buyFakeaball() {
 }
 
 function leaveTallTower() {
+  enterOverworld();
+}
+
+// ===========================================================================
+//  TRAVEL BETWEEN AREAS (M4S6) — the boats.
+//
+//  Venta has six areas (DESIGN.md §7); two of them exist so far. An `exits`
+//  entry in src/data/maps.js is a doorway: bump it and this panel asks whether
+//  you want to go. Which areas you're ALLOWED into is one list —
+//  gameState.flags.unlockedAreas — and a gym badge is what pushes a new area
+//  onto it (awardGymPrize below). That list is the gate; there is no second
+//  "is it locked?" flag to keep in step with it.
+// ===========================================================================
+
+// May the player walk into this area yet? Also used by src/world/config.js to
+// decide whether a boat is drawn as a boat or as a padlock.
+function areaIsUnlocked(mapId) {
+  return gameState.flags.unlockedAreas.indexOf(mapId) !== -1;
+}
+
+// Which gym opens this area? Used only to say something helpful on a locked
+// exit ("you need the Gear Badge") — read straight out of src/data/gyms.js, so
+// adding Gym 2 makes its area's locked message correct with no extra work.
+function gymThatOpens(mapId) {
+  return Object.values(GYMS).find(function (gym) { return gym.opens === mapId; }) || null;
+}
+
+// Bumped a boat. Unlike a battle, the map stays visible behind the panel —
+// same HUD-overlay treatment as the buildings (M4 plan §5.1).
+function enterExit(exit) {
+  worldActive = false; // no walking while the panel is open
+  showTravelPanel(exit);
+}
+
+function showTravelPanel(exit) {
+  const destination = MAPS[exit.toMap];
+  const unlocked = areaIsUnlocked(exit.toMap);
+  const gym = gymThatOpens(exit.toMap);
+
+  document.getElementById("title").textContent = "Boat 🚤";
+  document.getElementById("controls-label").textContent = "";
+  document.getElementById("arena").innerHTML =
+    '<div class="title-card">' +
+      "<h2>Boat 🚤</h2>" +
+      (unlocked
+        ? "<p>The little boat bobs against the shore. Sail to <b>" +
+          destination.name + "</b>?</p>"
+        : "<p>🔒 The boat is chained up. <b>" + destination.name +
+          "</b> is closed off" +
+          (gym
+            ? " — you need the <b>" + gym.badgeName + "</b> " + gym.badgeIcon +
+              " to sail there.</p><p><small>Beat " + gym.leader +
+              " at the Gym and come back!</small></p>"
+            : ".</p>")) +
+    "</div>";
+
+  const controls = document.getElementById("controls");
+  controls.innerHTML = "";
+
+  if (unlocked) {
+    const sailButton = document.createElement("button");
+    sailButton.className = "move-btn";
+    sailButton.textContent = "Sail to " + destination.name + " 🚤";
+    sailButton.addEventListener("click", function () { travelTo(exit); });
+    controls.appendChild(sailButton);
+  }
+
+  addTitleButton(controls, "save-btn", unlocked ? "Stay here" : "Turn back", enterOverworld);
+}
+
+// Actually go. Changing gameState.world is the WHOLE move — enterOverworld →
+// showWorld() → WorldScene.loadMap() redraws everything from it, the same seam
+// that already re-syncs the map after a battle.
+function travelTo(exit) {
+  gameState.world.mapId = exit.toMap;
+  gameState.world.player = {
+    tileX: exit.toTile.x,
+    tileY: exit.toTile.y,
+    facing: exit.toTile.facing,
+  };
+  noteNews("🚤 You sailed to " + MAPS[exit.toMap].name + "!");
+  saveGame();
   enterOverworld();
 }
 

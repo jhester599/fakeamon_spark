@@ -234,9 +234,9 @@
     <div class="overall">
       <div class="row">
         <b>Whole game progress</b>
-        <span class="count">30 / 36 steps · Milestone 4 of 5</span>
+        <span class="count">31 / 36 steps · Milestone 4 of 5</span>
       </div>
-      <div class="meter"><span style="width:83.3%"></span></div>
+      <div class="meter"><span style="width:86.1%"></span></div>
       <p style="margin:12px 0 0; font-size:12.5px; color:var(--ink-soft);">Every step is <b>M‹milestone›S‹step›</b> — e.g. the 7th M3 step is <b>M3S7</b>. Each row below is one such step, matching the S-numbers in the <code>PLANS/</code> docs, so "what's next" reads the same everywhere.</p>
     </div>
 
@@ -384,11 +384,11 @@
         <div class="zone-top">
           <span class="badge-m">M4 · METAL</span>
           <h2 class="zone-title">World Systems</h2>
-          <span class="status now">Playing now</span>
+          <span class="status done">✅ Complete</span>
         </div>
         <p class="zone-goal">Reasons to explore — heal, shop, cook, and the first trainer challenge. <i>(Beating a gym opens a new area — Step 6 builds that seam and stocks the <b>first</b> new area; the rest follow in M5. Architecture: <code>PLANS/M4_WORLD_SYSTEMS_PLAN.md</code>.)</i></p>
-        <div class="zone-meter"><span style="width:83.3%"></span></div>
-        <div class="zone-count">5 of 6 steps done</div>
+        <div class="zone-meter"><span style="width:100%"></span></div>
+        <div class="zone-count">6 of 6 steps done</div>
       </div>
       <ol class="steps">
         <li class="done"><span class="num">1</span><div class="step-body"><p class="step-what"><b>Tokens</b> — earn them from winning battles</p><p class="see"><span class="tag">▶ You'll see</span> A number that goes up when you win — done! (2026-07-24)</p></div></li>
@@ -396,7 +396,7 @@
         <li class="done"><span class="num">3</span><div class="step-body"><p class="step-what"><b>Tall Tower</b> — spend tokens to buy Fakeaballs (only the basic ball — B18; Great/Ultra/Cosmic are later). <i>Bonus this session: all 4 Fakeaball-tier icons got sourced from Tuxemon/AI art (see <code>CREDITS.md</code>) — only the basic one is wired in so far.</i></p><p class="see"><span class="tag">▶ You'll see</span> A shop that stays open for repeat purchases; the real Fakeaball icon shows on the Buy button — done! (2026-07-24; real skyscraper art added 2026-07-26)</p></div></li>
         <li class="done"><span class="num">4</span><div class="step-body"><p class="step-what"><b>Gym 1</b> — <b>Enforcer Boss</b> with a 2-Fakeamon team (<b>Allagon</b> + the ace <b>AV8R</b>), behind a ⚙️ Gym building in The Meadows' town row. This was the milestone's <b>one real engine change</b>: <code>battle.js</code> learned that the <i>enemy</i> has a bench too — <code>enemyParty</code> + <code>enemyIndex</code>, the exact mirror of your own <code>party[0]</code> — so when the leader's Fakeamon faints the next one steps up instead of the battle ending. A wild fight is just a bench of one, so nothing about wild battles changed. Also added the game's first metal move, <b>Iron Beam</b> (Lewis's invention!). No catching or running from a gym. Winning pays 40 🪙 + the <b>Gear Badge</b> (a chip on your HUD) and quietly unlocks <b>The Lagoon</b>, ready for Step 6's gate; rematches pay 10 🪙 (B17). XP is now paid per knockout, so a two-Fakeamon gym pays twice.</p><p class="see"><span class="tag">▶ You'll see</span> Bump the ⚙️ Gym → “Enforcer Boss sent out Allagon!” → beat it → “Enforcer Boss sent out AV8R!” → win a badge — done! (2026-07-25, placeholder gym art; AV8R has no sprite yet — its art is blocked on <i>attribution</i>, see <code>CREDITS.md</code>)</p></div></li>
         <li class="done"><span class="num">5</span><div class="step-body"><p class="step-what"><b>Cooking Cabin</b> — berries grow on the overworld and, unlike everything else on the map, <b>don't block you</b>: walk over one and it's yours. Six berry patches in The Meadows (<code>berrySpots</code>), and which berry appears is rolled from per-berry weights in the new <code>src/data/berries.js</code> — <b>Fakeaberry common</b> (50), Greenberry &amp; Raspberry medium (20 each), Greatberry unlikely (8), <b>Cosmicberry extremely rare</b> (2). The Factory grows none at all; Bossberry still only drops from mini-bosses. The <b>Cooking Cabin</b> (real log-cabin art) is the fourth building on the town row: pick two berries, see what they'd make, and cook — free, no chef (B26). All 13 recipes straight from <code>DESIGN.md</code> §9, and any unlisted pair still makes a Basic Dish so cooking never fails. ⚠️ This answered <b>B44</b> in a way that <b>supersedes B35</b> — berries are not area-themed after all, only the odds differ (<code>DECISIONS.md</code> #75).</p><p class="see"><span class="tag">▶ You'll see</span> Berries lying in the grass; a cooking screen where recipes heal different amounts — done! (2026-07-26)</p></div></li>
-        <li><span class="num">6</span><div class="step-body"><p class="step-what"><b>Open a new area</b> — build the area-travel seam: a map's <code>exits</code> become real doorways (walk onto one → load the next map), gated by badges so Gym 1's <b>Gear Badge</b> opens <b>one</b> new area (<b>The Lagoon</b>), stocked with its own slice of the <b>198-Fakeamon</b> pool + Lewis's renames <i>(re-scoped from "all areas": the remaining four grow area-by-area in M5)</i>. The biggest, riskiest piece of the milestone — it reuses the scene-resync seam already built for M4S1/S2's Continue-bug fix.</p><p class="see"><span class="tag">▶ You'll see</span> Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon</p></div></li>
+        <li class="done"><span class="num">6</span><div class="step-body"><p class="step-what"><b>Open a new area</b> — the area-travel seam is built: a map's <code>exits</code> are real doorways, and <b>one</b> method — <code>WorldScene.loadMap()</code> — now draws <i>whichever</i> map you're on. It does the first draw, the after-a-battle re-sync (the old CR-A fix) <b>and</b> the change of area, so there's only ever one answer to "why does the map show that?". You travel by <b>boat</b> (Jeff &amp; Lewis's call — a boat suits a watery destination better than a gate), tied up at the east end of The Meadows' path: it wears a 🔒 until you've won the <b>Gear Badge</b>, then becomes a 🚤. The gate reads one list — <code>flags.unlockedAreas</code>, the same list beating a gym pushes to — so there's no second "is it locked?" flag to keep in step. <b>The Lagoon</b> is a brand-new 30×20 map with its own tileset (built by <code>tools/make-lagoon-tileset.mjs</code> from the same George tiles The Meadows uses), its own <b>12 wild Fakeamon</b>, its own Fakeatent (so fainting out there heals you <i>there</i>) and its own berry patches. Water is solid — you walk around the lagoon, you don't swim. <i>(The remaining four areas grow area-by-area in M5. ⚠️ Lewis's rename pass for these 12 is still pending, same as The Meadows' 14.)</i> New guard: <code>tools/check-maps.mjs</code> proves nothing on any map stands inside a tree or out of reach.</p><p class="see"><span class="tag">▶ You'll see</span> Beat Gym 1 → the 🔒 on the boat turns into a 🚤 → sail east into a whole new swamp with a fresh cast of wild Fakeamon — done! (2026-08-10)</p></div></li>
       </ol>
       <p class="done-when"><b>🎉 Done when:</b> you can win tokens, heal at a Fakeatent, buy balls, beat your first gym, cook healing dishes, and walk through the badge-opened gate into <b>one</b> new area stocked with its own wild Fakeamon — all of it surviving a reload (save v2). <i>(The remaining areas open, one at a time, in M5.)</i></p>
       <p class="done-when">🧩 <b>Why this order:</b> tokens are the currency everything else spends, so they come first; the Fakeatent and Tall Tower are the two things tokens <i>buy</i> (heal before shop — simplest first); Gym 1 needs the enemy-party engine change, so it's gated behind that; Cooking needs a berry inventory and a way to find them; the new area needs the multi-map seam — the biggest, riskiest piece, saved for last. Full reasoning: <code>PLANS/M4_WORLD_SYSTEMS_PLAN.md</code> §1.</p>
@@ -409,7 +409,7 @@
         <div class="zone-top">
           <span class="badge-m">M5 · COSMIC</span>
           <h2 class="zone-title">Depth &amp; Story · The Finale</h2>
-          <span class="status locked">🔒 Locked</span>
+          <span class="status now">Playing now</span>
         </div>
         <p class="zone-goal">The big finish — evolutions, the mini-bosses, and stopping <b>Artemis</b> from dropping the meteor. 🌠 <i>(New late-game areas keep getting their own wild-roster slice — the same area-by-area job M4 Step 6 begins with the first area.)</i></p>
         <div class="zone-meter"><span style="width:0%"></span></div>

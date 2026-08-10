@@ -70,6 +70,11 @@ const IDLE_FRAME_W  = 24;
 const IDLE_FRAME_H  = 24;
 const IDLE_FRAME_RATE = 2; // slow, sleepy idle (frames per second — Lewis dial)
 
+// How far BACK the ground tiles sit. Phaser draws things in the order they're
+// made, and since M4S6 the hero is made first (so one hero sprite survives
+// every map change) — this pushes the grass behind everything regardless.
+const GROUND_DEPTH = -10;
+
 // --- Respawning (S8) -------------------------------------------------------
 // A beaten/caught wild Fakeamon leaves the map, but The Meadows shouldn't
 // stay empty forever — see PLANS/M3_OVERWORLD_PLAN.md §6.3. After every
@@ -102,6 +107,23 @@ const BUILDING_LOOKS = {
   cabin:     { emoji: "🍳", color: "#8b5a2b" }, // log brown — the Cooking Cabin (M4S5)
 };
 
+// --- Exits: the way out of an area (M4S6) ---------------------------------
+// An exit is a third kind of "special tile you bump", after wild Fakeamon and
+// buildings — same trick a third time, no new machinery. Bumping one asks
+// "sail over?" instead of starting a battle or opening a shop.
+//
+// EXIT_ART is empty on purpose: the boat is a placeholder emoji marker for
+// now, exactly like the Fakeatent and Gym were before Jeff & Lewis drew them.
+// Add "boat": "assets/sprites/buildings/boat.png" here when the art exists and
+// it takes over automatically — that's the whole change.
+const EXIT_ART = {};
+const EXIT_LOOKS = {
+  boat: { emoji: "🚤", color: "#4a90d9" },      // water blue
+};
+// What a LOCKED exit looks like instead (you haven't earned the badge yet).
+// One look for every kind — a locked door is a locked door.
+const EXIT_LOCKED_LOOK = { emoji: "🔒", color: "#6b6b6b" };
+
 // The live WorldScene, so main.js can nudge it (e.g. re-place the hero after
 // loading a save). Set in create(). worldActive gates walking: it's false on
 // the title/starter/battle screens so arrow keys don't walk a hero you can't
@@ -130,32 +152,44 @@ class BootScene extends Phaser.Scene {
   // that's just the meadow tileset (the little 16×16 tiles the map is built
   // from). The hero walk sheet joins this at S3.
   preload() {
-    const meadow = MAPS.theMeadows;
-    this.load.image("meadow-tiles", meadow.tileset); // assets/tilesets/meadow.png
     // S3: the hero walk sheet, sliced into 16×32 frames.
     this.load.spritesheet("hero", HERO_SHEET, { frameWidth: HERO_FRAME_W, frameHeight: HERO_FRAME_H });
 
-    // S6: the little idle sprite for each kind of wild Fakeamon that stands on
-    // this map — 2 frames of 24×24, keyed "idle-<species>" (one load per
-    // species, even if several of that species appear).
+    // M4S6: there's more than one map now, and you can sail between them at any
+    // moment — so we load EVERY map's art up front rather than only the one
+    // you start on. Loading is a "before the game starts" job in Phaser; doing
+    // it mid-game would mean a loading pause in the middle of a boat ride.
+    // (Two small maps' worth of art is nothing. If Venta ever has all six
+    // areas and this gets heavy, the fix is a loading screen per area — not
+    // something to build before it's actually slow.)
     const seenSpecies = new Set();
-    (meadow.encounters || []).forEach((enc) => {
-      const species = FAKEAMON[enc.species];
-      if (!species || !species.overworld || seenSpecies.has(enc.species)) return;
-      seenSpecies.add(enc.species);
-      this.load.spritesheet("idle-" + enc.species, species.overworld,
-        { frameWidth: IDLE_FRAME_W, frameHeight: IDLE_FRAME_H });
-    });
-
-    // M4S2: real building art, where BUILDING_ART lists it — same "only load
-    // what THIS map actually uses" spirit as the encounter sprites just above.
-    // A building kind with no entry here falls back to the BUILDING_LOOKS
-    // placeholder marker (see spawnOneBuilding).
     const seenBuildingKinds = new Set();
-    (meadow.buildings || []).forEach((b) => {
-      if (!BUILDING_ART[b.kind] || seenBuildingKinds.has(b.kind)) return;
-      seenBuildingKinds.add(b.kind);
-      this.load.image("building-" + b.kind, BUILDING_ART[b.kind]);
+
+    Object.keys(MAPS).forEach((mapId) => {
+      const map = MAPS[mapId];
+
+      // The ground tiles. Keyed per map, since each area has its own tileset.
+      this.load.image("tiles-" + mapId, map.tileset);
+
+      // S6: the little idle sprite for each kind of wild Fakeamon that stands
+      // on a map — 2 frames of 24×24, keyed "idle-<species>" (one load per
+      // species, even if several of that species appear).
+      (map.encounters || []).forEach((enc) => {
+        const species = FAKEAMON[enc.species];
+        if (!species || !species.overworld || seenSpecies.has(enc.species)) return;
+        seenSpecies.add(enc.species);
+        this.load.spritesheet("idle-" + enc.species, species.overworld,
+          { frameWidth: IDLE_FRAME_W, frameHeight: IDLE_FRAME_H });
+      });
+
+      // M4S2: real building art, where BUILDING_ART lists it. A building kind
+      // with no entry there falls back to the BUILDING_LOOKS placeholder
+      // marker (see spawnOneBuilding).
+      (map.buildings || []).forEach((b) => {
+        if (!BUILDING_ART[b.kind] || seenBuildingKinds.has(b.kind)) return;
+        seenBuildingKinds.add(b.kind);
+        this.load.image("building-" + b.kind, BUILDING_ART[b.kind]);
+      });
     });
 
     // M4S5: the little berry sprites that lie on the ground. Any berry can grow
@@ -195,37 +229,16 @@ class WorldScene extends Phaser.Scene {
     // fills the whole screen — but it's a friendly fallback).
     this.cameras.main.setBackgroundColor(WORLD_GRASS_COLOR);
 
-    const mapData = MAPS.theMeadows;
-    this.mapData = mapData; // kept for later lookups (S8: respawnEncounter)
-    this.tileSize = mapData.tileSize;
-    this.ground = mapData.ground;            // the tile-number grid
-    this.solid = new Set(SOLID_TILE_INDICES); // which tile numbers you can't walk on
-    this.mapCols = mapData.ground[0].length; // 30
-    this.mapRows = mapData.ground.length;    // 20
-
-    // Build a Phaser tilemap straight from our 2D array of tile numbers.
-    const map = this.make.tilemap({
-      data: mapData.ground,
-      tileWidth: mapData.tileSize,
-      tileHeight: mapData.tileSize,
-    });
-
-    // Link the tileset image to the map, then draw the ground layer. The
-    // tile numbers in mapData.ground index into this image (6 tiles wide).
-    const tileset = map.addTilesetImage("meadow", "meadow-tiles", mapData.tileSize, mapData.tileSize);
-    map.createLayer(0, tileset, 0, 0);
-
     // The hero. Origin bottom-centre so they "stand on" their tile (the 16×32
     // sprite is two tiles tall — the head pokes up into the tile above).
     this.hero = this.add.sprite(0, 0, "hero", HERO_STAND_FRAME.down);
     this.hero.setOrigin(0.5, 1);
     this.isMoving = false;
     this.createWalkAnims(); // S4: the four walk cycles
-    this.syncHeroToState(); // place them wherever gameState says (start tile, or a loaded save)
 
-    this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass
-    this.spawnBuildings(mapData);  // M4S2: stand the Fakeatent (and later, other buildings)
-    this.spawnBerries(mapData);    // M4S5: lay out whatever berries are currently growing
+    // M4S6: draw whichever area the save says you're standing in, and stand
+    // everything on it. One call does the whole map — see loadMap below.
+    this.loadMap(gameState.world.mapId);
 
     // Arrow keys. addCapture stops the browser from scrolling the page when
     // you press them (plan §6.2 / §3).
@@ -286,27 +299,85 @@ class WorldScene extends Phaser.Scene {
     this.isMoving = false;
   }
 
-  // Rebuild which wild Fakeamon stand on the map, straight from the save — the
-  // CR-A fix (PLANS/M4_WORLD_SYSTEMS_PLAN.md §5.2 / §A.3). The scene's encounter
-  // sprites are created ONCE at create(), before a loaded save is applied — so
-  // after Continue/Import the map could still show creatures you already beat,
-  // and let you re-fight them for free XP. This wipes the current encounter
-  // sprites and re-spawns exactly the ones the save says are still out there
-  // (spawnEncounters skips defeatedEncounters), then re-places the hero.
-  // showWorld() (src/screens.js) calls this every time we step onto the map, so
-  // what you see always matches your save. (Multi-map travel at M4S6 reuses this
-  // same seam to switch maps.)
-  rebuildFromState() {
-    if (!this.hero) return; // scene not ready yet — nothing to rebuild
+  // ---- THE ONE PLACE A MAP GETS DRAWN (M4S6) -----------------------------
+  // Build the whole overworld for `mapId`: the ground, the wild Fakeamon, the
+  // buildings, the berries, the exits, and the hero — all straight from
+  // src/data/maps.js and the save. Everything that changes what you're
+  // looking at goes through here, which is why there's only ever one answer to
+  // "why does the map show that?".
+  //
+  // It does three jobs at once, and that's on purpose (M4 plan §5.2 —
+  // "build it once, use it three ways"):
+  //   1. first draw, when the scene starts up;
+  //   2. re-sync after Continue / Import / a battle — the CR-A fix. The scene's
+  //      sprites used to be created ONCE at create(), before a loaded save was
+  //      applied, so the map could still show creatures you'd already beaten
+  //      and let you re-fight them for free XP;
+  //   3. changing area, when you take the boat (M4S6).
+  loadMap(mapId) {
+    if (!this.hero) return;              // scene not ready yet — nothing to draw
+    const mapData = MAPS[mapId];
+    if (!mapData) return;                // unknown map — leave what's on screen alone
+
+    // Only redraw the ground when the area actually changed. Re-syncing after
+    // every battle is common; sailing somewhere new is rare.
+    if (this.currentMapId !== mapId) {
+      this.drawGround(mapId, mapData);
+      this.currentMapId = mapId;
+    }
+
+    this.mapData = mapData; // kept for later lookups (S8: respawnEncounter)
+    this.tileSize = mapData.tileSize;
+    this.ground = mapData.ground;            // the tile-number grid
+    // Which tile numbers block you HERE. Each map brings its own list, because
+    // tile number 13 is a footpath in The Meadows and open water in The Lagoon.
+    this.solid = new Set(mapData.solidTiles || SOLID_TILE_INDICES);
+    this.mapCols = mapData.ground[0].length; // 30
+    this.mapRows = mapData.ground.length;    // 20
+
+    // Clear everything standing on the old map, then stand up the new one.
     (this.encounterSprites || []).forEach(function (sprite) { sprite.destroy(); });
     (this.buildingSprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S2
-    (this.berrySprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S5
-    this.spawnEncounters(this.mapData); // resets the sprite/tile maps; skips defeated
-    this.spawnBerries(this.mapData);    // M4S5: redraw from gameState.world.berries
-    this.spawnBuildings(this.mapData);  // M4S2: buildings don't change yet, but rebuilding
-                                         // them here too keeps this seam symmetric — M4S6's
-                                         // map-switch work reuses it as-is.
-    this.syncHeroToState();             // put the hero where the save says
+    (this.berrySprites || []).forEach(function (sprite) { sprite.destroy(); });    // M4S5
+    (this.exitSprites || []).forEach(function (sprite) { sprite.destroy(); });     // M4S6
+
+    this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass (skips defeated)
+    this.spawnBerries(mapData);    // M4S5: whatever is currently growing
+    this.spawnBuildings(mapData);  // M4S2: the Fakeatent, shop, gym, cabin…
+    this.spawnExits(mapData);      // M4S6: the boats
+    this.syncHeroToState();        // put the hero where the save says
+  }
+
+  // Draw the ground tiles for a map. Phaser builds a tilemap straight from our
+  // 2D array of tile numbers; the numbers index into the map's tileset image
+  // (6 tiles wide — see the legend in src/data/maps.js).
+  //
+  // Changing area means throwing the old layer away and making a new one: a
+  // Phaser tilemap layer belongs to one tilemap and one tileset image, so it
+  // can't just be re-pointed at different art (PLANS/phaser-skills/tilemaps).
+  drawGround(mapId, mapData) {
+    if (this.groundLayer) this.groundLayer.destroy();
+
+    const map = this.make.tilemap({
+      data: mapData.ground,
+      tileWidth: mapData.tileSize,
+      tileHeight: mapData.tileSize,
+    });
+    // "tiles-<mapId>" is the texture BootScene preloaded for this area.
+    const tileset = map.addTilesetImage(
+      "ground", "tiles-" + mapId, mapData.tileSize, mapData.tileSize);
+    this.groundLayer = map.createLayer(0, tileset, 0, 0);
+    // The ground is made AFTER the hero now (create() puts the hero first so
+    // that one sprite survives every map change), so without this the grass
+    // would be painted right over the top of them.
+    this.groundLayer.setDepth(GROUND_DEPTH);
+  }
+
+  // Kept as the old name so nothing else had to change when M4S6 turned "redraw
+  // this map" into "draw whichever map you're on". src/screens.js calls this
+  // every time we step back onto the overworld.
+  rebuildFromState() {
+    this.loadMap(gameState.world.mapId);
   }
 
   // S6: stand a wild Fakeamon on each of this map's encounter tiles, wiggling
@@ -507,6 +578,55 @@ class WorldScene extends Phaser.Scene {
     enterBuilding(building); // → src/main.js
   }
 
+  // ---- EXITS (M4S6) ------------------------------------------------------
+  // The way out of an area. Same "special tile you bump" idea as encounters
+  // (S6) and buildings (M4S2), for the third time — bumping one asks whether
+  // you want to travel. Locked exits are still drawn (so you can SEE there's
+  // somewhere to go), they just wear a padlock and say no.
+  spawnExits(mapData) {
+    this.exitByTile = new Map(); // "x,y" -> exit, for bump detection
+    this.exitSprites = [];
+    (mapData.exits || []).forEach((exit) => this.spawnOneExit(exit));
+  }
+
+  spawnOneExit(exit) {
+    const p = this.tilePixel(exit.tileX, exit.tileY);
+    const textureKey = "exit-" + exit.kind;
+    let marker;
+
+    if (this.textures.exists(textureKey) && areaIsUnlocked(exit.toMap)) {
+      marker = this.add.image(p.x, p.y, textureKey);
+    } else {
+      // No art yet (or it's locked, which real art wouldn't show) — the same
+      // colored-badge placeholder the buildings used before they got sprites.
+      const look = areaIsUnlocked(exit.toMap)
+        ? (EXIT_LOOKS[exit.kind] || { emoji: "🚪", color: "#888888" })
+        : EXIT_LOCKED_LOOK;
+      marker = this.add.text(p.x, p.y, look.emoji, {
+        fontSize: "18px",
+        backgroundColor: look.color,
+        padding: { x: 3, y: 2 },
+      });
+    }
+    marker.setOrigin(0.5, 1);
+    marker.exitId = exit.id;
+
+    this.exitSprites.push(marker);
+    this.exitByTile.set(exit.tileX + "," + exit.tileY, exit);
+  }
+
+  // Is there an exit on this tile? Returns it or null (mirrors buildingAt).
+  exitAt(tileX, tileY) {
+    return this.exitByTile ? (this.exitByTile.get(tileX + "," + tileY) || null) : null;
+  }
+
+  // Bumping an exit opens the travel panel (src/main.js's enterExit), which is
+  // where the "is this area unlocked yet?" question actually gets answered.
+  handleExit(exit) {
+    if (battleInProgress) return; // never sail off mid-battle
+    enterExit(exit); // → src/main.js
+  }
+
   // Can the hero stand on this tile? No if it's off the map, or if the tile
   // there is a "solid" one (tree, rock, boulder, stump, log). We read
   // solidity straight from the tile the map already shows — so anything you
@@ -553,6 +673,17 @@ class WorldScene extends Phaser.Scene {
       this.hero.anims.stop();
       this.hero.setFrame(HERO_STAND_FRAME[dir]);
       this.handleBuilding(building);
+      return;
+    }
+
+    // M4S6: and once more for an exit (the boat). Bumping rather than walking
+    // onto it is what stops a landing tile from bouncing you straight back
+    // where you came from.
+    const exit = this.exitAt(targetX, targetY);
+    if (exit) {
+      this.hero.anims.stop();
+      this.hero.setFrame(HERO_STAND_FRAME[dir]);
+      this.handleExit(exit);
       return;
     }
 

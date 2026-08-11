@@ -26,11 +26,39 @@
 //  Same spirit as tools/check-roadmap.mjs: prove it, don't hope.
 // ===========================================================================
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const TOOLS = dirname(fileURLToPath(import.meta.url));
+const TILE = 16;
+
+// A building blocks every tile along the BOTTOM of its picture, not just the
+// one tile it's pinned to (WorldScene.buildingFootprint in src/world/config.js
+// — added 2026-08-11 so you can't walk through the Cooking Cabin's walls). To
+// check reachability honestly, this script has to measure the same tiles the
+// game does, so it reads the sprite's real width straight out of the PNG.
+//
+// ⚠️ The path is a convention shared with BUILDING_ART in src/world/config.js.
+// A building kind with no art there falls back to a one-tile emoji marker, and
+// a kind with no PNG here gets a one-tile footprint — the same answer.
+function buildingFootprint(building, mapCols) {
+  const art = join(TOOLS, "..", "assets", "sprites", "buildings", `${building.kind}.png`);
+  if (!existsSync(art)) return [[building.tileX, building.tileY]];
+
+  // PNG width lives at byte 16 of the header.
+  const spriteWidth = readFileSync(art).readUInt32BE(16);
+  const centre = building.tileX * TILE + TILE / 2;
+  const left = centre - spriteWidth / 2;
+  const right = centre + spriteWidth / 2;
+
+  const tiles = [];
+  for (let x = 0; x < mapCols; x++) {
+    const tileCentre = x * TILE + TILE / 2;
+    if (tileCentre >= left && tileCentre <= right) tiles.push([x, building.tileY]);
+  }
+  return tiles;
+}
 
 // src/data/maps.js is a plain script that just declares MAPS (no exports —
 // that's the whole point of this project's no-build-step setup), so we run it
@@ -65,7 +93,13 @@ for (const [mapId, map] of Object.entries(MAPS)) {
   // (you bump them); berries do not (you walk over them).
   const blockers = [
     ...(map.encounters || []).map((e) => ({ ...e, what: `wild ${e.species}` })),
-    ...(map.buildings || []).map((b) => ({ ...b, what: `building ${b.id}` })),
+    // One entry per tile of a building's base row, since the game blocks all of
+    // them (see buildingFootprint above).
+    ...(map.buildings || []).flatMap((b) =>
+      buildingFootprint(b, cols).map(([tileX, tileY]) => ({
+        ...b, tileX, tileY,
+        what: `building ${b.id}` + (tileX === b.tileX ? "" : ` (its picture also stands on ${tileX},${tileY})`),
+      }))),
     ...(map.exits || []).map((e) => ({ ...e, what: `exit ${e.id}` })),
   ];
   const walkOns = (map.berrySpots || []).map((s) => ({ ...s, what: `berry spot ${s.id}` }));

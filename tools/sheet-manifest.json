@@ -50,7 +50,7 @@
     "sourceCommit": "c34a9c72"
   },
   "axolightl": {
-    "ourName": null,
+    "ourName": "Axolightl",
     "artists": "Cavalcadeur, josepharaoh99",
     "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
     "sourceCommit": "c34a9c72"
@@ -206,19 +206,19 @@
     "sourceCommit": "c34a9c72"
   },
   "nostray": {
-    "ourName": null,
+    "ourName": "Nostray",
     "artists": "Sanglorian",
     "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
     "sourceCommit": "c34a9c72"
   },
   "nudiflot_female": {
-    "ourName": null,
+    "ourName": "Nudiflot (dreamy)",
     "artists": "Sanglorian",
     "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
     "sourceCommit": "c34a9c72"
   },
   "nudiflot_male": {
-    "ourName": null,
+    "ourName": "Nudiflot (fierce)",
     "artists": "Sanglorian",
     "license": "CC BY-SA 4.0 (per Tuxemon ATTRIBUTIONS.md)",
     "sourceCommit": "c34a9c72"
@@ -410,7 +410,7 @@
     "sourceCommit": "c34a9c72"
   },
   "claymorior": {
-    "ourName": null,
+    "ourName": "Claymorior",
     "artists": "Design and original sprite by JustinNuggets and Piacarrot",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Claymorior)",
     "sourceCommit": "c34a9c72"
@@ -656,13 +656,13 @@
     "sourceCommit": "c34a9c72"
   },
   "fluoresfin": {
-    "ourName": null,
+    "ourName": "Fluoresfin",
     "artists": "Original design and sprites by Serpexnessie",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Fluoresfin)",
     "sourceCommit": "c34a9c72"
   },
   "gupphish": {
-    "ourName": null,
+    "ourName": "Gupphish",
     "artists": "Design and original sprite by JustinNuggets and Piacarrot; Face sprites by Jaskrendix",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Gupphish)",
     "sourceCommit": "c34a9c72"
@@ -764,7 +764,7 @@
     "sourceCommit": "c34a9c72"
   },
   "kroki": {
-    "ourName": null,
+    "ourName": "Kroki",
     "artists": "Designed and sprited by Georg Eckert; Face sprites by Jaskrendix; Backsprite by HippasusTwo",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Kroki)",
     "sourceCommit": "c34a9c72"
@@ -782,7 +782,7 @@
     "sourceCommit": "c34a9c72"
   },
   "lesmagu": {
-    "ourName": null,
+    "ourName": "Lesmagu",
     "artists": "Art by BrasioPkmn; Sprites by Jaskrendix",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Lesmagu)",
     "sourceCommit": "c34a9c72"
@@ -812,7 +812,7 @@
     "sourceCommit": "c34a9c72"
   },
   "jelillow": {
-    "ourName": null,
+    "ourName": "Jelillow",
     "artists": "Art and design by TheBritanniaRegion; Sprites by Lejun",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Jelillow)",
     "sourceCommit": "c34a9c72"
@@ -896,7 +896,7 @@
     "sourceCommit": "c34a9c72"
   },
   "nebufin": {
-    "ourName": null,
+    "ourName": "Nebufin",
     "artists": "Design and front sprite by Serpexnessie; Back and face sprites adapted by Jaskrendix",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Nebufin)",
     "sourceCommit": "c34a9c72"
@@ -1028,7 +1028,7 @@
     "sourceCommit": "c34a9c72"
   },
   "skwib": {
-    "ourName": null,
+    "ourName": "Skwib",
     "artists": "Designed and illustrated by fauxlens; Sprites by Sanglorian",
     "license": "CC BY-SA 3.0 (per wiki.tuxemon.org/Skwib)",
     "sourceCommit": "c34a9c72"

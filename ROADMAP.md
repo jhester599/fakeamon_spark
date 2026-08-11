@@ -229,7 +229,7 @@ Meadows cast, not just the starters — battle it, and return to exploring.
 
 ---
 
-## 🟡 M4 — World Systems (places to visit)  *(in progress — Steps 1–5 done; Step 6 (open a new area) next)*
+## ✅ M4 — World Systems (places to visit)  *(complete! 🎉 all 6 steps — on to M5)*
 
 **Goal:** reasons to explore — heal, shop, cook, and the first trainer
 challenge. *(Beating a gym opens a new area — Step 6 builds that area-travel
@@ -308,7 +308,46 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 > still makes a Basic Dish, so cooking never fails. ⚠️ **This answered B44 in a
 > way that supersedes B35** — berries are NOT themed by area after all; every
 > area grows every berry and only the odds differ (`DECISIONS.md` #75). Verified
-> with a 27-check headless-browser suite. **Next: Step 6 (open a new area).**
+> with a 27-check headless-browser suite.
+>
+> **Status (2026-08-10) — M4 IS COMPLETE. 🎉 Step 6 (open a new area) is done.**
+> The area-travel seam is in: a map's `exits` are real doorways, and **one**
+> method — `WorldScene.loadMap()` in `src/world/config.js` — now draws
+> *whichever* map you're standing on. It does the first draw, the
+> after-a-battle re-sync (what used to be `rebuildFromState`, the CR-A fix)
+> **and** the change of area, so there's exactly one place that decides what
+> the overworld shows. You travel by **boat** (Jeff & Lewis's call this
+> session — a boat suits a watery destination better than a gate), tied up at
+> the east end of The Meadows' path. It wears a 🔒 until you've won the **Gear
+> Badge** and a 🚤 after. The gate reads **one** list — `flags.unlockedAreas`,
+> the very list `awardGymPrize` already pushed to at M4S4 — so there is no
+> second "is it locked?" flag to keep in step with it. **The Lagoon** is a new
+> 30×20 map with its own tileset (`tools/make-lagoon-tileset.mjs` composes it
+> from the same George tiles The Meadows uses — and unlike `meadow.png`, the
+> recipe is written down), its own **12 wild Fakeamon**, its own Fakeatent (so
+> a team-wipe out there heals you *there*), and its own berry patches. Water is
+> solid: you walk around the lagoon, you don't swim. **No save-version bump was
+> needed** — `world.mapId` has been saved since M3 and encounter ids were
+> already namespaced (`meadows-…` / `lagoon-…`), so one flat
+> `defeatedEncounters` list still works; respawning is scoped to the map you're
+> on (`clearedOnThisMap`). New guard: **`tools/check-maps.mjs`** reads the real
+> `src/data/maps.js` and proves nothing on any map stands inside a tree, shares
+> a tile, or sits somewhere you can't walk to.
+>
+> **Three design tweaks the same day, off the first screenshots (`DECISIONS.md`
+> #80):** The Lagoon is now **dark blue and black** — a `MOOD` block at the end
+> of `tools/make-lagoon-tileset.mjs` recolours the same George tiles, so the
+> gloom is a dial, not hand-painted art (the rule that makes it work: *the bluer
+> a pixel already is, the more light it keeps*, so the banks go near-black and
+> the water glows). **The Meadows gained a small inlet of water** beside the
+> boat so the dock reads as a dock — nine new water tiles added by
+> `tools/add-meadow-water-tiles.mjs`, which grows `meadow.png` by one row so no
+> existing tile number moves. And **The Lagoon's boat moved to the map's far
+> west edge**, mirroring The Meadows' dock on its far east. Verified with a
+> 56-check headless-browser suite plus a 19-check regression pass over
+> M3/M4S2–S5.
+> ⚠️ **Lewis's rename pass for these 12 is still pending**, same as The
+> Meadows' 14. **Next: M5 Step 1 (Evolutions).**
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
@@ -317,7 +356,7 @@ Architecture: `PLANS/M4_WORLD_SYSTEMS_PLAN.md`.
 | **3** ✅ | **Tall Tower** — spend tokens to **buy Fakeaballs** | A shop; your ball count goes up — *done! (2026-07-24; real skyscraper art added 2026-07-26)* |
 | **4** ✅ | **Gym 1** — Enforcer Boss with a **2-Fakeamon team** (Allagon + the ace AV8R); beating them gives tokens **and the Gear Badge**. Includes the one M4 engine change (`enemyParty` in `src/battle.js`) and the game's first metal move, **Iron Beam** (Lewis's invention) | Bump the ⚙️ Gym → a two-creature trainer battle → a badge on your HUD — *done! (2026-07-25, placeholder gym art; AV8R art blocked on attribution)* |
 | **5** ✅ | **Cooking Cabin** — berries grow on the map (walk over one to pick it up), and two of them cook into a **healing dish** at the Cabin; self-serve, free (B26). Rarity per berry: Fakeaberry common → Cosmicberry extremely rare | Berries lying in the grass; a cooking screen where recipes heal different amounts — *done! (2026-07-26)* |
-| **6** | **Open a new area** — build the **area-travel seam** (walk between maps through doorways), so Gym 1's **Gear Badge** opens **one** new area (**The Lagoon**), stocked with its own slice of the **198-Fakeamon** pool + Lewis's renames (`CONTENT_REFERENCE.md` §16, `VENTA_ROSTER_DRAFT.md`). *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7.)* | Beat Gym 1 → walk through the opened gate into a new area with its own fresh cast of wild Fakeamon |
+| **6** ✅ | **Open a new area** — build the **area-travel seam** (`exits` in map data + `WorldScene.loadMap`), so Gym 1's **Gear Badge** unlocks **The Lagoon**, stocked with its own 12-line slice of the **198-Fakeamon** pool. You travel by **boat** (Jeff & Lewis's call — a boat suits a watery area better than a gate), moored at a little inlet at the east end of The Meadows' path, and arriving at the mirror-image dock on The Lagoon's west edge. *(Re-scoped from an open-ended "all areas" job: the remaining four areas grow area-by-area in **M5** as their paths open — `PLANS/M4_WORLD_SYSTEMS_PLAN.md` §5/§7. ⚠️ Lewis's rename pass for these 12 is still pending, same as The Meadows' 14.)* | Beat Gym 1 → the 🔒 on the boat becomes a 🚤 → sail to a whole new area with its own cast of wild Fakeamon — *done! (2026-08-10)* |
 
 **🎉 M4 done when:** you can win tokens, heal at a Fakeatent, buy balls at a
 Tall Tower, beat your first gym, cook healing dishes at a Cooking Cabin, and
@@ -326,7 +365,7 @@ wild Fakeamon. *(The remaining areas open, one at a time, in M5.)*
 
 ---
 
-## 🔴 M5 — Depth & Story (the finale)
+## 🟡 M5 — Depth & Story (the finale)  *(up next)*
 
 **Goal:** the big finish — evolutions, the mini-bosses, and stopping Artemis.
 *(New late-game areas keep getting their own wild-roster slice — the same

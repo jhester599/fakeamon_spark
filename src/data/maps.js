@@ -8,6 +8,12 @@
 //  S2 (2026-07-10). The `encounters` list below isn't wired to battles yet —
 //  that lands at S6/S7.
 //
+//  M4S6 (2026-08-10): there are now TWO maps — The Meadows and The Lagoon —
+//  and you sail between them by bumping the boat listed in each map's `exits`.
+//  Every map carries its own tile legend, its own `solidTiles` list, and its
+//  own creatures/buildings/berries, so adding a third area is "copy an entry,
+//  change the numbers."
+//
 //  TILE LEGEND for assets/tilesets/meadow.png (index = row*6 + column):
 //     0 grass         1 light grass    2 white flowers
 //     3 blue flowers  4 boulder        5 stump
@@ -16,30 +22,53 @@
 //    12 path W edge  13 path          14 path E edge
 //    15 tree bot-L   16 tree bot-R    17 fallen log
 //    18 path SW edge 19 path S edge   20 path SE edge
-//    (21–23 are empty — room to grow)
+//    21 water NW     22 water N       23 water NE
+//    24 water W      25 open water    26 water E
+//    27 water SW     28 water S       29 water SE
 //  Trees are 2×2: put 9,10 on one row and 15,16 right below them.
+//  The nine WATER tiles (21–29) were added at M4S6 by
+//  tools/add-meadow-water-tiles.mjs, which grew meadow.png from 6×4 tiles to
+//  6×5 without moving any existing tile number. They make the little inlet at
+//  the east end of the path, so the boat you sail to The Lagoon from is
+//  actually sitting on water. They tile together into a pond of any size:
+//  corners at the corners, edges along the sides, 25 repeated in the middle.
 //
-//  SOLID_TILE_INDICES below lists which tile numbers you CAN'T walk on (trees,
-//  boulders, stumps, rocks, logs). The game reads this straight from the map,
-//  so anything you can see as an obstacle blocks you — there's no separate
-//  "blocked" grid to keep in sync (that used to drift and let you walk through
-//  a couple of rocks). Add a new solid tile number here and it just works.
+//  Each map's `solidTiles` lists which tile numbers you CAN'T walk on (trees,
+//  boulders, stumps, rocks, logs — and, in The Lagoon, water). The game reads
+//  this straight from the map, so anything you can see as an obstacle blocks
+//  you — there's no separate "blocked" grid to keep in sync (that used to drift
+//  and let you walk through a couple of rocks). Add a new solid tile number to
+//  a map's list and it just works.
 //  encounters: wild Fakeamon standing on the map — walking into one starts
 //  the battle (M3 plan §6.3). species is a lowercase key that will match
 //  the state-bag's species keys (M5 plan §1). Levels are Lewis-tweakable —
 //  The Meadows is the starting area, so they're low (B4: wild level
 //  depends on the area).
+//
+//  ⚠️ Every map must be 30×20 tiles of 16px, because that's the size of the
+//  Phaser canvas (WORLD_TILES_WIDE/TALL in src/world/config.js). A bigger map
+//  would need a scrolling camera, which we haven't built.
 // ===========================================================================
 
-// Tile numbers you can't walk onto (for the meadow tileset above):
+// Tile numbers you can't walk onto in THE MEADOWS (the meadow tileset above):
 //   4 boulder · 5 stump · 9,10,15,16 tree · 11 small rock · 17 fallen log
-const SOLID_TILE_INDICES = [4, 5, 9, 10, 11, 15, 16, 17];
+//   21–29 water (M4S6) — you can't swim in either area, only sail
+// Kept as a named constant because it's also the fallback for any map that
+// forgets to list its own.
+const SOLID_TILE_INDICES = [4, 5, 9, 10, 11, 15, 16, 17, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+
+// Tile numbers you can't walk onto in THE LAGOON (assets/tilesets/lagoon.png —
+// a different tileset, so a different list). That's everything except grass,
+// pale grass, reeds and mud: the trees/rocks/stumps/logs, AND all nine water
+// tiles. You can't swim in Fakeamon — the lagoon is scenery you walk around.
+const LAGOON_SOLID_TILE_INDICES = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 const MAPS = {
   theMeadows: {
     name: "The Meadows",             // first of Venta's six areas (B7/B8)
     tileSize: 16,
     tileset: "assets/tilesets/meadow.png",
+    solidTiles: SOLID_TILE_INDICES,  // what blocks you here (see the legend above)
     startTile: { x: 5, y: 9 },    // where the hero appears (on the path)
     ground: [
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
@@ -50,10 +79,10 @@ const MAPS = {
     [15,16, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0,11, 0, 9,10],
     [15,16, 0,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
-    [ 9,10, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 9,10],
-    [15,16,12,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,14,15,16],
-    [ 9,10,18,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,20, 9,10],
-    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8,21,22],
+    [15,16,12,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,14,24,25],
+    [ 9,10,18,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,20,24,25],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,27,28],
     [ 9,10, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 9,10],
     [15,16, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
     [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 9,10],
@@ -124,6 +153,117 @@ const MAPS = {
       { id: "meadows-berry-5", tileX: 13, tileY: 13 },
       { id: "meadows-berry-6", tileX: 22, tileY: 15 },
     ],
-    exits: [],                       // M4: doorways to the other five areas
+    // M4S6: doorways to other areas. You BUMP an exit (like a building) rather
+    // than walk onto it, so arriving somewhere can never bounce you straight
+    // back. `toTile` is where you land on the other map, and `facing` is which
+    // way you're looking when you get there.
+    //
+    // An exit is LOCKED until its destination is in gameState.flags.unlockedAreas
+    // — which is what a gym badge pushes there (src/main.js's awardGymPrize).
+    // Nothing else marks it locked: the one list IS the gate.
+    exits: [
+      { id: "meadows-boat", kind: "boat", tileX: 27, tileY: 9,
+        toMap: "theLagoon", toTile: { x: 3, y: 9, facing: "right" } },
+    ],
+  },
+
+  // =========================================================================
+  //  THE LAGOON (M4S6) — the swamp that the Gear Badge opens up. Sail here
+  //  from the boat at the east end of The Meadows' path.
+  //
+  //  TILE LEGEND for assets/tilesets/lagoon.png (index = row*6 + column).
+  //  ⚠️ DIFFERENT numbers from The Meadows! Same 6-wide layout, different
+  //  pictures — that tileset is built by tools/make-lagoon-tileset.mjs, and
+  //  that script's RECIPE list is the other half of this legend.
+  //     0 swamp grass   1 pale grass     2 reeds
+  //     3 muddy shore   4 rocks          5 stump
+  //     6 water NW     7 water N         8 water NE
+  //     9 tree top-L  10 tree top-R     11 boulder
+  //    12 water W     13 open water     14 water E
+  //    15 tree bot-L  16 tree bot-R     17 fallen log
+  //    18 water SW    19 water S        20 water SE
+  //    (21–23 are spare — room to grow)
+  //  The nine water tiles fit together into a pond of any size: corners at the
+  //  four corners, edges along the sides, and 13 repeated in the middle. They
+  //  make TWO bodies of water here: the lagoon itself in the middle of the map,
+  //  and a narrow inlet running off the map's WEST edge where the boat home is
+  //  moored — the mirror of The Meadows' dock on its east edge.
+  //
+  //  ⚠️ The Lagoon's tileset is DARK — dark blue and black (Jeff & Lewis's
+  //  call). That's not a different set of tiles, it's the same George tiles put
+  //  through a "mood" pass at the end of tools/make-lagoon-tileset.mjs. If the
+  //  swamp ever wants to be brighter or gloomier, that script's MOOD block is
+  //  the dial, not this file.
+  // =========================================================================
+  theLagoon: {
+    name: "The Lagoon",              // opened by the Gear Badge (B14 / DECISIONS.md #27)
+    tileSize: 16,
+    tileset: "assets/tilesets/lagoon.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES, // water is solid here — see the note above
+    // Only used if something ever drops you here with no saved position; the
+    // normal way in is the boat, which lands you at its own toTile.
+    startTile: { x: 3, y: 9 },
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 0, 0, 0, 9,10, 0, 0, 0, 0, 0, 0, 1, 0, 0,17, 0, 0, 1, 0, 0, 0, 0, 9,10, 0, 0, 9,10],
+    [15,16, 0, 0, 0,15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16, 0, 0,15,16],
+    [ 9,10, 1, 0, 0, 0, 0, 4, 0, 0, 2, 0, 3, 3, 0, 0, 2, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 1,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 3, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 3, 0, 0, 0, 0, 9,10],
+    [15,16, 3, 0, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 5, 0,15,16],
+    [ 7, 8, 3, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 0, 0, 0, 0, 0, 9,10],
+    [13,14, 3, 0, 0, 0, 0, 0, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 2, 0, 0, 0,15,16],
+    [13,14, 3, 0, 0, 0, 0, 2, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 0, 0, 0, 0, 9,10],
+    [19,20, 3, 0, 0, 0, 0, 3, 3,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0,15,16],
+    [ 9,10, 3, 1, 0, 0, 0, 0, 0,12,13,13,13,13,13,13,13,13,13,13,13,13,14, 3, 3, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 3,18,19,19,19,19,19,19,19,19,19,19,19,19,20, 3, 4, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 9,10, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0, 9,10, 0,15,16],
+    [ 9,10, 0,15,16, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      { id: "lagoon-axolightl",       species: "axolightl",       level: 10, tileX: 10, tileY: 3  },
+      { id: "lagoon-claymorior",      species: "claymorior",      level: 10, tileX: 14, tileY: 3  },
+      { id: "lagoon-fluoresfin",      species: "fluoresfin",      level: 11, tileX: 18, tileY: 3  },
+      { id: "lagoon-gupphish",        species: "gupphish",        level: 11, tileX: 22, tileY: 3  },
+      { id: "lagoon-jelillow",        species: "jelillow",        level: 12, tileX: 25, tileY: 6  },
+      { id: "lagoon-kroki",           species: "kroki",           level: 13, tileX: 25, tileY: 10 },
+      { id: "lagoon-lesmagu",         species: "lesmagu",         level: 12, tileX: 22, tileY: 15 },
+      { id: "lagoon-nebufin",         species: "nebufin",         level: 13, tileX: 18, tileY: 16 },
+      { id: "lagoon-nostray",         species: "nostray",         level: 14, tileX: 14, tileY: 16 },
+      { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 14, tileX: 10, tileY: 15 },
+      { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 15, tileX: 6,  tileY: 12 },
+      { id: "lagoon-skwib",           species: "skwib",           level: 15, tileX: 5,  tileY: 8  },
+    ],
+    // Just a Fakeatent for now, so fainting out here heals you HERE instead of
+    // shipping you all the way back to The Meadows (src/main.js's homeBaseTile).
+    // A shop/gym/cabin would be one more line each — the same seam, a fifth time.
+    buildings: [
+      { id: "lagoon-fakeatent", kind: "fakeatent", tileX: 4, tileY: 5,
+        spawnTile: { x: 4, y: 6, facing: "up" } },
+    ],
+    // Berries grow here too. Which ones is rolled from the same weights as
+    // everywhere else (src/data/berries.js) — DECISIONS.md #75: every area
+    // grows every berry, only the odds differ.
+    berrySpots: [
+      { id: "lagoon-berry-1", tileX: 3,  tileY: 7  },
+      { id: "lagoon-berry-2", tileX: 6,  tileY: 4  },
+      { id: "lagoon-berry-3", tileX: 12, tileY: 4  },
+      { id: "lagoon-berry-4", tileX: 20, tileY: 4  },
+      { id: "lagoon-berry-5", tileX: 26, tileY: 12 },
+      { id: "lagoon-berry-6", tileX: 16, tileY: 15 },
+    ],
+    // The boat home, tied up at the water on the FAR WEST edge — the mirror
+    // image of The Meadows' dock on its far east, so the two ends of the
+    // crossing line up (Jeff & Lewis's call, DECISIONS.md #80). No lock on this
+    // one: you can always get back to The Meadows.
+    exits: [
+      { id: "lagoon-boat", kind: "boat", tileX: 2, tileY: 9,
+        toMap: "theMeadows", toTile: { x: 26, y: 9, facing: "left" } },
+    ],
   },
 };

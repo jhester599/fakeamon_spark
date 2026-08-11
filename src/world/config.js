@@ -339,17 +339,34 @@ class WorldScene extends Phaser.Scene {
     this.mapCols = mapData.ground[0].length; // 30
     this.mapRows = mapData.ground.length;    // 20
 
-    // Clear everything standing on the old map, then stand up the new one.
-    (this.encounterSprites || []).forEach(function (sprite) { sprite.destroy(); });
-    (this.buildingSprites || []).forEach(function (sprite) { sprite.destroy(); }); // M4S2
-    (this.berrySprites || []).forEach(function (sprite) { sprite.destroy(); });    // M4S5
-    (this.exitSprites || []).forEach(function (sprite) { sprite.destroy(); });     // M4S6
-
+    // Stand up everything on the new map. Each spawn* below clears its own old
+    // sprites first (see clearSprites), so this is safe to call over the top of
+    // whatever was here before.
     this.spawnEncounters(mapData); // S6: stand the wild Fakeamon in the grass (skips defeated)
     this.spawnBerries(mapData);    // M4S5: whatever is currently growing
     this.spawnBuildings(mapData);  // M4S2: the Fakeatent, shop, gym, cabin…
     this.spawnExits(mapData);      // M4S6: the boats
     this.syncHeroToState();        // put the hero where the save says
+  }
+
+  // Throw away one of our lists of sprites — really throw it away, picture and
+  // all — before it gets rebuilt.
+  //
+  // ⚠️ THIS IS WHY IT EXISTS (bug found in playtesting, 2026-08-11). Every
+  // spawn* method below used to just do `this.berrySprites = []` and start
+  // over. But emptying OUR list doesn't remove anything from the SCREEN —
+  // Phaser is still drawing those sprites, we've simply lost our handle on
+  // them. `loadMap` destroyed them first so it was fine, but
+  // `maybeGrowBerries` (src/main.js) calls spawnBerries directly, and every
+  // berry that grew orphaned the whole previous set: berries you could see and
+  // walk over but never pick up, and — after sailing — The Meadows' berries
+  // still painted on top of The Lagoon, sometimes out in the middle of water.
+  //
+  // So every spawn* method now cleans up after itself instead of trusting its
+  // caller to have done it. Same rule everywhere, no exceptions to remember.
+  clearSprites(listName) {
+    (this[listName] || []).forEach(function (sprite) { sprite.destroy(); });
+    this[listName] = [];
   }
 
   // Draw the ground tiles for a map. Phaser builds a tilemap straight from our
@@ -389,8 +406,8 @@ class WorldScene extends Phaser.Scene {
   // so walking into that tile can "bump" it. Encounters already cleared in a
   // later step (caught/beaten) are skipped, so this stays correct once S8 lands.
   spawnEncounters(mapData) {
-    this.encounterByTile = new Map(); // "x,y" -> encounter, for bump detection
-    this.encounterSprites = [];       // the sprites, so removeEncounter can clear one
+    this.clearSprites("encounterSprites"); // the sprites, so removeEncounter can clear one
+    this.encounterByTile = new Map();      // "x,y" -> encounter, for bump detection
     const cleared = gameState.world.defeatedEncounters || [];
 
     (mapData.encounters || []).forEach((enc) => {
@@ -456,8 +473,8 @@ class WorldScene extends Phaser.Scene {
   // Which berry is on which spot lives in gameState.world.berries (spotId →
   // berryKey), so it survives a save and a map rebuild.
   spawnBerries(mapData) {
+    this.clearSprites("berrySprites");
     this.berryByTile = new Map(); // "x,y" -> { spot, berryKey }
-    this.berrySprites = [];
     const growing = gameState.world.berries || {};
 
     (mapData.berrySpots || []).forEach((spot) => {
@@ -535,8 +552,8 @@ class WorldScene extends Phaser.Scene {
   // M4S2: stand every building on this map (right now, just the Fakeatent).
   // Mirrors spawnEncounters — buildingByTile is how tryWalk detects a bump.
   spawnBuildings(mapData) {
+    this.clearSprites("buildingSprites");
     this.buildingByTile = new Map();
-    this.buildingSprites = [];
     (mapData.buildings || []).forEach((b) => this.spawnOneBuilding(b));
   }
 
@@ -566,7 +583,40 @@ class WorldScene extends Phaser.Scene {
     marker.buildingId = building.id;
 
     this.buildingSprites.push(marker);
-    this.buildingByTile.set(building.tileX + "," + building.tileY, building);
+    // A building blocks (and opens) every tile along the BOTTOM of its picture,
+    // not just the one tile it's pinned to — see buildingFootprint below.
+    this.buildingFootprint(marker, building.tileY).forEach((tileKey) => {
+      this.buildingByTile.set(tileKey, building);
+    });
+  }
+
+  // Which tiles does a building actually stand on? (Playtest fix, 2026-08-11.)
+  //
+  // A building is pinned to ONE tile in src/data/maps.js, but the pictures are
+  // bigger than that: the Cooking Cabin is three tiles wide. Only the pinned
+  // tile used to do anything, so you could walk straight through the cabin's
+  // left and right thirds — through its walls — with nothing happening.
+  //
+  // So the real footprint is the BOTTOM ROW of the picture: every tile the
+  // building is standing on. Walking into any of them opens the panel.
+  // Everything ABOVE that row is left alone on purpose, which is what keeps
+  // Jeff & Lewis's earlier call working (DECISIONS.md #71): the Tall Tower and
+  // the Gym are tall, so you still stroll behind their upper halves — you just
+  // can't walk through their front doors any more.
+  //
+  // A tile counts only if its CENTRE is inside the picture, so a sprite that
+  // overhangs its neighbour by a pixel or two doesn't make that whole tile
+  // solid. Measured off the sprite, so there's no width to keep in step by
+  // hand: swap in wider art and the footprint follows.
+  buildingFootprint(sprite, tileY) {
+    const left = sprite.x - sprite.displayWidth / 2;
+    const right = sprite.x + sprite.displayWidth / 2;
+    const tiles = [];
+    for (let x = 0; x < this.mapCols; x++) {
+      const tileCentre = x * this.tileSize + this.tileSize / 2;
+      if (tileCentre >= left && tileCentre <= right) tiles.push(x + "," + tileY);
+    }
+    return tiles;
   }
 
   // Is a building standing on this tile? Returns it or null (mirrors encounterAt).
@@ -588,8 +638,8 @@ class WorldScene extends Phaser.Scene {
   // you want to travel. Locked exits are still drawn (so you can SEE there's
   // somewhere to go), they just wear a padlock and say no.
   spawnExits(mapData) {
+    this.clearSprites("exitSprites");
     this.exitByTile = new Map(); // "x,y" -> exit, for bump detection
-    this.exitSprites = [];
     (mapData.exits || []).forEach((exit) => this.spawnOneExit(exit));
   }
 

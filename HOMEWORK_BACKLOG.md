@@ -380,6 +380,175 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 
 ---
 
+---
+
+## 🏁 Post-game — the game is FINISHED, so what now? *(B46–B54, opened 2026-08-13)*
+
+> **All 36 build steps are done.** You can play Fakeamon Spark from the title
+> screen to the end credits. These questions aren't about *finishing* it any
+> more — they're about making it properly **yours**, and about what (if
+> anything) we build next. Nothing here blocks anything. 🎉
+
+### 🔲 B46. THE BIG ONE — name your Fakeamon 🎨  *(no deadline, but it's the biggest thing left)*
+
+**87 of the 98 creatures in the game are still called things like "Chenipode"
+and "Nudiflot (fierce)".** Those are the placeholder names the original art
+came with — working labels, never meant to stay. **42 of them stand on maps**
+where you'll meet them, and **45 are the evolved forms** they turn into.
+
+The only ones already properly named are the three starters (Growler, Whaley,
+Leafick), the two gym Fakeamon, the five mini-bosses and Artemis.
+
+This is a big job, so the real question is **how you want to eat the elephant**:
+
+- [ ] **A) Area by area** — name The Meadows' 14 first (that's where every new
+  player starts), then The Lagoon's 12, and so on. Small chunks, and each
+  batch is playable straight away.
+- [ ] **B) Family by family** — name a creature and its evolved form together
+  (Chenipode → Exapode becomes, say, Leafcrawl → Leafwing), so the pairs
+  actually sound related.
+- [ ] **C) Only the ones you like** — flick through them all, rename your
+  favourites, and leave the rest as-is for now.
+- [ ] **D) All 87 in one epic sitting** — a proper naming marathon. 💪
+
+*(Whichever you pick, renaming one is a **single word** in
+`src/data/fakeamon.js` — nothing else in the game has to change.)*
+
+### 🔲 B47. INVENT: name the five big moves 💥  *(no deadline)*
+
+Evolving gives your Fakeamon a **stronger set of attacks** — but grass only
+had ONE attack in the whole game, so five new "big" moves had to be invented
+to give evolved Fakeamon something worth upgrading into. **I picked
+placeholder names so the code would run. They're yours to replace:**
+
+| What it does | Placeholder name | Your name |
+|---|---|---|
+| The big **fire** attack (power 22) | Firestorm | ______________ |
+| The big **water** attack (power 20) | Tidal Wave | ______________ |
+| A medium **grass** attack (power 16) | Vine Lash | ______________ |
+| The big **grass** attack (power 22) | Forest Fury | ______________ |
+| A big **normal** attack (power 16) | Slam | ______________ |
+
+*(Iron Beam — your invention from Gym 1 — is still in there and unchanged.)*
+
+### 🔲 B48. Your starters' evolutions — keep the dragons? 🐉  *(no deadline)*
+
+Growler, Whaley and Leafick now evolve at **level 16**. But there was a snag:
+in the original art **Whaley and Leafick don't evolve into anything at all** —
+they're already the last form of their family — and Growler's real evolution
+isn't in the art we're allowed to use. You said "use art we already own", so
+they became:
+
+- Growler → **Deviraptor** (a fire dragon)
+- Whaley → **Leviadile** (a huge sea-dragon)
+- Leafick → **Dragarbor** (a tree-dragon)
+
+All three turned out to be dragons **by accident**. Do you want to:
+
+- [ ] **A) Keep all three** — three dragons is a great look, honestly.
+- [ ] **B) Swap one or two** for something else from the 198 creatures we own
+  (tell me what kind of thing you want and I'll show you the options).
+- [ ] **C) Go and get their real family members** — needs a licence check
+  first, which we can't do until `wiki.tuxemon.org` is reachable again.
+
+### 🔲 B49. Four mini-bosses are wearing borrowed faces 🎭  *(no deadline)*
+
+**Sharpfin and Artemis look like themselves.** The other four —
+**Banvengeance, Saurchin, Gastronium, Tobishimi** — are wearing sprites
+borrowed from other creatures, because their real pictures don't have a
+recorded artist anywhere we can check, and the rule in this project is that
+nothing ships without knowing who drew it.
+
+- [ ] **A) Leave them** — they look fine, honestly. Fix it if the wiki ever
+  comes back.
+- [ ] **B) Pick better stand-ins** — go through the 198 we own and choose
+  faces that suit them better.
+- [ ] **C) Wait for the real art** — leave the four out of the game until the
+  licence can be checked. *(They'd be unbeatable, so Artemis would stay
+  locked — probably not what you want!)*
+
+### 🔲 B50. Should The Factory go back to being badge-locked? 🔥  *(needed if we ever build Gym 2)*
+
+⚠️ **This one is me checking something against a decision you already made.**
+Back in **B14** you decided the **Flame Badge** (Gym 2) opens **The Factory**.
+But Gym 2 doesn't exist, and The Factory had to exist for Gastronium to live
+in — so right now you reach it **by boat from The Lagoon**, with no Flame
+Badge involved. (It's still behind the Gear Badge, since The Lagoon is.)
+
+- [ ] **A) Leave it open** — one badge-locked door is enough; the world flows
+  better without a wall every few steps.
+- [ ] **B) Lock it behind the Flame Badge again** *when Gym 2 is built* — as
+  originally decided.
+- [ ] **C) Lock it now** — and Gym 2 becomes the next thing we build.
+
+### 🔲 B51. Two areas of Venta still don't exist 🌫️❄️  *(no deadline)*
+
+You invented **six** areas for Venta (B8). Four are built and playable:
+The Meadows, The Lagoon, The Forest, The Factory — plus Artemis's lair. Still
+missing: **Foggy City** (packed urban city) and **Snow Mountain** (icy
+Everest-like peaks). The game is completable without them.
+
+- [ ] **A) Build them both** — Venta isn't Venta until all six exist.
+- [ ] **B) Build one** — pick your favourite of the two.
+- [ ] **C) Leave them for now** — there's plenty to do already.
+
+*(Each new area is a day's work now: the mood-dial trick means no new art.
+Snow Mountain would want a white/blue dial and Foggy City a grey one — plus
+Foggy City is the natural home for the **villager NPCs** you asked for in B12,
+which also don't exist yet.)*
+
+### 🔲 B52. What should we build next? 🛠️  *(the fun one — pick as many as you like)*
+
+The story is finished, so everything from here is extra. Which of these do you
+want most? **Rank your top three.**
+
+- [ ] **Great / Ultra / Cosmic Fakeaballs** — better balls that catch better.
+  *(Their art is already drawn and waiting in the game folder!)* This is also
+  what would let you **catch a mini-boss**, which you decided should be
+  possible with a Cosmic ball.
+- [ ] **Day and night** — you decided mini-bosses should only come out at
+  **night** (B11). Right now they're out all the time, because day/night
+  doesn't exist yet.
+- [ ] **Gyms 2 and 3** — the Fire gym and the Water gym, with their badges.
+- [ ] **Swapping Fakeamon at a Fakeatent** — you decided this in B33; the
+  Boxes work, but the swapping screen was never built.
+- [ ] **Sound and music** — you asked for full chiptune (B32). The game is
+  completely silent right now.
+- [ ] **Villagers to talk to** — the NPCs from B12, with a line of advice each.
+- [ ] **Something else entirely** — your idea: ______________________
+
+### 🔲 B53. Is the final battle the right hardness? ⚔️  *(after you've played it!)*
+
+Artemis has **260 HP**, hits **double against every type**, and hurts itself
+with Meteor Shower — your idea, and the only reason it's beatable. In testing,
+a level-30 team of four with mixed types wins, but not easily.
+
+- [ ] **A) Just right** — hard but fair.
+- [ ] **B) Too hard** — I couldn't win. *(We'd lower its Attack, or make
+  Meteor Shower hurt it more.)*
+- [ ] **C) Too easy** — I want a proper wall. *(We'd raise its HP or Attack.)*
+
+### 🔲 B54. Being two levels behind means you basically lose 📉  *(after you've played it)*
+
+Something the maths turned up: because fights are short (about 3 hits), **a
+level gap decides almost everything.** Level-for-level you win about 85% of
+the time; **one level down, 8%; two levels down, 1%.** Type matchup matters
+just as much — a level-30 fire Growler genuinely loses to a level-16 Sharpfin.
+
+That means "go and train a bit more" is often the answer, which is very
+classic-RPG — but it can also feel unfair.
+
+- [ ] **A) Leave it** — it makes levelling up feel powerful, and it teaches
+  you to bring the right type.
+- [ ] **B) Soften it** — make fights **longer** (everyone gets more HP), so
+  one bad turn doesn't decide it. *(Warning: we tested this and it actually
+  made the gap WORSE. The real fix is C.)*
+- [ ] **C) Change how damage is worked out** — a bigger change to the battle
+  maths, so being a bit behind stings instead of ending you. This is the one
+  that would really fix it, and it touches the oldest code in the game.
+
+---
+
 ## 📊 Progress tracker
 
 | Milestone | Questions | Answered |
@@ -389,7 +558,8 @@ The word "Spark" with a meteor next to it (alongside the "Fakeamon" name).
 | M4 | B13–B18, B43–B45 | 8 / 9 |
 | M5 | B19–B26, B33, B35, B36 | 11 / 11 |
 | Anytime | B27–B32 | 6 / 6 |
-| **Total** | | **44 / 45** |
+| Post-game | B46–B54 | 0 / 9 |
+| **Total** | | **44 / 54** |
 
 *(Update this table as decisions land — and add new questions to the bottom
 of the right section whenever one comes up mid-build. The bank grows!)*

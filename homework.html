@@ -85,6 +85,8 @@
   section.sec { --c: var(--fire); margin-bottom: 30px; }
   section.sec.s-water  { --c: var(--water); }
   section.sec.s-metal  { --c: var(--metal); }
+  section.sec.s-grass  { --c: var(--grass); }
+  section.sec.s-cosmic { --c: var(--cosmic); }
   .sec-title {
     font-family: ui-rounded, system-ui, sans-serif; font-size: 19px; font-weight:800;
     display:flex; align-items:center; gap:10px; margin: 0 0 6px;
@@ -165,29 +167,27 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Fakeamon · Stopping Point</div>
-    <h1 class="title disp">Homework Before We Continue</h1>
-    <p class="subtitle">Lewis has answered <b>44 of 45</b> questions — only one is left, and it can wait for M5. 🎉</p>
+    <div class="eyebrow">Fakeamon · The Game Is Finished 🎉</div>
+    <h1 class="title disp">You Beat The Whole Roadmap</h1>
+    <p class="subtitle"><b>All 36 steps. All five milestones.</b> Fakeamon Spark plays from the title screen to the end credits. Nothing below is blocking anything — it's about making the game properly <b>yours</b>. 🌠</p>
   </header>
 
   <div class="recap">
-    <h2>✅ What happened this session</h2>
-    <ul>
-      <li><span class="tag">M4S5 ✅</span><b>2026-07-26 — berries and the Cooking Cabin are in.</b> Berries grow in the grass (walk over one to grab it) and two of them cook into a healing dish — free, no chef, just like you wanted. Answering <b>B44</b> this way replaced the old "berries are themed by area" plan.</li>
-      <li><span class="tag">B45 ✅</span><b>2026-07-26 — your next Fakeamon now joins the battle</b> when one faints. You only lose when your whole team is down, the same way the gym leader gets a second one.</li>
-      <li><span class="tag">M4S4 ✅</span><b>2026-07-25 — Gym 1 is built.</b> Enforcer Boss, Allagon and the ace AV8R, the Gear Badge, and Lewis's own metal move <b>Iron Beam</b>. Playtesting after it found six things, all fixed — including a real bug where you could throw a Fakeaball you didn't have.</li>
-      <li><span class="tag">Round 4 ✅</span><b>2026-07-11 — the last ten (B33–B42) are answered</b>, so every creative-director question B1–B42 is now decided. Picks folded into <code>DECISIONS.md</code> (#51–60), <code>DESIGN.md</code>, the touch plan, and the roster draft: Fakeatent swap, "the wild &lt;name&gt;" battle text, area-themed berries, a starter Cooking Cabin, the roster draft kept as-is, and the D-pad (four floating arrows, bottom-right, half see-through, a toggle) still called "Pocket Venta."</li>
-      <li><span class="tag">Huge round</span>Lewis answered <b>32 of 36</b> backlog questions in one go: flee/catch/nickname rules, the world's name (<b>Venta</b>) and its six areas, gym re-themes and badges, the story spine, the evolution ceremony, sound &amp; music, and more. All logged in <code>DECISIONS.md</code> (rows 14–45) and folded into <code>DESIGN.md</code>.</li>
-      <li><span class="tag">IP check</span>B10's hero look referenced an existing character, so it was redirected to an <b>original design</b> in the same spirit — no Nintendo IP in the repo. See <code>DESIGN.md</code> §1.</li>
-      <li><span class="tag">Bug found</span>Testing Step 3 turned up a real bug (mirror matches shared HP) — fixed — plus a cosmetic question, <b>B34</b> below, about how a mirror match should read in the log.</li>
-      <li><span class="tag">New ideas</span>Lewis invented two more design bits on his own — berries on the ground, Cooking Cabins near Snow Mountain — logged as decisions (<code>DECISIONS.md</code> #46–47), each with one follow-up detail below (<b>B35</b>, <b>B36</b>).</li>
-      <li><span class="tag">Round 2</span>✅ Done — team of <b>4</b> with <b>Boxes</b>, <b>50%</b> base catch rate. See <code>DECISIONS.md</code> #11–12.</li>
-      <li><span class="tag">Touch plan</span>2026-07-10: Jeff adopted the touch &amp; mobile plan (<code>PLANS/M3_TOUCH_AND_MOBILE_PLAN.md</code>) — an on-screen D-pad so the game works on a phone or tablet, lands as build step <b>S10</b>. Five new creative calls below (<b>B38–B42</b>).</li>
-    </ul>
-  </div>
+      <h2>🎉 What happened — the game got finished</h2>
+      <ul>
+        <li><span class="tag">M5 ✅</span><b>2026-08-13 — the whole finale, in one go.</b> Levelling up, evolving, the five mini-bosses, two new areas, Artemis, and the win screen. <b>36 of 36 steps.</b></li>
+        <li><span class="tag">Evolving ✅</span><b>Everything evolves now</b> — all three starters and all 42 wild Fakeamon. Reach the level and the screen goes dark, your Fakeamon <b>shakes</b>, <b>flashes white-hot</b>, and the new one appears: <i>"Congratulations! Growler evolved into Deviraptor!"</i> The full ceremony you asked for (B23).</li>
+        <li><span class="tag">Levels ✅</span><b>Levels finally do something.</b> Before this, a level-10 Fakeamon was exactly as strong as a level-1 one — the numbers behind it were all zeros. Now every level is +3 HP, +2 Attack, +1 Defense, +1 Speed.</li>
+        <li><span class="tag">Bosses ✅</span><b>All five mini-bosses are out there</b>, each saying the line you wrote for it. Triple XP, 60 🪙 and a <b>Bossberry</b> — and once beaten, they stay beaten.</li>
+        <li><span class="tag">New areas ✅</span><b>The Forest and The Factory</b> were built so the last two mini-bosses had homes — the same tiles as everywhere else, just put through different colour dials. Venta is five maps now.</li>
+        <li><span class="tag">Artemis ✅</span><b>The final battle works — and your idea is what makes it winnable.</b> Meteor Shower hits your Fakeamon <i>and</i> Artemis. A legend with 260 HP that hits double against everything would be impossible otherwise.</li>
+        <li><span class="tag">Your words</span>The lair is <b>"purple fire and a throne of stars"</b> (B22) and the ending says <b>"Venta is saved! But adventures still await you…"</b> (B24) — word for word.</li>
+        <li><span class="tag">Bug caught</span>The tests found something scary: the <b>cosmic</b> type was missing from the type chart, so Artemis's very first attack would have crashed the game. Fixed before anyone played it.</li>
+      </ul>
+    </div>
 
   <div class="bar">
-    <span class="count"><b id="doneN">0</b> of 1 question answered</span>
+    <span class="count"><b id="doneN">0</b> of 8 questions answered</span>
     <div class="actions">
       <button class="btn" id="printBtn" type="button">🖨️ Print</button>
       <button class="btn" id="resetBtn" type="button">↺ Reset</button>
@@ -195,20 +195,112 @@
   </div>
   <p class="note">Answers auto-save in this browser. When you're done, tell Jeff (or Claude) your picks and we run the decision loop in <code>DECISIONS.md</code>.</p>
 
-  <section class="sec s-metal">
-    <h2 class="sec-title">⚙️ One question left, Lewis</h2>
-    <p class="sec-sub">Everything else is answered! This one only matters for <b>Gym 2 and Gym 3</b>, which are M5 work — so there's no rush at all.</p>
+  <section class="sec s-cosmic">
+    <h2 class="sec-title">🎨 Lewis — four to start with</h2>
+    <p class="sec-sub">You can answer all four right now, without playing first. The full list is <b>B46–B54</b> in <code>HOMEWORK_BACKLOG.md</code>.</p>
 
     <div class="q" data-q="1">
       <div class="q-head"><span class="q-num">1</span>
-        <h3 class="q-title">The two "wrong-type" gym aces <span class="why-tag">B43 · needed for M5's gyms</span></h3></div>
-      <p class="q-desc">You decided every gym is a <b>single type</b> (B13): Gym&nbsp;1 is Metal ✅ (built!), Gym&nbsp;2 is Fire, Gym&nbsp;3 is Water. But the two <i>ace</i> creatures picked long ago don't match their gym: <b>Windeye</b> is a Metal/Lightning tower-bot sitting in the <b>Fire</b> gym, and <b>Spectera</b> is a Grass/Sky leaf-bat sitting in the <b>Water</b> gym. What should we do?</p>
+        <h3 class="q-title">THE BIG ONE — name your Fakeamon <span class="why-tag">B46 · the biggest thing left</span></h3></div>
+      <p class="q-desc"><b>87 of the 98 creatures are still using placeholder names</b> like "Chenipode" and "Nudiflot (fierce)" — the working labels the art came with. <b>42 of them stand on maps you walk through</b>; the other 45 are what they evolve into. Only your three starters, the two gym Fakeamon, the five mini-bosses and Artemis have proper names.<br><br>The question isn't <i>what</i> the names are — it's <b>how you want to tackle 87 of them.</b> (Renaming one is a single word in the data file. Nothing else changes.)</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="q1" value="A - swap for on-type"><span class="ok"><b>A) Swap them out</b> — pick different creatures that already match Fire and Water.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="B - re-theme"><span class="ok"><b>B) Keep them, re-theme them</b> — same creatures, but we make them Fire and Water in our game.</span></label>
-        <label class="opt"><input type="radio" name="q1" value="C - mixed aces are fine"><span class="ok"><b>C) Let the ace break the rule</b> — the gym is one type, but its strongest one is allowed to be a surprise.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="A - area by area"><span class="ok"><b>A) Area by area</b> — The Meadows' 14 first (where every new player starts), then The Lagoon's 12, then The Forest's 8, then The Factory's 8.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="B - family by family"><span class="ok"><b>B) Family by family</b> — name a creature and what it evolves into together, so the pair sounds related.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="C - favourites only"><span class="ok"><b>C) Only your favourites</b> — rename the ones you love, leave the rest for now.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="D - all 87 marathon"><span class="ok"><b>D) All 87 in one epic naming marathon.</b> 💪</span></label>
       </div>
-      <div class="fill"><label>Because…</label><input class="txt" name="q1_why" placeholder="Tell us why you picked that"></div>
+      <div class="fill"><label>Any names you already know you want?</label><input class="txt" name="q1_why" placeholder="e.g. the little fire cat should be called…"></div>
+    </div>
+
+    <div class="q" data-q="2">
+      <div class="q-head"><span class="q-num">2</span>
+        <h3 class="q-title">Name the five big moves <span class="why-tag">B47 · invent</span></h3></div>
+      <p class="q-desc">Evolving upgrades your whole attack set — but grass had only <b>one</b> attack in the entire game, so five new "big" moves had to exist for evolved Fakeamon to upgrade into. <b>I picked placeholder names so the code would run — they're yours to replace.</b> (Iron Beam, your invention, is untouched.)</p>
+      <div class="fill"><label>Big <b>fire</b> attack (power 22) — placeholder "Firestorm"</label><input class="txt" name="q2_fire" placeholder="Your name for it"></div>
+      <div class="fill"><label>Big <b>water</b> attack (power 20) — placeholder "Tidal Wave"</label><input class="txt" name="q2_water" placeholder="Your name for it"></div>
+      <div class="fill"><label>Medium <b>grass</b> attack (power 16) — placeholder "Vine Lash"</label><input class="txt" name="q2_grass1" placeholder="Your name for it"></div>
+      <div class="fill"><label>Big <b>grass</b> attack (power 22) — placeholder "Forest Fury"</label><input class="txt" name="q2_grass2" placeholder="Your name for it"></div>
+      <div class="fill"><label>Big <b>normal</b> attack (power 16) — placeholder "Slam"</label><input class="txt" name="q2_normal" placeholder="Your name for it"></div>
+    </div>
+
+    <div class="q" data-q="3">
+      <div class="q-head"><span class="q-num">3</span>
+        <h3 class="q-title">Your starters' evolutions — keep the dragons? <span class="why-tag">B48</span></h3></div>
+      <p class="q-desc">They evolve at <b>level 16</b>. Here's the snag we hit: in the original art, <b>Whaley and Leafick don't evolve into anything at all</b> — they're already their family's last form — and Growler's real evolution isn't in the art we're allowed to use. You said "use art we already own", so they became:<br><br>Growler → <b>Deviraptor</b> (fire dragon) · Whaley → <b>Leviadile</b> (huge sea-dragon) · Leafick → <b>Dragarbor</b> (tree-dragon)<br><br>All three came out as dragons <b>by accident!</b></p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="A - keep all three"><span class="ok"><b>A) Keep all three</b> — three dragons is a great look.</span></label>
+        <label class="opt"><input type="radio" name="q3" value="B - swap some"><span class="ok"><b>B) Swap one or two</b> for something else from the 198 creatures we own — tell me what kind of thing you want.</span></label>
+        <label class="opt"><input type="radio" name="q3" value="C - get the real ones"><span class="ok"><b>C) Go and get their real family members</b> — needs a licence check we can't do until the Tuxemon wiki is back online.</span></label>
+      </div>
+      <div class="fill"><label>If you'd swap one — what should it be instead?</label><input class="txt" name="q3_why" placeholder="e.g. Whaley should become a giant shark"></div>
+    </div>
+
+    <div class="q" data-q="4">
+      <div class="q-head"><span class="q-num">4</span>
+        <h3 class="q-title">What should we build next? <span class="why-tag">B52 · pick your top three</span></h3></div>
+      <p class="q-desc">The story is finished, so everything from here is a bonus. Tick as many as you like, then write your top three in order at the bottom.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="q4_balls" value="yes"><span class="ok"><b>Great / Ultra / Cosmic Fakeaballs</b> — better balls that catch better. <i>Their art is already in the game folder, waiting!</i> This is also what would let you <b>catch a mini-boss</b>, which you decided should need a Cosmic ball.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_daynight" value="yes"><span class="ok"><b>Day and night</b> — you decided mini-bosses only come out at <b>night</b> (B11). Right now they're out all day, because day and night don't exist yet.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_gyms" value="yes"><span class="ok"><b>Gyms 2 and 3</b> — the Fire gym and the Water gym, with their badges.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_box" value="yes"><span class="ok"><b>Swapping Fakeamon at a Fakeatent</b> — you decided this (B33), but the swapping screen was never built.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_sound" value="yes"><span class="ok"><b>Sound and music</b> — you asked for full chiptune (B32). The game is completely silent right now.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_npcs" value="yes"><span class="ok"><b>Villagers to talk to</b> — the NPCs from B12, with a line of advice each.</span></label>
+        <label class="opt"><input type="checkbox" name="q4_areas" value="yes"><span class="ok"><b>The last two areas</b> — <b>Foggy City</b> and <b>Snow Mountain</b> still don't exist (B51). You invented six areas; four are built.</span></label>
+      </div>
+      <div class="fill"><label>Your top three, in order — or your own idea:</label><input class="txt" name="q4_rank" placeholder="1. … 2. … 3. …"></div>
+    </div>
+  </section>
+
+  <section class="sec s-fire">
+    <h2 class="sec-title">🎮 Lewis — after you've actually played it</h2>
+    <p class="sec-sub">Don't answer these from the page. <b>Play first</b>, then tell us how it felt.</p>
+
+    <div class="q" data-q="5">
+      <div class="q-head"><span class="q-num">5</span>
+        <h3 class="q-title">Is the final battle the right hardness? <span class="why-tag">B53 · play first</span></h3></div>
+      <p class="q-desc">Artemis has <b>260 HP</b>, hits <b>double against every type</b>, and hurts itself with Meteor Shower. In testing, a level-30 team of four with mixed types wins — but not easily.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="A - just right"><span class="ok"><b>A) Just right</b> — hard but fair.</span></label>
+        <label class="opt"><input type="radio" name="q5" value="B - too hard"><span class="ok"><b>B) Too hard</b> — I couldn't win.</span></label>
+        <label class="opt"><input type="radio" name="q5" value="C - too easy"><span class="ok"><b>C) Too easy</b> — I want a proper wall.</span></label>
+      </div>
+      <div class="fill"><label>What happened when you fought it?</label><input class="txt" name="q5_why" placeholder="Tell us about the fight"></div>
+    </div>
+
+    <div class="q" data-q="6">
+      <div class="q-head"><span class="q-num">6</span>
+        <h3 class="q-title">Being two levels behind means you basically lose <span class="why-tag">B54 · play first</span></h3></div>
+      <p class="q-desc">Something the maths turned up: because fights are short (about 3 hits), <b>a level gap decides almost everything.</b> Level-for-level you win about <b>85%</b> of fights. One level down: <b>8%</b>. Two levels down: <b>1%</b>. Type matters just as much — a level-30 fire Growler genuinely loses to a level-16 Sharpfin!</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="A - leave it"><span class="ok"><b>A) Leave it</b> — it makes levelling up feel powerful, and it teaches you to bring the right type.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="B - longer fights"><span class="ok"><b>B) Make fights longer</b> so one bad turn doesn't decide it. <i>(We tested this — it actually made it worse!)</i></span></label>
+        <label class="opt"><input type="radio" name="q6" value="C - change the maths"><span class="ok"><b>C) Change how damage is worked out</b> — the real fix, but it touches the oldest code in the game.</span></label>
+      </div>
+      <div class="fill"><label>Did it annoy you while playing?</label><input class="txt" name="q6_why" placeholder="Be honest!"></div>
+    </div>
+
+    <div class="q" data-q="7">
+      <div class="q-head"><span class="q-num">7</span>
+        <h3 class="q-title">Four mini-bosses are wearing borrowed faces <span class="why-tag">B49 · play first</span></h3></div>
+      <p class="q-desc"><b>Sharpfin and Artemis look like themselves.</b> The other four — <b>Banvengeance, Saurchin, Gastronium, Tobishimi</b> — are wearing pictures borrowed from other creatures, because nobody wrote down who drew their real ones, and nothing goes in this game without knowing that. Do they look right to you anyway?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="A - leave them"><span class="ok"><b>A) Leave them</b> — they look fine.</span></label>
+        <label class="opt"><input type="radio" name="q7" value="B - better stand-ins"><span class="ok"><b>B) Pick better stand-ins</b> from the 198 we own.</span></label>
+        <label class="opt"><input type="radio" name="q7" value="C - wait for real art"><span class="ok"><b>C) Wait for the real art</b> — but that means those four leave the game, and Artemis stays locked!</span></label>
+      </div>
+      <div class="fill"><label>Which one looks most wrong?</label><input class="txt" name="q7_why" placeholder="…"></div>
+    </div>
+
+    <div class="q" data-q="8">
+      <div class="q-head"><span class="q-num">8</span>
+        <h3 class="q-title">Should The Factory be locked behind the Flame Badge again? <span class="why-tag">B50</span></h3></div>
+      <p class="q-desc">⚠️ This one is me checking something against a decision <i>you</i> already made. Back in <b>B14</b> you said the <b>Flame Badge</b> (from Gym 2) opens <b>The Factory</b>. But Gym 2 doesn't exist yet, and The Factory had to exist for Gastronium to live in — so right now you get there <b>by boat from The Lagoon</b>, no Flame Badge involved. (It's still behind the Gear Badge, because The Lagoon is.)</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="A - leave it open"><span class="ok"><b>A) Leave it open</b> — one locked door is enough; the world flows better.</span></label>
+        <label class="opt"><input type="radio" name="q8" value="B - lock it when gym 2 exists"><span class="ok"><b>B) Lock it again when Gym 2 is built</b> — as you originally decided.</span></label>
+        <label class="opt"><input type="radio" name="q8" value="C - lock it now"><span class="ok"><b>C) Lock it now</b> — and Gym 2 becomes the next thing we build.</span></label>
+      </div>
     </div>
   </section>
 
@@ -239,7 +331,7 @@
     </div>
 
     <div class="laterlist">
-      <b>No rush — later milestones:</b> evolution level per starter &amp; XP curve (M5), exact Great/Ultra/Cosmic ball multipliers (M2 fine-tuning can wait), token prices (M4), officially locking the Metal/Cosmic type chart (low urgency — already built and working).
+      <b>Still open, no rush:</b> the ⚠️ <b>licence rechecks</b> that need <code>wiki.tuxemon.org</code> back online (four mini-bosses' real art, AV8R's assumed credit, the OPMon trio, the hero walk sheet's share-alike terms) · balance dials now that levels are real (all <code>[TUNE]</code>-marked — see <code>HOMEWORK.md</code> for the table) · a <b>peer-review checkpoint</b> if B52 turns into a real M6 · and one gotcha worth knowing: <b>the map no longer renders from a double-clicked <code>file://</code></b>, so local testing needs <code>python3 -m http.server</code>.
     </div>
   </section>
 
@@ -254,7 +346,7 @@
     root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
 
-  var KEY = "fakeamon-homework-v8";
+  var KEY = "fakeamon-homework-v9";
   var fields = document.querySelectorAll("input[name], textarea[name]");
 
   function load() {
@@ -263,7 +355,7 @@
     fields.forEach(function (f) {
       var v = saved[f.name];
       if (v === undefined) return;
-      if (f.type === "radio") { if (f.value === v) f.checked = true; }
+      if (f.type === "radio" || f.type === "checkbox") { if (f.value === v) f.checked = true; }
       else { f.value = v; }
     });
     refresh();
@@ -272,7 +364,7 @@
   function save() {
     var data = {};
     fields.forEach(function (f) {
-      if (f.type === "radio") { if (f.checked) data[f.name] = f.value; }
+      if (f.type === "radio" || f.type === "checkbox") { if (f.checked) data[f.name] = f.value; }
       else if (f.value.trim() !== "") { data[f.name] = f.value; }
     });
     localStorage.setItem(KEY, JSON.stringify(data));
@@ -284,8 +376,20 @@
       l.classList.toggle("picked", r.checked);
     });
     var done = 0;
-    // Only B43 is still open, and it's a pick-one question.
-    if (document.querySelector('input[name="q1"]:checked')) done++;
+    // Q1 and Q3 and Q5-Q8 are pick-one. Q2 counts once any move is named;
+    // Q4 counts once anything is ticked or ranked.
+    ["q1", "q3", "q5", "q6", "q7", "q8"].forEach(function (name) {
+      if (document.querySelector('input[name="' + name + '"]:checked')) done++;
+    });
+    var namedAMove = ["q2_fire", "q2_water", "q2_grass1", "q2_grass2", "q2_normal"]
+      .some(function (n) {
+        var f = document.querySelector('input[name="' + n + '"]');
+        return f && f.value.trim() !== "";
+      });
+    if (namedAMove) done++;
+    var rank = document.querySelector('input[name="q4_rank"]');
+    if (document.querySelector('input[name^="q4_"]:checked') ||
+        (rank && rank.value.trim() !== "")) done++;
     document.getElementById("doneN").textContent = done;
   }
 
@@ -298,7 +402,9 @@
   document.getElementById("resetBtn").addEventListener("click", function () {
     if (confirm("Clear these answers on this browser?")) {
       localStorage.removeItem(KEY);
-      fields.forEach(function (f) { if (f.type === "radio") f.checked = false; else f.value = ""; });
+      fields.forEach(function (f) {
+        if (f.type === "radio" || f.type === "checkbox") f.checked = false; else f.value = "";
+      });
       refresh();
     }
   });

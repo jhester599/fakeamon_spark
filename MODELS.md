@@ -94,6 +94,7 @@ wins). **`M3S11`** (expand the wild roster — The Meadows' slice) is new work
 |---|---|---|---|---|
 | **Pre-M5 planning session** ✅ | *Done early!* Save-game + evolution state design — produced `PLANS/M5_STATE_AND_SAVE_PLAN.md` (bundled with the M3 planning session) | — | — | Saving hurts if bolted on late — which is why its steps S1–S4 land back in **M2** (see the note in the M2 section above) |
 | 1–5 | Evolutions, mini-bosses, Artemis finale (cooking moved to M4) | **Sonnet 5** | medium | The specs live in DESIGN.md; XP/evolution/box steps follow the M5 plan §6 (its S5–S8, with per-step picks) |
+| S5 ✅ | *XP & levelling (done 2026-08-13)* | ~~Sonnet 5~~ **Opus 5** | **high** | Huddle override, and it earned its keep — **but not where we expected.** The code was small (~170 lines). The expensive part was the *balance judgement*: switching on `STAT_GROWTH_PER_LEVEL` changes every stat in the game at once, and the first sensible-looking numbers quietly made The Lagoon unwinnable. What actually saved it was **writing a simulator and running 400 fights per matchup** instead of guessing. **Lesson for next time:** the tell for "spend the big brain" isn't how much code a step needs — it's *how many other numbers the step silently changes*. |
 
 ### Anytime
 

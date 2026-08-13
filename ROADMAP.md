@@ -365,7 +365,7 @@ wild Fakeamon. *(The remaining areas open, one at a time, in M5.)*
 
 ---
 
-## 🟡 M5 — Depth & Story (the finale)  *(up next)*
+## ✅ M5 — Depth & Story (the finale)  *(complete! 🎉 the game is finished — all 36 steps)*
 
 **Goal:** the big finish — evolutions, the mini-bosses, and stopping Artemis.
 *(New late-game areas keep getting their own wild-roster slice — the same
@@ -374,11 +374,11 @@ rest of Venta.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | **Evolutions** — a Fakeamon that reaches its evolve level gets a **new sprite + higher stats** | "Growler is evolving!" with new art |
-| **2** | The **5 mini-bosses** (single strong encounters) placed in the world | Tough special battles worth big XP |
-| **3** | **"Beat all 5 → unlock Artemis"** gate | A locked area that opens once all five are down |
-| **4** | **Artemis finale** — the legendary boss with **Meteor Shower** (hits your Fakeamon **and** damages Artemis itself — Lewis's idea!) | An epic, huge-HP battle that's hard but winnable |
-| **5** | **Win screen** — beat Artemis, stop the meteor 🌠 | "You saved the Fakeamon world!" |
+| **1** ✅ | **Evolutions** — a Fakeamon that reaches its evolve level gets a **new sprite + higher stats**. *Done 2026-08-13, in three slices from the M5 plan: **S5** levelling (XP buys levels, and a level is worth +3 max HP, +2 Attack, +1 Defense, +1 Speed — it changed nothing at all before), **S6** evolution (all 3 starters + all 26 wild Fakeamon, 29 evolved forms sliced and credited), and **S7** the ceremony (Lewis's B23 pick).* | "Growler grew to level 7! ⭐" in the battle log, a Lv badge on both fighters, an XP bar on every team card — and at level 16 the screen goes dark, your Fakeamon shakes, flashes white, and **"🎉 Congratulations! Growler evolved into Deviraptor!"** |
+| **2** ✅ | The **5 mini-bosses** placed in the world — and, so the last two had homes, **two new areas**: The Forest and The Factory. Each pays triple XP, 60 🪙 and a **Bossberry** (the berry you can't find any other way), and stays beaten for good. | Tough special battles worth big XP — *done 2026-08-13* |
+| **3** ✅ | **"Beat all 5 → unlock Artemis"** gate — the ☄️ door in The Factory wears a 🔒 until every mini-boss is down, using the same `flags.unlockedAreas` list every other locked area uses | A locked area that opens once all five are down — *done 2026-08-13* |
+| **4** ✅ | **Artemis finale** — 260 HP, Cosmic (2× against everything), in a lair of purple fire and a throne of stars. **Meteor Shower** hits your Fakeamon **and** Artemis itself — Lewis's idea, and the only reason a legend that size is beatable | An epic, huge-HP battle that's hard but winnable — *done 2026-08-13* |
+| **5** ✅ | **Win screen** — beat Artemis, stop the meteor 🌠, and keep your save: the world stays open afterwards (Lewis's B25) | *"Venta is saved! But adventures still await you…"* — Lewis's words, word for word — *done 2026-08-13* |
 
 **🎉 M5 done when:** you can evolve creatures, clear all 5 mini-bosses, and
 defeat Artemis to win the game.

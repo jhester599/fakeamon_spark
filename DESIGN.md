@@ -51,7 +51,16 @@ Fields: Name, Type, Stats (HP/Attack/Defense/Speed), Moves (up to 4), Level & XP
 
 **Whaley/Dollfin note:** In Tuxemon, both Bigfin (Whaley) and the mini-boss Sharpfin evolve from **Dollfin**. To avoid the same base sprite appearing twice, either give Whaley no pre-evolution (start it as Bigfin) or pick a different base. **DECIDED (2026-07-05):** Whaley has **no pre-evolution** — it starts as Bigfin. Simplest, and it avoids the shared Dollfin sprite. *(Lewis's call.)*
 
-**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)* **[TO DECIDE: evolution level per starter — number tuning, Jeff.]**
+**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)*
+
+**DECIDED (2026-08-13) — who evolves into what, and when** *(built at M5 Step 1; the data is `evolvesTo`/`evolvesAt` in `src/data/fakeamon.js`, the rules are in `src/progression.js`)*:
+
+- **Everybody evolves — once.** All three starters and all 26 wild Fakeamon have exactly one evolution. Second evolutions (some families have a third form) are deliberately left for later.
+- **The starters evolve at level 16** — the classic number, and comfortably after Gym 1.
+- **Wild Fakeamon use Tuxemon's own evolution levels, squeezed into our shorter game.** Tuxemon runs to about level 100 and ours caps at 30, so their numbers were compressed while keeping their *ordering* (15→12, 18→14, 20→16, 24→18, 26→20, 32→22, 41→24). Early bloomers stay early.
+- ⚠️ **The three starters' evolutions are a CHOICE, not Tuxemon canon.** Growler's real evolution (Cobarett) isn't in our licensed art set, and **Whaley and Leafick have no evolution at all** — they're already the last form of their families. So all three were picked from art the project already has permission to use *(Lewis's call: "use art we already own")*: Growler → **Deviraptor**, Whaley → **Leviadile**, Leafick → **Dragarbor**. Each is a one-word edit if he changes his mind.
+- **An evolved form keeps its type**, gains **+14 HP / +5 Attack / +4 Defense / +3 Speed** over its base form, and swaps to its type's **big move kit** — which is why M5 added Firestorm, Tidal Wave, Vine Lash, Forest Fury and Slam (§6). Before those existed, grass had exactly one attack in the whole game, so a fully evolved grass Fakeamon fought like a baby one.
+- **Evolving keeps the same fraction of HP** (half health in, half health out) and **never revives** a fainted Fakeamon.
 
 **DECIDED (2026-07-06) — the evolution show:** a full ceremony — the screen flashes, *"What?! `<name>` is evolving!"*, then a big sprite reveal. *(Lewis's call, B23.)*
 
@@ -118,7 +127,18 @@ Reads cleanly: Fire melts Metal and burns Grass; Water douses Fire; Grass drinks
 
 Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
-**Leveling:** winning awards XP → level up → stats rise. Mini-bosses award more XP than wild Fakeamon. **[TO DECIDE: XP curve; per-Fakeamon XP; mini-boss levels.]**
+**Leveling:** winning awards XP → level up → stats rise. Mini-bosses award more XP than wild Fakeamon.
+
+**DECIDED (2026-08-13) — the XP curve and what a level is worth** *(built at M5 Step 1; every number below is `[TUNE]` and lives in `src/progression.js`, except the growth table which lives in `src/state.js`)*:
+
+- **XP curve:** getting from level *L* to *L+1* costs `XP_BASE × L` (10 × L). Early levels fly by; later ones take real work. **Level cap 30.**
+- **What a fight pays:** `XP_REWARD_BASE × the opponent's level` (8 × level), so tougher opponents are worth more. A catch pays **half** that (you got a whole Fakeamon out of it too). Mini-bosses pay **×3** — DESIGN's "mini-bosses award more XP" rule, wired and waiting for M5 Step 2.
+- **Per-Fakeamon XP:** v1 rule — **the active fighter gets it all.** Sharing XP across the team is a possible later question.
+- **What a level gives:** **+3 max HP, +2 Attack, +1 Defense, +1 Speed.** Attack deliberately grows faster than Defense, which keeps a fight about 3 hits long at *every* level instead of slowly turning into two tanks bouncing off each other.
+- **Levelling up is not a heal:** your current HP goes up by exactly the max-HP gain, so half-health stays half-health. A fainted Fakeamon stays fainted.
+- ⚠️ **A knock-on effect worth knowing:** because fights are short (~3 hits), a level gap is *decisive* — level-for-level is a comfortable win, two levels down is very nearly an automatic loss. That's why **The Lagoon was re-levelled from 10–15 to 8–12** the same day (`DECISIONS.md` #84). If a future area ever feels like a locked door, its levels are the first thing to look at.
+
+*(Still open, and genuinely later: evolution levels per starter — that's M5 Step 1's next slice — and mini-boss levels/stats at M5 Step 2.)*
 
 **DECIDED (2026-07-06) — wild Fakeamon level:** depends on where you are — early areas are easy, far areas are dangerous. *(Lewis's call, B4.)* This is a full location-based feature once M3's map (§7) exists. For M2, before the map exists, use the player's average team level as a stand-in (`wildLevel ≈ playerAverageLevel`, with a small random wiggle) — Jeff turns the *real* per-area scaling into numbers once the areas in §7 are built.
 
@@ -496,7 +516,7 @@ Maintain a **`CREDITS.md`** in the repo (in place since the starter art landed; 
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
-3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
+3. ~~Evolution **level** per starter~~ (level 16, decided 2026-08-13, §3); ~~XP curve + per-Fakeamon XP~~ (both decided 2026-08-13, §5); mini-boss levels/stats.
 4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards (feel is decided, §9).
 5. Windeye's and Spectera's off-type re-theme/swap for Gyms 2/3, at M4 build time (§8).
 6. Wild-level location scaling — the real per-area numbers, once M3's areas (§7) exist.

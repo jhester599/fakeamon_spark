@@ -83,6 +83,18 @@
     font-size: 13px;
     text-transform: capitalize;
   }
+  /* M5 Step 1: a Fakeamon's level, next to its type badge. Levels change
+     stats now, so this number is real information, not decoration. */
+  .level-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #7a5cb0;   /* the same purple the XP text uses */
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+  }
   .stats {
     font-size: 14px;
     color: #556;
@@ -330,11 +342,24 @@
     font-size: 12px;
     color: #556;
   }
-  /* Step 8: a running XP count, so it's visible that it's really banking up
-     even though nothing levels up yet (that's M5's job). */
+  /* Step 8 banked XP; M5 Step 1 spends it. This line now reads
+     "Lv 4 · XP 12/40" — how far along the current level you are. */
   .team-xp-text {
     font-size: 12px;
     color: #7a5cb0;
+  }
+  /* The little XP bar under each team card (M5 Step 1). Same shape as the HP
+     bar above it, purple instead of green so nobody mixes the two up. */
+  .xp-bar-track {
+    height: 4px;
+    background: #e6e1f2;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 3px 0;
+  }
+  .xp-bar-fill {
+    height: 100%;
+    background: #7a5cb0;
   }
   /* Step 6: Switch buttons. Deliberately NOT .move-btn — same reason as
      .boxes-btn above (battle.js's setControlsEnabled() would grab it). */
@@ -359,6 +384,72 @@
   /* One shared "hide me" switch. The screen manager (src/screens.js) toggles
      this on #world to swap between the map and a battle (M3 S7). */
   .hidden { display: none !important; }
+
+  /* ---- THE EVOLUTION CEREMONY (M5 Step 1 / the plan's S7) ----
+     Lewis's B23 pick: don't just tell the player their Fakeamon evolved —
+     make a fuss. The screen goes dark, the old shape flashes white, and the
+     new one is revealed. This is ALL that S7 is: the rules already happened
+     in src/progression.js, this is the show. */
+  #ceremony {
+    position: fixed;
+    inset: 0;                      /* cover the whole window */
+    z-index: 50;                   /* above the map and the battle box */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(12, 8, 28, 0.92);
+    text-align: center;
+    color: white;
+  }
+  .ceremony-inner { max-width: 420px; padding: 20px; }
+  .ceremony-line {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    min-height: 52px;              /* so the sprite doesn't jump when text changes */
+  }
+  /* The sprite itself: big, crisp pixels, and it can glow. */
+  .ceremony-sprite {
+    width: 192px; height: 192px;
+    image-rendering: pixelated;    /* nearest-neighbor — no blurry pixel art */
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
+  }
+  /* [TUNE] The three beats of the show. Change these numbers to make the
+     ceremony faster, slower, flashier — nothing else depends on them. */
+  .ceremony-shaking  { animation: ceremony-shake 0.5s ease-in-out infinite; }
+  .ceremony-flashing { animation: ceremony-flash 0.4s ease-in-out infinite; }
+  .ceremony-arriving { animation: ceremony-arrive 0.7s ease-out; }
+
+  @keyframes ceremony-shake {           /* "something is happening…" */
+    0%, 100% { transform: translateX(0)     scale(1);    }
+    25%      { transform: translateX(-7px)  scale(1.03); }
+    75%      { transform: translateX(7px)   scale(1.03); }
+  }
+  @keyframes ceremony-flash {           /* white-hot, mid-change */
+    0%, 100% { filter: brightness(1)  drop-shadow(0 0 12px rgba(255,255,255,0.35)); }
+    50%      { filter: brightness(14) drop-shadow(0 0 40px rgba(255,255,255,0.95)); }
+  }
+  @keyframes ceremony-arrive {          /* ta-daa! */
+    0%   { transform: scale(0.35); filter: brightness(9); opacity: 0.2; }
+    60%  { transform: scale(1.14); filter: brightness(1.5); opacity: 1; }
+    100% { transform: scale(1);    filter: brightness(1); }
+  }
+  .ceremony-btn {
+    margin-top: 20px;
+    padding: 12px 26px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: #7a5cb0;
+    color: white;
+    cursor: pointer;
+  }
+  /* Respect a "reduce motion" setting — the show still happens, it just
+     doesn't shake and strobe. */
+  @media (prefers-reduced-motion: reduce) {
+    .ceremony-shaking, .ceremony-flashing, .ceremony-arriving { animation: none; }
+  }
 
   /* ---- M3 Step S1: the overworld (Phaser canvas) ---- */
   /* #world is where Phaser drops its <canvas>. We just center it and give it
@@ -529,6 +620,18 @@
   <div id="boxes"></div>
 </div>
 
+<!-- THE EVOLUTION CEREMONY (M5 Step 1 / S7). Sits on top of everything else
+     and is hidden until a Fakeamon evolves — src/main.js fills it in and runs
+     the show. It's outside #battle on purpose: evolving happens on the MAP,
+     after the fight is over (M5 plan §3). -->
+<div id="ceremony" class="hidden">
+  <div class="ceremony-inner">
+    <p class="ceremony-line" id="ceremonyLine"></p>
+    <img class="ceremony-sprite" id="ceremonySprite" alt="">
+    <div id="ceremonyControls"></div>
+  </div>
+</div>
+
 <!-- Phaser (the game engine for the overworld) — M3 Step S1. Vendored, not
      loaded from a CDN, so double-clicking index.html still works offline and
      nothing can swap the file out from under us (M3 plan §2; DECISIONS.md).
@@ -539,23 +642,27 @@
 <!-- Game code lives in src/ now. Plain scripts (not modules) on purpose, so
      double-clicking index.html still works with no server needed — which
      means load ORDER is how files depend on each other. Required order:
-       data/*  →  state.js  →  battle.js  →  save.js  →  world/config.js
-       →  screens.js  →  main.js
-     (save.js reads gameState + uses battle.js's addLogLine; world/config.js
-     needs the Phaser global above; screens.js swaps the map/battle screens and
-     uses config.js's worldScene/worldGame; main.js starts both the overworld
-     and the battle game and calls the screen manager, so it goes last.
-     progression.js will slot in between state.js and battle.js once M5's
-     leveling work lands — see PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1.) -->
+       data/*  →  state.js  →  progression.js  →  battle.js  →  save.js
+       →  world/config.js  →  screens.js  →  main.js
+     (progression.js — M5 Step 1 — uses state.js's statsFor, and is itself used
+     by battle.js's XP payouts and save.js's load-time level catch-up, so it
+     slots in right there, exactly where PLANS/M5_STATE_AND_SAVE_PLAN.md §A.1
+     said it would. save.js reads gameState + uses battle.js's addLogLine;
+     world/config.js needs the Phaser global above; screens.js swaps the
+     map/battle screens and uses config.js's worldScene/worldGame; main.js
+     starts both the overworld and the battle game and calls the screen
+     manager, so it goes last.) -->
 <script src="src/data/moves.js"></script>
 <script src="src/data/fakeamon.js"></script>
 <script src="src/data/typechart.js"></script>
 <script src="src/data/economy.js"></script>
 <script src="src/data/gyms.js"></script>
+<script src="src/data/bosses.js"></script>
 <script src="src/data/berries.js"></script>
 <script src="src/data/recipes.js"></script>
 <script src="src/data/maps.js"></script>
 <script src="src/state.js"></script>
+<script src="src/progression.js"></script>
 <script src="src/battle.js"></script>
 <script src="src/save.js"></script>
 <script src="src/world/config.js"></script>

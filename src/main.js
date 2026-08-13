@@ -129,6 +129,10 @@ function continueGame() {
   gameState.flags = loaded.flags;      // M4 — badges earned + areas unlocked
   gameState.world = loaded.world;
   gameState.inventory = loaded.inventory;
+  // M5 Step 1: an old save cashes in XP it banked before levelling existed
+  // (src/save.js), which can push somebody straight past their evolve level —
+  // so check here too, not just after battles.
+  evolveWhoeverIsReady();
   enterOverworld();
 }
 
@@ -182,6 +186,13 @@ function enterOverworld() {
   refillEmptyMap();   // …and never leave the player standing on an empty map
   maybeGrowBerries(); // M4S5: berries grow back on empty patches over time
   saveGame();
+
+  // M5 Step 1 (S7): if anybody evolved on the way here — after a battle, or
+  // after loading a save that had XP banked — the show plays now, on the map,
+  // which is where the M5 plan §3 wanted the reveal. This goes LAST so the map
+  // is already up and saved: the ceremony is a celebration of something that
+  // has already safely happened, never a thing the save is waiting on.
+  playPendingCeremonies().then(playWinScreenIfWon);
 }
 
 // M4S6: a little picture for each area, used in the overworld card's heading.
@@ -353,6 +364,11 @@ function enterBattle(config, context) {
 // src/world/config.js's WorldScene.handleEncounter calls this when you bump one.
 function startMapEncounter(encounter) {
   if (battleInProgress) return;
+
+  // M5 Step 2: a mini-boss stands on the map like anything else, but the fight
+  // is an event — it announces itself, it can't be caught, and it pays triple.
+  if (encounter.bossId) { startMiniBossBattle(encounter); return; }
+
   enterBattle({
     playerParty: gameState.party,
     enemy: newIndividual(encounter.species, encounter.level),
@@ -361,6 +377,101 @@ function startMapEncounter(encounter) {
     canCatch: true,
     onStateChange: renderTeamList,
   }, { encounter: encounter });
+}
+
+// A mini-boss fight (M5 Step 2). Everything that makes it special is here;
+// the battle engine itself needed only two small additions (a named opponent
+// and an entrance line), because a boss is just a very large wild Fakeamon.
+function startMiniBossBattle(encounter) {
+  const boss = bossById(encounter.bossId); // a mini-boss, or Artemis herself
+  if (boss === ARTEMIS) { startArtemisBattle(encounter); return; }
+  const bossIndividual = newIndividual(boss.speciesKey, boss.level);
+
+  // This is the flag src/progression.js reads to pay MINIBOSS_XP_MULT — the
+  // socket that was left waiting when levelling was built.
+  bossIndividual.isMiniBoss = true;
+
+  enterBattle({
+    playerParty: gameState.party,
+    enemy: bossIndividual,
+    inventory: gameState.inventory,
+    canFlee: true,        // you may always walk away and come back stronger
+    canCatch: false,      // ⚠️ Lewis's rule is "only with a Cosmic Fakeaball"
+                          //   (DESIGN.md §6) — until ball tiers exist, no catching
+    namedOpponent: true,  // it's "Saurchin", never "the wild Saurchin"
+    introLine: boss.entrance,
+    battleTitle: "⚔️ Mini-Boss — " + boss.name,
+    onStateChange: renderTeamList,
+  }, { encounter: encounter, boss: boss });
+}
+
+// ===========================================================================
+//  THE FINALE (M5 Step 4) — Artemis. Everything Lewis wrote about this moment
+//  is in DESIGN.md §10: the lair (B22), the win text (B24), and the fact that
+//  the world stays open afterwards (B25).
+// ===========================================================================
+function startArtemisBattle(encounter) {
+  const artemis = newIndividual(ARTEMIS.speciesKey, ARTEMIS.level);
+  artemis.isMiniBoss = true; // the legend pays boss-sized XP too
+
+  noteNews(ARTEMIS.lairText); // "Purple fire crackles around a throne of stars…"
+
+  enterBattle({
+    playerParty: gameState.party,
+    enemy: artemis,
+    inventory: gameState.inventory,
+    canFlee: true,     // you may always retreat and come back healed
+    canCatch: false,   // Lewis's call: Artemis can never be caught (DESIGN.md §10)
+    namedOpponent: true,
+    introLine: ARTEMIS.entrance,
+    battleTitle: "☄️ THE FINAL BATTLE — Artemis",
+    onStateChange: renderTeamList,
+  }, { encounter: encounter, artemis: true });
+}
+
+// You beat Artemis. This is the end of the story — but not the end of the
+// game: the world stays open (Lewis's B25), so this sets a flag, shows the
+// win screen, and hands you back your adventure.
+function winTheGame() {
+  const firstTime = !gameState.flags.artemisDefeated;
+  gameState.flags.artemisDefeated = true;
+  gameState.tokens += ARTEMIS_TOKEN_REWARD;
+  saveGame();
+  if (firstTime) pendingWinScreen = true;
+}
+
+// Beating a mini-boss: bank the prize, remember it's down for good, and tell
+// the player how close they are to unlocking Artemis (M5 Step 3).
+function awardMiniBossPrize(boss) {
+  if (gameState.flags.bossesCleared.indexOf(boss.id) === -1) {
+    gameState.flags.bossesCleared.push(boss.id);
+  }
+  gameState.tokens += MINIBOSS_TOKEN_REWARD;
+
+  // The Bossberry — the one berry you can never find lying on the ground
+  // (src/data/berries.js). Beating a mini-boss is the only way to get one.
+  gameState.inventory.berries.bossberry =
+    (gameState.inventory.berries.bossberry || 0) + 1;
+
+  const beaten = gameState.flags.bossesCleared.length;
+  const total = MINI_BOSS_IDS.length;
+  let news = "🏆 You defeated " + boss.name + "! +" + MINIBOSS_TOKEN_REWARD +
+             " 🪙 and a Bossberry! (" + beaten + " of " + total + " mini-bosses)";
+
+  // M5 Step 3 — THE GATE. Beating the fifth one opens Artemis's lair. It's
+  // pushed onto the same flags.unlockedAreas list every other locked area
+  // uses, so the door in The Factory just stops being locked. One list, one
+  // fact (DECISIONS.md #79).
+  if (allMiniBossesBeaten(gameState.flags.bossesCleared)) {
+    if (gameState.flags.unlockedAreas.indexOf("artemisLair") === -1) {
+      gameState.flags.unlockedAreas.push("artemisLair");
+    }
+    news += " — ALL FIVE ARE DOWN! ☄️ The door in The Factory is open. " +
+            "Artemis is waiting.";
+  } else {
+    news += " — " + (total - beaten) + " to go before Artemis.";
+  }
+  noteNews(news);
 }
 
 // S8: after a battle, maybe bring one previously-cleared wild Fakeamon back
@@ -373,9 +484,14 @@ function startMapEncounter(encounter) {
 // back onto it. Without this, a respawn roll in The Lagoon could pick a
 // Meadows creature and quietly do nothing.
 function clearedOnThisMap() {
-  const ids = (MAPS[gameState.world.mapId].encounters || []).map(function (enc) {
-    return enc.id;
-  });
+  // M5 Step 2: mini-bosses are filtered OUT here, which is what makes "beaten
+  // for good" true. Ordinary wild Fakeamon wander back (S8's respawn roll and
+  // refillEmptyMap both draw from this list); a mini-boss you've beaten must
+  // never reappear, or the Artemis gate could be farmed and the world would
+  // stop feeling like it remembers what you did.
+  const ids = (MAPS[gameState.world.mapId].encounters || [])
+    .filter(function (enc) { return !enc.bossId; })
+    .map(function (enc) { return enc.id; });
   return gameState.world.defeatedEncounters.filter(function (id) {
     return ids.indexOf(id) !== -1;
   });
@@ -422,6 +538,176 @@ function refillEmptyMap() {
   });
 }
 
+// M5 Step 1 — the evolution check. Runs after a battle and after loading a
+// save; both are moments when a Fakeamon might have just crossed its evolve
+// level. src/progression.js owns the rules and the actual swap — this only
+// decides WHO to check (your party and your Boxes) and says what happened.
+//
+// The Boxes are included on purpose: XP can reach a boxed Fakeamon when an old
+// save catches up (src/save.js), and a Fakeamon quietly growing up in storage
+// is a nice surprise rather than a bug.
+function evolveWhoeverIsReady() {
+  const reports = applyEvolutions(gameState.party.concat(gameState.box));
+  reports.forEach(function (report) {
+    noteNews(report.message); // "What?! Growler evolved into Deviraptor! ✨"
+  });
+  return reports;
+}
+
+// ===========================================================================
+//  THE EVOLUTION CEREMONY — M5 Step 1 (the M5 plan's S7), Lewis's B23 pick:
+//  screen flash, "What?! <name> is evolving!", big sprite reveal.
+//
+//  This is PURE THEATRE. Every rule already ran in src/progression.js before a
+//  single pixel of this happens — the Fakeamon has already changed. All this
+//  does is make a fuss about it, which is exactly why the plan kept the two
+//  apart: Lewis can redirect the whole show from this one section without ever
+//  touching the rules.
+//
+//  It plugs into progression.js's `onEvolve` hook, which was left empty on
+//  purpose at S6. The hook fires DURING applyEvolutions (possibly several
+//  times — a gym battle can level two of your Fakeamon), so we just queue what
+//  happened and play the shows afterwards, one at a time, on the map.
+// ===========================================================================
+
+// [TUNE] How long each beat of the ceremony lasts, in milliseconds.
+const CEREMONY_BEATS = {
+  shaking: 1600,  // "What?! Growler is evolving!" — the sprite wobbles
+  flashing: 1500, // white-hot, the shape changing
+};
+
+let pendingCeremonies = []; // filled by the hook, drained by playPendingCeremonies
+let pendingWinScreen = false; // M5 Step 5 — set the moment Artemis falls
+
+// This is the S7 implementation of S6's hook.
+onEvolve = function (individual, oldKey, newKey) {
+  pendingCeremonies.push({ oldKey: oldKey, newKey: newKey });
+};
+
+// Play every queued ceremony, one after another. Returns a Promise that
+// resolves once the last "Great!" button has been clicked, so callers can wait
+// for the show to finish before doing anything else.
+function playPendingCeremonies() {
+  const queue = pendingCeremonies;
+  pendingCeremonies = [];
+  if (queue.length === 0) return Promise.resolve();
+
+  // Walking around behind a full-screen ceremony would be silly — freeze the
+  // map exactly the way a battle does, and unfreeze when the show is over.
+  freezeWorldForCeremony(true);
+
+  let chain = Promise.resolve();
+  queue.forEach(function (item) {
+    chain = chain.then(function () { return playOneCeremony(item.oldKey, item.newKey); });
+  });
+  return chain.then(function () {
+    freezeWorldForCeremony(false);
+    renderTeamList(); // the team row now shows the new creature
+  });
+}
+
+// One creature's show, in three beats.
+function playOneCeremony(oldKey, newKey) {
+  const oldSpecies = FAKEAMON[oldKey];
+  const newSpecies = FAKEAMON[newKey];
+  const stage = document.getElementById("ceremony");
+  const line = document.getElementById("ceremonyLine");
+  const sprite = document.getElementById("ceremonySprite");
+  const controls = document.getElementById("ceremonyControls");
+
+  return new Promise(function (finished) {
+    // BEAT 1 — "what's happening to my Fakeamon?"
+    stage.classList.remove("hidden");
+    controls.innerHTML = "";
+    line.textContent = "What?! " + oldSpecies.name + " is evolving!";
+    sprite.src = oldSpecies.sprite;
+    sprite.alt = oldSpecies.name;
+    sprite.className = "ceremony-sprite ceremony-shaking";
+
+    setTimeout(function () {
+      // BEAT 2 — white-hot: the old shape is still there, but only just.
+      sprite.className = "ceremony-sprite ceremony-flashing";
+
+      setTimeout(function () {
+        // BEAT 3 — the reveal.
+        sprite.src = newSpecies.sprite;
+        sprite.alt = newSpecies.name;
+        sprite.className = "ceremony-sprite ceremony-arriving";
+        line.textContent = "🎉 Congratulations! " + oldSpecies.name +
+                           " evolved into " + newSpecies.name + "!";
+
+        const button = document.createElement("button");
+        button.className = "ceremony-btn";
+        button.textContent = "Great!";
+        button.addEventListener("click", function () {
+          stage.classList.add("hidden");
+          sprite.className = "ceremony-sprite";
+          finished();
+        });
+        controls.appendChild(button);
+        button.focus();
+      }, CEREMONY_BEATS.flashing);
+    }, CEREMONY_BEATS.shaking);
+  });
+}
+
+// ===========================================================================
+//  THE WIN SCREEN — M5 Step 5. Lewis wrote the words (B24) and the rule that
+//  the world stays open afterwards (B25), so this is a curtain call, not an
+//  ending: you press Keep exploring and carry straight on with your save.
+//
+//  It reuses the ceremony's stage (#ceremony) — same dark backdrop, same
+//  frozen map, same "click to carry on" shape. One overlay, two occasions.
+// ===========================================================================
+function playWinScreenIfWon() {
+  if (!pendingWinScreen) return Promise.resolve();
+  pendingWinScreen = false;
+
+  freezeWorldForCeremony(true);
+  const stage = document.getElementById("ceremony");
+  const line = document.getElementById("ceremonyLine");
+  const sprite = document.getElementById("ceremonySprite");
+  const controls = document.getElementById("ceremonyControls");
+
+  return new Promise(function (finished) {
+    stage.classList.remove("hidden");
+    sprite.src = FAKEAMON[ARTEMIS.speciesKey].sprite;
+    sprite.alt = ARTEMIS.name;
+    sprite.className = "ceremony-sprite ceremony-arriving";
+    line.innerHTML =
+      "🌠 <b>The meteor stops.</b><br>" + ARTEMIS.winText;
+
+    controls.innerHTML = "";
+    const button = document.createElement("button");
+    button.className = "ceremony-btn";
+    button.textContent = "Keep exploring!";
+    button.addEventListener("click", function () {
+      stage.classList.add("hidden");
+      sprite.className = "ceremony-sprite";
+      freezeWorldForCeremony(false);
+      finished();
+    });
+    controls.appendChild(button);
+    button.focus();
+  });
+}
+
+// Freeze/unfreeze the map for the duration of the show. Same guards
+// src/screens.js uses for a battle (pause the scene, take away the keyboard
+// and pointer) — but the map STAYS VISIBLE behind the dark backdrop, which is
+// the whole point of doing the reveal out here.
+function freezeWorldForCeremony(frozen) {
+  worldActive = !frozen;
+  if (!worldScene) return;
+  worldScene.input.enabled = !frozen;
+  worldScene.input.keyboard.enabled = !frozen;
+  if (frozen) {
+    if (!worldScene.scene.isPaused()) worldScene.scene.pause();
+  } else {
+    if (worldScene.scene.isPaused()) worldScene.scene.resume();
+  }
+}
+
 // Whatever the battle decided, this is where it becomes a team fact — then
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
@@ -438,6 +724,10 @@ function handleBattleOutcome(outcome, context) {
   // reward instead, so the two never stack.
   if (outcome.result === "win" && gym) {
     awardGymPrize(gym);
+  } else if (outcome.result === "win" && context.artemis) {
+    winTheGame(); // M5 Steps 4–5 — the meteor stops
+  } else if (outcome.result === "win" && context.boss) {
+    awardMiniBossPrize(context.boss); // M5 Step 2 — tokens + a Bossberry
   } else if (outcome.result === "win") {
     gameState.tokens += ECONOMY.TOKENS_PER_WILD_WIN;
     noteNews("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");
@@ -470,6 +760,13 @@ function handleBattleOutcome(outcome, context) {
   if (encounter && (outcome.result === "win" || outcome.result === "caught")) {
     if (worldScene) worldScene.removeEncounter(encounter.id);
   }
+
+  // M5 Step 1 (the plan's S6): now the fight is over and the XP is banked, see
+  // if anyone grew up enough to EVOLVE. This deliberately runs here rather than
+  // inside battle.js — the M5 plan §3 keeps evolution out of battle resolution,
+  // so nobody changes shape mid-turn. The whole party is checked, not just the
+  // fighter: a gym battle can level up two of your Fakeamon.
+  evolveWhoeverIsReady();
 
   // S8: The Meadows shouldn't stay empty forever — see the respawn note in
   // PLANS/M3_OVERWORLD_PLAN.md §6.3. Rolled after EVERY battle, not just wins,
@@ -1030,7 +1327,16 @@ function teamCard(individual, isActive, buttonHtml) {
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +
       '<div class="team-hp-text">' + individual.currentHP + "/" + stats.maxHP + "</div>" +
-      '<div class="team-xp-text">XP: ' + individual.xp + "</div>" +
+      // M5 Step 1: XP is spent on levels now, so show how far along this level
+      // you are ("Lv 4 · XP 12/40") instead of one number that only ever grew.
+      '<div class="xp-bar-track">' +
+        '<div class="xp-bar-fill" style="width: ' + xpBarPercent(individual) + '%;"></div>' +
+      "</div>" +
+      '<div class="team-xp-text">Lv ' + individual.level + " · " +
+        (individual.level >= MAX_LEVEL
+          ? "MAX"
+          : "XP " + individual.xp + "/" + xpToNext(individual.level)) +
+      "</div>" +
       (buttonHtml || "") +
     "</div>"
   );

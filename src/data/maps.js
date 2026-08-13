@@ -162,6 +162,12 @@ const MAPS = {
     // — which is what a gym badge pushes there (src/main.js's awardGymPrize).
     // Nothing else marks it locked: the one list IS the gate.
     exits: [
+      // M5 Step 2: a path west into The Forest. No badge needed — it's the
+      // wood next door to the starting field, and it's where Banvengeance
+      // lives. (Bumped like the boat, so the landing tile can't bounce you
+      // straight back.)
+      { id: "meadows-forest-path", kind: "path", tileX: 2, tileY: 4,
+        toMap: "theForest", toTile: { x: 3, y: 9, facing: "right" } },
       { id: "meadows-boat", kind: "boat", tileX: 27, tileY: 9,
         toMap: "theLagoon", toTile: { x: 3, y: 9, facing: "right" } },
     ],
@@ -225,19 +231,38 @@ const MAPS = {
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
     [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
     ],
+    // [TUNE] ⚠️ These levels were 10–15 while `level` changed no stats. M5 Step 1
+    // (2026-08-13) turned levels into real stats and re-levelled them to 8–12
+    // (Jeff & Lewis's call). Why: you sail in here around level 8–10 straight
+    // after Gym 1, and a 400-fight simulation said a two-level deficit is very
+    // nearly an automatic loss — so at 10–15 most of this area was a locked
+    // door, not a challenge. At 8–12 you arrive able to fight most of it, with
+    // the far side still a stretch. They still climb as you go deeper round
+    // the water (the order below follows the path anticlockwise).
     encounters: [
-      { id: "lagoon-axolightl",       species: "axolightl",       level: 10, tileX: 10, tileY: 3  },
-      { id: "lagoon-claymorior",      species: "claymorior",      level: 10, tileX: 14, tileY: 3  },
-      { id: "lagoon-fluoresfin",      species: "fluoresfin",      level: 11, tileX: 18, tileY: 3  },
-      { id: "lagoon-gupphish",        species: "gupphish",        level: 11, tileX: 22, tileY: 3  },
-      { id: "lagoon-jelillow",        species: "jelillow",        level: 12, tileX: 25, tileY: 6  },
-      { id: "lagoon-kroki",           species: "kroki",           level: 13, tileX: 25, tileY: 10 },
-      { id: "lagoon-lesmagu",         species: "lesmagu",         level: 12, tileX: 22, tileY: 15 },
-      { id: "lagoon-nebufin",         species: "nebufin",         level: 13, tileX: 18, tileY: 16 },
-      { id: "lagoon-nostray",         species: "nostray",         level: 14, tileX: 14, tileY: 16 },
-      { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 14, tileX: 10, tileY: 15 },
-      { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 15, tileX: 6,  tileY: 12 },
-      { id: "lagoon-skwib",           species: "skwib",           level: 15, tileX: 5,  tileY: 8  },
+      { id: "lagoon-axolightl",       species: "axolightl",       level: 8,  tileX: 10, tileY: 3  },
+      { id: "lagoon-claymorior",      species: "claymorior",      level: 8,  tileX: 14, tileY: 3  },
+      { id: "lagoon-fluoresfin",      species: "fluoresfin",      level: 9,  tileX: 18, tileY: 3  },
+      { id: "lagoon-gupphish",        species: "gupphish",        level: 9,  tileX: 22, tileY: 3  },
+      { id: "lagoon-jelillow",        species: "jelillow",        level: 10, tileX: 25, tileY: 6  },
+      { id: "lagoon-kroki",           species: "kroki",           level: 11, tileX: 25, tileY: 10 },
+      { id: "lagoon-lesmagu",         species: "lesmagu",         level: 10, tileX: 22, tileY: 15 },
+      { id: "lagoon-nebufin",         species: "nebufin",         level: 11, tileX: 18, tileY: 16 },
+      { id: "lagoon-nostray",         species: "nostray",         level: 12, tileX: 14, tileY: 16 },
+      { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 12, tileX: 10, tileY: 15 },
+      { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 12, tileX: 6,  tileY: 12 },
+      { id: "lagoon-skwib",           species: "skwib",           level: 12, tileX: 5,  tileY: 8  },
+
+      // ---- MINI-BOSSES (M5 Step 2) ----
+      // Three of the five live here — Lewis put all the Water-type ones in the
+      // swamp (DESIGN.md §8, homework B9). They stand on the map like any other
+      // wild Fakeamon and you bump into them the same way; `bossId` is what
+      // makes the fight different (src/main.js reads src/data/bosses.js for the
+      // level, the entrance line and the reward). Beat one and it is gone for
+      // good — mini-bosses never respawn.
+      { id: "lagoon-boss-saurchin",  bossId: "saurchin",  species: "saurchin",  level: 20, tileX: 5,  tileY: 12 },
+      { id: "lagoon-boss-sharpfin",  bossId: "sharpfin",  species: "sharpfin",  level: 16, tileX: 14, tileY: 17 },
+      { id: "lagoon-boss-tobishimi", bossId: "tobishimi", species: "tobishimi", level: 19, tileX: 20, tileY: 2  },
     ],
     // Just a Fakeatent for now, so fainting out here heals you HERE instead of
     // shipping you all the way back to The Meadows (src/main.js's homeBaseTile).
@@ -264,6 +289,201 @@ const MAPS = {
     exits: [
       { id: "lagoon-boat", kind: "boat", tileX: 2, tileY: 9,
         toMap: "theMeadows", toTile: { x: 26, y: 9, facing: "left" } },
+      // M5 Step 2: a second boat, moored on the far side of the swamp, carries
+      // you on to The Factory — where the fifth mini-boss lives. You needed the
+      // Gear Badge to reach The Lagoon at all, so that badge still gates this.
+      { id: "lagoon-boat-factory", kind: "boat", tileX: 26, tileY: 14,
+        toMap: "theFactory", toTile: { x: 25, y: 8, facing: "left" } },
     ],
   },
+  // =========================================================================
+  //  THE FOREST (M5 Step 2) — Banvengeance's turf (DESIGN.md §8, Lewis's B9).
+  //  Reached on foot from the west side of The Meadows, so it's open from the
+  //  very start: a dark wood right next door to the friendly starting field.
+  //  Its tileset is the SAME George tiles as everywhere else, run through the
+  //  "forest" mood dial in tools/make-area-tilesets.mjs — deep greens and black
+  //  shadows. Same tile legend as The Lagoon, so it shares its solidTiles list
+  //  (the water tiles read as a woodland pool here; you still walk around it).
+  // =========================================================================
+  theForest: {
+    name: "The Forest",
+    tileSize: 16,
+    tileset: "assets/tilesets/forest.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 3, y: 9 },
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9,10],
+    [15,16, 0, 3, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 2,15,16],
+    [ 9,10, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 9,10],
+    [15,16, 0, 0, 0, 0, 1, 3, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9,10],
+    [15,16, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0,17, 0, 0, 4, 0, 1, 4, 0, 0, 1, 0, 4, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 0, 2, 0, 3, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0,17, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10,17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 9,10],
+    [15,16, 0, 0, 1, 2, 0, 4, 0, 1, 4, 0, 0, 5, 0, 0, 4, 0, 0, 0,12,13,13,13,13,14, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0,17, 0, 0, 0, 2, 1, 0,12,13,13,13,13,14, 0, 1, 9,10],
+    [15,16, 0, 0, 0, 4, 0, 1, 0, 0, 3, 0, 0,17, 0, 0, 0, 0, 0, 0,18,19,19,19,19,20, 0, 3,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 5, 9,10],
+    [15,16, 0, 0, 1, 3, 4, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      { id: "forest-anoleaf", species: "anoleaf", level: 10, tileX: 5, tileY: 5 },
+      { id: "forest-babysnitch", species: "babysnitch", level: 11, tileX: 10, tileY: 5 },
+      { id: "forest-burrlock", species: "burrlock", level: 11, tileX: 15, tileY: 5 },
+      { id: "forest-chloragon", species: "chloragon", level: 12, tileX: 20, tileY: 5 },
+      { id: "forest-duggot", species: "duggot", level: 12, tileX: 25, tileY: 5 },
+      { id: "forest-flounce", species: "flounce", level: 13, tileX: 5, tileY: 10 },
+      { id: "forest-foxfire", species: "foxfire", level: 13, tileX: 10, tileY: 10 },
+      { id: "forest-scarlant", species: "scarlant", level: 14, tileX: 15, tileY: 9 },
+      { id: "forest-boss-banvengeance", bossId: "banvengeance", species: "banvengeance", level: 18, tileX: 20, tileY: 10 },
+    ],
+    buildings: [
+      { id: "forest-fakeatent", kind: "fakeatent", tileX: 25, tileY: 10,
+        spawnTile: { x: 25, y: 11, facing: "up" } },
+    ],
+    berrySpots: [
+      { id: "forest-berry-1", tileX: 5, tileY: 14 },
+      { id: "forest-berry-2", tileX: 10, tileY: 15 },
+      { id: "forest-berry-3", tileX: 15, tileY: 15 },
+      { id: "forest-berry-4", tileX: 19, tileY: 15 },
+      { id: "forest-berry-5", tileX: 26, tileY: 15 },
+    ],
+    exits: [
+      { id: "forest-path", kind: "path", tileX: 2, tileY: 9,
+        toMap: "theMeadows", toTile: { x: 3, y: 4, facing: "right" } },
+    ],
+  },
+
+  // =========================================================================
+  //  THE FACTORY (M5 Step 2) — Gastronium's turf (DESIGN.md §8, Lewis's B9).
+  //  Reached by boat from the east side of The Lagoon, which means the Gear
+  //  Badge still gates it in practice: you can't get here without going
+  //  through The Lagoon first. Rust and dead ground — the same George tiles
+  //  put through the "factory" mood dial, where nothing is alive so nothing
+  //  keeps its colour. The water tiles read as a chemical spill.
+  // =========================================================================
+  theFactory: {
+    name: "The Factory",
+    tileSize: 16,
+    tileset: "assets/tilesets/factory.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 26, y: 9 },
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 2, 0, 0, 9,10],
+    [15,16, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 2, 0,12,13,13,13,13,14, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 4, 5, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 1, 4, 0, 0,18,19,19,19,19,20, 1, 5, 1, 2, 0,17, 1, 5, 0, 0, 0, 3, 0, 0,17, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 1,17, 0, 0, 1, 1, 1, 0, 0, 0, 3, 2, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,17, 0, 0, 0, 0, 2, 0, 4,15,16],
+    [ 9,10, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 3, 0, 0,15,16],
+    [ 9,10, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,15,16],
+    [ 9,10, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0,17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0,17, 0, 1, 0, 0, 0, 5, 0, 0, 0, 2, 1, 0, 0, 2, 0, 0, 5, 0,15,16],
+    [ 9,10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 5, 0, 1, 0, 2, 0, 0, 5, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      { id: "factory-boltnu", species: "boltnu", level: 14, tileX: 5, tileY: 5 },
+      { id: "factory-cataspike", species: "cataspike", level: 15, tileX: 12, tileY: 5 },
+      { id: "factory-pythwire", species: "pythwire", level: 15, tileX: 15, tileY: 5 },
+      { id: "factory-embra", species: "embra", level: 16, tileX: 20, tileY: 5 },
+      { id: "factory-grimachin", species: "grimachin", level: 16, tileX: 25, tileY: 5 },
+      { id: "factory-virware", species: "virware", level: 17, tileX: 5, tileY: 10 },
+      { id: "factory-ignibus", species: "ignibus", level: 17, tileX: 10, tileY: 10 },
+      { id: "factory-nut", species: "nut", level: 18, tileX: 15, tileY: 10 },
+      { id: "factory-boss-gastronium", bossId: "gastronium", species: "gastronium", level: 19, tileX: 20, tileY: 10 },
+    ],
+    buildings: [
+      { id: "factory-fakeatent", kind: "fakeatent", tileX: 25, tileY: 10,
+        spawnTile: { x: 25, y: 11, facing: "up" } },
+    ],
+    berrySpots: [
+      { id: "factory-berry-1", tileX: 5, tileY: 15 },
+      { id: "factory-berry-2", tileX: 10, tileY: 15 },
+      { id: "factory-berry-3", tileX: 15, tileY: 14 },
+      { id: "factory-berry-4", tileX: 20, tileY: 15 },
+      { id: "factory-berry-5", tileX: 25, tileY: 15 },
+    ],
+    exits: [
+      // M5 Step 3: the door to Artemis. Locked (🔒) until all five mini-bosses
+      // are beaten — see flags.unlockedAreas.
+      { id: "factory-lair-door", kind: "lair", tileX: 15, tileY: 4,
+        toMap: "artemisLair", toTile: { x: 15, y: 16, facing: "up" } },
+      { id: "factory-boat", kind: "boat", tileX: 27, tileY: 8,
+        toMap: "theLagoon", toTile: { x: 25, y: 14, facing: "left" } },
+    ],
+  },
+
+  // =========================================================================
+  //  ARTEMIS'S LAIR (M5 Steps 3–4) — the end of the game.
+  //
+  //  You can only get here once all FIVE mini-bosses are down; until then the
+  //  door in The Factory wears a 🔒. The gate is the same one every other
+  //  locked area uses — `flags.unlockedAreas` (DECISIONS.md #79) — and the
+  //  fifth mini-boss win is what pushes "artemisLair" onto it.
+  //
+  //  Lewis designed the room (B22): "purple fire and Artemis's throne of
+  //  stars". The purple is the `lair` mood dial in tools/make-area-tilesets.mjs;
+  //  the throne is the pool of fire in the middle, with Artemis standing in
+  //  front of it and black pillars lining the walk up.
+  //
+  //  There are no wild Fakeamon here, no berries and no Fakeatent. Heal
+  //  BEFORE you come — that's the point of a final boss.
+  // =========================================================================
+  artemisLair: {
+    name: "Artemis's Lair",
+    tileSize: 16,
+    tileset: "assets/tilesets/lair.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 15, y: 16 },   // you walk in at the bottom, facing the throne
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,18,19,19,19,19,20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      // The legend itself. Same "bump into it" seam as every other creature in
+      // the game — it's just standing in front of its throne.
+      { id: "lair-artemis", bossId: "artemis", species: "artemis", level: 25, tileX: 15, tileY: 12 },
+    ],
+    exits: [
+      // The way home. You can always leave — even mid-quest, even after
+      // winning, because the world stays open (Lewis's B25).
+      { id: "lair-exit", kind: "door", tileX: 15, tileY: 17,
+        toMap: "theFactory", toTile: { x: 15, y: 5, facing: "down" } },
+    ],
+  },
+
 };

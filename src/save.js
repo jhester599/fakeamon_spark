@@ -195,11 +195,35 @@ function parseSave(text) {
   // would crash the badge checks). Same forgiving spirit as the world/inventory
   // resets above.
   if (typeof state.tokens !== "number" || state.tokens < 0) state.tokens = 0;
+
+  // M5 Step 1 — CASH IN OLD XP. Every adventure saved before levelling existed
+  // has Fakeamon sitting on XP that was never spent (M3 Step S8 banked it for
+  // months, and nothing could turn it into a level). Without this, an old save
+  // would come back with a level-1 Growler carrying 500 XP, and it'd stay that
+  // way until its next fight nudged the loop into running.
+  //
+  // No save-version bump is needed: `level` and `xp` have been in the save
+  // since save v1, so the SHAPE hasn't changed at all — only what the numbers
+  // are worth. (Doing it here, rather than in main.js, means EVERY way in gets
+  // it: Continue, an imported file, and any future load path.)
+  state.party.concat(state.box).forEach(catchUpLevels);
   const f = state.flags;
   if (!f || typeof f !== "object" ||
       !Array.isArray(f.badges) || !Array.isArray(f.gymsCleared) || !Array.isArray(f.unlockedAreas)) {
     state.flags = defaultFlags();
   }
+  // M5 Step 2/5: bossesCleared and artemisDefeated live INSIDE flags, so the
+  // shallow merge onto defaults can't fill them for a save made before M5 (the
+  // CR-B trap again — the old `flags` object is copied whole). Back-fill them,
+  // which also means no SAVE_VERSION bump was needed.
+  if (!Array.isArray(state.flags.bossesCleared)) state.flags.bossesCleared = [];
+  // M5 Step 2 added two areas that are open from the start. A save made before
+  // them has an unlockedAreas list without them, which would lock their exits
+  // forever — so make sure every always-open area is present.
+  defaultFlags().unlockedAreas.forEach(function (areaId) {
+    if (state.flags.unlockedAreas.indexOf(areaId) === -1) state.flags.unlockedAreas.push(areaId);
+  });
+  if (typeof state.flags.artemisDefeated !== "boolean") state.flags.artemisDefeated = false;
 
   return state;
 }

@@ -66,6 +66,14 @@ function buildingFootprint(building, mapCols) {
 const source = readFileSync(join(TOOLS, "..", "src", "data", "maps.js"), "utf8");
 const MAPS = new Function(source + "\nreturn MAPS;")();
 
+// The species list, read the same way — so we can check that everything a map
+// puts on screen actually HAS a picture on disk (added M5 Step 2, after
+// exactly that went wrong: four mini-bosses pointed at sprites that had never
+// been sliced. The game doesn't complain — Phaser fails to build the idle
+// animation and the creature silently doesn't appear).
+const speciesSource = readFileSync(join(TOOLS, "..", "src", "data", "fakeamon.js"), "utf8");
+const FAKEAMON = new Function(speciesSource + "\nreturn FAKEAMON;")();
+
 const EXPECTED_COLS = 30;
 const EXPECTED_ROWS = 20;
 // The 2×2 tree, as tile numbers — the same four in both tilesets so far.
@@ -176,6 +184,19 @@ for (const [mapId, map] of Object.entries(MAPS)) {
       problem(mapId, `exit ${exit.id} lands off the edge of ${exit.toMap}`);
     } else if (destSolid.has(destination.ground[t.y][t.x])) {
       problem(mapId, `exit ${exit.id} lands you inside a solid tile on ${exit.toMap}`);
+    }
+  }
+
+  // Does every creature standing on this map have art that really exists?
+  for (const enc of map.encounters || []) {
+    const species = FAKEAMON[enc.species];
+    if (!species) { problem(mapId, `${enc.id} uses unknown species "${enc.species}"`); continue; }
+    for (const field of ["sprite", "overworld"]) {
+      const path = species[field];
+      if (!path) { problem(mapId, `${enc.species} has no ${field} art`); continue; }
+      if (!existsSync(join(TOOLS, "..", path))) {
+        problem(mapId, `${enc.species}'s ${field} art is missing: ${path}`);
+      }
     }
   }
 

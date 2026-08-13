@@ -10,13 +10,27 @@
 //  Growlers never have to share one HP number again.
 // ===========================================================================
 
-// How much each stat grows per level above 1. Everything's 0 for now —
-// nothing levels up yet, that's M5's job (src/progression.js) — but the
-// numbers already live in one obvious spot for when leveling arrives.
-const STAT_GROWTH_PER_LEVEL = { hp: 0, attack: 0, defense: 0, speed: 0 };
+// [TUNE] ⭐ How much each stat grows per level above level 1. THESE FOUR
+// NUMBERS ARE THE DIFFICULTY OF THE WHOLE GAME — every wild Fakeamon, every
+// gym team and your own party all grow by them. They were all 0 until M5
+// Step 1 (2026-08-13), which is why `level` used to change nothing at all.
+//
+// Why these numbers: a fight should stay about 3 hits long no matter what
+// level you're at. Damage is "move power + Attack − Defense", so Attack has
+// to climb FASTER than Defense or every fight would slowly turn into two
+// tanks bouncing off each other. +2 Attack vs +1 Defense keeps damage rising
+// roughly in step with the +3 HP.
+//
+//   want fights to feel faster? → raise attack, or lower hp
+//   want them to last longer?   → raise hp and defense
+const STAT_GROWTH_PER_LEVEL = { hp: 3, attack: 2, defense: 1, speed: 1 };
 
-// Every individual starts at this level until M5's XP system exists.
-const STARTING_LEVEL = 1;
+// [TUNE] What level your starter begins at. This was 1 while levels did
+// nothing; M5 Step 1 raised it to 5, because the moment level started changing
+// stats, a level-1 starter walking into The Meadows (wild levels 2–5) was
+// losing its very first fights. 5 puts you level with the toughest thing in the
+// starting area — the same trick the classic games use.
+const STARTING_LEVEL = 5;
 
 // Makes one fresh individual of a species — fully healed, level 1 (for now).
 function newIndividual(speciesKey, level) {

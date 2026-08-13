@@ -120,6 +120,9 @@ function showFighter(individual, displayName) {
     '<div class="fighter">' +
       "<h2>" + (displayName || species.name) + "</h2>" +
       '<span class="type-badge type-' + species.type + '">' + species.type + "</span>" +
+      // M5 Step 1: levels change stats now, so it matters that you can SEE
+      // whose level is higher before you pick a move.
+      '<span class="level-badge">Lv ' + individual.level + "</span>" +
       '<div class="sprite type-' + species.type + '">' + spriteImg + "</div>" +
       '<div class="hp-bar-track">' +
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
@@ -447,15 +450,15 @@ function attemptCatch() {
 }
 
 // ===========================================================================
-//  XP — Step 8: winning (or catching) a wild Fakeamon earns your active
-//  fighter some XP. It's just banked on the individual for now — there's no
-//  curve to spend it on yet (that's M5's job,
-//  PLANS/M5_STATE_AND_SAVE_PLAN.md §2); this only makes sure xpGained is a
-//  real number instead of the placeholder 0 every outcome used to resolve
-//  with. Tweak these two numbers to change how fast XP piles up.
+//  XP — Step 8 banked it; M5 Step 1 (2026-08-13) makes it actually DO
+//  something. Winning (or catching) pays XP, and enough XP means a level —
+//  which now really does make your Fakeamon stronger.
+//
+//  The rules and all the tunable numbers live in src/progression.js
+//  (PLANS/M5_STATE_AND_SAVE_PLAN.md §2: "battle.js reports the win;
+//  progression applies consequences"). All this file does is ask what the win
+//  was worth, hand it over, and print whatever progression says happened.
 // ===========================================================================
-const XP_REWARD_BASE = 4;      // [TUNE] a win's XP = XP_REWARD_BASE × opponent's level
-const CATCH_XP_FRACTION = 0.5; // [TUNE] catching earns this fraction of a win's XP
 
 // M4S4: a trainer battle can hand out XP more than once (one payout per
 // Fakeamon you knock out), so we keep a running total for the whole fight and
@@ -465,10 +468,16 @@ let xpEarnedThisBattle = 0;
 
 function grantXP(fraction) {
   const individual = activePlayer(); // v1: the active fighter gets it all (M5 plan §2)
-  const amount = Math.round(XP_REWARD_BASE * activeOpponent().level * fraction);
-  individual.xp += amount;
+  const amount = xpReward(activeOpponent(), fraction);
+  const report = giveXP(individual, amount);
+
   xpEarnedThisBattle += amount;
   addLogLine(fighterName("player") + " earned " + amount + " XP!");
+  report.messages.forEach(addLogLine); // "Growler grew to level 7! ⭐"
+
+  // A level-up changes max HP and the stat line, so redraw the cards.
+  if (report.levelsGained > 0) renderArena();
+
   return amount;
 }
 

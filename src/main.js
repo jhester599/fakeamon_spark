@@ -1030,7 +1030,16 @@ function teamCard(individual, isActive, buttonHtml) {
         '<div class="hp-bar-fill" style="width: ' + percent + '%; background: ' + hpBarColor(percent) + ';"></div>' +
       "</div>" +
       '<div class="team-hp-text">' + individual.currentHP + "/" + stats.maxHP + "</div>" +
-      '<div class="team-xp-text">XP: ' + individual.xp + "</div>" +
+      // M5 Step 1: XP is spent on levels now, so show how far along this level
+      // you are ("Lv 4 · XP 12/40") instead of one number that only ever grew.
+      '<div class="xp-bar-track">' +
+        '<div class="xp-bar-fill" style="width: ' + xpBarPercent(individual) + '%;"></div>' +
+      "</div>" +
+      '<div class="team-xp-text">Lv ' + individual.level + " · " +
+        (individual.level >= MAX_LEVEL
+          ? "MAX"
+          : "XP " + individual.xp + "/" + xpToNext(individual.level)) +
+      "</div>" +
       (buttonHtml || "") +
     "</div>"
   );

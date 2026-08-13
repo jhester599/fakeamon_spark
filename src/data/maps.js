@@ -225,19 +225,27 @@ const MAPS = {
     [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
     [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
     ],
+    // [TUNE] ⚠️ These levels were 10–15 while `level` changed no stats. M5 Step 1
+    // (2026-08-13) turned levels into real stats and re-levelled them to 8–12
+    // (Jeff & Lewis's call). Why: you sail in here around level 8–10 straight
+    // after Gym 1, and a 400-fight simulation said a two-level deficit is very
+    // nearly an automatic loss — so at 10–15 most of this area was a locked
+    // door, not a challenge. At 8–12 you arrive able to fight most of it, with
+    // the far side still a stretch. They still climb as you go deeper round
+    // the water (the order below follows the path anticlockwise).
     encounters: [
-      { id: "lagoon-axolightl",       species: "axolightl",       level: 10, tileX: 10, tileY: 3  },
-      { id: "lagoon-claymorior",      species: "claymorior",      level: 10, tileX: 14, tileY: 3  },
-      { id: "lagoon-fluoresfin",      species: "fluoresfin",      level: 11, tileX: 18, tileY: 3  },
-      { id: "lagoon-gupphish",        species: "gupphish",        level: 11, tileX: 22, tileY: 3  },
-      { id: "lagoon-jelillow",        species: "jelillow",        level: 12, tileX: 25, tileY: 6  },
-      { id: "lagoon-kroki",           species: "kroki",           level: 13, tileX: 25, tileY: 10 },
-      { id: "lagoon-lesmagu",         species: "lesmagu",         level: 12, tileX: 22, tileY: 15 },
-      { id: "lagoon-nebufin",         species: "nebufin",         level: 13, tileX: 18, tileY: 16 },
-      { id: "lagoon-nostray",         species: "nostray",         level: 14, tileX: 14, tileY: 16 },
-      { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 14, tileX: 10, tileY: 15 },
-      { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 15, tileX: 6,  tileY: 12 },
-      { id: "lagoon-skwib",           species: "skwib",           level: 15, tileX: 5,  tileY: 8  },
+      { id: "lagoon-axolightl",       species: "axolightl",       level: 8,  tileX: 10, tileY: 3  },
+      { id: "lagoon-claymorior",      species: "claymorior",      level: 8,  tileX: 14, tileY: 3  },
+      { id: "lagoon-fluoresfin",      species: "fluoresfin",      level: 9,  tileX: 18, tileY: 3  },
+      { id: "lagoon-gupphish",        species: "gupphish",        level: 9,  tileX: 22, tileY: 3  },
+      { id: "lagoon-jelillow",        species: "jelillow",        level: 10, tileX: 25, tileY: 6  },
+      { id: "lagoon-kroki",           species: "kroki",           level: 11, tileX: 25, tileY: 10 },
+      { id: "lagoon-lesmagu",         species: "lesmagu",         level: 10, tileX: 22, tileY: 15 },
+      { id: "lagoon-nebufin",         species: "nebufin",         level: 11, tileX: 18, tileY: 16 },
+      { id: "lagoon-nostray",         species: "nostray",         level: 12, tileX: 14, tileY: 16 },
+      { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 12, tileX: 10, tileY: 15 },
+      { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 12, tileX: 6,  tileY: 12 },
+      { id: "lagoon-skwib",           species: "skwib",           level: 12, tileX: 5,  tileY: 8  },
     ],
     // Just a Fakeatent for now, so fainting out here heals you HERE instead of
     // shipping you all the way back to The Meadows (src/main.js's homeBaseTile).

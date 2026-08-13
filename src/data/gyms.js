@@ -31,11 +31,15 @@ const GYMS = {
               "metal. Let's see you dent them!",
     // The team, in the order they're sent out: standard first, ace last.
     //
-    // ⚠️ `level` is FLAVOUR ONLY right now — it shows up in battle text, but
-    // it changes no stats, because STAT_GROWTH_PER_LEVEL (src/state.js) is
-    // still all zeros until M5 adds leveling. A gym's real difficulty lives in
-    // the base stats in src/data/fakeamon.js. Don't "buff" a gym by raising
-    // these numbers — nothing will happen!
+    // ✅ `level` IS REAL as of M5 Step 1 (2026-08-13) — it used to be pure
+    // flavour (STAT_GROWTH_PER_LEVEL in src/state.js was all zeros), so raising
+    // it did nothing at all. Now every level is +3 max HP, +2 Attack, +1
+    // Defense and +1 Speed, so these two numbers are a genuine difficulty dial.
+    // Handle with care: levels are a BLUNT lever (a 2-level jump is a big
+    // swing). For finer control over what kind of fighter a gym mon is, edit
+    // its base stats in src/data/fakeamon.js instead.
+    //
+    // Where a player usually is when they get here: about level 8–10.
     team: [
       { species: "allagon", level: 8,  type: "metal" }, // standard
       { species: "av8r",    level: 10, type: "metal" }, // ace (stronger)

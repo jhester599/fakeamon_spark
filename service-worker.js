@@ -23,7 +23,7 @@
 
 importScripts("sw-precache-list.js"); // defines PRECACHE_URLS
 
-const CACHE_VERSION = "fakeamon-2026-08-11a"; // [TUNE] bump this on every asset-changing deploy
+const CACHE_VERSION = "fakeamon-2026-08-13a"; // [TUNE] bump this on every asset-changing deploy
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -14,6 +14,7 @@ const PRECACHE_URLS = [
   "src/data/recipes.js",
   "src/data/typechart.js",
   "src/main.js",
+  "src/progression.js",
   "src/save.js",
   "src/screens.js",
   "src/state.js",

@@ -374,7 +374,7 @@ rest of Venta.)*
 
 | Step | What we build | ▶ You'll see |
 |---|---|---|
-| **1** | **Evolutions** — a Fakeamon that reaches its evolve level gets a **new sprite + higher stats** | "Growler is evolving!" with new art |
+| **1** | **Evolutions** — a Fakeamon that reaches its evolve level gets a **new sprite + higher stats**. *Half built (2026-08-13): **levelling itself now works** — the M5 plan's S5. XP buys levels, and a level is finally worth something (+3 max HP, +2 Attack, +1 Defense, +1 Speed) where it changed nothing before. Still to come: S6 (the evolve-at-level swap) and S7 (the ceremony).* | **Now:** "Growler grew to level 7! ⭐" in the battle log, a Lv badge on both fighters, an XP bar on every team card. **Next:** "Growler is evolving!" with new art |
 | **2** | The **5 mini-bosses** (single strong encounters) placed in the world | Tough special battles worth big XP |
 | **3** | **"Beat all 5 → unlock Artemis"** gate | A locked area that opens once all five are down |
 | **4** | **Artemis finale** — the legendary boss with **Meteor Shower** (hits your Fakeamon **and** damages Artemis itself — Lewis's idea!) | An epic, huge-HP battle that's hard but winnable |

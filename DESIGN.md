@@ -118,7 +118,18 @@ Reads cleanly: Fire melts Metal and burns Grass; Water douses Fire; Grass drinks
 
 Proposed Artemis block: **HP 260, Attack 22, Defense 16, Speed 14.**
 
-**Leveling:** winning awards XP → level up → stats rise. Mini-bosses award more XP than wild Fakeamon. **[TO DECIDE: XP curve; per-Fakeamon XP; mini-boss levels.]**
+**Leveling:** winning awards XP → level up → stats rise. Mini-bosses award more XP than wild Fakeamon.
+
+**DECIDED (2026-08-13) — the XP curve and what a level is worth** *(built at M5 Step 1; every number below is `[TUNE]` and lives in `src/progression.js`, except the growth table which lives in `src/state.js`)*:
+
+- **XP curve:** getting from level *L* to *L+1* costs `XP_BASE × L` (10 × L). Early levels fly by; later ones take real work. **Level cap 30.**
+- **What a fight pays:** `XP_REWARD_BASE × the opponent's level` (8 × level), so tougher opponents are worth more. A catch pays **half** that (you got a whole Fakeamon out of it too). Mini-bosses pay **×3** — DESIGN's "mini-bosses award more XP" rule, wired and waiting for M5 Step 2.
+- **Per-Fakeamon XP:** v1 rule — **the active fighter gets it all.** Sharing XP across the team is a possible later question.
+- **What a level gives:** **+3 max HP, +2 Attack, +1 Defense, +1 Speed.** Attack deliberately grows faster than Defense, which keeps a fight about 3 hits long at *every* level instead of slowly turning into two tanks bouncing off each other.
+- **Levelling up is not a heal:** your current HP goes up by exactly the max-HP gain, so half-health stays half-health. A fainted Fakeamon stays fainted.
+- ⚠️ **A knock-on effect worth knowing:** because fights are short (~3 hits), a level gap is *decisive* — level-for-level is a comfortable win, two levels down is very nearly an automatic loss. That's why **The Lagoon was re-levelled from 10–15 to 8–12** the same day (`DECISIONS.md` #84). If a future area ever feels like a locked door, its levels are the first thing to look at.
+
+*(Still open, and genuinely later: evolution levels per starter — that's M5 Step 1's next slice — and mini-boss levels/stats at M5 Step 2.)*
 
 **DECIDED (2026-07-06) — wild Fakeamon level:** depends on where you are — early areas are easy, far areas are dangerous. *(Lewis's call, B4.)* This is a full location-based feature once M3's map (§7) exists. For M2, before the map exists, use the player's average team level as a stand-in (`wildLevel ≈ playerAverageLevel`, with a small random wiggle) — Jeff turns the *real* per-area scaling into numbers once the areas in §7 are built.
 
@@ -496,7 +507,7 @@ Maintain a **`CREDITS.md`** in the repo (in place since the starter art landed; 
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
-3. Evolution **level** per starter; XP curve + per-Fakeamon XP; mini-boss levels/stats.
+3. Evolution **level** per starter; ~~XP curve + per-Fakeamon XP~~ (both decided 2026-08-13, §5 above); mini-boss levels/stats.
 4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards (feel is decided, §9).
 5. Windeye's and Spectera's off-type re-theme/swap for Gyms 2/3, at M4 build time (§8).
 6. Wild-level location scaling — the real per-area numbers, once M3's areas (§7) exist.

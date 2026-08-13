@@ -159,10 +159,12 @@ const FAKEAMON = {
   // handful of these to hand-tune, the way the gym team above was. Good
   // homework once the area has been played.
   //
-  // ⚠️ AND: The Lagoon's wild levels are 10–15 vs The Meadows' 2–5, but the
-  // stats below are the SAME archetype numbers as The Meadows' roster — so
-  // right now this area is not actually harder, just later. It becomes a real
-  // difficulty step when M5 turns level into stats (src/state.js).
+  // ⚠️ AND: the stats below are the SAME archetype numbers as The Meadows'
+  // roster — this area is harder only because its Fakeamon are a higher LEVEL.
+  // ✅ That finally counts for something: M5 Step 1 (2026-08-13) turned level
+  // into real stats, and the same change re-levelled this area from 10–15 down
+  // to 8–12 (see the note above the encounter list in src/data/maps.js),
+  // because a two-level deficit turned out to be nearly an automatic loss.
   axolightl: {
     name: "Axolightl", type: "water", sprite: "assets/sprites/front/axolightl.png",
     overworld: "assets/sprites/idle/axolightl.png",
@@ -249,10 +251,12 @@ const FAKEAMON = {
   // while the handful of named creatures (starters, gym teams, bosses) get
   // their own numbers. DESIGN.md §8 picked the pair; the stats are ours.
   //
-  // ⚠️ IMPORTANT [TUNE] NOTE: a gym mon's `level` (see gyms.js) currently
-  // changes NOTHING — STAT_GROWTH_PER_LEVEL in src/state.js is all zeros until
-  // M5 adds leveling. So a gym's difficulty comes entirely from the base
-  // numbers below. To make Gym 1 harder or easier, change THESE, not the level.
+  // ✅ [TUNE] NOTE, UPDATED 2026-08-13 (M5 Step 1): a gym mon's `level` (see
+  // gyms.js) used to change NOTHING, because STAT_GROWTH_PER_LEVEL in
+  // src/state.js was all zeros. It works now — Allagon at level 8 really is
+  // tougher than Allagon at level 1. So there are now TWO ways to tune a gym:
+  // its level (a big, blunt lever — every stat at once) and the base numbers
+  // below (fine control over what KIND of fighter it is).
   //
   // The target feel (Jeff & Lewis's call): "a fair step up" — clearly stronger
   // than The Meadows' wild roster (HP 36-41, Attack 11-14, Defense 9-13), but

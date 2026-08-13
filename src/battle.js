@@ -26,6 +26,8 @@ let party;       // config.playerParty — YOUR bench (party[0] is who's out)
 let enemyParty;  // the other side's bench (a wild Fakeamon = a bench of one)
 let enemyIndex;  // which of enemyParty is out right now; 0 for a wild battle
 let trainerName; // "Enforcer Boss" in a gym battle; null in a wild one
+let namedOpponent; // M5 Step 2: true for a mini-boss/Artemis — it has a name,
+                   // so the battle text never calls it "the wild ..."
 let inventory; // config.inventory — a LIVE reference, same trick as party
 let canFlee = true;
 let canCatch = true;
@@ -69,6 +71,9 @@ function fighterFor(role) {
 function fighterName(role) {
   const name = FAKEAMON[fighterFor(role).speciesKey].name;
   if (role === "player") return name;
+  // M5 Step 2: a mini-boss (and Artemis) is somebody — it has a NAME, so it
+  // never reads as "the wild Saurchin". config.namedOpponent says so.
+  if (namedOpponent) return name;
   return trainerName ? trainerName + "'s " + name : "the wild " + name;
 }
 
@@ -216,6 +221,18 @@ function performAttack(attackerRole, defenderRole, move) {
     line += " It's not very effective...";
   }
   addLogLine(line);
+
+  // ⭐ RECOIL — a move can hurt whoever used it (M5 Step 4). This exists for
+  // Lewis's Meteor Shower: Artemis rains meteors on you AND gets hit by its
+  // own storm, which is the whole reason a legend with 260 HP is beatable.
+  // Any move can opt in with `selfDamage` (src/data/moves.js) — it's the
+  // fraction of the damage dealt that rebounds.
+  if (move.selfDamage) {
+    const recoil = Math.max(1, Math.round(result.damage * move.selfDamage));
+    attacker.currentHP = Math.max(0, attacker.currentHP - recoil);
+    addLogLine("💥 The falling meteors hit " + attackerName + " too — " +
+               recoil + " damage!");
+  }
 }
 
 // The opponent doesn't think ahead yet — it just picks one of its moves at random.
@@ -391,10 +408,9 @@ function attemptCatch() {
 
     // B45: same rule as any other faint — resolveFaint sends out your next
     // Fakeamon if you have one, and only ends the battle if you don't.
-    if (checkForFaint("player")) {
-      resolveFaint("player", "opponent");
-      return;
-    }
+    // (settleFaints also catches an attacker downed by its own recoil — see
+    // its note; that's how Artemis can lose to its own Meteor Shower.)
+    if (settleFaints("opponent", "player")) return;
 
     afterAttack();
   }
@@ -546,6 +562,30 @@ function sendOutNextPlayer() {
 // game over", which is why every faint check funnels through here. Both sides
 // are treated the same: send out the next one if there is one, otherwise the
 // battle is over.
+// After ANY attack, work out whether that hit ended someone. Called from every
+// place an attack happens, so there's one answer to "who fell over?".
+//
+// ⚠️ The ATTACKER is checked first, and the order matters exactly once in the
+// whole game: Meteor Shower (M5 Step 4) hurts Artemis as well as you, so both
+// fighters can hit 0 on the same swing. Checking the attacker first means the
+// one who threw the move falls first — Artemis is buried by its own meteors
+// and you win. Dramatic, generous, and Lewis's move deserves it.
+//
+// For every other move in the game the attacker check can't be true (nothing
+// else has `selfDamage`), so this is a no-op and the defender is checked as
+// before. Returns true if a faint was handled and the caller should stop.
+function settleFaints(attackerRole, defenderRole) {
+  if (checkForFaint(attackerRole)) {   // recoil — only Meteor Shower, today
+    resolveFaint(attackerRole, defenderRole);
+    return true;
+  }
+  if (checkForFaint(defenderRole)) {
+    resolveFaint(defenderRole, attackerRole);
+    return true;
+  }
+  return false;
+}
+
 function resolveFaint(faintedRole, winnerRole) {
   if (faintedRole === "opponent") {
     grantXP(1); // you earn the XP for THIS Fakeamon right away, not just at the end
@@ -587,10 +627,9 @@ function attemptSwitch(targetIndex) {
 
     // B45: same rule as any other faint — resolveFaint sends out your next
     // Fakeamon if you have one, and only ends the battle if you don't.
-    if (checkForFaint("player")) {
-      resolveFaint("player", "opponent");
-      return;
-    }
+    // (settleFaints also catches an attacker downed by its own recoil — see
+    // its note; that's how Artemis can lose to its own Meteor Shower.)
+    if (settleFaints("opponent", "player")) return;
 
     afterAttack();
   }
@@ -649,19 +688,13 @@ function resolveTurn(playerMove) {
 
   // M4S4: resolveFaint (not endBattle) decides what a faint means now — it
   // might be "game over", or it might be "the trainer sends out their next one".
-  if (checkForFaint(first.defenderRole)) {
-    resolveFaint(first.defenderRole, first.attackerRole);
-    return;
-  }
+  if (settleFaints(first.attackerRole, first.defenderRole)) return;
 
   setTimeout(function () {
     performAttack(second.attackerRole, second.defenderRole, second.move);
     renderArena();
 
-    if (checkForFaint(second.defenderRole)) {
-      resolveFaint(second.defenderRole, second.attackerRole);
-      return;
-    }
+    if (settleFaints(second.attackerRole, second.defenderRole)) return;
 
     setControlsEnabled(true);
   }, randomTurnPause());
@@ -825,6 +858,7 @@ function startBattle(config) {
     enemyParty = config.enemyParty || [config.enemy]; // one wild creature = a bench of one
     enemyIndex = 0;
     trainerName = config.trainerName || null;
+    namedOpponent = config.namedOpponent === true;
     inventory = config.inventory;
     canFlee = config.canFlee !== false;
     canCatch = config.canCatch !== false;
@@ -835,8 +869,9 @@ function startBattle(config) {
     const opponentSpecies = FAKEAMON[activeOpponent().speciesKey];
 
     // B34: "Growler vs the wild Growler" rather than "Growler vs Growler".
-    document.getElementById("title").textContent = trainerName
-      ? "Gym Battle — " + playerSpecies.name + " vs " + trainerName
+    document.getElementById("title").textContent =
+      config.battleTitle ? config.battleTitle
+      : trainerName ? "Gym Battle — " + playerSpecies.name + " vs " + trainerName
       : "Fakeamon Battle — " + playerSpecies.name + " vs " + fighterName("opponent");
     document.getElementById("controls-label").textContent = "Choose your move:";
 
@@ -852,6 +887,11 @@ function startBattle(config) {
       addLogLine(trainerName + " wants to battle — " + enemyParty.length +
         " Fakeamon! You can't run from a gym.");
       addLogLine(trainerName + " sent out " + opponentSpecies.name + "!");
+    } else if (config.introLine) {
+      // M5 Steps 2-4: a mini-boss or Artemis announces itself in its own words
+      // (DESIGN.md §8/§10 — every entrance line is Lewis's).
+      addLogLine("💀 " + opponentSpecies.name + " blocks your path!");
+      addLogLine('"' + config.introLine + '"');
     } else {
       addLogLine("A wild " + opponentSpecies.name + " appears! Choose a move for " + playerSpecies.name + ".");
     }

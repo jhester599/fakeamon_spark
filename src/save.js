@@ -212,6 +212,12 @@ function parseSave(text) {
       !Array.isArray(f.badges) || !Array.isArray(f.gymsCleared) || !Array.isArray(f.unlockedAreas)) {
     state.flags = defaultFlags();
   }
+  // M5 Step 2/5: bossesCleared and artemisDefeated live INSIDE flags, so the
+  // shallow merge onto defaults can't fill them for a save made before M5 (the
+  // CR-B trap again — the old `flags` object is copied whole). Back-fill them,
+  // which also means no SAVE_VERSION bump was needed.
+  if (!Array.isArray(state.flags.bossesCleared)) state.flags.bossesCleared = [];
+  if (typeof state.flags.artemisDefeated !== "boolean") state.flags.artemisDefeated = false;
 
   return state;
 }

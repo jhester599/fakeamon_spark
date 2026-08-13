@@ -246,6 +246,17 @@ const MAPS = {
       { id: "lagoon-nudiflot_female", species: "nudiflot_female", level: 12, tileX: 10, tileY: 15 },
       { id: "lagoon-nudiflot_male",   species: "nudiflot_male",   level: 12, tileX: 6,  tileY: 12 },
       { id: "lagoon-skwib",           species: "skwib",           level: 12, tileX: 5,  tileY: 8  },
+
+      // ---- MINI-BOSSES (M5 Step 2) ----
+      // Three of the five live here — Lewis put all the Water-type ones in the
+      // swamp (DESIGN.md §8, homework B9). They stand on the map like any other
+      // wild Fakeamon and you bump into them the same way; `bossId` is what
+      // makes the fight different (src/main.js reads src/data/bosses.js for the
+      // level, the entrance line and the reward). Beat one and it is gone for
+      // good — mini-bosses never respawn.
+      { id: "lagoon-boss-saurchin",  bossId: "saurchin",  species: "saurchin",  level: 20, tileX: 5,  tileY: 12 },
+      { id: "lagoon-boss-sharpfin",  bossId: "sharpfin",  species: "sharpfin",  level: 16, tileX: 14, tileY: 17 },
+      { id: "lagoon-boss-tobishimi", bossId: "tobishimi", species: "tobishimi", level: 19, tileX: 20, tileY: 2  },
     ],
     // Just a Fakeatent for now, so fainting out here heals you HERE instead of
     // shipping you all the way back to The Meadows (src/main.js's homeBaseTile).

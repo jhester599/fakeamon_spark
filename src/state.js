@@ -103,6 +103,14 @@ function defaultFlags() {
                                    //   separate so a rematch (Lewis's B17) can tell a first
                                    //   clear (big reward) from a repeat (small one)
     unlockedAreas: ["theMeadows"], // maps you may enter — beating a gym pushes a new one here
+    // *M5 Step 2 — which of the five mini-bosses you've beaten (their ids from
+    // src/data/bosses.js). Beating all five is what unlocks Artemis's lair
+    // (M5 Step 3), so this list IS the endgame gate — same "one list, one
+    // fact" rule as unlockedAreas (DECISIONS.md #79).
+    bossesCleared: [],
+    // *M5 Step 5 — set once you've beaten Artemis. The world stays open
+    // afterwards (Lewis's B25), so this is a memory, not an ending.
+    artemisDefeated: false,
   };
 }
 

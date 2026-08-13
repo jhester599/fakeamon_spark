@@ -364,6 +364,11 @@ function enterBattle(config, context) {
 // src/world/config.js's WorldScene.handleEncounter calls this when you bump one.
 function startMapEncounter(encounter) {
   if (battleInProgress) return;
+
+  // M5 Step 2: a mini-boss stands on the map like anything else, but the fight
+  // is an event — it announces itself, it can't be caught, and it pays triple.
+  if (encounter.bossId) { startMiniBossBattle(encounter); return; }
+
   enterBattle({
     playerParty: gameState.party,
     enemy: newIndividual(encounter.species, encounter.level),
@@ -372,6 +377,54 @@ function startMapEncounter(encounter) {
     canCatch: true,
     onStateChange: renderTeamList,
   }, { encounter: encounter });
+}
+
+// A mini-boss fight (M5 Step 2). Everything that makes it special is here;
+// the battle engine itself needed only two small additions (a named opponent
+// and an entrance line), because a boss is just a very large wild Fakeamon.
+function startMiniBossBattle(encounter) {
+  const boss = MINI_BOSSES[encounter.bossId];
+  const bossIndividual = newIndividual(boss.speciesKey, boss.level);
+
+  // This is the flag src/progression.js reads to pay MINIBOSS_XP_MULT — the
+  // socket that was left waiting when levelling was built.
+  bossIndividual.isMiniBoss = true;
+
+  enterBattle({
+    playerParty: gameState.party,
+    enemy: bossIndividual,
+    inventory: gameState.inventory,
+    canFlee: true,        // you may always walk away and come back stronger
+    canCatch: false,      // ⚠️ Lewis's rule is "only with a Cosmic Fakeaball"
+                          //   (DESIGN.md §6) — until ball tiers exist, no catching
+    namedOpponent: true,  // it's "Saurchin", never "the wild Saurchin"
+    introLine: boss.entrance,
+    battleTitle: "⚔️ Mini-Boss — " + boss.name,
+    onStateChange: renderTeamList,
+  }, { encounter: encounter, boss: boss });
+}
+
+// Beating a mini-boss: bank the prize, remember it's down for good, and tell
+// the player how close they are to unlocking Artemis (M5 Step 3).
+function awardMiniBossPrize(boss) {
+  if (gameState.flags.bossesCleared.indexOf(boss.id) === -1) {
+    gameState.flags.bossesCleared.push(boss.id);
+  }
+  gameState.tokens += MINIBOSS_TOKEN_REWARD;
+
+  // The Bossberry — the one berry you can never find lying on the ground
+  // (src/data/berries.js). Beating a mini-boss is the only way to get one.
+  gameState.inventory.berries.bossberry =
+    (gameState.inventory.berries.bossberry || 0) + 1;
+
+  const beaten = gameState.flags.bossesCleared.length;
+  const total = MINI_BOSS_IDS.length;
+  let news = "🏆 You defeated " + boss.name + "! +" + MINIBOSS_TOKEN_REWARD +
+             " 🪙 and a Bossberry! (" + beaten + " of " + total + " mini-bosses)";
+  if (beaten < total) {
+    news += " — " + (total - beaten) + " to go before Artemis.";
+  }
+  noteNews(news);
 }
 
 // S8: after a battle, maybe bring one previously-cleared wild Fakeamon back
@@ -384,9 +437,14 @@ function startMapEncounter(encounter) {
 // back onto it. Without this, a respawn roll in The Lagoon could pick a
 // Meadows creature and quietly do nothing.
 function clearedOnThisMap() {
-  const ids = (MAPS[gameState.world.mapId].encounters || []).map(function (enc) {
-    return enc.id;
-  });
+  // M5 Step 2: mini-bosses are filtered OUT here, which is what makes "beaten
+  // for good" true. Ordinary wild Fakeamon wander back (S8's respawn roll and
+  // refillEmptyMap both draw from this list); a mini-boss you've beaten must
+  // never reappear, or the Artemis gate could be farmed and the world would
+  // stop feeling like it remembers what you did.
+  const ids = (MAPS[gameState.world.mapId].encounters || [])
+    .filter(function (enc) { return !enc.bossId; })
+    .map(function (enc) { return enc.id; });
   return gameState.world.defeatedEncounters.filter(function (id) {
     return ids.indexOf(id) !== -1;
   });
@@ -577,6 +635,8 @@ function handleBattleOutcome(outcome, context) {
   // reward instead, so the two never stack.
   if (outcome.result === "win" && gym) {
     awardGymPrize(gym);
+  } else if (outcome.result === "win" && context.boss) {
+    awardMiniBossPrize(context.boss); // M5 Step 2 — tokens + a Bossberry
   } else if (outcome.result === "win") {
     gameState.tokens += ECONOMY.TOKENS_PER_WILD_WIN;
     noteNews("You earned " + ECONOMY.TOKENS_PER_WILD_WIN + " tokens! 🪙");

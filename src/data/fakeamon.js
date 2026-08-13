@@ -317,6 +317,84 @@ const FAKEAMON = {
     moves: ["tackle", "pounce", "ironBeam"],
   },
 
+  // ---- THE FIVE MINI-BOSSES + ARTEMIS (M5 Steps 2–4) ----
+  // HP comes straight from DESIGN.md §5's mini-boss tier table (Lewis and
+  // Jeff's numbers); Attack/Defense/Speed are hand-authored to match, the same
+  // way the gym team was. These are NOT archetype creatures — there are only
+  // six of them and each is supposed to feel like an event.
+  //
+  //   Saurchin     130 HP  ← the strongest
+  //   Banvengeance 120 HP
+  //   Tobishimi    115 HP
+  //   Gastronium   110 HP
+  //   Sharpfin     100 HP
+  //
+  // ⚠️ ART NOTE — four of these five wear BORROWED faces. Tuxemon does have
+  // real sprites for Banvengeance, Saurchin, Gastronium and Tobishimi, but
+  // none of them appear in Tuxemon's `ATTRIBUTIONS.md`, and `wiki.tuxemon.org`
+  // (the project's fallback for checking who drew something) could not be
+  // reached when they were built. The rule in CONTENT_REFERENCE.md §14 is
+  // simple and worth keeping: no asset ships without a verified credit. So
+  // each borrows a sprite from the 198 already-verified sheets — the same
+  // "use art we already own" call Lewis made for the starters' evolutions
+  // (DECISIONS.md #85). Swapping in the real art later is a one-line `sprite`
+  // edit per boss, once the wiki can be reached:
+  //     cd tools && npm run wiki-credits -- banvengeance=Banvengeance --write
+  // Sharpfin and Artemis (Djinnbo) wear their OWN art — both are credited in
+  // Tuxemon's ATTRIBUTIONS.md, so they needed no substitute.
+  banvengeance: {
+    name: "Banvengeance", type: "grass",
+    sprite: "assets/sprites/front/brickhemoth.png",   // ⚠️ borrowed art, see above
+    overworld: "assets/sprites/idle/brickhemoth.png",
+    baseHP: 120, baseAttack: 22, baseDefense: 18, baseSpeed: 12, // [TUNE]
+    moves: ["stranglevine", "forestFury", "vineLash", "slam"],
+  },
+  saurchin: {
+    name: "Saurchin", type: "water",
+    sprite: "assets/sprites/front/crustagu.png",      // ⚠️ borrowed art, see above
+    overworld: "assets/sprites/idle/crustagu.png",
+    baseHP: 130, baseAttack: 24, baseDefense: 19, baseSpeed: 11, // [TUNE] the strongest
+    moves: ["starfall", "tidalWave", "breech", "crushingBlow"],
+  },
+  sharpfin: {
+    name: "Sharpfin", type: "water",
+    sprite: "assets/sprites/front/sharpfin.png",      // its own art — credited
+    overworld: "assets/sprites/idle/sharpfin.png",
+    baseHP: 100, baseAttack: 21, baseDefense: 15, baseSpeed: 18, // [TUNE] fast, but frailest
+    moves: ["starfall", "tidalWave", "bite", "breech"],
+  },
+  gastronium: {
+    name: "Gastronium", type: "metal",
+    sprite: "assets/sprites/front/nimbulex.png",      // ⚠️ borrowed art, see above
+    overworld: "assets/sprites/idle/nimbulex.png",
+    baseHP: 110, baseAttack: 22, baseDefense: 22, baseSpeed: 10, // [TUNE] the tank
+    moves: ["meltdown", "ironBeam", "crushingBlow", "slam"],
+  },
+  tobishimi: {
+    name: "Tobishimi", type: "water",
+    sprite: "assets/sprites/front/lightmare.png",     // ⚠️ borrowed art, see above
+    overworld: "assets/sprites/idle/lightmare.png",
+    baseHP: 115, baseAttack: 23, baseDefense: 17, baseSpeed: 16, // [TUNE]
+    moves: ["starfall", "tidalWave", "spout", "crushingBlow"],
+  },
+
+  // ARTEMIS — the legend at the end of the game (DESIGN.md §5, §10).
+  // The HP rule is Jeff's: **at least 2× the strongest mini-boss.** Saurchin
+  // is 130, so Artemis is 260. If Saurchin's number ever changes, change this
+  // one too and keep the ratio.
+  //
+  // Its Cosmic type hits 2× against everything (Lewis's call), which would be
+  // unfair if it weren't for Meteor Shower hurting Artemis too — that's the
+  // pressure valve that makes the finale winnable. Don't remove it without
+  // re-balancing the whole fight.
+  artemis: {
+    name: "Artemis", type: "cosmic",
+    sprite: "assets/sprites/front/djinnbo.png",       // its own art — credited
+    overworld: "assets/sprites/idle/djinnbo.png",
+    baseHP: 260, baseAttack: 22, baseDefense: 16, baseSpeed: 14, // DESIGN.md §5
+    moves: ["meteorShower", "hyperBeam", "cosmicShift", "meteorShower"],
+  },
+
   // ---- EVOLVED FORMS (M5 Step 1 / the M5 plan's S6) ----
   // What everything above turns INTO. Every Fakeamon in the game — all three
   // starters and all 26 wild ones — now has exactly one evolution, listed on

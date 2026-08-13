@@ -47,4 +47,30 @@ const MOVES = {
   vineLash:   { name: "Vine Lash",   type: "grass",  power: 16, accuracy: 95 },
   forestFury: { name: "Forest Fury", type: "grass",  power: 22, accuracy: 85 },
   slam:       { name: "Slam",        type: "normal", power: 16, accuracy: 90 },
+
+  // ---- BOSS MOVES (M5 Steps 2–4) ----
+  // The five mini-bosses hit harder than anything you'll meet in the grass.
+  // [TUNE] Each is a big version of its type's normal attack.
+  crushingBlow: { name: "Crushing Blow", type: "normal", power: 24, accuracy: 85 },
+  starfall:     { name: "Starfall",      type: "water",  power: 24, accuracy: 85 },
+  meltdown:     { name: "Meltdown",      type: "metal",  power: 24, accuracy: 85 },
+  stranglevine: { name: "Stranglevine",  type: "grass",  power: 24, accuracy: 85 },
+
+  // ---- ARTEMIS'S COSMIC MOVES (DESIGN.md §6) ----
+  // ⚠️ Cosmic hits 2× against EVERY type (Lewis's call), so these are brutal
+  // by design — the finale is meant to feel like a wall you have to be clever
+  // about. Read the Meteor Shower note below; it's what keeps it winnable.
+  hyperBeam:   { name: "Hyper Beam",   type: "cosmic", power: 28, accuracy: 90 },
+  cosmicShift: { name: "Cosmic Shift", type: "cosmic", power: 18, accuracy: 95 },
+
+  // ⭐ LEWIS'S IDEA, and the best one in the game: Meteor Shower hits YOU hard
+  // — and Artemis takes half of that damage itself. Artemis has a mountain of
+  // HP, so a patient trainer wins by surviving while the meteors wear the
+  // legend down. `selfDamage` is the fraction of the damage dealt that comes
+  // back on the attacker; src/battle.js is what actually applies it, and any
+  // move can use it.
+  meteorShower: {
+    name: "Meteor Shower", type: "cosmic", power: 24, accuracy: 90,
+    selfDamage: 0.5, // [TUNE] half the damage dealt rebounds onto the attacker
+  },
 };

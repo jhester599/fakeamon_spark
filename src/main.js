@@ -186,6 +186,13 @@ function enterOverworld() {
   refillEmptyMap();   // …and never leave the player standing on an empty map
   maybeGrowBerries(); // M4S5: berries grow back on empty patches over time
   saveGame();
+
+  // M5 Step 1 (S7): if anybody evolved on the way here — after a battle, or
+  // after loading a save that had XP banked — the show plays now, on the map,
+  // which is where the M5 plan §3 wanted the reveal. This goes LAST so the map
+  // is already up and saved: the ceremony is a celebration of something that
+  // has already safely happened, never a thing the save is waiting on.
+  playPendingCeremonies();
 }
 
 // M4S6: a little picture for each area, used in the overworld card's heading.
@@ -440,6 +447,118 @@ function evolveWhoeverIsReady() {
     noteNews(report.message); // "What?! Growler evolved into Deviraptor! ✨"
   });
   return reports;
+}
+
+// ===========================================================================
+//  THE EVOLUTION CEREMONY — M5 Step 1 (the M5 plan's S7), Lewis's B23 pick:
+//  screen flash, "What?! <name> is evolving!", big sprite reveal.
+//
+//  This is PURE THEATRE. Every rule already ran in src/progression.js before a
+//  single pixel of this happens — the Fakeamon has already changed. All this
+//  does is make a fuss about it, which is exactly why the plan kept the two
+//  apart: Lewis can redirect the whole show from this one section without ever
+//  touching the rules.
+//
+//  It plugs into progression.js's `onEvolve` hook, which was left empty on
+//  purpose at S6. The hook fires DURING applyEvolutions (possibly several
+//  times — a gym battle can level two of your Fakeamon), so we just queue what
+//  happened and play the shows afterwards, one at a time, on the map.
+// ===========================================================================
+
+// [TUNE] How long each beat of the ceremony lasts, in milliseconds.
+const CEREMONY_BEATS = {
+  shaking: 1600,  // "What?! Growler is evolving!" — the sprite wobbles
+  flashing: 1500, // white-hot, the shape changing
+};
+
+let pendingCeremonies = []; // filled by the hook, drained by playPendingCeremonies
+
+// This is the S7 implementation of S6's hook.
+onEvolve = function (individual, oldKey, newKey) {
+  pendingCeremonies.push({ oldKey: oldKey, newKey: newKey });
+};
+
+// Play every queued ceremony, one after another. Returns a Promise that
+// resolves once the last "Great!" button has been clicked, so callers can wait
+// for the show to finish before doing anything else.
+function playPendingCeremonies() {
+  const queue = pendingCeremonies;
+  pendingCeremonies = [];
+  if (queue.length === 0) return Promise.resolve();
+
+  // Walking around behind a full-screen ceremony would be silly — freeze the
+  // map exactly the way a battle does, and unfreeze when the show is over.
+  freezeWorldForCeremony(true);
+
+  let chain = Promise.resolve();
+  queue.forEach(function (item) {
+    chain = chain.then(function () { return playOneCeremony(item.oldKey, item.newKey); });
+  });
+  return chain.then(function () {
+    freezeWorldForCeremony(false);
+    renderTeamList(); // the team row now shows the new creature
+  });
+}
+
+// One creature's show, in three beats.
+function playOneCeremony(oldKey, newKey) {
+  const oldSpecies = FAKEAMON[oldKey];
+  const newSpecies = FAKEAMON[newKey];
+  const stage = document.getElementById("ceremony");
+  const line = document.getElementById("ceremonyLine");
+  const sprite = document.getElementById("ceremonySprite");
+  const controls = document.getElementById("ceremonyControls");
+
+  return new Promise(function (finished) {
+    // BEAT 1 — "what's happening to my Fakeamon?"
+    stage.classList.remove("hidden");
+    controls.innerHTML = "";
+    line.textContent = "What?! " + oldSpecies.name + " is evolving!";
+    sprite.src = oldSpecies.sprite;
+    sprite.alt = oldSpecies.name;
+    sprite.className = "ceremony-sprite ceremony-shaking";
+
+    setTimeout(function () {
+      // BEAT 2 — white-hot: the old shape is still there, but only just.
+      sprite.className = "ceremony-sprite ceremony-flashing";
+
+      setTimeout(function () {
+        // BEAT 3 — the reveal.
+        sprite.src = newSpecies.sprite;
+        sprite.alt = newSpecies.name;
+        sprite.className = "ceremony-sprite ceremony-arriving";
+        line.textContent = "🎉 Congratulations! " + oldSpecies.name +
+                           " evolved into " + newSpecies.name + "!";
+
+        const button = document.createElement("button");
+        button.className = "ceremony-btn";
+        button.textContent = "Great!";
+        button.addEventListener("click", function () {
+          stage.classList.add("hidden");
+          sprite.className = "ceremony-sprite";
+          finished();
+        });
+        controls.appendChild(button);
+        button.focus();
+      }, CEREMONY_BEATS.flashing);
+    }, CEREMONY_BEATS.shaking);
+  });
+}
+
+// Freeze/unfreeze the map for the duration of the show. Same guards
+// src/screens.js uses for a battle (pause the scene, take away the keyboard
+// and pointer) — but the map STAYS VISIBLE behind the dark backdrop, which is
+// the whole point of doing the reveal out here.
+function freezeWorldForCeremony(frozen) {
+  worldActive = !frozen;
+  if (!worldScene) return;
+  worldScene.input.enabled = !frozen;
+  worldScene.input.keyboard.enabled = !frozen;
+  if (frozen) {
+    if (!worldScene.scene.isPaused()) worldScene.scene.pause();
+  } else {
+    if (worldScene.scene.isPaused()) worldScene.scene.resume();
+  }
 }
 
 // Whatever the battle decided, this is where it becomes a team fact — then

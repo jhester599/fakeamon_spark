@@ -24,6 +24,10 @@
 // [TUNE] What beating a mini-boss pays, on top of the tripled XP.
 const MINIBOSS_TOKEN_REWARD = 60;
 
+// [TUNE] And what saving the world pays. It's a trophy more than a wage —
+// there's nothing left you need to buy.
+const ARTEMIS_TOKEN_REWARD = 500;
+
 const MINI_BOSSES = {
   banvengeance: {
     id: "banvengeance",
@@ -75,6 +79,20 @@ const MINI_BOSSES = {
 // Handy list of all five ids — "have you beaten them all?" (M5 Step 3) reads
 // this rather than a second hand-written list that could drift out of step.
 const MINI_BOSS_IDS = Object.keys(MINI_BOSSES);
+
+// Look up any boss by id — the five mini-bosses OR Artemis. One lookup means
+// src/main.js has a single "start a boss fight" path instead of two nearly
+// identical ones (M5 Step 4).
+function bossById(id) {
+  if (MINI_BOSSES[id]) return MINI_BOSSES[id];
+  return id === ARTEMIS.id ? ARTEMIS : null;
+}
+
+// Have all five mini-bosses been beaten? This is the whole Artemis gate
+// (M5 Step 3) — asked of the save's flags.bossesCleared list.
+function allMiniBossesBeaten(clearedIds) {
+  return MINI_BOSS_IDS.every(function (id) { return clearedIds.indexOf(id) !== -1; });
+}
 
 // ===========================================================================
 //  ARTEMIS — the final boss (DESIGN.md §10). Its lair opens only once all five

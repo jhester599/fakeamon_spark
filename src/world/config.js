@@ -124,6 +124,7 @@ const EXIT_ART = {};
 const EXIT_LOOKS = {
   boat: { emoji: "🚤", color: "#4a90d9" },      // water blue
   path: { emoji: "🌲", color: "#2f6b3a" },      // M5 Step 2 — the walk into The Forest
+  lair: { emoji: "☄️", color: "#7a3ccc" },      // M5 Step 3 — the door to Artemis
 };
 // What a LOCKED exit looks like instead (you haven't earned the badge yet).
 // One look for every kind — a locked door is a locked door.

@@ -420,8 +420,69 @@ const MAPS = {
       { id: "factory-berry-5", tileX: 20, tileY: 12 },
     ],
     exits: [
+      // M5 Step 3: the door to Artemis. Locked (🔒) until all five mini-bosses
+      // are beaten — see flags.unlockedAreas.
+      { id: "factory-lair-door", kind: "lair", tileX: 15, tileY: 4,
+        toMap: "artemisLair", toTile: { x: 15, y: 16, facing: "up" } },
       { id: "factory-boat", kind: "boat", tileX: 27, tileY: 8,
         toMap: "theLagoon", toTile: { x: 25, y: 14, facing: "left" } },
+    ],
+  },
+
+  // =========================================================================
+  //  ARTEMIS'S LAIR (M5 Steps 3–4) — the end of the game.
+  //
+  //  You can only get here once all FIVE mini-bosses are down; until then the
+  //  door in The Factory wears a 🔒. The gate is the same one every other
+  //  locked area uses — `flags.unlockedAreas` (DECISIONS.md #79) — and the
+  //  fifth mini-boss win is what pushes "artemisLair" onto it.
+  //
+  //  Lewis designed the room (B22): "purple fire and Artemis's throne of
+  //  stars". The purple is the `lair` mood dial in tools/make-area-tilesets.mjs;
+  //  the throne is the pool of fire in the middle, with Artemis standing in
+  //  front of it and black pillars lining the walk up.
+  //
+  //  There are no wild Fakeamon here, no berries and no Fakeatent. Heal
+  //  BEFORE you come — that's the point of a final boss.
+  // =========================================================================
+  artemisLair: {
+    name: "Artemis's Lair",
+    tileSize: 16,
+    tileset: "assets/tilesets/lair.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 15, y: 16 },   // you walk in at the bottom, facing the throne
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,18,19,19,19,19,20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0,11, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      // The legend itself. Same "bump into it" seam as every other creature in
+      // the game — it's just standing in front of its throne.
+      { id: "lair-artemis", bossId: "artemis", species: "artemis", level: 25, tileX: 15, tileY: 12 },
+    ],
+    exits: [
+      // The way home. You can always leave — even mid-quest, even after
+      // winning, because the world stays open (Lewis's B25).
+      { id: "lair-exit", kind: "path", tileX: 15, tileY: 17,
+        toMap: "theFactory", toTile: { x: 15, y: 5, facing: "down" } },
     ],
   },
 

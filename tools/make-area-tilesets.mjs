@@ -1,6 +1,6 @@
 // ===========================================================================
-//  make-area-tilesets.mjs — builds THE FOREST's and THE FACTORY's tilesets
-//  (M5 Step 2, so Banvengeance and Gastronium have somewhere to live).
+//  make-area-tilesets.mjs — builds the tilesets for THE FOREST, THE FACTORY
+//  and ARTEMIS'S LAIR (M5 Steps 2–3).
 //
 //  Run it from the tools/ folder (never in the browser):
 //      cd tools && npm install && node make-area-tilesets.mjs
@@ -13,6 +13,7 @@
 //      The Lagoon   dark blue and black   (a swamp at night)
 //      The Forest   deep, shadowy green   (a wood so thick it's dim)
 //      The Factory  grey, rusty, sickly   (nothing grows here any more)
+//      The Lair     near-black and violet (purple fire — Lewis's B22)
 //
 //  So there's no new art to draw or licence — just three sets of numbers.
 //  Change a number, re-run, and the area's whole feeling changes.
@@ -21,8 +22,9 @@
 //          ../assets/tilesets/vegetation_george.png  (by George_, CC BY 3.0)
 //  OUTPUT: ../assets/tilesets/forest.png    (6×4 tiles = 96×64)
 //          ../assets/tilesets/factory.png   (6×4 tiles = 96×64)
+//          ../assets/tilesets/lair.png      (6×4 tiles = 96×64)
 //
-//  Both are 6 tiles wide like every other area, so tile numbers still read as
+//  All are 6 tiles wide like every other area, so tile numbers still read as
 //  `index = row*6 + column` in src/data/maps.js, and both share The Lagoon's
 //  LEGEND exactly — which means they can share its `solidTiles` list too.
 // ===========================================================================
@@ -65,6 +67,14 @@ const MOODS = {
     // everything sinks towards the same sickly grey-brown.
     DIM: 0.45, TINT: 0.72, RAMP: { r: 0.72, g: 0.62, b: 0.52 },
     LIFT: 14, DRAIN: 0.62, KEY: "none",
+  },
+  lair: {
+    // ARTEMIS'S LAIR (M5 Step 3) — Lewis asked for "purple fire and a throne
+    // of stars" (B22), so this is the moodiest dial of the lot: almost black,
+    // lit only by violet. Nothing here is alive either, so everything drains
+    // together the way it does in the factory.
+    DIM: 0.30, TINT: 0.86, RAMP: { r: 0.62, g: 0.24, b: 0.98 },
+    LIFT: 6, DRAIN: 0.80, KEY: "none",
   },
 };
 
@@ -192,4 +202,4 @@ for (const [area, mood] of Object.entries(MOODS)) {
   console.log(`✅ wrote ${out} (${OUT_COLS}×${OUT_ROWS} tiles of ${TILE}px)`);
 }
 
-console.log("   Tiles by George_ (CC BY 3.0) — both derived files are recorded in CREDITS.md.");
+console.log("   Tiles by George_ (CC BY 3.0) — every derived file is recorded in CREDITS.md.");

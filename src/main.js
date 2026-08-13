@@ -192,7 +192,7 @@ function enterOverworld() {
   // which is where the M5 plan §3 wanted the reveal. This goes LAST so the map
   // is already up and saved: the ceremony is a celebration of something that
   // has already safely happened, never a thing the save is waiting on.
-  playPendingCeremonies();
+  playPendingCeremonies().then(playWinScreenIfWon);
 }
 
 // M4S6: a little picture for each area, used in the overworld card's heading.
@@ -383,7 +383,8 @@ function startMapEncounter(encounter) {
 // the battle engine itself needed only two small additions (a named opponent
 // and an entrance line), because a boss is just a very large wild Fakeamon.
 function startMiniBossBattle(encounter) {
-  const boss = MINI_BOSSES[encounter.bossId];
+  const boss = bossById(encounter.bossId); // a mini-boss, or Artemis herself
+  if (boss === ARTEMIS) { startArtemisBattle(encounter); return; }
   const bossIndividual = newIndividual(boss.speciesKey, boss.level);
 
   // This is the flag src/progression.js reads to pay MINIBOSS_XP_MULT — the
@@ -404,6 +405,41 @@ function startMiniBossBattle(encounter) {
   }, { encounter: encounter, boss: boss });
 }
 
+// ===========================================================================
+//  THE FINALE (M5 Step 4) — Artemis. Everything Lewis wrote about this moment
+//  is in DESIGN.md §10: the lair (B22), the win text (B24), and the fact that
+//  the world stays open afterwards (B25).
+// ===========================================================================
+function startArtemisBattle(encounter) {
+  const artemis = newIndividual(ARTEMIS.speciesKey, ARTEMIS.level);
+  artemis.isMiniBoss = true; // the legend pays boss-sized XP too
+
+  noteNews(ARTEMIS.lairText); // "Purple fire crackles around a throne of stars…"
+
+  enterBattle({
+    playerParty: gameState.party,
+    enemy: artemis,
+    inventory: gameState.inventory,
+    canFlee: true,     // you may always retreat and come back healed
+    canCatch: false,   // Lewis's call: Artemis can never be caught (DESIGN.md §10)
+    namedOpponent: true,
+    introLine: ARTEMIS.entrance,
+    battleTitle: "☄️ THE FINAL BATTLE — Artemis",
+    onStateChange: renderTeamList,
+  }, { encounter: encounter, artemis: true });
+}
+
+// You beat Artemis. This is the end of the story — but not the end of the
+// game: the world stays open (Lewis's B25), so this sets a flag, shows the
+// win screen, and hands you back your adventure.
+function winTheGame() {
+  const firstTime = !gameState.flags.artemisDefeated;
+  gameState.flags.artemisDefeated = true;
+  gameState.tokens += ARTEMIS_TOKEN_REWARD;
+  saveGame();
+  if (firstTime) pendingWinScreen = true;
+}
+
 // Beating a mini-boss: bank the prize, remember it's down for good, and tell
 // the player how close they are to unlocking Artemis (M5 Step 3).
 function awardMiniBossPrize(boss) {
@@ -421,7 +457,18 @@ function awardMiniBossPrize(boss) {
   const total = MINI_BOSS_IDS.length;
   let news = "🏆 You defeated " + boss.name + "! +" + MINIBOSS_TOKEN_REWARD +
              " 🪙 and a Bossberry! (" + beaten + " of " + total + " mini-bosses)";
-  if (beaten < total) {
+
+  // M5 Step 3 — THE GATE. Beating the fifth one opens Artemis's lair. It's
+  // pushed onto the same flags.unlockedAreas list every other locked area
+  // uses, so the door in The Factory just stops being locked. One list, one
+  // fact (DECISIONS.md #79).
+  if (allMiniBossesBeaten(gameState.flags.bossesCleared)) {
+    if (gameState.flags.unlockedAreas.indexOf("artemisLair") === -1) {
+      gameState.flags.unlockedAreas.push("artemisLair");
+    }
+    news += " — ALL FIVE ARE DOWN! ☄️ The door in The Factory is open. " +
+            "Artemis is waiting.";
+  } else {
     news += " — " + (total - beaten) + " to go before Artemis.";
   }
   noteNews(news);
@@ -530,6 +577,7 @@ const CEREMONY_BEATS = {
 };
 
 let pendingCeremonies = []; // filled by the hook, drained by playPendingCeremonies
+let pendingWinScreen = false; // M5 Step 5 — set the moment Artemis falls
 
 // This is the S7 implementation of S6's hook.
 onEvolve = function (individual, oldKey, newKey) {
@@ -603,6 +651,47 @@ function playOneCeremony(oldKey, newKey) {
   });
 }
 
+// ===========================================================================
+//  THE WIN SCREEN — M5 Step 5. Lewis wrote the words (B24) and the rule that
+//  the world stays open afterwards (B25), so this is a curtain call, not an
+//  ending: you press Keep exploring and carry straight on with your save.
+//
+//  It reuses the ceremony's stage (#ceremony) — same dark backdrop, same
+//  frozen map, same "click to carry on" shape. One overlay, two occasions.
+// ===========================================================================
+function playWinScreenIfWon() {
+  if (!pendingWinScreen) return Promise.resolve();
+  pendingWinScreen = false;
+
+  freezeWorldForCeremony(true);
+  const stage = document.getElementById("ceremony");
+  const line = document.getElementById("ceremonyLine");
+  const sprite = document.getElementById("ceremonySprite");
+  const controls = document.getElementById("ceremonyControls");
+
+  return new Promise(function (finished) {
+    stage.classList.remove("hidden");
+    sprite.src = FAKEAMON[ARTEMIS.speciesKey].sprite;
+    sprite.alt = ARTEMIS.name;
+    sprite.className = "ceremony-sprite ceremony-arriving";
+    line.innerHTML =
+      "🌠 <b>The meteor stops.</b><br>" + ARTEMIS.winText;
+
+    controls.innerHTML = "";
+    const button = document.createElement("button");
+    button.className = "ceremony-btn";
+    button.textContent = "Keep exploring!";
+    button.addEventListener("click", function () {
+      stage.classList.add("hidden");
+      sprite.className = "ceremony-sprite";
+      freezeWorldForCeremony(false);
+      finished();
+    });
+    controls.appendChild(button);
+    button.focus();
+  });
+}
+
 // Freeze/unfreeze the map for the duration of the show. Same guards
 // src/screens.js uses for a battle (pause the scene, take away the keyboard
 // and pointer) — but the map STAYS VISIBLE behind the dark backdrop, which is
@@ -635,6 +724,8 @@ function handleBattleOutcome(outcome, context) {
   // reward instead, so the two never stack.
   if (outcome.result === "win" && gym) {
     awardGymPrize(gym);
+  } else if (outcome.result === "win" && context.artemis) {
+    winTheGame(); // M5 Steps 4–5 — the meteor stops
   } else if (outcome.result === "win" && context.boss) {
     awardMiniBossPrize(context.boss); // M5 Step 2 — tokens + a Bossberry
   } else if (outcome.result === "win") {

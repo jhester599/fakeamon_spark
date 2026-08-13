@@ -236,6 +236,7 @@ const PRECACHE_URLS = [
   "assets/tilesets/factory.png",
   "assets/tilesets/forest.png",
   "assets/tilesets/lagoon.png",
+  "assets/tilesets/lair.png",
   "assets/tilesets/meadow.png",
   "assets/tilesets/terrain_george.png",
   "assets/tilesets/vegetation_george.png",

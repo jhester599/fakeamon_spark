@@ -102,7 +102,12 @@ function defaultFlags() {
     gymsCleared: [],               // gym ids beaten — same as badges for now, but kept
                                    //   separate so a rematch (Lewis's B17) can tell a first
                                    //   clear (big reward) from a repeat (small one)
-    unlockedAreas: ["theMeadows"], // maps you may enter — beating a gym pushes a new one here
+    // Maps you may enter. Beating a gym pushes a new one here (M4S6).
+    // M5 Step 2 opens two more from the start — but they're not free passes:
+    // The Forest is next door to The Meadows on foot, and The Factory can only
+    // be reached by boat FROM The Lagoon, which still needs the Gear Badge. So
+    // there's still exactly one locked door in the game, and it's the gym's.
+    unlockedAreas: ["theMeadows", "theForest", "theFactory"],
     // *M5 Step 2 — which of the five mini-bosses you've beaten (their ids from
     // src/data/bosses.js). Beating all five is what unlocks Artemis's lair
     // (M5 Step 3), so this list IS the endgame gate — same "one list, one

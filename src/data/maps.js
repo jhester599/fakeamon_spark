@@ -162,6 +162,12 @@ const MAPS = {
     // — which is what a gym badge pushes there (src/main.js's awardGymPrize).
     // Nothing else marks it locked: the one list IS the gate.
     exits: [
+      // M5 Step 2: a path west into The Forest. No badge needed — it's the
+      // wood next door to the starting field, and it's where Banvengeance
+      // lives. (Bumped like the boat, so the landing tile can't bounce you
+      // straight back.)
+      { id: "meadows-forest-path", kind: "path", tileX: 2, tileY: 4,
+        toMap: "theForest", toTile: { x: 3, y: 9, facing: "right" } },
       { id: "meadows-boat", kind: "boat", tileX: 27, tileY: 9,
         toMap: "theLagoon", toTile: { x: 3, y: 9, facing: "right" } },
     ],
@@ -283,6 +289,140 @@ const MAPS = {
     exits: [
       { id: "lagoon-boat", kind: "boat", tileX: 2, tileY: 9,
         toMap: "theMeadows", toTile: { x: 26, y: 9, facing: "left" } },
+      // M5 Step 2: a second boat, moored on the far side of the swamp, carries
+      // you on to The Factory — where the fifth mini-boss lives. You needed the
+      // Gear Badge to reach The Lagoon at all, so that badge still gates this.
+      { id: "lagoon-boat-factory", kind: "boat", tileX: 26, tileY: 14,
+        toMap: "theFactory", toTile: { x: 25, y: 8, facing: "left" } },
     ],
   },
+  // =========================================================================
+  //  THE FOREST (M5 Step 2) — Banvengeance's turf (DESIGN.md §8, Lewis's B9).
+  //  Reached on foot from the west side of The Meadows, so it's open from the
+  //  very start: a dark wood right next door to the friendly starting field.
+  //  Its tileset is the SAME George tiles as everywhere else, run through the
+  //  "forest" mood dial in tools/make-area-tilesets.mjs — deep greens and black
+  //  shadows. Same tile legend as The Lagoon, so it shares its solidTiles list
+  //  (the water tiles read as a woodland pool here; you still walk around it).
+  // =========================================================================
+  theForest: {
+    name: "The Forest",
+    tileSize: 16,
+    tileset: "assets/tilesets/forest.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 3, y: 9 },
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9,10],
+    [15,16, 0, 3, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 2,15,16],
+    [ 9,10, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 9,10],
+    [15,16, 0, 0, 0, 0, 1, 3, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9,10],
+    [15,16, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 0,17, 0, 0, 4, 0, 1, 4, 0, 0, 1, 0, 4, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 0, 2, 0, 3, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0,17, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10,17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 5, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 9,10],
+    [15,16, 0, 0, 1, 2, 0, 4, 0, 1, 4, 0, 0, 5, 0, 0, 4, 0, 0, 0,12,13,13,13,13,14, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0,17, 0, 0, 0, 2, 1, 0,12,13,13,13,13,14, 0, 1, 9,10],
+    [15,16, 0, 0, 0, 4, 0, 1, 0, 0, 3, 0, 0,17, 0, 0, 0, 0, 0, 0,18,19,19,19,19,20, 0, 3,15,16],
+    [ 9,10, 2, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 5, 9,10],
+    [15,16, 0, 0, 1, 3, 4, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      { id: "forest-anoleaf", species: "anoleaf", level: 10, tileX: 3, tileY: 9 },
+      { id: "forest-babysnitch", species: "babysnitch", level: 11, tileX: 6, tileY: 9 },
+      { id: "forest-burrlock", species: "burrlock", level: 11, tileX: 4, tileY: 7 },
+      { id: "forest-chloragon", species: "chloragon", level: 12, tileX: 3, tileY: 12 },
+      { id: "forest-duggot", species: "duggot", level: 12, tileX: 5, tileY: 11 },
+      { id: "forest-flounce", species: "flounce", level: 13, tileX: 3, tileY: 5 },
+      { id: "forest-foxfire", species: "foxfire", level: 13, tileX: 9, tileY: 9 },
+      { id: "forest-scarlant", species: "scarlant", level: 14, tileX: 7, tileY: 7 },
+      { id: "forest-boss-banvengeance", bossId: "banvengeance", species: "banvengeance", level: 18, tileX: 4, tileY: 14 },
+    ],
+    buildings: [
+      { id: "forest-fakeatent", kind: "fakeatent", tileX: 8, tileY: 11,
+        spawnTile: { x: 8, y: 12, facing: "up" } },
+    ],
+    berrySpots: [
+      { id: "forest-berry-1", tileX: 6, tileY: 13 },
+      { id: "forest-berry-2", tileX: 6, tileY: 5 },
+      { id: "forest-berry-3", tileX: 4, tileY: 3 },
+      { id: "forest-berry-4", tileX: 3, tileY: 16 },
+      { id: "forest-berry-5", tileX: 12, tileY: 9 },
+    ],
+    exits: [
+      { id: "forest-path", kind: "path", tileX: 2, tileY: 9,
+        toMap: "theMeadows", toTile: { x: 3, y: 4, facing: "right" } },
+    ],
+  },
+
+  // =========================================================================
+  //  THE FACTORY (M5 Step 2) — Gastronium's turf (DESIGN.md §8, Lewis's B9).
+  //  Reached by boat from the east side of The Lagoon, which means the Gear
+  //  Badge still gates it in practice: you can't get here without going
+  //  through The Lagoon first. Rust and dead ground — the same George tiles
+  //  put through the "factory" mood dial, where nothing is alive so nothing
+  //  keeps its colour. The water tiles read as a chemical spill.
+  // =========================================================================
+  theFactory: {
+    name: "The Factory",
+    tileSize: 16,
+    tileset: "assets/tilesets/factory.png",
+    solidTiles: LAGOON_SOLID_TILE_INDICES,
+    startTile: { x: 26, y: 9 },
+    ground: [
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    [ 9,10, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 2, 0, 0, 9,10],
+    [15,16, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 6, 7, 7, 7, 7, 8, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 2, 0,12,13,13,13,13,14, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,15,16],
+    [ 9,10, 0, 4, 5, 0,12,13,13,13,13,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 1, 4, 0, 0,18,19,19,19,19,20, 1, 5, 1, 2, 0,17, 1, 5, 0, 0, 0, 3, 0, 0,17, 0,15,16],
+    [ 9,10, 0, 0, 0, 0, 1,17, 0, 0, 1, 1, 1, 0, 0, 0, 3, 2, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,17, 0, 0, 0, 0, 2, 0, 4,15,16],
+    [ 9,10, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 4, 3, 0, 0,15,16],
+    [ 9,10, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,15,16],
+    [ 9,10, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0,17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0,17, 0, 1, 0, 0, 0, 5, 0, 0, 0, 2, 1, 0, 0, 2, 0, 0, 5, 0,15,16],
+    [ 9,10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 9,10],
+    [15,16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 5, 0, 1, 0, 2, 0, 0, 5, 0,15,16],
+    [ 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10, 9,10],
+    [15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16,15,16],
+    ],
+    encounters: [
+      { id: "factory-boltnu", species: "boltnu", level: 14, tileX: 26, tileY: 9 },
+      { id: "factory-cataspike", species: "cataspike", level: 15, tileX: 23, tileY: 9 },
+      { id: "factory-pythwire", species: "pythwire", level: 15, tileX: 25, tileY: 11 },
+      { id: "factory-embra", species: "embra", level: 16, tileX: 25, tileY: 7 },
+      { id: "factory-grimachin", species: "grimachin", level: 16, tileX: 26, tileY: 13 },
+      { id: "factory-virware", species: "virware", level: 17, tileX: 21, tileY: 10 },
+      { id: "factory-ignibus", species: "ignibus", level: 17, tileX: 22, tileY: 7 },
+      { id: "factory-nut", species: "nut", level: 18, tileX: 23, tileY: 12 },
+      { id: "factory-boss-gastronium", bossId: "gastronium", species: "gastronium", level: 19, tileX: 24, tileY: 5 },
+    ],
+    buildings: [
+      { id: "factory-fakeatent", kind: "fakeatent", tileX: 20, tileY: 8,
+        spawnTile: { x: 20, y: 9, facing: "up" } },
+    ],
+    berrySpots: [
+      { id: "factory-berry-1", tileX: 24, tileY: 14 },
+      { id: "factory-berry-2", tileX: 26, tileY: 4 },
+      { id: "factory-berry-3", tileX: 25, tileY: 16 },
+      { id: "factory-berry-4", tileX: 18, tileY: 10 },
+      { id: "factory-berry-5", tileX: 20, tileY: 12 },
+    ],
+    exits: [
+      { id: "factory-boat", kind: "boat", tileX: 27, tileY: 8,
+        toMap: "theLagoon", toTile: { x: 25, y: 14, facing: "left" } },
+    ],
+  },
+
 };

@@ -317,6 +317,231 @@ const FAKEAMON = {
     moves: ["tackle", "pounce", "ironBeam"],
   },
 
+
+  // ---- WILD ROSTER — THE FOREST and THE FACTORY (M5 Step 2) ----
+  // Two more of Venta's six areas open here, because the last two mini-bosses
+  // live in them (DESIGN.md §8: Banvengeance in The Forest, Gastronium in The
+  // Factory). Eight wild Fakeamon each, taken from the same approved pool —
+  // and specifically from the creatures the roster already assigned to these
+  // areas (`areaProposed` in tools/roster-200.json, Lewis's B37).
+  //
+  // Every one of the sixteen is a STAGE-1 creature, chosen on purpose so it has
+  // somewhere to grow — each is listed here with its evolved form right beneath
+  // it. Stats come from the same [TUNE] type-archetype table as the earlier
+  // areas; evolved forms are base + 14 HP / +5 Attack / +4 Defense / +3 Speed,
+  // exactly like M5 Step 1's.
+  //
+  // ⚠️ Names are placeholder Title-Cased slugs, same as the other 55 — Lewis's
+  // rename pass covers all of them at once when he's ready.
+  anoleaf: {
+    name: "Anoleaf", type: "grass", sprite: "assets/sprites/front/anoleaf.png",
+    overworld: "assets/sprites/idle/anoleaf.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "gectile", evolvesAt: 14,
+  },
+  gectile: {
+    name: "Gectile", type: "grass", sprite: "assets/sprites/front/gectile.png",
+    overworld: "assets/sprites/idle/gectile.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  babysnitch: {
+    name: "Babysnitch", type: "grass", sprite: "assets/sprites/front/babysnitch.png",
+    overworld: "assets/sprites/idle/babysnitch.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "baddrscratch", evolvesAt: 14,
+  },
+  baddrscratch: {
+    name: "Baddrscratch", type: "grass", sprite: "assets/sprites/front/baddrscratch.png",
+    overworld: "assets/sprites/idle/baddrscratch.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  burrlock: {
+    name: "Burrlock", type: "grass", sprite: "assets/sprites/front/burrlock.png",
+    overworld: "assets/sprites/idle/burrlock.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "cacaburr", evolvesAt: 14,
+  },
+  cacaburr: {
+    name: "Cacaburr", type: "grass", sprite: "assets/sprites/front/cacaburr.png",
+    overworld: "assets/sprites/idle/cacaburr.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  chloragon: {
+    name: "Chloragon", type: "grass", sprite: "assets/sprites/front/chloragon.png",
+    overworld: "assets/sprites/idle/chloragon.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "sapragon", evolvesAt: 14,
+  },
+  sapragon: {
+    name: "Sapragon", type: "grass", sprite: "assets/sprites/front/sapragon.png",
+    overworld: "assets/sprites/idle/sapragon.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  duggot: {
+    name: "Duggot", type: "grass", sprite: "assets/sprites/front/duggot.png",
+    overworld: "assets/sprites/idle/duggot.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "breem", evolvesAt: 14,
+  },
+  breem: {
+    name: "Breem", type: "grass", sprite: "assets/sprites/front/breem.png",
+    overworld: "assets/sprites/idle/breem.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  flounce: {
+    name: "Flounce", type: "fire", sprite: "assets/sprites/front/flounce.png",
+    overworld: "assets/sprites/idle/flounce.png",
+    baseHP: 36, baseAttack: 14, baseDefense: 9, baseSpeed: 13,
+    moves: ["tackle","bite","burn","flare"],
+    evolvesTo: "knindling", evolvesAt: 14,
+  },
+  knindling: {
+    name: "Knindling", type: "fire", sprite: "assets/sprites/front/knindling.png",
+    overworld: "assets/sprites/idle/knindling.png",
+    baseHP: 50, baseAttack: 19, baseDefense: 13, baseSpeed: 16,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  foxfire: {
+    name: "Foxfire", type: "fire", sprite: "assets/sprites/front/foxfire.png",
+    overworld: "assets/sprites/idle/foxfire.png",
+    baseHP: 36, baseAttack: 14, baseDefense: 9, baseSpeed: 13,
+    moves: ["tackle","bite","burn","flare"],
+    evolvesTo: "vulpyre", evolvesAt: 14,
+  },
+  vulpyre: {
+    name: "Vulpyre", type: "fire", sprite: "assets/sprites/front/vulpyre.png",
+    overworld: "assets/sprites/idle/vulpyre.png",
+    baseHP: 50, baseAttack: 19, baseDefense: 13, baseSpeed: 16,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  scarlant: {
+    name: "Scarlant", type: "grass", sprite: "assets/sprites/front/scarlant.png",
+    overworld: "assets/sprites/idle/scarlant.png",
+    baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
+    moves: ["tackle","leafage","pounce","confusion"],
+    evolvesTo: "shull", evolvesAt: 14,
+  },
+  shull: {
+    name: "Shull", type: "grass", sprite: "assets/sprites/front/shull.png",
+    overworld: "assets/sprites/idle/shull.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  boltnu: {
+    name: "Boltnu", type: "metal", sprite: "assets/sprites/front/boltnu.png",
+    overworld: "assets/sprites/idle/boltnu.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "exclawvate", evolvesAt: 14,
+  },
+  exclawvate: {
+    name: "Exclawvate", type: "metal", sprite: "assets/sprites/front/exclawvate.png",
+    overworld: "assets/sprites/idle/exclawvate.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+  cataspike: {
+    name: "Cataspike", type: "metal", sprite: "assets/sprites/front/cataspike.png",
+    overworld: "assets/sprites/idle/cataspike.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "puparmor", evolvesAt: 14,
+  },
+  puparmor: {
+    name: "Puparmor", type: "metal", sprite: "assets/sprites/front/puparmor.png",
+    overworld: "assets/sprites/idle/puparmor.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+  pythwire: {
+    name: "Pythwire", type: "metal", sprite: "assets/sprites/front/pythwire.png",
+    overworld: "assets/sprites/idle/pythwire.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "ouroboutlet", evolvesAt: 14,
+  },
+  ouroboutlet: {
+    name: "Ouroboutlet", type: "metal", sprite: "assets/sprites/front/ouroboutlet.png",
+    overworld: "assets/sprites/idle/ouroboutlet.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+  embra: {
+    name: "Embra", type: "fire", sprite: "assets/sprites/front/embra.png",
+    overworld: "assets/sprites/idle/embra.png",
+    baseHP: 36, baseAttack: 14, baseDefense: 9, baseSpeed: 13,
+    moves: ["tackle","bite","burn","flare"],
+    evolvesTo: "ruption", evolvesAt: 14,
+  },
+  ruption: {
+    name: "Ruption", type: "fire", sprite: "assets/sprites/front/ruption.png",
+    overworld: "assets/sprites/idle/ruption.png",
+    baseHP: 50, baseAttack: 19, baseDefense: 13, baseSpeed: 16,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  grimachin: {
+    name: "Grimachin", type: "metal", sprite: "assets/sprites/front/grimachin.png",
+    overworld: "assets/sprites/idle/grimachin.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "tigrock", evolvesAt: 14,
+  },
+  tigrock: {
+    name: "Tigrock", type: "metal", sprite: "assets/sprites/front/tigrock.png",
+    overworld: "assets/sprites/idle/tigrock.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+  virware: {
+    name: "Virware", type: "metal", sprite: "assets/sprites/front/virware.png",
+    overworld: "assets/sprites/idle/virware.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "trojerror", evolvesAt: 14,
+  },
+  trojerror: {
+    name: "Trojerror", type: "metal", sprite: "assets/sprites/front/trojerror.png",
+    overworld: "assets/sprites/idle/trojerror.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+  ignibus: {
+    name: "Ignibus", type: "fire", sprite: "assets/sprites/front/ignibus.png",
+    overworld: "assets/sprites/idle/ignibus.png",
+    baseHP: 36, baseAttack: 14, baseDefense: 9, baseSpeed: 13,
+    moves: ["tackle","bite","burn","flare"],
+    evolvesTo: "embazook", evolvesAt: 14,
+  },
+  embazook: {
+    name: "Embazook", type: "fire", sprite: "assets/sprites/front/embazook.png",
+    overworld: "assets/sprites/idle/embazook.png",
+    baseHP: 50, baseAttack: 19, baseDefense: 13, baseSpeed: 16,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  nut: {
+    name: "Nut", type: "metal", sprite: "assets/sprites/front/nut.png",
+    overworld: "assets/sprites/idle/nut.png",
+    baseHP: 40, baseAttack: 12, baseDefense: 14, baseSpeed: 8,
+    moves: ["tackle","bite","ironBeam","slam"],
+    evolvesTo: "bolt", evolvesAt: 14,
+  },
+  bolt: {
+    name: "Bolt", type: "metal", sprite: "assets/sprites/front/bolt.png",
+    overworld: "assets/sprites/idle/bolt.png",
+    baseHP: 54, baseAttack: 17, baseDefense: 18, baseSpeed: 11,
+    moves: ["bite","ironBeam","meltdown","slam"],
+  },
+
   // ---- THE FIVE MINI-BOSSES + ARTEMIS (M5 Steps 2–4) ----
   // HP comes straight from DESIGN.md §5's mini-boss tier table (Lewis and
   // Jeff's numbers); Attack/Defense/Speed are hand-authored to match, the same

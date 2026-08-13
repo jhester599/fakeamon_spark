@@ -217,6 +217,12 @@ function parseSave(text) {
   // CR-B trap again — the old `flags` object is copied whole). Back-fill them,
   // which also means no SAVE_VERSION bump was needed.
   if (!Array.isArray(state.flags.bossesCleared)) state.flags.bossesCleared = [];
+  // M5 Step 2 added two areas that are open from the start. A save made before
+  // them has an unlockedAreas list without them, which would lock their exits
+  // forever — so make sure every always-open area is present.
+  defaultFlags().unlockedAreas.forEach(function (areaId) {
+    if (state.flags.unlockedAreas.indexOf(areaId) === -1) state.flags.unlockedAreas.push(areaId);
+  });
   if (typeof state.flags.artemisDefeated !== "boolean") state.flags.artemisDefeated = false;
 
   return state;

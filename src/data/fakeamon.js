@@ -15,18 +15,21 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/hissiorite.png",
     baseHP: 40, baseAttack: 13, baseDefense: 10, baseSpeed: 12,
     moves: ["tackle", "bite", "burn", "flare"],
+    evolvesTo: "deviraptor", evolvesAt: 16,
   },
   whaley: {
     name: "Whaley", type: "water", sprite: "assets/sprites/whaley.png",
     overworld: "assets/sprites/idle/bigfin.png",
     baseHP: 44, baseAttack: 12, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "leviadile", evolvesAt: 16,
   },
   leafick: {
     name: "Leafick", type: "grass", sprite: "assets/sprites/leafick.png",
     overworld: "assets/sprites/idle/frondly.png",
     baseHP: 42, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "dragarbor", evolvesAt: 16,
   },
 
   // ---- WILD ROSTER — THE MEADOWS (M3 Step S11) ----
@@ -60,84 +63,98 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/aardorn.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "aardart", evolvesAt: 14,
   },
   baoby: {
     name: "Baoby", type: "grass", sprite: "assets/sprites/front/baoby.png",
     overworld: "assets/sprites/idle/baoby.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "baobaraffe", evolvesAt: 14,
   },
   capiti: {
     name: "Capiti", type: "normal", sprite: "assets/sprites/front/capiti.png",
     overworld: "assets/sprites/idle/capiti.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "capinyah", evolvesAt: 22,
   },
   chenipode: {
     name: "Chenipode", type: "normal", sprite: "assets/sprites/front/chenipode.png",
     overworld: "assets/sprites/idle/chenipode.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "exapode", evolvesAt: 14,
   },
   chickadee: {
     name: "Chickadee", type: "normal", sprite: "assets/sprites/front/chickadee.png",
     overworld: "assets/sprites/idle/chickadee.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "birdee", evolvesAt: 12,
   },
   dandicub: {
     name: "Dandicub", type: "grass", sprite: "assets/sprites/front/dandicub.png",
     overworld: "assets/sprites/idle/dandicub.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "dandylion", evolvesAt: 14,
   },
   hatchling: {
     name: "Hatchling", type: "normal", sprite: "assets/sprites/front/hatchling.png",
     overworld: "assets/sprites/idle/hatchling.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "birdling", evolvesAt: 14,
   },
   lambert: {
     name: "Lambert", type: "grass", sprite: "assets/sprites/front/lambert.png",
     overworld: "assets/sprites/idle/lambert.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "legko", evolvesAt: 18,
   },
   marvillar: {
     name: "Marvillar", type: "normal", sprite: "assets/sprites/front/marvillar.png",
     overworld: "assets/sprites/idle/marvillar.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "marvantis", evolvesAt: 12,
   },
   pairagrin: {
     name: "Pairagrin", type: "normal", sprite: "assets/sprites/front/pairagrin.png",
     overworld: "assets/sprites/idle/pairagrin.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "pairagrim", evolvesAt: 20,
   },
   pantherafira: {
     name: "Pantherafira", type: "fire", sprite: "assets/sprites/front/pantherafira.png",
     overworld: "assets/sprites/idle/pantherafira.png",
     baseHP: 36, baseAttack: 14, baseDefense: 9, baseSpeed: 13,
     moves: ["tackle", "bite", "burn", "flare"],
+    evolvesTo: "criniotherme", evolvesAt: 14,
   },
   shybulb: {
     name: "Shybulb", type: "grass", sprite: "assets/sprites/front/shybulb.png",
     overworld: "assets/sprites/idle/shybulb.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "narcileaf", evolvesAt: 14,
   },
   snaki: {
     name: "Snaki", type: "normal", sprite: "assets/sprites/front/snaki.png",
     overworld: "assets/sprites/idle/snaki.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "snokari", evolvesAt: 14,
   },
   tumbleworm: {
     name: "Tumbleworm", type: "grass", sprite: "assets/sprites/front/tumbleworm.png",
     overworld: "assets/sprites/idle/tumbleworm.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "tumblebee", evolvesAt: 14,
   },
 
   // ---- WILD ROSTER — THE LAGOON (M4S6) ----
@@ -170,54 +187,63 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/axolightl.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "ampystoma", evolvesAt: 22,
   },
   claymorior: {
     name: "Claymorior", type: "grass", sprite: "assets/sprites/front/claymorior.png",
     overworld: "assets/sprites/idle/claymorior.png",
     baseHP: 41, baseAttack: 11, baseDefense: 13, baseSpeed: 10,
     moves: ["tackle", "leafage", "pounce", "confusion"],
+    evolvesTo: "regalance", evolvesAt: 22,
   },
   fluoresfin: {
     name: "Fluoresfin", type: "water", sprite: "assets/sprites/front/fluoresfin.png",
     overworld: "assets/sprites/idle/fluoresfin.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "incandesfin", evolvesAt: 14,
   },
   gupphish: {
     name: "Gupphish", type: "water", sprite: "assets/sprites/front/gupphish.png",
     overworld: "assets/sprites/idle/gupphish.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "gupphire", evolvesAt: 16,
   },
   jelillow: {
     name: "Jelillow", type: "water", sprite: "assets/sprites/front/jelillow.png",
     overworld: "assets/sprites/idle/jelillow.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "bedoo", evolvesAt: 24,
   },
   kroki: {
     name: "Kroki", type: "water", sprite: "assets/sprites/front/kroki.png",
     overworld: "assets/sprites/idle/kroki.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "krokivip", evolvesAt: 12,
   },
   lesmagu: {
     name: "Lesmagu", type: "water", sprite: "assets/sprites/front/lesmagu.png",
     overworld: "assets/sprites/idle/lesmagu.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "shelagu", evolvesAt: 14,
   },
   nebufin: {
     name: "Nebufin", type: "water", sprite: "assets/sprites/front/nebufin.png",
     overworld: "assets/sprites/idle/nebufin.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "galasces", evolvesAt: 13,
   },
   nostray: {
     name: "Nostray", type: "water", sprite: "assets/sprites/front/nostray.png",
     overworld: "assets/sprites/idle/nostray.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "shnark", evolvesAt: 14,
   },
   nudiflot_female: {
     // See the note on nudiflot_male below — two different creatures that would
@@ -226,6 +252,7 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/nudiflot_female.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "nudimind", evolvesAt: 14,
   },
   nudiflot_male: {
     // Tuxemon ships two Nudiflots. They're different creatures with different
@@ -236,12 +263,14 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/nudiflot_male.png",
     baseHP: 44, baseAttack: 11, baseDefense: 12, baseSpeed: 9,
     moves: ["tackle", "splash", "spout", "breech"],
+    evolvesTo: "nudikill", evolvesAt: 14,
   },
   skwib: {
     name: "Skwib", type: "normal", sprite: "assets/sprites/front/skwib.png",
     overworld: "assets/sprites/idle/skwib.png",
     baseHP: 38, baseAttack: 12, baseDefense: 11, baseSpeed: 11,
     moves: ["tackle", "bite", "pounce", "confusion"],
+    evolvesTo: "octabode", evolvesAt: 14,
   },
 
   // ---- GYM 1 — ENFORCER BOSS'S TEAM (M4S4) ----
@@ -286,6 +315,209 @@ const FAKEAMON = {
     overworld: "assets/sprites/idle/av8r.png",
     baseHP: 52, baseAttack: 15, baseDefense: 13, baseSpeed: 14, // [TUNE] the ace: faster than EVERY starter, so it strikes first
     moves: ["tackle", "pounce", "ironBeam"],
+  },
+
+  // ---- EVOLVED FORMS (M5 Step 1 / the M5 plan's S6) ----
+  // What everything above turns INTO. Every Fakeamon in the game — all three
+  // starters and all 26 wild ones — now has exactly one evolution, listed on
+  // the base form as `evolvesTo` + `evolvesAt`. The rules live in
+  // src/progression.js; this is just the cast list.
+  //
+  // ⚠️ NAMES ARE PLACEHOLDERS, same as their base forms — Title-Cased Tuxemon
+  // slugs, waiting for Lewis's rename pass.
+  //
+  // 🎨 THREE OF THESE ARE A CHOICE, NOT A FACT — and they're a one-word edit:
+  //   Growler → Deviraptor (a fire dragon)
+  //   Whaley  → Leviadile  (a huge sea-dragon)
+  //   Leafick → Dragarbor  (a tree-dragon)
+  // In the original Tuxemon art, Growler's real evolution is Cobarett — and
+  // Whaley and Leafick have NO evolution at all; they're already the last form
+  // of their families. So these three were picked from art the project already
+  // has permission to use (Lewis's call, 2026-08-13), which is why all three
+  // happen to be dragons. Swap any `evolvesTo` above for another species and
+  // it just works.
+  //
+  //   STATS [TUNE]: an evolved form is its base form + 14 HP, +5 Attack,
+  //   +4 Defense, +3 Speed. One rule for all of them, same spirit as the type
+  //   archetype table above — hand-tune individual ones later if a favourite
+  //   deserves it.
+  //   TYPE: an evolved form always keeps its base form's type, so evolving
+  //   never changes what you're strong or weak against. One less surprise.
+  //   MOVES: an evolved form gets its type's BIG kit (src/data/moves.js) —
+  //   that's the reward: Firestorm, Tidal Wave, Forest Fury and friends.
+  deviraptor: {
+    name: "Deviraptor", type: "fire", sprite: "assets/sprites/front/deviraptor.png",
+    overworld: "assets/sprites/idle/deviraptor.png",
+    baseHP: 54, baseAttack: 18, baseDefense: 14, baseSpeed: 15,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  leviadile: {
+    name: "Leviadile", type: "water", sprite: "assets/sprites/front/leviadile.png",
+    overworld: "assets/sprites/idle/leviadile.png",
+    baseHP: 58, baseAttack: 17, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  dragarbor: {
+    name: "Dragarbor", type: "grass", sprite: "assets/sprites/front/dragarbor.png",
+    overworld: "assets/sprites/idle/dragarbor.png",
+    baseHP: 56, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  aardart: {
+    name: "Aardart", type: "normal", sprite: "assets/sprites/front/aardart.png",
+    overworld: "assets/sprites/idle/aardart.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  capinyah: {
+    name: "Capinyah", type: "normal", sprite: "assets/sprites/front/capinyah.png",
+    overworld: "assets/sprites/idle/capinyah.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  birdee: {
+    name: "Birdee", type: "normal", sprite: "assets/sprites/front/birdee.png",
+    overworld: "assets/sprites/idle/birdee.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  birdling: {
+    name: "Birdling", type: "normal", sprite: "assets/sprites/front/birdling.png",
+    overworld: "assets/sprites/idle/birdling.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  pairagrim: {
+    name: "Pairagrim", type: "normal", sprite: "assets/sprites/front/pairagrim.png",
+    overworld: "assets/sprites/idle/pairagrim.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  exapode: {
+    name: "Exapode", type: "normal", sprite: "assets/sprites/front/exapode.png",
+    overworld: "assets/sprites/idle/exapode.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  snokari: {
+    name: "Snokari", type: "normal", sprite: "assets/sprites/front/snokari.png",
+    overworld: "assets/sprites/idle/snokari.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  marvantis: {
+    name: "Marvantis", type: "normal", sprite: "assets/sprites/front/marvantis.png",
+    overworld: "assets/sprites/idle/marvantis.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
+  },
+  baobaraffe: {
+    name: "Baobaraffe", type: "grass", sprite: "assets/sprites/front/baobaraffe.png",
+    overworld: "assets/sprites/idle/baobaraffe.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  dandylion: {
+    name: "Dandylion", type: "grass", sprite: "assets/sprites/front/dandylion.png",
+    overworld: "assets/sprites/idle/dandylion.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  legko: {
+    name: "Legko", type: "grass", sprite: "assets/sprites/front/legko.png",
+    overworld: "assets/sprites/idle/legko.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  narcileaf: {
+    name: "Narcileaf", type: "grass", sprite: "assets/sprites/front/narcileaf.png",
+    overworld: "assets/sprites/idle/narcileaf.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  tumblebee: {
+    name: "Tumblebee", type: "grass", sprite: "assets/sprites/front/tumblebee.png",
+    overworld: "assets/sprites/idle/tumblebee.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  criniotherme: {
+    name: "Criniotherme", type: "fire", sprite: "assets/sprites/front/criniotherme.png",
+    overworld: "assets/sprites/idle/criniotherme.png",
+    baseHP: 50, baseAttack: 19, baseDefense: 13, baseSpeed: 16,
+    moves: ["bite","burn","flare","firestorm"],
+  },
+  ampystoma: {
+    name: "Ampystoma", type: "water", sprite: "assets/sprites/front/ampystoma.png",
+    overworld: "assets/sprites/idle/ampystoma.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  regalance: {
+    name: "Regalance", type: "grass", sprite: "assets/sprites/front/regalance.png",
+    overworld: "assets/sprites/idle/regalance.png",
+    baseHP: 55, baseAttack: 16, baseDefense: 17, baseSpeed: 13,
+    moves: ["leafage","vineLash","forestFury","pounce"],
+  },
+  incandesfin: {
+    name: "Incandesfin", type: "water", sprite: "assets/sprites/front/incandesfin.png",
+    overworld: "assets/sprites/idle/incandesfin.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  gupphire: {
+    name: "Gupphire", type: "water", sprite: "assets/sprites/front/gupphire.png",
+    overworld: "assets/sprites/idle/gupphire.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  bedoo: {
+    name: "Bedoo", type: "water", sprite: "assets/sprites/front/bedoo.png",
+    overworld: "assets/sprites/idle/bedoo.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  krokivip: {
+    name: "Krokivip", type: "water", sprite: "assets/sprites/front/krokivip.png",
+    overworld: "assets/sprites/idle/krokivip.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  shelagu: {
+    name: "Shelagu", type: "water", sprite: "assets/sprites/front/shelagu.png",
+    overworld: "assets/sprites/idle/shelagu.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  galasces: {
+    name: "Galasces", type: "water", sprite: "assets/sprites/front/galasces.png",
+    overworld: "assets/sprites/idle/galasces.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  shnark: {
+    name: "Shnark", type: "water", sprite: "assets/sprites/front/shnark.png",
+    overworld: "assets/sprites/idle/shnark.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  nudimind: {
+    name: "Nudimind", type: "water", sprite: "assets/sprites/front/nudimind.png",
+    overworld: "assets/sprites/idle/nudimind.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  nudikill: {
+    name: "Nudikill", type: "water", sprite: "assets/sprites/front/nudikill.png",
+    overworld: "assets/sprites/idle/nudikill.png",
+    baseHP: 58, baseAttack: 16, baseDefense: 16, baseSpeed: 12,
+    moves: ["bite","spout","breech","tidalWave"],
+  },
+  octabode: {
+    name: "Octabode", type: "normal", sprite: "assets/sprites/front/octabode.png",
+    overworld: "assets/sprites/idle/octabode.png",
+    baseHP: 52, baseAttack: 17, baseDefense: 15, baseSpeed: 14,
+    moves: ["bite","pounce","confusion","slam"],
   },
 };
 

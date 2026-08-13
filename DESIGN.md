@@ -51,7 +51,16 @@ Fields: Name, Type, Stats (HP/Attack/Defense/Speed), Moves (up to 4), Level & XP
 
 **Whaley/Dollfin note:** In Tuxemon, both Bigfin (Whaley) and the mini-boss Sharpfin evolve from **Dollfin**. To avoid the same base sprite appearing twice, either give Whaley no pre-evolution (start it as Bigfin) or pick a different base. **DECIDED (2026-07-05):** Whaley has **no pre-evolution** — it starts as Bigfin. Simplest, and it avoids the shared Dollfin sprite. *(Lewis's call.)*
 
-**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)* **[TO DECIDE: evolution level per starter — number tuning, Jeff.]**
+**Evolutions** change the sprite and unlock higher stats at a set level. Because these Tuxemon are mid-chain, before/after art already exists for free. **DECIDED (2026-07-05):** **auto-evolve** — a Fakeamon evolves right away when it's strong enough (no "do you want to evolve?" prompt). *(Lewis's call.)*
+
+**DECIDED (2026-08-13) — who evolves into what, and when** *(built at M5 Step 1; the data is `evolvesTo`/`evolvesAt` in `src/data/fakeamon.js`, the rules are in `src/progression.js`)*:
+
+- **Everybody evolves — once.** All three starters and all 26 wild Fakeamon have exactly one evolution. Second evolutions (some families have a third form) are deliberately left for later.
+- **The starters evolve at level 16** — the classic number, and comfortably after Gym 1.
+- **Wild Fakeamon use Tuxemon's own evolution levels, squeezed into our shorter game.** Tuxemon runs to about level 100 and ours caps at 30, so their numbers were compressed while keeping their *ordering* (15→12, 18→14, 20→16, 24→18, 26→20, 32→22, 41→24). Early bloomers stay early.
+- ⚠️ **The three starters' evolutions are a CHOICE, not Tuxemon canon.** Growler's real evolution (Cobarett) isn't in our licensed art set, and **Whaley and Leafick have no evolution at all** — they're already the last form of their families. So all three were picked from art the project already has permission to use *(Lewis's call: "use art we already own")*: Growler → **Deviraptor**, Whaley → **Leviadile**, Leafick → **Dragarbor**. Each is a one-word edit if he changes his mind.
+- **An evolved form keeps its type**, gains **+14 HP / +5 Attack / +4 Defense / +3 Speed** over its base form, and swaps to its type's **big move kit** — which is why M5 added Firestorm, Tidal Wave, Vine Lash, Forest Fury and Slam (§6). Before those existed, grass had exactly one attack in the whole game, so a fully evolved grass Fakeamon fought like a baby one.
+- **Evolving keeps the same fraction of HP** (half health in, half health out) and **never revives** a fainted Fakeamon.
 
 **DECIDED (2026-07-06) — the evolution show:** a full ceremony — the screen flashes, *"What?! `<name>` is evolving!"*, then a big sprite reveal. *(Lewis's call, B23.)*
 
@@ -507,7 +516,7 @@ Maintain a **`CREDITS.md`** in the repo (in place since the starter art landed; 
 **Still open — grown-up / number-tuning (Jeff):**
 1. Officially confirm adding **Metal** and **Cosmic** types + lock the type chart.
 2. Pull actual gym-leader (Enforcer Boss / Goth / Child Actor) sprites + credits.
-3. Evolution **level** per starter; ~~XP curve + per-Fakeamon XP~~ (both decided 2026-08-13, §5 above); mini-boss levels/stats.
+3. ~~Evolution **level** per starter~~ (level 16, decided 2026-08-13, §3); ~~XP curve + per-Fakeamon XP~~ (both decided 2026-08-13, §5); mini-boss levels/stats.
 4. Per-ball catch bonuses (Great/Ultra/Cosmic exact multipliers), floor/cap; token prices + gym rewards (feel is decided, §9).
 5. Windeye's and Spectera's off-type re-theme/swap for Gyms 2/3, at M4 build time (§8).
 6. Wild-level location scaling — the real per-area numbers, once M3's areas (§7) exist.

@@ -133,3 +133,80 @@ function applyLevelUps(individual) {
 function catchUpLevels(individual) {
   return applyLevelUps(individual);
 }
+
+// ===========================================================================
+//  EVOLUTION — M5 Step 1 (the M5 plan's S6, §3).
+//
+//  Evolving is ONE LINE: `individual.speciesKey = <the new species>`.
+//  That's the whole trick, and it works because of a decision made way back at
+//  the M5 plan's S1: an individual stores WHICH species it is, never a copy of
+//  that species' numbers. Stats are worked out from species + level every time
+//  they're needed (statsFor in src/state.js), and the picture and move list
+//  live on the species too — so changing that one word changes everything at
+//  once, with no bookkeeping to keep in step.
+//
+//  Two rules, both decided in the plan:
+//    • Evolving is a SURPRISE — it just happens, no "do you want to?" prompt
+//      (Lewis's call, DECISIONS.md #9).
+//    • It happens AFTER the battle is over, never mid-fight. A Fakeamon that
+//      changed shape halfway through a turn would raise questions a first
+//      version shouldn't have to answer (does its new Speed re-order the
+//      turn?), and the big reveal reads better on the map anyway.
+// ===========================================================================
+
+// Is this Fakeamon due to evolve? Returns the species key it should become,
+// or null. Most Fakeamon never evolve at all — both fields are optional.
+function evolutionFor(individual) {
+  const species = FAKEAMON[individual.speciesKey];
+  if (!species.evolvesTo || !species.evolvesAt) return null;
+  if (individual.level < species.evolvesAt) return null;
+  return species.evolvesTo;
+}
+
+// Do it. Returns a little report (or null if it wasn't due after all).
+function evolveNow(individual) {
+  const newKey = evolutionFor(individual);
+  if (!newKey) return null;
+
+  const oldKey = individual.speciesKey;
+  const oldMaxHP = statsFor(individual).maxHP;
+
+  individual.speciesKey = newKey; // ⭐ the one line
+
+  // HP policy: keep the same FRACTION of your health. Evolving at half health
+  // leaves you at half health — a bigger body, not a free heal. (And 0 stays
+  // 0: growing up doesn't bring anyone back from a faint.)
+  const newMaxHP = statsFor(individual).maxHP;
+  individual.currentHP = Math.round(newMaxHP * (individual.currentHP / oldMaxHP));
+
+  return {
+    oldKey: oldKey,
+    newKey: newKey,
+    message: "What?! " + FAKEAMON[oldKey].name + " evolved into " +
+             FAKEAMON[newKey].name + "! ✨",
+  };
+}
+
+// The hook the ceremony hangs off (S7 — Lewis's B23 pick: screen flash,
+// "What?! <name> is evolving!", big sprite reveal). Machinery here, showbiz
+// there: replace this one function and the rules never change. It's called
+// once per Fakeamon that evolves, right after the swap.
+let onEvolve = function (individual, oldKey, newKey) {
+  // S7 fills this in. Deliberately empty for now.
+};
+
+// Walk a list of Fakeamon (your party, your box) and evolve everyone who's
+// due. This is what the game calls after a battle — and after loading an old
+// save, where somebody might arrive already past their evolve level.
+// Returns one report per Fakeamon that changed.
+function applyEvolutions(individuals) {
+  const reports = [];
+  individuals.forEach(function (individual) {
+    const report = evolveNow(individual);
+    if (report) {
+      reports.push(report);
+      onEvolve(individual, report.oldKey, report.newKey);
+    }
+  });
+  return reports;
+}

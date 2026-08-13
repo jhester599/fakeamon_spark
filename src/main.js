@@ -129,6 +129,10 @@ function continueGame() {
   gameState.flags = loaded.flags;      // M4 — badges earned + areas unlocked
   gameState.world = loaded.world;
   gameState.inventory = loaded.inventory;
+  // M5 Step 1: an old save cashes in XP it banked before levelling existed
+  // (src/save.js), which can push somebody straight past their evolve level —
+  // so check here too, not just after battles.
+  evolveWhoeverIsReady();
   enterOverworld();
 }
 
@@ -422,6 +426,22 @@ function refillEmptyMap() {
   });
 }
 
+// M5 Step 1 — the evolution check. Runs after a battle and after loading a
+// save; both are moments when a Fakeamon might have just crossed its evolve
+// level. src/progression.js owns the rules and the actual swap — this only
+// decides WHO to check (your party and your Boxes) and says what happened.
+//
+// The Boxes are included on purpose: XP can reach a boxed Fakeamon when an old
+// save catches up (src/save.js), and a Fakeamon quietly growing up in storage
+// is a nice surprise rather than a bug.
+function evolveWhoeverIsReady() {
+  const reports = applyEvolutions(gameState.party.concat(gameState.box));
+  reports.forEach(function (report) {
+    noteNews(report.message); // "What?! Growler evolved into Deviraptor! ✨"
+  });
+  return reports;
+}
+
 // Whatever the battle decided, this is where it becomes a team fact — then
 // you head back to the map (M3). A catch joins the team (open slot) or
 // overflows to the Boxes (Lewis's call — max 4 active). A wipe uses the M3
@@ -470,6 +490,13 @@ function handleBattleOutcome(outcome, context) {
   if (encounter && (outcome.result === "win" || outcome.result === "caught")) {
     if (worldScene) worldScene.removeEncounter(encounter.id);
   }
+
+  // M5 Step 1 (the plan's S6): now the fight is over and the XP is banked, see
+  // if anyone grew up enough to EVOLVE. This deliberately runs here rather than
+  // inside battle.js — the M5 plan §3 keeps evolution out of battle resolution,
+  // so nobody changes shape mid-turn. The whole party is checked, not just the
+  // fighter: a gym battle can level up two of your Fakeamon.
+  evolveWhoeverIsReady();
 
   // S8: The Meadows shouldn't stay empty forever — see the respawn note in
   // PLANS/M3_OVERWORLD_PLAN.md §6.3. Rolled after EVERY battle, not just wins,
